@@ -1,0 +1,9 @@
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csprojAssemblyReference.cache
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfoInputs.cache
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfo.cs
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.deps.json
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.dll
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.pdb
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
