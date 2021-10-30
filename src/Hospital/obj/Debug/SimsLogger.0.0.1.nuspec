@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SimsLogger</id>
+    <version>0.0.1</version>
+    <authors>misa, mihailo, branimirius, laki</authors>
+    <description>sims logger za program integracije</description>
+    <repository url="https://github.com/lenche23/clinical-system" />
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.json" target="lib\netcoreapp3.1\Integration.runtimeconfig.json" />
+    <file src="D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.dll" target="lib\netcoreapp3.1\Integration.dll" />
+  </files>
+</package>
