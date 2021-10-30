@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yjFb0o7xjsbCkDwQ62rtJ5S8DFhjefh5P8T8aoGROAum17PjF22TTzXaqNLpczguKqsbMDFVD20ZyCiNZNakSw==",
+  "dgSpecHash": "c6Oc1PdsRmfWBj9fIYYr3PJOHwr/IVwc+wkH5CK/BUUST1yDRA4T9L2gO0LaVmdqMNWA/1RycleC8Da6ESBp5g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
+  "projectFilePath": "C:\\Users\\bogdana\\Desktop\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
