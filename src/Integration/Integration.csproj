@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>SimsLogger</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>misa, mihailo, branimirius, laki</Authors>
+    <Company>GitHub</Company>
+    <OutputType>Exe</OutputType>
+    <PackageDescription>sims logger za program integracije</PackageDescription>
+    <RepositoryUrl>https://github.com/lenche23/clinical-system</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

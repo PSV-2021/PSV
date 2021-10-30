@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "L834ZvTkI+hrEVtE4j8Xju+ovn8LOk8UOyKdNNdgfF+aFjRBAkn02peUwNEoe4jFBQ7khhjZKvcYTaaPCVEtNw==",
+  "dgSpecHash": "d47OE/GRf6LRhe/sGSGFeg6jtEGdZBF6lt7RVAAajssRmFDxjigs8onCPzZSmQK8lKjKHpyNWm/3IIehDDx7IA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj",
+  "projectFilePath": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\Integration\\Integration.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\brani\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\Lenka\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }
