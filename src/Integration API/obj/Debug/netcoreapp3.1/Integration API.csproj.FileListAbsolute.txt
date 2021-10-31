@@ -1,0 +1,6 @@
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csproj.AssemblyReference.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.AssemblyInfoInputs.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.AssemblyInfo.cs
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csproj.CoreCompileInputs.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.MvcApplicationPartsAssemblyInfo.cache

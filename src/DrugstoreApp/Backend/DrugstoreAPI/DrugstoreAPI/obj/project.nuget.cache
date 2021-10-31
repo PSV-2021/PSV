@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "c6Oc1PdsRmfWBj9fIYYr3PJOHwr/IVwc+wkH5CK/BUUST1yDRA4T9L2gO0LaVmdqMNWA/1RycleC8Da6ESBp5g==",
+  "dgSpecHash": "kC6YsAw0ddtvxq12UuPikVBNFFoQ0VfQGpXtkxVTJhJtwFsU8IATWTp/feVYKXbpt3hYjvEH+aquSEsCUsX8nw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bogdana\\Desktop\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Zola\\.nuget\\packages\\npgsql\\5.0.10\\npgsql.5.0.10.nupkg.sha512",
+    "C:\\Users\\Zola\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.6.0\\system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512"
+  ],
   "logs": []
 }

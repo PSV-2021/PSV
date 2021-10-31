@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Repository;
 using System.ComponentModel;
+using Integration.Repository.File;
 using Model;
 
 namespace Model

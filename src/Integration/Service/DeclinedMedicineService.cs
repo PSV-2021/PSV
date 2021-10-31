@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Integration.Repository.Interfaces;
 using Model;
-using Repository;
 
 namespace Service
 {

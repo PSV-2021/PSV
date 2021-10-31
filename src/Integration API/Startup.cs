@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using PrimerWebApi.Models;
 
 namespace Integration_API
 {
@@ -25,6 +27,8 @@ namespace Integration_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<MyDbContext>(options =>
+                options.UseNpgsql("koji ja ne znam"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

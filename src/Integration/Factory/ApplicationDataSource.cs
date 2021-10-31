@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Integration.Factory;
 
 namespace Factory
 {
@@ -33,7 +34,7 @@ namespace Factory
             //{
             //    return new FileRepositoryFactory();
             //}
-            return null;
+            return new SqlRepositoryFactory();
         }
         public IRepositoryFactory GetRepositoryFactory()
         {

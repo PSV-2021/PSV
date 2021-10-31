@@ -4,7 +4,8 @@ using Model;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Repository;
+using Integration.Repository.File;
+using Integration.Repository.Interfaces;
 using Service;
 
 namespace Service

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Repository;
+using Integration.Repository.File;
+using Integration.Repository.Interfaces;
 
 namespace Factory
 {
@@ -32,6 +33,11 @@ namespace Factory
         public IDoctorRepository CreateDoctorRepository()
         {
             return new DoctorFileRepository();
+        }
+
+        public IDrugstoreRepository CreateDrugstoreRepository()
+        {
+            throw new NotImplementedException();
         }
 
         public IEquipmentRepository CreateEquipmentRepository()
@@ -71,7 +77,17 @@ namespace Factory
 
         public IUserFeedbackRepository CreateUserFeebackRepository()
         {
+            throw new NotImplementedException();
+        }
+
+        public IUserFeedbackRepository CreateUserFeedbackRepository()
+        {
             return new UserFeedbackFileRepository();
+        }
+
+        IDrugstoreFeedbackRepository IRepositoryFactory.CreateUserFeedbackRepository()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Repository;
+using Integration.Repository.Interfaces;
 
 namespace Factory
 {
@@ -22,5 +22,8 @@ namespace Factory
         IRoomInventoryRepository CreateRoomInventoryRepository();
         IRoomRepository CreateRoomRepository();
         IUserFeedbackRepository CreateUserFeebackRepository();
+
+        IDrugstoreRepository CreateDrugstoreRepository();
+        IDrugstoreFeedbackRepository CreateUserFeedbackRepository();
     }
 }

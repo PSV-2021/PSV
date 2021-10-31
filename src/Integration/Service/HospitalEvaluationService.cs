@@ -1,6 +1,7 @@
 using Model;
 using System;
-using Repository;
+using Integration.Repository.File;
+using Integration.Repository.Interfaces;
 
 namespace Service
 {

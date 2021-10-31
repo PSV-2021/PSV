@@ -2,7 +2,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using Factory;
-using Repository;
+using Integration.Repository.Interfaces;
 
 namespace Service
 {

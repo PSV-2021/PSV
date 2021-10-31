@@ -22,3 +22,10 @@ D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.AssemblyReference.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfoInputs.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfo.cs
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
