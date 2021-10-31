@@ -19,7 +19,6 @@ D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfoInputs.cache
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfo.cs
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
-D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CopyComplete
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
 D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
