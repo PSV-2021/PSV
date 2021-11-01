@@ -13,6 +13,10 @@ namespace Integration.Model
         public DateTime SentTime { get; set; }
         public DateTime RecievedTime { get; set; }
 
+        public DrugstoreFeedback()
+        {
+
+        }
         public DrugstoreFeedback(int Id, string token, string content, string response, DateTime sentTime,
             DateTime recievedTime)
         {

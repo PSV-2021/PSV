@@ -4,3 +4,43 @@ C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.AssemblyInfo.cs
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csproj.CoreCompileInputs.cache
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.exe
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.deps.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.runtimeconfig.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.runtimeconfig.dev.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.pdb
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Npgsql.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\staticwebassets\Integration API.StaticWebAssets.Manifest.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\staticwebassets\Integration API.StaticWebAssets.xml
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\scopedcss\bundle\Integration API.styles.css
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.RazorTargetAssemblyInfo.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csproj.CopyComplete
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.pdb
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.genruntimeconfig.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration.pdb
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Humanizer.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll

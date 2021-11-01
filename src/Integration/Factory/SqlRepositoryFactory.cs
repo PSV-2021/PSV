@@ -77,7 +77,7 @@ namespace Integration.Factory
         //////////////////////////////////////////////
         public IDrugstoreRepository CreateDrugstoreRepository()
         {
-            return new DrugstoreSqlRepository();
+            return new DrugstoreSqlRepository("server=localhost; port=5432; database=hospital; user=postgre; password=firma4");
         }
 
         public IDrugstoreFeedbackRepository CreateUserFeedbackRepository()

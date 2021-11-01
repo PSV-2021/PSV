@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Integration.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace PrimerWebApi.Models
+namespace Model.DataBaseContext
 {
     public class MyDbContext: DbContext
     {

@@ -10,6 +10,10 @@ namespace Integration.Model
         public string Name { get; set; }
         public string Url { get; set; }
 
+        public Drugstore()
+        {
+
+        }
         public Drugstore(string id, string name, string url)
         {
             Id = id;

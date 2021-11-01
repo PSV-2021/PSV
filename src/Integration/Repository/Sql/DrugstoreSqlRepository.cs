@@ -10,7 +10,7 @@ namespace Integration.Repository.Sql
     {
         private string ConnectionString = "";
 
-        DrugstoreSqlRepository(string cs)
+        public DrugstoreSqlRepository(string cs)
         {
             ConnectionString = cs;
         }

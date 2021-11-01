@@ -29,3 +29,9 @@ C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\I
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.deps.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.dev.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.pdb
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
