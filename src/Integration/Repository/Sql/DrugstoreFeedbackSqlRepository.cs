@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using Integration.Model;
 using Integration.Repository.Interfaces;
+using Model.DataBaseContext;
 using Npgsql;
 
 namespace Integration.Repository.Sql
 {
-    class DrugstoreFeedbackSqlRepository : IDrugstoreFeedbackRepository
+    public class DrugstoreFeedbackSqlRepository : IDrugstoreFeedbackRepository
     {
+        public MyDbContext dbContext { get; set; }
 
-        private static NpgsqlConnection GetConnection()
+        public DrugstoreFeedbackSqlRepository()
         {
-            return new NpgsqlConnection("...");
+            this.dbContext = dbContext;
         }
         public bool Delete(string id)
         {
-            using (NpgsqlConnection con = GetConnection())
-            {
-                if (con.State == ConnectionState.Open)
-                {
-
-                    return true;
-                }
-            }
-
-            return false;
+            throw new NotImplementedException();
         }
 
         public List<DrugstoreFeedback> GetAll()
         {
-            throw new NotImplementedException();
+            List<DrugstoreFeedback> result = new List<DrugstoreFeedback>();
+            dbContext.DrugstoreFeedbacks.ToList().ForEach(feedback =>
+                result.Add(new DrugstoreFeedback(feedback.Id, feedback.DrugstoreToken, feedback.Content,
+                feedback.Response, feedback.SentTime, feedback.RecievedTime)));
+            return result;
         }
 
         public DrugstoreFeedback GetOne(string id)

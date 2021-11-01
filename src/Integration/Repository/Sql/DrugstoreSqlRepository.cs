@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Integration.Model;
 using Integration.Repository.Interfaces;
+using Model.DataBaseContext;
 
 namespace Integration.Repository.Sql
-{
-    class DrugstoreSqlRepository : IDrugstoreRepository
+{ 
+    public class DrugstoreSqlRepository : IDrugstoreRepository
     {
-        private string ConnectionString = "";
+        public MyDbContext dbContext { get; set; }
 
-        public DrugstoreSqlRepository(string cs)
+        public DrugstoreSqlRepository(MyDbContext dbContext)
         {
-            ConnectionString = cs;
+            this.dbContext = dbContext;
+        }
+
+        public DrugstoreSqlRepository()
+        {
+
         }
         public bool Delete(int id)
         {
@@ -21,7 +28,9 @@ namespace Integration.Repository.Sql
 
         public List<Drugstore> GetAll()
         {
-            throw new NotImplementedException();
+            List<Drugstore> result = new List<Drugstore>();
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
+            return result;
         }
 
         public Drugstore GetOne(int id)

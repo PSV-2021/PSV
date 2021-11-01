@@ -24,6 +24,6 @@ namespace Factory
         IUserFeedbackRepository CreateUserFeebackRepository();
 
         IDrugstoreRepository CreateDrugstoreRepository();
-        IDrugstoreFeedbackRepository CreateUserFeedbackRepository();
+        IDrugstoreFeedbackRepository CreateDrugstoreFeedbackRepository();
     }
 }

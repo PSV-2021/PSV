@@ -5,30 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Model;
-//using Integration.Model;
-using Model.DataBaseContext;
 using Integration.Repository.Sql;
+using Model.DataBaseContext;
 
 namespace Integration_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DrugstoreController : ControllerBase
+    public class DrugstoreFeedbackController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public DrugstoreSqlRepository repo = new DrugstoreSqlRepository();
-        
-        public DrugstoreController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
+        public DrugstoreFeedbackSqlRepository repo = new DrugstoreFeedbackSqlRepository();
+
+        public DrugstoreFeedbackController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
         }
 
-        [HttpGet]       // GET /api/drugstore
+        [HttpGet]   // GET /api/drugstorefeedback
         public IActionResult Get()
         {
             repo.dbContext = dbContext;
-            List<Integration.Model.Drugstore> result = new List<Integration.Model.Drugstore>();
-            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
+            List<DrugstoreFeedback> result = new List<DrugstoreFeedback>();
+            repo.GetAll().ForEach(feedback => result.Add(new DrugstoreFeedback(feedback.Id, feedback.DrugstoreToken, feedback.Content,
+                feedback.Response, feedback.SentTime, feedback.SentTime)));
             /*
             dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
             */

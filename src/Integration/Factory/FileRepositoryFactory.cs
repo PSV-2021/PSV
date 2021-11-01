@@ -35,6 +35,11 @@ namespace Factory
             return new DoctorFileRepository();
         }
 
+        public IDrugstoreFeedbackRepository CreateDrugstoreFeedbackRepository()
+        {
+            throw new NotImplementedException();
+        }
+
         public IDrugstoreRepository CreateDrugstoreRepository()
         {
             throw new NotImplementedException();
@@ -85,9 +90,5 @@ namespace Factory
             return new UserFeedbackFileRepository();
         }
 
-        IDrugstoreFeedbackRepository IRepositoryFactory.CreateUserFeedbackRepository()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

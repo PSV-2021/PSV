@@ -4,6 +4,7 @@ using System.Text;
 using Factory;
 using Integration.Repository.Interfaces;
 using Integration.Repository.Sql;
+using Model.DataBaseContext;
 
 namespace Integration.Factory
 {
@@ -77,10 +78,10 @@ namespace Integration.Factory
         //////////////////////////////////////////////
         public IDrugstoreRepository CreateDrugstoreRepository()
         {
-            return new DrugstoreSqlRepository("server=localhost; port=5432; database=hospital; user=postgre; password=firma4");
+            return new DrugstoreSqlRepository();
         }
 
-        public IDrugstoreFeedbackRepository CreateUserFeedbackRepository()
+        public IDrugstoreFeedbackRepository CreateDrugstoreFeedbackRepository()
         {
             return new DrugstoreFeedbackSqlRepository();
         }
