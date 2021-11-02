@@ -1,11 +1,11 @@
 export class RegistrationDto{
-    hospitalName: string;
+    DrugStorename: string;
     address: string;
     email: string;
     apiAddress: string;
 
     constructor(){
-        this.hospitalName = '';
+        this.DrugStorename = '';
         this.address = '';
         this.email = '';
         this.apiAddress = '';

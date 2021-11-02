@@ -1,0 +1,21 @@
+<div class="reviews-holder">
+<div *ngFor="let review of reviews">
+    <div class="review-holder">
+    <mat-card class="example-card">
+        <mat-card-subtitle >{{review.DrugstoreName}}</mat-card-subtitle>
+        <br>
+        <mat-card-title>Review</mat-card-title>
+        <mat-card-content>
+        <br>
+        <p>{{ review.ReviewContent }}</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-subtitle>Response</mat-card-subtitle>
+        <br>
+        <p>{{ review.ReviewResponse }}</p>
+    </mat-card>
+    </div>
+    <br>
+    <br>
+</div>
+</div>

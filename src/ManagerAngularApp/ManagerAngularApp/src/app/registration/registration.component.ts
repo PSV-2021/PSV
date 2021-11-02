@@ -5,21 +5,21 @@ import { RegistrationDto } from './registration.dto';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
-  providers: [RegistrationService]
+  styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  @Input() public newHospital: RegistrationDto;
+  @Input() public newDrugstore: RegistrationDto;
 
   constructor() {
-    this.newHospital = new RegistrationDto();
+    this.newDrugstore = new RegistrationDto();
    }
 
-  register(): void{
-    console.log(this.newHospital);
+  ngOnInit(): void {
   }
 
-  ngOnInit(): void {
+
+  register(): void{
+    console.log(this.newDrugstore);
   }
 
 }

@@ -34,5 +34,16 @@ namespace Integration_API.Controllers
             */
             return Ok(result);
         }
+
+        [HttpGet("/name/{id}")] // GET /api/test2/int/3
+        public IActionResult GetDrugstoreName(string id)
+        {
+            repo.dbContext = dbContext;
+            string result = repo.GetDrugstoreName(id);
+            /*
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
+            */
+            return Ok(result);
+        }
     }
 }
