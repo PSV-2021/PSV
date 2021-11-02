@@ -17,9 +17,12 @@ namespace DrugstoreAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<MedicineDto> result = new List<MedicineDto>();
-            Program.MedicineList.ForEach(medicine => result.Add(MedicineAdapter.MedicineToMedicineDto(medicine)));
-            return Ok(result);
+            List<string> lista = new List<string>();
+            lista.Add("VOLIM");
+            // List<MedicineDto> result = new List<MedicineDto>();
+            // Program.MedicineList.ForEach(medicine => result.Add(MedicineAdapter.MedicineToMedicineDto(medicine)));
+            Console.WriteLine("Status:Najjaci");
+            return Ok(lista);
         }
 
         [HttpGet("{id?}")]

@@ -37,6 +37,7 @@
           "Npgsql": "5.0.10",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10",
           "Integration": "0.0.1.0",
+          "RestSharp": "106.13.0.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -1382,6 +1383,17 @@
         },
         "compile": {
           "Integration.dll": {}
+        }
+      },
+      "RestSharp/106.13.0.0": {
+        "runtime": {
+          "RestSharp.dll": {
+            "assemblyVersion": "106.13.0.0",
+            "fileVersion": "106.13.0.0"
+          }
+        },
+        "compile": {
+          "RestSharp.dll": {}
         }
       },
       "Newtonsoft.Json/13.0.0.0": {
@@ -3756,6 +3768,11 @@
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
     },
     "Integration/0.0.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RestSharp/106.13.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
