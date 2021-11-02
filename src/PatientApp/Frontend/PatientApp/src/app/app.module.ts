@@ -7,11 +7,13 @@ import { HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
