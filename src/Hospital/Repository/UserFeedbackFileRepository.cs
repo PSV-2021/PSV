@@ -19,11 +19,11 @@ namespace Repository
         {
             List<UserFeedback> storedFeedback = ReadFromFile();
             List<UserFeedback> feedback = new List<UserFeedback>();
-            for (int i = 0; i < storedFeedback.Count; i++)
+            /*for (int i = 0; i < storedFeedback.Count; i++)
             {
                 if (storedFeedback[i].IsDeleted == false)
                     feedback.Add(storedFeedback[i]);
-            }
+            }*/
             return feedback;
         }
         public UserFeedback GetOne(int id)
@@ -68,7 +68,7 @@ namespace Repository
         public Boolean Update(UserFeedback editedFeedback)
         {
             List<UserFeedback> storedFeedback = ReadFromFile();
-            foreach (UserFeedback f in storedFeedback)
+           /* foreach (UserFeedback f in storedFeedback)
             {
                 if (f.Id == editedFeedback.Id && f.IsDeleted == false)
                 {
@@ -78,7 +78,7 @@ namespace Repository
                     WriteToFile(storedFeedback);
                     return true;
                 }
-            }
+            }*/
             return false;
         }
 
@@ -86,14 +86,14 @@ namespace Repository
         {
             List<UserFeedback> storedFeedback = ReadFromFile();
             foreach (UserFeedback f in storedFeedback)
-            {
+            {/*
                 if (f.Id == id && f.IsDeleted == false)
                 {
                     f.IsDeleted = true;
                     WriteToFile(storedFeedback);
                     return true;
 
-                }
+                }*/
             }
             return false;
         }

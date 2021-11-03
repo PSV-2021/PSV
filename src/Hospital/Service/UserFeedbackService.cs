@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Repository;
+using Hospital.Repository;
 
 namespace Service
 {
@@ -13,7 +14,7 @@ namespace Service
         private IUserFeedbackRepository UserFeedbackRepository { get; set; }
         public UserFeedbackService()
         {
-            UserFeedbackRepository = new UserFeedbackFileRepository();
+            UserFeedbackRepository = new UserFeedbackSqlRepository();
         }
         public Boolean SaveUserFeedback(UserFeedback newUserFeedback)
         {
