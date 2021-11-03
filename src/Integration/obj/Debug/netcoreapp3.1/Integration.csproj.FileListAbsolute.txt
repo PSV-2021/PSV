@@ -47,3 +47,6 @@ D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInp
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.json
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.dev.json
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache

@@ -4,13 +4,15 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { catchError } from 'rxjs/operators';
-import { ReviewDto } from '../review/review.dto';
+import { ReviewDto } from '../reviews/review.dto';
+import { ResponseDto } from '../reviews/response.dto';
+
 import { map } from 'rxjs-compat/operator/map';
 
 @Injectable({
     providedIn: 'root'
   })
-export class ReviewService {
+export class ReviewsService {
     url: string;
     smartphone: any = [];
     constructor (private http: HttpClient) {
@@ -18,10 +20,14 @@ export class ReviewService {
     }
 
     GetAllReviews(): Observable<any> {
-        return this.http.get<any>(this.url + '/drugstorefeedback');
+        return this.http.get<any>(this.url + '/hospitalreview');
     }
 
-    GetDrugStoreName(id: string): Observable<string>{
-      return this.http.get<any>(this.url + '/drugstore/name/', {params:{id: id}});
+    GetHospitalName(id: string): Observable<string>{
+      return this.http.get<any>(this.url + '/hospital/name/', {params:{id: id}});
+    }
+    SendResponse(response: ResponseDto): Observable<ResponseDto> {
+      
+      return this.http.post<ResponseDto>(this.url + '/drugstoreresponse', response);
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PSV\\src\\Integration\\Integration.csproj": {}
+    "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj": {}
   },
   "projects": {
-    "D:\\PSV\\src\\Integration\\Integration.csproj": {
+    "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj": {
       "version": "0.0.1",
       "restore": {
-        "projectUniqueName": "D:\\PSV\\src\\Integration\\Integration.csproj",
+        "projectUniqueName": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj",
         "projectName": "SimsLogger",
-        "projectPath": "D:\\PSV\\src\\Integration\\Integration.csproj",
-        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-        "outputPath": "D:\\PSV\\src\\Integration\\obj\\",
+        "projectPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj",
+        "packagesPath": "C:\\Users\\brani\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\brani\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -86,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
