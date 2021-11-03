@@ -5889,19 +5889,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Korisnik\\.nuget\\packages\\": {}
+    "C:\\Users\\Zola\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PSV\\src\\Integration API\\Integration API.csproj",
+      "projectUniqueName": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration API\\Integration API.csproj",
       "projectName": "Integration API",
-      "projectPath": "D:\\PSV\\src\\Integration API\\Integration API.csproj",
-      "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-      "outputPath": "D:\\PSV\\src\\Integration API\\obj\\",
+      "projectPath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration API\\Integration API.csproj",
+      "packagesPath": "C:\\Users\\Zola\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Zola\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5968,7 +5968,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.ComponentModel;
-using Integration.Repository.File;
+using Integration_API.Repository.File;
 using Model;
 
 namespace Model

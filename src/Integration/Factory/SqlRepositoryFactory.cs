@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Factory;
-using Integration.Repository.Interfaces;
 using Integration.Repository.Sql;
-using Model.DataBaseContext;
+using Integration_API.Repository.Interfaces;
 
-namespace Integration.Factory
+namespace Integration_API.Factory
 {
     class SqlRepositoryFactory : IRepositoryFactory
     {

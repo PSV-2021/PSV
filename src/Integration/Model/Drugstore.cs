@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Integration.Model
+namespace Integration_API.Model
 {
     public class Drugstore
     {

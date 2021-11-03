@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Model;
 
-namespace Integration.Repository.Interfaces
+namespace Integration_API.Repository.Interfaces
 {
     interface IAnnouncementRepository: IGenericRepository<Announcement, int>
     {

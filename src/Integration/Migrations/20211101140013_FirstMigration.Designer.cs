@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Integration.Migrations
+namespace Integration_API.Migrations
 {
     [DbContext(typeof(MyDbContext))]
     [Migration("20211101140013_FirstMigration")]
