@@ -1,0 +1,21 @@
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.exe
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.deps.json
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.runtimeconfig.json
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.runtimeconfig.dev.json
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.dll
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.pdb
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csproj.AssemblyReference.cache
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.AssemblyInfoInputs.cache
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.AssemblyInfo.cs
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csproj.CoreCompileInputs.cache
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\staticwebassets\Integration API.StaticWebAssets.Manifest.cache
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\staticwebassets\Integration API.StaticWebAssets.xml
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\scopedcss\bundle\Integration API.styles.css
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.RazorTargetAssemblyInfo.cache
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.dll
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.pdb
+C:\Users\masa\Documents\GitHub\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.genruntimeconfig.cache

@@ -43,4 +43,3 @@ C:\Users\masa\Documents\GitHub\PSV\src\HospitalAPI\HospitalAPI\HospitalAPI\obj\D
 C:\Users\masa\Documents\GitHub\PSV\src\HospitalAPI\HospitalAPI\HospitalAPI\obj\Debug\netcoreapp3.1\HospitalAPI.genruntimeconfig.cache
 C:\Users\masa\Documents\GitHub\PSV\src\HospitalAPI\HospitalAPI\HospitalAPI\bin\Debug\netcoreapp3.1\Humanizer.dll
 C:\Users\masa\Documents\GitHub\PSV\src\HospitalAPI\HospitalAPI\HospitalAPI\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
-C:\Users\masa\Documents\GitHub\PSV\src\HospitalAPI\HospitalAPI\HospitalAPI\obj\Debug\netcoreapp3.1\HospitalAPI.csproj.CopyComplete

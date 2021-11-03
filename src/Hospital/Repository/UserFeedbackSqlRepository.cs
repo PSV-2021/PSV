@@ -7,7 +7,7 @@ using Repository;
 
 namespace Hospital.Repository
 {
-    class UserFeedbackSqlRepository:IUserFeedbackRepository
+    public class UserFeedbackSqlRepository:IUserFeedbackRepository
     {
         public MyDbContext dbContext { get; set; }
 
@@ -40,6 +40,14 @@ namespace Hospital.Repository
                         select st.Content;
 
             return query.FirstOrDefault();
+        }
+
+        public List<UserFeedback> GetAllAproved()
+        {
+            List<UserFeedback> result = new List<UserFeedback>();
+            dbContext.UserFeedbacks.ToList().ForEach(userFeedbacks => result.Add(new UserFeedback(userFeedbacks.Id, userFeedbacks.Date, userFeedbacks.Name, userFeedbacks.canPublish, userFeedbacks.Content)));
+
+            return result;
         }
 
         public UserFeedback GetOne(int id)

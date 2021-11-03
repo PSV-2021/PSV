@@ -1,20 +1,21 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">  
-    <ng-container matColumnDef="comment">
-      <th mat-header-cell *matHeaderCellDef> Comment </th>
-      <td mat-cell *matCellDef="let patientcomment"> {{patientcomment.comment}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Date </th>
-      <td mat-cell *matCellDef="let patientcomment"> {{patientcomment.date}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let patientcomment"> {{patientcomment.name}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
+    <div class="reviews-holder">
+    <div *ngFor="let comment of comments">
+        <div class="review-holder">
+        <mat-card class="example-card">
+            <mat-card-title>Review</mat-card-title>
+            <mat-card-content>
+            <br>
+            <p>{{ comment.Name }}</p>
+            <p>{{ comment.Date }}</p>
+            <mat-card-subtitle>Response</mat-card-subtitle>
+            <br>
+            <p>{{ comment.Comment }}</p>
+          </mat-card-content>
+
+            
+        </mat-card>
+        </div>
+        <br>
+        <br>
+    </div>
+    </div>
