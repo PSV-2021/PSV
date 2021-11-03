@@ -19,10 +19,9 @@ namespace Model.DataBaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Drugstore>().HasData(
-                new Drugstore { Id = "aaa" , Name = "Apoteka 1", Url = @"http://apoteka1.rs"},
-                new Drugstore { Id = "bbb", Name = "Apoteka 2", Url = @"http://apoteka2.rs" },
-                new Drugstore { Id = "ccc", Name = "Apoteka 3", Url = @"http://apoteka3.rs" }
-
+                new Drugstore { Id = "aaa" , Name = "Apoteka 1", Url = @"http://apoteka1.rs", ApiKey = "LJa6p1qNr20saUvj" },
+                new Drugstore { Id = "bbb", Name = "Apoteka 2", Url = @"http://apoteka2.rs", ApiKey = "e4qnw0FTqLLddoX2" },
+                new Drugstore { Id = "ccc", Name = "Apoteka 3", Url = @"http://apoteka3.rs", ApiKey = "DfrBEbaMvRodUg99" }
             );
 
 

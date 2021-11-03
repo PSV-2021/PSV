@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Integration_API.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
 using Integration.Repository.Sql;
-using Integration.Service;
-using Integration.Model;
+//using Integration.Service;
 using DrugstoreFeedback = Integration.Model.DrugstoreFeedback;
 
 namespace Integration_API.Controllers
@@ -29,6 +25,17 @@ namespace Integration_API.Controllers
             this.dbContext = db;
         }
 
+        [HttpGet(template: "testHit")]
+        public IActionResult GetHit()
+        {
+            List<string> lista = new List<string>();
+            lista.Add("POGODJENA BOLNICA");
+            // List<MedicineDto> result = new List<MedicineDto>();
+            // Program.MedicineList.ForEach(medicine => result.Add(MedicineAdapter.MedicineToMedicineDto(medicine)));
+            Console.WriteLine("Status:Najjaci");
+            return Ok(lista);
+        }
+
         [HttpGet]   // GET /api/drugstorefeedback
         public IActionResult Get()
         {
@@ -45,7 +52,7 @@ namespace Integration_API.Controllers
 
             return Ok(result);
         }
-        
+        /*
         [HttpPost] // POST /api/drugstorefeedback
         public IActionResult Post(NewPharmacyReviewDto pharmacyReview)
         {
@@ -58,7 +65,7 @@ namespace Integration_API.Controllers
             return Ok(dfb);
         }
         
-
+        */
 
     }
 }

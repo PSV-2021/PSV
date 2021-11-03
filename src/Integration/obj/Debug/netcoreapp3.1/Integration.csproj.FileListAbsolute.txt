@@ -40,10 +40,10 @@ D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.json
 D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.dev.json
 D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.dll
 D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.pdb
-D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csprojAssemblyReference.cache
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfoInputs.cache
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfo.cs
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
 D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
+D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csprojAssemblyReference.cache

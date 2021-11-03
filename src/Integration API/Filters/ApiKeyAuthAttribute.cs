@@ -1,3 +1,5 @@
+using Integration.Model;
+using Integration.Repository.Sql;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -5,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Model.DataBaseContext;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +20,7 @@ namespace Integration_API.Filters
     public class ApiKeyAuthAttribute : Attribute, IAsyncActionFilter
     {
         private const string ApiKeyHeaderName = "ApiKey";
+
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if (!context.HttpContext.Request.Headers.TryGetValue(ApiKeyHeaderName, out var potentialApiKey))
@@ -25,9 +30,9 @@ namespace Integration_API.Filters
             }
 
             var configuration = context.HttpContext.RequestServices.GetRequiredService<IConfiguration>();
-            var apiKey = configuration.GetValue<string>(key:"ApiKey");
+            var apiKey = configuration.GetValue<string>(key: "ApiKey");
 
-            if (!apiKey.Equals(potentialApiKey)) 
+            if (!apiKey.Equals(potentialApiKey))
             {
                 context.Result = new UnauthorizedResult();
                 return;

@@ -490,7 +490,7 @@ namespace Service
 
             //appointments.Sort((x, y) => y.StartTime.CompareTo(x.StartTime));
             //appointments.Reverse();
-            return null; //dick
+            return null;
         }
 
         public List<Appointment> GetPatientTodayAppointments()
@@ -507,7 +507,7 @@ namespace Service
 
             //appointments.Sort((x, y) => y.StartTime.CompareTo(x.StartTime));
             //appointments.Reverse();
-            return null; //dick
+            return null;
         }
 
         public void GetTodaysAppointments(ObservableCollection<Appointment> appointments)

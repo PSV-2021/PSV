@@ -41,3 +41,4 @@ D:\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\obj\Debug\netcoreapp3.
 D:\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\obj\Debug\netcoreapp3.1\DrugstoreAPI.dll
 D:\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\obj\Debug\netcoreapp3.1\DrugstoreAPI.pdb
 D:\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\obj\Debug\netcoreapp3.1\DrugstoreAPI.genruntimeconfig.cache
+D:\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\bin\Debug\netcoreapp3.1\RestSharp.dll

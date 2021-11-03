@@ -10,6 +10,8 @@ using Integration_API.Filters;
 using RestSharp;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Integration;
+using Integration.Repository.Sql;
 
 namespace Integration_API.Controllers
 {
@@ -18,22 +20,24 @@ namespace Integration_API.Controllers
     [ApiKeyAuth]
     public class DrugstoreFeedbackWithAPIController : ControllerBase
     {
+
         [HttpGet(template:"secret")]   // GET /secret
         public IActionResult Get()
         {
-            return Ok("This is my secret");
+            return Ok("You can use hospital services :)");
         }
 
         [HttpGet(template: "hitit")]
-        public IActionResult GetT()
+        public IActionResult HitIt()
         {
             var client = new RestSharp.RestClient("http://localhost:5001");
-            var request = new RestRequest("/api/Medicine");
+            var request = new RestRequest("/api/DrugstoreFeedbackWithAPI/secret");
+            request.AddHeader("ApiKey", "LJa6p1qNr20saUvj");
             var response = client.Get<List<string>>(request);
             Console.WriteLine("Status: " + response.StatusCode.ToString());
             List<string> result = response.Data;
             result.ForEach(product => Console.WriteLine(product.ToString()));
-            return Ok("NAJJACI SMO NAJJACI");
+            return Ok("Pogodio apoteku");
         }
     }
 }
