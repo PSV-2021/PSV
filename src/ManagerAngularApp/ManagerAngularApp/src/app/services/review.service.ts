@@ -24,4 +24,13 @@ export class ReviewService {
     GetDrugStoreName(id: string): Observable<string>{
       return this.http.get<any>(this.url + '/drugstore/name/', {params:{id: id}});
     }
+
+    SendNewReview(pharmacyId: string, review: string): any{
+      const body = {
+        pharmacyId : pharmacyId,
+        review : review
+      };
+      const ret = this.http.post<any>(this.url + "/drugstorefeedback", body);
+      return ret;
+    }
 }

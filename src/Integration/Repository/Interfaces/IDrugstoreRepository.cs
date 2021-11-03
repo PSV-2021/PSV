@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Integration.Model;
+using Integration_API.Model;
 
-namespace Integration.Repository.Interfaces
+namespace Integration_API.Repository.Interfaces
 {
     interface IDrugstoreRepository : IGenericRepository<Drugstore, int>
     {

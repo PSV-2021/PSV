@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using Integration.Model;
-using Integration.Repository.Interfaces;
+using Integration_API.Repository.Interfaces;
 using Model.DataBaseContext;
 using Npgsql;
 
@@ -26,9 +26,12 @@ namespace Integration.Repository.Sql
         public List<DrugstoreFeedback> GetAll()
         {
             List<DrugstoreFeedback> result = new List<DrugstoreFeedback>();
+            /*
             dbContext.DrugstoreFeedbacks.ToList().ForEach(feedback =>
                 result.Add(new DrugstoreFeedback(feedback.Id, feedback.DrugstoreToken, feedback.Content,
                 feedback.Response, feedback.SentTime, feedback.RecievedTime)));
+            */
+            result = dbContext.DrugstoreFeedbacks.ToList();
             return result;
         }
 

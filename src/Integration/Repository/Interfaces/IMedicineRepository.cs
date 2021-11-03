@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Model;
 
-namespace Integration.Repository.Interfaces
+namespace Integration_API.Repository.Interfaces
 {
     public interface IMedicineRepository:IGenericRepository<Medicine, int>
     {

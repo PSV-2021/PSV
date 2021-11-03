@@ -2,8 +2,8 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Integration.Repository.File;
-using Integration.Repository.Interfaces;
+using Integration_API.Repository.File;
+using Integration_API.Repository.Interfaces;
 
 namespace Service
 {

@@ -1,6 +1,6 @@
 ﻿using Model;
 
-namespace Integration.Repository.Interfaces
+namespace Integration_API.Repository.Interfaces
 {
     interface IRoomRepository:IGenericRepository<Room, int>
     {

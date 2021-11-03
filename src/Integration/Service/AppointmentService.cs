@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using Integration.Repository.File;
-using Integration.Repository.Interfaces;
+using Integration_API.Repository.File;
+using Integration_API.Repository.Interfaces;
 
 namespace Service
 {

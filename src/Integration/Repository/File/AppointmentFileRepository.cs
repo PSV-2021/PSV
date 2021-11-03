@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Integration.Repository.Interfaces;
+using Integration_API.Repository.Interfaces;
 using Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Integration.Repository.File
+namespace Integration_API.Repository.File
 {
     public class AppointmentFileRepository: IAppointmentRepository
     {

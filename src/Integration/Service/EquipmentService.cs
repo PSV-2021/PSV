@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Integration.Repository.File;
-using Integration.Repository.Interfaces;
+using Integration_API.Repository.File;
+using Integration_API.Repository.Interfaces;
 using Model;
 
 namespace Service

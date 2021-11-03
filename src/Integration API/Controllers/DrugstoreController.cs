@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Integration.Model;
+using Integration.Repository.Sql;
+using Integration_API.Model;
 //using Integration.Model;
 using Model.DataBaseContext;
-using Integration.Repository.Sql;
 
 namespace Integration_API.Controllers
 {
@@ -27,11 +27,8 @@ namespace Integration_API.Controllers
         public IActionResult Get()
         {
             repo.dbContext = dbContext;
-            List<Integration.Model.Drugstore> result = new List<Integration.Model.Drugstore>();
+            List<Integration_API.Model.Drugstore> result = new List<Integration_API.Model.Drugstore>();
             repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
-            /*
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
-            */
             return Ok(result);
         }
 
