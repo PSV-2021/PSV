@@ -6,7 +6,6 @@ using Factory;
 using Integration.Model;
 using Integration.Repository.Sql;
 using Model.DataBaseContext;
-
 namespace Integration.Service
 {
     public class DrugstoreFeedbackService
@@ -24,7 +23,7 @@ namespace Integration.Service
             DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository();
         }
 
-        public int SaveFeedback(NewPharmacyReviewDto pharmacyReview)
+       /* public int SaveFeedback(NewPharmacyReviewDto pharmacyReview)
         {
             int maxId = new DrugstoreFeedbackService(DrugstoreFeedbackRepository.dbContext).GetMaxId();
             DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
@@ -32,7 +31,7 @@ namespace Integration.Service
             DrugstoreFeedbackRepository.dbContext.DrugstoreFeedbacks.Add(dfb);
             DrugstoreFeedbackRepository.dbContext.SaveChanges();
 
-        }
+        }*/
 
         public int GetMaxId()
         {

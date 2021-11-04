@@ -30,7 +30,7 @@ namespace Integration.Repository.Sql
         public List<Drugstore> GetAll()
         {
             List<Drugstore> result = new List<Drugstore>();
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url,drugstore.ApiKey)));
 
             return result;
         }
@@ -38,8 +38,8 @@ namespace Integration.Repository.Sql
         public string GetDrugstoreName(string id)
         {
             var query = from st in dbContext.Drugstores
-                where st.Id == id.ToString()
-                select st.Name;
+                        where st.Id == id.ToString()
+                        select st.Name;
 
             return query.FirstOrDefault();
         }

@@ -5889,19 +5889,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\masa\\.nuget\\packages\\": {}
+    "C:\\Users\\Andrea\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Integration API\\Integration API.csproj",
+      "projectUniqueName": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\New folder (2)\\PSV\\src\\Integration API\\Integration API.csproj",
       "projectName": "Integration API",
-      "projectPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Integration API\\Integration API.csproj",
-      "packagesPath": "C:\\Users\\masa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Integration API\\obj\\",
+      "projectPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\New folder (2)\\PSV\\src\\Integration API\\Integration API.csproj",
+      "packagesPath": "C:\\Users\\Andrea\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\New folder (2)\\PSV\\src\\Integration API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\masa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Andrea\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -23,6 +23,6 @@ namespace Integration_API.Model
             ApiKey = api;
         }
 
-        
+
     }
 }
