@@ -6,6 +6,7 @@ mat-toolbar span{
 .example-spacer {
     flex: 1 1 auto;
   }
+<<<<<<< HEAD
 
 mat-toolbar a{
     text-decoration-color: aliceblue;
@@ -15,3 +16,6 @@ mat-toolbar a{
 mat-toolbar div{
    color: black;
 }
+=======
+  
+>>>>>>> e28da3b478b9b0a8a8a9c221976111a9939c0361

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .landing{
     display: block;
     margin-left: 5%;
@@ -23,4 +24,8 @@
     margin: auto;
     float: right;
     font-style: italic;
+=======
+app-navigation{
+    width: 100%;
+>>>>>>> e28da3b478b9b0a8a8a9c221976111a9939c0361
 }

@@ -4,5 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="5.0.10" />
+    <PackageReference Include="RestSharp" Version="106.13.0" />
+  </ItemGroup>
+
 
 </Project>

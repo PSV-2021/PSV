@@ -1,0 +1,52 @@
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csprojAssemblyReference.cache
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfoInputs.cache
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfo.cs
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.deps.json
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.dll
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.pdb
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.exe
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.deps.json
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.json
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.dev.json
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.dll
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.pdb
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.AssemblyReference.cache
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.GeneratedMSBuildEditorConfig.editorconfig
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfoInputs.cache
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfo.cs
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.AssemblyReference.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfoInputs.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfo.cs
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.deps.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.dev.json
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.dll
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.pdb
+C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
+D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.deps.json
+D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.json
+D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.dev.json
+D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.dll
+D:\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.pdb
+D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csprojAssemblyReference.cache
+D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfoInputs.cache
+D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.AssemblyInfo.cs
+D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.csproj.CoreCompileInputs.cache
+D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.dll
+D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.pdb
+D:\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.json
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\bin\Debug\netcoreapp3.1\Integration.runtimeconfig.dev.json
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\Integration\obj\Debug\netcoreapp3.1\Integration.genruntimeconfig.cache
