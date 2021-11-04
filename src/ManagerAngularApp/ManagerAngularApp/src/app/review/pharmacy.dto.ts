@@ -1,11 +1,11 @@
 export class PharmacyDto{
-    Id: string;
+    Id: number;
     Name: string;
     Url: string;
 
 
     constructor(){
-        this.Id = '';
+        this.Id = 0;
         this.Name = '';
         this.Url = '';
     }

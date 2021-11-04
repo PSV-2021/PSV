@@ -35,10 +35,10 @@ namespace Integration.Repository.Sql
             return result;
         }
 
-        public string GetDrugstoreName(string id)
+        public string GetDrugstoreName(int id)
         {
             var query = from st in dbContext.Drugstores
-                        where st.Id == id.ToString()
+                        where st.Id == id
                         select st.Name;
 
             return query.FirstOrDefault();

@@ -6,7 +6,7 @@ namespace Integration_API.Model
 {
     public class Drugstore
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
         public string ApiKey { get; set; }
@@ -15,9 +15,16 @@ namespace Integration_API.Model
         {
 
         }
-        public Drugstore(string id, string name, string url, string api)
+        public Drugstore(int id, string name, string url, string api)
         {
             Id = id;
+            Name = name;
+            Url = url;
+            ApiKey = api;
+        }
+
+        public Drugstore(string name, string url, string api)
+        {
             Name = name;
             Url = url;
             ApiKey = api;

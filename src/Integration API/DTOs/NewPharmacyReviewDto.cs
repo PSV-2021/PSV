@@ -7,10 +7,10 @@ namespace Integration_API.DTOs
 {
     public class NewPharmacyReviewDto
     {
-        public string pharmacyId { get; set; }
+        public int pharmacyId { get; set; }
         public string review { get; set; }
 
-        public NewPharmacyReviewDto(string pharmacyId, string review)
+        public NewPharmacyReviewDto(int pharmacyId, string review)
         {
             this.pharmacyId = pharmacyId;
             this.review = review;

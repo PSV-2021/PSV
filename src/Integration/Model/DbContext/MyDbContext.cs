@@ -19,17 +19,17 @@ namespace Model.DataBaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Drugstore>().HasData(
-                new Drugstore { Id = "aaa" , Name = "Apoteka 1", Url = @"http://apoteka1.rs"},
-                new Drugstore { Id = "bbb", Name = "Apoteka 2", Url = @"http://apoteka2.rs" },
-                new Drugstore { Id = "ccc", Name = "Apoteka 3", Url = @"http://apoteka3.rs" }
+                new Drugstore(1,"Apoteka prva", "www.apoteka.rs", "aaabbbccc"),
+                new Drugstore(2,"Apoteka druga", "www.apotekica.rs", "111222333"),
+                new Drugstore(3,"Apoteka treca", "www.apotekcina.rs", "555333")
 
             );
 
 
             modelBuilder.Entity<DrugstoreFeedback>().HasData(
-                new DrugstoreFeedback { Id = 1, DrugstoreToken = "tokentokentoken123", Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now},
-                new DrugstoreFeedback { Id = 2, DrugstoreToken = "tokentokentoken456", Content = "Svidjela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now },
-                new DrugstoreFeedback { Id = 3, DrugstoreToken = "tokentokentoken789", Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now }
+                new DrugstoreFeedback {Id = 1, DrugstoreId = 1, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now},
+                new DrugstoreFeedback { Id = 2, DrugstoreId = 2, Content = "Svidjela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now },
+                new DrugstoreFeedback { Id = 3, DrugstoreId = 3, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now }
 
             );
         }

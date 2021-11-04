@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Integration.Repository.Sql;
 using Integration_API.Model;
-//using Integration.Model;
 using Model.DataBaseContext;
 
 namespace Integration_API.Controllers
@@ -33,7 +32,7 @@ namespace Integration_API.Controllers
         }
 
         [HttpGet("/name/{id}")] // GET /api/test2/int/3
-        public IActionResult GetDrugstoreName(string id)
+        public IActionResult GetDrugstoreName(int id)
         {
             repo.dbContext = dbContext;
             string result = repo.GetDrugstoreName(id);

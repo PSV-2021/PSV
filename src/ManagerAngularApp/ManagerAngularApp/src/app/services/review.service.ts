@@ -25,7 +25,7 @@ export class ReviewService {
       return this.http.get<any>(this.url + '/drugstore/name/', {params:{id: id}});
     }
 
-    SendNewReview(pharmacyId: string, review: string): any{
+    SendNewReview(pharmacyId: number, review: string): any{
       const body = {
         pharmacyId : pharmacyId,
         review : review

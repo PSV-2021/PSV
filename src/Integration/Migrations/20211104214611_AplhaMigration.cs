@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Integration_API.Migrations
+namespace Integration.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class AplhaMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace Integration_API.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DrugstoreToken = table.Column<string>(type: "text", nullable: true),
+                    DrugstoreId = table.Column<int>(type: "integer", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: true),
                     Response = table.Column<string>(type: "text", nullable: true),
                     SentTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -29,9 +29,11 @@ namespace Integration_API.Migrations
                 name: "Drugstores",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    Url = table.Column<string>(type: "text", nullable: true)
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    ApiKey = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,22 +42,22 @@ namespace Integration_API.Migrations
 
             migrationBuilder.InsertData(
                 table: "DrugstoreFeedbacks",
-                columns: new[] { "Id", "Content", "DrugstoreToken", "RecievedTime", "Response", "SentTime" },
+                columns: new[] { "Id", "Content", "DrugstoreId", "RecievedTime", "Response", "SentTime" },
                 values: new object[,]
                 {
-                    { 1, "Nije mi se svidela usluga", "tokentokentoken123", new DateTime(2021, 11, 1, 15, 0, 12, 762, DateTimeKind.Local).AddTicks(5846), "Nemoj da lazes!", new DateTime(2021, 11, 1, 15, 0, 12, 768, DateTimeKind.Local).AddTicks(7287) },
-                    { 2, "Svidjela usluga", "tokentokentoken456", new DateTime(2021, 11, 1, 15, 0, 12, 768, DateTimeKind.Local).AddTicks(8195), "Nemoj da lazes!", new DateTime(2021, 11, 1, 15, 0, 12, 768, DateTimeKind.Local).AddTicks(8249) },
-                    { 3, "Nije mi se svidela usluga", "tokentokentoken789", new DateTime(2021, 11, 1, 15, 0, 12, 768, DateTimeKind.Local).AddTicks(8274), "Nemoj da lazes!", new DateTime(2021, 11, 1, 15, 0, 12, 768, DateTimeKind.Local).AddTicks(8281) }
+                    { 1, "Nije mi se svidela usluga", 1, new DateTime(2021, 11, 4, 22, 46, 10, 39, DateTimeKind.Local).AddTicks(109), "Nemoj da lazes!", new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7334) },
+                    { 2, "Svidjela usluga", 2, new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7732), "Nemoj da lazes!", new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7761) },
+                    { 3, "Nije mi se svidela usluga", 3, new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7781), "Nemoj da lazes!", new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7785) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Drugstores",
-                columns: new[] { "Id", "Name", "Url" },
+                columns: new[] { "Id", "ApiKey", "Name", "Url" },
                 values: new object[,]
                 {
-                    { "aaa", "Apoteka 1", "http://apoteka1.rs" },
-                    { "bbb", "Apoteka 2", "http://apoteka2.rs" },
-                    { "ccc", "Apoteka 3", "http://apoteka3.rs" }
+                    { 1, "aaabbbccc", "Apoteka prva", "www.apoteka.rs" },
+                    { 2, "111222333", "Apoteka druga", "www.apotekica.rs" },
+                    { 3, "555333", "Apoteka treca", "www.apotekcina.rs" }
                 });
         }
 

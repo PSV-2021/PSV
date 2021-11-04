@@ -34,7 +34,7 @@ namespace Integration_API.Controllers
         {
             repoFeedback.dbContext = dbContext;
             repoDrugstores.dbContext = dbContext;
-            var result = repoFeedback.GetAll().Join(repoDrugstores.GetAll(), f => f.DrugstoreToken, d => d.Id,
+            var result = repoFeedback.GetAll().Join(repoDrugstores.GetAll(), f => f.DrugstoreId, d => d.Id,
                 (df, d) =>
                 new {
                     Id = df.Id,

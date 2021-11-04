@@ -9,20 +9,6 @@ namespace Factory
 {
     interface IRepositoryFactory
     {
-        IAnnouncementRepository CreateAnnouncementRepository();
-        IAppointmentRepository CreateAppointmentRepository(); 
-        IDeclinedMedicineRepository CreateDeclinedMedicineRepository();
-        IDoctorEvaluationRepository CreateDoctorEvaluationRepository();
-        IDoctorRepository CreateDoctorRepository();
-        IEquipmentRepository CreateEquipmentRepository();
-        IEventsLogRepository CreateEventsLogRepository();
-        IHospitalEvaluationRepository CreateHospitalEvaluationRepository();
-        IMedicineRepository CreateMedicineRepository();
-        IPatientRepository CreatePatientRepository();
-        IRoomInventoryRepository CreateRoomInventoryRepository();
-        IRoomRepository CreateRoomRepository();
-        IUserFeedbackRepository CreateUserFeebackRepository();
-
         IDrugstoreRepository CreateDrugstoreRepository();
         IDrugstoreFeedbackRepository CreateDrugstoreFeedbackRepository();
     }
