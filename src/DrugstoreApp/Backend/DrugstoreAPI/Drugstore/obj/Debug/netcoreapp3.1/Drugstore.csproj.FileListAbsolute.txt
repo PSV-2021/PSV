@@ -1,0 +1,12 @@
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.deps.json
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.runtimeconfig.json
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.runtimeconfig.dev.json
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.dll
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.pdb
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.GeneratedMSBuildEditorConfig.editorconfig
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.AssemblyInfoInputs.cache
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.AssemblyInfo.cs
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.csproj.CoreCompileInputs.cache
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.dll
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.pdb
+D:\Fakultet\cetvrta\psw\Projekat\psw\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.genruntimeconfig.cache
