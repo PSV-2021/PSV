@@ -28,7 +28,7 @@ namespace Integration_API.Controllers
         {
             repo.dbContext = dbContext;
             List<Integration_API.Model.Drugstore> result = new List<Integration_API.Model.Drugstore>();
-            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
+            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey)));
             return Ok(result);
         }
 

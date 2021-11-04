@@ -5961,19 +5961,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Zola\\.nuget\\packages\\": {}
+    "C:\\Users\\Korisnik\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "0.0.1",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration\\Integration.csproj",
+      "projectUniqueName": "D:\\PSV\\src\\Integration\\Integration.csproj",
       "projectName": "SimsLogger",
-      "projectPath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration\\Integration.csproj",
-      "packagesPath": "C:\\Users\\Zola\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration\\obj\\",
+      "projectPath": "D:\\PSV\\src\\Integration\\Integration.csproj",
+      "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+      "outputPath": "D:\\PSV\\src\\Integration\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Zola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6045,7 +6045,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

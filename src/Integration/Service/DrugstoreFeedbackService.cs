@@ -24,6 +24,16 @@ namespace Integration.Service
             DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository();
         }
 
+        public int SaveFeedback(NewPharmacyReviewDto pharmacyReview)
+        {
+            int maxId = new DrugstoreFeedbackService(DrugstoreFeedbackRepository.dbContext).GetMaxId();
+            DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
+                DateTime.Now, DateTime.MinValue);
+            DrugstoreFeedbackRepository.dbContext.DrugstoreFeedbacks.Add(dfb);
+            DrugstoreFeedbackRepository.dbContext.SaveChanges();
+
+        }
+
         public int GetMaxId()
         {
             int max = -999;

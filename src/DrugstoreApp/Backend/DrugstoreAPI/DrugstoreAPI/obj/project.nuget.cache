@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "OkYxNre59VQ4vV7JB+h6Y77fSPNKt07+XPwvTNIPTZgTG0Gf3DhZZ+VmbZbrbfhe9porq06D2/qu4zXxu2tlkQ==",
+  "dgSpecHash": "W7mfcR2U252yxCMSB4JyB2uQZPDbr4KVmxs4275OXrbLX52xVsrqkx9td7rD3nlgc1uuoPYhhrJjOKojkezBpA==",
   "success": true,
   "projectFilePath": "D:\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Korisnik\\.nuget\\packages\\npgsql\\5.0.10\\npgsql.5.0.10.nupkg.sha512",
+    "C:\\Users\\Korisnik\\.nuget\\packages\\restsharp\\106.13.0\\restsharp.106.13.0.nupkg.sha512",
     "C:\\Users\\Korisnik\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.6.0\\system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512"
   ],
   "logs": []

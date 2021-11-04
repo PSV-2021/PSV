@@ -46,3 +46,50 @@ C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.dll
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.pdb
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.genruntimeconfig.cache
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\appsettings.json
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.exe
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.deps.json
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.runtimeconfig.json
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.runtimeconfig.dev.json
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration API.pdb
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Castle.Core.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Humanizer.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Npgsql.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\RestSharp.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\Integration.pdb
+D:\PSV\src\Integration API\bin\Debug\netcoreapp3.1\RestSharp.xml
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csprojAssemblyReference.cache
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.AssemblyInfoInputs.cache
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.AssemblyInfo.cs
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csproj.CoreCompileInputs.cache
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.MvcApplicationPartsAssemblyInfo.cache
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\staticwebassets\Integration API.StaticWebAssets.Manifest.cache
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\staticwebassets\Integration API.StaticWebAssets.xml
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\scopedcss\bundle\Integration API.styles.css
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.RazorTargetAssemblyInfo.cache
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.csproj.CopyComplete
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.dll
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.pdb
+D:\PSV\src\Integration API\obj\Debug\netcoreapp3.1\Integration API.genruntimeconfig.cache
