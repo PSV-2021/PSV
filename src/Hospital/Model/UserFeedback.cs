@@ -14,7 +14,7 @@ namespace Model
         public String Content { get; set; }
         //public Boolean IsDeleted { get; set; }
         public String Name { get; set; }
-        public String Date { get; set; }
+        //public String Date { get; set; }
         public Boolean canPublish { get; set; }
 
         public UserFeedback() { }
@@ -27,10 +27,10 @@ namespace Model
             Content = con;
             //IsDeleted = false;
         }
-        public UserFeedback(int id, string date, string name, Boolean canPublish, string context)
+        public UserFeedback(int id, DateTime date, string name, Boolean canPublish, string context)
         {
             Id = id;
-            Date = date;
+            TimeWritten = date;
             Name = name;
             Content = context;
             canPublish = true;

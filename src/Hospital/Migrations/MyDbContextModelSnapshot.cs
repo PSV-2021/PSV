@@ -29,9 +29,6 @@ namespace Hospital.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("text");
 
-                    b.Property<string>("Date")
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -50,27 +47,24 @@ namespace Hospital.Migrations
                         {
                             Id = 1,
                             Content = "Good!",
-                            Date = "20/05/2021",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            canPublish = true
+                            TimeWritten = new DateTime(2021, 11, 4, 15, 17, 0, 975, DateTimeKind.Local).AddTicks(6810),
+                            canPublish = false
                         },
                         new
                         {
                             Id = 2,
                             Content = "I didn't like it.",
-                            Date = "21/06/2020",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeWritten = new DateTime(2021, 11, 4, 15, 17, 0, 978, DateTimeKind.Local).AddTicks(8284),
                             canPublish = true
                         },
                         new
                         {
                             Id = 3,
                             Content = "Super service!",
-                            Date = "22/07/2021",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TimeWritten = new DateTime(2021, 11, 4, 15, 17, 0, 978, DateTimeKind.Local).AddTicks(8356),
                             canPublish = true
                         });
                 });
