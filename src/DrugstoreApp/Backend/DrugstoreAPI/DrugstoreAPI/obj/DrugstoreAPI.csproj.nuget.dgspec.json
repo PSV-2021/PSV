@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj": {}
+    "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj": {}
   },
   "projects": {
-    "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj": {
+    "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
         "projectName": "DrugstoreAPI",
-        "projectPath": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
-        "packagesPath": "C:\\Users\\Lenka\\.nuget\\packages\\",
-        "outputPath": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\obj\\",
+        "projectPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
+        "packagesPath": "C:\\Users\\Andrea\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lenka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Andrea\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,15 +26,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.pkg.github.com/lenche23/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj": {
-                "projectPath": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj"
+              "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj": {
+                "projectPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj"
               }
             }
           }
@@ -48,6 +47,22 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -70,20 +85,20 @@
         }
       }
     },
-    "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj": {
+    "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
+        "projectUniqueName": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
         "projectName": "Drugstore",
-        "projectPath": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
-        "packagesPath": "C:\\Users\\Lenka\\.nuget\\packages\\",
-        "outputPath": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\obj\\",
+        "projectPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
+        "packagesPath": "C:\\Users\\Andrea\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lenka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Andrea\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -92,8 +107,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.pkg.github.com/lenche23/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -125,7 +139,7 @@
               "target": "Package",
               "version": "[5.0.11, )"
             },
-            "Npgsql": {
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[5.0.10, )"
             }

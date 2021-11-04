@@ -115,7 +115,7 @@
           "Microsoft.Extensions.Configuration.Abstractions": "5.0.0"
         },
         "compile": {
-          "lib/netstandard2.1/_._": {}
+          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Relational.dll": {}
         },
         "runtime": {
           "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Relational.dll": {}
@@ -167,7 +167,7 @@
           "Microsoft.Extensions.Primitives": "5.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/_._": {}
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll": {}
@@ -329,6 +329,21 @@
         },
         "runtime": {
           "lib/netcoreapp3.1/Npgsql.dll": {}
+        }
+      },
+      "Npgsql.EntityFrameworkCore.PostgreSQL/5.0.10": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.10",
+          "Microsoft.EntityFrameworkCore.Abstractions": "5.0.10",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
+          "Npgsql": "5.0.10"
+        },
+        "compile": {
+          "lib/netstandard2.1/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -2131,6 +2146,19 @@
         "lib/netstandard2.1/Npgsql.xml",
         "npgsql.5.0.10.nupkg.sha512",
         "npgsql.nuspec",
+        "postgresql.png"
+      ]
+    },
+    "Npgsql.EntityFrameworkCore.PostgreSQL/5.0.10": {
+      "sha512": "3K+YNZFdwMcTxY8aW9m6BHyzPce/WFdDKPESP4uCXk6xNS6Ujq6zhi7+KXkzb7iNB0OYretEuF3ezqkk4ZnJMg==",
+      "type": "package",
+      "path": "npgsql.entityframeworkcore.postgresql/5.0.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.1/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
+        "npgsql.entityframeworkcore.postgresql.5.0.10.nupkg.sha512",
+        "npgsql.entityframeworkcore.postgresql.nuspec",
         "postgresql.png"
       ]
     },
@@ -5856,27 +5884,27 @@
       "Microsoft.EntityFrameworkCore >= 5.0.11",
       "Microsoft.EntityFrameworkCore.Proxies >= 5.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.11",
-      "Npgsql >= 5.0.10"
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.10"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lenka\\.nuget\\packages\\": {},
+    "C:\\Users\\Andrea\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
+      "projectUniqueName": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
       "projectName": "Drugstore",
-      "projectPath": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
-      "packagesPath": "C:\\Users\\Lenka\\.nuget\\packages\\",
-      "outputPath": "D:\\Fakultet\\cetvrta\\psw\\Projekat\\psw\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\obj\\",
+      "projectPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
+      "packagesPath": "C:\\Users\\Andrea\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Lenka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Andrea\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5885,8 +5913,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.pkg.github.com/lenche23/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
@@ -5918,7 +5945,7 @@
             "target": "Package",
             "version": "[5.0.11, )"
           },
-          "Npgsql": {
+          "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[5.0.10, )"
           }
