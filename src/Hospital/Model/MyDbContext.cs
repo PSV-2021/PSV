@@ -17,7 +17,7 @@ namespace Hospital.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserFeedback>().HasData(
-                new UserFeedback { Id = 1, Date = "20/05/2021", Content = "Good!", Name = "Mika Mikic", canPublish = true },
+                new UserFeedback { Id = 1, Date = "20/05/2021", Content = "Good!", Name = "Mika Mikic", canPublish = false },
                 new UserFeedback { Id = 2, Date = "21/06/2020", Content = "I didn't like it.", Name = "Anonymus", canPublish = true},
                 new UserFeedback { Id = 3, Date = "22/07/2021", Content = "Super service!", Name = "Sara Saric", canPublish = true }
             );

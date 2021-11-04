@@ -28,7 +28,7 @@ namespace HospitalAPI.Controllers
         {
             repoFeedback.dbContext = dbContext;
             List<UserFeedback> result = new List<UserFeedback>();
-            repoFeedback.GetAll().ForEach(userFeedbacks => result.Add(new UserFeedback(userFeedbacks.Id, userFeedbacks.Date, userFeedbacks.Name, userFeedbacks.canPublish, userFeedbacks.Content)));
+            result = repoFeedback.GetAllAproved();
             return Ok(result);
         }
     }

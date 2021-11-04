@@ -38,16 +38,15 @@ namespace Hospital.Repository
             var query = from st in dbContext.UserFeedbacks
                         where st.Id == id
                         select st.Content;
-
+            //var a = dbContext.UserFeedbacks.Where(f=>f.canPublish==true);
             return query.FirstOrDefault();
         }
 
         public List<UserFeedback> GetAllAproved()
         {
-            List<UserFeedback> result = new List<UserFeedback>();
-            dbContext.UserFeedbacks.ToList().ForEach(userFeedbacks => result.Add(new UserFeedback(userFeedbacks.Id, userFeedbacks.Date, userFeedbacks.Name, userFeedbacks.canPublish, userFeedbacks.Content)));
+            var a = dbContext.UserFeedbacks.Where(f => f.canPublish == true);
 
-            return result;
+            return a.ToList<UserFeedback>();
         }
 
         public UserFeedback GetOne(int id)
