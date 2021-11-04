@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hospital.DTO;
 using Hospital.Model;
 using Model;
 using Repository;
@@ -28,7 +29,7 @@ namespace Hospital.Repository
         public List<UserFeedback> GetAll()
         {
             List<UserFeedback> result = new List<UserFeedback>();
-            dbContext.UserFeedbacks.ToList().ForEach(userFeedbacks => result.Add(new UserFeedback(userFeedbacks.Id, userFeedbacks.Date, userFeedbacks.Name, userFeedbacks.canPublish, userFeedbacks.Content)));
+            dbContext.UserFeedbacks.ToList().ForEach(userFeedbacks => result.Add(new UserFeedback(userFeedbacks.Id, userFeedbacks.TimeWritten, userFeedbacks.Name, userFeedbacks.canPublish, userFeedbacks.Content)));
 
             return result;
         }
@@ -38,15 +39,22 @@ namespace Hospital.Repository
             var query = from st in dbContext.UserFeedbacks
                         where st.Id == id
                         select st.Content;
-            //var a = dbContext.UserFeedbacks.Where(f=>f.canPublish==true);
             return query.FirstOrDefault();
         }
 
-        public List<UserFeedback> GetAllAproved()
+        public List<CommentDTO> GetAllAproved()
         {
             var a = dbContext.UserFeedbacks.Where(f => f.canPublish == true);
 
-            return a.ToList<UserFeedback>();
+            List<UserFeedback> list = new List<UserFeedback>();
+            list = a.ToList<UserFeedback>();
+
+            List<CommentDTO> result = new List<CommentDTO>();
+            foreach ( UserFeedback f in list){
+                   result.Add(new CommentDTO{ Name = f.Name, Date = f.TimeWritten, Content = f.Content });
+            }
+
+            return result;
         }
 
         public UserFeedback GetOne(int id)

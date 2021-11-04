@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CommentsObserveComponent } from './comments-observe.component';
 
 describe('CommentsObserveComponent', () => {

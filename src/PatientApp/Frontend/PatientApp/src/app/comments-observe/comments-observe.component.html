@@ -4,15 +4,12 @@
         <mat-card class="example-card">
             <mat-card-title>Review</mat-card-title>
             <mat-card-content>
-            <br>
-            <p>{{ comment.Name }}</p>
-            <p>{{ comment.Date }}</p>
-            <mat-card-subtitle>Response</mat-card-subtitle>
-            <br>
-            <p>{{ comment.Comment }}</p>
-          </mat-card-content>
-
-            
+              <p>{{ comment.name }}</p>
+              <p>{{ comment.date | date:'short' }}</p>
+              <br>
+              <mat-card-subtitle>Response</mat-card-subtitle>
+              <p><em>"{{ comment.content }}"</em></p>
+            </mat-card-content>
         </mat-card>
         </div>
         <br>

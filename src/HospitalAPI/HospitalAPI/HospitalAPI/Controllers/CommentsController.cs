@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Hospital;
 using Hospital.Repository;
 using Model;
+using Hospital.DTO;
 
 namespace HospitalAPI.Controllers
 {
@@ -27,7 +28,7 @@ namespace HospitalAPI.Controllers
         public IActionResult Get()
         {
             repoFeedback.dbContext = dbContext;
-            List<UserFeedback> result = new List<UserFeedback>();
+            List<CommentDTO> result = new List<CommentDTO>();
             result = repoFeedback.GetAllAproved();
             return Ok(result);
         }
