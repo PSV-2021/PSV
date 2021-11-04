@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace DrugstoreAPI.Models
+namespace Drugstore.Models
 {
     public class Medicine
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public String Name { get; set; }
         public Double Price { get; set; }
 

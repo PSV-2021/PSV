@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Drugstore.Models;
 using DrugstoreAPI.Dtos;
-using DrugstoreAPI.Models;
 
 namespace DrugstoreAPI.Adapters
 {

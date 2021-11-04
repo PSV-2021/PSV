@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DrugstoreAPI.Adapters;
 using DrugstoreAPI.Dtos;
-using DrugstoreAPI.Models;
+using Drugstore.Models;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -44,7 +44,7 @@ namespace DrugstoreAPI.Controllers
                 return BadRequest();
             }
 
-            long id = Program.MedicineList.Count > 0 ? Program.MedicineList.Max(medicine => medicine.Id) + 1 : 1;
+            int id = Program.MedicineList.Count > 0 ? Program.MedicineList.Max(medicine => medicine.Id) + 1 : 1;
             Medicine medicine = MedicineAdapter.MedicineDtoToMedicine(dto);
             medicine.Id = id;
             Program.MedicineList.Add(medicine);
