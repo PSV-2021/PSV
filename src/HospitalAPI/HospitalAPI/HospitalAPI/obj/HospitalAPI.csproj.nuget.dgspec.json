@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj": {}
+    "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj": {
+    "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
         "projectName": "HospitalAPI",
-        "projectPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
-        "packagesPath": "C:\\Users\\masa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\obj\\",
+        "projectPath": "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
+        "packagesPath": "C:\\Users\\Natasa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\masa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Natasa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Hospital\\Hospital.csproj": {
-                "projectPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Hospital\\Hospital.csproj"
+              "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\Hospital\\Hospital.csproj": {
+                "projectPath": "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\Hospital\\Hospital.csproj"
               }
             }
           }
@@ -85,17 +85,17 @@
         }
       }
     },
-    "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Hospital\\Hospital.csproj": {
+    "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\Hospital\\Hospital.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Hospital\\Hospital.csproj",
+        "projectUniqueName": "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\Hospital\\Hospital.csproj",
         "projectName": "Hospital",
-        "projectPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Hospital\\Hospital.csproj",
-        "packagesPath": "C:\\Users\\masa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Hospital\\obj\\",
+        "projectPath": "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\Hospital\\Hospital.csproj",
+        "packagesPath": "C:\\Users\\Natasa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Natasa\\Desktop\\PSW\\PSV\\src\\Hospital\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\masa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Natasa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
