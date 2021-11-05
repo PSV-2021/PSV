@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Integration.Model;
 using Integration.Repository.Sql;
 using Model.DataBaseContext;
+using Integration_API.DTOs;
+using Integration_API.Model;
 
 namespace Integration_API.Controllers
 {
@@ -23,7 +25,7 @@ namespace Integration_API.Controllers
         }
 
         [HttpPost]   // POST /api/drugstoreresponse
-        public IActionResult Respond(String response)
+        public IActionResult Respond(PharmacyResponseDto response)
         {
 
             //List<DrugstoreFeedback> result = new List<DrugstoreFeedback>();
@@ -32,8 +34,9 @@ namespace Integration_API.Controllers
             /*
             dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
             */
-            Console.WriteLine("Status: " + response);
-            return Ok();
+            DrugstoreResponse dres = new DrugstoreResponse(1, 1111, response.response, DateTime.Now, DateTime.Now);
+            Console.WriteLine("Status: " + response.response);
+            return Ok(dres);
         }
         
 

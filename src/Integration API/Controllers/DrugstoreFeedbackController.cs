@@ -11,6 +11,7 @@ using Integration.Repository.Sql;
 using Integration.Service;
 using Integration.Model;
 using DrugstoreFeedback = Integration.Model.DrugstoreFeedback;
+using RestSharp;
 
 namespace Integration_API.Controllers
 {
@@ -49,13 +50,28 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/drugstorefeedback
         public IActionResult Post(NewPharmacyReviewDto pharmacyReview)
         {
-            
             repoFeedback.dbContext = dbContext;
             int maxId = new DrugstoreFeedbackService(dbContext).GetMaxId();
             DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
                 DateTime.Now, DateTime.MinValue);
             dbContext.DrugstoreFeedbacks.Add(dfb);
             dbContext.SaveChanges();
+
+
+            var client = new RestClient("http://localhost:5001");
+            var request = new RestRequest("/api/DrugstoreFeedback/secret", Method.POST);
+
+            request.AddJsonBody(new
+            {
+                Id = pharmacyReview.pharmacyId,
+                Response = pharmacyReview.review
+            });
+            //request.AddHeader("ApiKey", )
+            IRestResponse response = client.Execute(request);
+            var content = response.Content; // {"message":" created."}
+
+
+           
             return Ok(dfb);
         }
         
