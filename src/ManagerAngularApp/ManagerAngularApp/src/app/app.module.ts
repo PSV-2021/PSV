@@ -10,6 +10,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MaterialModule } from './material/material.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { ReviewComponent } from './review/review.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { ReviewComponent } from './review/review.component';
     NavigationComponent,
     RegistrationComponent,
     ReviewComponent,
+    LandingPageComponent,
+    FeedbacksComponent,
   ],
   imports: [
     BrowserModule,

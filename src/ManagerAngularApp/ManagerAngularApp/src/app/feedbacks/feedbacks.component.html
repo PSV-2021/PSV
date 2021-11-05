@@ -1,0 +1,18 @@
+<div class="reviews-holder">
+    <div *ngFor="let comment of comments">
+        <div class="review-holder">
+        <mat-card class="example-card">
+            <mat-card-title>Review</mat-card-title>
+            <mat-card-content>
+              <p>{{ comment.name }}</p>
+              <p>{{ comment.timeWritten | date:'short' }}</p>
+              <br>
+              <mat-card-subtitle>Response</mat-card-subtitle>
+              <p><em>"{{ comment.content }}"</em></p>
+            </mat-card-content>
+        </mat-card>
+        </div>
+        <br>
+        <br>
+    </div>
+</div>
