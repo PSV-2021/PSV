@@ -1,0 +1,32 @@
+<mat-grid-list cols="1" rowHeight="500px">
+    <mat-grid-tile>
+        <div class="example-container">
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Hospital name</mat-label>
+            <input type="text" matInput [(ngModel)]="newHospital.hospitalName">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Adress</mat-label>
+            <input type="text" matInput [(ngModel)]="newHospital.address">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Email address</mat-label>
+            <input type="text" matInput placeholder="Ex. pat@example.com" [(ngModel)]="newHospital.email">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Api Adress</mat-label>
+            <input type="text" matInput placeholder="Ex. http://pharmacy021.rs/" [(ngModel)]="newHospital.apiAddress">
+          </mat-form-field>
+          <br>
+
+          <mat-card-actions>
+            <button mat-raised-button (click)="register()" color="primary">REGISTER</button>
+          </mat-card-actions>
+          <br>
+          <br><br>
+          </div>
+    </mat-grid-tile>
+</mat-grid-list>

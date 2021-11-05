@@ -1,0 +1,47 @@
+<div>
+    <mat-card class="example-card">
+        <mat-card-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose pharmacy:</mat-label>
+                <mat-select [(ngModel)]="selectedPharmacy" name="phar">
+                  <mat-option *ngFor="let pharmacy of pharmacies" [value]="pharmacy">
+                    {{pharmacy.Name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <mat-form-field class="example-full-width" appearance="fill" >
+                <mat-label>Leave a feedback</mat-label>
+                <textarea matInput placeholder="Your feedback" [(ngModel)]="review" name="review" matInput></textarea>
+              </mat-form-field>
+              <br>
+              <mat-card-actions>
+                <button mat-raised-button (click)="sendReview()" color="primary">Send review</button>
+              </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+<br>
+
+<div class="reviews-holder">
+<div *ngFor="let review of reviews">
+    <div class="review-holder">
+    <mat-card class="example-card">
+        <mat-card-subtitle >{{review.DrugstoreName}}</mat-card-subtitle>
+        <br>
+        <mat-card-title>Review</mat-card-title>
+        <mat-card-content>
+        <br>
+        <p>{{ review.ReviewContent }}</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-subtitle>Response</mat-card-subtitle>
+        <br>
+        <p>{{ review.ReviewResponse }}</p>
+    </mat-card>
+    </div>
+    <br>
+    <br>
+</div>
+</div>
