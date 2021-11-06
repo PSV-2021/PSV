@@ -23,3 +23,16 @@ C:\Users\Andrea\Desktop\SEMESTAR7\PSV\PSV\PSV\src\DrugstoreApp\Backend\Drugstore
 C:\Users\Andrea\Desktop\SEMESTAR7\PSV\PSV\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.dll
 C:\Users\Andrea\Desktop\SEMESTAR7\PSV\PSV\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.pdb
 C:\Users\Andrea\Desktop\SEMESTAR7\PSV\PSV\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.genruntimeconfig.cache
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.deps.json
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.runtimeconfig.json
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.runtimeconfig.dev.json
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.dll
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\bin\Debug\netcoreapp3.1\Drugstore.pdb
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.csproj.AssemblyReference.cache
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.AssemblyInfoInputs.cache
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.AssemblyInfo.cs
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.csproj.CoreCompileInputs.cache
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.dll
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.pdb
+C:\Users\DUSAN\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\obj\Debug\netcoreapp3.1\Drugstore.genruntimeconfig.cache

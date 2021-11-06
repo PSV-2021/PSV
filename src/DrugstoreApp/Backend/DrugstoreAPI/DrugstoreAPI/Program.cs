@@ -17,13 +17,6 @@ namespace DrugstoreAPI
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static List<Medicine> MedicineList = new List<Medicine>()
-        {
-            new Medicine(1, "Brufen", 255.00),
-            new Medicine(2, "Aspirin", 300.00),
-            new Medicine(3, "Olynth", 150.00)
-        };
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

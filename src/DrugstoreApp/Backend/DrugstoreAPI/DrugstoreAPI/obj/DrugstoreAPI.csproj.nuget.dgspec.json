@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj": {}
+    "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj": {
+    "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
+        "projectUniqueName": "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
         "projectName": "DrugstoreAPI",
-        "projectPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
-        "packagesPath": "C:\\Users\\Andrea\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\obj\\",
+        "projectPath": "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
+        "packagesPath": "C:\\Users\\DUSAN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Andrea\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\DUSAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj": {
-                "projectPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj"
+              "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj": {
+                "projectPath": "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj"
               }
             }
           }
@@ -85,21 +81,17 @@
         }
       }
     },
-    "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj": {
+    "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
+        "projectUniqueName": "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
         "projectName": "Drugstore",
-        "projectPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
-        "packagesPath": "C:\\Users\\Andrea\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andrea\\Desktop\\SEMESTAR7\\PSV\\PSV\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\obj\\",
+        "projectPath": "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drugstore.csproj",
+        "packagesPath": "C:\\Users\\DUSAN\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DUSAN\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Andrea\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\DUSAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
