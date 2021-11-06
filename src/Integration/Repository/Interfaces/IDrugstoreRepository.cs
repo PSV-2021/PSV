@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Integration_API.Model;
+using Integration.Model;
 
 namespace Integration_API.Repository.Interfaces
 {

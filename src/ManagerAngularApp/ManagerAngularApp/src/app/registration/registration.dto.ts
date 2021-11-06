@@ -1,14 +1,14 @@
 export class RegistrationDto{
-    DrugStorename: string;
-    address: string;
-    email: string;
-    apiAddress: string;
+    DrugstoreName: string;
+    Address: string;
+    Email: string;
+    URLAddress: string;
 
     constructor(){
-        this.DrugStorename = '';
-        this.address = '';
-        this.email = '';
-        this.apiAddress = '';
+        this.DrugstoreName = '';
+        this.Address = '';
+        this.Email = '';
+        this.URLAddress = '';
     }
 }
 
