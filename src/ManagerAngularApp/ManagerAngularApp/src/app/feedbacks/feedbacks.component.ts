@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommentService } from '../services/comment.service';
 
 @Component({
@@ -12,7 +14,7 @@ export class FeedbacksComponent implements OnInit {
   public comments: any[];
   displayedColumns: string[] = ['comment', 'date', 'name'];
 
-  constructor(private commentService: CommentService) {
+  constructor(private commentService: CommentService, private _snackBar: MatSnackBar) {
     this.comments = [];
   }
 
@@ -22,6 +24,14 @@ export class FeedbacksComponent implements OnInit {
         this.comments.push(p);
       }
     })
+  }
+  public publishComment(id:number): void{
+    this.commentService.publishComment(id).subscribe((d: any) =>{
+      this._snackBar.open('Komentar odobren!', '', {
+        duration: 2000
+      });;
+
+    });
   }
 
 }

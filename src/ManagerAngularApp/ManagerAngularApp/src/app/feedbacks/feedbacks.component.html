@@ -9,6 +9,7 @@
               <br>
               <mat-card-subtitle>Response</mat-card-subtitle>
               <p><em>"{{ comment.content }}"</em></p>
+              <button mat-raised-button *ngIf="!comment.canPublish" (click)="publishComment(comment.id)">&#10003; Odobri</button>
             </mat-card-content>
         </mat-card>
         </div>

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CommentService {
 
   url: string;
@@ -14,5 +15,9 @@ export class CommentService {
 
   GetAllComments(): Observable<any> {
       return this.http.get<any>(this.url + '/managercomments');
+  }
+  
+  publishComment(Id: number): any {
+    return this.http.post<any>(this.url + "/managercomments", Id);
   }
 }
