@@ -32,5 +32,6 @@ namespace HospitalAPI.Controllers
             result = repoFeedback.GetAllAproved();
             return Ok(result);
         }
+
     }
 }

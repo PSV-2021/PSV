@@ -1,0 +1,17 @@
+.example-card {
+    max-width: 90%;
+  }
+
+.reviews-holder{
+  display: flex;
+  flex-direction: column;
+} 
+
+.review-holder{
+  margin-left: 5%;
+  align-items: center;
+}
+
+.example-full-width {
+  width: 100%;
+}
