@@ -17,28 +17,28 @@ namespace Integration_API.Controllers
     public class DrugstoreResponseController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public DrugstoreFeedbackSqlRepository repo = new DrugstoreFeedbackSqlRepository();
+        public DrugstoreFeedbackSqlRepository repoFeedback = new DrugstoreFeedbackSqlRepository();
+        public DrugstoreSqlRepository repoDrugstores = new DrugstoreSqlRepository();
+        //public DrugstoreFeedbackService FeedbackService = new DrugstoreFeedbackService();
+
 
         public DrugstoreResponseController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
         }
 
-        [HttpPost]   // POST /api/drugstoreresponse
-        public IActionResult Respond(PharmacyResponseDto response)
+        [HttpPost]
+        public IActionResult ReceiveResponse(PharmacyResponseDto pharmacyResponse)
         {
+            repoFeedback.dbContext = dbContext;
+            Integration.Model.DrugstoreFeedback forEdit = repoFeedback.GetOne(pharmacyResponse.Id);
+            forEdit.Response = pharmacyResponse.Response;
 
-            //List<DrugstoreFeedback> result = new List<DrugstoreFeedback>();
-            //repo.GetAll().ForEach(feedback => result.Add(new DrugstoreFeedback(feedback.Id, feedback.DrugstoreToken, feedback.Content,
-            //    feedback.Response, feedback.SentTime, feedback.SentTime)));
-            /*
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
-            */
-            DrugstoreResponse dres = new DrugstoreResponse(1, 1111, response.Response, DateTime.Now, DateTime.Now);
-            Console.WriteLine("Status: " + response.Response);
-            return Ok(dres);
+            repoFeedback.Update(forEdit);
+
+            return Ok();
         }
-        
+
 
 
 

@@ -93,17 +93,17 @@ namespace Integration_API.Controllers
             return Ok(content);
         }
 
-        [HttpPost]
-        public IActionResult ReceiveResponse(PharmacyResponseDto pharmacyResponse)
-        {
-            repoFeedback.dbContext = dbContext;
-            DrugstoreFeedback forEdit = repoFeedback.GetOne(pharmacyResponse.Id);
-            forEdit.Response = pharmacyResponse.Response;
+        //[HttpPost]
+        //public IActionResult ReceiveResponse(PharmacyResponseDto pharmacyResponse)
+        //{
+        //    repoFeedback.dbContext = dbContext;
+        //    DrugstoreFeedback forEdit = repoFeedback.GetOne(pharmacyResponse.Id);
+        //    forEdit.Response = pharmacyResponse.Response;
 
-            repoFeedback.Update(forEdit);
+        //    repoFeedback.Update(forEdit);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
 
     }

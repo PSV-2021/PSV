@@ -40,7 +40,7 @@ namespace DrugstoreAPI.Controllers
         {
 
             var client = new RestClient("http://localhost:5000");
-            var request = new RestRequest("/api/drugstorefeedback/newResponse", Method.POST);
+            var request = new RestRequest("/api/drugstoreresponse", Method.POST);
 
             HospitalSqlRepository repo = new HospitalSqlRepository(dbContext);
             FeedbackSqlRepository repoFB = new FeedbackSqlRepository(dbContext);

@@ -5952,19 +5952,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Zola\\.nuget\\packages\\": {}
+    "C:\\Users\\brani\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
+      "projectUniqueName": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
       "projectName": "DrugstoreAPI",
-      "projectPath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
-      "packagesPath": "C:\\Users\\Zola\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\obj\\",
+      "projectPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
+      "packagesPath": "C:\\Users\\brani\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Zola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\brani\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6039,7 +6039,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
