@@ -39,6 +39,18 @@ namespace Integration.Repository.Sql
         {
             return dbContext.DrugstoreFeedbacks.Find(id);
         }
+        public DrugstoreFeedback GetById(string reviewId)
+        {
+            foreach (DrugstoreFeedback fb in dbContext.DrugstoreFeedbacks.ToList())
+            {
+                if (fb.Id.Equals(reviewId))
+                {
+                    return fb;
+                }
+            }
+
+            return null;
+        }
 
         public bool Save(DrugstoreFeedback newObject)
         {
@@ -47,7 +59,9 @@ namespace Integration.Repository.Sql
 
         public bool Update(DrugstoreFeedback editedObject)
         {
+            
             dbContext.DrugstoreFeedbacks.Update(editedObject);
+            dbContext.SaveChanges();
             return true;
         }
     }

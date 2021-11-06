@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "+dqp8GmPbIFcyhnCAUtYuni3zF0Ip8hEF9uxx4tNoOKyw4ZbKNxl7QJOGt/cUG6N2I0vzbN1oXjXVkBiw++PeA==",
+  "dgSpecHash": "mTb5lDtLkRbAs2HLb3DxNn6AgBWJ1hTwpsXX9CrFyGREqoE86rUBsne4Db46j7lvGSDk1j13HYIvm+cY8QGJfg==",
   "success": true,
   "projectFilePath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\DrugstoreApp\\Backend\\DrugstoreAPI\\DrugstoreAPI\\DrugstoreAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\brani\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\brani\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.10\\microsoft.aspnetcore.jsonpatch.3.1.10.nupkg.sha512",
+    "C:\\Users\\brani\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.10\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.10.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.11\\microsoft.entityframeworkcore.5.0.11.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.11\\microsoft.entityframeworkcore.abstractions.5.0.11.nupkg.sha512",
@@ -28,6 +30,7 @@
     "C:\\Users\\brani\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\brani\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\npgsql\\5.0.10\\npgsql.5.0.10.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\5.0.10\\npgsql.entityframeworkcore.postgresql.5.0.10.nupkg.sha512",
     "C:\\Users\\brani\\.nuget\\packages\\restsharp\\106.13.0\\restsharp.106.13.0.nupkg.sha512",

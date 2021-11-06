@@ -31,9 +31,10 @@ namespace Integration_API.Controllers
         public IActionResult ReceiveResponse(PharmacyResponseDto pharmacyResponse)
         {
             repoFeedback.dbContext = dbContext;
-            Integration.Model.DrugstoreFeedback forEdit = repoFeedback.GetOne(pharmacyResponse.Id);
+            Integration.Model.DrugstoreFeedback forEdit = repoFeedback.GetById(pharmacyResponse.Id);
             forEdit.Response = pharmacyResponse.Response;
-
+            //Integration.Model.DrugstoreFeedback fdbEdit = new Integration.Model.DrugstoreFeedback(forEdit.Id, forEdit.DrugstoreId,forEdit.Content, forEdit.Response, forEdit.SentTime, forEdit.RecievedTime);
+            
             repoFeedback.Update(forEdit);
 
             return Ok();

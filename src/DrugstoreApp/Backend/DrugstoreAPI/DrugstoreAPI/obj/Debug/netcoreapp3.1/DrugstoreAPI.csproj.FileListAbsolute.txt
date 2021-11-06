@@ -131,3 +131,6 @@ C:\Users\Zola\Desktop\PSW Projekat\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Dru
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\obj\Debug\netcoreapp3.1\DrugstoreAPI.genruntimeconfig.cache
 C:\Users\Zola\Desktop\PSW Projekat\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\brani\OneDrive\Documents\GitHub\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
