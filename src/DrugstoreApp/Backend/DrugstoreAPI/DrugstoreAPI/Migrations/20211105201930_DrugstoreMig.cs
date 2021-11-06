@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DrugstoreAPI.Migrations
 {
-    public partial class drugstore : Migration
+    public partial class DrugstoreMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,7 @@ namespace DrugstoreAPI.Migrations
                 name: "Feedbacks",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     HospitalName = table.Column<string>(type: "text", nullable: true),
                     Content = table.Column<string>(type: "text", nullable: true),
                     Response = table.Column<string>(type: "text", nullable: true)
@@ -42,9 +41,9 @@ namespace DrugstoreAPI.Migrations
                 columns: new[] { "Id", "Content", "HospitalName", "Response" },
                 values: new object[,]
                 {
-                    { 1, "Lenka vrati zeton", "Ime bolnice 222", "" },
-                    { 2, "normalno", "Ime bolnice 223", "" },
-                    { 3, "bla bla", "Ime bolnice 224", "" }
+                    { "aaa", "Lenka vrati zeton", "Ime bolnice 222", "" },
+                    { "bbb", "normalno", "Ime bolnice 223", "" },
+                    { "ccc", "bla bla", "Ime bolnice 224", "" }
                 });
 
             migrationBuilder.InsertData(

@@ -31,6 +31,55 @@ namespace Integration.Repository.Sql
             return result;
         }
 
-        
+        public bool Save(Feedback newFeedback)
+        {
+            try
+            {
+                dbContext.Feedbacks.Add(newFeedback);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        public bool Update(Feedback feedback)
+        {
+            dbContext.Feedbacks.Update(feedback);
+            dbContext.SaveChanges();
+            return true;
+        }
+
+        public Feedback getById(string reviewId)
+        {
+            foreach (Feedback fb in dbContext.Feedbacks.ToList())
+            {
+                if (fb.Id.Equals(reviewId))
+                {
+                    return fb;
+                }
+            }
+
+            return null;
+        }
+        /*
+public Feedback getByKey(string id)
+{
+   foreach (Feedback fb in dbContext.Feedbacks.ToList())
+   {
+       if (fb..Equals(id))
+           return fb;
+   }
+
+   return null;
+}
+*/
+
+
+
+
     }
 }

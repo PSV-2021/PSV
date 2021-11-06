@@ -44,7 +44,7 @@ namespace Integration.Repository.Sql
             return query.FirstOrDefault();
         }
 
-        public Drugstore GetOne(int id)
+        public Drugstore GetOne(string id)
         {
             throw new NotImplementedException();
         }
@@ -55,6 +55,11 @@ namespace Integration.Repository.Sql
         }
 
         public bool Update(Drugstore editedObject)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Drugstore GetOne(int id)
         {
             throw new NotImplementedException();
         }

@@ -12,6 +12,7 @@ using Integration.Service;
 using Integration.Model;
 using DrugstoreFeedback = Integration.Model.DrugstoreFeedback;
 using RestSharp;
+using System.Text.Json;
 
 namespace Integration_API.Controllers
 {
@@ -51,30 +52,58 @@ namespace Integration_API.Controllers
         public IActionResult Post(NewPharmacyReviewDto pharmacyReview)
         {
             repoFeedback.dbContext = dbContext;
-            int maxId = new DrugstoreFeedbackService(dbContext).GetMaxId();
-            DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
+            string randomId = new DrugstoreFeedbackService(dbContext).GetNewRadnomId();
+            DrugstoreFeedback dfb = new DrugstoreFeedback(randomId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
                 DateTime.Now, DateTime.MinValue);
             dbContext.DrugstoreFeedbacks.Add(dfb);
             dbContext.SaveChanges();
 
 
             var client = new RestClient("http://localhost:5001");
-            var request = new RestRequest("/api/DrugstoreFeedback/secret", Method.POST);
+            var request = new RestRequest("/api/drugstoreresponse", Method.POST);
 
-            request.AddJsonBody(new
+            string ApiKey = "";
+            foreach (var df in dbContext.Drugstores.ToList())
             {
-                Id = pharmacyReview.pharmacyId,
-                Response = pharmacyReview.review
-            });
-            //request.AddHeader("ApiKey", )
+                if (df.Id.Equals(pharmacyReview.pharmacyId))
+                {
+                    ApiKey = df.ApiKey;
+                    break;
+                }
+            }
+
+            request.AddHeader("ApiKey", ApiKey);
+            request.AddHeader("Content-Type", "application/json");
+            
+            var body = new
+            {
+                Id = randomId,
+                HospitalName = "Ime bolnice 222",
+                Content = pharmacyReview.review,
+                Response = ""
+            };
+            string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+
+            request.AddJsonBody(jsonBody);
+
             IRestResponse response = client.Execute(request);
+
             var content = response.Content; // {"message":" created."}
 
-
-           
-            return Ok(dfb);
+            return Ok(content);
         }
-        
+
+        [HttpPost]
+        public IActionResult ReceiveResponse(PharmacyResponseDto pharmacyResponse)
+        {
+            repoFeedback.dbContext = dbContext;
+            DrugstoreFeedback forEdit = repoFeedback.GetOne(pharmacyResponse.Id);
+            forEdit.Response = pharmacyResponse.Response;
+
+            repoFeedback.Update(forEdit);
+
+            return Ok();
+        }
 
 
     }

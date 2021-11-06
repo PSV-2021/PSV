@@ -22,7 +22,7 @@ export class ReviewsService {
     GetAllMyReviews(): Observable<any> {
       let headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'ApiKey': "DrugstoreSecretKey" });
+        'ApiKey': "xxxxx" });
       let options = { headers: headers };
         return this.http.get<any>(this.url + '/drugstoreresponse/getAllMyFeedbacks', options);
     }
@@ -33,9 +33,14 @@ export class ReviewsService {
     SendResponse(response: string, review: ReviewDto): any{
       const body = {
         response : response,
-        reviewId : review.Id
+        Id : review.Id,
+        hospitalName: review.HospitalName,
       };
-      const ret = this.http.post<any>(this.url + "/drugstoreresponse", body);
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'ApiKey': "xxxxx" });
+      let options = { headers: headers };
+      const ret = this.http.post<any>(this.url + "/drugstoreresponse/new", body, options);
       return ret;
     }
 }

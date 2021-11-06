@@ -34,8 +34,8 @@ namespace Integration_API.Controllers
             /*
             dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
             */
-            DrugstoreResponse dres = new DrugstoreResponse(1, 1111, response.response, DateTime.Now, DateTime.Now);
-            Console.WriteLine("Status: " + response.response);
+            DrugstoreResponse dres = new DrugstoreResponse(1, 1111, response.Response, DateTime.Now, DateTime.Now);
+            Console.WriteLine("Status: " + response.Response);
             return Ok(dres);
         }
         

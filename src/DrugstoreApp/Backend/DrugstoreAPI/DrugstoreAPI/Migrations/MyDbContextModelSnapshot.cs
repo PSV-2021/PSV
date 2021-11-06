@@ -20,10 +20,8 @@ namespace DrugstoreAPI.Migrations
 
             modelBuilder.Entity("DrugstoreAPI.Models.Feedback", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("Content")
                         .HasColumnType("text");
@@ -41,21 +39,21 @@ namespace DrugstoreAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = "aaa",
                             Content = "Lenka vrati zeton",
                             HospitalName = "Ime bolnice 222",
                             Response = ""
                         },
                         new
                         {
-                            Id = 2,
+                            Id = "bbb",
                             Content = "normalno",
                             HospitalName = "Ime bolnice 223",
                             Response = ""
                         },
                         new
                         {
-                            Id = 3,
+                            Id = "ccc",
                             Content = "bla bla",
                             HospitalName = "Ime bolnice 224",
                             Response = ""

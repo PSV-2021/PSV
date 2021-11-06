@@ -21,10 +21,8 @@ namespace Integration.Migrations
 
             modelBuilder.Entity("Integration.Model.DrugstoreFeedback", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("Content")
                         .HasColumnType("text");
@@ -48,30 +46,30 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 11, 4, 22, 46, 10, 39, DateTimeKind.Local).AddTicks(109),
+                            RecievedTime = new DateTime(2021, 11, 5, 21, 26, 28, 229, DateTimeKind.Local).AddTicks(5685),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7334)
+                            SentTime = new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(6668)
                         },
                         new
                         {
-                            Id = 2,
+                            Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7732),
+                            RecievedTime = new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7004),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7761)
+                            SentTime = new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7031)
                         },
                         new
                         {
-                            Id = 3,
+                            Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7781),
+                            RecievedTime = new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7049),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7785)
+                            SentTime = new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7052)
                         });
                 });
 

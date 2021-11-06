@@ -1,11 +1,11 @@
 export class ReviewDto{
-    Id: number;
+    Id: string;
     HospitalName: string;
     ReviewContent: string;
     ReviewResponse: string;
 
     constructor(){
-        this.Id = 0;
+        this.Id = '';
         this.HospitalName = '';
         this.ReviewContent = '';
         this.ReviewResponse = '';

@@ -37,7 +37,7 @@ namespace Integration.Repository.Sql
 
         public DrugstoreFeedback GetOne(string id)
         {
-            throw new NotImplementedException();
+            return dbContext.DrugstoreFeedbacks.Find(id);
         }
 
         public bool Save(DrugstoreFeedback newObject)
@@ -47,7 +47,8 @@ namespace Integration.Repository.Sql
 
         public bool Update(DrugstoreFeedback editedObject)
         {
-            throw new NotImplementedException();
+            dbContext.DrugstoreFeedbacks.Update(editedObject);
+            return true;
         }
     }
 }

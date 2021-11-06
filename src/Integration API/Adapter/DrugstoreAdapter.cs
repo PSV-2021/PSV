@@ -17,7 +17,7 @@ namespace Integration_API.Adapter
             response.DrugstoreId = 1; //temporary 
            // response.Id = dto.id;          
 
-            response.Response = dto.response;
+            response.Response = dto.Response;
             response.SentTime = DateTime.Now;
             response.RecievedTime = DateTime.Now;
             return response;

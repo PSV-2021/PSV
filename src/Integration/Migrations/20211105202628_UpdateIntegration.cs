@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration.Migrations
 {
-    public partial class AplhaMigration : Migration
+    public partial class UpdateIntegration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +12,7 @@ namespace Integration.Migrations
                 name: "DrugstoreFeedbacks",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     DrugstoreId = table.Column<int>(type: "integer", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: true),
                     Response = table.Column<string>(type: "text", nullable: true),
@@ -45,9 +44,9 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "Content", "DrugstoreId", "RecievedTime", "Response", "SentTime" },
                 values: new object[,]
                 {
-                    { 1, "Nije mi se svidela usluga", 1, new DateTime(2021, 11, 4, 22, 46, 10, 39, DateTimeKind.Local).AddTicks(109), "Nemoj da lazes!", new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7334) },
-                    { 2, "Svidjela usluga", 2, new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7732), "Nemoj da lazes!", new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7761) },
-                    { 3, "Nije mi se svidela usluga", 3, new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7781), "Nemoj da lazes!", new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7785) }
+                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 11, 5, 21, 26, 28, 229, DateTimeKind.Local).AddTicks(5685), "Nemoj da lazes!", new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(6668) },
+                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7004), "Nemoj da lazes!", new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7031) },
+                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7049), "Nemoj da lazes!", new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7052) }
                 });
 
             migrationBuilder.InsertData(

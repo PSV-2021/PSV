@@ -21,9 +21,9 @@ namespace Model.DataBaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Feedback>().HasData(
-                new Feedback("Ime bolnice 222", 1, "Lenka vrati zeton", ""),
-                new Feedback("Ime bolnice 223", 2, "normalno", ""),
-                new Feedback("Ime bolnice 224", 3, "bla bla", "")
+                new Feedback("Ime bolnice 222", "aaa", "Lenka vrati zeton", ""),
+                new Feedback("Ime bolnice 223", "bbb", "normalno", ""),
+                new Feedback("Ime bolnice 224", "ccc", "bla bla", "")
 
             );
 

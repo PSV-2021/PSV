@@ -9,6 +9,8 @@ using System.Net.Http.Headers;
 using DrugstoreAPI.Filters;
 using RestSharp;
 using DrugstoreAPI.Models;
+using DrugstoreAPI.Repository;
+using Integration.Repository.Sql;
 using Model.DataBaseContext;
 
 namespace DrugstoreAPI.Controllers
@@ -19,10 +21,12 @@ namespace DrugstoreAPI.Controllers
     public class DrugstoreResponseController : ControllerBase
     {
         private readonly MyDbContext dbContext;
+
         public DrugstoreResponseController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
         }
+
         [HttpGet(template: "getAllMyFeedbacks")]
         public IActionResult TestAPI()
         {
@@ -30,35 +34,52 @@ namespace DrugstoreAPI.Controllers
             retFeedbacks = this.dbContext.Feedbacks.ToList();
             return Ok(retFeedbacks);
         }
-
-        [HttpGet(template: "respond")]
+        
+        [HttpPost(template: "new")]
         public IActionResult Respond(FeedbackResponseDto dto)
         {
 
             var client = new RestClient("http://localhost:5000");
-            var request = new RestRequest("/api/DrugstoreFeedback/secret", Method.POST);
+            var request = new RestRequest("/api/drugstorefeedback/newResponse", Method.POST);
 
-            request.AddJsonBody(new
+            HospitalSqlRepository repo = new HospitalSqlRepository(dbContext);
+            FeedbackSqlRepository repoFB = new FeedbackSqlRepository(dbContext);
+
+            //string nesto = repo.GetKeyByName(dto.HospitalName);
+
+            Feedback ediFeedback = repoFB.getById(dto.Id);
+            ediFeedback.Response = dto.Response;
+            repoFB.Update(ediFeedback);
+            
+
+            request.AddHeader("ApiKey", repo.GetKeyByName(dto.HospitalName));
+            request.AddHeader("Content-Type", "application/json");
+
+            var body = new
             {
                 Id = dto.Id,
                 Response = dto.Response
-            });
-            //request.AddHeader("ApiKey", )
+            };
+
+            string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+
+            request.AddJsonBody(jsonBody);
+
             IRestResponse response = client.Execute(request);
-            var content = response.Content; // {"message":" created."}
 
+            return Ok(response);
+        }
+        
 
-            //var client = new RestSharp.RestClient("http://localhost:5000");
-            //var request = new RestRequest("/api/DrugstoreFeedback/secret");
-            //var response = client.Post<List<string>>(request);
-            //Console.WriteLine("Status: " + response.StatusCode.ToString());
-            //List<string> result = response.Data;
-            //if (result == null) 
-            //{
-            //    return Unauthorized();
-            //}
-            //result.ForEach(product => Console.WriteLine(product.ToString()));
-            return Ok("Pogodio bolnicu");
+        [HttpPost]
+        public IActionResult Post(Feedback newFeedback)
+        {
+            FeedbackSqlRepository repo = new FeedbackSqlRepository();
+            repo.dbContext = dbContext;
+
+            repo.Save(newFeedback);
+
+            return Ok(newFeedback);
         }
     }
 }

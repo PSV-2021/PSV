@@ -7,13 +7,13 @@ namespace Integration_API.DTOs
 {
     public class PharmacyResponseDto
     {
-        
-        public string response { get; set; }
+        public string Id { get; set; }
+        public string Response { get; set; }
 
-        public PharmacyResponseDto(string response)
+        public PharmacyResponseDto(string id,string response)
         {
-            
-            this.response = response;
+            this.Id = id;
+            this.Response = response;
         }
 
         public PharmacyResponseDto()

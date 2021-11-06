@@ -25,7 +25,7 @@ namespace Integration.Service
 
        /* public int SaveFeedback(NewPharmacyReviewDto pharmacyReview)
         {
-            int maxId = new DrugstoreFeedbackService(DrugstoreFeedbackRepository.dbContext).GetMaxId();
+            int maxId = new DrugstoreFeedbackService(DrugstoreFeedbackRepository.dbContext).GetNewRadnomId();
             DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
                 DateTime.Now, DateTime.MinValue);
             DrugstoreFeedbackRepository.dbContext.DrugstoreFeedbacks.Add(dfb);
@@ -33,17 +33,9 @@ namespace Integration.Service
 
         }*/
 
-        public int GetMaxId()
+        public string GetNewRadnomId()
         {
-            int max = -999;
-            foreach (DrugstoreFeedback df in DrugstoreFeedbackRepository.GetAll())
-            {
-                if (df.Id > max)
-                    max = df.Id;
-            }
-
-            return max;
-
+           return Guid.NewGuid().ToString();
         }
 
     }

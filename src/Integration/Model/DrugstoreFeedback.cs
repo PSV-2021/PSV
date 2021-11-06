@@ -6,7 +6,7 @@ namespace Integration.Model
 {
     public class DrugstoreFeedback
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int DrugstoreId { get; set; }
         public string Content { get; set; }
         public string Response { get; set; }
@@ -17,7 +17,7 @@ namespace Integration.Model
         {
 
         }
-        public DrugstoreFeedback(int Id, int token, string content, string response, DateTime sentTime,
+        public DrugstoreFeedback(string Id, int token, string content, string response, DateTime sentTime,
             DateTime recievedTime)
         {
             this.Id = Id;

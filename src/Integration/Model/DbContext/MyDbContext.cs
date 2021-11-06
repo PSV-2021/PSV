@@ -27,9 +27,9 @@ namespace Model.DataBaseContext
 
 
             modelBuilder.Entity<DrugstoreFeedback>().HasData(
-                new DrugstoreFeedback {Id = 1, DrugstoreId = 1, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now},
-                new DrugstoreFeedback { Id = 2, DrugstoreId = 2, Content = "Svidjela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now },
-                new DrugstoreFeedback { Id = 3, DrugstoreId = 3, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now }
+                new DrugstoreFeedback {Id = "aaa", DrugstoreId = 1, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now},
+                new DrugstoreFeedback { Id = "bbb", DrugstoreId = 2, Content = "Svidjela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now },
+                new DrugstoreFeedback { Id = "ccc", DrugstoreId = 3, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now }
 
             );
         }
