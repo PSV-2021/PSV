@@ -30,7 +30,8 @@ namespace DrugstoreAPI
             services.AddControllers();
 
             services.AddDbContext<MyDbContext>(options =>
-                options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
+                options.UseNpgsql(ConfigurationExtensions.GetConnectionString
+                    (Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             
 

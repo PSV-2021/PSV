@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration API\\Integration API.csproj": {}
+    "F:\\PSV\\src\\Integration API\\Integration API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration API\\Integration API.csproj": {
+    "F:\\PSV\\src\\Integration API\\Integration API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration API\\Integration API.csproj",
+        "projectUniqueName": "F:\\PSV\\src\\Integration API\\Integration API.csproj",
         "projectName": "Integration API",
-        "projectPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration API\\Integration API.csproj",
-        "packagesPath": "C:\\Users\\brani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration API\\obj\\",
+        "projectPath": "F:\\PSV\\src\\Integration API\\Integration API.csproj",
+        "packagesPath": "C:\\Users\\Milos\\.nuget\\packages\\",
+        "outputPath": "F:\\PSV\\src\\Integration API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\brani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Milos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +32,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj": {
-                "projectPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj"
+              "F:\\PSV\\src\\Integration\\Integration.csproj": {
+                "projectPath": "F:\\PSV\\src\\Integration\\Integration.csproj"
               }
             }
           }
@@ -89,21 +93,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj": {
+    "F:\\PSV\\src\\Integration\\Integration.csproj": {
       "version": "0.0.1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj",
+        "projectUniqueName": "F:\\PSV\\src\\Integration\\Integration.csproj",
         "projectName": "SimsLogger",
-        "projectPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\Integration.csproj",
-        "packagesPath": "C:\\Users\\brani\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brani\\OneDrive\\Documents\\GitHub\\PSV\\src\\Integration\\obj\\",
+        "projectPath": "F:\\PSV\\src\\Integration\\Integration.csproj",
+        "packagesPath": "C:\\Users\\Milos\\.nuget\\packages\\",
+        "outputPath": "F:\\PSV\\src\\Integration\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\brani\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Milos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -175,7 +183,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -12,22 +12,27 @@ using DrugstoreAPI.Models;
 using DrugstoreAPI.Repository;
 using Integration.Repository.Sql;
 using Model.DataBaseContext;
+using Service;
 
 namespace DrugstoreAPI.Controllers
 {
     [Route("api/[controller]")] // /api/DrugstoreFeedbackWithAPI
     [ApiController]
-    [ApiKeyAuth]
+    
     public class DrugstoreResponseController : ControllerBase
     {
         private readonly MyDbContext dbContext;
+        public DrugstoreResponseService drugstoreResponseService = new DrugstoreResponseService();
 
+        
         public DrugstoreResponseController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
         }
-
+        // public ApiKeyAuthAttribute apiKeyAuth = new ApiKeyAuthAttribute(dbContext);
+        
         [HttpGet(template: "getAllMyFeedbacks")]
+        [ApiKeyAuth]
         public IActionResult TestAPI()
         {
             List<Feedback> retFeedbacks = new List<Feedback>();
@@ -36,15 +41,17 @@ namespace DrugstoreAPI.Controllers
         }
         
         [HttpPost(template: "new")]
+        [ApiKeyAuth]
         public IActionResult Respond(FeedbackResponseDto dto)
         {
 
-            var client = new RestClient("http://localhost:5000");
+           
+            var client = new RestClient(drugstoreResponseService.GetHospitalURL(dto.HospitalName, dbContext));
             var request = new RestRequest("/api/drugstoreresponse", Method.POST);
 
             HospitalSqlRepository repo = new HospitalSqlRepository(dbContext);
             FeedbackSqlRepository repoFB = new FeedbackSqlRepository(dbContext);
-
+            
             //string nesto = repo.GetKeyByName(dto.HospitalName);
 
             Feedback ediFeedback = repoFB.getById(dto.Id);
@@ -74,12 +81,47 @@ namespace DrugstoreAPI.Controllers
         [HttpPost]
         public IActionResult Post(Feedback newFeedback)
         {
-            FeedbackSqlRepository repo = new FeedbackSqlRepository();
-            repo.dbContext = dbContext;
 
-            repo.Save(newFeedback);
 
-            return Ok(newFeedback);
+            Microsoft.Extensions.Primitives.StringValues headerValues;
+
+            if (Request.Headers.TryGetValue("ApiKey", out headerValues))
+            {
+                // Can now check if the value is true:
+                var value = Request.Headers["ApiKey"];
+                foreach(string nesto in value)
+                {
+                    if (this.checkApiKey(nesto, dbContext))
+                    {
+                        FeedbackSqlRepository repo = new FeedbackSqlRepository();
+                        repo.dbContext = dbContext;
+
+                        repo.Save(newFeedback);
+
+                        return Ok(newFeedback);
+                    }
+                }
+               
+            }
+                    return Unauthorized();
+
+            
+
+           
+        }
+
+        public bool checkApiKey(string apiKey, MyDbContext dbContext)
+        {
+            bool found = false;
+            foreach (Hospital h in dbContext.Hospitals.ToList())
+            {
+                if (h.ApiKey.Equals(apiKey))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
         }
     }
 }

@@ -16,6 +16,12 @@ namespace DrugstoreAPI.Repository
             this.dbContext = dbContext;
         }
 
+        public List<Hospital> GetAll()
+        {
+            List<Hospital> result = dbContext.Hospitals.ToList();
+            return result;
+        }
+
         public HospitalSqlRepository()
         {
 

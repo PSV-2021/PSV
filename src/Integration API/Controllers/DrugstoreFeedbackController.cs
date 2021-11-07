@@ -13,6 +13,7 @@ using Integration.Model;
 using DrugstoreFeedback = Integration.Model.DrugstoreFeedback;
 using RestSharp;
 using System.Text.Json;
+using System.Net.NetworkInformation;
 
 namespace Integration_API.Controllers
 {
@@ -21,6 +22,8 @@ namespace Integration_API.Controllers
     public class DrugstoreFeedbackController : ControllerBase
     {
         private readonly MyDbContext dbContext;
+        public DrugstoreService drugstoreService = new DrugstoreService();
+        public DrugstoreFeedbackService drugstoreFeedbackService = new DrugstoreFeedbackService();
         public DrugstoreFeedbackSqlRepository repoFeedback = new DrugstoreFeedbackSqlRepository();
         public DrugstoreSqlRepository repoDrugstores = new DrugstoreSqlRepository();
         //public DrugstoreFeedbackService FeedbackService = new DrugstoreFeedbackService();
@@ -51,46 +54,51 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/drugstorefeedback
         public IActionResult Post(NewPharmacyReviewDto pharmacyReview)
         {
-            repoFeedback.dbContext = dbContext;
-            string randomId = new DrugstoreFeedbackService(dbContext).GetNewRadnomId();
-            DrugstoreFeedback dfb = new DrugstoreFeedback(randomId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
-                DateTime.Now, DateTime.MinValue);
-            dbContext.DrugstoreFeedbacks.Add(dfb);
-            dbContext.SaveChanges();
 
+            //if (drugstoreFeedbackService.PingServer(drugstoreService.GetDrugStoreURL(pharmacyReview.pharmacyId, dbContext) + "/api/drugstoreresponse"))
+           // {
+                repoFeedback.dbContext = dbContext;
+                string randomId = new DrugstoreFeedbackService(dbContext).GetNewRadnomId();
+                DrugstoreFeedback dfb = new DrugstoreFeedback(randomId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
+                    DateTime.Now, DateTime.MinValue);
+                dbContext.DrugstoreFeedbacks.Add(dfb);
+                dbContext.SaveChanges();
 
-            var client = new RestClient("http://localhost:5001");
-            var request = new RestRequest("/api/drugstoreresponse", Method.POST);
+                var client = new RestClient(drugstoreService.GetDrugStoreURL(pharmacyReview.pharmacyId, dbContext));
+                var request = new RestRequest("/api/drugstoreresponse", Method.POST);
 
-            string ApiKey = "";
-            foreach (var df in dbContext.Drugstores.ToList())
-            {
-                if (df.Id.Equals(pharmacyReview.pharmacyId))
+                string ApiKey = "";
+                foreach (var df in dbContext.Drugstores.ToList())
                 {
-                    ApiKey = df.ApiKey;
-                    break;
+                    if (df.Id.Equals(pharmacyReview.pharmacyId))
+                    {
+                        ApiKey = df.ApiKey;
+                        break;
+                    }
                 }
-            }
 
-            request.AddHeader("ApiKey", ApiKey);
-            request.AddHeader("Content-Type", "application/json");
-            
+                request.AddHeader("ApiKey", ApiKey);
+                request.AddHeader("Content-Type", "application/json");
+               
             var body = new
-            {
-                Id = randomId,
-                HospitalName = "Ime bolnice 222",
-                Content = pharmacyReview.review,
-                Response = ""
-            };
-            string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+                {
+                    Id = randomId,
+                    HospitalName = "Ime bolnice 222",
+                    Content = pharmacyReview.review,
+                    Response = ""
+                };
+                string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
 
-            request.AddJsonBody(jsonBody);
+                request.AddJsonBody(jsonBody);
 
-            IRestResponse response = client.Execute(request);
+                IRestResponse response = client.Execute(request);
 
-            var content = response.Content; // {"message":" created."}
+                var content = response.Content; // {"message":" created."}
 
-            return Ok(content);
+                return Ok(content);
+           // }
+          //  else
+              //  return NotFound();
         }
 
         //[HttpPost]

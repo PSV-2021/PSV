@@ -7,6 +7,7 @@ namespace Integration_API.DTOs
 {
     public class PharmacyResponseDto
     {
+
         public string Id { get; set; }
         public string Response { get; set; }
 
