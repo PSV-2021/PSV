@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Repository.Sql;
-using Integration_API.Model;
+using Integration.Model;
 using Model.DataBaseContext;
+using Integration_API.DTOs;
+using Integration.Service;
 
 namespace Integration_API.Controllers
 {
@@ -16,6 +18,7 @@ namespace Integration_API.Controllers
     {
         private readonly MyDbContext dbContext;
         public DrugstoreSqlRepository repo = new DrugstoreSqlRepository();
+        public DrugstoreService drugstoreService = new DrugstoreService();
         
         public DrugstoreController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
@@ -26,8 +29,8 @@ namespace Integration_API.Controllers
         public IActionResult Get()
         {
             repo.dbContext = dbContext;
-            List<Integration_API.Model.Drugstore> result = new List<Integration_API.Model.Drugstore>();
-            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey)));
+            List<Drugstore> result = new List<Drugstore>();
+            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.Address)));
             return Ok(result);
         }
 
@@ -40,6 +43,17 @@ namespace Integration_API.Controllers
             dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
             */
             return Ok(result);
+        }
+
+        [HttpPost] // POST /api/drugstore/newdrugstore
+        public IActionResult Post(RegistrationDto newPharmacy)
+        {
+            repo.dbContext = dbContext;
+            int maxId = repo.GetMaxId();
+            Drugstore ds = new Drugstore(++maxId, newPharmacy.DrugstoreName, newPharmacy.URLAddress, Guid.NewGuid().ToString(), newPharmacy.Email, newPharmacy.Address);
+            dbContext.Drugstores.Add(ds);
+            dbContext.SaveChanges();
+            return Ok(ds);
         }
     }
 }

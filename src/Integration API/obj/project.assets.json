@@ -6077,24 +6077,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Milos\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Korisnik\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\PSV\\src\\Integration API\\Integration API.csproj",
+      "projectUniqueName": "D:\\PSV\\src\\Integration API\\Integration API.csproj",
       "projectName": "Integration API",
-      "projectPath": "F:\\PSV\\src\\Integration API\\Integration API.csproj",
-      "packagesPath": "C:\\Users\\Milos\\.nuget\\packages\\",
-      "outputPath": "F:\\PSV\\src\\Integration API\\obj\\",
+      "projectPath": "D:\\PSV\\src\\Integration API\\Integration API.csproj",
+      "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+      "outputPath": "D:\\PSV\\src\\Integration API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Milos\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6108,8 +6103,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "F:\\PSV\\src\\Integration\\Integration.csproj": {
-              "projectPath": "F:\\PSV\\src\\Integration\\Integration.csproj"
+            "D:\\PSV\\src\\Integration\\Integration.csproj": {
+              "projectPath": "D:\\PSV\\src\\Integration\\Integration.csproj"
             }
           }
         }

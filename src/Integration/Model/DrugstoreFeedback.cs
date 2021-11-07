@@ -28,15 +28,6 @@ namespace Integration.Model
             RecievedTime = recievedTime;
         }
 
-        public DrugstoreFeedback(int token, string content, string response, DateTime sentTime,
-            DateTime recievedTime)
-        {
-            DrugstoreId = token;
-            Content = content;
-            Response = response;
-            SentTime = sentTime;
-            RecievedTime = recievedTime;
-        }
 
     }
 }

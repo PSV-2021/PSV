@@ -13,11 +13,7 @@ export class ReviewsComponent implements OnInit {
   public reviews: ReviewDto[];
   public response: string;
   constructor(private reviewsService: ReviewsService) { 
-    this.reviews = [ 
-      {"Id" : '1', "HospitalName" : "Ime bolnice 1", "ReviewContent" : "Ovo je bilo dobro1", "ReviewResponse": "Sram vas bilo1"},
-      {"Id" : '2', "HospitalName" : "Ime bolnice 2", "ReviewContent" : "Ovo je bilo dobro2", "ReviewResponse": "Sram vas bilo2"},
-      {"Id" : '3', "HospitalName" : "Ime bolnice 3", "ReviewContent" : "Ovo je bilo dobro3", "ReviewResponse": "Sram vas bilo3"},
-    ];
+    this.reviews = [];
     this.response = "";
   }
 

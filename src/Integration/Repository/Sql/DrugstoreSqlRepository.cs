@@ -7,7 +7,7 @@ using Integration_API.Repository.Interfaces;
 using Model.DataBaseContext;
 
 namespace Integration.Repository.Sql
-{ 
+{
     public class DrugstoreSqlRepository : IDrugstoreRepository
     {
         public MyDbContext dbContext { get; set; }
@@ -29,8 +29,7 @@ namespace Integration.Repository.Sql
         public List<Drugstore> GetAll()
         {
             List<Drugstore> result = new List<Drugstore>();
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url,drugstore.ApiKey)));
-
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.Address)));
             return result;
         }
 
@@ -43,7 +42,20 @@ namespace Integration.Repository.Sql
             return query.FirstOrDefault();
         }
 
-        public Drugstore GetOne(string id)
+        public int GetMaxId()
+        {
+            int max = -999;
+            foreach (Drugstore ds in dbContext.Drugstores.ToList())
+            {
+                if (ds.Id > max)
+                    max = ds.Id;
+            }
+
+            return max;
+
+        }
+
+        public Drugstore GetOne(int id)
         {
             throw new NotImplementedException();
         }
@@ -54,11 +66,6 @@ namespace Integration.Repository.Sql
         }
 
         public bool Update(Drugstore editedObject)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Drugstore GetOne(int id)
         {
             throw new NotImplementedException();
         }

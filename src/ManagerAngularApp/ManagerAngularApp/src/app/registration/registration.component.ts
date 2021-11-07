@@ -9,17 +9,37 @@ import { RegistrationDto } from './registration.dto';
 })
 export class RegistrationComponent implements OnInit {
   @Input() public newDrugstore: RegistrationDto;
+  
 
-  constructor() {
+  constructor(private rs : RegistrationService) {
     this.newDrugstore = new RegistrationDto();
    }
 
   ngOnInit(): void {
   }
 
-
   register(): void{
-    console.log(this.newDrugstore);
-  }
+    if (this.validate() == true){
+      console.log(this.newDrugstore);
+      this.sendRegistration();
+      alert("Uspesno ste registrovali novu apoteku !");
+    }
+    else 
+      alert("Niste uneli sve potrebne podatke !");
+}
+
+validate() : boolean{
+  if (
+    this.newDrugstore.Address == "" || this.newDrugstore.DrugstoreName == "" ||
+    this.newDrugstore.Email == "" || this.newDrugstore.URLAddress == ""
+  )
+    return false;
+  else 
+    return true;
+}
+
+public sendRegistration(): void{
+  this.rs.RegisterDrugstore(this.newDrugstore).subscribe();
+}
 
 }

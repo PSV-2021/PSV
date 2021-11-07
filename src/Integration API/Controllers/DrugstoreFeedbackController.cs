@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Integration_API.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
 using Integration.Repository.Sql;
@@ -59,7 +58,7 @@ namespace Integration_API.Controllers
             // {
 
                 string randomId = new DrugstoreFeedbackService(dbContext).GetNewRadnomId();
-
+                
                 var client = new RestClient(drugstoreService.GetDrugStoreURL(pharmacyReview.pharmacyId, dbContext));
                 var request = new RestRequest("/api/drugstoreresponse", Method.POST);
 
@@ -80,7 +79,7 @@ namespace Integration_API.Controllers
             var body = new
                 {
                     Id = randomId,
-                    HospitalName = "Ime bolnice 222",
+                    HospitalName = "Health",
                     Content = pharmacyReview.review,
                     Response = ""
                 };
@@ -104,24 +103,7 @@ namespace Integration_API.Controllers
             else
                 return Unauthorized();
 
-                
-           // }
-          //  else
-              //  return NotFound();
         }
-
-        //[HttpPost]
-        //public IActionResult ReceiveResponse(PharmacyResponseDto pharmacyResponse)
-        //{
-        //    repoFeedback.dbContext = dbContext;
-        //    DrugstoreFeedback forEdit = repoFeedback.GetOne(pharmacyResponse.Id);
-        //    forEdit.Response = pharmacyResponse.Response;
-
-        //    repoFeedback.Update(forEdit);
-
-        //    return Ok();
-        //}
-
 
     }
 }

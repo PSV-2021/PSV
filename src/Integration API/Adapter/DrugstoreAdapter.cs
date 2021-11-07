@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration_API.DTOs;
-using Integration_API.Model;
+using Integration.Model;
 
 namespace Integration_API.Adapter
 {

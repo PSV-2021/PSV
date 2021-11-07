@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration.Migrations
 {
-    public partial class UpdateIntegration : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,9 @@ namespace Integration.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Url = table.Column<string>(type: "text", nullable: true),
-                    ApiKey = table.Column<string>(type: "text", nullable: true)
+                    ApiKey = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Address = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,19 +46,19 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "Content", "DrugstoreId", "RecievedTime", "Response", "SentTime" },
                 values: new object[,]
                 {
-                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 11, 5, 21, 26, 28, 229, DateTimeKind.Local).AddTicks(5685), "Nemoj da lazes!", new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(6668) },
-                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7004), "Nemoj da lazes!", new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7031) },
-                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7049), "Nemoj da lazes!", new DateTime(2021, 11, 5, 21, 26, 28, 232, DateTimeKind.Local).AddTicks(7052) }
+                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 11, 7, 22, 58, 9, 235, DateTimeKind.Local).AddTicks(9809), "Nemoj da lazes!", new DateTime(2021, 11, 7, 22, 58, 9, 240, DateTimeKind.Local).AddTicks(9213) },
+                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 11, 7, 22, 58, 9, 241, DateTimeKind.Local).AddTicks(619), "Nemoj da lazes!", new DateTime(2021, 11, 7, 22, 58, 9, 241, DateTimeKind.Local).AddTicks(705) },
+                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 11, 7, 22, 58, 9, 241, DateTimeKind.Local).AddTicks(734), "Nemoj da lazes!", new DateTime(2021, 11, 7, 22, 58, 9, 241, DateTimeKind.Local).AddTicks(742) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Drugstores",
-                columns: new[] { "Id", "ApiKey", "Name", "Url" },
+                columns: new[] { "Id", "Address", "ApiKey", "Email", "Name", "Url" },
                 values: new object[,]
                 {
-                    { 1, "aaabbbccc", "Apoteka prva", "www.apoteka.rs" },
-                    { 2, "111222333", "Apoteka druga", "www.apotekica.rs" },
-                    { 3, "555333", "Apoteka treca", "www.apotekcina.rs" }
+                    { 1, "Tolstojeva 3, Novi Sad", "aaabbbccc", "apoteka1@gmail.com", "Apoteka prva", "http://localhost:5001" },
+                    { 2, "Balzakova 3, Novi Sad", "wnjgjowenfweo", "apoteka2@gmail.com", "Apoteka druga", "http://localhost:5002" },
+                    { 3, "Puskinova 3, Novi Sad", "wuhguiwoehfuhw", "apoteka3@gmail.com", "Apoteka treca", "http://localhost:5003" }
                 });
         }
 

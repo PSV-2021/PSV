@@ -18,9 +18,9 @@ namespace Model.DataBaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Drugstore>().HasData(
-                new Drugstore(1,"Apoteka prva", "www.apoteka.rs", "aaabbbccc"),
-                new Drugstore(2,"Apoteka druga", "www.apotekica.rs", "111222333"),
-                new Drugstore(3,"Apoteka treca", "www.apotekcina.rs", "555333")
+                new Drugstore(1,"Apoteka prva", "http://localhost:5001", "aaabbbccc", "apoteka1@gmail.com", "Tolstojeva 3, Novi Sad"),
+                new Drugstore(2,"Apoteka druga", "http://localhost:5002", "wnjgjowenfweo", "apoteka2@gmail.com", "Balzakova 3, Novi Sad"),
+                new Drugstore(3,"Apoteka treca", "http://localhost:5003", "wuhguiwoehfuhw", "apoteka3@gmail.com", "Puskinova 3, Novi Sad")
 
             );
 

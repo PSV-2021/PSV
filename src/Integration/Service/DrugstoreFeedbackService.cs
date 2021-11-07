@@ -12,11 +12,14 @@ namespace Integration.Service
     public class DrugstoreFeedbackService
     {
         public DrugstoreFeedbackSqlRepository DrugstoreFeedbackRepository { get; set; }
+        public DrugstoreSqlRepository DrugstoreRepository { get; set; }
 
         public DrugstoreFeedbackService(MyDbContext dbContext)
         {
             DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository();
+            DrugstoreRepository = new DrugstoreSqlRepository();
             DrugstoreFeedbackRepository.dbContext = dbContext;
+            DrugstoreRepository.dbContext = dbContext;
         }
 
         public DrugstoreFeedbackService()
@@ -24,15 +27,15 @@ namespace Integration.Service
             DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository();
         }
 
-       /* public int SaveFeedback(NewPharmacyReviewDto pharmacyReview)
-        {
-            int maxId = new DrugstoreFeedbackService(DrugstoreFeedbackRepository.dbContext).GetNewRadnomId();
-            DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
-                DateTime.Now, DateTime.MinValue);
-            DrugstoreFeedbackRepository.dbContext.DrugstoreFeedbacks.Add(dfb);
-            DrugstoreFeedbackRepository.dbContext.SaveChanges();
+        /* public int SaveFeedback(NewPharmacyReviewDto pharmacyReview)
+         {
+             int maxId = new DrugstoreFeedbackService(DrugstoreFeedbackRepository.dbContext).GetNewRadnomId();
+             DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
+                 DateTime.Now, DateTime.MinValue);
+             DrugstoreFeedbackRepository.dbContext.DrugstoreFeedbacks.Add(dfb);
+             DrugstoreFeedbackRepository.dbContext.SaveChanges();
 
-        }*/
+         }*/
 
         public string GetNewRadnomId()
         {
