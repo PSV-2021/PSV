@@ -29,7 +29,7 @@ namespace Hospital.Repository
         public List<UserFeedback> GetAll()
         {
             List<UserFeedback> result = new List<UserFeedback>();
-            dbContext.UserFeedbacks.ToList().ForEach(userFeedbacks => result.Add(new UserFeedback(userFeedbacks.Id, userFeedbacks.TimeWritten, userFeedbacks.Name, userFeedbacks.canPublish, userFeedbacks.Content)));
+            dbContext.UserFeedbacks.ToList().ForEach(userFeedbacks => result.Add(userFeedbacks));
 
             return result;
         }

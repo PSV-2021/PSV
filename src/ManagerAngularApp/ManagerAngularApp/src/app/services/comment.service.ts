@@ -20,4 +20,8 @@ export class CommentService {
   publishComment(Id: number): any {
     return this.http.post<any>(this.url + "/managercomments", Id);
   }
+  
+  returnComment(Id: number): any {
+    return this.http.post<any>(this.url + "/managercomments", Id);
+  }
 }

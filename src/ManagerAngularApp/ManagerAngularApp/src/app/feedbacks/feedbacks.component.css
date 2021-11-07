@@ -30,3 +30,10 @@
 .reviews-holder{
     margin-top: 3%; 
 }
+
+.approveButton{
+    border: solid 1px green;
+}
+
+.returnButton{
+    border: solid 1px red;}

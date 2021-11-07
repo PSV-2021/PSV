@@ -30,8 +30,16 @@ export class FeedbacksComponent implements OnInit {
       this._snackBar.open('Komentar odobren!', '', {
         duration: 2000
       });;
-
     });
+
+  }
+  public returnComment(id:number): void{
+    this.commentService.returnComment(id).subscribe((d: any) =>{
+      this._snackBar.open('Komentar vraćen na odobravanje!', '', {
+        duration: 2000
+      });;
+    });
+
   }
 
 }
