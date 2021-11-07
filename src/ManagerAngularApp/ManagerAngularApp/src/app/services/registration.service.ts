@@ -12,10 +12,16 @@ import { RegistrationDto } from '../registration/registration.dto';
 export class RegistrationService {
     url: string;
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5000/api/registration" //ovo ne znam posto ne pisem ja backend za sad
+        this.url = "http://localhost:5000/api"
     }
 
-    registerNewHospital(hospital: RegistrationDto): Observable<string> {
-        return this.http.post<string>(this.url + '/new', hospital);
+    public RegisterDrugstore(drugstore: RegistrationDto){
+        const body = {
+            DrugstoreName : drugstore.DrugstoreName,
+            Address : drugstore.Address,
+            URLAddress : drugstore.URLAddress,
+            Email : drugstore.Email
+          };
+        return this.http.post<any>(this.url + "/drugstore", body);
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Integration.Model;
-using Integration_API.Model;
 using Integration_API.Repository.Interfaces;
 using Model.DataBaseContext;
 
@@ -30,8 +29,7 @@ namespace Integration.Repository.Sql
         public List<Drugstore> GetAll()
         {
             List<Drugstore> result = new List<Drugstore>();
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url,drugstore.ApiKey)));
-
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url,drugstore.ApiKey,drugstore.Email, drugstore.Address)));
             return result;
         }
 

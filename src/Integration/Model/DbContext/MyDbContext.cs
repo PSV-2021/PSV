@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Model;
-using Integration_API.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Model.DataBaseContext
@@ -19,10 +18,9 @@ namespace Model.DataBaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Drugstore>().HasData(
-                new Drugstore(1,"Apoteka prva", "www.apoteka.rs", "aaabbbccc"),
-                new Drugstore(2,"Apoteka druga", "www.apotekica.rs", "111222333"),
-                new Drugstore(3,"Apoteka treca", "www.apotekcina.rs", "555333")
-
+                new Drugstore(1,"Apoteka prva", "www.apoteka.rs", "aaabbbccc", "apoteka1@gmail.com", "Kneza 22"),
+                new Drugstore(2,"Apoteka druga", "www.apotekica.rs", "111222333", "apoteka2@gmail.com", "Kneza 23"),
+                new Drugstore(3,"Apoteka treca", "www.apotekcina.rs", "555333", "apoteka3@gmail.com", "Kneza 265")
             );
 
 
