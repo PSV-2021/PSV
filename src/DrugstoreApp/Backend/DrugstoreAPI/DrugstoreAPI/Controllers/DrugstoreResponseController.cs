@@ -39,25 +39,20 @@ namespace DrugstoreAPI.Controllers
             retFeedbacks = this.dbContext.Feedbacks.ToList();
             return Ok(retFeedbacks);
         }
-        
+
         [HttpPost(template: "new")]
         [ApiKeyAuth]
         public IActionResult Respond(FeedbackResponseDto dto)
         {
 
-           
+
             var client = new RestClient(drugstoreResponseService.GetHospitalURL(dto.HospitalName, dbContext));
             var request = new RestRequest("/api/drugstoreresponse", Method.POST);
 
             HospitalSqlRepository repo = new HospitalSqlRepository(dbContext);
             FeedbackSqlRepository repoFB = new FeedbackSqlRepository(dbContext);
-            
-            //string nesto = repo.GetKeyByName(dto.HospitalName);
 
-            Feedback ediFeedback = repoFB.getById(dto.Id);
-            ediFeedback.Response = dto.Response;
-            repoFB.Update(ediFeedback);
-            
+            //string nesto = repo.GetKeyByName(dto.HospitalName);
 
             request.AddHeader("ApiKey", repo.GetKeyByName(dto.HospitalName));
             request.AddHeader("Content-Type", "application/json");
@@ -72,9 +67,18 @@ namespace DrugstoreAPI.Controllers
 
             request.AddJsonBody(jsonBody);
 
-            IRestResponse response = client.Execute(request);
 
-            return Ok(response);
+            IRestResponse response = client.Execute(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                Feedback ediFeedback = repoFB.getById(dto.Id);
+                ediFeedback.Response = dto.Response;
+                repoFB.Update(ediFeedback);
+                return Ok();
+            }
+            else
+                return Unauthorized();
+            
         }
         
 

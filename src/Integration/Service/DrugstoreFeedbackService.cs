@@ -6,7 +6,6 @@ using System.Text;
 using Factory;
 using Integration.Model;
 using Integration.Repository.Sql;
-using Integration_API.Model;
 using Model.DataBaseContext;
 namespace Integration.Service
 {

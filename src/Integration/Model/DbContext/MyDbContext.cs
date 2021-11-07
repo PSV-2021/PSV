@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Model;
-using Integration_API.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Model.DataBaseContext

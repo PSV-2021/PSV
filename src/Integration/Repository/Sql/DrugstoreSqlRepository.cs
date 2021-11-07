@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Integration.Model;
-using Integration_API.Model;
 using Integration_API.Repository.Interfaces;
 using Model.DataBaseContext;
 

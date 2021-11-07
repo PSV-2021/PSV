@@ -56,17 +56,14 @@ namespace Integration_API.Controllers
         {
 
             //if (drugstoreFeedbackService.PingServer(drugstoreService.GetDrugStoreURL(pharmacyReview.pharmacyId, dbContext) + "/api/drugstoreresponse"))
-           // {
-                repoFeedback.dbContext = dbContext;
+            // {
+
                 string randomId = new DrugstoreFeedbackService(dbContext).GetNewRadnomId();
-                DrugstoreFeedback dfb = new DrugstoreFeedback(randomId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
-                    DateTime.Now, DateTime.MinValue);
-                dbContext.DrugstoreFeedbacks.Add(dfb);
-                dbContext.SaveChanges();
 
                 var client = new RestClient(drugstoreService.GetDrugStoreURL(pharmacyReview.pharmacyId, dbContext));
                 var request = new RestRequest("/api/drugstoreresponse", Method.POST);
 
+                
                 string ApiKey = "";
                 foreach (var df in dbContext.Drugstores.ToList())
                 {
@@ -92,10 +89,22 @@ namespace Integration_API.Controllers
                 request.AddJsonBody(jsonBody);
 
                 IRestResponse response = client.Execute(request);
-
+                
                 var content = response.Content; // {"message":" created."}
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                repoFeedback.dbContext = dbContext;
+                DrugstoreFeedback dfb = new DrugstoreFeedback(randomId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
+                    DateTime.Now, DateTime.MinValue);
+                dbContext.DrugstoreFeedbacks.Add(dfb);
+                dbContext.SaveChanges();
 
                 return Ok(content);
+            }
+            else
+                return Unauthorized();
+
+                
            // }
           //  else
               //  return NotFound();

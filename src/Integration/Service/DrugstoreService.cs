@@ -5,7 +5,6 @@ using System.Text;
 using Factory;
 using Integration.Model;
 using Integration.Repository.Sql;
-using Integration_API.Model;
 using Model.DataBaseContext;
 using Npgsql;
 
