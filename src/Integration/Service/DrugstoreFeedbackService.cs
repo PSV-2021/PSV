@@ -32,5 +32,19 @@ namespace Integration.Service
            return Guid.NewGuid().ToString();
         }
 
+        public bool checkApiKey(string apiKey, MyDbContext dbContext)
+        {
+            bool found = false;
+            foreach (Drugstore h in dbContext.Drugstores.ToList())
+            {
+                if (h.ApiKey.Equals(apiKey))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        }
+
     }
 }
