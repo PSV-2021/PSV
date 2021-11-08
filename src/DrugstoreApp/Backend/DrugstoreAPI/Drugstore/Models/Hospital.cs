@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DrugstoreAPI.Models
+namespace Drugstore.Models
 {
     public class Hospital
     {

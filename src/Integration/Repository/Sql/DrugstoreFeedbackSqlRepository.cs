@@ -26,11 +26,6 @@ namespace Integration.Repository.Sql
         public List<DrugstoreFeedback> GetAll()
         {
             List<DrugstoreFeedback> result = new List<DrugstoreFeedback>();
-            /*
-            dbContext.DrugstoreFeedbacks.ToList().ForEach(feedback =>
-                result.Add(new DrugstoreFeedback(feedback.Id, feedback.DrugstoreToken, feedback.Content,
-                feedback.Response, feedback.SentTime, feedback.RecievedTime)));
-            */
             result = dbContext.DrugstoreFeedbacks.ToList();
             return result;
         }
@@ -59,7 +54,6 @@ namespace Integration.Repository.Sql
 
         public bool Update(DrugstoreFeedback editedObject)
         {
-            
             dbContext.DrugstoreFeedbacks.Update(editedObject);
             dbContext.SaveChanges();
             return true;
