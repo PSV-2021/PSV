@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using Factory;
 using Integration.Model;
@@ -11,11 +12,14 @@ namespace Integration.Service
     public class DrugstoreFeedbackService
     {
         public DrugstoreFeedbackSqlRepository DrugstoreFeedbackRepository { get; set; }
+        public DrugstoreSqlRepository DrugstoreRepository { get; set; }
 
         public DrugstoreFeedbackService(MyDbContext dbContext)
         {
             DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository();
+            DrugstoreRepository = new DrugstoreSqlRepository();
             DrugstoreFeedbackRepository.dbContext = dbContext;
+            DrugstoreRepository.dbContext = dbContext;
         }
 
         public DrugstoreFeedbackService()
@@ -23,28 +27,47 @@ namespace Integration.Service
             DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository();
         }
 
-       /* public int SaveFeedback(NewPharmacyReviewDto pharmacyReview)
-        {
-            int maxId = new DrugstoreFeedbackService(DrugstoreFeedbackRepository.dbContext).GetMaxId();
-            DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
-                DateTime.Now, DateTime.MinValue);
-            DrugstoreFeedbackRepository.dbContext.DrugstoreFeedbacks.Add(dfb);
-            DrugstoreFeedbackRepository.dbContext.SaveChanges();
+        /* public int SaveFeedback(NewPharmacyReviewDto pharmacyReview)
+         {
+             int maxId = new DrugstoreFeedbackService(DrugstoreFeedbackRepository.dbContext).GetNewRadnomId();
+             DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
+                 DateTime.Now, DateTime.MinValue);
+             DrugstoreFeedbackRepository.dbContext.DrugstoreFeedbacks.Add(dfb);
+             DrugstoreFeedbackRepository.dbContext.SaveChanges();
 
-        }*/
+         }*/
 
-        public int GetMaxId()
+        public string GetNewRadnomId()
         {
-            int max = -999;
-            foreach (DrugstoreFeedback df in DrugstoreFeedbackRepository.GetAll())
+           return Guid.NewGuid().ToString();
+        }
+
+        public  bool PingServer(string nameOrAddress)
+        {
+            bool pingable = false;
+            Ping pinger = null;
+
+            try
             {
-                if (df.Id > max)
-                    max = df.Id;
+                pinger = new Ping();
+                PingReply reply = pinger.Send(nameOrAddress);
+                pingable = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+                // Discard PingExceptions and return false;
+            }
+            finally
+            {
+                if (pinger != null)
+                {
+                    pinger.Dispose();
+                }
             }
 
-            return max;
-
+            return pingable;
         }
+
 
     }
 }
