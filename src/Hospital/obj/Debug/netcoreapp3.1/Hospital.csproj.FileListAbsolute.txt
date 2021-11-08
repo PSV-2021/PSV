@@ -44,3 +44,15 @@ C:\Users\Natasa\Desktop\PSW\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.cs
 C:\Users\Natasa\Desktop\PSW\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.dll
 C:\Users\Natasa\Desktop\PSW\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.pdb
 C:\Users\Natasa\Desktop\PSW\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.genruntimeconfig.cache
+E:\PSV\src\Hospital\bin\Debug\netcoreapp3.1\Hospital.deps.json
+E:\PSV\src\Hospital\bin\Debug\netcoreapp3.1\Hospital.runtimeconfig.json
+E:\PSV\src\Hospital\bin\Debug\netcoreapp3.1\Hospital.runtimeconfig.dev.json
+E:\PSV\src\Hospital\bin\Debug\netcoreapp3.1\Hospital.dll
+E:\PSV\src\Hospital\bin\Debug\netcoreapp3.1\Hospital.pdb
+E:\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.csprojAssemblyReference.cache
+E:\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.AssemblyInfoInputs.cache
+E:\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.AssemblyInfo.cs
+E:\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.csproj.CoreCompileInputs.cache
+E:\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.dll
+E:\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.pdb
+E:\PSV\src\Hospital\obj\Debug\netcoreapp3.1\Hospital.genruntimeconfig.cache

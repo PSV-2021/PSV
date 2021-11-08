@@ -30,5 +30,30 @@ namespace HospitalAPI.Controllers
             result = repoFeedback.GetAll();
             return Ok(result);
         }
+
+        [HttpPost]   // POST /api/publishfeedback
+        public IActionResult Post([FromBody] int id)
+        {
+            repoFeedback.dbContext = dbContext;
+            UserFeedback matchedRecords = dbContext.UserFeedbacks.ToList().Find(matchedRecords => matchedRecords.Id == id);
+
+            if (matchedRecords != null)
+            {
+                if (matchedRecords.canPublish == true)
+                {
+                    matchedRecords.canPublish = false;
+                }
+                else
+                {
+                    matchedRecords.canPublish = true;
+                }
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                return Ok(false);
+            }
+            return Ok(true);
+        }
     }
 }

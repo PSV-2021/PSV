@@ -6,7 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using DrugstoreAPI.Adapters;
 using DrugstoreAPI.Dtos;
-using DrugstoreAPI.Models;
+
+using Drugstore.Models;
+using Drugstore.Repository.Sql;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -14,21 +16,27 @@ namespace DrugstoreAPI.Controllers
     [ApiController]
     public class MedicineController : ControllerBase
     {
+
+        private readonly MyDbContext dbContext;
+        public MedicineSqlRepository repo = new MedicineSqlRepository();
+
+        public MedicineController(MyDbContext context)
+        {
+            this.dbContext = context;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
-            List<string> lista = new List<string>();
-            lista.Add("VOLIM");
-            // List<MedicineDto> result = new List<MedicineDto>();
-            // Program.MedicineList.ForEach(medicine => result.Add(MedicineAdapter.MedicineToMedicineDto(medicine)));
-            Console.WriteLine("Status:Najjaci");
-            return Ok(lista);
+            repo.DbContext = this.dbContext;
+            return Ok(repo.GetAll());
         }
 
         [HttpGet("{id?}")]
         public IActionResult Get(long id)
         {
-            Medicine medicine = Program.MedicineList.Find(medicine => medicine.Id == id);
+            Medicine medicine = dbContext.Medicines.FirstOrDefault(medicine => medicine.Id == id);
+
             if (medicine == null)
             {
                 return NotFound();
@@ -46,25 +54,27 @@ namespace DrugstoreAPI.Controllers
             {
                 return BadRequest();
             }
-
-            long id = Program.MedicineList.Count > 0 ? Program.MedicineList.Max(medicine => medicine.Id) + 1 : 1;
+            int id = dbContext.Medicines.ToList().Count > 0 ? dbContext.Medicines.ToList().Max(medicine => medicine.Id) + 1 : 1;
             Medicine medicine = MedicineAdapter.MedicineDtoToMedicine(dto);
             medicine.Id = id;
-            Program.MedicineList.Add(medicine);
+            dbContext.Medicines.Add(medicine);
+            dbContext.SaveChanges();
             return Ok();
         }
 
         [HttpDelete("{id?}")]
         public IActionResult Delete(long id = 0)
         {
-            Medicine medicine = Program.MedicineList.Find(medicine => medicine.Id == id);
+            Medicine medicine = dbContext.Medicines.ToList().Find(medicine => medicine.Id == id);
+
             if (medicine == null)
             {
                 return NotFound();
             }
             else
             {
-                Program.MedicineList.Remove(medicine);
+                dbContext.Medicines.Remove(medicine);
+                dbContext.SaveChanges();
                 return Ok();
             }
         }

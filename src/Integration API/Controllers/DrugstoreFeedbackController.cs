@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Integration_API.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
 using Integration.Repository.Sql;
@@ -49,7 +48,6 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/drugstorefeedback
         public IActionResult Post(NewPharmacyReviewDto pharmacyReview)
         {
-            
             repoFeedback.dbContext = dbContext;
             int maxId = new DrugstoreFeedbackService(dbContext).GetMaxId();
             DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",

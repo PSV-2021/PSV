@@ -19,6 +19,62 @@ namespace Integration.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Integration.Model.Drugstore", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ApiKey")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Drugstores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Kneza 22",
+                            ApiKey = "aaabbbccc",
+                            Email = "apoteka1@gmail.com",
+                            Name = "Apoteka prva",
+                            Url = "www.apoteka.rs"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Kneza 23",
+                            ApiKey = "111222333",
+                            Email = "apoteka2@gmail.com",
+                            Name = "Apoteka druga",
+                            Url = "www.apotekica.rs"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "Kneza 265",
+                            ApiKey = "555333",
+                            Email = "apoteka3@gmail.com",
+                            Name = "Apoteka treca",
+                            Url = "www.apotekcina.rs"
+                        });
+                });
+
             modelBuilder.Entity("Integration.Model.DrugstoreFeedback", b =>
                 {
                     b.Property<int>("Id")
@@ -51,71 +107,27 @@ namespace Integration.Migrations
                             Id = 1,
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 11, 4, 22, 46, 10, 39, DateTimeKind.Local).AddTicks(109),
+                            RecievedTime = new DateTime(2021, 11, 6, 2, 19, 10, 686, DateTimeKind.Local).AddTicks(7991),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7334)
+                            SentTime = new DateTime(2021, 11, 6, 2, 19, 10, 689, DateTimeKind.Local).AddTicks(8405)
                         },
                         new
                         {
                             Id = 2,
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7732),
+                            RecievedTime = new DateTime(2021, 11, 6, 2, 19, 10, 689, DateTimeKind.Local).AddTicks(9143),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7761)
+                            SentTime = new DateTime(2021, 11, 6, 2, 19, 10, 689, DateTimeKind.Local).AddTicks(9188)
                         },
                         new
                         {
                             Id = 3,
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7781),
+                            RecievedTime = new DateTime(2021, 11, 6, 2, 19, 10, 689, DateTimeKind.Local).AddTicks(9201),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 4, 22, 46, 10, 41, DateTimeKind.Local).AddTicks(7785)
-                        });
-                });
-
-            modelBuilder.Entity("Integration_API.Model.Drugstore", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("ApiKey")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Drugstores");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ApiKey = "aaabbbccc",
-                            Name = "Apoteka prva",
-                            Url = "www.apoteka.rs"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ApiKey = "111222333",
-                            Name = "Apoteka druga",
-                            Url = "www.apotekica.rs"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ApiKey = "555333",
-                            Name = "Apoteka treca",
-                            Url = "www.apotekcina.rs"
+                            SentTime = new DateTime(2021, 11, 6, 2, 19, 10, 689, DateTimeKind.Local).AddTicks(9204)
                         });
                 });
 #pragma warning restore 612, 618

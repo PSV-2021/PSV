@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Integration_API.Model;
 using Model.DataBaseContext;
 using Integration_API.Filters;
 using RestSharp;

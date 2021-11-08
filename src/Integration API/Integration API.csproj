@@ -80,5 +80,9 @@
     <None Include="packages.config" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Integration\Integration.csproj" />
+  </ItemGroup>
+
 
 </Project>

@@ -219,6 +219,20 @@
           "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
         }
       },
+      "Microsoft.Extensions.Logging.Debug/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Logging": "5.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "5.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Debug.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Debug.dll": {}
+        }
+      },
       "Microsoft.Extensions.Options/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -317,6 +331,15 @@
           "System.Threading.Timer": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XDocument": "4.3.0"
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
       "Npgsql/5.0.10": {
@@ -1635,6 +1658,24 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
+      },
+      "SimsLogger/0.0.1": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.11",
+          "Microsoft.EntityFrameworkCore.Proxies": "5.0.11",
+          "Microsoft.Extensions.Logging.Debug": "5.0.0",
+          "Newtonsoft.Json": "13.0.1",
+          "Npgsql": "5.0.10",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10"
+        },
+        "compile": {
+          "bin/placeholder/SimsLogger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SimsLogger.dll": {}
+        }
       }
     }
   },
@@ -2004,6 +2045,26 @@
         "version.txt"
       ]
     },
+    "Microsoft.Extensions.Logging.Debug/5.0.0": {
+      "sha512": "9dvt0xqRrClvhaPNpfyS39WxnW9G55l5lrV5ZX7IrEgwo4VwtmJKtoPiKVYKbhAuOBGUI5WY3hWLvF+PSbJp5A==",
+      "type": "package",
+      "path": "microsoft.extensions.logging.debug/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Logging.Debug.dll",
+        "lib/net461/Microsoft.Extensions.Logging.Debug.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Debug.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Debug.xml",
+        "microsoft.extensions.logging.debug.5.0.0.nupkg.sha512",
+        "microsoft.extensions.logging.debug.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "Microsoft.Extensions.Options/5.0.0": {
       "sha512": "CBvR92TCJ5uBIdd9/HzDSrxYak+0W/3+yxrNg8Qm6Bmrkh5L+nu6m3WeazQehcZ5q1/6dDA7J5YdQjim0165zg==",
       "type": "package",
@@ -2127,6 +2188,33 @@
         "dotnet_library_license.txt",
         "netstandard.library.1.6.1.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "Npgsql/5.0.10": {
@@ -5877,6 +5965,11 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "SimsLogger/0.0.1": {
+      "type": "project",
+      "path": "../Integration/Integration.csproj",
+      "msbuildProject": "../Integration/Integration.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5885,23 +5978,24 @@
       "Microsoft.EntityFrameworkCore.Proxies >= 5.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.11",
       "Npgsql >= 5.0.10",
-      "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.10"
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.10",
+      "SimsLogger >= 0.0.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Zola\\.nuget\\packages\\": {}
+    "C:\\Users\\Korisnik\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration API\\Integration API.csproj",
+      "projectUniqueName": "D:\\PSV\\src\\Integration API\\Integration API.csproj",
       "projectName": "Integration API",
-      "projectPath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration API\\Integration API.csproj",
-      "packagesPath": "C:\\Users\\Zola\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Zola\\Desktop\\PSW Projekat\\PSV\\src\\Integration API\\obj\\",
+      "projectPath": "D:\\PSV\\src\\Integration API\\Integration API.csproj",
+      "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
+      "outputPath": "D:\\PSV\\src\\Integration API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Zola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5914,7 +6008,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\PSV\\src\\Integration\\Integration.csproj": {
+              "projectPath": "D:\\PSV\\src\\Integration\\Integration.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -5968,7 +6066,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

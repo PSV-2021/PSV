@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Repository.Sql;
-using Integration_API.Model;
 using Model.DataBaseContext;
+using Integration_API.DTOs;
+using Integration.Model;
+using Integration.Service;
 
 namespace Integration_API.Controllers
 {
@@ -15,7 +17,7 @@ namespace Integration_API.Controllers
     public class DrugstoreController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public DrugstoreSqlRepository repo = new DrugstoreSqlRepository();
+        public DrugstoreSqlRepository DrugstoreRepo = new DrugstoreSqlRepository();
         
         public DrugstoreController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
@@ -25,21 +27,32 @@ namespace Integration_API.Controllers
         [HttpGet]       // GET /api/drugstore
         public IActionResult Get()
         {
-            repo.dbContext = dbContext;
-            List<Integration_API.Model.Drugstore> result = new List<Integration_API.Model.Drugstore>();
-            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey)));
+            DrugstoreRepo.dbContext = dbContext;
+            List<Drugstore> result = new List<Drugstore>();
+            DrugstoreRepo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.Address)));
             return Ok(result);
         }
 
         [HttpGet("/name/{id}")] // GET /api/test2/int/3
         public IActionResult GetDrugstoreName(int id)
         {
-            repo.dbContext = dbContext;
-            string result = repo.GetDrugstoreName(id);
+            DrugstoreRepo.dbContext = dbContext;
+            string result = DrugstoreRepo.GetDrugstoreName(id);
             /*
             dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
             */
             return Ok(result);
+        }
+
+        [HttpPost] // POST /api/drugstore/newdrugstore
+        public IActionResult Post(RegistrationDto newPharmacy)
+        {
+            DrugstoreRepo.dbContext = dbContext;
+            int maxId = new DrugstoreService(dbContext).GetMaxId();
+            Drugstore ds = new Drugstore(++maxId, newPharmacy.DrugstoreName, newPharmacy.URLAddress, Guid.NewGuid().ToString(), newPharmacy.Email, newPharmacy.Address);
+            dbContext.Drugstores.Add(ds);
+            dbContext.SaveChanges();
+            return Ok(ds);
         }
     }
 }
