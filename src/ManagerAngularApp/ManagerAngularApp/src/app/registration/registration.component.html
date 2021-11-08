@@ -1,4 +1,5 @@
 <mat-grid-list cols="1" rowHeight="700px">
+<<<<<<< HEAD
   <mat-grid-tile>
       <div class="example-container" >
         <mat-form-field appearance="fill" class="width-200">
@@ -21,6 +22,30 @@
           <input type="text" matInput placeholder="Ex. http://pharmacy021.rs/" [(ngModel)]="newDrugstore.URLAddress">
         </mat-form-field>
         <br>
+=======
+    <mat-grid-tile>
+        <div class="example-container" >
+          <mat-form-field appearance="fill" class="width-200">
+            <mat-label>Pharmacy name</mat-label>
+            <input type="text" matInput [(ngModel)]="newDrugstore.DrugstoreName">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-200">
+            <mat-label>Address</mat-label>
+            <input type="text" matInput [(ngModel)]="newDrugstore.Address">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-200">
+            <mat-label>E-mail address</mat-label>
+            <input type="text" matInput placeholder="Ex. pat@example.com" [(ngModel)]="newDrugstore.Email">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill" class="width-200">
+            <mat-label>URL address</mat-label>
+            <input type="text" matInput placeholder="Ex. http://pharmacy021.rs/" [(ngModel)]="newDrugstore.URLAddress">
+          </mat-form-field>
+          <br>
+>>>>>>> development
 
         <mat-card-actions>
           <button mat-raised-button (click)="register()" color="primary">REGISTER</button>

@@ -5909,19 +5909,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\masa\\.nuget\\packages\\": {}
+    "C:\\Users\\Tatjana\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
+      "projectUniqueName": "E:\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
       "projectName": "HospitalAPI",
-      "projectPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
-      "packagesPath": "C:\\Users\\masa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\obj\\",
+      "projectPath": "E:\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\HospitalAPI.csproj",
+      "packagesPath": "C:\\Users\\Tatjana\\.nuget\\packages\\",
+      "outputPath": "E:\\PSV\\src\\HospitalAPI\\HospitalAPI\\HospitalAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\masa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tatjana\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5935,8 +5935,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Hospital\\Hospital.csproj": {
-              "projectPath": "C:\\Users\\masa\\Documents\\GitHub\\PSV\\src\\Hospital\\Hospital.csproj"
+            "E:\\PSV\\src\\Hospital\\Hospital.csproj": {
+              "projectPath": "E:\\PSV\\src\\Hospital\\Hospital.csproj"
             }
           }
         }
@@ -5988,7 +5988,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

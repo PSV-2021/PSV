@@ -54,6 +54,17 @@ namespace Integration_API.Controllers
         public IActionResult Post(NewPharmacyReviewDto pharmacyReview)
         {
 
+            repoFeedback.dbContext = dbContext;
+            int maxId = new DrugstoreFeedbackService(dbContext).GetMaxId();
+            DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
+                DateTime.Now, DateTime.MinValue);
+            dbContext.DrugstoreFeedbacks.Add(dfb);
+            dbContext.SaveChanges();
+            return Ok(dfb);
+        }
+        
+
+/*
             //if (drugstoreFeedbackService.PingServer(drugstoreService.GetDrugStoreURL(pharmacyReview.pharmacyId, dbContext) + "/api/drugstoreresponse"))
             // {
 
@@ -103,7 +114,7 @@ namespace Integration_API.Controllers
             else
                 return Unauthorized();
 
-        }
+        }*/
 
     }
 }

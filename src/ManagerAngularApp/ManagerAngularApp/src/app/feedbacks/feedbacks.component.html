@@ -1,0 +1,19 @@
+<div class="reviews-holder">
+    <div *ngFor="let comment of comments">
+        <div class="review-holder">
+        <mat-card class="example-card">
+            <mat-card-title>Review</mat-card-title>
+            <mat-card-content>
+              <p>{{ comment.name }}</p>
+              <p>{{ comment.timeWritten | date:'short' }}</p>
+              <br>
+              <mat-card-subtitle>Response</mat-card-subtitle>
+              <p><em>"{{ comment.content }}"</em></p><button mat-raised-button class="approveButton" *ngIf="!comment.canPublish" (click)="publishComment(comment.id)">&#10003; Odobri</button>
+              <button mat-raised-button class="returnButton" *ngIf="comment.canPublish" (click)="returnComment(comment.id)">	&#10007; Vrati na odobravanje</button>
+            </mat-card-content>
+        </mat-card>
+        </div>
+        <br>
+        <br>
+    </div>
+</div>

@@ -49,34 +49,41 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 1,
+
                             Address = "Tolstojeva 3, Novi Sad",
                             ApiKey = "aaabbbccc",
                             Email = "apoteka1@gmail.com",
                             Name = "Apoteka prva",
                             Url = "http://localhost:5001"
+
                         },
                         new
                         {
                             Id = 2,
+
                             Address = "Balzakova 3, Novi Sad",
                             ApiKey = "wnjgjowenfweo",
                             Email = "apoteka2@gmail.com",
                             Name = "Apoteka druga",
                             Url = "http://localhost:5002"
+
                         },
                         new
                         {
                             Id = 3,
+
                             Address = "Puskinova 3, Novi Sad",
                             ApiKey = "wuhguiwoehfuhw",
                             Email = "apoteka3@gmail.com",
                             Name = "Apoteka treca",
                             Url = "http://localhost:5003"
+
                         });
                 });
 
             modelBuilder.Entity("Integration.Model.DrugstoreFeedback", b =>
                 {
+
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
@@ -85,6 +92,7 @@ namespace Integration.Migrations
 
                     b.Property<int>("DrugstoreId")
                         .HasColumnType("integer");
+
 
                     b.Property<DateTime>("RecievedTime")
                         .HasColumnType("timestamp without time zone");
@@ -102,6 +110,7 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
+
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,

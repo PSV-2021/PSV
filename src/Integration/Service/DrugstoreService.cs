@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +8,27 @@ using Integration.Repository.Sql;
 using Model.DataBaseContext;
 using Npgsql;
 
+
 namespace Integration.Service
 {
    public class DrugstoreService
     {
         public DrugstoreSqlRepository DrugstoreRepository = new DrugstoreSqlRepository();
+
         public MyDbContext dbContext { get; set; }
-  
-        public DrugstoreService()
+        
+        public DrugstoreService(MyDbContext dbContext)
         {
             DrugstoreRepository = new DrugstoreSqlRepository();
             DrugstoreRepository.dbContext = dbContext;
         }
+
+
+        public DrugstoreService()
+        {
+            DrugstoreRepository = new DrugstoreSqlRepository();
+        }
+
 
         public int GetMaxId()
         {
@@ -33,6 +42,7 @@ namespace Integration.Service
             return max;
 
         }
+
         public string GetDrugStoreURL(int id,MyDbContext dbContext)
         {
             foreach (Drugstore dg in dbContext.Drugstores.ToList())
@@ -46,5 +56,4 @@ namespace Integration.Service
             return null;
         }
     }
-
 }

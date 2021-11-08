@@ -372,6 +372,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+<<<<<<< HEAD
       "Newtonsoft.Json.Bson/1.0.2": {
         "type": "package",
         "dependencies": {
@@ -384,6 +385,8 @@
           "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
         }
       },
+=======
+>>>>>>> development
       "Npgsql/5.0.10": {
         "type": "package",
         "dependencies": {
@@ -2289,6 +2292,7 @@
         "packageIcon.png"
       ]
     },
+<<<<<<< HEAD
     "Newtonsoft.Json.Bson/1.0.2": {
       "sha512": "QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
       "type": "package",
@@ -2310,6 +2314,8 @@
         "newtonsoft.json.bson.nuspec"
       ]
     },
+=======
+>>>>>>> development
     "Npgsql/5.0.10": {
       "sha512": "3TB9le3lfu5Hc+LSHqMCVLcA+qUPg1enyM4+u0pMUBmNNGwc0sVPrnfnys2TVZIdkF8Aww/AZlnJHDsnEGqD0g==",
       "type": "package",
