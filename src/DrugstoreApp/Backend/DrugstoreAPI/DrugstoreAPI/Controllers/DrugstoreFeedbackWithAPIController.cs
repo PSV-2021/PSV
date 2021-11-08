@@ -13,7 +13,7 @@ namespace DrugstoreAPI.Controllers
 {
     [Route("api/[controller]")] // /api/DrugstoreFeedbackWithAPI
     [ApiController]
-    [ApiKeyAuth]
+   // [ApiKeyAuth]
     public class DrugstoreFeedbackWithAPIController : ControllerBase
     {
         [HttpGet(template: "secret")]

@@ -10,6 +10,9 @@ using Integration.Repository.Sql;
 using Integration.Service;
 using Integration.Model;
 using DrugstoreFeedback = Integration.Model.DrugstoreFeedback;
+using RestSharp;
+using System.Text.Json;
+using System.Net.NetworkInformation;
 
 namespace Integration_API.Controllers
 {
@@ -18,6 +21,8 @@ namespace Integration_API.Controllers
     public class DrugstoreFeedbackController : ControllerBase
     {
         private readonly MyDbContext dbContext;
+        public DrugstoreService drugstoreService = new DrugstoreService();
+        public DrugstoreFeedbackService drugstoreFeedbackService = new DrugstoreFeedbackService();
         public DrugstoreFeedbackSqlRepository repoFeedback = new DrugstoreFeedbackSqlRepository();
         public DrugstoreSqlRepository repoDrugstores = new DrugstoreSqlRepository();
         //public DrugstoreFeedbackService FeedbackService = new DrugstoreFeedbackService();
@@ -48,6 +53,7 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/drugstorefeedback
         public IActionResult Post(NewPharmacyReviewDto pharmacyReview)
         {
+
             repoFeedback.dbContext = dbContext;
             int maxId = new DrugstoreFeedbackService(dbContext).GetMaxId();
             DrugstoreFeedback dfb = new DrugstoreFeedback(++maxId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
@@ -58,6 +64,57 @@ namespace Integration_API.Controllers
         }
         
 
+/*
+            //if (drugstoreFeedbackService.PingServer(drugstoreService.GetDrugStoreURL(pharmacyReview.pharmacyId, dbContext) + "/api/drugstoreresponse"))
+            // {
+
+                string randomId = new DrugstoreFeedbackService(dbContext).GetNewRadnomId();
+                
+                var client = new RestClient(drugstoreService.GetDrugStoreURL(pharmacyReview.pharmacyId, dbContext));
+                var request = new RestRequest("/api/drugstoreresponse", Method.POST);
+
+                
+                string ApiKey = "";
+                foreach (var df in dbContext.Drugstores.ToList())
+                {
+                    if (df.Id.Equals(pharmacyReview.pharmacyId))
+                    {
+                        ApiKey = df.ApiKey;
+                        break;
+                    }
+                }
+
+                request.AddHeader("ApiKey", ApiKey);
+                request.AddHeader("Content-Type", "application/json");
+               
+            var body = new
+                {
+                    Id = randomId,
+                    HospitalName = "Health",
+                    Content = pharmacyReview.review,
+                    Response = ""
+                };
+                string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+
+                request.AddJsonBody(jsonBody);
+
+                IRestResponse response = client.Execute(request);
+                
+                var content = response.Content; // {"message":" created."}
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                repoFeedback.dbContext = dbContext;
+                DrugstoreFeedback dfb = new DrugstoreFeedback(randomId, pharmacyReview.pharmacyId, pharmacyReview.review, "",
+                    DateTime.Now, DateTime.MinValue);
+                dbContext.DrugstoreFeedbacks.Add(dfb);
+                dbContext.SaveChanges();
+
+                return Ok(content);
+            }
+            else
+                return Unauthorized();
+
+        }*/
 
     }
 }

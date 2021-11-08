@@ -4,7 +4,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using Microsoft.Extensions.Logging;
+using Model.DataBaseContext;
 using Microsoft.EntityFrameworkCore;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DrugstoreAPI
 {
@@ -22,7 +30,18 @@ namespace DrugstoreAPI
         {
             services.AddControllers();
             services.AddDbContext<MyDbContext>(options =>
-            options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")));
+                options.UseNpgsql(ConfigurationExtensions.GetConnectionString
+                    (Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
+            services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +53,8 @@ namespace DrugstoreAPI
             }
 
             app.UseRouting();
+
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 

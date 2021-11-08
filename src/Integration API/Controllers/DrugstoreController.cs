@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Repository.Sql;
+
+using Integration.Model;
 using Model.DataBaseContext;
 using Integration_API.DTOs;
-using Integration.Model;
+
 using Integration.Service;
 
 namespace Integration_API.Controllers
@@ -17,7 +19,10 @@ namespace Integration_API.Controllers
     public class DrugstoreController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public DrugstoreSqlRepository DrugstoreRepo = new DrugstoreSqlRepository();
+
+        public DrugstoreSqlRepository repo = new DrugstoreSqlRepository();
+        public DrugstoreService drugstoreService = new DrugstoreService();
+
         
         public DrugstoreController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
@@ -27,9 +32,10 @@ namespace Integration_API.Controllers
         [HttpGet]       // GET /api/drugstore
         public IActionResult Get()
         {
-            DrugstoreRepo.dbContext = dbContext;
+            repo.dbContext = dbContext;
             List<Drugstore> result = new List<Drugstore>();
-            DrugstoreRepo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.Address)));
+            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.Address)));
+
             return Ok(result);
         }
 
@@ -47,8 +53,10 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/drugstore/newdrugstore
         public IActionResult Post(RegistrationDto newPharmacy)
         {
-            DrugstoreRepo.dbContext = dbContext;
-            int maxId = new DrugstoreService(dbContext).GetMaxId();
+
+            repo.dbContext = dbContext;
+            int maxId = repo.GetMaxId();
+
             Drugstore ds = new Drugstore(++maxId, newPharmacy.DrugstoreName, newPharmacy.URLAddress, Guid.NewGuid().ToString(), newPharmacy.Email, newPharmacy.Address);
             dbContext.Drugstores.Add(ds);
             dbContext.SaveChanges();
