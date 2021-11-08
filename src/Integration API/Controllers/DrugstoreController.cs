@@ -19,7 +19,6 @@ namespace Integration_API.Controllers
     public class DrugstoreController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-
         public DrugstoreSqlRepository repo = new DrugstoreSqlRepository();
         public DrugstoreService drugstoreService = new DrugstoreService();
 
@@ -42,21 +41,16 @@ namespace Integration_API.Controllers
         [HttpGet("/name/{id}")] // GET /api/test2/int/3
         public IActionResult GetDrugstoreName(int id)
         {
-            DrugstoreRepo.dbContext = dbContext;
-            string result = DrugstoreRepo.GetDrugstoreName(id);
-            /*
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
-            */
+            repo.dbContext = dbContext;
+            string result = repo.GetDrugstoreName(id);
             return Ok(result);
         }
 
         [HttpPost] // POST /api/drugstore/newdrugstore
         public IActionResult Post(RegistrationDto newPharmacy)
         {
-
             repo.dbContext = dbContext;
             int maxId = repo.GetMaxId();
-
             Drugstore ds = new Drugstore(++maxId, newPharmacy.DrugstoreName, newPharmacy.URLAddress, Guid.NewGuid().ToString(), newPharmacy.Email, newPharmacy.Address);
             dbContext.Drugstores.Add(ds);
             dbContext.SaveChanges();

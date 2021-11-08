@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrugstoreAPI.Models;
-using Model.DataBaseContext;
-
+using Drugstore.Models;
 namespace DrugstoreAPI.Repository
 {
     public class HospitalSqlRepository

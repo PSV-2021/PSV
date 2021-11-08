@@ -18,27 +18,11 @@ namespace Integration_API.Controllers
         private readonly MyDbContext dbContext;
         public DrugstoreFeedbackSqlRepository repoFeedback = new DrugstoreFeedbackSqlRepository();
         public DrugstoreSqlRepository repoDrugstores = new DrugstoreSqlRepository();
-        //public DrugstoreFeedbackService FeedbackService = new DrugstoreFeedbackService();
-
 
         public DrugstoreResponseController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
         }
-
-        //[HttpPost]
-        //public IActionResult ReceiveResponse(PharmacyResponseDto pharmacyResponse)
-        //{   
-
-        //    repoFeedback.dbContext = dbContext;
-        //    Integration.Model.DrugstoreFeedback forEdit = repoFeedback.GetById(pharmacyResponse.Id);
-        //    forEdit.Response = pharmacyResponse.Response;
-        //    //Integration.Model.DrugstoreFeedback fdbEdit = new Integration.Model.DrugstoreFeedback(forEdit.Id, forEdit.DrugstoreId,forEdit.Content, forEdit.Response, forEdit.SentTime, forEdit.RecievedTime);
-            
-        //    repoFeedback.Update(forEdit);
-
-        //    return Ok();
-        //}
 
         [HttpPost]
         public IActionResult Post(PharmacyResponseDto pharmacyResponse)
@@ -58,8 +42,6 @@ namespace Integration_API.Controllers
                         repoFeedback.dbContext = dbContext;
                         Integration.Model.DrugstoreFeedback forEdit = repoFeedback.GetById(pharmacyResponse.Id);
                         forEdit.Response = pharmacyResponse.Response;
-                        //Integration.Model.DrugstoreFeedback fdbEdit = new Integration.Model.DrugstoreFeedback(forEdit.Id, forEdit.DrugstoreId,forEdit.Content, forEdit.Response, forEdit.SentTime, forEdit.RecievedTime);
-
                         repoFeedback.Update(forEdit);
 
                         return Ok();

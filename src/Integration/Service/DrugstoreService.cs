@@ -23,7 +23,6 @@ namespace Integration.Service
             DrugstoreRepository.dbContext = dbContext;
         }
 
-
         public DrugstoreService()
         {
             DrugstoreRepository = new DrugstoreSqlRepository();
