@@ -29,19 +29,6 @@ namespace Integration.Service
         }
 
 
-        public int GetMaxId()
-        {
-            int max = -999;
-            foreach (Drugstore ds in DrugstoreRepository.GetAll())
-            {
-                if (ds.Id > max)
-                    max = ds.Id;
-            }
-
-            return max;
-
-        }
-
         public string GetDrugStoreURL(int id,MyDbContext dbContext)
         {
             foreach (Drugstore dg in dbContext.Drugstores.ToList())

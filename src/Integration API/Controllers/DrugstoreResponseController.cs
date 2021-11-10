@@ -8,6 +8,7 @@ using Integration.Repository.Sql;
 using Model.DataBaseContext;
 using Integration_API.DTOs;
 using Integration.Model;
+using Integration.Service;
 
 namespace Integration_API.Controllers
 {
@@ -18,6 +19,7 @@ namespace Integration_API.Controllers
         private readonly MyDbContext dbContext;
         public DrugstoreFeedbackSqlRepository repoFeedback = new DrugstoreFeedbackSqlRepository();
         public DrugstoreSqlRepository repoDrugstores = new DrugstoreSqlRepository();
+        public DrugstoreFeedbackService drugstoreFeedbackService = new DrugstoreFeedbackService();
 
         public DrugstoreResponseController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
@@ -28,7 +30,6 @@ namespace Integration_API.Controllers
         public IActionResult Post(PharmacyResponseDto pharmacyResponse)
         {
 
-
             Microsoft.Extensions.Primitives.StringValues headerValues;
 
             if (Request.Headers.TryGetValue("ApiKey", out headerValues))
@@ -37,7 +38,7 @@ namespace Integration_API.Controllers
                 var value = Request.Headers["ApiKey"];
                 foreach (string nesto in value)
                 {
-                    if (this.checkApiKey(nesto, dbContext))
+                    if (drugstoreFeedbackService.checkApiKey(nesto, dbContext))
                     {
                         repoFeedback.dbContext = dbContext;
                         Integration.Model.DrugstoreFeedback forEdit = repoFeedback.GetById(pharmacyResponse.Id);
@@ -52,23 +53,6 @@ namespace Integration_API.Controllers
             return Unauthorized();
 
         }
-
-        public bool checkApiKey(string apiKey, MyDbContext dbContext)
-        {
-            bool found = false;
-            foreach (Drugstore h in dbContext.Drugstores.ToList())
-            {
-                if (h.ApiKey.Equals(apiKey))
-                {
-                    found = true;
-                    break;
-                }
-            }
-            return found;
-        }
-
-
-
 
     }
 }

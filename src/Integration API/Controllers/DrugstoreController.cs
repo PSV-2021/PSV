@@ -11,6 +11,7 @@ using Model.DataBaseContext;
 using Integration_API.DTOs;
 
 using Integration.Service;
+using RestSharp;
 
 namespace Integration_API.Controllers
 {
@@ -49,12 +50,37 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/drugstore/newdrugstore
         public IActionResult Post(RegistrationDto newPharmacy)
         {
-            repo.dbContext = dbContext;
-            int maxId = repo.GetMaxId();
-            Drugstore ds = new Drugstore(++maxId, newPharmacy.DrugstoreName, newPharmacy.URLAddress, Guid.NewGuid().ToString(), newPharmacy.Email, newPharmacy.Address);
-            dbContext.Drugstores.Add(ds);
-            dbContext.SaveChanges();
-            return Ok(ds);
+            var client = new RestClient(newPharmacy.URLAddress);
+            var request = new RestRequest("/api/hospital", Method.POST); //izmeni
+
+            string ApiKey = Guid.NewGuid().ToString();
+
+            request.AddHeader("Content-Type", "application/json");
+
+            var body = new
+            {
+                HospitalName = "Health",
+                URLAddress = "http://localhost:5000",
+                ApiKey = ApiKey
+            };
+
+            string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+
+            request.AddJsonBody(jsonBody);
+
+            IRestResponse response = client.Execute(request);
+
+            var content = response.Content; // {"message":" created."}
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                repo.dbContext = dbContext;
+                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.Address);
+                dbContext.Drugstores.Add(ds);
+                dbContext.SaveChanges();
+                return Ok(ds);
+            }
+            else
+                return Unauthorized();
         }
     }
 }

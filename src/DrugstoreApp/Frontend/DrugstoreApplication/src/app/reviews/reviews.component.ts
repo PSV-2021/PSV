@@ -3,7 +3,6 @@ import { ReviewDto } from './review.dto';
 import { ReviewsService } from '../services/review.service';
 import { ResponseDto } from './response.dto';
 
-
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
@@ -19,7 +18,7 @@ export class ReviewsComponent implements OnInit {
 
   respond(review : ReviewDto): void {
     console.log(this.response);
-    this.reviewsService.SendResponse(this.response, review).subscribe((d: any) =>{alert("NAJJACI" + d.response)});
+    this.reviewsService.SendResponse(review).subscribe((d: any) =>{alert("NAJJACI" + d.response)});
   }
   ngOnInit(): void {
     this.reviewsService.GetAllMyReviews().subscribe((data: any) => {

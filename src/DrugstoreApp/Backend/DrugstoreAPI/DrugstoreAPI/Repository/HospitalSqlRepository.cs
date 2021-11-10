@@ -55,5 +55,20 @@ namespace DrugstoreAPI.Repository
 
             return "";
         }
+
+        public bool Save(Hospital newHospital)
+        {
+            try
+            {
+                dbContext.Hospitals.Add(newHospital);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }
