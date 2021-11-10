@@ -19,6 +19,12 @@ namespace Drugstore.Models
             this.Url = url;
             this.ApiKey = apiKey;
         }
+        public Hospital(string name, string url, string apiKey)
+        {
+            this.Name = name;
+            this.Url = url;
+            this.ApiKey = apiKey;
+        }
 
         public Hospital() { }
     }

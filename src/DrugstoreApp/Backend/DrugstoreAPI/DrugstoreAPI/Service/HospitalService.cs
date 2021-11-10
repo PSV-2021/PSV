@@ -24,15 +24,5 @@ namespace Service
             HospitalRepository = new HospitalSqlRepository();
         }
 
-        public int GetMaxId()
-        {
-            int max = -999;
-            foreach (Hospital h in HospitalRepository.GetAll())
-            {
-                if (h.Id > max)
-                    max = h.Id;
-            }
-            return max;
-        }
     }
 }

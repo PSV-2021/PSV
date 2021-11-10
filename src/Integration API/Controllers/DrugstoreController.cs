@@ -74,8 +74,7 @@ namespace Integration_API.Controllers
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 repo.dbContext = dbContext;
-                int maxId = repo.GetMaxId();
-                Drugstore ds = new Drugstore(++maxId, newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.Address);
+                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.Address);
                 dbContext.Drugstores.Add(ds);
                 dbContext.SaveChanges();
                 return Ok(ds);

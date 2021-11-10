@@ -35,8 +35,7 @@ namespace DrugstoreAPI.Controllers
         public IActionResult Post(HospitalDto hospital)
         {
             hospitalService = new HospitalService(dbContext);
-            int id = hospitalService.GetMaxId();
-            Hospital newHospital = new Hospital(hospital.HospitalName, ++id, hospital.URLAddress, hospital.ApiKey);
+            Hospital newHospital = new Hospital(hospital.HospitalName,hospital.URLAddress, hospital.ApiKey);
             HospitalSqlRepository repo = new HospitalSqlRepository();
             repo.dbContext = dbContext;
             repo.Save(newHospital);
