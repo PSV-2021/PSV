@@ -8,11 +8,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using DrugstoreAPI.Filters;
 using RestSharp;
-using DrugstoreAPI.Repository;
-using Integration.Repository.Sql;
 using Drugstore.Models;
 using Service;
 using DrugstoreAPI.Models;
+using Drugstore.Repository.Sql;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -43,8 +42,6 @@ namespace DrugstoreAPI.Controllers
         [ApiKeyAuth]
         public IActionResult Respond(FeedbackResponseDto dto)
         {
-
-
             var client = new RestClient(drugstoreResponseService.GetHospitalURL(dto.HospitalName, dbContext));
             var request = new RestRequest("/api/drugstoreresponse", Method.POST);
 
@@ -82,8 +79,6 @@ namespace DrugstoreAPI.Controllers
         [HttpPost]
         public IActionResult Post(Feedback newFeedback)
         {
-
-
             Microsoft.Extensions.Primitives.StringValues headerValues;
 
             if (Request.Headers.TryGetValue("ApiKey", out headerValues))
@@ -105,7 +100,6 @@ namespace DrugstoreAPI.Controllers
                
             }
                     return Unauthorized();
-
         }
 
         public bool checkApiKey(string apiKey, MyDbContext dbContext)

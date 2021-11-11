@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Integration.Repository.Sql;
 
 namespace DrugstoreAPI.Models
 {

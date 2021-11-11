@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using DrugstoreAPI.Models;
 using Drugstore.Models;
+using Drugstore.Repository.Interfaces;
 
-namespace Integration.Repository.Sql
+namespace Drugstore.Repository.Sql
 {
-    public class FeedbackSqlRepository 
+    public class FeedbackSqlRepository: IFeedbackRepository
     {
         public MyDbContext dbContext { get; set; }
 
@@ -65,21 +64,6 @@ namespace Integration.Repository.Sql
 
             return null;
         }
-        /*
-public Feedback getByKey(string id)
-{
-   foreach (Feedback fb in dbContext.Feedbacks.ToList())
-   {
-       if (fb..Equals(id))
-           return fb;
-   }
-
-   return null;
-}
-*/
-
-
-
 
     }
 }
