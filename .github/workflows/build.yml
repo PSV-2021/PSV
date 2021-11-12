@@ -43,6 +43,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"PSV-2021_PSV" /o:"psv-2021" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          cd src\DrugstoreApp\Backend\DrugstoreAPI\DrugStoreAPI.sln
+          cd src\DrugstoreApp\Backend\DrugstoreAPI
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
