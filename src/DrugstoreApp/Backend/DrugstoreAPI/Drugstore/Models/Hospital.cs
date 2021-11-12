@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DrugstoreAPI.Models
+namespace Drugstore.Models
 {
     public class Hospital
     {
@@ -16,6 +16,12 @@ namespace DrugstoreAPI.Models
         {
             this.Name = name;
             this.Id = id;
+            this.Url = url;
+            this.ApiKey = apiKey;
+        }
+        public Hospital(string name, string url, string apiKey)
+        {
+            this.Name = name;
             this.Url = url;
             this.ApiKey = apiKey;
         }

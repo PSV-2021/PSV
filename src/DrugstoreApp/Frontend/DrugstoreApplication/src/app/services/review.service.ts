@@ -30,9 +30,9 @@ export class ReviewsService {
     GetHospitalName(id: string): Observable<string>{
       return this.http.get<any>(this.url + '/hospital/name/', {params:{id: id}});
     }
-    SendResponse(response: string, review: ReviewDto): any{
+    SendResponse(review: ReviewDto): any{
       const body = {
-        response : response,
+        response : review.ReviewResponse,
         Id : review.Id,
         hospitalName: review.HospitalName,
       };

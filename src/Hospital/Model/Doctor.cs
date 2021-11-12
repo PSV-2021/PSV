@@ -13,7 +13,6 @@ namespace Model
         public Doctor(string name, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber, string adress, string email, string idNum, int salary, Speciality speciality, string username, string password)
         {
 
-            this.IsDeleted = false;
             this.Name = name;
             this.Surname = surname;
             this.Jmbg = jmbg;
@@ -22,7 +21,6 @@ namespace Model
             this.PhoneNumber = phoneNumber;
             this.Adress = adress;
             this.Email = email;
-            this.IdCard = idNum;
             this.Username = username;
             this.Password = password;
             this.Type = UserType.doctor;

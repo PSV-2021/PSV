@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DrugstoreAPI.Models;
-using Model.DataBaseContext;
+using Drugstore.Models;
 
 namespace Integration.Repository.Sql
 {

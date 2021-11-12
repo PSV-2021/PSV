@@ -22,7 +22,7 @@ namespace Repository
             List<Patient> patients = new List<Patient>();
             foreach(Patient patient in storedPatients)
             {
-                if(patient.IsDeleted == false)
+                //if(patient.IsDeleted == false)
                     patients.Add(patient);
             }
             return patients;
@@ -35,7 +35,7 @@ namespace Repository
 
             foreach (Patient patient in storedPatients)
             {
-                if (patient.Jmbg.Equals(newPatient.Jmbg) && patient.IsDeleted == false)
+                //if (patient.Jmbg.Equals(newPatient.Jmbg) && patient.IsDeleted == false)
                     return false;
             }
             storedPatients.Add(newPatient);
@@ -56,12 +56,10 @@ namespace Repository
                     patient.Sex = editedPatient.Sex;
                     patient.PhoneNumber = editedPatient.PhoneNumber;
                     patient.Adress = editedPatient.Adress;
-                    patient.IdCard = editedPatient.IdCard;
                     patient.Email = editedPatient.Email;
                     patient.EmergencyContact = editedPatient.EmergencyContact;
                     patient.MedicalRecord = editedPatient.MedicalRecord;
                     patient.Username = editedPatient.Username;
-                    patient.IsGuest = editedPatient.IsGuest;
                     patient.Password = editedPatient.Password;
                     patient.IsBlocked = editedPatient.IsBlocked;
 
@@ -90,7 +88,7 @@ namespace Repository
             {
                 if (patient.Jmbg.Equals(jmbg))
                 {
-                    patient.IsDeleted = true;
+                    //patient.IsDeleted = true;
                     WriteToFile(storedPatients);
                     return true;
                 }

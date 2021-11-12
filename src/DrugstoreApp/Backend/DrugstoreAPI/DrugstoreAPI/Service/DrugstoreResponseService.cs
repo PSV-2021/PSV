@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DrugstoreAPI.Models;
 using Integration.Repository.Sql;
-using Model.DataBaseContext;
+using Drugstore.Models;
 
 namespace Service
 {

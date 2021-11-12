@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrugstoreAPI.Models;
-using Model.DataBaseContext;
-
+using Drugstore.Models;
 namespace DrugstoreAPI.Repository
 {
     public class HospitalSqlRepository
@@ -55,6 +54,21 @@ namespace DrugstoreAPI.Repository
             }
 
             return "";
+        }
+
+        public bool Save(Hospital newHospital)
+        {
+            try
+            {
+                dbContext.Hospitals.Add(newHospital);
+                dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
     }
 }

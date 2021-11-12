@@ -14,9 +14,7 @@ namespace Model
         public String PhoneNumber { get; set; }
         public String Adress { get; set; }
         public String Email { get; set; }
-        public String IdCard { get; set; }
         public UserType Type { get; set; }
-        public Boolean IsDeleted { get; set; }
 
     }
 }

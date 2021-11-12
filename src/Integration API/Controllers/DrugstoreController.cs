@@ -11,6 +11,7 @@ using Model.DataBaseContext;
 using Integration_API.DTOs;
 
 using Integration.Service;
+using RestSharp;
 
 namespace Integration_API.Controllers
 {
@@ -19,7 +20,6 @@ namespace Integration_API.Controllers
     public class DrugstoreController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-
         public DrugstoreSqlRepository repo = new DrugstoreSqlRepository();
         public DrugstoreService drugstoreService = new DrugstoreService();
 
@@ -42,25 +42,45 @@ namespace Integration_API.Controllers
         [HttpGet("/name/{id}")] // GET /api/test2/int/3
         public IActionResult GetDrugstoreName(int id)
         {
-            DrugstoreRepo.dbContext = dbContext;
-            string result = DrugstoreRepo.GetDrugstoreName(id);
-            /*
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url)));
-            */
+            repo.dbContext = dbContext;
+            string result = repo.GetDrugstoreName(id);
             return Ok(result);
         }
 
         [HttpPost] // POST /api/drugstore/newdrugstore
         public IActionResult Post(RegistrationDto newPharmacy)
         {
+            var client = new RestClient(newPharmacy.URLAddress);
+            var request = new RestRequest("/api/hospital", Method.POST); //izmeni
 
-            repo.dbContext = dbContext;
-            int maxId = repo.GetMaxId();
+            string ApiKey = Guid.NewGuid().ToString();
 
-            Drugstore ds = new Drugstore(++maxId, newPharmacy.DrugstoreName, newPharmacy.URLAddress, Guid.NewGuid().ToString(), newPharmacy.Email, newPharmacy.Address);
-            dbContext.Drugstores.Add(ds);
-            dbContext.SaveChanges();
-            return Ok(ds);
+            request.AddHeader("Content-Type", "application/json");
+
+            var body = new
+            {
+                HospitalName = "Health",
+                URLAddress = "http://localhost:5000",
+                ApiKey = ApiKey
+            };
+
+            string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+
+            request.AddJsonBody(jsonBody);
+
+            IRestResponse response = client.Execute(request);
+
+            var content = response.Content; // {"message":" created."}
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                repo.dbContext = dbContext;
+                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.Address);
+                dbContext.Drugstores.Add(ds);
+                dbContext.SaveChanges();
+                return Ok(ds);
+            }
+            else
+                return Unauthorized();
         }
     }
 }

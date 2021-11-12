@@ -8,11 +8,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using DrugstoreAPI.Filters;
 using RestSharp;
-using DrugstoreAPI.Models;
 using DrugstoreAPI.Repository;
 using Integration.Repository.Sql;
-using Model.DataBaseContext;
+using Drugstore.Models;
 using Service;
+using DrugstoreAPI.Models;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -29,7 +29,6 @@ namespace DrugstoreAPI.Controllers
         {
             this.dbContext = db;
         }
-        // public ApiKeyAuthAttribute apiKeyAuth = new ApiKeyAuthAttribute(dbContext);
         
         [HttpGet(template: "getAllMyFeedbacks")]
         [ApiKeyAuth]
@@ -51,8 +50,6 @@ namespace DrugstoreAPI.Controllers
 
             HospitalSqlRepository repo = new HospitalSqlRepository(dbContext);
             FeedbackSqlRepository repoFB = new FeedbackSqlRepository(dbContext);
-
-            //string nesto = repo.GetKeyByName(dto.HospitalName);
 
             request.AddHeader("ApiKey", repo.GetKeyByName(dto.HospitalName));
             request.AddHeader("Content-Type", "application/json");
@@ -109,9 +106,6 @@ namespace DrugstoreAPI.Controllers
             }
                     return Unauthorized();
 
-            
-
-           
         }
 
         public bool checkApiKey(string apiKey, MyDbContext dbContext)

@@ -23,25 +23,11 @@ namespace Integration.Service
             DrugstoreRepository.dbContext = dbContext;
         }
 
-
         public DrugstoreService()
         {
             DrugstoreRepository = new DrugstoreSqlRepository();
         }
 
-
-        public int GetMaxId()
-        {
-            int max = -999;
-            foreach (Drugstore ds in DrugstoreRepository.GetAll())
-            {
-                if (ds.Id > max)
-                    max = ds.Id;
-            }
-
-            return max;
-
-        }
 
         public string GetDrugStoreURL(int id,MyDbContext dbContext)
         {
