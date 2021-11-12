@@ -22,7 +22,7 @@ namespace Repository
             List<Doctor> doctors = new List<Doctor>();
             for (int i = 0; i < storedDoctors.Count; i++)
             {
-                if (storedDoctors[i].IsDeleted == false)
+               // if (storedDoctors[i].IsDeleted == false)
                     doctors.Add(storedDoctors[i]);
             }
             return doctors;
@@ -84,7 +84,7 @@ namespace Repository
             List<Doctor> storedDoctors = ReadFromFile();
             foreach (Doctor doctor in storedDoctors)
             {
-                if (doctor.Jmbg == editedDoctor.Jmbg && doctor.IsDeleted == false)
+                //if (doctor.Jmbg == editedDoctor.Jmbg && doctor.IsDeleted == false)
                 {
                     doctor.VacationDays = editedDoctor.VacationDays;
                     doctor.WorkingSchedule = editedDoctor.WorkingSchedule;
@@ -102,9 +102,9 @@ namespace Repository
             List<Doctor> storedDoctors = ReadFromFile();
             foreach (Doctor doctor in storedDoctors)
             {
-                if (doctor.Jmbg == jmbg && doctor.IsDeleted == false)
+                if (doctor.Jmbg == jmbg)
                 {
-                    doctor.IsDeleted = true;
+                    
                     WriteToFile(storedDoctors);
                     return true;
 
