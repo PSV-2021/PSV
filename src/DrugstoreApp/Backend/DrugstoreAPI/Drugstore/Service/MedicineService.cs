@@ -27,6 +27,11 @@ namespace DrugstoreAPI.Service
             if (med == null)
                 return false;
 
+            return CheckIsTheDrugAmountSatisfied(amountOfDrug, med);
+        }
+
+        private static bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Medicine med)
+        {
             if (med.Supply >= amountOfDrug)
             {
                 return true;

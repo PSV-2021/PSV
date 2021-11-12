@@ -29,6 +29,32 @@ namespace Integration_API.Controllers
             var client = new RestClient(demand.PharmacyUrl);
             var request = new RestRequest("/api/drugdemand", Method.POST);
 
+            SetApiKeyInHeader(demand, request);
+
+            SetRequestBody(demand, request);
+
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                return Ok(Boolean.Parse(response.Content));
+
+            return Unauthorized(false);
+        }
+
+        private static void SetRequestBody(DrugAmountDemandDto demand, RestRequest request)
+        {
+            var body = new
+            {
+                Name = demand.Name,
+                Amount = demand.Amount,
+            };
+            string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+
+            request.AddJsonBody(jsonBody);
+        }
+
+        private void SetApiKeyInHeader(DrugAmountDemandDto demand, RestRequest request)
+        {
             string ApiKey = "";
             foreach (var df in dbContext.Drugstores.ToList())
             {
@@ -41,26 +67,6 @@ namespace Integration_API.Controllers
 
             request.AddHeader("ApiKey", ApiKey);
             request.AddHeader("Content-Type", "application/json");
-
-            var body = new
-            {
-                Name = demand.Name,
-                Amount = demand.Amount,
-            };
-
-            string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
-
-            request.AddJsonBody(jsonBody);
-
-            IRestResponse response = client.Execute(request);
-
-            var content = response.Content; // {"message":" created."}
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                return Ok(Boolean.Parse(response.Content));
-            }
-            else
-                return Unauthorized(false);
         }
     }
 }

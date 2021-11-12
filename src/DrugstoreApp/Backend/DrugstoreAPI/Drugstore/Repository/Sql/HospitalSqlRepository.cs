@@ -25,7 +25,7 @@ namespace Drugstore.Repository.Sql
         {
 
         }
-        public bool GetHospitalById(int id)
+        public Hospital GetHospitalById(int id)
         {
             throw new NotImplementedException();
         }
@@ -56,18 +56,16 @@ namespace Drugstore.Repository.Sql
             return "";
         }
 
-        public bool Save(Hospital newHospital)
+        public void Save(Hospital newHospital)
         {
             try
             {
                 dbContext.Hospitals.Add(newHospital);
                 dbContext.SaveChanges();
-                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
             }
         }
     }

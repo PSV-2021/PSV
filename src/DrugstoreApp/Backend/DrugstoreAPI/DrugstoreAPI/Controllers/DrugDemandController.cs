@@ -35,7 +35,7 @@ namespace DrugstoreAPI.Controllers
                 var headers = Request.Headers["ApiKey"];
                 foreach (string header in headers)
                 {
-                    if (this.checkApiKey(header, dbContext))
+                    if (this.CheckApiKey(header))
                     {
                        return Ok(medicineService.CheckForAmountOfDrug(demand.Name, demand.Amount));
                     }
@@ -45,7 +45,7 @@ namespace DrugstoreAPI.Controllers
         }
 
 
-        public bool checkApiKey(string apiKey, MyDbContext dbContext)
+        private bool CheckApiKey(string apiKey)
         {
             bool found = false;
             foreach (Hospital h in dbContext.Hospitals.ToList())

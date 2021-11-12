@@ -19,7 +19,7 @@ namespace Drugstore.Repository.Sql
         {
 
         }
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -30,26 +30,23 @@ namespace Drugstore.Repository.Sql
             return result;
         }
 
-        public bool Save(Feedback newFeedback)
+        public void Save(Feedback newFeedback)
         {
             try
             {
                 dbContext.Feedbacks.Add(newFeedback);
                 dbContext.SaveChanges();
-                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
             }
         }
 
-        public bool Update(Feedback feedback)
+        public void Update(Feedback feedback)
         {
             dbContext.Feedbacks.Update(feedback);
             dbContext.SaveChanges();
-            return true;
         }
 
         public Feedback getById(string reviewId)
