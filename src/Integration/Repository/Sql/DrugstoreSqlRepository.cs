@@ -21,7 +21,7 @@ namespace Integration.Repository.Sql
         {
 
         }
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -62,12 +62,12 @@ namespace Integration.Repository.Sql
             throw new NotImplementedException();
         }
 
-        public bool Save(Drugstore newObject)
+        public void Save(Drugstore newObject)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Drugstore editedObject)
+        public void Update(Drugstore editedObject)
         {
             throw new NotImplementedException();
         }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using DrugstoreAPI.Models;
 using Drugstore.Models;
-namespace DrugstoreAPI.Repository
+using Drugstore.Repository.Interfaces;
+
+namespace Drugstore.Repository.Sql
 {
-    public class HospitalSqlRepository
+    public class HospitalSqlRepository: IHospitalRepository
     {
         public MyDbContext dbContext { get; set; }
 
@@ -25,7 +25,7 @@ namespace DrugstoreAPI.Repository
         {
 
         }
-        public bool GetHospitalById(int id)
+        public Hospital GetHospitalById(int id)
         {
             throw new NotImplementedException();
         }
@@ -56,18 +56,16 @@ namespace DrugstoreAPI.Repository
             return "";
         }
 
-        public bool Save(Hospital newHospital)
+        public void Save(Hospital newHospital)
         {
             try
             {
                 dbContext.Hospitals.Add(newHospital);
                 dbContext.SaveChanges();
-                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
             }
         }
     }

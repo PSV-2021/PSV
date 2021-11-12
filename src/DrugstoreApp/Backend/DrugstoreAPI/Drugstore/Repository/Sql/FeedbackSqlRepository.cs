@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using DrugstoreAPI.Models;
 using Drugstore.Models;
+using Drugstore.Repository.Interfaces;
 
-namespace Integration.Repository.Sql
+namespace Drugstore.Repository.Sql
 {
-    public class FeedbackSqlRepository 
+    public class FeedbackSqlRepository: IFeedbackRepository
     {
         public MyDbContext dbContext { get; set; }
 
@@ -20,7 +19,7 @@ namespace Integration.Repository.Sql
         {
 
         }
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -31,26 +30,23 @@ namespace Integration.Repository.Sql
             return result;
         }
 
-        public bool Save(Feedback newFeedback)
+        public void Save(Feedback newFeedback)
         {
             try
             {
                 dbContext.Feedbacks.Add(newFeedback);
                 dbContext.SaveChanges();
-                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
             }
         }
 
-        public bool Update(Feedback feedback)
+        public void Update(Feedback feedback)
         {
             dbContext.Feedbacks.Update(feedback);
             dbContext.SaveChanges();
-            return true;
         }
 
         public Feedback getById(string reviewId)
@@ -65,21 +61,6 @@ namespace Integration.Repository.Sql
 
             return null;
         }
-        /*
-public Feedback getByKey(string id)
-{
-   foreach (Feedback fb in dbContext.Feedbacks.ToList())
-   {
-       if (fb..Equals(id))
-           return fb;
-   }
-
-   return null;
-}
-*/
-
-
-
 
     }
 }

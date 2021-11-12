@@ -7,8 +7,8 @@ namespace Integration_API.Repository.Interfaces
     {
         List<T> GetAll();
         T GetOne(M id);
-        Boolean Save(T newObject);
-        Boolean Update(T editedObject);
-        Boolean Delete(M id);
+        void Save(T newObject);
+        void Update(T editedObject);
+        void Delete(M id);
     }
 }
