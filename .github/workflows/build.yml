@@ -5,6 +5,7 @@ on:
       types: [opened, synchronize, reopened]
       branches: [ development ]
       
+jobs:
   build:
     name: Build
     runs-on: windows-latest
@@ -39,7 +40,6 @@ on:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       - name: Build and analyze
-        uses: Install SonarCloud scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
