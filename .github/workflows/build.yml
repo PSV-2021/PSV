@@ -9,9 +9,6 @@ jobs:
   build:
     name: Build
     runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: ./src/DrugstoreApp/Backend/DrugstoreAPI
     steps:
       - name: Set up JDK 11
         uses: actions/setup-java@v1
@@ -30,21 +27,21 @@ jobs:
         id: cache-sonar-scanner
         uses: actions/cache@v1
         with:
-          path: .\.sonar\scanner
+          path: .\src\DrugstoreApp\Backend\DrugstoreAPI\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+          New-Item -Path .\src\DrugstoreApp\Backend\DrugstoreAPI\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\src\DrugstoreApp\Backend\DrugstoreAPI\.sonar\scanner
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"PSV-2021_PSV" /o:"psv-2021" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          .\src\DrugstoreApp\Backend\DrugstoreAPI\.sonar\scanner\dotnet-sonarscanner begin /k:"PSV-2021_PSV" /o:"psv-2021" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI.sln
+          .\src\DrugstoreApp\Backend\DrugstoreAPI\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
