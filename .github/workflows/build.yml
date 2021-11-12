@@ -1,4 +1,4 @@
-name: Sonar Workflos
+name: Sonar Workflows
 
 on:
   pull_request:
