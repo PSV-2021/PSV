@@ -1,3 +1,4 @@
+using Hospital.Model;
 using System;
 using System.Collections.Generic;
 
@@ -6,11 +7,14 @@ namespace Model
     public class Patient : User
     {
         public Boolean IsBlocked { get; set; }
-        public Patient(Boolean isGuest, string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string idNum, string emContact, MedicalRecord med, string username, string password, Boolean block = false)
+        public BloodType BloodType { get; set; }
+        public Boolean IsActive { get; set; }
+        public String FathersName { get; set; }
+        public Doctor ChosenDoctor { get; set; }
+        public String EmergencyContact { get; set; }
+        public MedicalRecord MedicalRecord { get; set; }
+        public Patient(string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string emContact, MedicalRecord med, string username, string password, Boolean block = false)
         {
-
-            this.IsDeleted = false;
-            this.IsGuest = isGuest;
             this.Name = name;
             this.Surname = surname;
             this.Jmbg = jmbg;
@@ -19,7 +23,6 @@ namespace Model
             this.PhoneNumber = phoneNumber;
             this.Adress = adress;
             this.Email = email;
-            this.IdCard = idNum;
             this.EmergencyContact = emContact;
             this.MedicalRecord = med;
             this.Username = username;
@@ -28,10 +31,6 @@ namespace Model
             this.Type = UserType.patient;
             this.IsBlocked = block;
         }
-        public Boolean IsGuest { get; set; }
-        public String EmergencyContact { get; set; }
-
-        public MedicalRecord MedicalRecord { get; set; }
 
         public string NameAndSurname
         {

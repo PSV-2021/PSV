@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Model
 {
@@ -7,7 +8,7 @@ namespace Model
         public String HealthInsuranceNumber { get; set; }
         public String MedicalIdNumber { get; set; }
 
-        public System.Collections.Generic.List<Ingridient> allergen;
+        public List<Ingridient> allergen;
 
         public MedicalRecord(string hid, string mid)
         {
@@ -15,7 +16,7 @@ namespace Model
             this.MedicalIdNumber = mid;
         }
 
-        public System.Collections.Generic.List<Ingridient> Allergen
+        public List<Ingridient> Allergen
         {
             get
             {
