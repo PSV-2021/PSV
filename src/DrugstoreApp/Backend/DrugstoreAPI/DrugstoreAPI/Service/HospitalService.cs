@@ -19,10 +19,10 @@ namespace Service
             HospitalRepository.dbContext = dbContext;
         }
 
-        public HospitalService()
+        /*public HospitalService()
         {
             HospitalRepository = new HospitalSqlRepository();
-        }
+        }*/
 
     }
 }
