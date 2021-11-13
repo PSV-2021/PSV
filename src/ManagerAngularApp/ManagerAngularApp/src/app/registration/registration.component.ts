@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
 validate() : boolean{
   if (
     this.newDrugstore.Address == "" || this.newDrugstore.DrugstoreName == "" ||
-    this.newDrugstore.Email == "" || this.newDrugstore.URLAddress == ""
+    this.newDrugstore.Email == "" || this.newDrugstore.URLAddress == "" || this.newDrugstore.Address == ""
   )
     return false;
   else 
