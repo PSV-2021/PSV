@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    interface IPatientRepository:IGenericRepository<Patient, string>
+    public interface IPatientRepository:IGenericRepository<Patient, string>
     {
     }
 }

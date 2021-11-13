@@ -13,6 +13,7 @@ namespace Model
         public Doctor ChosenDoctor { get; set; }
         public String EmergencyContact { get; set; }
         public MedicalRecord MedicalRecord { get; set; }
+        public Patient() { }
         public Patient(string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string emContact, MedicalRecord med, string username, string password, Boolean block = false)
         {
             this.Name = name;
