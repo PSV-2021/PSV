@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrugstoreAPI", "DrugstoreAPI\DrugstoreAPI.csproj", "{D3257DF5-8C7C-481D-9314-A224BF69CD6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drugstore", "Drugstore\Drugstore.csproj", "{5856F915-C525-4827-9297-F41E5E7A4272}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drugstore", "Drugstore\Drugstore.csproj", "{5856F915-C525-4827-9297-F41E5E7A4272}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrugstoreApiTests", "DrugstoreApiTests\DrugstoreApiTests.csproj", "{914F123B-2099-4EC4-B382-D978AEED42C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5856F915-C525-4827-9297-F41E5E7A4272}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5856F915-C525-4827-9297-F41E5E7A4272}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5856F915-C525-4827-9297-F41E5E7A4272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{914F123B-2099-4EC4-B382-D978AEED42C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914F123B-2099-4EC4-B382-D978AEED42C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914F123B-2099-4EC4-B382-D978AEED42C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914F123B-2099-4EC4-B382-D978AEED42C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

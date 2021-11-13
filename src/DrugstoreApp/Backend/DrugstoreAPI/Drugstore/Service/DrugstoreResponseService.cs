@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DrugstoreAPI.Models;
-using Integration.Repository.Sql;
 using Drugstore.Models;
+using Drugstore.Repository.Sql;
 
 namespace Service
 {

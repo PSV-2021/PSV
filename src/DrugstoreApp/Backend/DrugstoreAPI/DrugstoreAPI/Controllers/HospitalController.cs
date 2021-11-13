@@ -8,12 +8,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using DrugstoreAPI.Filters;
 using RestSharp;
-using DrugstoreAPI.Repository;
-using Integration.Repository.Sql;
 using Drugstore.Models;
 using Service;
 using DrugstoreAPI.Models;
 using DrugstoreAPI.Dtos;
+using Drugstore.Repository.Sql;
 
 namespace DrugstoreAPI.Controllers
 {

@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Drugstore.Repository.Interfaces;
 
 namespace Drugstore.Repository.Sql
 {
-    public class MedicineSqlRepository
+    public class MedicineSqlRepository:IMedicineRepository
     {
         public MyDbContext DbContext { get; set; }
 
@@ -27,5 +28,9 @@ namespace Drugstore.Repository.Sql
             return result;
         }
 
+        public Medicine GetByName(string name)
+        {
+            return DbContext.Medicines.Where(m => m.Name == name).FirstOrDefault<Medicine>();
+        }
     }
 }

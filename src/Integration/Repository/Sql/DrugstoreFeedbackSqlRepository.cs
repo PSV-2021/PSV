@@ -18,7 +18,7 @@ namespace Integration.Repository.Sql
         {
             this.dbContext = dbContext;
         }
-        public bool Delete(string id)
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }
@@ -47,16 +47,15 @@ namespace Integration.Repository.Sql
             return null;
         }
 
-        public bool Save(DrugstoreFeedback newObject)
+        public void Save(DrugstoreFeedback newObject)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(DrugstoreFeedback editedObject)
+        public void Update(DrugstoreFeedback editedObject)
         {
             dbContext.DrugstoreFeedbacks.Update(editedObject);
             dbContext.SaveChanges();
-            return true;
         }
     }
 }
