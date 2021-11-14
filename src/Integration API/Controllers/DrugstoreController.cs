@@ -21,7 +21,7 @@ namespace Integration_API.Controllers
     {
         private readonly MyDbContext dbContext;
         public DrugstoreSqlRepository repo = new DrugstoreSqlRepository();
-        public DrugstoreService drugstoreService = new DrugstoreService();
+        public DrugstoreService drugstoreService;
 
         
         public DrugstoreController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
@@ -34,9 +34,27 @@ namespace Integration_API.Controllers
         {
             repo.dbContext = dbContext;
             List<Drugstore> result = new List<Drugstore>();
-            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.Address)));
+            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email,drugstore.City, drugstore.Address)));
 
             return Ok(result);
+        }
+
+        [HttpGet ("filter")]       // GET /api/drugstore
+        public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
+        {
+            CheckFilterParameters(ref city, ref address);
+            repo.dbContext = dbContext;
+            drugstoreService = new DrugstoreService(repo);
+            List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
+            return Ok(result);
+        }
+
+        private static void CheckFilterParameters(ref string city, ref string address)
+        {
+            if (city == null)
+                city = "";
+            if (address == null)
+                address = "";
         }
 
         [HttpGet("/name/{id}")] // GET /api/test2/int/3
@@ -74,7 +92,7 @@ namespace Integration_API.Controllers
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 repo.dbContext = dbContext;
-                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.Address);
+                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.City,newPharmacy.Address);
                 dbContext.Drugstores.Add(ds);
                 dbContext.SaveChanges();
                 return Ok(ds);
