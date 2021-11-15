@@ -25,6 +25,7 @@ namespace Integration_API.Controllers
         public IDrugstoreRepository repo = new DrugstoreSqlRepository();
 
 
+
         public DrugstoreController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
@@ -36,7 +37,15 @@ namespace Integration_API.Controllers
         {
             List<Drugstore> result = new List<Drugstore>();
             drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email,drugstore.City, drugstore.Address)));
+            return Ok(result);
+        }
 
+
+        [HttpGet ("filter")]       // GET /api/drugstore
+        public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
+        {
+            CheckFilterParameters(ref city, ref address);
+            List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
             return Ok(result);
         }
 
@@ -44,6 +53,8 @@ namespace Integration_API.Controllers
         public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
         {
             CheckFilterParameters(ref city, ref address);
+            repo.dbContext = dbContext;
+            drugstoreService = new DrugstoreService(repo);
             List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
             return Ok(result);
         }

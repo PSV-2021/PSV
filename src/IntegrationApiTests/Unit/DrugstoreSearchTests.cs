@@ -24,6 +24,7 @@ namespace IntegrationApiTests
             
             retVal.Count.ShouldBe(3);
         }
+
         private static List<Drugstore> GenerateStubData()
         {
             List<Drugstore> seachedDrugstores = new List<Drugstore>();
@@ -40,7 +41,5 @@ namespace IntegrationApiTests
             seachedDrugstores.Add(drugstore3);
             return seachedDrugstores;
         }
-
-
     }
 }
