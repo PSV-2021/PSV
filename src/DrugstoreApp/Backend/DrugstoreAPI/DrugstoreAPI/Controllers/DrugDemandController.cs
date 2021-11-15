@@ -8,6 +8,8 @@ using Drugstore.Models;
 using Drugstore.Repository.Sql;
 using DrugstoreAPI.Dtos;
 using DrugstoreAPI.Service;
+using Drugstore.Repository.Interfaces;
+using Service;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -18,11 +20,32 @@ namespace DrugstoreAPI.Controllers
 
         private readonly MyDbContext dbContext;
         public MedicineService medicineService;
-
+        public HospitalService HospitalService;
+        public IMedicineRepository MedicineRepository { get; }
+        public IHospitalRepository HospitalRepository { get; }
         public DrugDemandController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
+            this.HospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
+        }
+
+        public DrugDemandController(MedicineSqlRepository medicineRepository, HospitalSqlRepository hospitalRepository) //Radi testiranja
+        {
+            MedicineRepository = medicineRepository;
+            this.medicineService = new MedicineService(MedicineRepository);
+
+            this.HospitalRepository = hospitalRepository;
+            this.HospitalService = new HospitalService(HospitalRepository);
+        }
+
+        public DrugDemandController(IMedicineRepository medRepo, IHospitalRepository hosRepo)
+        {
+            MedicineRepository = medRepo;
+            this.medicineService = new MedicineService(MedicineRepository);
+
+            HospitalRepository = hosRepo;
+            this.HospitalService = new HospitalService(HospitalRepository);
         }
 
         [HttpPost]
@@ -35,7 +58,7 @@ namespace DrugstoreAPI.Controllers
                 var headers = Request.Headers["ApiKey"];
                 foreach (string header in headers)
                 {
-                    if (this.CheckApiKey(header))
+                    if (HospitalService.CheckApiKey(header))
                     {
                        return Ok(medicineService.CheckForAmountOfDrug(demand.Name, demand.Amount));
                     }
@@ -45,18 +68,5 @@ namespace DrugstoreAPI.Controllers
         }
 
 
-        private bool CheckApiKey(string apiKey)
-        {
-            bool found = false;
-            foreach (Hospital h in dbContext.Hospitals.ToList())
-            {
-                if (h.ApiKey.Equals(apiKey))
-                {
-                    found = true;
-                    break;
-                }
-            }
-            return found;
-        }
     }
 }

@@ -51,7 +51,8 @@ namespace Integration.Repository.Sql
 
         public void Save(Drugstore newObject)
         {
-            throw new NotImplementedException();
+            dbContext.Add(newObject);
+            dbContext.SaveChanges();
         }
 
         public void Update(Drugstore editedObject)

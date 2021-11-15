@@ -12,7 +12,7 @@ export class ReviewsComponent implements OnInit {
   public reviews: ReviewDto[];
   public response: string;
   constructor(private reviewsService: ReviewsService) { 
-    this.reviews = [];
+    this.reviews = [] as ReviewDto[];
     this.response = "";
   }
 

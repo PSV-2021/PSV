@@ -8,5 +8,6 @@ namespace Integration_API.Repository.Interfaces
     public interface IDrugstoreRepository : IGenericRepository<Drugstore, int>
     {
         List<Drugstore> SearchDrugstoresByCityAndAddress(string address, string city);
+        string GetDrugstoreName(int id);
     }
 }
