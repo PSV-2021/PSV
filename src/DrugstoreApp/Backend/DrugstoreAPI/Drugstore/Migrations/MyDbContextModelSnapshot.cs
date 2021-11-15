@@ -18,6 +18,78 @@ namespace Drugstore.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Drugstore.Models.Feedback", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HospitalName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Response")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feedbacks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "aaa",
+                            Content = "Lenka vrati zeton",
+                            HospitalName = "Health",
+                            Response = ""
+                        },
+                        new
+                        {
+                            Id = "bbb",
+                            Content = "normalno",
+                            HospitalName = "Ime bolnice 223",
+                            Response = ""
+                        },
+                        new
+                        {
+                            Id = "ccc",
+                            Content = "bla bla",
+                            HospitalName = "Ime bolnice 224",
+                            Response = ""
+                        });
+                });
+
+            modelBuilder.Entity("Drugstore.Models.Hospital", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("ApiKey")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hospitals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ApiKey = "DrugStoreSecretKey",
+                            Name = "Health",
+                            Url = "http://localhost:5000"
+                        });
+                });
+
             modelBuilder.Entity("Drugstore.Models.Medicine", b =>
                 {
                     b.Property<int>("Id")
@@ -31,6 +103,9 @@ namespace Drugstore.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double precision");
 
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.ToTable("Medicines");
@@ -40,19 +115,22 @@ namespace Drugstore.Migrations
                         {
                             Id = 1,
                             Name = "Brufen",
-                            Price = 250.0
+                            Price = 150.0,
+                            Supply = 150
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Olynth",
-                            Price = 180.0
+                            Name = "Paracetamol",
+                            Price = 150.0,
+                            Supply = 10
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Polinol",
-                            Price = 670.0
+                            Name = "Palitreks",
+                            Price = 150.0,
+                            Supply = 30
                         });
                 });
 #pragma warning restore 612, 618

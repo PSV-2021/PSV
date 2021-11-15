@@ -12,6 +12,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ReviewComponent } from './review/review.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FeedbacksComponent } from './feedbacks/feedbacks.component';
+import { PurchaseDrugsComponent } from './purchase-drugs/purchase-drugs.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FeedbacksComponent } from './feedbacks/feedbacks.component';
     ReviewComponent,
     LandingPageComponent,
     FeedbacksComponent,
+    PurchaseDrugsComponent,
   ],
   imports: [
     BrowserModule,
