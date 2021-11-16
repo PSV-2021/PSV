@@ -35,16 +35,10 @@ namespace Service
 
         public bool CheckApiKey(string apiKey)
         {
-            bool found = false;
-            foreach (Hospital h in HospitalRepository.GetAll())
-            {
-                if (h.ApiKey.Equals(apiKey))
-                {
-                    found = true;
-                    break;
-                }
-            }
-            return found;
+            Hospital hospital = HospitalRepository.GetAll().Where(hospital => hospital.ApiKey.Equals(apiKey)).FirstOrDefault();
+            if (hospital == null)
+                return false;
+            return true;
         }
     }
 }

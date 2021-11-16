@@ -18,6 +18,12 @@ namespace Integration.Repository.Sql
         {
             this.dbContext = dbContext;
         }
+
+        public DrugstoreFeedbackSqlRepository(MyDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public void Delete(string id)
         {
             throw new NotImplementedException();
