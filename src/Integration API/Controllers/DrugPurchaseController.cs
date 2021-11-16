@@ -27,7 +27,7 @@ namespace Integration_API.Controllers
         public IActionResult Put(DrugAmountDemandDto demand)
         {
             var client = new RestClient(demand.PharmacyUrl);
-            var request = new RestRequest("/api/drugdemand", Method.POST);
+            var request = new RestRequest("/api/drugDemand", Method.POST);
 
             SetApiKeyInHeader(demand, request);
 
@@ -65,8 +65,8 @@ namespace Integration_API.Controllers
                 }
             }
 
-            request.AddHeader("ApiKey", ApiKey);
             request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("ApiKey", ApiKey);
         }
     }
 }

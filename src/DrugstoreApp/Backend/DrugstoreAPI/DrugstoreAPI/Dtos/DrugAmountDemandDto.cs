@@ -10,9 +10,9 @@ namespace DrugstoreAPI.Dtos
         public string Name { get; set; }
         public int Amount { get; set; }
 
-        DrugAmountDemandDto() { }
+        public DrugAmountDemandDto() { }
 
-        DrugAmountDemandDto(string drugName, int drugAmount)
+        public DrugAmountDemandDto(string drugName, int drugAmount)
         {
             this.Name = drugName;
             this.Amount = drugAmount;

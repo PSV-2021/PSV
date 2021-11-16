@@ -34,14 +34,13 @@ namespace Integration_API.Controllers
 
             if (Request.Headers.TryGetValue("ApiKey", out headerValues))
             {
-                // Can now check if the value is true:
                 var value = Request.Headers["ApiKey"];
                 foreach (string nesto in value)
                 {
-                    if (drugstoreFeedbackService.checkApiKey(nesto, dbContext))
+                    if (drugstoreFeedbackService.CheckApiKey(nesto))
                     {
                         repoFeedback.dbContext = dbContext;
-                        Integration.Model.DrugstoreFeedback forEdit = repoFeedback.GetById(pharmacyResponse.Id);
+                        DrugstoreFeedback forEdit = repoFeedback.GetById(pharmacyResponse.Id);
                         forEdit.Response = pharmacyResponse.Response;
                         repoFeedback.Update(forEdit);
 

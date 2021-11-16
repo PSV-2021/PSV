@@ -23,7 +23,6 @@ namespace IntegrationApiTests
             List<Drugstore> retVal = drugstoreService.SearchDrugstoresByCityAndAddress("Novi Sad", "");
             
             retVal.Count.ShouldBe(3);
-
         }
 
         private static List<Drugstore> GenerateStubData()
