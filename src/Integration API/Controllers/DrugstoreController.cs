@@ -49,15 +49,6 @@ namespace Integration_API.Controllers
             return Ok(result);
         }
 
-        [HttpGet ("filter")]       // GET /api/drugstore
-        public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
-        {
-            CheckFilterParameters(ref city, ref address);
-            repo.dbContext = dbContext;
-            drugstoreService = new DrugstoreService(repo);
-            List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
-            return Ok(result);
-        }
 
         private static void CheckFilterParameters(ref string city, ref string address)
         {

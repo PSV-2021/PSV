@@ -21,31 +21,12 @@ namespace DrugstoreAPI.Controllers
         private readonly MyDbContext dbContext;
         public MedicineService medicineService;
         public HospitalService HospitalService;
-        public IMedicineRepository MedicineRepository { get; }
-        public IHospitalRepository HospitalRepository { get; }
+
         public DrugDemandController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.HospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
-        }
-
-        public DrugDemandController(MedicineSqlRepository medicineRepository, HospitalSqlRepository hospitalRepository) //Radi testiranja
-        {
-            MedicineRepository = medicineRepository;
-            this.medicineService = new MedicineService(MedicineRepository);
-
-            this.HospitalRepository = hospitalRepository;
-            this.HospitalService = new HospitalService(HospitalRepository);
-        }
-
-        public DrugDemandController(IMedicineRepository medRepo, IHospitalRepository hosRepo)
-        {
-            MedicineRepository = medRepo;
-            this.medicineService = new MedicineService(MedicineRepository);
-
-            HospitalRepository = hosRepo;
-            this.HospitalService = new HospitalService(HospitalRepository);
         }
 
         [HttpPost]

@@ -11,6 +11,7 @@ using DrugstoreAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Service;
 using Shouldly;
 
 namespace DrugstoreApiTests
@@ -42,13 +43,16 @@ namespace DrugstoreApiTests
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Headers["ApiKey"] = "DrugStoreSecretKey";
 
-            var controler = new DrugDemandController(medicineRepository.Object, hospitalRepository.Object)
+            var controler = new DrugDemandController(null)
             {
                 ControllerContext = new ControllerContext()
                 {
                     HttpContext = httpContext,
                 }
             };
+            controler.HospitalService = new HospitalService(hospitalRepository.Object);
+            controler.medicineService = new MedicineService(medicineRepository.Object);
+            //OVO OVAKO MORA, I JA SAM TUZAN ZBOG TOGA, U SUPROTNOM SE KORISTI ANTIPATERN PA JE TO JOS GORE!
 
             medicineRepository.Setup(d => d.GetByName("Brufen")).Returns(drug);
             medicineRepository.Setup(d => d.GetByName(null)).Returns(drug);
