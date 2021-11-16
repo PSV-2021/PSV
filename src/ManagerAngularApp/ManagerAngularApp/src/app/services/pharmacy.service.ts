@@ -34,6 +34,20 @@ export class PharmacyService {
       return ret;
     }
 
+    SendUrgentDrugPurchase(Url: string, DrugAmount: number, DrugName: string): Observable<any> {
+      const body = {
+        pharmacyUrl : Url,
+        name: DrugName,
+        amount : DrugAmount
+      };
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'ApiKey': "abcde" });
+      let options = { headers: headers };
+      const ret = this.http.put<any>(this.url + '/drugpurchase/urgent', body, options);
+      return ret;
+    }
+
     SendFilter(searchDto: DrugstoreSearchDto): Observable<any>{
       const params = new HttpParams()
       .set('city', searchDto.City)
