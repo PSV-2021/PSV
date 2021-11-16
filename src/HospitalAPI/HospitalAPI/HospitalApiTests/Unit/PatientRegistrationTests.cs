@@ -12,6 +12,10 @@ using Moq;
 using Moq.Protected;
 using System.Threading;
 using Shouldly;
+using Repository;
+using Model;
+using Hospital.Model;
+using Service;
 
 namespace HospitalApiTests.Unit
 {
@@ -82,5 +86,19 @@ namespace HospitalApiTests.Unit
                ItExpr.IsAny<CancellationToken>()
             );
         }
+        /*[Fact]
+        public void Save_Patient()
+        {
+            var patientStubRepository = new Mock<IPatientRepository>();
+            var patient = new Patient("Marko", "Petar", "Markovic", "3009998805137", new DateTime(2001, 1, 1), Sex.male, "0641664608", "Resavska 5", "marko.markovic@gmail.com", null, "uproba", "pproba", BloodType.A, false, null, false);
+
+            patientStubRepository.Setup(r => r.Save(patient)).Returns(patient);
+
+            PatientService patientService = new PatientService(patientStubRepository.Object, null);
+
+            Patient p = patientService.Save(patient);
+            Assert.Null(p);
+
+        }*/
     }
 }

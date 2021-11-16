@@ -33,6 +33,28 @@ namespace Model
             this.IsBlocked = block;
         }
 
+        public Patient(string name, string fathersName, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber, string adress, string email, MedicalRecord med, string username, string password, BloodType bt, Boolean isActive, Doctor cd, Boolean block = false)
+        {
+            this.Name = name;
+            this.FathersName = fathersName;
+            this.Surname = surname;
+            this.Jmbg = jmbg;
+            this.DateOfBirth = date;
+            this.Sex = sex;
+            this.PhoneNumber = phoneNumber;
+            this.Adress = adress;
+            this.Email = email;
+            this.MedicalRecord = med;
+            this.Username = username;
+            this.Password = password;
+            this.appointment = null;
+            this.Type = UserType.patient;
+            this.IsBlocked = block;
+            this.BloodType = bt;
+            this.IsActive = isActive;
+            this.ChosenDoctor = cd;
+        }
+
         public string NameAndSurname
         {
             get

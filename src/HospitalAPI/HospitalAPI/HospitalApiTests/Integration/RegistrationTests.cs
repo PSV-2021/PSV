@@ -59,20 +59,35 @@ namespace HospitalApiTests.Integration
             retVal.Add(new object[] { new Ingridient("Penicilin") });
             return retVal;
         }
+        [Fact]
+        public void Save_patient()
+        {
+            SetUpDbContext();
+            PatientSqlRepository patientSqlRepository = new PatientSqlRepository(context);
+
+            Boolean retVal = patientSqlRepository.Save(GeneratePatient());
+
+            retVal.Equals(true);
+        }
+
+        private Patient GeneratePatient()
+        {
+            return new Patient("Marko", "Petar", "Markovic", "3009998805137", new DateTime(2001, 1, 1), Sex.male, "0641664608", "Resavska 5", "marko.markovic@gmail.com", null, "uproba", "pproba", BloodType.A, false, null, false);
+        }
         /* [Theory]
-         [MemberData(nameof(ExpectedStatus))]
-         public async void Get_all_doctors(HttpStatusCode expectedStatusCode)
-         {
-             HttpClient client = CreateClient();
-             HttpResponseMessage response = await client.GetAsync(communicationLink + "/api/doctor/");
-             response.StatusCode.ShouldBeEquivalentTo(expectedStatusCode);
-         }
-         public static IEnumerable<object[]> ExpectedStatus =>
-                new List<object[]>
-                {
-                 new object[] {HttpStatusCode.OK},
-                 new object[] {HttpStatusCode.BadRequest}
-                };*/
+        [MemberData(nameof(ExpectedStatus))]
+        public async void Get_all_doctors(HttpStatusCode expectedStatusCode)
+        {
+           HttpClient client = CreateClient();
+           HttpResponseMessage response = await client.GetAsync(communicationLink + "/api/doctor/");
+           response.StatusCode.ShouldBeEquivalentTo(expectedStatusCode);
+        }
+        public static IEnumerable<object[]> ExpectedStatus =>
+             new List<object[]>
+        {
+             new object[] {HttpStatusCode.OK},
+             new object[] {HttpStatusCode.BadRequest}
+        };*/
     }
 }
 

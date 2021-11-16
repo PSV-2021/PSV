@@ -11,7 +11,7 @@ namespace Service
     {
         private IPatientRepository PatientRepository { get; }
 
-        public PatientService()
+        public PatientService(IPatientRepository @object, object p)
         {
             PatientRepository = new PatientFileRepository();
         }
@@ -118,6 +118,11 @@ namespace Service
                 }
             }
             return notifications;
+        }
+
+        public Patient Save(Patient patient)
+        {
+            throw new NotImplementedException();
         }
 
         private Boolean PeriodDaily(Prescription prescription)
