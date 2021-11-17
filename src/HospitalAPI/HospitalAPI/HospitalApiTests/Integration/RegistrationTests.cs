@@ -38,7 +38,7 @@ namespace HospitalApiTests.Integration
         public static IEnumerable<object[]> Doctors()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), Sex.male, "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com", "01", 20000, null, "miki56", "02145"), true });
+            retVal.Add(new object[] { new Doctor( "Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), Sex.male, "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com", 200000, "miki56", "02145"), true });
             retVal.Add(new object[] { null, true });
             return retVal;
         }
@@ -55,8 +55,10 @@ namespace HospitalApiTests.Integration
         public static IEnumerable<object[]> Ingridients()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new Ingridient("Panclav")});
-            retVal.Add(new object[] { new Ingridient("Penicilin") });
+            retVal.Add(new object[] { new Ingridient(1, "Panclav")});
+            retVal.Add(new object[] { new Ingridient(2,"Penicilin") });
+            retVal.Add(new object[] { new Ingridient(3, "Panadol") });
+
             return retVal;
         }
         [Fact]
