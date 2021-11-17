@@ -16,6 +16,10 @@ namespace Service
             PatientRepository = new PatientFileRepository();
         }
 
+        public PatientService()
+        {
+        }
+
         public Patient GetPatientByJmbg(string jmbg)
         {
             return PatientRepository.GetOne(jmbg);

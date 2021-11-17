@@ -6,6 +6,7 @@ namespace Model
 {
     public class Patient : User
     {
+        public string Id { get; set; } 
         public Boolean IsBlocked { get; set; }
         public BloodType BloodType { get; set; }
         public Boolean IsActive { get; set; }

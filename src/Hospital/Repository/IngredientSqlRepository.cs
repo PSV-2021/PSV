@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Hospital.Repository
@@ -22,7 +23,10 @@ namespace Hospital.Repository
 
         public List<Ingridient> GetAll()
         {
-            throw new NotImplementedException();
+            List<Ingridient> result = new List<Ingridient>();
+            context.Ingridients.ToList().ForEach(ingredients => result.Add(ingredients));
+
+            return result;
         }
 
         public Ingridient GetOne(int id)

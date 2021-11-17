@@ -11,6 +11,7 @@ namespace Hospital.Model
     public class MyDbContext : DbContext
     {
         public DbSet<UserFeedback> UserFeedbacks { get; set; }
+        public DbSet<Ingridient> Ingridients { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -18,9 +19,14 @@ namespace Hospital.Model
         {
             modelBuilder.Entity<UserFeedback>().HasData(
                 new UserFeedback { Id = 1, TimeWritten = DateTime.Now, Content = "Good!", Name = "Mika Mikic", canPublish = false },
-                new UserFeedback { Id = 2, TimeWritten = DateTime.Now, Content = "I didn't like it.", Name = "Anonymus", canPublish = true},
+                new UserFeedback { Id = 2, TimeWritten = DateTime.Now, Content = "I didn't like it.", Name = "Anonymus", canPublish = true },
                 new UserFeedback { Id = 3, TimeWritten = DateTime.Now, Content = "Super service!", Name = "Sara Saric", canPublish = true }
             );
+            modelBuilder.Entity<Ingridient>().HasData(
+               new Ingridient(1, "Panclav"),
+               new Ingridient(2, "Penicilin"),
+               new Ingridient(3, "Panadol")
+              );
 
         }
 
