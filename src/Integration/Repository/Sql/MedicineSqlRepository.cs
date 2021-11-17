@@ -1,13 +1,14 @@
-﻿using Drugstore.Models;
+﻿using Integration.Model;
+using Integration.Repository.Interfaces;
+using Model.DataBaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Drugstore.Repository.Interfaces;
 
-namespace Drugstore.Repository.Sql
+namespace Integration.Sql
 {
-    public class MedicineSqlRepository:IMedicineRepository
+    public class MedicineSqlRepository : IMedicineRepository
     {
         public MyDbContext DbContext { get; set; }
 
@@ -23,7 +24,7 @@ namespace Drugstore.Repository.Sql
         public List<Medicine> GetAll()
         {
             List<Medicine> result = new List<Medicine>();
-            DbContext.Medicines.ToList().ForEach(medicine => result.Add(new Medicine(medicine.Id, medicine.Name, medicine.Price)));
+            DbContext.Medicines.ToList().ForEach(medicine => result.Add(new Medicine(medicine.Id, medicine.Name)));
 
             return result;
         }
@@ -37,6 +38,18 @@ namespace Drugstore.Repository.Sql
         {
             DbContext.Medicines.Update(medicine);
             DbContext.SaveChanges();
+        }
+        public void Save(Medicine newMedicine)
+        {
+            try
+            {
+                DbContext.Medicines.Add(newMedicine);
+                DbContext.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

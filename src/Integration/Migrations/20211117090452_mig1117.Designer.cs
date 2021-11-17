@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211117090452_mig1117")]
+    partial class mig1117
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,65 +113,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 11, 17, 18, 28, 22, 989, DateTimeKind.Local).AddTicks(807),
+                            RecievedTime = new DateTime(2021, 11, 17, 10, 4, 51, 411, DateTimeKind.Local).AddTicks(6764),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 17, 18, 28, 22, 993, DateTimeKind.Local).AddTicks(5745)
+                            SentTime = new DateTime(2021, 11, 17, 10, 4, 51, 417, DateTimeKind.Local).AddTicks(1562)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 11, 17, 18, 28, 22, 993, DateTimeKind.Local).AddTicks(6846),
+                            RecievedTime = new DateTime(2021, 11, 17, 10, 4, 51, 417, DateTimeKind.Local).AddTicks(2513),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 17, 18, 28, 22, 993, DateTimeKind.Local).AddTicks(6910)
+                            SentTime = new DateTime(2021, 11, 17, 10, 4, 51, 417, DateTimeKind.Local).AddTicks(2553)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 11, 17, 18, 28, 22, 993, DateTimeKind.Local).AddTicks(6944),
+                            RecievedTime = new DateTime(2021, 11, 17, 10, 4, 51, 417, DateTimeKind.Local).AddTicks(2566),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 17, 18, 28, 22, 993, DateTimeKind.Local).AddTicks(6959)
-                        });
-                });
-
-            modelBuilder.Entity("Integration.Model.Medicine", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Supply")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medicines");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Brufen",
-                            Supply = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Paracetamol",
-                            Supply = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Palitreks",
-                            Supply = 0
+                            SentTime = new DateTime(2021, 11, 17, 10, 4, 51, 417, DateTimeKind.Local).AddTicks(2570)
                         });
                 });
 #pragma warning restore 612, 618

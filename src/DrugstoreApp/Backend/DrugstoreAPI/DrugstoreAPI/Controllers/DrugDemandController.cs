@@ -47,6 +47,24 @@ namespace DrugstoreAPI.Controllers
             }
             return Unauthorized();
         }
+        [HttpPost ("urgent")]
+        public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
+        {
+            Microsoft.Extensions.Primitives.StringValues headerValues;
+
+            if (Request.Headers.TryGetValue("ApiKey", out headerValues))
+            {
+                var headers = Request.Headers["ApiKey"];
+                foreach (string header in headers)
+                {
+                    if (HospitalService.CheckApiKey(header))
+                    {
+                        return Ok(medicineService.SellDrugUrgent(demand.Name, demand.Amount));
+                    }
+                }
+            }
+            return Unauthorized(false);
+        }
 
 
     }

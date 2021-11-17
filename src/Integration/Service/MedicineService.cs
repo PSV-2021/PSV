@@ -1,12 +1,11 @@
-﻿using Drugstore.Repository.Interfaces;
+﻿using Integration.Model;
+using Integration.Repository.Interfaces;
+using Integration.Sql;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Drugstore.Models;
-using Drugstore.Repository.Sql;
+using System.Text;
 
-namespace DrugstoreAPI.Service
+namespace Integration.Service
 {
     public class MedicineService
     {
@@ -40,22 +39,20 @@ namespace DrugstoreAPI.Service
             return false;
         }
 
-        public bool SellDrugUrgent(string nameOfDrug, int amountOfDrug)
+        public void AddDrugUrgent(string nameOfDrug, int amountOfDrug)
         {
             Medicine med = MedicineRepository.GetByName(nameOfDrug);
             if (med == null)
             {
-                return false;
+                MedicineRepository.Save(new Medicine(nameOfDrug, amountOfDrug));
             }
-            if (!CheckIsTheDrugAmountSatisfied(amountOfDrug, med))
+            else
             {
-                return false;
+                med.Supply += amountOfDrug;
+                MedicineRepository.Update(med);
             }
-            med.Supply -= amountOfDrug;
-            MedicineRepository.Update(med);
-            return true;
+            
         }
-        
 
 
     }
