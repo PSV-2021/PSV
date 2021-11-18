@@ -15,14 +15,17 @@ namespace HospitalApiTests.Integration
 {
     public class RegistrationTests
     {
-        private readonly string communicationLink = "http://localhost:5000";
+        //private readonly string communicationLink = "http://localhost:5000";
         private MyDbContext context;
         public void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
 
-            builder.UseNpgsql(Constants.ConnectionString);
+            //builder.UseNpgsql(Constants.ConnectionString);
 
+            //context = new MyDbContext(builder.Options);
+
+            builder.UseInMemoryDatabase("Doctors");
             context = new MyDbContext(builder.Options);
         }
         [Fact]
@@ -95,16 +98,16 @@ namespace HospitalApiTests.Integration
         public void Save_patient()
         {
             SetUpDbContext();
-            PatientSqlRepository patientSqlRepository = new PatientSqlRepository(context);
+            PatientRegistrationController patientRegistrationController = new PatientRegistrationController(context);
 
-            Boolean retVal = patientSqlRepository.Save(GeneratePatient());
+            IActionResult retVal = patientRegistrationController.Post(GeneratePatient());
 
             retVal.Equals(true);
         }
 
         private Patient GeneratePatient()
         {
-            return new Patient("Marko", "Petar", "Markovic", "3009998805137", new DateTime(2001, 1, 1), Sex.male, "0641664608", "Resavska 5", "marko.markovic@gmail.com", null, "uproba", "pproba", BloodType.A, false, null, false);
+            return new Patient("Mirko", "Srdjan", "Kitic", "3009998805057", new DateTime(2001, 1, 1), Sex.male, "0641664608", "Resavska 5", "mirko@gmail.com", null, "uproba", "pproba", BloodType.A, false, null, false);
         }
         /* [Theory]
         [MemberData(nameof(ExpectedStatus))]
@@ -114,7 +117,7 @@ namespace HospitalApiTests.Integration
            HttpResponseMessage response = await client.GetAsync(communicationLink + "/api/doctor/");
            response.StatusCode.ShouldBeEquivalentTo(expectedStatusCode);
         }
-        public static IEnumerable<object[]> ExpectedStatus =>
+        public static IEnumerable<object[]> ExpectedStatus =>s
              new List<object[]>
         {
              new object[] {HttpStatusCode.OK},

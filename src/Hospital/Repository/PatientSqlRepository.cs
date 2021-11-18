@@ -16,6 +16,8 @@ namespace Hospital.Repository
             this.dbContext = dbContext;
         }
 
+        public PatientSqlRepository() { }
+
         public List<Patient> GetAll()
         {
             throw new NotImplementedException();
@@ -26,9 +28,10 @@ namespace Hospital.Repository
             throw new NotImplementedException();
         }
 
-        public bool Save(Patient newObject)
+        public void SavePatient(Patient patient)
         {
-            throw new NotImplementedException();
+            dbContext.Patients.Add(patient);
+            dbContext.SaveChanges();
         }
 
         public bool Update(Patient editedObject)
@@ -37,6 +40,11 @@ namespace Hospital.Repository
         }
 
         public bool Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Save(Patient newObject)
         {
             throw new NotImplementedException();
         }
