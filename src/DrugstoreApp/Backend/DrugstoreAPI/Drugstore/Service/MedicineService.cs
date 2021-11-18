@@ -2,6 +2,7 @@
 using Drugstore.Models;
 using Drugstore.Repository.Sql;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DrugstoreAPI.Service
 {
@@ -38,6 +39,11 @@ namespace DrugstoreAPI.Service
         public bool Delete(int id)
         {
             return MedicineRepository.Delete(id);
+        }
+
+        public void PurchaseDrugs(ShoppingCart shoppingCart)
+        {
+            shoppingCart.ShoppingCartItems.ForEach(item => DecreaseDrugAmount(item.Amount, MedicineRepository.GetByName(item.MedicineName)));
         }
 
         public bool CheckForAmountOfDrug(string nameOfDrug, int amountOfDrug)
