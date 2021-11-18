@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Model;
-using Model;
 using Repository;
 using Service;
 
@@ -66,9 +65,9 @@ namespace Service
             return MedicineRepository.GetAll();
         }
 
-        public Boolean SaveMedicine(Medicine newMedicine)
+        public void SaveMedicine(Medicine newMedicine)
         {
-            return MedicineRepository.Save(newMedicine);
+            MedicineRepository.Save(newMedicine);
         }
 
     }
