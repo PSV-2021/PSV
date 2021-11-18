@@ -24,7 +24,7 @@ namespace Hospital.Repository
         public List<Ingridient> GetAll()
         {
             List<Ingridient> result = new List<Ingridient>();
-            context.Ingridients.ToList().ForEach(ingredients => result.Add(ingredients));
+            context.Ingridients.ToList();
 
             return result;
         }
