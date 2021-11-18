@@ -12,5 +12,8 @@ export class RegistrationService {
   }
   GetDoctors(): Observable<any> {
     return this.http.get<any>(this.url + '/doctors');
-}
+  }
+  GetAllergens(): Observable<any> {
+    return this.http.get<any>(this.url + '/ingredients');
+  } 
 }

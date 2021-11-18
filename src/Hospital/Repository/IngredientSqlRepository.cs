@@ -24,10 +24,7 @@ namespace Hospital.Repository
 
         public List<Ingridient> GetAll()
         {
-            List<Ingridient> result = new List<Ingridient>();
-            context.Ingridients.ToList();
-
-            return result;
+            return context.Ingridients.ToList(); ;
         }
 
         public Ingridient GetOne(int id)

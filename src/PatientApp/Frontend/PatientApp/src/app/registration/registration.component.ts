@@ -26,7 +26,7 @@ export class RegistrationComponent implements OnInit {
   doctors: any[]=[];
 
   allergens = new FormControl();
-  allergenList: string[]=['Panclav', 'Brufen']
+  allergenList: any[]=[];
 
   constructor(private registrationService: RegistrationService) {
    
@@ -35,7 +35,11 @@ export class RegistrationComponent implements OnInit {
     this.registrationService.GetDoctors().subscribe((data: any)=>{
       for(const p of (data as any)){
         this.doctors.push(p);
-        console.log(p);
+      }
+    })
+    this.registrationService.GetAllergens().subscribe((data: any)=>{
+      for(const p of (data as any)){
+        this.allergenList.push(p);
       }
     })
   }
