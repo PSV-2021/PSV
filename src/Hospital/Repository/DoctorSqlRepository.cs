@@ -1,7 +1,9 @@
 ﻿using Hospital.Model;
 using Model;
 using Repository;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hospital.Repository
 {
@@ -40,6 +42,13 @@ namespace Hospital.Repository
         public bool Update(Doctor editedObject)
         {
             throw new System.NotImplementedException();
+        }
+
+        public List<Doctor> GetGeneralDoctors()
+        {
+            List<Doctor> retVal = new List<Doctor>();
+            dbContext.Doctors.ToList().Where(s=>s.SpecialityId == 1);
+            return retVal;
         }
 
         public bool Delete(string id)

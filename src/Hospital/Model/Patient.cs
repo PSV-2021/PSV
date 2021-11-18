@@ -1,19 +1,27 @@
 using Hospital.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
     public class Patient : User
     {
-        public string Id { get; set; } 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; } 
         public Boolean IsBlocked { get; set; }
         public BloodType BloodType { get; set; }
         public Boolean IsActive { get; set; }
         public String FathersName { get; set; }
-        public Doctor ChosenDoctor { get; set; }
+        [ForeignKey("DoctorId")]
+        public int DoctorId { get; set; }
+        public virtual Doctor ChosenDoctor { get; set; }
         public String EmergencyContact { get; set; }
-        public MedicalRecord MedicalRecord { get; set; }
+        [ForeignKey("MedicalRecordId")]
+        public int MedicalRecordId { get; set; }
+        public virtual MedicalRecord MedicalRecord { get; set; }
         public Patient() { }
         public Patient(string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string emContact, MedicalRecord med, string username, string password, Boolean block = false)
         {
@@ -63,10 +71,10 @@ namespace Model
                 return Name + " " + Surname;
             }
         }
-
+        
         public List<Appointment> appointment;
 
-
+        [NotMapped]
         public List<Appointment> Appointment
         {
             get

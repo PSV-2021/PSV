@@ -23,23 +23,50 @@ namespace HospitalApiTests.Integration
 
             context = new MyDbContext(builder.Options);
         }
+        [Fact]
+        public void Get_general_doctors()
+        {
+            SetUpDbContext();
+            DoctorSqlRepository doctorSqlRepository = new DoctorSqlRepository(context);
 
-        [Theory]
-        [MemberData(nameof(Doctors))]
-        public void Get_doctors(Doctor doctor, bool expectedValue)
+            List<Doctor> retVal = doctorSqlRepository.GetGeneralDoctors();
+
+            retVal.Equals(Doctors());
+        }
+
+        [Fact]
+        public void Get_doctors()
         {
             SetUpDbContext();
             DoctorSqlRepository doctorSqlRepository = new DoctorSqlRepository(context);
 
             List<Doctor> retVal = doctorSqlRepository.GetAll();
 
-            retVal.Equals(doctor).ShouldBe(expectedValue);
+            retVal.Equals(Doctors());
         }
         public static IEnumerable<object[]> Doctors()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new Doctor( "Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), Sex.male, "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com", 200000, "miki56", "02145"), true });
-            retVal.Add(new object[] { null, true });
+            retVal.Add(new object[] { new Doctor
+                {
+                    Name = "Milan",
+                    Surname = "Popovic",
+                    Jmbg = "3009998805137",
+                    DateOfBirth = new DateTime(1998, 04, 20),
+                    Sex = Sex.male,
+                    PhoneNumber = "0641664608",
+                    Adress = "Bulevar Oslobodjenja 4",
+                    Email = "milan@gmail.com",
+                    Username = "miki56",
+                    Password = "02145",
+                    Type = UserType.doctor,
+                    SalaryInRsd = 200000,
+                    WorkingSchedule = new List<WorkingHours>(),
+                    VacationDays = new List<VacationDays>(),
+                    AvailableDaysOff = 20,
+                    Id = 1,
+                    SpecialityId = 1
+            } });
             return retVal;
         }
         [Fact]

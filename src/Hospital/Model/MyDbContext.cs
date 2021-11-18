@@ -16,6 +16,8 @@ namespace Hospital.Model
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<WorkingHours> WorkingHours { get; set; }
         public DbSet<VacationDays> VacationDays { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<Patient> Patients { get; set; }
 
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
@@ -69,6 +71,37 @@ namespace Hospital.Model
                     Id = 1,
                     SpecialityId = 1
                 });
+            modelBuilder.Entity<MedicalRecord>().HasData(
+                new MedicalRecord
+                {
+                    Id = 1,
+                    HealthInsuranceNumber = "1ab",
+                    Allergen = new List<Ingridient>()
+                }
+                ) ;
+            modelBuilder.Entity<Patient>()
+               .HasData(
+               new Patient
+               {
+                   Name = "Marko",
+                   Surname = "Markovic",
+                   Jmbg = "3009998805138",
+                   DateOfBirth = new DateTime(1998, 06, 25),
+                   Sex = Sex.male,
+                   PhoneNumber = "0641664608",
+                   Adress = "Bulevar Oslobodjenja 8",
+                   Email = "marko@gmail.com",
+                   Username = "miki98",
+                   Password = "miki985",
+                   Type = UserType.patient,
+                   Id = 1,
+                   IsBlocked = false,
+                   IsActive = true,
+                   BloodType = BloodType.B,
+                   FathersName = "Petar",
+                   DoctorId = 1,
+                   MedicalRecordId = 1
+               }); ;
         }
 
     }

@@ -3,15 +3,17 @@ using System;
 using Hospital.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211118103811_medicalRecordMigration")]
+    partial class medicalRecordMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,106 +146,13 @@ namespace Hospital.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MedicalRecords");
+                    b.ToTable("MedicalRecods");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             HealthInsuranceNumber = "1ab"
-                        });
-                });
-
-            modelBuilder.Entity("Model.Patient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Adress")
-                        .HasColumnType("text");
-
-                    b.Property<int>("BloodType")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EmergencyContact")
-                        .HasColumnType("text");
-
-                    b.Property<string>("FathersName")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsBlocked")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Jmbg")
-                        .HasColumnType("text");
-
-                    b.Property<int>("MedicalRecordId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Sex")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Surname")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("MedicalRecordId");
-
-                    b.ToTable("Patients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Adress = "Bulevar Oslobodjenja 8",
-                            BloodType = 1,
-                            DateOfBirth = new DateTime(1998, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Email = "marko@gmail.com",
-                            FathersName = "Petar",
-                            IsActive = true,
-                            IsBlocked = false,
-                            Jmbg = "3009998805138",
-                            MedicalRecordId = 1,
-                            Name = "Marko",
-                            Password = "miki985",
-                            PhoneNumber = "0641664608",
-                            Sex = 0,
-                            Surname = "Markovic",
-                            Type = 3,
-                            Username = "miki98"
                         });
                 });
 
@@ -298,7 +207,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 11, 18, 11, 44, 21, 667, DateTimeKind.Local).AddTicks(6521),
+                            TimeWritten = new DateTime(2021, 11, 18, 11, 38, 10, 264, DateTimeKind.Local).AddTicks(2181),
                             canPublish = false
                         },
                         new
@@ -306,7 +215,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 11, 18, 11, 44, 21, 670, DateTimeKind.Local).AddTicks(6387),
+                            TimeWritten = new DateTime(2021, 11, 18, 11, 38, 10, 267, DateTimeKind.Local).AddTicks(9216),
                             canPublish = true
                         },
                         new
@@ -314,7 +223,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 11, 18, 11, 44, 21, 670, DateTimeKind.Local).AddTicks(6460),
+                            TimeWritten = new DateTime(2021, 11, 18, 11, 38, 10, 267, DateTimeKind.Local).AddTicks(9303),
                             canPublish = true
                         });
                 });
@@ -401,25 +310,6 @@ namespace Hospital.Migrations
                     b.HasOne("Model.MedicalRecord", null)
                         .WithMany("Allergen")
                         .HasForeignKey("MedicalRecordId");
-                });
-
-            modelBuilder.Entity("Model.Patient", b =>
-                {
-                    b.HasOne("Model.Doctor", "ChosenDoctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Model.MedicalRecord", "MedicalRecord")
-                        .WithMany()
-                        .HasForeignKey("MedicalRecordId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ChosenDoctor");
-
-                    b.Navigation("MedicalRecord");
                 });
 
             modelBuilder.Entity("Model.VacationDays", b =>

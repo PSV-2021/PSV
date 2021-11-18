@@ -1,22 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
     public class MedicalRecord
     {
-        public String HealthInsuranceNumber { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        [NotMapped]
         public String MedicalIdNumber { get; set; }
-
+        public String HealthInsuranceNumber { get; set; }
+       
         public List<Ingridient> allergen;
 
-        public MedicalRecord(string hid, string mid)
-        {
-            this.HealthInsuranceNumber = hid;
-            this.MedicalIdNumber = mid;
-        }
-
-        public List<Ingridient> Allergen
+        public virtual List<Ingridient> Allergen
         {
             get
             {
@@ -34,6 +34,15 @@ namespace Model
                 }
             }
         }
+
+        public MedicalRecord(string hid, string mid)
+        {
+            this.HealthInsuranceNumber = hid;
+            this.MedicalIdNumber = mid;
+        }
+        public MedicalRecord() { }
+
+       
 
         public void AddAllergen(Ingridient newAllergen)
         {
@@ -61,7 +70,7 @@ namespace Model
         }
 
         public System.Collections.Generic.List<Anamnesis> anamnesis;
-
+        [NotMapped]
         public System.Collections.Generic.List<Anamnesis> Anamnesis
         {
             get
@@ -106,7 +115,7 @@ namespace Model
                 anamnesis.Clear();
         }
         public System.Collections.Generic.List<Prescription> prescription;
-
+        [NotMapped]
         public System.Collections.Generic.List<Prescription> Prescription
         {
             get
@@ -152,7 +161,7 @@ namespace Model
         }
 
         public System.Collections.Generic.List<ReferralLetter> referralLetter;
-
+        [NotMapped]
         public System.Collections.Generic.List<ReferralLetter> ReferralLetter
         {
             get
@@ -196,9 +205,8 @@ namespace Model
             if (referralLetter != null)
                 referralLetter.Clear();
         }
-
         public System.Collections.Generic.List<HospitalTreatment> hospitalTreatment;
-
+        [NotMapped]
         public System.Collections.Generic.List<HospitalTreatment> HospitalTreatment
         {
             get
