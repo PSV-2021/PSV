@@ -28,5 +28,30 @@ namespace Hospital.Service
             }
             return false;
         }
+
+        public void CreateSurvey(List<SurveyQuestion> surveyQuestion)
+        {
+            /*
+            if (!CheckIfExistsById(appointmentId))
+            {
+                return null;
+            }*/
+            Survey survey = new Survey();
+            survey.Id = FindNextId();
+            survey.SurveyQuestions = surveyQuestion;
+            survey.PatientId = 1;  //Ove vrednosti se moraju posle promeniti
+            survey.AppointmentId = 2; //Ove vrednosti se moraju posle promeniti
+            survey.Date = DateTime.Now;
+            SurveyRepository.CreateSurvey(survey);
+
+        }
+
+        public int FindNextId()
+        {
+            List<Survey> surveys = SurveyRepository.GetAll().ToList();
+ 
+            return surveys.Count+1;
+        }
+
     }
 }

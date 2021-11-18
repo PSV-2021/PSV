@@ -1,5 +1,7 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../survey.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-survey',
@@ -11,13 +13,26 @@ export class SurveyComponent implements OnInit {
   pageTitle="Survey"
   public surveys: any[];
 
-  constructor(private data:SurveyService) { 
+  constructor(private surveyService:SurveyService, private _snackBar: MatSnackBar) { 
     this.surveys = [];
   }
 
   ngOnInit(): void {
-    this.surveys = this.data.getSurvey();
-    console.log(this.surveys);
+    this.surveyService.GetSurveyQuestions().subscribe((data: any)=>{
+      for(const p of (data as any)){
+        this.surveys.push(p);
+      }     
+    })
   }
+
+  onSubmit(){
+    console.log(this.surveys);  
+    this.surveyService.PostSurveyQuestions(this.surveys).subscribe((data: any) =>{
+      this._snackBar.open('Anketa poslata!', '', {
+        duration: 2000
+      });;
+    });
+
+}
 
 }

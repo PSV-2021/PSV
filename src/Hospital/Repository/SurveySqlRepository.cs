@@ -60,5 +60,12 @@ namespace Hospital.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void CreateSurvey(Survey survey)
+        {
+            dbContext.Survey.Add(survey);
+
+            dbContext.SaveChanges();
+        }
     }
 }

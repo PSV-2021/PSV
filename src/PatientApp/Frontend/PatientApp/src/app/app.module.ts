@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,6 +7,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { MatTableModule } from "@angular/material/table";
 import {MatCardModule} from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -30,7 +32,12 @@ import { SurveyComponent } from './survey/survey.component';
     HttpClientModule,
     MatTableModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule,
+    FormsModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
   bootstrap: [AppComponent]

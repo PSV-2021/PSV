@@ -20,5 +20,6 @@ namespace Hospital.Model
             Rating = rating;
             QuestionType = questionType;
         }
+
     }
 }

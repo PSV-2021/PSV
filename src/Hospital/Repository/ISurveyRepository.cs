@@ -9,5 +9,6 @@ namespace Hospital.Repository
     public interface ISurveyRepository : IGenericRepository<Survey, int>
     {
         public bool CheckIfExistsById(int id);
+        public void CreateSurvey(Survey survey);
     }
 }
