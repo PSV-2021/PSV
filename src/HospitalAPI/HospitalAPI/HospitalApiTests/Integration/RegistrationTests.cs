@@ -43,12 +43,32 @@ namespace HospitalApiTests.Integration
         public void Get_doctors()
         {
             SetUpDbContext();
+            context.Add(new Doctor
+            {
+                Name = "Milan",
+                Surname = "Popovic",
+                Jmbg = "3009998805137",
+                DateOfBirth = new DateTime(1998, 04, 20),
+                Sex = Sex.male,
+                PhoneNumber = "0641664608",
+                Adress = "Bulevar Oslobodjenja 4",
+                Email = "milan@gmail.com",
+                Username = "miki56",
+                Password = "02145",
+                Type = UserType.doctor,
+                SalaryInRsd = 200000,
+                WorkingSchedule = new List<WorkingHours>(),
+                VacationDays = new List<VacationDays>(),
+                AvailableDaysOff = 20,
+                Id = 1,
+                SpecialityId = 1
+            });
             
             DoctorsController doctorsController = new DoctorsController(context);
 
             IActionResult retVal = doctorsController.Get();
 
-            retVal.Equals(true);
+            retVal.Equals(HttpStatusCode.OK);
         }
         public static IEnumerable<object[]> Doctors()
         {
@@ -79,20 +99,15 @@ namespace HospitalApiTests.Integration
         public void Get_allergens()
         {
             SetUpDbContext();
+            context.Add(new Ingridient(1, "Panclav"));
+            context.Add(new Ingridient(2, "Penicilin"));
+            context.Add(new Ingridient(3, "Panadol"));
+
             IngredientsController ingredientsController = new IngredientsController(context);
 
             IActionResult retVal = ingredientsController.Get();
 
-            retVal.Equals(true);
-        }
-        public static IEnumerable<object[]> Ingridients()
-        {
-            var retVal = new List<object[]>();
-            retVal.Add(new object[] { new Ingridient(1, "Panclav")});
-            retVal.Add(new object[] { new Ingridient(2,"Penicilin") });
-            retVal.Add(new object[] { new Ingridient(3, "Panadol") });
-
-            return retVal;
+            retVal.Equals(HttpStatusCode.OK);
         }
         [Fact]
         public void Save_patient()
@@ -102,27 +117,13 @@ namespace HospitalApiTests.Integration
 
             IActionResult retVal = patientRegistrationController.Post(GeneratePatient());
 
-            retVal.Equals(true);
+            retVal.Equals(HttpStatusCode.OK);
         }
 
         private Patient GeneratePatient()
         {
             return new Patient("Mirko", "Srdjan", "Kitic", "3009998805057", new DateTime(2001, 1, 1), Sex.male, "0641664608", "Resavska 5", "mirko@gmail.com", null, "uproba", "pproba", BloodType.A, false, null, false);
         }
-        /* [Theory]
-        [MemberData(nameof(ExpectedStatus))]
-        public async void Get_all_doctors(HttpStatusCode expectedStatusCode)
-        {
-           HttpClient client = CreateClient();
-           HttpResponseMessage response = await client.GetAsync(communicationLink + "/api/doctor/");
-           response.StatusCode.ShouldBeEquivalentTo(expectedStatusCode);
-        }
-        public static IEnumerable<object[]> ExpectedStatus =>s
-             new List<object[]>
-        {
-             new object[] {HttpStatusCode.OK},
-             new object[] {HttpStatusCode.BadRequest}
-        };*/
     }
 }
 
