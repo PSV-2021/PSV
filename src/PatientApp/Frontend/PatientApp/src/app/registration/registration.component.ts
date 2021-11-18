@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { RegistrationService} from '../registration.service';
+import { RegistrationService } from '../registration.service';
 
 interface Type {
   value: string;
@@ -23,13 +23,13 @@ export class RegistrationComponent implements OnInit {
     {value: 'O'}
   ]
 
-  doctors: any[]
+  doctors: any[]=[];
 
   allergens = new FormControl();
-  allergenList: any[] = ['Panclav', 'Brufen'];
+  allergenList: string[]=['Panclav', 'Brufen']
 
   constructor(private registrationService: RegistrationService) {
-    this.doctors = []
+   
    }
   ngOnInit(): void {
     this.registrationService.GetDoctors().subscribe((data: any)=>{
@@ -39,6 +39,5 @@ export class RegistrationComponent implements OnInit {
       }
     })
   }
-  
 
 }

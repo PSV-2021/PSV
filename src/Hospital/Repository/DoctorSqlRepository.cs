@@ -46,8 +46,8 @@ namespace Hospital.Repository
 
         public List<Doctor> GetGeneralDoctors()
         {
-            List<Doctor> retVal = new List<Doctor>();
-            dbContext.Doctors.ToList().Where(s=>s.SpecialityId == 1);
+            List<Doctor> retVal = (List<Doctor>)dbContext.Doctors.ToList().Where(s => s.SpecialityId == 1).ToList();
+
             return retVal;
         }
 

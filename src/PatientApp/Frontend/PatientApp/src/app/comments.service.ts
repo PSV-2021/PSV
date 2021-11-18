@@ -12,9 +12,8 @@ export class CommentsService {
     this.url = "http://localhost:5000/api";
   }
 
-  GetAprovedComments(): Observable<any> {
+    GetAprovedComments(): Observable<any> {
       return this.http.get<any>(this.url + '/comments');
   }
-  
 
 }
