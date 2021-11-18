@@ -43,5 +43,21 @@ namespace Integration.Service
         {
             return DrugstoreRepository.SearchDrugstoresByCityAndAddress(city, address);
         }
+
+        public List<Drugstore> GetAll()
+        {
+            return DrugstoreRepository.GetAll();
+        }
+
+        public string GetDrugstoreName(int id)
+        {
+            return DrugstoreRepository.GetDrugstoreName(id);
+        }
+
+        public void AddNewDrugstore(Drugstore ds)
+        {
+            DrugstoreRepository.Save(ds);
+        }
+
     }
 }
