@@ -1,8 +1,4 @@
 ﻿using Drugstore.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Drugstore.Models;
 using Drugstore.Repository.Sql;
 
@@ -27,17 +23,23 @@ namespace DrugstoreAPI.Service
             if (med == null)
                 return false;
 
-            return CheckIsTheDrugAmountSatisfied(amountOfDrug, med);
-        }
-
-        private static bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Medicine med)
-        {
-            if (med.Supply >= amountOfDrug)
+            if (CheckIsTheDrugAmountSatisfied(amountOfDrug, med))
             {
+                DecreaseDrugAmount(amountOfDrug, med);
                 return true;
             }
-
             return false;
+        }
+
+        private bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Medicine med)
+        { 
+            return med.Supply >= amountOfDrug;
+        }
+
+        private void DecreaseDrugAmount(int amountOfDrug, Medicine med)
+        {
+            med.Supply -= amountOfDrug;
+            MedicineRepository.Update(med);
         }
     }
 }
