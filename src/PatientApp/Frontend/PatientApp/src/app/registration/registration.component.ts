@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { RegistrationService} from '../registration.service';
 
 interface Type {
   value: string;
@@ -22,18 +23,22 @@ export class RegistrationComponent implements OnInit {
     {value: 'O'}
   ]
 
-  doctors: Doctor[]=[
-    {name: 'Pera Peric'}
-  ]
+  doctors: any[]
 
   allergens = new FormControl();
-  allergenList: string[]=['Panclav', 'Brufen']
+  allergenList: any[] = ['Panclav', 'Brufen'];
 
-  constructor() {
-   
+  constructor(private registrationService: RegistrationService) {
+    this.doctors = []
    }
   ngOnInit(): void {
-  
+    this.registrationService.GetDoctors().subscribe((data: any)=>{
+      for(const p of (data as any)){
+        this.doctors.push(p);
+        console.log(p);
+      }
+    })
   }
+  
 
 }

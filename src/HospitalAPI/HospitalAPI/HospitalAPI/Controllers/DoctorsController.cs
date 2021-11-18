@@ -26,7 +26,7 @@ namespace HospitalAPI.Controllers
         {
             doctorSqlRepository.dbContext = context;
             List<Doctor> result = new List<Doctor>();
-            result = doctorSqlRepository.GetAll();
+            result = doctorSqlRepository.GetGeneralDoctors();
             return Ok(result);
         }
     }

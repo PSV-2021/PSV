@@ -67,8 +67,8 @@
             <mat-form-field appearance="fill" class="width-100">
                 <mat-label>Chosen doctor</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let doctor of doctors" [value]="doctor.name">
-                      {{doctor.name}}
+                    <mat-option *ngFor="let doctor of doctors" [value]="doctor.nameAndSurname" >
+                      {{doctor.nameAndSurname}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

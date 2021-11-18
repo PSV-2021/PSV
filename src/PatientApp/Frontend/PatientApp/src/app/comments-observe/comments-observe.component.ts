@@ -11,7 +11,6 @@ export class CommentsObserveComponent implements OnInit {
 
   pageTitle="Comments"
   public comments: any[];
-  displayedColumns: string[] = ['comment', 'date', 'name'];
 
   constructor(private patientCommentService: CommentsService) {
     this.comments = [];
