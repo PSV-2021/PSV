@@ -32,10 +32,8 @@ namespace DrugstoreAPI.Service
         }
 
         private bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Medicine med)
-        {
-            if (med.Supply >= amountOfDrug) return true;
-
-            return false;
+        { 
+            return med.Supply >= amountOfDrug;
         }
 
         private void DecreaseDrugAmount(int amountOfDrug, Medicine med)
