@@ -9,12 +9,13 @@ namespace Hospital.Repository
 {
     public class IngredientSqlRepository : IIngredientRepository
     {
-        private MyDbContext context;
+        public MyDbContext context { get; set; }
 
         public IngredientSqlRepository(MyDbContext context)
         {
             this.context = context;
         }
+        public IngredientSqlRepository() { }
 
         public bool Delete(int id)
         {

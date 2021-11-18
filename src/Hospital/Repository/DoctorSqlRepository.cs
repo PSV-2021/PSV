@@ -26,7 +26,7 @@ namespace Hospital.Repository
 
         public List<Doctor> GetAll()
         {
-            throw new System.NotImplementedException();
+            return dbContext.Doctors.ToList();
         }
 
         public Doctor GetOne(string id)

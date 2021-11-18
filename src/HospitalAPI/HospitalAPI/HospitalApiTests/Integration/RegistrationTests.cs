@@ -1,5 +1,7 @@
 ﻿using Hospital.Model;
 using Hospital.Repository;
+using HospitalAPI.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Model;
 using Shouldly;
@@ -38,11 +40,12 @@ namespace HospitalApiTests.Integration
         public void Get_doctors()
         {
             SetUpDbContext();
-            DoctorSqlRepository doctorSqlRepository = new DoctorSqlRepository(context);
+            
+            DoctorsController doctorsController = new DoctorsController(context);
 
-            List<Doctor> retVal = doctorSqlRepository.GetAll();
+            IActionResult retVal = doctorsController.Get();
 
-            retVal.Equals(Doctors());
+            retVal.Equals(true);
         }
         public static IEnumerable<object[]> Doctors()
         {
@@ -73,11 +76,11 @@ namespace HospitalApiTests.Integration
         public void Get_allergens()
         {
             SetUpDbContext();
-            IngredientSqlRepository ingredientSqlRepository = new IngredientSqlRepository(context);
+            IngredientsController ingredientsController = new IngredientsController(context);
 
-            List<Ingridient> retVal = ingredientSqlRepository.GetAll();
+            IActionResult retVal = ingredientsController.Get();
 
-            retVal.Equals(Ingridients());
+            retVal.Equals(true);
         }
         public static IEnumerable<object[]> Ingridients()
         {
