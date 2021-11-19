@@ -71,6 +71,17 @@ namespace Model
                 return Name + " " + Surname;
             }
         }
+
+        /// <summary>
+        /// ///////////////////////////////////////
+        /// </summary>
+        public List<Ingridient> Allergens
+        {
+            set
+            {
+                MedicalRecord.Allergen = value;
+            }
+        }
         
         public List<Appointment> appointment;
 
