@@ -56,7 +56,7 @@ namespace HospitalApiTests.Integration
 
             List<Doctor> retVal = doctorSqlRepository.GetGeneralDoctors();
 
-            retVal.Equals(HttpStatusCode.OK);
+            retVal.Equals(Doctors());
         }
 
         [Fact]
@@ -87,7 +87,32 @@ namespace HospitalApiTests.Integration
             DoctorsController doctorsController = new DoctorsController(context);
             IActionResult retVal = doctorsController.Get();
 
-            retVal.Equals(HttpStatusCode.OK);
+            retVal.Equals(Doctors());
+        }
+        public static IEnumerable<object[]> Doctors()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { new Doctor
+                {
+                    Name = "Milan",
+                    Surname = "Popovic",
+                    Jmbg = "3009998805137",
+                    DateOfBirth = new DateTime(1998, 04, 20),
+                    Sex = Sex.male,
+                    PhoneNumber = "0641664608",
+                    Adress = "Bulevar Oslobodjenja 4",
+                    Email = "milan@gmail.com",
+                    Username = "miki56",
+                    Password = "02145",
+                    Type = UserType.doctor,
+                    SalaryInRsd = 200000,
+                    WorkingSchedule = new List<WorkingHours>(),
+                    VacationDays = new List<VacationDays>(),
+                    AvailableDaysOff = 20,
+                    Id = 1,
+                    SpecialityId = 1
+            } });
+            return retVal;
         }
         [Fact]
         public void Get_allergens()
@@ -101,7 +126,16 @@ namespace HospitalApiTests.Integration
 
             IActionResult retVal = ingredientsController.Get();
 
-            retVal.Equals(HttpStatusCode.OK);
+            retVal.Equals(Ingridients());
+        }
+        public static IEnumerable<object[]> Ingridients()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { new Ingridient(1, "Panclav") });
+            retVal.Add(new object[] { new Ingridient(2, "Penicilin") });
+            retVal.Add(new object[] { new Ingridient(3, "Panadol") });
+
+            return retVal;
         }
         [Fact]
         public void Save_patient()
