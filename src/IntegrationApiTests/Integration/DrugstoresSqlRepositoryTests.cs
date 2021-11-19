@@ -27,7 +27,7 @@ namespace IntegrationApiTests.Integration
 
         [Theory]
         [MemberData(nameof(Searches))]
-        public void Certain_drugs_availability_on_repository(string city, string address, int expectedValue)
+        public void Search_drugstores_by_city_and_address(string city, string address, int expectedValue)
         {
             SetUpDbContext();
             IDrugstoreRepository drugstoreSqlRepository = new DrugstoreSqlRepository(context);
