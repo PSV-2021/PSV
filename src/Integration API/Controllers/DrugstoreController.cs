@@ -14,6 +14,7 @@ using Integration.Service;
 using Integration_API.Filters;
 using Integration_API.Repository.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Integration_API.Repository.Interfaces;
 using RestSharp;
 using System.Configuration;
 
@@ -44,6 +45,7 @@ namespace Integration_API.Controllers
         }
 
         [HttpGet ("filter")] // GET /api/drugstore/filter
+
         public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
         {
             IEnumerable<string> headerValues = Request.Headers["ApiKey"];
