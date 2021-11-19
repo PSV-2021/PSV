@@ -12,7 +12,10 @@ namespace Drugstore.Models
         }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Hospital> Hospitals { get; set; }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Pharmacist> Pharmacist { get; set; }
+/*        public DbSet<Customer> Customers { get; set; }
+*/
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,6 +37,14 @@ namespace Drugstore.Models
                 new Hospital("Health", 1, "http://localhost:5000", "DrugStoreSecretKey")
 
             );
+
+            modelBuilder.Entity<Pharmacist>().HasData(
+                new Pharmacist(1, "farmaceut", "farmaceut", "Farmaceut")
+            );
+
+            /*modelBuilder.Entity<Customer>().HasData(
+                new Customer("kupac", "kupac", "Kupac")
+            );*/
         }
     }
 }

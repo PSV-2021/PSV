@@ -3,15 +3,17 @@ using System;
 using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211119130008_NewMigration2")]
+    partial class NewMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,6 +188,22 @@ namespace Drugstore.Migrations
                     b.ToTable("Users");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Password = "farmaceut",
+                            Role = "pharmacist",
+                            Username = "farmaceut"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Password = "kupac",
+                            Role = "customer",
+                            Username = "kupac"
+                        });
                 });
 
             modelBuilder.Entity("Drugstore.Models.Pharmacist", b =>
@@ -200,11 +218,19 @@ namespace Drugstore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = 1,
+                            UserId = 3,
                             Password = "farmaceut",
                             Role = "Pharmacist",
                             Username = "farmaceut",
                             Name = "Farmaceut"
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            Password = "farmaceut",
+                            Role = "Pharmacist",
+                            Username = "farmaceut2",
+                            Name = "Farm"
                         });
                 });
 
