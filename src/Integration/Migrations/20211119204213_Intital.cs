@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration.Migrations
 {
-    public partial class drugstoreAddressDecomposition : Migration
+    public partial class Intital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,6 +22,22 @@ namespace Integration.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DrugstoreFeedbacks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DrugstoreOffers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Content = table.Column<string>(type: "text", nullable: true),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DrugstoreName = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DrugstoreOffers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,10 +63,15 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "Content", "DrugstoreId", "RecievedTime", "Response", "SentTime" },
                 values: new object[,]
                 {
-                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 11, 13, 16, 11, 37, 551, DateTimeKind.Local).AddTicks(5694), "Nemoj da lazes!", new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(1709) },
-                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2037), "Nemoj da lazes!", new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2062) },
-                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2074), "Nemoj da lazes!", new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2077) }
+                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 11, 19, 21, 42, 12, 852, DateTimeKind.Local).AddTicks(2630), "Nemoj da lazes!", new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(7653) },
+                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8302), "Nemoj da lazes!", new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8332) },
+                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8346), "Nemoj da lazes!", new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8349) }
                 });
+
+            migrationBuilder.InsertData(
+                table: "DrugstoreOffers",
+                columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8808), new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8801), "title" });
 
             migrationBuilder.InsertData(
                 table: "Drugstores",
@@ -67,6 +88,9 @@ namespace Integration.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DrugstoreFeedbacks");
+
+            migrationBuilder.DropTable(
+                name: "DrugstoreOffers");
 
             migrationBuilder.DropTable(
                 name: "Drugstores");

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211113151138_drugstoreAddressDecomposition")]
-    partial class drugstoreAddressDecomposition
+    [Migration("20211119204213_Intital")]
+    partial class Intital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,27 +113,63 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 11, 13, 16, 11, 37, 551, DateTimeKind.Local).AddTicks(5694),
+                            RecievedTime = new DateTime(2021, 11, 19, 21, 42, 12, 852, DateTimeKind.Local).AddTicks(2630),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(1709)
+                            SentTime = new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(7653)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2037),
+                            RecievedTime = new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8302),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2062)
+                            SentTime = new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8332)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2074),
+                            RecievedTime = new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8346),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2077)
+                            SentTime = new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8349)
+                        });
+                });
+
+            modelBuilder.Entity("Integration.Model.DrugstoreOffer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DrugstoreName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugstoreOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Content = "Content",
+                            DrugstoreName = "Apotekica",
+                            EndDate = new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8808),
+                            StartDate = new DateTime(2021, 11, 19, 21, 42, 12, 854, DateTimeKind.Local).AddTicks(8801),
+                            Title = "title"
                         });
                 });
 #pragma warning restore 612, 618
