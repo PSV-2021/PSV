@@ -3,12 +3,15 @@ using System;
 using System.Collections.Generic;
 using Factory;
 using Repository;
+using Hospital.Repository;
 
 namespace Service
 {
     public class DoctorService
     {
         private IDoctorRepository DoctorRepository { get; }
+
+        private DoctorSqlRepository DoctorSqlRepository { get; set; }
 
         private IRepositoryFactory RepositoryFactory { get; }
 
@@ -18,9 +21,24 @@ namespace Service
             DoctorRepository = RepositoryFactory.CreateDoctorRepository();
         }
 
+        public DoctorService(IDoctorRepository doctorRepository)
+        {
+            DoctorRepository = doctorRepository;
+        }
+
+        public DoctorService(DoctorSqlRepository doctorSqlRepository)
+        {
+            DoctorSqlRepository = doctorSqlRepository;
+        }
+
         public Doctor GetDoctorByJmbg(string jmbg)
         {
             return DoctorRepository.GetOne(jmbg);
+        }
+
+        public List<Doctor> GetGeneralDoctors()
+        {
+            return DoctorSqlRepository.GetGeneralDoctors();
         }
 
         public List<Doctor> GetAllDoctors()

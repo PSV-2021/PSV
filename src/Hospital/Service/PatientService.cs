@@ -4,20 +4,27 @@ using System.Collections.Generic;
 
 using Repository;
 using System.Threading;
+using Hospital.Repository;
 
 namespace Service
 {
    public class PatientService
     {
         private IPatientRepository PatientRepository { get; }
+        private PatientSqlRepository PatientSqlRepository { get; set; }
 
-        public PatientService(IPatientRepository @object, object p)
+        public PatientService(IPatientRepository patientRepository)
         {
-            PatientRepository = new PatientFileRepository();
+            PatientRepository = patientRepository;
         }
 
         public PatientService()
         {
+            PatientRepository = new PatientSqlRepository();
+        }
+        public PatientService(PatientSqlRepository patientSqlRepository)
+        {
+            PatientSqlRepository = patientSqlRepository;
         }
 
         public Patient GetPatientByJmbg(string jmbg)
@@ -32,6 +39,11 @@ namespace Service
         public Boolean SavePatient(Patient newPatient)
         {
             return PatientRepository.Save(newPatient);
+        }
+
+        public void SavePatientSql(Patient newPatient)
+        {
+           PatientSqlRepository.SavePatient(newPatient);
         }
 
         public Boolean EditPatient(Patient editedPatient)

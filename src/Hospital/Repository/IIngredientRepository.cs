@@ -3,7 +3,7 @@ using Repository;
 
 namespace Hospital.Repository
 {
-    internal interface IIngredientRepository: IGenericRepository<Ingridient, int>
+    public interface IIngredientRepository: IGenericRepository<Ingridient, int>
     { 
     }
 }

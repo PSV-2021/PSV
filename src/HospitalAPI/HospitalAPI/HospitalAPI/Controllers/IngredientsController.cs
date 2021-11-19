@@ -1,5 +1,6 @@
 ﻿using Hospital.Model;
 using Hospital.Repository;
+using Hospital.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
@@ -15,19 +16,19 @@ namespace HospitalAPI.Controllers
     public class IngredientsController : ControllerBase
     {
         private readonly MyDbContext context;
-        public IngredientSqlRepository ingredientSqlRepository = new IngredientSqlRepository();
-
+        public IngredientService ingredientService;
 
         public IngredientsController(MyDbContext context)
         {
             this.context = context;
+            ingredientService = new IngredientService(new IngredientSqlRepository(context));
         }
         [HttpGet]
         public IActionResult Get()
         {
-            ingredientSqlRepository.context = context;
             List<Ingridient> result = new List<Ingridient>();
-            result = ingredientSqlRepository.GetAll();
+            result = ingredientService.GetAllIngredients();
+
             return Ok(result);
         }
     }

@@ -3,6 +3,7 @@ using Hospital.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,19 @@ namespace HospitalAPI.Controllers
     public class DoctorsController : ControllerBase
     {
         private readonly MyDbContext context;
-        public DoctorSqlRepository doctorSqlRepository = new DoctorSqlRepository();
+        public DoctorService doctorService;
+
         public DoctorsController(MyDbContext context)
         {
             this.context = context;
+            doctorService = new DoctorService(new DoctorSqlRepository(context));
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            doctorSqlRepository.dbContext = context;
             List<Doctor> result = new List<Doctor>();
-            result = doctorSqlRepository.GetGeneralDoctors();
+            result = doctorService.GetGeneralDoctors();
             return Ok(result);
         }
     }
