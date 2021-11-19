@@ -2,7 +2,7 @@ name: Block Developers Write
 
 on:
   schedule:
-    - cron: "0 3 27 11 *"
+    - cron: "0 3 22 11 *"
     - cron: "0 3 3,17,31 12 *"
     - cron: "0 4 14,28 1 *"
 
