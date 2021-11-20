@@ -3,6 +3,7 @@ using Model;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Hospital.Repository
@@ -20,7 +21,7 @@ namespace Hospital.Repository
 
         public List<Patient> GetAll()
         {
-            throw new NotImplementedException();
+            return dbContext.Patients.ToList();
         }
 
         public Patient GetOne(string id)
@@ -30,6 +31,7 @@ namespace Hospital.Repository
 
         public void SavePatient(Patient patient)
         {
+            dbContext.MedicalRecords.Add(new MedicalRecord { Id = patient.MedicalRecordId });
             dbContext.Patients.Add(patient);
             dbContext.SaveChanges();
         }

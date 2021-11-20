@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PatientDto } from './registration.dto';
 
 interface Type {
   value: string;
@@ -10,15 +13,22 @@ export interface Patient{
   name: string;
   surname: string;
   jmbg: string;
-  //date: date;
+  date: Date;
   fathersName: string;
-  //sex: number;
+  sex: number;
   phoneNumber: string;
   adress: string;
   email: string;
   username: string;
   password: string;
   repeatPassword: string;
+  bloodType: number;
+  doctorId: number;
+
+}
+
+export interface SelectedDoctor{
+  name: string;
 }
 
 @Component({
@@ -27,6 +37,7 @@ export interface Patient{
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  [x: string]: any;
   types: Type[] = [
     {value: 'A'},
     {value: 'B'},
@@ -35,15 +46,17 @@ export class RegistrationComponent implements OnInit {
   ]
 
   doctors: any[]=[];
+  selectedDoctor: SelectedDoctor = {name: ""};
   
-  allergens = new FormControl();
+  
   allergenList: any[]=[];
+  public allergens: any[]=[];
 
-  patient: Patient = {name: "",surname: "", jmbg: "", fathersName: "", phoneNumber: "", adress: "", email: "", username: "", password: "", repeatPassword: ""};
-
+  patient: Patient = {name: "",surname: "", jmbg: "", date: new Date(), bloodType: 0, sex: 0, fathersName: "", phoneNumber: "", adress: "", email: "", username: "", password: "", repeatPassword: "", doctorId: 0};
+  public returnPatient: PatientDto;
 
   constructor(private registrationService: RegistrationService) {
-   
+   this.returnPatient = new PatientDto();
   }
 
   ngOnInit(): void {
@@ -59,16 +72,37 @@ export class RegistrationComponent implements OnInit {
       }
     })
   }
+
   onSubmit(){
-   console.log(this.patient.name)
-   console.log(this.patient.surname)
-   console.log(this.patient.jmbg)
-   console.log(this.patient.fathersName)
-   console.log(this.patient.phoneNumber)
-   console.log(this.patient.adress)
-   console.log(this.patient.email)
-   console.log(this.patient.username)
-   console.log(this.patient.password)
-   console.log(this.patient.repeatPassword)
+   this.PrepareDTO();
+    for(const d of this.doctors){
+      if(d.nameAndSurname == this.selectedDoctor.name){
+        this.returnPatient.DoctorId = d.id
+      }
+    }
+
+  this.registrationService.SendPatient( this.returnPatient).subscribe((data: any)=>{
+      /*this._snackBar.open('Anketa poslata!', '', {
+        duration: 2000
+      });*/
+    });
+  
   }
+  PrepareDTO(){
+    this.returnPatient.Name = this.patient.name;
+    this.returnPatient.Surname = this.patient.surname;
+    this.returnPatient.Jmbg = this.patient.jmbg;
+    this.returnPatient.FathersName = this.patient.fathersName;
+    this.returnPatient.PhoneNumber = this.patient.phoneNumber;
+    this.returnPatient.Adress = this.patient.adress;
+    this.returnPatient.Email = this.patient.email;
+    this.returnPatient.Username = this.patient.username;
+    this.returnPatient.Password = this.patient.password;
+    this.returnPatient.RepeatPassword = this.patient.repeatPassword;
+    this.returnPatient.Date = this.patient.date;
+    this.returnPatient.Sex = this.patient.sex;
+    this.returnPatient.BloodType = this.patient.bloodType;
+    this.returnPatient.Allergens = this.allergens;
+  }
+
 }

@@ -22,15 +22,14 @@ namespace HospitalAPI.Controllers
         public PatientRegistrationController(MyDbContext context)
         {
             this.dbContext = context;
-            patientService = new PatientService(new  PatientSqlRepository(context));
+            patientService = new PatientService(new PatientSqlRepository(context));
         }
 
         [HttpPost]
-        public IActionResult Post(Patient patient)
+        public IActionResult Post([FromBody] Patient patient)
         {
-            Patient newPatient = patient;
-            patientService.SavePatientSql(newPatient);
-
+            patientService.SavePatientSql(patient, dbContext);
+           
             return Ok();
         }
     }

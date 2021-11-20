@@ -5,13 +5,16 @@ using System.Collections.Generic;
 using Repository;
 using System.Threading;
 using Hospital.Repository;
+using Hospital.Model;
+using System.Linq;
 
 namespace Service
 {
-   public class PatientService
+    public class PatientService
     {
         private IPatientRepository PatientRepository { get; }
         private PatientSqlRepository PatientSqlRepository { get; set; }
+        private MedicalRecordSqlRepository MedicalRecordRepository { get; set; }
 
         public PatientService(IPatientRepository patientRepository)
         {
@@ -41,9 +44,23 @@ namespace Service
             return PatientRepository.Save(newPatient);
         }
 
-        public void SavePatientSql(Patient newPatient)
+        public void SavePatientSql(Patient newPatient, MyDbContext context)
         {
+           GenerateMedicalRecordId(newPatient, context);
+           GeneratePatiendId(newPatient, context);
            PatientSqlRepository.SavePatient(newPatient);
+        }
+
+        private void GeneratePatiendId(Patient newPatient, MyDbContext context)
+        {
+            newPatient.Id = PatientSqlRepository.GetAll().Count() + 1;
+        }
+
+        public void GenerateMedicalRecordId(Patient p, MyDbContext context)
+        {
+            MedicalRecordRepository = new MedicalRecordSqlRepository(context);
+            List<MedicalRecord> mr = MedicalRecordRepository.GetAll();
+            p.MedicalRecordId = (mr.Count + 1);
         }
 
         public Boolean EditPatient(Patient editedPatient)

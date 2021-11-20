@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PatientDto } from './registration/registration.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,14 @@ export class RegistrationService {
   }
   GetAllergens(): Observable<any> {
     return this.http.get<any>(this.url + '/ingredients');
-  } 
+  }
+  SendPatient(patient: PatientDto): Observable<any>{
+    console.log(patient)
+    const body = {
+      patient: patient
+    }
+    const ret = this.http.post<any>(this.url + "/patientRegistration", patient);
+   
+    return ret;
+  }
 }
