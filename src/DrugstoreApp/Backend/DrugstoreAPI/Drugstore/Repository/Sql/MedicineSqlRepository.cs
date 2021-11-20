@@ -7,7 +7,7 @@ using Drugstore.Repository.Interfaces;
 
 namespace Drugstore.Repository.Sql
 {
-    public class MedicineSqlRepository:IMedicineRepository
+    public class MedicineSqlRepository : IMedicineRepository
     {
         public MyDbContext DbContext { get; set; }
 
@@ -62,6 +62,12 @@ namespace Drugstore.Repository.Sql
         {
             DbContext.Medicines.Update(med);
             DbContext.SaveChanges();
+        }
+
+        public List<Medicine> SearchMedicineByNameAndSubstance(string name, string substance)
+        {
+            var retVal = DbContext.Medicines.Where(medicine => medicine.Name.Contains(name) && medicine.Substances.Contains(substance)).ToList();
+            return retVal;
         }
     }
 }

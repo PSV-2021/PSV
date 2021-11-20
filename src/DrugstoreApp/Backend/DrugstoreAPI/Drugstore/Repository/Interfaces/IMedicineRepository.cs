@@ -13,5 +13,6 @@ namespace Drugstore.Repository.Interfaces
         public bool Delete(int id);
         public Medicine GetByName(string name);
         public void Update(Medicine med);
+        public List<Medicine> SearchMedicineByNameAndSubstance(string name, string substance);
     }
 }

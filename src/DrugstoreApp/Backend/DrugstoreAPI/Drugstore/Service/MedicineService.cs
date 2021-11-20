@@ -76,5 +76,10 @@ namespace DrugstoreAPI.Service
             med.Supply += amountOfDrug;
             MedicineRepository.Update(med);
         }
+
+        public List<Medicine> SearchMedicineByNameAndSubstance(string name, string substance)
+        {
+            return MedicineRepository.SearchMedicineByNameAndSubstance(name, substance);
+        }
     }
 }

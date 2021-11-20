@@ -39,6 +39,14 @@ namespace Drugstore.Models
             this.compatibleMedicines = compatibleMedicines;
             Weight = weight;
             Precautions = precautions;
+            Substances = substances;
+        }
+
+        public Medicine(int id, string name, string substances)
+        {
+            Id = id;
+            Name = name;
+            Substances = substances;
         }
 
         public Medicine() { }
