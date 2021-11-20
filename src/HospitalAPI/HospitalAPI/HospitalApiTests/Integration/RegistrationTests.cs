@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.DTO;
+using Hospital.Model;
 using Hospital.Repository;
 using HospitalAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -148,9 +149,10 @@ namespace HospitalApiTests.Integration
             retVal.Equals(HttpStatusCode.OK);
         }
 
-        private Patient GeneratePatient()
+        private PatientDTO GeneratePatient()
         {
-            return new Patient("Mirko", "Srdjan", "Kitic", "3009998805057", new DateTime(2001, 1, 1), Sex.male, "0641664608", "Resavska 5", "mirko@gmail.com", null, "uproba", "pproba", BloodType.A, false, null, false);
+            // return new Patient("Mirko", "Srdjan", "Kitic", "3009998805057", new DateTime(2001, 1, 1), Sex.male, "0641664608", "Resavska 5", "mirko@gmail.com", null, "uproba", "pproba", BloodType.A, false, null, false);
+            return null;
         }
     }
 }

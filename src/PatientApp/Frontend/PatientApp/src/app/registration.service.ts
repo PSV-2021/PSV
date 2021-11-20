@@ -18,12 +18,12 @@ export class RegistrationService {
     return this.http.get<any>(this.url + '/ingredients');
   }
   SendPatient(patient: PatientDto): Observable<any>{
-    console.log(patient)
+    console.log(patient.Address)
     const body = {
       patient: patient
     }
     const ret = this.http.post<any>(this.url + "/patientRegistration", patient);
-   
+    
     return ret;
   }
 }

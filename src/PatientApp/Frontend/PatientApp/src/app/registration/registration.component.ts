@@ -1,9 +1,8 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PatientDto } from './registration.dto';
+import { formatDate } from '@angular/common';
 
 interface Type {
   value: string;
@@ -37,7 +36,6 @@ export interface SelectedDoctor{
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  [x: string]: any;
   types: Type[] = [
     {value: 'A'},
     {value: 'B'},
@@ -55,7 +53,7 @@ export class RegistrationComponent implements OnInit {
   patient: Patient = {name: "",surname: "", jmbg: "", date: new Date(), bloodType: 0, sex: 0, fathersName: "", phoneNumber: "", adress: "", email: "", username: "", password: "", repeatPassword: "", doctorId: 0};
   public returnPatient: PatientDto;
 
-  constructor(private registrationService: RegistrationService) {
+  constructor(private registrationService: RegistrationService, private _snackBar: MatSnackBar) {
    this.returnPatient = new PatientDto();
   }
 
@@ -82,9 +80,9 @@ export class RegistrationComponent implements OnInit {
     }
 
   this.registrationService.SendPatient( this.returnPatient).subscribe((data: any)=>{
-      /*this._snackBar.open('Anketa poslata!', '', {
+      this._snackBar.open('Anketa poslata!', '', {
         duration: 2000
-      });*/
+      });
     });
   
   }
@@ -94,15 +92,19 @@ export class RegistrationComponent implements OnInit {
     this.returnPatient.Jmbg = this.patient.jmbg;
     this.returnPatient.FathersName = this.patient.fathersName;
     this.returnPatient.PhoneNumber = this.patient.phoneNumber;
-    this.returnPatient.Adress = this.patient.adress;
+    this.returnPatient.Address = this.patient.adress;
     this.returnPatient.Email = this.patient.email;
     this.returnPatient.Username = this.patient.username;
     this.returnPatient.Password = this.patient.password;
     this.returnPatient.RepeatPassword = this.patient.repeatPassword;
-    this.returnPatient.Date = this.patient.date;
     this.returnPatient.Sex = this.patient.sex;
     this.returnPatient.BloodType = this.patient.bloodType;
     this.returnPatient.Allergens = this.allergens;
+
+    const format = "dd/MM/yyyy HH:mm:ss"
+
+    this.returnPatient.Date = formatDate(this.patient.date, format, "en-US")
+    
   }
 
 }

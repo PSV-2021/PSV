@@ -1,4 +1,5 @@
 using Hospital.Model;
+using Hospital.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -71,18 +72,7 @@ namespace Model
                 return Name + " " + Surname;
             }
         }
-
-        /// <summary>
-        /// ///////////////////////////////////////
-        /// </summary>
-        public List<Ingridient> Allergens
-        {
-            set
-            {
-                MedicalRecord.Allergen = value;
-            }
-        }
-        
+  
         public List<Appointment> appointment;
 
         [NotMapped]
