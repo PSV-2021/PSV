@@ -1,15 +1,14 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
 import { MatTableModule } from "@angular/material/table";
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatCardModule } from '@angular/material/card';
 import { AppComponent } from './app.component';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { LandingComponent } from './landing/landing.component';
@@ -25,6 +24,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SurveyComponent } from './survey/survey.component';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NavigationComponent,
     LandingComponent,
     CommentsObserveComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    SurveyComponent
+
   ],
   imports: [
     BrowserModule,
@@ -43,20 +46,22 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTableModule,
     MatCardModule,
     MatButtonModule,
-    FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,
     MatIconModule,
-    MatRadioModule,
     MatGridListModule,
     MatButtonToggleModule,
     MatDatepickerModule,
     MatInputModule,
-    MatFormFieldModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatRadioModule,
+    MatSnackBarModule,
+    FormsModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
   bootstrap: [AppComponent],

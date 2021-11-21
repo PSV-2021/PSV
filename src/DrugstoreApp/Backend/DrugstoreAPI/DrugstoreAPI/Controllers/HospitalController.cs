@@ -22,22 +22,20 @@ namespace DrugstoreAPI.Controllers
     public class HospitalController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public HospitalService hospitalService = new HospitalService();
+        public HospitalService hospitalService;
 
 
         public HospitalController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
+            hospitalService = new HospitalService(new HospitalSqlRepository(db));
         }
 
         [HttpPost]
         public IActionResult Post(HospitalDto hospital)
         {
-            hospitalService = new HospitalService(dbContext);
             Hospital newHospital = new Hospital(hospital.HospitalName,hospital.URLAddress, hospital.ApiKey);
-            HospitalSqlRepository repo = new HospitalSqlRepository();
-            repo.dbContext = dbContext;
-            repo.Save(newHospital);
+            hospitalService.SaveNewHospital(newHospital);
             return Ok();
         }
 

@@ -16,10 +16,8 @@ namespace Integration.Service
 
         public DrugstoreFeedbackService(MyDbContext dbContext)
         {
-            DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository();
-            DrugstoreRepository = new DrugstoreSqlRepository();
-            DrugstoreFeedbackRepository.dbContext = dbContext;
-            DrugstoreRepository.dbContext = dbContext;
+            DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository(dbContext);
+            DrugstoreRepository = new DrugstoreSqlRepository(dbContext);
         }
 
         public DrugstoreFeedbackService()
@@ -32,18 +30,12 @@ namespace Integration.Service
            return Guid.NewGuid().ToString();
         }
 
-        public bool checkApiKey(string apiKey, MyDbContext dbContext)
+        public bool CheckApiKey(string apiKey)
         {
-            bool found = false;
-            foreach (Drugstore h in dbContext.Drugstores.ToList())
-            {
-                if (h.ApiKey.Equals(apiKey))
-                {
-                    found = true;
-                    break;
-                }
-            }
-            return found;
+            Drugstore drugstore = DrugstoreRepository.GetAll().Where(drugstore => drugstore.ApiKey.Equals(apiKey)).FirstOrDefault();
+            if (drugstore == null)
+                return false;
+            return true;
         }
 
     }

@@ -11,7 +11,12 @@ using Model.DataBaseContext;
 using Integration_API.DTOs;
 
 using Integration.Service;
+using Integration_API.Filters;
+using Integration_API.Repository.Interfaces;
+using Microsoft.Extensions.Configuration;
+using Integration_API.Repository.Interfaces;
 using RestSharp;
+using System.Configuration;
 
 namespace Integration_API.Controllers
 {
@@ -20,30 +25,51 @@ namespace Integration_API.Controllers
     public class DrugstoreController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public DrugstoreSqlRepository repo = new DrugstoreSqlRepository();
-        public DrugstoreService drugstoreService = new DrugstoreService();
+        public DrugstoreService drugstoreService;
+        public IDrugstoreRepository repo = new DrugstoreSqlRepository();
 
-        
+
+
         public DrugstoreController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
+            this.drugstoreService = new DrugstoreService(new DrugstoreSqlRepository(dbContext));
         }
 
         [HttpGet]       // GET /api/drugstore
         public IActionResult Get()
         {
-            repo.dbContext = dbContext;
             List<Drugstore> result = new List<Drugstore>();
-            repo.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.Address)));
-
+            drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email,drugstore.City, drugstore.Address)));
             return Ok(result);
+        }
+
+        [HttpGet ("filter")] // GET /api/drugstore/filter
+
+        public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
+        {
+            IEnumerable<string> headerValues = Request.Headers["ApiKey"];
+            var key = headerValues.FirstOrDefault();
+            if (key == null || !key.Equals("abcde"))
+                return Unauthorized();
+            CheckFilterParameters(ref city, ref address);
+            List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
+            return Ok(result);
+        }
+
+
+        private static void CheckFilterParameters(ref string city, ref string address)
+        {
+            if (city == null)
+                city = "";
+            if (address == null)
+                address = "";
         }
 
         [HttpGet("/name/{id}")] // GET /api/test2/int/3
         public IActionResult GetDrugstoreName(int id)
         {
-            repo.dbContext = dbContext;
-            string result = repo.GetDrugstoreName(id);
+            string result = drugstoreService.GetDrugstoreName(id);
             return Ok(result);
         }
 
@@ -51,7 +77,7 @@ namespace Integration_API.Controllers
         public IActionResult Post(RegistrationDto newPharmacy)
         {
             var client = new RestClient(newPharmacy.URLAddress);
-            var request = new RestRequest("/api/hospital", Method.POST); //izmeni
+            var request = new RestRequest("/api/hospital", Method.POST);
 
             string ApiKey = Guid.NewGuid().ToString();
 
@@ -70,17 +96,13 @@ namespace Integration_API.Controllers
 
             IRestResponse response = client.Execute(request);
 
-            var content = response.Content; // {"message":" created."}
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                repo.dbContext = dbContext;
-                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.Address);
-                dbContext.Drugstores.Add(ds);
-                dbContext.SaveChanges();
+                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.City,newPharmacy.Address);
+                drugstoreService.AddNewDrugstore(ds);
                 return Ok(ds);
             }
-            else
-                return Unauthorized();
+            return Unauthorized();
         }
     }
 }

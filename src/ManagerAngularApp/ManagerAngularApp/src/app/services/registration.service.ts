@@ -18,6 +18,7 @@ export class RegistrationService {
     public RegisterDrugstore(drugstore: RegistrationDto){
         const body = {
             DrugstoreName : drugstore.DrugstoreName,
+            City: drugstore.City,
             Address : drugstore.Address,
             URLAddress : drugstore.URLAddress,
             Email : drugstore.Email

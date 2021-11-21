@@ -30,7 +30,9 @@ export class ReviewComponent implements OnInit {
         this.pharmacies.push({
           "Id": p.id,
           "Name": p.name,
-          "Url": p.url
+          "Url": p.url,
+          "City": p.city,
+          "Address": p.address
         });
       }
     });
