@@ -33,7 +33,7 @@ namespace Model.DataBaseContext
 
             );
             modelBuilder.Entity<DrugstoreOffer>().HasData(
-                new DrugstoreOffer("1", "Content", "title", DateTime.Now, DateTime.Now, "Apotekica")
+                new DrugstoreOffer("1", "Content", "title", DateTime.Now, DateTime.Now, "Apotekica",false)
             );
         }
     }

@@ -5,14 +5,14 @@ export class DrugstoreOfferDto{
     StartDate:Date;
     EndDate:Date;
     DrugstoreName: string;
+    IsPublished:boolean;
     constructor(){
         this.Id = '';
-        this.Title = '';
         this.Content = '';
-        this.DrugstoreName = '';
+        this.Title = '';
         this.StartDate = Date.prototype;
         this.EndDate = Date.prototype;
+        this.DrugstoreName = '';
+        this.IsPublished = false;
     }
 }
-
-

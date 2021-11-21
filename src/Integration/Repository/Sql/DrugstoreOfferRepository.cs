@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Integration.Model;
 using Integration_API.Repository.Interfaces;
@@ -20,14 +21,14 @@ namespace Integration.Repository.Sql
         {
 
         }
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<DrugstoreOffer> GetAll()
         {
-            throw new NotImplementedException();
+            List<DrugstoreOffer> result = new List<DrugstoreOffer>();
+
+            dbContext.DrugstoreOffers.ToList().ForEach(drugstoreOffer => result.Add(new DrugstoreOffer(drugstoreOffer.Id, drugstoreOffer.Content, drugstoreOffer.Title, drugstoreOffer.StartDate, drugstoreOffer.EndDate, drugstoreOffer.DrugstoreName, drugstoreOffer.IsPublished)));
+
+            return result;
         }
 
 
@@ -47,6 +48,18 @@ namespace Integration.Repository.Sql
         }
 
         public void Update(DrugstoreOffer drugstoreOffer)
+        {
+            dbContext.DrugstoreOffers.Update(drugstoreOffer);
+            dbContext.SaveChanges();
+        }
+
+        public DrugstoreOffer GetOne(string id)
+        {
+         return dbContext.DrugstoreOffers.Find(id);
+            
+        }
+
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }

@@ -20,7 +20,7 @@ namespace Integration_API
    
         public static void Main(string[] args)
         {
-            DrugstoreOfferController offerRabbitMQService = new DrugstoreOfferController();
+           
             CreateHostBuilder(args).Build().Run();
             
 

@@ -14,8 +14,6 @@ export class DrugstoreOfferComponent implements OnInit {
   }
   sendOffer(drugstoreOffer : DrugstoreOfferDto): void {
     console.log(this.drugstoreOffer);
-    drugstoreOffer.Id = '2';
-    drugstoreOffer.DrugstoreName='Ova'
     this.drugStoreOfferService.SendOffer(drugstoreOffer).subscribe((d: any) =>{alert("NAJJACI" )});
   }
   

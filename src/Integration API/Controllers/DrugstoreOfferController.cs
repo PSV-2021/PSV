@@ -12,6 +12,7 @@ using Integration_API.Repository.Interfaces;
 using Integration.Repository.Sql;
 using RabbitMQ.Client.Events;
 using Integration.Model;
+using Integration_API.DTOs;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -33,8 +34,19 @@ namespace DrugstoreAPI.Controllers
             this.connection = factory.CreateConnection();
             this.channel = connection.CreateModel();
         }
-        
 
+
+        [HttpGet]   // GET /api/drugstoreOffer
+        public IActionResult Get()
+        {
+            IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(dbContext);
+            var result = repo.GetAll();
+
+            return Ok(result);
+        }
+
+        
+ 
         public void RecieveOffer()
         {
 
@@ -59,14 +71,16 @@ namespace DrugstoreAPI.Controllers
                     try
                     {   // try deserialize with default datetime format
                         drugstoreOffer = JsonConvert.DeserializeObject<DrugstoreOffer>(jsonMessage);
-                        Console.WriteLine(drugstoreOffer.Content);
+                        Console.WriteLine(drugstoreOffer.IsPublished);
+
+                        //drugstoreOffer.IsPublished = false;
                     }
                     catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
                     {
                         Console.WriteLine("Ne moze");
                     }
                     Console.WriteLine(" [x] Received {0}", drugstoreOffer);
-                    //repo.Save(drugstoreOffer);
+                    repo.Save(drugstoreOffer);
                 };
                 channel.BasicConsume(queue: queueName,
                                      autoAck: true,
@@ -76,18 +90,24 @@ namespace DrugstoreAPI.Controllers
                 Console.ReadLine();
             }
         }
-        public  DrugstoreOfferController()
-        {
-            this.factory = new ConnectionFactory() { HostName = "localhost" };
-            this.connection = factory.CreateConnection();
-            this.channel = connection.CreateModel();
-
-        }
+        
 
         public void Deregister()
         {
             this.connection.Close();
         }
 
+        [HttpPost("pls")]
+        public IActionResult Post(PublishedOfferDto offer)
+        {
+            
+            IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(dbContext);
+            
+            DrugstoreOffer forEdit = repo.GetOne(offer.OfferId);
+            Console.WriteLine(offer.OfferId);
+            forEdit.IsPublished = true;
+            repo.Update(forEdit);
+            return Ok();
+        }
     }
 }

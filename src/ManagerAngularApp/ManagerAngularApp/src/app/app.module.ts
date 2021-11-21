@@ -13,7 +13,7 @@ import { ReviewComponent } from './review/review.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 import { PurchaseDrugsComponent } from './purchase-drugs/purchase-drugs.component';
-import { DrugstoreOffersComponent } from './drugstore-offers/drugstore-offers.component';
+import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { DrugstoreOffersComponent } from './drugstore-offers/drugstore-offers.co
     LandingPageComponent,
     FeedbacksComponent,
     PurchaseDrugsComponent,
-    DrugstoreOffersComponent,
+    DrugstoreOfferComponent,
   ],
   imports: [
     BrowserModule,
