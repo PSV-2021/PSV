@@ -38,7 +38,7 @@ namespace Service
 
         public List<Doctor> GetGeneralDoctors()
         {
-            return DoctorSqlRepository.GetGeneralDoctors();
+            return DoctorSqlRepository.GetAvalibleGeneralDoctors();
         }
 
         public List<Doctor> GetAllDoctors()

@@ -44,9 +44,10 @@ namespace Hospital.Repository
             throw new System.NotImplementedException();
         }
 
-        public List<Doctor> GetGeneralDoctors()
+        public List<Doctor> GetAvalibleGeneralDoctors()
         {
-            List<Doctor> retVal = (List<Doctor>)dbContext.Doctors.ToList().Where(s => s.SpecialityId == 1).ToList();
+            var d = dbContext.Doctors.OrderBy(p => p.NumberOfPatients).FirstOrDefault();
+            List<Doctor> retVal = (List<Doctor>)dbContext.Doctors.ToList().Where(s => s.SpecialityId == 1).Where(s=>s.NumberOfPatients <= d.NumberOfPatients + 2).ToList();
 
             return retVal;
         }
