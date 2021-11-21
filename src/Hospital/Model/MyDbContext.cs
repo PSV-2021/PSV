@@ -18,6 +18,7 @@ namespace Hospital.Model
         public DbSet<VacationDays> VacationDays { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Allergen> Allergens { get; set; }
        
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
@@ -103,8 +104,8 @@ namespace Hospital.Model
                    FathersName = "Petar",
                    DoctorId = 1,
                    MedicalRecordId = 1,
-                   Allergen = new List<String>()
-               }) ; ;
+                   Allergen = new List<Allergen>()
+               }) ;
         }
 
     }

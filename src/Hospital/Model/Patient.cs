@@ -16,7 +16,7 @@ namespace Model
         public BloodType BloodType { get; set; }
         public Boolean IsActive { get; set; }
         public String FathersName { get; set; }
-        public virtual List<String> Allergen { get; set; }
+        public virtual List<Allergen> Allergen { get; set; }
         [ForeignKey("DoctorId")]
         public int DoctorId { get; set; }
         public virtual Doctor ChosenDoctor { get; set; }

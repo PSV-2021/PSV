@@ -151,7 +151,7 @@ namespace HospitalApiTests.Integration
 
         private PatientDTO GeneratePatient()
         {
-             return new PatientDTO { Name= "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType =  BloodType.A, DoctorId = 1 };
+             return new PatientDTO { Name= "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType =  BloodType.A, DoctorId = 1, Allergens = new List<String>()};
         }
     }
 }

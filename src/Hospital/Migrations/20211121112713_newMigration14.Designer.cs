@@ -3,15 +3,17 @@ using System;
 using Hospital.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211121112713_newMigration14")]
+    partial class newMigration14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -322,7 +324,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 11, 21, 12, 28, 54, 904, DateTimeKind.Local).AddTicks(7557),
+                            TimeWritten = new DateTime(2021, 11, 21, 12, 27, 12, 286, DateTimeKind.Local).AddTicks(3483),
                             canPublish = false
                         },
                         new
@@ -330,7 +332,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 11, 21, 12, 28, 54, 907, DateTimeKind.Local).AddTicks(8296),
+                            TimeWritten = new DateTime(2021, 11, 21, 12, 27, 12, 289, DateTimeKind.Local).AddTicks(5110),
                             canPublish = true
                         },
                         new
@@ -338,7 +340,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 11, 21, 12, 28, 54, 907, DateTimeKind.Local).AddTicks(8370),
+                            TimeWritten = new DateTime(2021, 11, 21, 12, 27, 12, 289, DateTimeKind.Local).AddTicks(5183),
                             canPublish = true
                         });
                 });
@@ -412,7 +414,7 @@ namespace Hospital.Migrations
             modelBuilder.Entity("Hospital.Model.Allergen", b =>
                 {
                     b.HasOne("Model.Patient", "Patient")
-                        .WithMany("Allergen")
+                        .WithMany()
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -481,11 +483,6 @@ namespace Hospital.Migrations
             modelBuilder.Entity("Model.MedicalRecord", b =>
                 {
                     b.Navigation("Allergens");
-                });
-
-            modelBuilder.Entity("Model.Patient", b =>
-                {
-                    b.Navigation("Allergen");
                 });
 #pragma warning restore 612, 618
         }

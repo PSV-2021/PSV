@@ -30,8 +30,6 @@ namespace HospitalAPI.Controllers
         public IActionResult Post([FromBody] PatientDTO p)
         {
             Patient patient = GeneratePatientFromDTO(p);
-            patient.DateOfBirth = DateTime.Parse(p.Date);
-            Console.WriteLine(patient.DateOfBirth);
             patientService.SavePatientSql(patient, dbContext);
 
             return Ok();
@@ -54,11 +52,12 @@ namespace HospitalAPI.Controllers
                 Password = p.Password,
                 DoctorId = p.DoctorId
             };
-            patient.Allergen = new List<String>();
+            patient.Allergen = new List<Allergen>();
             foreach (String s in p.Allergens)
             {
-                patient.Allergen.Add(s);
+                patient.Allergen.Add(new Allergen { Name = s, PatientId = patient.Id});
             }
+            patient.DateOfBirth = DateTime.Parse(p.Date);
 
             return patient;
         }
