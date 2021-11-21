@@ -4,16 +4,30 @@ using System.Collections.Generic;
 
 using Repository;
 using System.Threading;
+using Hospital.Repository;
+using Hospital.Model;
+using System.Linq;
 
 namespace Service
 {
-   public class PatientService
+    public class PatientService
     {
         private IPatientRepository PatientRepository { get; }
+        private PatientSqlRepository PatientSqlRepository { get; set; }
+        private MedicalRecordSqlRepository MedicalRecordRepository { get; set; }
+
+        public PatientService(IPatientRepository patientRepository)
+        {
+            PatientRepository = patientRepository;
+        }
 
         public PatientService()
         {
-            PatientRepository = new PatientFileRepository();
+            PatientRepository = new PatientSqlRepository();
+        }
+        public PatientService(PatientSqlRepository patientSqlRepository)
+        {
+            PatientSqlRepository = patientSqlRepository;
         }
 
         public Patient GetPatientByJmbg(string jmbg)
@@ -28,6 +42,19 @@ namespace Service
         public Boolean SavePatient(Patient newPatient)
         {
             return PatientRepository.Save(newPatient);
+        }
+
+        public void SavePatientSql(Patient newPatient, MyDbContext context)
+        {
+           GenerateMedicalRecordId(newPatient, context);
+           PatientSqlRepository.SavePatient(newPatient);
+        }
+
+        public void GenerateMedicalRecordId(Patient p, MyDbContext context)
+        {
+            MedicalRecordRepository = new MedicalRecordSqlRepository(context);
+            List<MedicalRecord> mr = MedicalRecordRepository.GetAll();
+            p.MedicalRecordId = (mr.Count + 1);
         }
 
         public Boolean EditPatient(Patient editedPatient)
@@ -118,6 +145,11 @@ namespace Service
                 }
             }
             return notifications;
+        }
+
+        public Patient Save(Patient patient)
+        {
+            throw new NotImplementedException();
         }
 
         private Boolean PeriodDaily(Prescription prescription)

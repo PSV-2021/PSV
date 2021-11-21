@@ -20,40 +20,177 @@ namespace Hospital.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Hospital.Model.Allergen", b =>
+            {
+                b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        
+                b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                b.Property<int>("PatientId")
+                        .HasColumnType("integer");
+
+                b.HasKey("Id");
+
+                b.HasIndex("PatientId");
+
+                b.ToTable("Allergens");
+             });
+             
             modelBuilder.Entity("Hospital.Model.Survey", b =>
+            {
+                b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        
+                b.Property<int>("AppointmentId")
+                        .HasColumnType("integer");
+
+                b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                b.Property<int>("PatientId")
+                        .HasColumnType("integer");
+
+                b.Property<List<int>>("SurveyAnswers")
+                        .HasColumnType("integer[]");
+
+                b.Property<List<int>>("SurveyQuestions")
+                        .HasColumnType("integer[]");
+
+                b.HasKey("Id");
+
+                b.ToTable("Survey");
+             });
+             
+            modelBuilder.Entity("Model.Doctor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("AppointmentId")
+                    b.Property<string>("Adress")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AvailableDaysOff")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("PatientId")
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Jmbg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("NumberOfPatients")
                         .HasColumnType("integer");
 
-                    b.Property<List<int>>("SurveyAnswers")
-                        .HasColumnType("integer[]");
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
 
-                    b.Property<List<int>>("SurveyQuestions")
-                        .HasColumnType("integer[]");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<int>("SalaryInRsd")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Sex")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SpecialityId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Survey");
+                    b.HasIndex("SpecialityId");
+
+                    b.ToTable("Doctors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Adress = "Bulevar Oslobodjenja 4",
+                            AvailableDaysOff = 20,
+                            DateOfBirth = new DateTime(1998, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "milan@gmail.com",
+                            Jmbg = "3009998805137",
+                            Name = "Milan",
+                            NumberOfPatients = 0,
+                            Password = "02145",
+                            PhoneNumber = "0641664608",
+                            SalaryInRsd = 200000,
+                            Sex = 0,
+                            SpecialityId = 1,
+                            Surname = "Popovic",
+                            Type = 2,
+                            Username = "miki56"
+                        });
                 });
 
-            modelBuilder.Entity("Hospital.Model.SurveyQuestion", b =>
-                {
+            modelBuilder.Entity("Model.Ingridient", b =>
+            {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        
+                    b.Property<int?>("MedicalRecordId")
+                        .HasColumnType("integer");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+                    
+                    b.HasIndex("MedicalRecordId");
+
+                    b.ToTable("Ingridients");
+                    
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Panclav"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Penicilin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Panadol"
+                        });
+             });
+                  
+            modelBuilder.Entity("Hospital.Model.SurveyQuestion", b =>
+            {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        
                     b.Property<int>("QuestionType")
                         .HasColumnType("integer");
 
@@ -64,9 +201,9 @@ namespace Hospital.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
+                    
                     b.ToTable("SurveyQuestion");
-
+                    
                     b.HasData(
                         new
                         {
@@ -168,6 +305,143 @@ namespace Hospital.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Model.MedicalRecord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("HealthInsuranceNumber")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalRecords");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HealthInsuranceNumber = "1ab"
+                        });
+                });
+
+            modelBuilder.Entity("Model.Patient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Adress")
+                        .HasColumnType("text");
+
+                    b.Property<int>("BloodType")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EmergencyContact")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FathersName")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Jmbg")
+                        .HasColumnType("text");
+
+                    b.Property<int>("MedicalRecordId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Sex")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("MedicalRecordId");
+
+                    b.ToTable("Patients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Adress = "Bulevar Oslobodjenja 8",
+                            BloodType = 1,
+                            DateOfBirth = new DateTime(1998, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Email = "marko@gmail.com",
+                            FathersName = "Petar",
+                            IsActive = true,
+                            IsBlocked = false,
+                            Jmbg = "3009998805138",
+                            MedicalRecordId = 1,
+                            Name = "Marko",
+                            Password = "miki985",
+                            PhoneNumber = "0641664608",
+                            Sex = 0,
+                            Surname = "Markovic",
+                            Type = 3,
+                            Username = "miki98"
+                        });
+                });
+
+            modelBuilder.Entity("Model.Speciality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Speciality");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "general"
+                        });
+                });
+
             modelBuilder.Entity("Model.UserFeedback", b =>
                 {
                     b.Property<int>("Id")
@@ -197,7 +471,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 11, 21, 17, 35, 10, 861, DateTimeKind.Local).AddTicks(3648),
+                            TimeWritten = new DateTime(2021, 11, 21, 12, 28, 54, 904, DateTimeKind.Local).AddTicks(7557),
                             canPublish = false
                         },
                         new
@@ -205,7 +479,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 11, 21, 17, 35, 10, 890, DateTimeKind.Local).AddTicks(4117),
+                            TimeWritten = new DateTime(2021, 11, 21, 12, 28, 54, 907, DateTimeKind.Local).AddTicks(8296),
                             canPublish = true
                         },
                         new
@@ -213,9 +487,154 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 11, 21, 17, 35, 10, 890, DateTimeKind.Local).AddTicks(4248),
+                            TimeWritten = new DateTime(2021, 11, 21, 12, 28, 54, 907, DateTimeKind.Local).AddTicks(8370),
                             canPublish = true
                         });
+                });
+
+            modelBuilder.Entity("Model.VacationDays", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("VacationDays");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EndDate = new DateTime(2021, 5, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2021, 5, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("Model.WorkingHours", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("BeginningDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Shift")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("WorkingHours");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BeginningDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2021, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Shift = 0
+                        });
+                });
+
+            modelBuilder.Entity("Hospital.Model.Allergen", b =>
+                {
+                    b.HasOne("Model.Patient", "Patient")
+                        .WithMany("Allergen")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("Model.Doctor", b =>
+                {
+                    b.HasOne("Model.Speciality", "Speciality")
+                        .WithMany()
+                        .HasForeignKey("SpecialityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Speciality");
+                });
+
+            modelBuilder.Entity("Model.Ingridient", b =>
+                {
+                    b.HasOne("Model.MedicalRecord", null)
+                        .WithMany("Allergens")
+                        .HasForeignKey("MedicalRecordId");
+                });
+
+            modelBuilder.Entity("Model.Patient", b =>
+                {
+                    b.HasOne("Model.Doctor", "ChosenDoctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Model.MedicalRecord", "MedicalRecord")
+                        .WithMany()
+                        .HasForeignKey("MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChosenDoctor");
+
+                    b.Navigation("MedicalRecord");
+                });
+
+            modelBuilder.Entity("Model.VacationDays", b =>
+                {
+                    b.HasOne("Model.Doctor", null)
+                        .WithMany("VacationDays")
+                        .HasForeignKey("DoctorId");
+                });
+
+            modelBuilder.Entity("Model.WorkingHours", b =>
+                {
+                    b.HasOne("Model.Doctor", null)
+                        .WithMany("WorkingSchedule")
+                        .HasForeignKey("DoctorId");
+                });
+
+            modelBuilder.Entity("Model.Doctor", b =>
+                {
+                    b.Navigation("VacationDays");
+
+                    b.Navigation("WorkingSchedule");
+                });
+
+            modelBuilder.Entity("Model.MedicalRecord", b =>
+                {
+                    b.Navigation("Allergens");
+                });
+
+            modelBuilder.Entity("Model.Patient", b =>
+                {
+                    b.Navigation("Allergen");
                 });
 #pragma warning restore 612, 618
         }

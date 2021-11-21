@@ -3,9 +3,17 @@ mat-toolbar span{
     display: flex;
 }
 
+mat-toolbar{
+    max-width: 100%;
+}
+
 .example-spacer {
-    flex: 1 1 auto;
+    flex: 1 1 5;
   }
+
+.spacer{
+    flex: 1 1 auto
+}
 
 mat-toolbar a{
     text-decoration-color: aliceblue;

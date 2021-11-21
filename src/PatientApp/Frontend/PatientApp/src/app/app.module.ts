@@ -5,16 +5,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
 import { MatTableModule } from "@angular/material/table";
-import {MatCardModule} from '@angular/material/card';
-import { MatRadioModule } from '@angular/material/radio';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { FormsModule } from '@angular/forms';
-
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { AppComponent } from './app.component';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { LandingComponent } from './landing/landing.component';
 import { CommentsObserveComponent } from './comments-observe/comments-observe.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SurveyComponent } from './survey/survey.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +33,9 @@ import { SurveyComponent } from './survey/survey.component';
     NavigationComponent,
     LandingComponent,
     CommentsObserveComponent,
+    RegistrationComponent,
     SurveyComponent
+
   ],
   imports: [
     BrowserModule,
@@ -32,6 +45,17 @@ import { SurveyComponent } from './survey/survey.component';
     HttpClientModule,
     MatTableModule,
     MatCardModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatIconModule,
+    MatGridListModule,
+    MatButtonToggleModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
     MatRadioModule,
     MatSnackBarModule,
     FormsModule
@@ -40,6 +64,6 @@ import { SurveyComponent } from './survey/survey.component';
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
