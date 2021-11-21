@@ -13,10 +13,10 @@ namespace Model
         [NotMapped]
         public String MedicalIdNumber { get; set; }
         public String HealthInsuranceNumber { get; set; }
-       
+        public virtual List<Ingridient> Allergens { get; set; }
+        [NotMapped]
         public List<Ingridient> allergen;
-
-        public virtual List<Ingridient> Allergen
+        /*public virtual List<Ingridient> Allergens
         {
             get
             {
@@ -33,7 +33,7 @@ namespace Model
                         AddAllergen(oAllergen);
                 }
             }
-        }
+        }*/
 
         public MedicalRecord(string hid, string mid)
         {

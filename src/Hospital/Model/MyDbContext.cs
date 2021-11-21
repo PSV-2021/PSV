@@ -18,13 +18,13 @@ namespace Hospital.Model
         public DbSet<VacationDays> VacationDays { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Patient> Patients { get; set; }
-
+       
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies(true);
+           optionsBuilder.UseLazyLoadingProxies(true);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -69,15 +69,17 @@ namespace Hospital.Model
                     VacationDays = new List<VacationDays>(),
                     AvailableDaysOff = 20,
                     Id = 1,
-                    SpecialityId = 1
+                    SpecialityId = 1,
+                    NumberOfPatients = 0
                 });
+           
             modelBuilder.Entity<MedicalRecord>().HasData(
-                new MedicalRecord
-                {
-                    Id = 1,
-                    HealthInsuranceNumber = "1ab",
-                    Allergen = new List<Ingridient>()
-                }
+                 new MedicalRecord
+                 {
+                     Id = 1,
+                     HealthInsuranceNumber = "1ab",
+                     Allergens = new List<Ingridient>()
+                 }
                 ) ;
             modelBuilder.Entity<Patient>()
                .HasData(
@@ -100,8 +102,9 @@ namespace Hospital.Model
                    BloodType = BloodType.B,
                    FathersName = "Petar",
                    DoctorId = 1,
-                   MedicalRecordId = 1
-               }); ;
+                   MedicalRecordId = 1,
+                   Allergen = new List<String>()
+               }) ; ;
         }
 
     }

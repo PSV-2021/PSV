@@ -34,7 +34,7 @@ namespace Service
             var allergenMatchFound = false;
             foreach (var ingredient in medicine.ingridient)
             {
-                foreach (var allergen in medicalRecord.Allergen)
+                foreach (var allergen in medicalRecord.Allergens)
                 {
                     if (ingredient.Name.Equals(allergen.Name))
                     {

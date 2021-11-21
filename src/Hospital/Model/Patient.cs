@@ -16,6 +16,7 @@ namespace Model
         public BloodType BloodType { get; set; }
         public Boolean IsActive { get; set; }
         public String FathersName { get; set; }
+        public virtual List<String> Allergen { get; set; }
         [ForeignKey("DoctorId")]
         public int DoctorId { get; set; }
         public virtual Doctor ChosenDoctor { get; set; }
@@ -23,6 +24,9 @@ namespace Model
         [ForeignKey("MedicalRecordId")]
         public int MedicalRecordId { get; set; }
         public virtual MedicalRecord MedicalRecord { get; set; }
+        
+       
+
         public Patient() { }
         public Patient(string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string emContact, MedicalRecord med, string username, string password, Boolean block = false)
         {
@@ -70,6 +74,18 @@ namespace Model
             get
             {
                 return Name + " " + Surname;
+            }
+        }
+        [NotMapped]
+        public List<Ingridient> Allergens
+        {
+            get
+            {
+                return MedicalRecord.Allergens;
+            }
+            set
+            {
+                MedicalRecord.Allergens = value;
             }
         }
   

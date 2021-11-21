@@ -18,6 +18,7 @@ namespace Model
         public int SpecialityId { get; set; }
        
         public virtual Speciality Speciality { get; set; }
+        public int NumberOfPatients { get; set; }
 
         public Doctor(string name, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber,
             string adress, string email, int salary, string username, string password)

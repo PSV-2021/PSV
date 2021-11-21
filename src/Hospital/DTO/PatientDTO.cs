@@ -21,7 +21,7 @@ namespace Hospital.DTO
         public String Username { get; set; }
         public String Password { get; set; }
         public int DoctorId { get; set; }
-        public List<Ingridient> Allergens { get; set; }
+        public List<String> Allergens { get; set; }
         public PatientDTO() { }
     }
 }

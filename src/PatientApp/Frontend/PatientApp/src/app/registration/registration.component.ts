@@ -80,7 +80,7 @@ export class RegistrationComponent implements OnInit {
     }
 
   this.registrationService.SendPatient( this.returnPatient).subscribe((data: any)=>{
-      this._snackBar.open('Anketa poslata!', '', {
+      this._snackBar.open('Patient saved!', '', {
         duration: 2000
       });
     });
