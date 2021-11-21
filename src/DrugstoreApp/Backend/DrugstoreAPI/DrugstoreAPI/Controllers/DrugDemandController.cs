@@ -8,6 +8,8 @@ using Drugstore.Models;
 using Drugstore.Repository.Sql;
 using DrugstoreAPI.Dtos;
 using DrugstoreAPI.Service;
+using Drugstore.Repository.Interfaces;
+using Service;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -18,11 +20,13 @@ namespace DrugstoreAPI.Controllers
 
         private readonly MyDbContext dbContext;
         public MedicineService medicineService;
+        public HospitalService HospitalService;
 
         public DrugDemandController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
+            this.HospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
         }
 
         [HttpPost]
@@ -35,7 +39,7 @@ namespace DrugstoreAPI.Controllers
                 var headers = Request.Headers["ApiKey"];
                 foreach (string header in headers)
                 {
-                    if (this.CheckApiKey(header))
+                    if (HospitalService.CheckApiKey(header))
                     {
                        return Ok(medicineService.CheckForAmountOfDrug(demand.Name, demand.Amount));
                     }
@@ -45,18 +49,5 @@ namespace DrugstoreAPI.Controllers
         }
 
 
-        private bool CheckApiKey(string apiKey)
-        {
-            bool found = false;
-            foreach (Hospital h in dbContext.Hospitals.ToList())
-            {
-                if (h.ApiKey.Equals(apiKey))
-                {
-                    found = true;
-                    break;
-                }
-            }
-            return found;
-        }
     }
 }

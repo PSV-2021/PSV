@@ -5,7 +5,9 @@ using Integration.Model;
 
 namespace Integration_API.Repository.Interfaces
 {
-    interface IDrugstoreRepository : IGenericRepository<Drugstore, int>
+    public interface IDrugstoreRepository : IGenericRepository<Drugstore, int>
     {
+        List<Drugstore> SearchDrugstoresByCityAndAddress(string address, string city);
+        string GetDrugstoreName(int id);
     }
 }

@@ -30,7 +30,7 @@ namespace Integration.Repository.Sql
         {
             List<Drugstore> result = new List<Drugstore>();
 
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.Address)));
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.City,drugstore.Address)));
 
             return result;
         }
@@ -44,19 +44,6 @@ namespace Integration.Repository.Sql
             return query.FirstOrDefault();
         }
 
-        public int GetMaxId()
-        {
-            int max = -999;
-            foreach (Drugstore ds in dbContext.Drugstores.ToList())
-            {
-                if (ds.Id > max)
-                    max = ds.Id;
-            }
-
-            return max;
-
-        }
-
         public Drugstore GetOne(int id)
         {
             throw new NotImplementedException();
@@ -64,12 +51,21 @@ namespace Integration.Repository.Sql
 
         public void Save(Drugstore newObject)
         {
-            throw new NotImplementedException();
+            dbContext.Add(newObject);
+            dbContext.SaveChanges();
         }
 
         public void Update(Drugstore editedObject)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Drugstore> SearchDrugstoresByCityAndAddress(string city, string address)
+        {
+            var retVal = dbContext.Drugstores.Where(drugstore => 
+                drugstore.City.Contains(city) && drugstore.Address.Contains(address)
+                ).ToList();
+            return retVal;
         }
     }
 }

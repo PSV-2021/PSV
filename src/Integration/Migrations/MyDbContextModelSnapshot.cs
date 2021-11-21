@@ -32,6 +32,9 @@ namespace Integration.Migrations
                     b.Property<string>("ApiKey")
                         .HasColumnType("text");
 
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
@@ -49,41 +52,37 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 1,
-
-                            Address = "Tolstojeva 3, Novi Sad",
-                            ApiKey = "aaabbbccc",
+                            Address = "Tolstojeva 3",
+                            ApiKey = "DrugStoreSecretKey",
+                            City = "Novi Sad",
                             Email = "apoteka1@gmail.com",
                             Name = "Apoteka prva",
                             Url = "http://localhost:5001"
-
                         },
                         new
                         {
                             Id = 2,
-
-                            Address = "Balzakova 3, Novi Sad",
+                            Address = "Balzakova 3",
                             ApiKey = "wnjgjowenfweo",
+                            City = "Novi Sad",
                             Email = "apoteka2@gmail.com",
                             Name = "Apoteka druga",
                             Url = "http://localhost:5002"
-
                         },
                         new
                         {
                             Id = 3,
-
-                            Address = "Puskinova 3, Novi Sad",
+                            Address = "Puskinova 3",
                             ApiKey = "wuhguiwoehfuhw",
+                            City = "Beograd",
                             Email = "apoteka3@gmail.com",
                             Name = "Apoteka treca",
                             Url = "http://localhost:5003"
-
                         });
                 });
 
             modelBuilder.Entity("Integration.Model.DrugstoreFeedback", b =>
                 {
-
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
@@ -92,7 +91,6 @@ namespace Integration.Migrations
 
                     b.Property<int>("DrugstoreId")
                         .HasColumnType("integer");
-
 
                     b.Property<DateTime>("RecievedTime")
                         .HasColumnType("timestamp without time zone");
@@ -110,31 +108,30 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 11, 7, 22, 58, 9, 235, DateTimeKind.Local).AddTicks(9809),
+                            RecievedTime = new DateTime(2021, 11, 13, 16, 11, 37, 551, DateTimeKind.Local).AddTicks(5694),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 7, 22, 58, 9, 240, DateTimeKind.Local).AddTicks(9213)
+                            SentTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(1709)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 11, 7, 22, 58, 9, 241, DateTimeKind.Local).AddTicks(619),
+                            RecievedTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2037),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 7, 22, 58, 9, 241, DateTimeKind.Local).AddTicks(705)
+                            SentTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2062)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 11, 7, 22, 58, 9, 241, DateTimeKind.Local).AddTicks(734),
+                            RecievedTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2074),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 7, 22, 58, 9, 241, DateTimeKind.Local).AddTicks(742)
+                            SentTime = new DateTime(2021, 11, 13, 16, 11, 37, 554, DateTimeKind.Local).AddTicks(2077)
                         });
                 });
 #pragma warning restore 612, 618

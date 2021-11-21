@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    interface IDoctorRepository: IGenericRepository<Doctor, string>
+    public interface IDoctorRepository : IGenericRepository<Doctor, string>
     {
         List<Doctor> GetDoctorsWithSpeciality(Speciality speciality);
     }
