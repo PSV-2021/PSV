@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using Hospital.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211120131220_sixMigration")]
+    partial class sixMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,7 +199,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 11, 21, 17, 35, 10, 861, DateTimeKind.Local).AddTicks(3648),
+                            TimeWritten = new DateTime(2021, 11, 20, 14, 12, 19, 307, DateTimeKind.Local).AddTicks(4420),
                             canPublish = false
                         },
                         new
@@ -205,7 +207,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 11, 21, 17, 35, 10, 890, DateTimeKind.Local).AddTicks(4117),
+                            TimeWritten = new DateTime(2021, 11, 20, 14, 12, 19, 318, DateTimeKind.Local).AddTicks(7772),
                             canPublish = true
                         },
                         new
@@ -213,7 +215,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 11, 21, 17, 35, 10, 890, DateTimeKind.Local).AddTicks(4248),
+                            TimeWritten = new DateTime(2021, 11, 20, 14, 12, 19, 318, DateTimeKind.Local).AddTicks(7895),
                             canPublish = true
                         });
                 });
