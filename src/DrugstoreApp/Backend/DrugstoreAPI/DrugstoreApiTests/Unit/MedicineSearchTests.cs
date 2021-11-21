@@ -20,65 +20,13 @@ namespace DrugstoreApiTests.Unit
         {
             var medicineStubRepository = new Mock<IMedicineRepository>();
             var medicineService = new MedicineService(medicineStubRepository.Object);
-            List<Medicine> seachedMedicines = GenerateStubData();
+            List<Medicine> medicines = GenerateStubData();
 
-            medicineStubRepository.Setup(m => m.SearchMedicineByNameAndSubstance("", "")).Returns(seachedMedicines);
+            medicineStubRepository.Setup(m => m.GetAll()).Returns(medicines);
 
             List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("", "");
 
             retVal.Count.ShouldBe(3);
-        }
-
-        [Theory]
-        [MemberData(nameof(Searches))]
-        public void Medicine_search_with_response(string name, string substance, int expectedValue)
-        {
-            var medicineRepository = new Mock<IMedicineRepository>();
-            var httpContext = new DefaultHttpContext();
-            httpContext.Request.Headers["ApiKey"] = "abcde";
-            List<Medicine> retVal = GenerateStubData();
-
-            var controler = new MedicineController(null)
-            {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = httpContext,
-                }
-            };
-
-            controler.medicineService = new MedicineService(medicineRepository.Object);
-            medicineRepository.Setup(dr => dr.SearchMedicineByNameAndSubstance(name, substance)).Returns(retVal);
-
-            var result = controler.Filter(name, substance) as ObjectResult;
-
-            result.ShouldNotBeNull();
-            retVal = (List<Medicine>)result.Value;
-            retVal.Count.ShouldBe(expectedValue);
-
-        }
-
-        [Fact]
-        public void Check_if_ApiKey_is_not_valid()
-        {
-            var medicineRepository = new Mock<IMedicineRepository>();
-            var httpContext = new DefaultHttpContext();
-            httpContext.Request.Headers["ApiKey"] = "something wrong";
-            List<Medicine> retVal = GenerateStubData();
-
-            var controler = new MedicineController(null)
-            {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = httpContext,
-                }
-            };
-
-            controler.medicineService = new MedicineService(medicineRepository.Object);
-            medicineRepository.Setup(dr => dr.SearchMedicineByNameAndSubstance("", "")).Returns(retVal);
-
-            var result = controler.Filter("", "");
-
-            Assert.IsType<UnauthorizedResult>(result);
         }
 
         private static List<Medicine> GenerateStubData()
@@ -94,6 +42,20 @@ namespace DrugstoreApiTests.Unit
             searchedMedicines.Add(m3);
             return searchedMedicines;
         }
+        
+
+        /*[Theory]
+        [MemberData(nameof(Searches))]
+        public void Searched_drugs(Medicine drug, bool expectedValue)
+        {
+            foreach (Medicine m in GenerateStubData()) {
+                m.SearchMedicineByNameAndSubstance(m.Name, m.Substances);
+            }
+            bool retVal = service.CheckForAmountOfDrug(drug.Name, drug.Supply);
+
+            retVal.ShouldBe(expectedValue);
+        }*/
+
         public static IEnumerable<object[]> Searches()
         {
             var retVal = new List<object[]>();
