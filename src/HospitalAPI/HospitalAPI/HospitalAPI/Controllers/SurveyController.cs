@@ -1,4 +1,5 @@
-﻿using Hospital.Model;
+﻿using Hospital.DTO;
+using Hospital.Model;
 using Hospital.Repository;
 using Hospital.Service;
 using Microsoft.AspNetCore.Http;
@@ -35,11 +36,9 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(List<SurveyQuestion> surveyQuestion)
+        public IActionResult Post(SurveyDTO survey)
         {
-            //repoSurvey.dbContext = dbContext;
-            //Survey newSurvey = repoSurvey.CreateSurvey(surveyQuestion);
-            surveyService.CreateSurvey(surveyQuestion);
+            surveyService.CreateSurvey(survey.SurveyQuestions, survey.SurveyAnswers);
 
             return Ok();
         }

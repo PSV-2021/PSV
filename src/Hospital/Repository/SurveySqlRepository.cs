@@ -21,7 +21,7 @@ namespace Hospital.Repository
         }
 
         public bool CheckIfExistsById(int id)
-        {
+        {          
             foreach (Survey s in GetAll())
             {
                 if (s.AppointmentId == id)
@@ -41,7 +41,7 @@ namespace Hospital.Repository
         {
             List<Survey> result = new List<Survey>();
 
-            dbContext.Survey.ToList().ForEach(survey => result.Add(new Survey(survey.Id, survey.SurveyQuestions, survey.PatientId, survey.Date, survey.AppointmentId)));
+            dbContext.Survey.ToList().ForEach(survey => result.Add(new Survey(survey.Id, survey.PatientId, survey.Date, survey.AppointmentId, survey.SurveyQuestions, survey.SurveyAnswers)));
 
             return result;
         }

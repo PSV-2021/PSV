@@ -29,7 +29,7 @@ namespace Hospital.Service
             return false;
         }
 
-        public void CreateSurvey(List<SurveyQuestion> surveyQuestion)
+        public void CreateSurvey(List<int> surveyQuestions, List<int> surveyAnswers)
         {
             /*
             if (!CheckIfExistsById(appointmentId))
@@ -38,10 +38,11 @@ namespace Hospital.Service
             }*/
             Survey survey = new Survey();
             survey.Id = FindNextId();
-            survey.SurveyQuestions = surveyQuestion;
             survey.PatientId = 1;  //Ove vrednosti se moraju posle promeniti
-            survey.AppointmentId = 2; //Ove vrednosti se moraju posle promeniti
             survey.Date = DateTime.Now;
+            survey.AppointmentId = 3; //Ove vrednosti se moraju posle promeniti
+            survey.SurveyQuestions = surveyQuestions;
+            survey.SurveyAnswers = surveyAnswers;
             SurveyRepository.CreateSurvey(survey);
 
         }

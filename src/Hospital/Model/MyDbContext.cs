@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Model;
 using Microsoft.EntityFrameworkCore;
+using Hospital.DTO;
 
 namespace Hospital.Model
 {
@@ -41,11 +42,6 @@ namespace Hospital.Model
                 new SurveyQuestion { Id = 14, Text = "How likely are you to recommend our hospital to a friend or family member?", Rating = 0, QuestionType = 2 }
             );
 
-
-            modelBuilder.Entity<Survey>().HasData(
-                new Survey { Id = 1, SurveyQuestions = new List<SurveyQuestion>(), PatientId = 1, Date = DateTime.Now, AppointmentId = 1 }
-                
-            );
 
         }
 
