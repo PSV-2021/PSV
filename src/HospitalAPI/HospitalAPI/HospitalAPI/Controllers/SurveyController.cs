@@ -17,29 +17,28 @@ namespace HospitalAPI.Controllers
     {
         private readonly MyDbContext dbContext;
         public SurveyQuestionSqlRepository repoSurveyQuestion = new SurveyQuestionSqlRepository();
-        public SurveySqlRepository repoSurvey = new SurveySqlRepository();
+        public SurveySqlRepository repoSurvey;
         public SurveyService surveyService;
 
         public SurveyController(MyDbContext db)
         {
             this.dbContext = db;
-            surveyService = new SurveyService(new SurveySqlRepository(db));
+            repoSurvey = new SurveySqlRepository(db);
+            surveyService = new SurveyService(repoSurvey);
+            //surveyService = new SurveyService(new SurveySqlRepository(db));
         }
 
         [HttpGet]   // GET 
         public IActionResult Get()
         {
             repoSurveyQuestion.dbContext = dbContext;
-            List<SurveyQuestion> result = new List<SurveyQuestion>();
-            result = repoSurveyQuestion.GetAll();
-            return Ok(result);
+            return Ok(repoSurveyQuestion.GetAll());
         }
 
         [HttpPost]
         public IActionResult Post(SurveyDTO survey)
         {
             surveyService.CreateSurvey(survey.SurveyQuestions, survey.SurveyAnswers);
-
             return Ok();
         }
     }

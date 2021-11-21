@@ -21,15 +21,16 @@ namespace Hospital.Repository
         }
 
         public bool CheckIfExistsById(int id)
-        {          
+        {
+            bool retVal = false;
             foreach (Survey s in GetAll())
             {
                 if (s.AppointmentId == id)
                 {
-                    return true;
+                    retVal = true;
                 }
             }
-            return false;
+            return retVal;
         }
 
         public bool Delete(int id)

@@ -18,15 +18,15 @@ namespace Hospital.Service
 
         public bool CheckIfExistsById(int id)
         {
+            bool retVal = false;
             List<Survey> surveys = SurveyRepository.GetAll().ToList();
             foreach (Survey s in surveys)
             {
                 if (s.AppointmentId == id)
-                {
-                    return true;
-                }
+                    retVal = true;
+                
             }
-            return false;
+            return retVal;
         }
 
         public void CreateSurvey(List<int> surveyQuestions, List<int> surveyAnswers)
@@ -37,7 +37,6 @@ namespace Hospital.Service
                 return null;
             }*/
             Survey survey = new Survey();
-            survey.Id = FindNextId();
             survey.PatientId = 1;  //Ove vrednosti se moraju posle promeniti
             survey.Date = DateTime.Now;
             survey.AppointmentId = 3; //Ove vrednosti se moraju posle promeniti
@@ -45,13 +44,6 @@ namespace Hospital.Service
             survey.SurveyAnswers = surveyAnswers;
             SurveyRepository.CreateSurvey(survey);
 
-        }
-
-        public int FindNextId()
-        {
-            List<Survey> surveys = SurveyRepository.GetAll().ToList();
- 
-            return surveys.Count+1;
         }
 
     }
