@@ -18,7 +18,6 @@ export class RegistrationService {
     return this.http.get<any>(this.url + '/ingredients');
   }
   SendPatient(patient: PatientDto): Observable<any>{
-    console.log(patient.Address)
     const body = {
       patient: patient
     }
