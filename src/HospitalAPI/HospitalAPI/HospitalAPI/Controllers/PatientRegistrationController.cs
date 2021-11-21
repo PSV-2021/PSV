@@ -58,6 +58,7 @@ namespace HospitalAPI.Controllers
                 patient.Allergen.Add(new Allergen { Name = s, PatientId = patient.Id});
             }
             patient.DateOfBirth = DateTime.Parse(p.Date);
+            patient.Type = UserType.patient;
 
             return patient;
         }

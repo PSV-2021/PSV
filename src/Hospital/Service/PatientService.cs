@@ -47,13 +47,7 @@ namespace Service
         public void SavePatientSql(Patient newPatient, MyDbContext context)
         {
            GenerateMedicalRecordId(newPatient, context);
-           GeneratePatiendId(newPatient, context);
            PatientSqlRepository.SavePatient(newPatient);
-        }
-
-        private void GeneratePatiendId(Patient newPatient, MyDbContext context)
-        {
-            newPatient.Id = PatientSqlRepository.GetAll().Count() + 1;
         }
 
         public void GenerateMedicalRecordId(Patient p, MyDbContext context)
