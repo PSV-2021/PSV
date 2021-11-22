@@ -23,10 +23,10 @@ namespace Integration_API.Controllers
         }
 
         [HttpPut]
-        public IActionResult Get(DrugAmountDemandDto demand)
+        public IActionResult Put(DrugAmountDemandDto demand)
         {
             var client = new RestClient(demand.PharmacyUrl);
-            var request = new RestRequest("/api/drugDemand", Method.GET);
+            var request = new RestRequest("/api/drugDemand", Method.POST);
 
             SetApiKeyInHeader(demand, request);
 

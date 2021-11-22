@@ -13,7 +13,7 @@ import { DrugstoreSearchDto } from '../purchase-drugs/drugstore.search.dto';
 export class PharmacyService {
     url: string;
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5000/api";
+      this.url = "http://"+location.hostname+":5000/api";
     }
 
     GetAllDrugstores(): Observable<any> {

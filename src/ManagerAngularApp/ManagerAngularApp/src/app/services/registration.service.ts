@@ -12,7 +12,7 @@ import { RegistrationDto } from '../registration/registration.dto';
 export class RegistrationService {
     url: string;
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5000/api"
+      this.url = "http://"+location.hostname+":5000/api";
     }
 
     public RegisterDrugstore(drugstore: RegistrationDto){

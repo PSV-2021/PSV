@@ -14,7 +14,7 @@ export class DrugStoreOffersService {
     url: string;
     smartphone: any = [];
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5000/api" //ovo ne znam posto ne pisem ja backend za sad
+      this.url = "http://"+location.hostname+":5000/api";
     }
     GetAllOffers(): Observable<any> {
         return this.http.get<any>(this.url + '/drugstoreoffer');
