@@ -13,6 +13,7 @@ using Service;
 using RabbitMQ.Client;
 using System.Text;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -45,7 +46,7 @@ namespace DrugstoreAPI.Controllers
                     Id = this.GetNewRadnomId(),
                     Title = offer.Title,
                     Content = offer.Content,
-                    DrugstoreName = offer.DrugstoreName,
+                    DrugstoreName = "Apoteka 1",
                     StartDate = offer.StartDate,
                     EndDate = offer.EndDate
 
@@ -58,7 +59,9 @@ namespace DrugstoreAPI.Controllers
                                      basicProperties: null,
                                      body: bodyNew);
                 repo.Save(drugstoreOffer);
-                return Ok();
+               
+                return Ok(true);
+               
 
             }
         }

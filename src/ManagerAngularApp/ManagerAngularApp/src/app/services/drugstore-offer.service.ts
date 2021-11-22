@@ -23,7 +23,6 @@ export class DrugStoreOffersService {
       
       const body = {
         OfferId : offer.Id,
-
       };
       let headers = new HttpHeaders({
         'Content-Type': 'application/json',

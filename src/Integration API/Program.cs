@@ -11,6 +11,8 @@ using Integration.Repository.Sql;
 using Integration_API.Repository.Interfaces;
 using DrugstoreAPI.Controllers;
 using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace Integration_API
 {
@@ -27,13 +29,12 @@ namespace Integration_API
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args)         
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-   
-                });
-       
+                });   
+
 
     }
 }

@@ -31,12 +31,16 @@ export class DrugstoreOfferComponent implements OnInit {
       }
     });
   }
-  publishOffer(offer : PublishedDrugstoreOfferDto ):void {
-    this.drugStoreOffersService.publishOffer(offer).subscribe((d: any) =>{alert("Offer published" )});
+  reloadPage() {
+    window.location.reload();
+  }
+  async publishOffer(offer : PublishedDrugstoreOfferDto ):Promise<void> {
+   await this.drugStoreOffersService.publishOffer(offer).subscribe((d: any) =>{alert("Offer published" );
+    this.reloadPage();
+  });
+    
     
 }
-reloadPage() {
-  window.location.reload();
-}
+
 
 }
