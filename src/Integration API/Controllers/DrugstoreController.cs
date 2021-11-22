@@ -11,8 +11,12 @@ using Model.DataBaseContext;
 using Integration_API.DTOs;
 
 using Integration.Service;
+using Integration_API.Filters;
+using Integration_API.Repository.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Integration_API.Repository.Interfaces;
 using RestSharp;
+using System.Configuration;
 
 namespace Integration_API.Controllers
 {
@@ -40,13 +44,14 @@ namespace Integration_API.Controllers
             return Ok(result);
         }
 
+        [HttpGet ("filter")] // GET /api/drugstore/filter
 
-        [HttpGet ("filter")]       // GET /api/drugstore
         public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
         {
-            DrugsConsumptionReportService serv = new DrugsConsumptionReportService();
-            serv.SaveDrugsConsumptionReport(new DateRange(new DateTime(2021, 11, 16), new DateTime(2021, 11, 18)));
-            serv.UploadDrugConsumtpionReport("Izvestaj o potrosnji lekova.pdf");
+            IEnumerable<string> headerValues = Request.Headers["ApiKey"];
+            var key = headerValues.FirstOrDefault();
+            if (key == null || !key.Equals("abcde"))
+                return Unauthorized();
             CheckFilterParameters(ref city, ref address);
             List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
             return Ok(result);

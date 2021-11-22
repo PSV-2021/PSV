@@ -1,18 +1,33 @@
 using Hospital.Model;
+using Hospital.Repository;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
     public class Patient : User
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; } 
         public Boolean IsBlocked { get; set; }
         public BloodType BloodType { get; set; }
         public Boolean IsActive { get; set; }
         public String FathersName { get; set; }
-        public Doctor ChosenDoctor { get; set; }
+        public virtual List<Allergen> Allergen { get; set; }
+        [ForeignKey("DoctorId")]
+        public int DoctorId { get; set; }
+        public virtual Doctor ChosenDoctor { get; set; }
         public String EmergencyContact { get; set; }
-        public MedicalRecord MedicalRecord { get; set; }
+        [ForeignKey("MedicalRecordId")]
+        public int MedicalRecordId { get; set; }
+        public virtual MedicalRecord MedicalRecord { get; set; }
+        
+       
+
+        public Patient() { }
         public Patient(string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string emContact, MedicalRecord med, string username, string password, Boolean block = false)
         {
             this.Name = name;
@@ -32,6 +47,28 @@ namespace Model
             this.IsBlocked = block;
         }
 
+        public Patient(string name, string fathersName, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber, string adress, string email, MedicalRecord med, string username, string password, BloodType bt, Boolean isActive, Doctor cd, Boolean block = false)
+        {
+            this.Name = name;
+            this.FathersName = fathersName;
+            this.Surname = surname;
+            this.Jmbg = jmbg;
+            this.DateOfBirth = date;
+            this.Sex = sex;
+            this.PhoneNumber = phoneNumber;
+            this.Adress = adress;
+            this.Email = email;
+            this.MedicalRecord = med;
+            this.Username = username;
+            this.Password = password;
+            this.appointment = null;
+            this.Type = UserType.patient;
+            this.IsBlocked = block;
+            this.BloodType = bt;
+            this.IsActive = isActive;
+            this.ChosenDoctor = cd;
+        }
+
         public string NameAndSurname
         {
             get
@@ -39,10 +76,22 @@ namespace Model
                 return Name + " " + Surname;
             }
         }
-
+        [NotMapped]
+        public List<Ingridient> Allergens
+        {
+            get
+            {
+                return MedicalRecord.Allergens;
+            }
+            set
+            {
+                MedicalRecord.Allergens = value;
+            }
+        }
+  
         public List<Appointment> appointment;
 
-
+        [NotMapped]
         public List<Appointment> Appointment
         {
             get

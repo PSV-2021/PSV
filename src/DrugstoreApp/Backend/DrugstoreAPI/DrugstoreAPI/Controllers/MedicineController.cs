@@ -9,6 +9,7 @@ using DrugstoreAPI.Dtos;
 
 using Drugstore.Models;
 using Drugstore.Repository.Sql;
+using DrugstoreAPI.Service;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -16,67 +17,41 @@ namespace DrugstoreAPI.Controllers
     [ApiController]
     public class MedicineController : ControllerBase
     {
-
-        private readonly MyDbContext dbContext;
-        public MedicineSqlRepository repo = new MedicineSqlRepository();
+        public MedicineService medicineService;
 
         public MedicineController(MyDbContext context)
         {
-            this.dbContext = context;
+            this.medicineService = new MedicineService(context);
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            repo.DbContext = this.dbContext;
-            return Ok(repo.GetAll());
+            return Ok(medicineService.GetAll());
         }
 
         [HttpGet("{id?}")]
-        public IActionResult Get(long id)
+        public IActionResult Get(int id)
         {
-            Medicine medicine = dbContext.Medicines.FirstOrDefault(medicine => medicine.Id == id);
-
-            if (medicine == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(MedicineAdapter.MedicineToMedicineDto(medicine));
-            }
+            Medicine medicine = medicineService.GetOne(id);
+            if (medicine == null) return NotFound();
+            else return Ok(MedicineAdapter.MedicineToMedicineDto(medicine));
         }
 
         [HttpPost]
         public IActionResult Add(MedicineDto dto)
         {
-            if (dto.Name.Length <= 0 || dto.Price <= 0)
-            {
-                return BadRequest();
-            }
-            int id = dbContext.Medicines.ToList().Count > 0 ? dbContext.Medicines.ToList().Max(medicine => medicine.Id) + 1 : 1;
+            if (dto.Name.Length <= 0 || dto.Price <= 0) return BadRequest();
             Medicine medicine = MedicineAdapter.MedicineDtoToMedicine(dto);
-            medicine.Id = id;
-            dbContext.Medicines.Add(medicine);
-            dbContext.SaveChanges();
+            medicineService.Add(medicine);
             return Ok();
         }
 
         [HttpDelete("{id?}")]
-        public IActionResult Delete(long id = 0)
+        public IActionResult Delete(int id)
         {
-            Medicine medicine = dbContext.Medicines.ToList().Find(medicine => medicine.Id == id);
-
-            if (medicine == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                dbContext.Medicines.Remove(medicine);
-                dbContext.SaveChanges();
-                return Ok();
-            }
+            if (!medicineService.Delete(id)) return NotFound();
+            else return Ok();
         }
     }
 }

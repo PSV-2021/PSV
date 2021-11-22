@@ -9,7 +9,7 @@ namespace Model
 {
     public class VacationDays
     {
-        
+        public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public VacationDays(DateTime start, DateTime end)
@@ -17,6 +17,7 @@ namespace Model
             StartDate = start;
             EndDate = end;
         }
+        public VacationDays() { }
         public string FormatedStartDate
         {
             get

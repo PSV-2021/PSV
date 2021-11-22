@@ -9,8 +9,9 @@ namespace Model
 {
     public class WorkingHours
     {
-        public DateTime BeginningDate { get; }
-        public DateTime EndDate { get; }
+        public int Id { get; set; }
+        public DateTime BeginningDate { get; set; }
+        public DateTime EndDate { get; set; }
         public Shift Shift { get; set; }
 
         public WorkingHours(DateTime beginningDate, Shift shift)
@@ -19,6 +20,7 @@ namespace Model
             EndDate = beginningDate.AddDays(6);
             Shift = shift;
         }
+        public WorkingHours() { }
 
         public string FormatedBeginnigDate
         {
