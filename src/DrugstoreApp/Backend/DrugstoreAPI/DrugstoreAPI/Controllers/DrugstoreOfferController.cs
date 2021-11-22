@@ -14,6 +14,7 @@ using RabbitMQ.Client;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading;
+using Drugstore.Service;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -23,7 +24,7 @@ namespace DrugstoreAPI.Controllers
     {
 
         private readonly MyDbContext dbContext;
-
+        public DrugstoreOfferService drugstoreOfferService;
 
         public DrugstoreOfferController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
@@ -33,8 +34,7 @@ namespace DrugstoreAPI.Controllers
         [HttpPost]
         public IActionResult Post(DrugstoreOfferDto offer)
         {
-
-            IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(dbContext);
+            drugstoreOfferService = new DrugstoreOfferService(dbContext);
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
@@ -43,7 +43,7 @@ namespace DrugstoreAPI.Controllers
 
                 var body = new
                 {
-                    Id = this.GetNewRadnomId(),
+                    Id = drugstoreOfferService.GetNewRadnomId(),
                     Title = offer.Title,
                     Content = offer.Content,
                     DrugstoreName = "Apoteka 1",
@@ -58,7 +58,7 @@ namespace DrugstoreAPI.Controllers
                                      routingKey: "",
                                      basicProperties: null,
                                      body: bodyNew);
-                repo.Save(drugstoreOffer);
+                drugstoreOfferService.SaveOffer(drugstoreOffer);
                
                 return Ok(true);
                

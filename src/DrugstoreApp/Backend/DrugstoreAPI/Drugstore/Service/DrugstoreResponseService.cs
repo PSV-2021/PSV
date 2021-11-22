@@ -47,10 +47,7 @@ namespace Service
             }
             return found;
         }
-        public string GetNewRadnomId()
-        {
-            return Guid.NewGuid().ToString();
-        }
+        
 
     }
 }

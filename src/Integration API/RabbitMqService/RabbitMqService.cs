@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Integration.Service;
 using Integration.Model;
 using Integration.Repository.Sql;
 using Integration_API;
@@ -24,7 +25,7 @@ namespace PrimerServis
         IConnection connection;
         IModel channel;
         private readonly IServiceScopeFactory scopeFactory;
-      
+        public DrugstoreOfferService drugstoreOfferService;
 
         public RabbitMQService(IServiceScopeFactory scopeFactory)
         {
@@ -51,7 +52,7 @@ namespace PrimerServis
                     using (var scope = scopeFactory.CreateScope())
                     {
                         var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
-                        IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(dbContext);
+                        drugstoreOfferService = new DrugstoreOfferService(dbContext);
                         byte[] body = ea.Body.ToArray();
                         var jsonMessage = Encoding.UTF8.GetString(body);
 
@@ -65,7 +66,7 @@ namespace PrimerServis
                             Console.WriteLine("Ne moze");
                         }
                         Console.WriteLine(" [x] Received {0}", drugstoreOffer);
-                        repo.Save(drugstoreOffer);
+                        drugstoreOfferService.SaveOffer(drugstoreOffer);
                     }
                 };
             
