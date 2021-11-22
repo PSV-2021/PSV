@@ -22,7 +22,6 @@ namespace Integration_API.Controllers
             this.dbContext = db;
         }
 
-
         [HttpPut]
         public IActionResult Put(DrugAmountDemandDto demand)
         {

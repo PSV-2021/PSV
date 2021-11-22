@@ -10,7 +10,7 @@ export class CommentService {
 
   url: string;
   constructor (private http: HttpClient) {
-    this.url = "http://localhost:5000/api";
+    this.url = "http://"+location.hostname+":5000/api";
   }
 
   GetAllComments(): Observable<any> {

@@ -11,6 +11,7 @@ namespace DrugstoreAPI.Adapters
             Medicine medicine = new Medicine();
             medicine.Name = dto.Name;
             medicine.Price = dto.Price;
+            medicine.Supply = dto.Supply;
             return medicine;
         }
 
@@ -19,6 +20,7 @@ namespace DrugstoreAPI.Adapters
             MedicineDto dto = new MedicineDto();
             dto.Name = medicine.Name;
             dto.Price = medicine.Price;
+            dto.Supply = medicine.Supply;
             return dto;
         }
     }
