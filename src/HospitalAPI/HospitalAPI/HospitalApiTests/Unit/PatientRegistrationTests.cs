@@ -7,15 +7,11 @@ using AutoFixture;
 using RichardSzalay.MockHttp;
 using System.Net.Http;
 using System.Net;
-using Hospital.Service;
 using Moq;
 using Moq.Protected;
 using System.Threading;
+using Hospital.MedicalRecords.Service;
 using Shouldly;
-using Repository;
-using Model;
-using Hospital.Model;
-using Service;
 
 namespace HospitalApiTests.Unit
 {

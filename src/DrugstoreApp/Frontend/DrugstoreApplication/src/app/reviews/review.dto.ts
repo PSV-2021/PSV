@@ -3,7 +3,6 @@ export class ReviewDto{
     HospitalName: string;
     ReviewContent: string;
     ReviewResponse: string;
-
     constructor(){
         this.Id = '';
         this.HospitalName = '';
