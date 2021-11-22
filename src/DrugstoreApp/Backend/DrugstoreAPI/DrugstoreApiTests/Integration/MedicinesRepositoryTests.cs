@@ -34,7 +34,6 @@ namespace DrugstoreApiTests.Integration
              Medicine retVal = medicineSqlRepository.GetByName("Test1");
 
              retVal.Name.ShouldBe("Test1");
-
         }
 
         [Theory]

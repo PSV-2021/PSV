@@ -14,6 +14,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 import { PurchaseDrugsComponent } from './purchase-drugs/purchase-drugs.component';
 import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.component';
+import { DrugsConsumptionComponent } from './drugs-consumption-specs/drugs-consumption.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -25,6 +30,7 @@ import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.compo
     FeedbacksComponent,
     PurchaseDrugsComponent,
     DrugstoreOfferComponent,
+    DrugsConsumptionComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,11 @@ import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.compo
     MatToolbarModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

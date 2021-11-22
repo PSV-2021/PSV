@@ -111,18 +111,18 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 11, 20, 17, 12, 50, 986, DateTimeKind.Local).AddTicks(5633),
+                            RecievedTime = new DateTime(2021, 11, 17, 21, 50, 47, 182, DateTimeKind.Local).AddTicks(8521),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 20, 17, 12, 50, 988, DateTimeKind.Local).AddTicks(9642)
+                            SentTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(2925)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(290),
+                            RecievedTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(3693),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(321)
+                            SentTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(3726)
                         },
                         new
                         {

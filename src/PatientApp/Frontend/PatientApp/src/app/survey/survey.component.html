@@ -1,0 +1,78 @@
+<div class = "survey">
+    <h1>{{ pageTitle }}</h1>
+<br>
+<div class="title-text">
+    <label>Doctor</label>       
+</div>
+<div *ngFor="let survey of surveys">
+    <div *ngIf="survey.questionType == 0">
+        <mat-card class="example-card">
+            <mat-card-content>
+                <p>{{ survey.text }}</p>
+                <div>
+                    <mat-radio-group class="example-radio-group" [(ngModel)]="questionList[survey.id]">
+                        <mat-radio-button [value]="1">1</mat-radio-button>
+                        <mat-radio-button [value]="2">2</mat-radio-button>
+                        <mat-radio-button [value]="3">3</mat-radio-button>
+                        <mat-radio-button [value]="4">4</mat-radio-button>
+                        <mat-radio-button [value]="5">5</mat-radio-button>                
+                    </mat-radio-group>
+                </div> 
+            </mat-card-content>
+        </mat-card>
+        <br>
+    </div>
+</div>
+<div class="title-text">
+    <label>Medical staff</label>       
+</div>
+<div *ngFor="let survey of surveys">
+    <div *ngIf="survey.questionType == 1">
+        <mat-card class="example-card">
+            <mat-card-content>
+                <p>{{ survey.text }}</p>
+                <div>
+                    <mat-radio-group class="example-radio-group" [(ngModel)]="questionList[survey.id]">
+                        <mat-radio-button [value]="1">1</mat-radio-button>
+                        <mat-radio-button [value]="2">2</mat-radio-button>
+                        <mat-radio-button [value]="3">3</mat-radio-button>
+                        <mat-radio-button [value]="4">4</mat-radio-button>
+                        <mat-radio-button [value]="5">5</mat-radio-button>                   
+                    </mat-radio-group>
+                </div> 
+            </mat-card-content>
+        </mat-card>
+        <br>
+    </div>
+</div>
+<div class="title-text">
+    <label>Hospital</label>       
+</div>
+<div *ngFor="let survey of surveys">
+    <div *ngIf="survey.questionType == 2">
+        <mat-card class="example-card">
+            <mat-card-content>
+                <p>{{ survey.text }}</p>
+                <div>
+                    <mat-radio-group class="example-radio-group" [(ngModel)]="questionList[survey.id]">
+                        <mat-radio-button [value]="1">1</mat-radio-button>
+                        <mat-radio-button [value]="2">2</mat-radio-button>
+                        <mat-radio-button [value]="3">3</mat-radio-button>
+                        <mat-radio-button [value]="4">4</mat-radio-button>
+                        <mat-radio-button [value]="5">5</mat-radio-button>                   
+                    </mat-radio-group>
+                </div> 
+            </mat-card-content>
+        </mat-card>
+        <br>
+    </div>
+</div>
+
+    <div class="div-button">
+    <br><br>
+    <button mat-raised-button id="button" color="accent" (click)="onSubmit()">Submit</button>
+    <br><br>
+    </div>
+</div>
+
+
