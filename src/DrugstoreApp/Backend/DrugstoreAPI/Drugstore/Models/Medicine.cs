@@ -17,6 +17,7 @@ namespace Drugstore.Models
         public List<Medicine> compatibleMedicines { get; set; }
         public Double Weight { get; set; }
         public String Precautions { get; set; }
+        public String MedicineImage { get; set; }
 
         public Medicine(int id, String name, double price, int supply)
         {

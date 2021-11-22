@@ -10,6 +10,8 @@ namespace DrugstoreAPI.Dtos
         public string Name { get; set; }
         public double Price { get; set; }
         public int Supply { get; set; }
+        public String MedicineImage { get; set; }
+
 
         public MedicineDto() { }
     }
