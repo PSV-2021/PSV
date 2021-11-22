@@ -1,14 +1,14 @@
-﻿using Hospital.DTO;
-using Hospital.Model;
-using Hospital.Repository;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model;
-using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hospital.MedicalRecords.Model;
+using Hospital.MedicalRecords.Repository;
+using Hospital.MedicalRecords.Service;
+using Hospital.SharedModel;
+using HospitalAPI.DTO;
 
 namespace HospitalAPI.Controllers
 {
@@ -27,7 +27,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] PatientDTO p)
+        public IActionResult Post([FromBody] PatientDto p)
         {
             Patient patient = GeneratePatientFromDTO(p);
             patientService.SavePatientSql(patient, dbContext);
@@ -35,7 +35,7 @@ namespace HospitalAPI.Controllers
             return Ok();
         }
 
-        private static Patient GeneratePatientFromDTO(PatientDTO p)
+        private static Patient GeneratePatientFromDTO(PatientDto p)
         {
             Patient patient = new Patient
             {

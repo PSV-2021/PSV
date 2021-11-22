@@ -1,11 +1,11 @@
-﻿using Hospital.Model;
-using Hospital.Repository;
-using Hospital.Service;
-using Moq;
+﻿using Moq;
 using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Hospital.MedicalRecords.Model;
+using Hospital.MedicalRecords.Repository;
+using Hospital.MedicalRecords.Service;
 using Xunit;
 
 namespace HospitalApiTests.Unit

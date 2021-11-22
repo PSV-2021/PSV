@@ -1,15 +1,16 @@
-﻿using Hospital.DTO;
-using Hospital.Model;
-using Hospital.Repository;
-using HospitalAPI.Controllers;
+﻿using HospitalAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Model;
 using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using Hospital.MedicalRecords.Model;
+using Hospital.Schedule.Model;
+using Hospital.Schedule.Repository;
+using Hospital.SharedModel;
+using HospitalAPI.DTO;
 using Xunit;
 
 namespace HospitalApiTests.Integration
@@ -194,9 +195,9 @@ namespace HospitalApiTests.Integration
             retVal.Equals(HttpStatusCode.OK);
         }
 
-        private PatientDTO GeneratePatient()
+        private PatientDto GeneratePatient()
         {
-            return new PatientDTO { Name = "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType = BloodType.A, DoctorId = 1, Allergens = new List<String>() };
+            return new PatientDto { Name = "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType = BloodType.A, DoctorId = 1, Allergens = new List<String>() };
         }
     }
 }
