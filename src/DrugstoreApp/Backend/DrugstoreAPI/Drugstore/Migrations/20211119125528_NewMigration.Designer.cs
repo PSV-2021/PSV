@@ -3,57 +3,23 @@ using System;
 using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211119125528_NewMigration")]
+    partial class NewMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("Drugstore.Models.DrugstoreOffer", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DrugstoreName")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DrugstoreOffers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Content = "Content",
-                            DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 11, 19, 20, 52, 11, 273, DateTimeKind.Local).AddTicks(1562),
-                            StartDate = new DateTime(2021, 11, 19, 20, 52, 11, 268, DateTimeKind.Local).AddTicks(8232),
-                            Title = "title"
-                        });
-                });
 
             modelBuilder.Entity("Drugstore.Models.Feedback", b =>
                 {
@@ -222,30 +188,21 @@ namespace Drugstore.Migrations
                     b.ToTable("Users");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("Drugstore.Models.Customer", b =>
-                {
-                    b.HasBaseType("Drugstore.Models.User");
-
-                    b.Property<string>("Adress")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("Customer_Name");
-
-                    b.HasDiscriminator().HasValue("Customer");
 
                     b.HasData(
                         new
                         {
+                            UserId = 1,
+                            Password = "farmaceut",
+                            Role = "pharmacist",
+                            Username = "farmaceut"
+                        },
+                        new
+                        {
                             UserId = 2,
                             Password = "kupac",
-                            Role = "Customer",
-                            Username = "kupac",
-                            Adress = "Adresa kupca 123",
-                            Name = "Kupac"
+                            Role = "customer",
+                            Username = "kupac"
                         });
                 });
 
@@ -261,7 +218,7 @@ namespace Drugstore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = 1,
+                            UserId = 3,
                             Password = "farmaceut",
                             Role = "Pharmacist",
                             Username = "farmaceut",
