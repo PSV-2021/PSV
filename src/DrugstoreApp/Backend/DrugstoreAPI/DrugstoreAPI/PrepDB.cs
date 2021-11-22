@@ -16,7 +16,7 @@ namespace DrugstoreAPI
             using(var serviceScope = appBuilder.ApplicationServices.CreateScope())
             {
                 MyDbContext dbContext= serviceScope.ServiceProvider.GetService<MyDbContext>();
-                Console.WriteLine("Appling Migration..");
+                Console.WriteLine("Applying Migration..");
                 dbContext.Database.Migrate();
             }
         }

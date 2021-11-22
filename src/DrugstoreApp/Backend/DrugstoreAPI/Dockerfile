@@ -8,9 +8,6 @@ RUN dotnet restore
 
 COPY . ./
 
-WORKDIR /src/DrugstoreApiTests
-RUN dotnet build -c Release -o /app
-
 WORKDIR /src/Drugstore
 RUN dotnet build -c Release -o /app
 
@@ -18,7 +15,7 @@ WORKDIR /src/DrugstoreAPI
 RUN dotnet build -c Release -o /app
 
 FROM build-env as Publish
-RUN dotnet publish -c Releas -o /app
+RUN dotnet publish -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
