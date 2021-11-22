@@ -1,13 +1,12 @@
-﻿using Hospital.Model;
-using Hospital.Repository;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Model;
-using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hospital.Schedule.Repository;
+using Hospital.Schedule.Service;
+using Hospital.SharedModel;
 
 namespace HospitalAPI.Controllers
 {

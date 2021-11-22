@@ -1,7 +1,4 @@
 ﻿using Hospital.DTO;
-using Hospital.Model;
-using Hospital.Repository;
-using Hospital.Service;
 using HospitalAPI;
 using HospitalAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +13,9 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Hospital.MedicalRecords.Model;
+using Hospital.SharedModel;
+using HospitalAPI.DTO;
 using Xunit;
 
 namespace HospitalApiTests.Integration
@@ -83,9 +83,9 @@ namespace HospitalApiTests.Integration
             retVal.Equals(HttpStatusCode.OK);
         }
 
-        public static SurveyDTO CreateSurvey()
+        public static SurveyDto CreateSurvey()
         {           
-            SurveyDTO surveyDTO = new SurveyDTO
+            SurveyDto surveyDTO = new SurveyDto
             {              
                 SurveyQuestions = CreateSurveyQuestions(),
                 SurveyAnswers = CreateSurveyAnswers(),

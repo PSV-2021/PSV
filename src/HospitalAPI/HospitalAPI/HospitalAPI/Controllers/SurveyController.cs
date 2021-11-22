@@ -1,13 +1,13 @@
-﻿using Hospital.DTO;
-using Hospital.Model;
-using Hospital.Repository;
-using Hospital.Service;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hospital.MedicalRecords.Repository;
+using Hospital.MedicalRecords.Service;
+using Hospital.SharedModel;
+using HospitalAPI.DTO;
 
 namespace HospitalAPI.Controllers
 {
@@ -36,7 +36,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(SurveyDTO survey)
+        public IActionResult Post(SurveyDto survey)
         {
             surveyService.CreateSurvey(survey.SurveyQuestions, survey.SurveyAnswers);
             return Ok();
