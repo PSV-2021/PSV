@@ -13,25 +13,23 @@ namespace Integration_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DrugPurchaseController : ControllerBase
+    public class DrugSpecificationController : ControllerBase
     {
         private readonly MyDbContext dbContext;
 
-        public DrugPurchaseController(MyDbContext db)
+        public DrugSpecificationController(MyDbContext db)
         {
             this.dbContext = db;
         }
 
         [HttpPut]
-        public IActionResult Get(DrugAmountDemandDto demand)
+        public IActionResult Put(DrugSpecificationRequestDTO specRequest)
         {
-            var client = new RestClient(demand.PharmacyUrl);
-            var request = new RestRequest("/api/drugDemand", Method.GET);
+            var client = new RestClient(specRequest.PharmacyUrl);
+            var request = new RestRequest("/api/drugSpecification", Method.POST);
 
-            SetApiKeyInHeader(demand, request);
-
-            SetRequestBody(demand, request);
-
+            SetApiKeyInHeader(specRequest, request);
+            SetRequestBody(specRequest, request);
             IRestResponse response = client.Execute(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -40,24 +38,23 @@ namespace Integration_API.Controllers
             return Unauthorized(false);
         }
 
-        private static void SetRequestBody(DrugAmountDemandDto demand, RestRequest request)
+        private static void SetRequestBody(DrugSpecificationRequestDTO specRequest, RestRequest request)
         {
             var body = new
             {
-                Name = demand.Name,
-                Amount = demand.Amount,
+                Name = specRequest.Name,
             };
             string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
 
             request.AddJsonBody(jsonBody);
         }
 
-        private void SetApiKeyInHeader(DrugAmountDemandDto demand, RestRequest request)
+        private void SetApiKeyInHeader(DrugSpecificationRequestDTO specRequest, RestRequest request)
         {
             string ApiKey = "";
             foreach (var df in dbContext.Drugstores.ToList())
             {
-                if (df.Url.Equals(demand.PharmacyUrl))
+                if (df.Url.Equals(specRequest.PharmacyUrl))
                 {
                     ApiKey = df.ApiKey;
                     break;

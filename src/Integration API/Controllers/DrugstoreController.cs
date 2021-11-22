@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Repository.Sql;
-
+using Integration.Service;
 using Integration.Model;
 using Model.DataBaseContext;
 using Integration_API.DTOs;
@@ -44,6 +44,9 @@ namespace Integration_API.Controllers
         [HttpGet ("filter")]       // GET /api/drugstore
         public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
         {
+            DrugsConsumptionReportService serv = new DrugsConsumptionReportService();
+            serv.SaveDrugsConsumptionReport(new DateRange(new DateTime(2021, 11, 16), new DateTime(2021, 11, 18)));
+            serv.UploadDrugConsumtpionReport("Izvestaj o potrosnji lekova.pdf");
             CheckFilterParameters(ref city, ref address);
             List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
             return Ok(result);

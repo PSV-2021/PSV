@@ -5,17 +5,15 @@ using System.Threading.Tasks;
 
 namespace DrugstoreAPI.Dtos
 {
-    public class DrugAmountDemandDto
+    public class DrugSpecificationDto
     {
         public string Name { get; set; }
-        public int Amount { get; set; }
 
-        public DrugAmountDemandDto() { }
+        public DrugSpecificationDto() { }
 
-        public DrugAmountDemandDto(string drugName, int amount)
+        public DrugSpecificationDto(string drugName)
         {
             this.Name = drugName;
-            this.Amount = amount;
         }
     }
 }
