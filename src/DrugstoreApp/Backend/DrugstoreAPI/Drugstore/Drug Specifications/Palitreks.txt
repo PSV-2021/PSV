@@ -1,0 +1,87 @@
+1 od 7
+
+SAZETAK KARAKTERISTIKA LEKA
+1. IME LEKA
+Palitrex
+250 mg, kapsula, tvrda
+Palitrex
+500 mg, kapsula, tvrda
+INN: cefaleksin
+2. KVALITATIVNI I KVANTITATIVNI SASTAV
+Palitrex 250 mg:
+1 kapsula, tvrda sadrzi 250 mg cefaleksina (u obliku cefaleksin, monohidrata)
+Palitrex 500 mg:
+1 kapsula, tvrda sadrzi 500 mg cefaleksina (u obliku cefaleksin, monohidrata)
+Za listu svih pomocnih supstanci videti odeljak 6.1.
+
+3. KLINICKI PODACI
+- Terapijske indikacije
+Cefaleksin je polusintetski antibiotik iz grupe cefalosporina za oralnu primenu. Cefaleksin je indikovan u
+terapiji sledecih infekcija prouzrokovanih osetljivim mikroorganizmima:
+- Infekcije respiratornog trakta.
+- Infekcije srednjeg uha (otitis media).
+- Infekcije koze i mekih tkiva.
+- Infekcije kostiju i zglobova.
+- Infekcije urogenitalnog trakta (ukljucujuci i akutni prostatitis).
+- Dentalne infekcije.
+- Doziranje i nacin primene
+Za oralnu upotrebu.
+Odrasli
+Doza za odrasle se krece u rasponu 1-4 g/ dnevno, u podeljenim dozama; kod vecine infekcija dovoljno je
+primeniti dozu od 500 mg na svakih 8 sati. Kod infekcija koze i mekih tkiva, streptokoknog faringitisa i
+blagih, nekomplikovanih infekcija urinarnog trakta uobicajeno je doziranje od 250 mg na svakih 6 sati, ili
+500 mg na svakih 12 sati.
+Kod tezih infekcija ili onih prouzrokovanih manje osetljivim mikroorganizmima, mogu biti potrebne i vece
+doze leka. Ukoliko je potrebno primeniti doze cefaleksina vece od 4 g dnevno, potrebno je razmotriti
+primenu parenteralnih cefalosporina, u adekvatnim dozama. 
+2 od 7
+Stariji i pacijenti sa ostecenom funkcijom bubrega
+Doziranje je isto kao kod odraslih osoba. Ukoliko je bubrezna funkcija znacajno ostecena, potrebno je
+smanjiti dozu (videti odeljak 4.4).
+Deca
+Uobicajena preporucena dnevna doza za decu je 25-50 mg/ kg u podeljenim dozama.
+Kod infekcija koze i mekih tkiva, streptokoknog faringitisa i blagih, nekomplikovanih infekcija urinarnog
+trakta, ukupna dnevna doza moze biti podeljena i primenjena na svakih 12 sati.
+Kod vecine infekcija preporucuje se sledeci rezim doziranja:
+Deca uzrasta 5 godina i starija: 250 mg na svakih 8 sati.
+Kod tezih infekcija doza moze biti udvostrucena.
+U terapiji otitis media, klinicka ispitivanja su pokazala da je neophodno primeniti dozu od 75 do 100 mg/ kg/
+dan, podeljeno u 4 pojedinacne doze.
+U terapiji infekcija izazvanih beta hemolitickim streptokokom, terapijska doza treba da se primenjuje
+najkrace 10 dana.
+- Kontraindikacije
+Cefaleksin je kontraindikovan kod pacijenata sa poznatom alergijom na cefaleksin, druge antibiotike iz grupe
+cefalosporina ili na bilo koju od pomocnih supstanci u sastavu leka (videti odeljak 6.1).
+
+- Interakcije sa drugim lekovima i druge vrste interakcija
+Kao i prilikom upotrebe drugih beta-laktama, renalna ekskreciju cefaleksina se inhibira tokom istovremene
+upotrebe probenecida
+U jednoj studiji kod 12 zdravih ispitanika koji su dobijali pojedinacne doze od po 500 mg cefaleksina i
+metformina, maksimalna koncentracija metformina u plazmi (Cmax) i povrsina ispod krive koncentracije leka
+u plazmi u funkciji vremena (PIK) povecani su u proseku za 34%, odnosno 24%, a renalni klirens
+metformina je smanjen u proseku za 14%. U ovoj studiji nije bilo prijavljenih nezeljenih dejstava kod 12
+ispitivanih zdravih dobrovoljaca. Nema raspolozivih podataka o interakciji cefaleksina i metformina nakon
+primene ponovljenih doza. Klinicki znacaj ove studije nije jasan, posebno zato sto nisu prijavljeni slucajevi
+laktatne acidoze povezani sa istovremenom primenom metformina i cefaleksina.
+Hipokalemija je opisana kod pacijenata koji su uzimali citotoksicne lekove za leukemiju i istovremeno
+dobijali gentamicin i cefaleksin.
+
+- Nezeljena dejstva
+Gastrointestinalni poremecaji: simptomi pseudomembranoznog kolitisa mogu da se jave tokom ili nakon
+primene antibiotika. Mucnina i povracanje su retko prijavljivani. Najcesce prijavljena nezeljena reakcija je
+dijareja. Vrlo retko, dijareja je bila dovoljno teska da zahteva prekid terapije. Javljali su se i dispepsija i bol u
+abdomenu. Kao i sa nekim penicilinima i nekim drugim cefalosporinima, retko su prijavljivani prolazni
+hepatitis i holestatska zutica.
+Preosetljivost: prijavljene su alergijske reakcije u vidu osipa, urtikarije, angioedema i retko, multiformnog
+eritema, Stevens-Johnson-ovog sindroma i toksicne epidermalne nekrolize. Ove reakcije se obicno povlace
+po prestanku primene leka, iako u nekim slucajevima moze biti neophodna suportivna terapija. Takodje je
+bilo prijava slucajeva anafilakse.
+Poremecaji krvi i limfnog sistema: prijavljeni su eozinofilija, neutropenija, trombocitopenija i hemoliticka
+anemija.
+Drugo: ovde spadaju genitalni i analni pruritus, genitalna kandidijaza, vaginitis i vaginalni iscedak,
+vrtoglavica, umor, glavobolja, agitacija, konfuzija, halucinacije, artralgija, artritis i poremecaji na nivou
+zglobova. Retko je prijavljivan reverzibilni intersticijalni nefritis. Prijavljeno je blago povecanje enzima AST
+i ALT.
+
+Rok upotrebe
+3 godine.
