@@ -1,0 +1,21 @@
+<div class = drugstore-holder>
+    <div class="reviews-holder">
+    <label class= font-size>Title :</label>
+    
+    <input class = input-style  [(ngModel)]="drugstoreOffer.Title" matInput>
+    <br>
+    <label class= font-size>Content : </label> <br>
+    <textarea  class= input-style   matInput [(ngModel)]="drugstoreOffer.Content"></textarea>
+    <br>
+    <label class= font-size>Enter date range : </label>
+    <mat-date-range-input [rangePicker]="picker">
+        <input class= input-style matStartDate="bp3" disabled [(ngModel)]="drugstoreOffer.StartDate" placeholder="Start date">
+        <input class = input-style matEndDate="bp4" disabled [(ngModel)]="drugstoreOffer.EndDate" placeholder="End date">
+    </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker #dp3 disabled="false" #bp4 disabled="false" ></mat-date-range-picker>
+      <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+    <br>
+    <button (click) = sendOffer(drugstoreOffer) class = "input-style">Send offer</button>
+    </div>
+</div>

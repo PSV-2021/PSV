@@ -129,9 +129,49 @@ namespace Integration.Migrations
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(3739),
+                            RecievedTime = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(332),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(3744)
+                            SentTime = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(336)
+                        });
+                });
+
+            modelBuilder.Entity("Integration.Model.DrugstoreOffer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DrugstoreName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugstoreOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Content = "Content",
+                            DrugstoreName = "Apotekica",
+                            EndDate = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(686),
+                            IsPublished = false,
+                            StartDate = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(678),
+                            Title = "title"
                         });
                 });
 #pragma warning restore 612, 618

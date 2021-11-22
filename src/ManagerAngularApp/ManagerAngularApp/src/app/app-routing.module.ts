@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.component';
 import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PurchaseDrugsComponent } from './purchase-drugs/purchase-drugs.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'feedbacks', component: FeedbacksComponent},
   { path: 'landingPage', component: LandingPageComponent},
   { path: 'purchase', component: PurchaseDrugsComponent},
+  { path: 'drugstore-offer', component: DrugstoreOfferComponent},
   { path: 'drugs-consumption', component: DrugsConsumptionComponent},
   { path: '', redirectTo: 'landingPage', pathMatch: 'full' },
   { path: '**', redirectTo: 'landingPage', pathMatch: 'full' }

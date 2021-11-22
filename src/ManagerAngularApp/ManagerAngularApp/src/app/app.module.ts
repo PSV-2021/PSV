@@ -13,6 +13,7 @@ import { ReviewComponent } from './review/review.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 import { PurchaseDrugsComponent } from './purchase-drugs/purchase-drugs.component';
+import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.component';
 import { DrugsConsumptionComponent } from './drugs-consumption-specs/drugs-consumption.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     LandingPageComponent,
     FeedbacksComponent,
     PurchaseDrugsComponent,
+    DrugstoreOfferComponent,
     DrugsConsumptionComponent,
   ],
   imports: [
