@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211119125528_NewMigration")]
-    partial class NewMigration
+    [Migration("20211122163021_databaseTest")]
+    partial class databaseTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,42 @@ namespace Drugstore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("Drugstore.Models.DrugstoreOffer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DrugstoreName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugstoreOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Content = "Content",
+                            DrugstoreName = "Apotekica",
+                            EndDate = new DateTime(2021, 11, 22, 17, 30, 20, 81, DateTimeKind.Local).AddTicks(6964),
+                            StartDate = new DateTime(2021, 11, 22, 17, 30, 20, 78, DateTimeKind.Local).AddTicks(2227),
+                            Title = "title"
+                        });
+                });
 
             modelBuilder.Entity("Drugstore.Models.Feedback", b =>
                 {
@@ -188,21 +224,30 @@ namespace Drugstore.Migrations
                     b.ToTable("Users");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                });
+
+            modelBuilder.Entity("Drugstore.Models.Customer", b =>
+                {
+                    b.HasBaseType("Drugstore.Models.User");
+
+                    b.Property<string>("Adress")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("Customer_Name");
+
+                    b.HasDiscriminator().HasValue("Customer");
 
                     b.HasData(
                         new
                         {
-                            UserId = 1,
-                            Password = "farmaceut",
-                            Role = "pharmacist",
-                            Username = "farmaceut"
-                        },
-                        new
-                        {
-                            UserId = 2,
+                            UserId = 5,
                             Password = "kupac",
-                            Role = "customer",
-                            Username = "kupac"
+                            Role = "Customer",
+                            Username = "kupac",
+                            Adress = "Adresa kupca 123",
+                            Name = "Kupac"
                         });
                 });
 
@@ -218,7 +263,7 @@ namespace Drugstore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = 3,
+                            UserId = 1,
                             Password = "farmaceut",
                             Role = "Pharmacist",
                             Username = "farmaceut",

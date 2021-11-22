@@ -49,8 +49,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 11, 19, 20, 52, 11, 273, DateTimeKind.Local).AddTicks(1562),
-                            StartDate = new DateTime(2021, 11, 19, 20, 52, 11, 268, DateTimeKind.Local).AddTicks(8232),
+                            EndDate = new DateTime(2021, 11, 22, 17, 30, 20, 81, DateTimeKind.Local).AddTicks(6964),
+                            StartDate = new DateTime(2021, 11, 22, 17, 30, 20, 78, DateTimeKind.Local).AddTicks(2227),
                             Title = "title"
                         });
                 });
@@ -240,7 +240,7 @@ namespace Drugstore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = 2,
+                            UserId = 5,
                             Password = "kupac",
                             Role = "Customer",
                             Username = "kupac",

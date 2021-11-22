@@ -111,27 +111,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 11, 17, 21, 50, 47, 182, DateTimeKind.Local).AddTicks(8521),
+                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 37, DateTimeKind.Local).AddTicks(9840),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(2925)
+                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(6498)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(3693),
+                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7898),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(3726)
+                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7952)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(332),
+                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7976),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(336)
+                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7982)
                         });
                 });
 
@@ -168,9 +168,9 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(686),
+                            EndDate = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(9276),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(678),
+                            StartDate = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(9256),
                             Title = "title"
                         });
                 });
