@@ -5,11 +5,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Model.DataBaseContext;
+using PrimerServis;
 
 namespace Integration_API
 {
     public class Startup
     {
+       
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,7 +23,7 @@ namespace Integration_API
         public void ConfigureServices(IServiceCollection services)
         {           
             services.AddControllers();
-            
+            services.AddHostedService<RabbitMQService>();
             services.AddDbContext<MyDbContext>(options =>
                 options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
             services.AddControllersWithViews().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -31,6 +33,8 @@ namespace Integration_API
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

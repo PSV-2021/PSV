@@ -19,6 +19,42 @@ namespace Drugstore.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Drugstore.Models.DrugstoreOffer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DrugstoreName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugstoreOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Content = "Content",
+                            DrugstoreName = "Apotekica",
+                            EndDate = new DateTime(2021, 11, 19, 20, 52, 11, 273, DateTimeKind.Local).AddTicks(1562),
+                            StartDate = new DateTime(2021, 11, 19, 20, 52, 11, 268, DateTimeKind.Local).AddTicks(8232),
+                            Title = "title"
+                        });
+                });
+
             modelBuilder.Entity("Drugstore.Models.Feedback", b =>
                 {
                     b.Property<string>("Id")

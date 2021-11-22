@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Repository;
+using Hospital.MedicalRecords.Repository;
+using Hospital.RoomsAndEquipment.Repository;
+using Hospital.Schedule.Repository;
 
 namespace Hospital.Factory
 {

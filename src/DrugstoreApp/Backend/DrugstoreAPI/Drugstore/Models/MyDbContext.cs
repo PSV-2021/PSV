@@ -1,6 +1,6 @@
 ﻿using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
-
+using System;
 
 namespace Drugstore.Models
 {
@@ -13,6 +13,7 @@ namespace Drugstore.Models
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<DrugstoreOffer> DrugstoreOffers { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -43,6 +44,10 @@ namespace Drugstore.Models
             modelBuilder.Entity<Customer>().HasData(
                 new Customer(5, "kupac", "kupac", "Kupac", "Adresa kupca 123")
             ) ;
+            
+            modelBuilder.Entity<DrugstoreOffer>().HasData(
+                new DrugstoreOffer("1", "Content", "title", DateTime.Now, DateTime.Now,"Apotekica")
+            ); 
         }
     }
 }
