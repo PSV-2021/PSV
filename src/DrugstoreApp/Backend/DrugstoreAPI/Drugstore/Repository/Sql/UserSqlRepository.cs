@@ -32,7 +32,7 @@ namespace Drugstore.Repository.Sql
         }
         public void AddCustomer(User user)
         {
-            Customer customer = new Customer(user.UserId, user.Username, user.Password, "Cust");
+            Customer customer = new Customer(user.UserId, user.Username, user.Password, "Cust", "Adresa");
             DbContext.Users.Add(customer);
             DbContext.SaveChanges();
         }
