@@ -58,9 +58,10 @@ namespace Drugstore.Repository.Sql
             return DbContext.Medicines.Where(m => m.Name == name).FirstOrDefault<Medicine>();
         }
 
-        public void Update(Medicine med)
+
+        public void Update(Medicine medicine)
         {
-            DbContext.Medicines.Update(med);
+            DbContext.Medicines.Update(medicine);
             DbContext.SaveChanges();
         }
     }

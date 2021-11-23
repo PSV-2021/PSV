@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Integration.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
+using Integration.Service;
+using Integration.Sql;
 
 namespace Integration_API.Controllers
 {
@@ -16,10 +18,12 @@ namespace Integration_API.Controllers
     public class DrugPurchaseController : ControllerBase
     {
         private readonly MyDbContext dbContext;
+        public MedicineService medicineService;
 
         public DrugPurchaseController(MyDbContext db)
         {
             this.dbContext = db;
+            this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
         }
 
         [HttpPut]
@@ -37,6 +41,31 @@ namespace Integration_API.Controllers
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 return Ok(Boolean.Parse(response.Content));
 
+            return Unauthorized(false);
+        }
+
+        [HttpPut("urgent")]
+        public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
+        {
+            var client = new RestClient(demand.PharmacyUrl);
+            var request = new RestRequest("/api/drugDemand/urgent", Method.POST);
+
+            SetApiKeyInHeader(demand, request);
+
+            SetRequestBody(demand, request);
+
+            IRestResponse response = client.Execute(request);
+
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                if (Boolean.Parse(response.Content))
+                {
+                    medicineService.AddDrugUrgent(demand.Name, demand.Amount);
+                    return Ok(Boolean.Parse(response.Content));
+                }
+                
+            }
             return Unauthorized(false);
         }
 
