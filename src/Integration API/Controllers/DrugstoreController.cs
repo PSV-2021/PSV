@@ -5,14 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Repository.Sql;
-
+using Integration.Service;
 using Integration.Model;
 using Model.DataBaseContext;
 using Integration_API.DTOs;
 
 using Integration.Service;
+using Integration_API.Filters;
+using Integration_API.Repository.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Integration_API.Repository.Interfaces;
 using RestSharp;
+using System.Configuration;
 
 namespace Integration_API.Controllers
 {
@@ -40,10 +44,14 @@ namespace Integration_API.Controllers
             return Ok(result);
         }
 
+        [HttpGet ("filter")] // GET /api/drugstore/filter
 
-        [HttpGet ("filter")]       // GET /api/drugstore
         public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
         {
+            IEnumerable<string> headerValues = Request.Headers["ApiKey"];
+            var key = headerValues.FirstOrDefault();
+            if (key == null || !key.Equals("abcde"))
+                return Unauthorized();
             CheckFilterParameters(ref city, ref address);
             List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
             return Ok(result);

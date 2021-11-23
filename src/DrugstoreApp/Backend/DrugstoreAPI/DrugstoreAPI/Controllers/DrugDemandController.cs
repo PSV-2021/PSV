@@ -10,6 +10,7 @@ using DrugstoreAPI.Dtos;
 using DrugstoreAPI.Service;
 using Drugstore.Repository.Interfaces;
 using Service;
+using Drugstore.Service;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -21,6 +22,7 @@ namespace DrugstoreAPI.Controllers
         private readonly MyDbContext dbContext;
         public MedicineService medicineService;
         public HospitalService HospitalService;
+
 
         public DrugDemandController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {

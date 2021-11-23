@@ -15,6 +15,7 @@ namespace Model.DataBaseContext
         }
         public DbSet<Drugstore> Drugstores { get; set; }
         public DbSet<DrugstoreFeedback> DrugstoreFeedbacks { get; set; }
+        public DbSet<DrugstoreOffer> DrugstoreOffers { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -39,6 +40,9 @@ namespace Model.DataBaseContext
                 new DrugstoreFeedback { Id = "bbb", DrugstoreId = 2, Content = "Svidjela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now },
                 new DrugstoreFeedback { Id = "ccc", DrugstoreId = 3, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now }
 
+            );
+            modelBuilder.Entity<DrugstoreOffer>().HasData(
+                new DrugstoreOffer("1", "Content", "title", DateTime.Now, DateTime.Now, "Apotekica",false)
             );
         }
     }

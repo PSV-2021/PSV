@@ -26,7 +26,6 @@ namespace Integration_API.Controllers
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
         }
 
-
         [HttpPut]
         public IActionResult Put(DrugAmountDemandDto demand)
         {

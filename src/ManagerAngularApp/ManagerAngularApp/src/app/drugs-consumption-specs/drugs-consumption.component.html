@@ -1,0 +1,38 @@
+<div>
+    <mat-card class="example-card">
+        <mat-card-content>
+            <p>Enter a date range for drugs consumption report:</p>
+            <mat-form-field appearance="fill">
+                <mat-label>Date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker" [formGroup]="range">
+                  <input matStartDate placeholder="Start date" formControlName="start">
+                  <input matEndDate placeholder="End date" formControlName="end">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+              <button style="margin-left: 3%;" (click)="generateReport()" mat-raised-button color="primary">Generate report</button>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+<div>
+  <mat-card class="example-card">
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose pharmacy:</mat-label>
+        <mat-select [(ngModel)]="selectedPharmacy" name="phar">
+          <mat-option *ngFor="let pharmacy of pharmacies" [value]="pharmacy">
+            {{pharmacy.Name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+          <mat-form-field style="margin-left: 3%;" class="example-full-width" appearance="fill" >
+            <mat-label>Drug name</mat-label>
+            <textarea matInput placeholder="Drug name" [(ngModel)]="drugName" name="drugName" matInput></textarea>
+          </mat-form-field>
+          <button style="margin-left: 3%;" mat-raised-button (click)="requestDrugSpecification()" color="primary">Request drug specification</button>
+    </mat-card-content>
+</mat-card>
+
+</div>

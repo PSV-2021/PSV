@@ -13,7 +13,7 @@ import { DrugstoreSearchDto } from '../purchase-drugs/drugstore.search.dto';
 export class PharmacyService {
     url: string;
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5000/api";
+      this.url = "http://"+location.hostname+":5000/api";
     }
 
     GetAllDrugstores(): Observable<any> {
@@ -49,11 +49,15 @@ export class PharmacyService {
     }
 
     SendFilter(searchDto: DrugstoreSearchDto): Observable<any>{
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'ApiKey': "abcde" });
+
       const params = new HttpParams()
       .set('city', searchDto.City)
       .set('address', searchDto.Address);
 
-      const ret = this.http.get<any>(this.url + '/drugstore/filter', {params});
+      const ret = this.http.get<any>(this.url + '/drugstore/filter', {params, headers});
 
       return ret;
     }
