@@ -51,13 +51,7 @@ namespace DrugstoreAPI.Service
             Medicine med = MedicineRepository.GetByName(nameOfDrug);
             if (med == null)
                 return false;
-
-            if (CheckIsTheDrugAmountSatisfied(amountOfDrug, med))
-            {
-                DecreaseDrugAmount(amountOfDrug, med);
-                return true;
-            }
-            return false;
+            return CheckIsTheDrugAmountSatisfied(amountOfDrug, med);
         }
 
 
@@ -72,8 +66,7 @@ namespace DrugstoreAPI.Service
             {
                 return false;
             }
-            med.Supply -= amountOfDrug;
-            MedicineRepository.Update(med);
+            DecreaseDrugAmount(amountOfDrug, med);
             return true;
         }
         

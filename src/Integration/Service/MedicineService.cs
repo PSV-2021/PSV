@@ -48,10 +48,19 @@ namespace Integration.Service
             }
             else
             {
-                med.Supply += amountOfDrug;
-                MedicineRepository.Update(med);
+                IncreaseDrugAmount(amountOfDrug, med);
             }
             
+        }
+        private void IncreaseDrugAmount(int amountOfDrug, Medicine med)
+        {
+            med.Supply += amountOfDrug;
+            MedicineRepository.Update(med);
+        }
+        private void DecreaseDrugAmount(int amountOfDrug, Medicine med)
+        {
+            med.Supply -= amountOfDrug;
+            MedicineRepository.Update(med);
         }
 
 
