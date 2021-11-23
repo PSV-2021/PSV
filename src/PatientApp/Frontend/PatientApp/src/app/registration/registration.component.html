@@ -9,11 +9,13 @@
             <mat-label>Name</mat-label>
             <input type="text" formControlName="name" matInput placeholder="" [(ngModel)]="patient.name" required/>
             <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('name', 'pattern')">Name must start with capital letter</mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill" class="width-100">
             <mat-label>Surname</mat-label>
             <input type="text" formControlName="surname"  matInput placeholder=""  [(ngModel)]="patient.surname" required/>
             <mat-error *ngIf="hasError('surname', 'required')">Surname is required</mat-error>
+            <mat-error *ngIf="hasError('surname', 'pattern')">Surname must start with capital letter</mat-error>
           </mat-form-field>
           <mat-form-field appearance="fill" class="width-100">
               <mat-label>Jmbg</mat-label>
@@ -31,6 +33,7 @@
               <mat-label>Father's name</mat-label>
               <input type="text" formControlName="father" matInput placeholder=""  [(ngModel)]="patient.fathersName" required/>
               <mat-error *ngIf="hasError('father', 'required')">Father's name is required</mat-error>
+              <mat-error *ngIf="hasError('father', 'pattern')">Father's name must start with capital letter</mat-error>
             </mat-form-field>
           <mat-radio-group aria-label="Select sex" [(ngModel)]="patient.sex" [ngModelOptions]="{standalone: true}">
               <mat-radio-button [value]=0>Male</mat-radio-button>
@@ -41,6 +44,7 @@
               <mat-label>Phone number</mat-label>
               <input type="text" formControlName="phone" matInput placeholder=""  [(ngModel)]="patient.phoneNumber" required/>
               <mat-error *ngIf="hasError('phone', 'required')">Phone is required</mat-error>
+              <mat-error *ngIf="hasError('phone', 'pattern')">Phone number only has numbers</mat-error>
             </mat-form-field>
           <mat-form-field appearance="fill" class="width-100">
               <mat-label>Address</mat-label>
