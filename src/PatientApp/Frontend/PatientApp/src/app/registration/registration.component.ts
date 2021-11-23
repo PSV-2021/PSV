@@ -49,7 +49,9 @@ export class RegistrationComponent implements OnInit {
   doctors: any[]=[];
   selectedDoctor: SelectedDoctor = {name: ""};
   registerForm: FormGroup;
-  submitted: any;
+
+  hide = true;
+  hiderp = true;
   
   allergenList: any[]=[];
   public allergens: any[]=[];
@@ -63,7 +65,9 @@ export class RegistrationComponent implements OnInit {
         title: formBuilder.control('initial value', Validators.required)
     });
   }
+
   get f() { return this.registerForm.controls; }
+
   public hasError = (controlName: string, errorName: string) =>{
     return this.registerForm.controls[controlName].hasError(errorName);
   }
@@ -84,9 +88,9 @@ export class RegistrationComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       doctor: ['', Validators.required],
       bloodType: ['', Validators.required]
-  }, {
+    }, {
       validator: MustMatch('password', 'confirmPassword')
-  });
+    });
 
     this.registrationService.GetDoctors().subscribe((data: any)=>{
       for(const p of (data as any)){
@@ -102,7 +106,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(){
-
 
    this.PrepareDTO();
     for(const d of this.doctors){
