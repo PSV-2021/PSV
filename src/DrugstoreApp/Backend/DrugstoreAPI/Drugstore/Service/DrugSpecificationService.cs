@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Net.Sockets;
 using System.Text;
 
 namespace Drugstore.Service
@@ -18,17 +19,23 @@ namespace Drugstore.Service
         {
             using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
             {
-                client.Connect();
-
-                string sourceFile = @"D:\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\Drug Specifications\" + fileName + " - Specifikacija leka.pdf";
-                if (File.Exists(sourceFile))
+                try
                 {
-                    using (Stream stream = File.OpenRead(sourceFile))
+                    client.Connect();
+                    string sourceFile = FormatPath() + fileName + " - Specifikacija leka.pdf";
+                    if (File.Exists(sourceFile))
                     {
-                        client.UploadFile(stream, @"\public\Hospital files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
-                        client.Disconnect();
-                        return true;
+                        using (Stream stream = File.OpenRead(sourceFile))
+                        {
+                            client.UploadFile(stream, @"\public\Hospital files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            client.Disconnect();
+                            return true;
+                        }
                     }
+                }
+                catch (SocketException se)
+                {
+                    string ErrorString = se.Message;
                 }
                 return false;
             }
@@ -44,22 +51,37 @@ namespace Drugstore.Service
                 PdfFont BodyFont = new PdfStandardFont(PdfFontFamily.Helvetica, 7);
                 Graphics.DrawString(drugName + " - Specifikacija leka", HeaderFont, PdfBrushes.Blue, new PointF(120, 20));
                 Graphics.DrawString(specification, BodyFont, PdfBrushes.Black, new PointF(90, 50));
-                Document.Save(@"D:\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\Drug Specifications\" + drugName + " - Specifikacija leka.pdf");
+                Document.Save(FormatPath() + drugName + " - Specifikacija leka.pdf");
                 Document.Close(true);
             }
         }
 
         public string ReadDrugSpecification(string drugName)
         {
-            drugName = drugName.Trim();
-            drugName = char.ToUpper(drugName[0]) + drugName.Substring(1).ToLower();
-            string path = @"D:\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\Drugstore\Drug Specifications\" + drugName + ".txt";
+            drugName = FormatString(drugName);
+            string path = FormatPath() + drugName + ".txt";
 
             if (File.Exists(path))
             {
                 return File.ReadAllText(path);
             }
             return "";
+        }
+
+        private string FormatPath()
+        {
+            string[] absolute = Directory.GetCurrentDirectory().Split("src");
+            return Path.Combine(absolute[0], "src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drug Specifications\\");
+        }
+
+        private string FormatString(string drugName)
+        {
+            if (drugName != "")
+            {
+                drugName = drugName.Trim();
+                drugName = char.ToUpper(drugName[0]) + drugName.Substring(1).ToLower();
+            }
+            return drugName;
         }
     }
 }
