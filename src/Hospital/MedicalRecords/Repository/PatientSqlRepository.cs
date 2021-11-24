@@ -36,6 +36,18 @@ namespace Hospital.MedicalRecords.Repository
             dbContext.SaveChanges();
         }
 
+        public Patient GetOne(int id)
+        {
+            Console.WriteLine(id+ "u getone");
+            Patient patientWithThatId = (from n in dbContext.Patients where n.Id == id select n).FirstOrDefault();
+            return patientWithThatId;
+        }
+
+        internal int FindIdMedRecordByIdPatient(int idPatient)
+        {
+           return (from n in dbContext.Patients where n.Id == idPatient select n).FirstOrDefault().MedicalRecordId;
+        }
+
         public bool Update(Patient editedObject)
         {
             throw new NotImplementedException();
@@ -49,6 +61,47 @@ namespace Hospital.MedicalRecords.Repository
         public bool Save(Patient newObject)
         {
             throw new NotImplementedException();
+        }
+
+        public bool activateAccount(int userId, string token)
+        {
+            Patient patientToChange = dbContext.Patients.Find(userId);
+            if (patientToChange.Token.Equals(token))
+            {
+                patientToChange.IsActive = true;
+                dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool saveToken(Patient tokenPatient)
+        {
+            Patient patientToChange = dbContext.Patients.Find(tokenPatient.Id);
+            patientToChange.Token = tokenPatient.Token;
+            dbContext.SaveChanges();
+            return true;
+        }
+
+        public bool CheckToken(string token)
+        {
+            try
+            {
+                Patient patientToChange = (from n in dbContext.Patients where n.IsActive!=true && n.Token == token select n).First();
+                if (patientToChange != null)
+                {
+                    patientToChange.IsActive = true;
+                    dbContext.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+
+            }
+
+            return false;
         }
     }
 }
