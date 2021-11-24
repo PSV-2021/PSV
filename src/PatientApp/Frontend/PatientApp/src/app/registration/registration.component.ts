@@ -75,13 +75,13 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
 
     this.registerForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern('[A-Z][a-z]*')]],
-      surname: ['', [Validators.required, Validators.pattern('[A-Z][a-z]*')]],
+      name: ['', [Validators.required, Validators.pattern('[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*')]],
+      surname: ['', [Validators.required, Validators.pattern('[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*')]],
       jmbg: ['', Validators.required],
       date: ['', Validators.required],
-      father: ['',[Validators.required, Validators.pattern('[A-Z][a-z]*')]],
+      father: ['',[Validators.required, Validators.pattern('[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*')]],
       phone: ['',[Validators.required, Validators.pattern('[0-9]*')]],
-      address: ['',  [Validators.required, Validators.pattern('[A-Z][a-z A-z0-9]*')]],
+      address: ['',  [Validators.required, Validators.pattern('[A-ZČĆŠĐŽ][a-z A-z0-9ČĆŠĐŽčćđžš]*')]],
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -111,6 +111,7 @@ export class RegistrationComponent implements OnInit {
     for(const d of this.doctors){
       if(d.nameAndSurname == this.selectedDoctor.name){
         this.returnPatient.DoctorId = d.id
+        console.log(d.id);
       }
     }
 
