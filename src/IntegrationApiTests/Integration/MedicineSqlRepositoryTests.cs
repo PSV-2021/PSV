@@ -37,6 +37,20 @@ namespace IntegrationApiTests.Integration
             newVal.Supply.ShouldBe(oldAmount + 10);
 
         }
+        [Fact]
+        public void Adding_nonexisting_drugs_to_repository()
+        {
+            SetUpDbContext();
+            IMedicineRepository repo = new MedicineSqlRepository(context);
+            MedicineService service = new MedicineService(repo);
+            Medicine testMed = repo.GetByName("NePostoji");
+            repo.Remove(testMed);
+            
+            service.AddDrugUrgent("NePostoji", 10);
+            Medicine newVal = repo.GetByName("NePostoji");
+            newVal.Supply.ShouldBe(10);
+
+        }
     }
 }
 
