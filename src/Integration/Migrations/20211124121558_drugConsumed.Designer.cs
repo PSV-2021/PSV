@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211124121558_drugConsumed")]
+    partial class drugConsumed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -477,45 +479,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-<<<<<<< HEAD
-                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 37, DateTimeKind.Local).AddTicks(9840),
-                            Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(6498)
-=======
                             RecievedTime = new DateTime(2021, 11, 24, 13, 15, 57, 180, DateTimeKind.Local).AddTicks(6120),
                             Response = "Nemoj da lazes!",
                             SentTime = new DateTime(2021, 11, 24, 13, 15, 57, 183, DateTimeKind.Local).AddTicks(9930)
->>>>>>> fix#8/Drug-specification-and-new-tests-
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-<<<<<<< HEAD
-                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7898),
-                            Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7952)
-=======
                             RecievedTime = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(809),
                             Response = "Nemoj da lazes!",
                             SentTime = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(845)
->>>>>>> fix#8/Drug-specification-and-new-tests-
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-<<<<<<< HEAD
-                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7976),
-                            Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7982)
-=======
                             RecievedTime = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(860),
                             Response = "Nemoj da lazes!",
                             SentTime = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(864)
->>>>>>> fix#8/Drug-specification-and-new-tests-
                         });
                 });
 
@@ -552,15 +536,9 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-<<<<<<< HEAD
-                            EndDate = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(9276),
-                            IsPublished = false,
-                            StartDate = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(9256),
-=======
                             EndDate = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(1522),
                             IsPublished = false,
                             StartDate = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(1514),
->>>>>>> fix#8/Drug-specification-and-new-tests-
                             Title = "title"
                         });
                 });

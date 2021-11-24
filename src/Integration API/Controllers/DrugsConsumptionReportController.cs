@@ -22,12 +22,13 @@ namespace Integration_API.Controllers
     public class DrugsConsumptionReportController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public DrugsConsumptionReportService drugsConsumptionService = new DrugsConsumptionReportService();
+        public DrugsConsumptionReportService drugsConsumptionService;
         //public DrugsConsumedRepositoryDummy repoDrugsConsumed = new DrugsConsumedRepositoryDummy();
 
         public DrugsConsumptionReportController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
+            drugsConsumptionService = new DrugsConsumptionReportService(db);
         }
         
         [HttpPost] // POST /api/DrugsConsumptionReportController

@@ -33,8 +33,9 @@ namespace Integration_API.Controllers
             IRestResponse response = client.Execute(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return Ok(Boolean.Parse(response.Content));
-
+                return Ok(true);
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                return NoContent();
             return Unauthorized(false);
         }
 
