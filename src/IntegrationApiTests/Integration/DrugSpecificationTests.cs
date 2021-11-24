@@ -21,6 +21,7 @@ namespace IntegrationApiTests.Integration
     public class DrugSpecificationTests
     {
         private MyDbContext context;
+        
         public void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();

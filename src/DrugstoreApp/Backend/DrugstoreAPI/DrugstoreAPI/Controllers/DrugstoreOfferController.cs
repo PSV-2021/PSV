@@ -47,8 +47,8 @@ namespace DrugstoreAPI.Controllers
                     Title = offer.Title,
                     Content = offer.Content,
                     DrugstoreName = "Apoteka 1",
-                    StartDate = offer.StartDate,
-                    EndDate = offer.EndDate
+                    StartDate = offer.StartDate.AddHours(1),
+                    EndDate = offer.EndDate.AddHours(1)
 
                 };
                 DrugstoreOffer drugstoreOffer = new DrugstoreOffer(body.Id, body.Content, body.Title, body.StartDate, body.EndDate, body.DrugstoreName);
