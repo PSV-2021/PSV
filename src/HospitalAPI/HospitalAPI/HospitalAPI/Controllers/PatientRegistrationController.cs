@@ -9,6 +9,7 @@ using Hospital.MedicalRecords.Repository;
 using Hospital.MedicalRecords.Service;
 using Hospital.SharedModel;
 using HospitalAPI.DTO;
+using HospitalAPI.Verification;
 
 namespace HospitalAPI.Controllers
 {
@@ -18,6 +19,7 @@ namespace HospitalAPI.Controllers
     {
         private readonly MyDbContext dbContext;
         public PatientService patientService;
+        public PatientVerification patientVerification = new PatientVerification();
 
 
         public PatientRegistrationController(MyDbContext context)
@@ -29,6 +31,8 @@ namespace HospitalAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] PatientDto p)
         {
+            if (!patientVerification.Verify(p))
+                return BadRequest();
             Patient patient = GeneratePatientFromDTO(p);
             patientService.SavePatientSql(patient, dbContext);
 

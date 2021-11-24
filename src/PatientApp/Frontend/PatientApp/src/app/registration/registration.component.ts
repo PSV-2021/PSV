@@ -3,6 +3,9 @@ import { RegistrationService } from '../registration.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PatientDto } from './registration.dto';
 import { formatDate } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MustMatch } from '../helpers/must-watch.validator';
+
 
 interface Type {
   value: string;
@@ -45,7 +48,10 @@ export class RegistrationComponent implements OnInit {
 
   doctors: any[]=[];
   selectedDoctor: SelectedDoctor = {name: ""};
-  
+  registerForm: FormGroup;
+
+  hide = true;
+  hiderp = true;
   
   allergenList: any[]=[];
   public allergens: any[]=[];
@@ -53,11 +59,39 @@ export class RegistrationComponent implements OnInit {
   patient: Patient = {name: "",surname: "", jmbg: "", date: new Date(), bloodType: 0, sex: 0, fathersName: "", phoneNumber: "", adress: "", email: "", username: "", password: "", repeatPassword: "", doctorId: 0};
   public returnPatient: PatientDto;
 
-  constructor(private registrationService: RegistrationService, private _snackBar: MatSnackBar) {
+  constructor(private registrationService: RegistrationService, private _snackBar: MatSnackBar,private formBuilder: FormBuilder) {
    this.returnPatient = new PatientDto();
+   this.registerForm = formBuilder.group({
+        title: formBuilder.control('initial value', Validators.required)
+    });
+  }
+
+  get f() { return this.registerForm.controls; }
+
+  public hasError = (controlName: string, errorName: string) =>{
+    return this.registerForm.controls[controlName].hasError(errorName);
   }
 
   ngOnInit(): void {
+
+    this.registerForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.pattern('[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*')]],
+      surname: ['', [Validators.required, Validators.pattern('[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*')]],
+      jmbg: ['', Validators.required],
+      date: ['', Validators.required],
+      father: ['',[Validators.required, Validators.pattern('[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*')]],
+      phone: ['',[Validators.required, Validators.pattern('[0-9]*')]],
+      address: ['',  [Validators.required, Validators.pattern('[A-ZČĆŠĐŽ][a-z A-z0-9ČĆŠĐŽčćđžš]*')]],
+      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+      doctor: ['', Validators.required],
+      bloodType: ['', Validators.required]
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
+    });
+
     this.registrationService.GetDoctors().subscribe((data: any)=>{
       for(const p of (data as any)){
         this.doctors.push(p);
@@ -72,10 +106,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(){
+
    this.PrepareDTO();
     for(const d of this.doctors){
       if(d.nameAndSurname == this.selectedDoctor.name){
         this.returnPatient.DoctorId = d.id
+        console.log(d.id);
       }
     }
 
