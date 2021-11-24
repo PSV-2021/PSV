@@ -10,60 +10,18 @@ namespace HospitalAPI.Verification
     public class PatientVerification
     {
         private PatientDto patient;
+        private Regex regexName = new Regex("[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*");
+        private Regex regexPhone = new Regex("[0-9]*");
+        private Regex regexAddress = new Regex("[A-ZČĆŠĐŽ][a-z A-z0-9ČĆŠĐŽčćđžš]*");
+        private Regex regexEmail = new Regex("^(.+)@(.+)$");
 
         public PatientVerification() { }
 
-        private bool VerifyName()
+        private bool VerifyField(Regex r, String s)
         {
-            Regex regex = new Regex("[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*");
-            if (patient.Name == null)
+            if (s == null)
                 return false;
-            if (!regex.IsMatch(patient.Name))
-                return false;
-            return true;
-        }
-        private bool VerifySurname()
-        {
-            Regex regex = new Regex("[A-Z][a-z]*");
-            if (patient.Surname == null)
-                return false;
-            if (!regex.IsMatch(patient.Surname))
-                return false;
-            return true;
-        }
-        private bool VerifyFathersName()
-        {
-            Regex regex = new Regex("[A-ZČĆŠĐŽčćđžš][a-zčćđžš]*");
-            if (patient.FathersName == null)
-                return false;
-            if (!regex.IsMatch(patient.FathersName))
-                return false;
-            return true;
-        }
-        private bool VerifyPhone()
-        {
-            Regex regex = new Regex("[0-9]*");
-            if (patient.PhoneNumber == null)
-                return false;
-            if (!regex.IsMatch(patient.PhoneNumber))
-                return false;
-            return true;
-        }
-        private bool VerifyAddress()
-        {
-            Regex regex = new Regex("[A-ZČĆŠĐŽ][a-z A-z0-9ČĆŠĐŽčćđžš]*");
-            if (patient.Address == null)
-                return false;
-            if (!regex.IsMatch(patient.Address))
-                return false;
-            return true;
-        }
-        private bool VerifyEmail()
-        {
-            Regex regex = new Regex("^(.+)@(.+)$");
-            if (patient.Email == null)
-                return false;
-            if (!regex.IsMatch(patient.Email))
+            if (!r.IsMatch(s))
                 return false;
             return true;
         }
@@ -73,17 +31,17 @@ namespace HospitalAPI.Verification
             this.patient = patient;
             if (patient == null)
                 return false;
-            if (!VerifyName())
+            if (!VerifyField(regexName, patient.Name))
                 return false;
-            if (!VerifySurname())
+            if (!VerifyField(regexName, patient.Surname))
                 return false;
-            if (!VerifyFathersName())
+            if (!VerifyField(regexName, patient.FathersName))
                 return false;
-            if (!VerifyPhone())
+            if (!VerifyField(regexPhone, patient.PhoneNumber))
                 return false;
-            if (!VerifyAddress())
+            if (!VerifyField(regexAddress, patient.Address))
                 return false;
-            if (!VerifyEmail())
+            if (!VerifyField(regexEmail, patient.Email))
                 return false;
             return true;
         }
