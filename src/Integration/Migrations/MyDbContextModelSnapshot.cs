@@ -477,45 +477,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-<<<<<<< HEAD
-                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 37, DateTimeKind.Local).AddTicks(9840),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 863, DateTimeKind.Local).AddTicks(4790),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(6498)
-=======
-                            RecievedTime = new DateTime(2021, 11, 24, 13, 15, 57, 180, DateTimeKind.Local).AddTicks(6120),
-                            Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 24, 13, 15, 57, 183, DateTimeKind.Local).AddTicks(9930)
->>>>>>> fix#8/Drug-specification-and-new-tests-
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(1767)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-<<<<<<< HEAD
-                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7898),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2581),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7952)
-=======
-                            RecievedTime = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(809),
-                            Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(845)
->>>>>>> fix#8/Drug-specification-and-new-tests-
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2617)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-<<<<<<< HEAD
-                            RecievedTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7976),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2629),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(7982)
-=======
-                            RecievedTime = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(860),
-                            Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(864)
->>>>>>> fix#8/Drug-specification-and-new-tests-
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2633)
                         });
                 });
 
@@ -552,16 +534,48 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-<<<<<<< HEAD
-                            EndDate = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(9276),
+                            EndDate = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(3344),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 11, 22, 17, 27, 48, 56, DateTimeKind.Local).AddTicks(9256),
-=======
-                            EndDate = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(1522),
-                            IsPublished = false,
-                            StartDate = new DateTime(2021, 11, 24, 13, 15, 57, 184, DateTimeKind.Local).AddTicks(1514),
->>>>>>> fix#8/Drug-specification-and-new-tests-
+                            StartDate = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(3336),
                             Title = "title"
+                        });
+                });
+
+            modelBuilder.Entity("Integration.Model.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Brufen",
+                            Supply = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Paracetamol",
+                            Supply = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Palitreks",
+                            Supply = 0
                         });
                 });
 #pragma warning restore 612, 618

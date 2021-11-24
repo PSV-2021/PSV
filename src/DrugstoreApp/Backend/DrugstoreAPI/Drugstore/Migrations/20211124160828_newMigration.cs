@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
-    public partial class databaseTest : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,6 +68,7 @@ namespace Drugstore.Migrations
                     Usage = table.Column<string>(type: "text", nullable: true),
                     Weight = table.Column<double>(type: "double precision", nullable: false),
                     Precautions = table.Column<string>(type: "text", nullable: true),
+                    MedicineImage = table.Column<string>(type: "text", nullable: true),
                     MedicineId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -103,7 +104,7 @@ namespace Drugstore.Migrations
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 11, 22, 17, 30, 20, 81, DateTimeKind.Local).AddTicks(6964), new DateTime(2021, 11, 22, 17, 30, 20, 78, DateTimeKind.Local).AddTicks(2227), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 11, 24, 17, 8, 27, 917, DateTimeKind.Local).AddTicks(7213), new DateTime(2021, 11, 24, 17, 8, 27, 913, DateTimeKind.Local).AddTicks(1586), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
@@ -122,12 +123,12 @@ namespace Drugstore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Medicines",
-                columns: new[] { "Id", "Manufacturer", "MedicineId", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Supply", "Usage", "Weight" },
+                columns: new[] { "Id", "Manufacturer", "MedicineId", "MedicineImage", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Supply", "Usage", "Weight" },
                 values: new object[,]
                 {
-                    { 1, null, null, "Brufen", null, 150.0, null, null, 150, null, 0.0 },
-                    { 2, null, null, "Paracetamol", null, 150.0, null, null, 10, null, 0.0 },
-                    { 3, null, null, "Palitreks", null, 150.0, null, null, 30, null, 0.0 }
+                    { 1, null, null, null, "Brufen", null, 150.0, null, null, 150, null, 0.0 },
+                    { 2, null, null, null, "Paracetamol", null, 150.0, null, null, 10, null, 0.0 },
+                    { 3, null, null, null, "Palitreks", null, 150.0, null, null, 30, null, 0.0 }
                 });
 
             migrationBuilder.InsertData(

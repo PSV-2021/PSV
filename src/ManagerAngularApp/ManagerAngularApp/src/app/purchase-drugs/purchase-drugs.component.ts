@@ -59,7 +59,7 @@ export class PurchaseDrugsComponent implements OnInit {
     this.pharmacyService.SendUrgentDrugPurchase(this.selectedPharmacy.Url, this.drugAmount, this.drugName).subscribe((d: any) =>{
       this.disableButton = true;
       if (d){
-        alert("You have successfully purchase drugs!");
+        alert("You have successfully purchased drugs!");
       }else if(!d){
         alert("Something went wrong!");
       }
