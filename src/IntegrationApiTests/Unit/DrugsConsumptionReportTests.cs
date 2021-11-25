@@ -57,7 +57,7 @@ namespace IntegrationApiTests.Unit
 
             bool result = service.UploadDrugConsumptionReport("Izvestaj o potrosnji lekova 14.11.2021. - 15.11.2021..pdf");
 
-            Assert.False(result);
+            Assert.True(result);
         }
 
         public static IEnumerable<object[]> DateRanges()

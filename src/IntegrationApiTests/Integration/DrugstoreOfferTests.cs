@@ -1,6 +1,7 @@
 ﻿using DrugstoreAPI.Controllers;
 using Integration.Model;
 using Integration.Repository.Sql;
+using Integration.Service;
 using Integration_API.DTOs;
 using Integration_API.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace IntegrationApiTests.Integration
         private readonly IServiceScopeFactory scopeFactory;
         PublishedOfferDto exists = new PublishedOfferDto("1");
         PublishedOfferDto Nonexistent = new PublishedOfferDto("2");
-        DrugstoreOffer offer1 = new DrugstoreOffer("3", "Content", "title", DateTime.Now, DateTime.Now, "Apotekica", false);
+        DrugstoreOffer offer1 = new DrugstoreOffer("7", "Content", "title", DateTime.Now, DateTime.Now, "Apotekica", false);
 
         public void SetUpDbContext()
         {
@@ -42,9 +43,10 @@ namespace IntegrationApiTests.Integration
             IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(context);
             List<DrugstoreOffer> offers = repo.GetAll();
             int val = offers.Count;
+           int checkVal = val + 1;
             this.SendDrugOffers();
             int newVal = repo.GetAll().Count;
-            newVal.ShouldBe(++val);
+            newVal.ShouldBe(checkVal);
 
         }
         private void SendDrugOffers()
@@ -53,7 +55,7 @@ namespace IntegrationApiTests.Integration
             IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(context);
             var stubRabbitMqService = new Mock<IRabbitMQService>();
             List<DrugstoreOffer> offers = new List<DrugstoreOffer>();
-            offers.Add(offer1);
+           offer1.Id = Guid.NewGuid().ToString();
             stubRabbitMqService.Setup(x => x.CreateConnection());
             stubRabbitMqService.Setup(x => x.RecieveMessage()).Returns(offer1);
             repo.Save(offer1);

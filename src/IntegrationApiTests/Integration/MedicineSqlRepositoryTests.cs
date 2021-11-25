@@ -43,11 +43,11 @@ namespace IntegrationApiTests.Integration
             SetUpDbContext();
             IMedicineRepository repo = new MedicineSqlRepository(context);
             MedicineService service = new MedicineService(repo);
-            Medicine testMed = repo.GetByName("NePostoji");
+            Medicine testMed = repo.GetByName("Brufen");
             repo.Remove(testMed);
             
-            service.AddDrugUrgent("NePostoji", 10);
-            Medicine newVal = repo.GetByName("NePostoji");
+            service.AddDrugUrgent("Brufen", 10);
+            Medicine newVal = repo.GetByName("Brufen");
             newVal.Supply.ShouldBe(10);
 
         }
