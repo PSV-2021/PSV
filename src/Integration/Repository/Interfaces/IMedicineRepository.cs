@@ -13,6 +13,7 @@ namespace Integration.Repository.Interfaces
 
         public void Update(Medicine medicine);
         public void Save(Medicine newMedicine);
+        public void Remove(Medicine medicine);
 
     }
 }

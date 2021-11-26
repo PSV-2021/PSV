@@ -20,7 +20,7 @@ using RabbitMQ.Client.Events;
 
 namespace PrimerServis
 {
-    public class RabbitMQService : BackgroundService
+    public class RabbitMQService : BackgroundService, IRabbitMQService
     {
         IConnection connection;
         IModel channel;
@@ -34,50 +34,9 @@ namespace PrimerServis
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            
-                var factory = new ConnectionFactory() { HostName = "localhost" };
-                connection = factory.CreateConnection();
-                channel = connection.CreateModel();
-                channel.ExchangeDeclare(exchange: "logs", type: ExchangeType.Fanout);
-                DrugstoreOffer drugstoreOffer = new DrugstoreOffer();
-                var queueName = channel.QueueDeclare().QueueName;
-                channel.QueueBind(queue: queueName,
-                                  exchange: "logs",
-                                  routingKey: "");
-
-                var consumer = new EventingBasicConsumer(channel);
-            
-                consumer.Received += (model, ea) =>
-                {
-                    using (var scope = scopeFactory.CreateScope())
-                    {
-                        var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
-                        drugstoreOfferService = new DrugstoreOfferService(dbContext);
-                        byte[] body = ea.Body.ToArray();
-                        var jsonMessage = Encoding.UTF8.GetString(body);
-
-                        try
-                        {   // try deserialize with default datetime format
-                            drugstoreOffer = JsonConvert.DeserializeObject<DrugstoreOffer>(jsonMessage);
-                            Console.WriteLine(drugstoreOffer.IsPublished);
-                        }
-                        catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
-                        {
-                            Console.WriteLine("Ne moze");
-                        }
-                        Console.WriteLine(" [x] Received {0}", drugstoreOffer);
-                        drugstoreOfferService.SaveOffer(drugstoreOffer);
-                    }
-                };
-            
-                
-                channel.BasicConsume(queue: queueName,
-                                         autoAck: true,
-                                         consumer: consumer);
-
-                return base.StartAsync(cancellationToken);
-                
-            
+            CreateConnection();
+            RecieveMessage();
+            return base.StartAsync(cancellationToken);
         }
 
         public override Task StopAsync(CancellationToken cancellationToken)
@@ -90,6 +49,51 @@ namespace PrimerServis
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             return Task.CompletedTask;
+        }
+        public void CreateConnection()
+        {
+            var factory = new ConnectionFactory() { HostName = "localhost" };
+            connection = factory.CreateConnection();
+            channel = connection.CreateModel();
+            channel.ExchangeDeclare(exchange: "logs", type: ExchangeType.Fanout);
+        }
+        public DrugstoreOffer RecieveMessage()
+        {
+            DrugstoreOffer drugstoreOffer = new DrugstoreOffer();
+            var queueName = channel.QueueDeclare().QueueName;
+            channel.QueueBind(queue: queueName,
+                              exchange: "logs",
+                              routingKey: "");
+
+            var consumer = new EventingBasicConsumer(channel);
+
+            consumer.Received += (model, ea) =>
+            {
+                using (var scope = scopeFactory.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
+                    drugstoreOfferService = new DrugstoreOfferService(dbContext);
+                    byte[] body = ea.Body.ToArray();
+                    var jsonMessage = Encoding.UTF8.GetString(body);
+
+                    try
+                    {   // try deserialize with default datetime format
+                        drugstoreOffer = JsonConvert.DeserializeObject<DrugstoreOffer>(jsonMessage);
+                        Console.WriteLine(drugstoreOffer.IsPublished);
+                        
+                    }
+                    catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
+                    {
+                        Console.WriteLine("Ne moze");
+                    }
+                    Console.WriteLine(" [x] Received {0}", drugstoreOffer);
+                    drugstoreOfferService.SaveOffer(drugstoreOffer);
+                }
+            };
+            channel.BasicConsume(queue: queueName,
+                                         autoAck: true,
+                                         consumer: consumer);
+            return drugstoreOffer;
         }
     }
 }

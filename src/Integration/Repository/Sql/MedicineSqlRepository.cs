@@ -51,5 +51,13 @@ namespace Integration.Sql
                 Console.WriteLine(e);
             }
         }
+        public void Remove(Medicine medicine)
+        {
+            if(GetByName(medicine.Name) != null)
+            {
+                DbContext.Medicines.Remove(medicine);
+                DbContext.SaveChanges();
+            }
+        }
     }
 }
