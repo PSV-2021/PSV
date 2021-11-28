@@ -20,6 +20,7 @@ namespace HospitalAPI.DTO
         public String Username { get; set; }
         public String Password { get; set; }
         public int DoctorId { get; set; }
+        public string Token { get; set; }
         public List<String> Allergens { get; set; }
         public PatientDto() { }
     }

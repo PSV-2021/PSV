@@ -30,6 +30,10 @@ namespace Hospital.Schedule.Repository
         {
             throw new System.NotImplementedException();
         }
+        public string GetMameAndSurnameById(int id)
+        {
+            return (from n in dbContext.Doctors where n.Id == id select n.NameAndSurname).FirstOrDefault();
+        }
 
         public bool Save(Doctor newObject)
         {

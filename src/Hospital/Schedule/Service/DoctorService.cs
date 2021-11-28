@@ -17,8 +17,8 @@ namespace Hospital.Schedule.Service
 
         public DoctorService()
         {
-            RepositoryFactory = (ApplicationDataSource.GetInstance()).GetRepositoryFactory();
-            DoctorRepository = RepositoryFactory.CreateDoctorRepository();
+          //  RepositoryFactory = (ApplicationDataSource.GetInstance()).GetRepositoryFactory();
+           // DoctorRepository = RepositoryFactory.CreateDoctorRepository();
         }
 
         public DoctorService(IDoctorRepository doctorRepository)
@@ -35,10 +35,15 @@ namespace Hospital.Schedule.Service
         {
             return DoctorRepository.GetOne(jmbg);
         }
-
+      
         public List<Doctor> GetGeneralDoctors()
         {
             return DoctorSqlRepository.GetAvalibleGeneralDoctors();
+        }
+        public string GetDoctorById(int id)
+        {
+            return DoctorSqlRepository.GetMameAndSurnameById(id);
+
         }
 
         public List<Doctor> GetAllDoctors()

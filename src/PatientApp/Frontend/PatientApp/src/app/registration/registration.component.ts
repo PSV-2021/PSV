@@ -1,8 +1,11 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { RegistrationService } from '../registration.service';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PatientDto } from './registration.dto';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
+import { ActivationService } from '../service/activation.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../helpers/must-watch.validator';
 
@@ -26,7 +29,7 @@ export interface Patient{
   repeatPassword: string;
   bloodType: number;
   doctorId: number;
-
+  token: string;
 }
 
 export interface SelectedDoctor{
@@ -56,10 +59,11 @@ export class RegistrationComponent implements OnInit {
   allergenList: any[]=[];
   public allergens: any[]=[];
 
-  patient: Patient = {name: "",surname: "", jmbg: "", date: new Date(), bloodType: 0, sex: 0, fathersName: "", phoneNumber: "", adress: "", email: "", username: "", password: "", repeatPassword: "", doctorId: 0};
+  patient: Patient = {name: "",surname: "", jmbg: "", date: new Date(), bloodType: 0, sex: 0, fathersName: "", phoneNumber: "", adress: "", email: "", username: "", password: "", repeatPassword: "", doctorId: 0, token:""};
   public returnPatient: PatientDto;
 
-  constructor(private registrationService: RegistrationService, private _snackBar: MatSnackBar,private formBuilder: FormBuilder) {
+
+  constructor(private registrationService: RegistrationService, private _snackBar: MatSnackBar,private formBuilder: FormBuilder,private activationService: ActivationService, private router: Router) {
    this.returnPatient = new PatientDto();
    this.registerForm = formBuilder.group({
         title: formBuilder.control('initial value', Validators.required)
@@ -119,6 +123,7 @@ export class RegistrationComponent implements OnInit {
       this._snackBar.open('Patient saved!', '', {
         duration: 2000
       });
+      this.router.navigate(['/registrationSuccess']);
     });
   
   }
