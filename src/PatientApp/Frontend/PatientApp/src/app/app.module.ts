@@ -25,6 +25,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SurveyComponent } from './survey/survey.component';
+import { ActivationAccountComponent } from './activation-account/activation-account.component';
+import { LoginComponent } from './login/login.component';
+import { MedicalRecordComponent } from './medical-record/medical-record.component';
+import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 
 
 @NgModule({
@@ -34,7 +38,11 @@ import { SurveyComponent } from './survey/survey.component';
     LandingComponent,
     CommentsObserveComponent,
     RegistrationComponent,
-    SurveyComponent
+    SurveyComponent,
+    ActivationAccountComponent,
+    LoginComponent,
+    MedicalRecordComponent,
+    RegistrationSuccessComponent
 
   ],
   imports: [

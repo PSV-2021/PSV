@@ -12,11 +12,16 @@ using Moq.Protected;
 using System.Threading;
 using Hospital.MedicalRecords.Service;
 using Shouldly;
+using HospitalAPI.DTO;
+using HospitalAPI.Verification;
+using Hospital.SharedModel;
+using Hospital.MedicalRecords.Model;
 
 namespace HospitalApiTests.Unit
 {
     public class PatientRegistrationTests
     {
+        private PatientVerification patientVerification = new PatientVerification();
         [Fact]
         public async Task GetStringAsync_uses_HttpClient_to_get_content_from_given_URI()
         {
@@ -82,19 +87,42 @@ namespace HospitalApiTests.Unit
                ItExpr.IsAny<CancellationToken>()
             );
         }
-        /*[Fact]
-        public void Save_Patient()
+        [Fact]
+        public void Check_patient_name_true()
         {
-            var patientStubRepository = new Mock<IPatientRepository>();
-            var patient = new Patient("Marko", "Petar", "Markovic", "3009998805137", new DateTime(2001, 1, 1), Sex.male, "0641664608", "Resavska 5", "marko.markovic@gmail.com", null, "uproba", "pproba", BloodType.A, false, null, false);
-
-            patientStubRepository.Setup(r => r.Save(patient)).Returns(patient);
-
-            PatientService patientService = new PatientService(patientStubRepository.Object, null);
-
-            Patient p = patientService.Save(patient);
-            Assert.Null(p);
-
-        }*/
+            PatientDto patient = GeneratePatient();
+            Assert.True(patientVerification.Verify(patient));
+        }
+        [Fact]
+        public void Check_patient_surname_null()
+        {
+            PatientDto patient = GeneratePatient();
+            patient.Surname = null;
+            Assert.False(patientVerification.Verify(patient));
+        }
+        [Fact]
+        public void Check_patient_name_false()
+        {
+            PatientDto patient = GeneratePatient();
+            patient.Name = "milan";
+            Assert.False(patientVerification.Verify(patient));
+        }
+        [Fact]
+        public void Check_patient_address_true()
+        {
+            PatientDto patient = GeneratePatient();
+            Assert.True(patientVerification.Verify(patient));
+        }
+        [Fact]
+        public void Check_patient_email_false()
+        {
+            PatientDto patient = GeneratePatient();
+            patient.Email = "nesto";
+            Assert.False(patientVerification.Verify(patient));
+        }
+        private PatientDto GeneratePatient()
+        {
+            return new PatientDto { Name = "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType = BloodType.A, DoctorId = 1, Allergens = new List<String>() };
+        }
     }
 }

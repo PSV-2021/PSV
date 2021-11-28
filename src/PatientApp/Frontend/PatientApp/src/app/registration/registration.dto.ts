@@ -14,6 +14,7 @@ export class PatientDto{
     RepeatPassword: string;
     DoctorId: number;
     Allergens: any[];
+    Token: string;
 
     constructor(){
         this.Name = "",
@@ -30,6 +31,7 @@ export class PatientDto{
         this.Sex = 0,
         this.BloodType = 0,
         this.DoctorId = 0,
-        this.Allergens = []
+        this.Allergens = [],
+        this.Token = ""
     }
 }

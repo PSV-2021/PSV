@@ -1,5 +1,7 @@
 ﻿using Integration.Model;
 using Integration.Repository.Dummies;
+using Integration.Repository.Sql;
+using Model.DataBaseContext;
 using Renci.SshNet;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
@@ -9,34 +11,50 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Net.Sockets;
+using System.Reflection;
 
 namespace Integration.Service
 {
     public class DrugsConsumptionReportService
     {
-        public DrugsConsumedRepositoryDummy repo = new DrugsConsumedRepositoryDummy();
+        public DrugsConsumptionSqlRepository DrugsConsumptionRepository { get; set; }
 
-        public bool UploadDrugConsumtpionReport(string fileName)
+        public DrugsConsumptionReportService(MyDbContext dbContext)
+        {
+            DrugsConsumptionRepository = new DrugsConsumptionSqlRepository(dbContext);
+        }
+
+        public bool UploadDrugConsumptionReport(string fileName)
         {
             using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
             {
-                client.Connect();
-
-                string sourceFile = "..\\..\\src\\Integration\\Reports\\" + fileName;
-                using (Stream stream = File.OpenRead(sourceFile))
+                try
                 {
-                    try
+                    client.Connect();
+                    string sourceFile = FormatPath(fileName);
+                    if (File.Exists(sourceFile))
                     {
-                        client.UploadFile(stream, @"\public\Drugstore files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
-                        client.Disconnect();
-                    }
-                    catch (Exception e)
-                    {
-                        return false;
+                        using (Stream stream = File.OpenRead(sourceFile))
+                        {
+                            client.UploadFile(stream, @"\public\Drugstore files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            client.Disconnect();
+                            return true;
+                        }
                     }
                 }
+                catch (SocketException se) 
+                {
+                    string ErrorString = se.Message;
+                }
+                return false;
             }
-            return true;
+        }
+
+        private string FormatPath(string fileName)
+        {
+            string[] absolute = Directory.GetCurrentDirectory().Split("src");
+            return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
         }
 
         public int SaveDrugsConsumptionReport(DateRange range)
@@ -63,7 +81,7 @@ namespace Integration.Service
                 string FileName = "Izvestaj o potrosnji lekova " + FormatDateRange(range) + ".pdf";
                 Document.Save("..\\..\\src\\Integration\\Reports\\" + FileName);
                 Document.Close(true);
-                UploadDrugConsumtpionReport(FileName);
+                UploadDrugConsumptionReport(FileName);
             }
             return counter;
         }
@@ -80,7 +98,7 @@ namespace Integration.Service
         {
             List<DrugConsumed> FormattedList = new List<DrugConsumed>();
             bool exists;
-            foreach (DrugConsumed drug in repo.GetAll())
+            foreach (DrugConsumed drug in DrugsConsumptionRepository.GetAll())
             {
                 if (IsDateInRange(range, drug))
                 {

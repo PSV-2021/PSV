@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Drugstore.Models;
 using Drugstore.Repository.Interfaces;
@@ -26,7 +27,11 @@ namespace Drugstore.Repository.Sql
 
         public List<DrugstoreOffer> GetAll()
         {
-            throw new NotImplementedException();
+            List<DrugstoreOffer> result = new List<DrugstoreOffer>();
+
+            dbContext.DrugstoreOffers.ToList().ForEach(drugstoreOffer => result.Add(new DrugstoreOffer(drugstoreOffer.Id, drugstoreOffer.Content, drugstoreOffer.Title, drugstoreOffer.StartDate, drugstoreOffer.EndDate, drugstoreOffer.DrugstoreName)));
+
+            return result;
         }
 
         public DrugstoreOffer getById(string offerId)

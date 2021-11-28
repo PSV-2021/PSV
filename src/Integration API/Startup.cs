@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Model.DataBaseContext;
 using PrimerServis;
+using Integration_API;
 
 namespace Integration_API
 {
@@ -25,7 +26,7 @@ namespace Integration_API
             services.AddControllers();
             services.AddHostedService<RabbitMQService>();
             services.AddDbContext<MyDbContext>(options =>
-                options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
+                options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
             services.AddControllersWithViews().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -56,6 +57,18 @@ namespace Integration_API
             {
                 endpoints.MapControllers();
             });
+            PrepDB.PrepPopulation(app);
+        }
+
+        private string GetDBConnectionString()
+        {
+            var server = Configuration["DBServer"];
+            var port = Configuration["DBPort"];
+            var user = Configuration["DBUser"];
+            var password = Configuration["DBPassword"];
+            var database = Configuration["DB"];
+            if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
+            return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
     }
 }
