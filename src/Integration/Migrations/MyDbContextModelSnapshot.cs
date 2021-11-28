@@ -19,6 +19,372 @@ namespace Integration.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Integration.Model.DrugConsumed", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateConsumed")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugsConsumed");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amount = 98,
+                            DateConsumed = new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Brufen"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amount = 65,
+                            DateConsumed = new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Palitrex"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amount = 45,
+                            DateConsumed = new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Amoksicilin"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amount = 43,
+                            DateConsumed = new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sinacilin"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Amount = 67,
+                            DateConsumed = new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Andol"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Amount = 65,
+                            DateConsumed = new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panadol"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Amount = 36,
+                            DateConsumed = new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panklav"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Amount = 76,
+                            DateConsumed = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Brufen"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Amount = 56,
+                            DateConsumed = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Palitrex"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Amount = 54,
+                            DateConsumed = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Amoksicilin"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Amount = 34,
+                            DateConsumed = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sinacilin"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Amount = 87,
+                            DateConsumed = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Andol"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Amount = 67,
+                            DateConsumed = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panadol"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Amount = 33,
+                            DateConsumed = new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panklav"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Amount = 78,
+                            DateConsumed = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Brufen"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Amount = 66,
+                            DateConsumed = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Palitrex"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Amount = 48,
+                            DateConsumed = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Amoksicilin"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Amount = 44,
+                            DateConsumed = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sinacilin"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Amount = 56,
+                            DateConsumed = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Andol"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Amount = 75,
+                            DateConsumed = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panadol"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Amount = 39,
+                            DateConsumed = new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panklav"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Amount = 105,
+                            DateConsumed = new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Brufen"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Amount = 66,
+                            DateConsumed = new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Palitrex"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Amount = 42,
+                            DateConsumed = new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Amoksicilin"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Amount = 54,
+                            DateConsumed = new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sinacilin"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Amount = 77,
+                            DateConsumed = new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Andol"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Amount = 64,
+                            DateConsumed = new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panadol"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Amount = 38,
+                            DateConsumed = new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panklav"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Amount = 78,
+                            DateConsumed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Brufen"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Amount = 66,
+                            DateConsumed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Palitrex"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Amount = 87,
+                            DateConsumed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Amoksicilin"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Amount = 56,
+                            DateConsumed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sinacilin"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Amount = 45,
+                            DateConsumed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Andol"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Amount = 56,
+                            DateConsumed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panadol"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Amount = 76,
+                            DateConsumed = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panklav"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Amount = 93,
+                            DateConsumed = new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Brufen"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Amount = 62,
+                            DateConsumed = new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Palitrex"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Amount = 49,
+                            DateConsumed = new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Amoksicilin"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Amount = 46,
+                            DateConsumed = new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sinacilin"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Amount = 72,
+                            DateConsumed = new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Andol"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Amount = 60,
+                            DateConsumed = new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panadol"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Amount = 34,
+                            DateConsumed = new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panklav"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Amount = 97,
+                            DateConsumed = new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Brufen"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Amount = 62,
+                            DateConsumed = new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Palitrex"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Amount = 39,
+                            DateConsumed = new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Amoksicilin"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Amount = 46,
+                            DateConsumed = new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sinacilin"
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Amount = 77,
+                            DateConsumed = new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Andol"
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Amount = 60,
+                            DateConsumed = new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panadol"
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Amount = 38,
+                            DateConsumed = new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Panklav"
+                        });
+                });
+
             modelBuilder.Entity("Integration.Model.Drugstore", b =>
                 {
                     b.Property<int>("Id")
@@ -111,27 +477,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 11, 17, 21, 50, 47, 182, DateTimeKind.Local).AddTicks(8521),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 863, DateTimeKind.Local).AddTicks(4790),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(2925)
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(1767)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(3693),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2581),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 17, 21, 50, 47, 186, DateTimeKind.Local).AddTicks(3726)
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2617)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(332),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2629),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(336)
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2633)
                         });
                 });
 
@@ -168,10 +534,48 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(686),
+                            EndDate = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(3344),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 11, 20, 17, 12, 50, 989, DateTimeKind.Local).AddTicks(678),
+                            StartDate = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(3336),
                             Title = "title"
+                        });
+                });
+
+            modelBuilder.Entity("Integration.Model.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Brufen",
+                            Supply = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Paracetamol",
+                            Supply = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Palitreks",
+                            Supply = 0
                         });
                 });
 #pragma warning restore 612, 618

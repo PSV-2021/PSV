@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 export class DrugConsumptionSpecsService {
     url: string;
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5000/api";
+        this.url = "http://"+location.hostname+":5000/api";
     }
 
     GetAllDrugstores(): Observable<any> {

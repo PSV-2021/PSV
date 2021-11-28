@@ -51,15 +51,25 @@ namespace DrugstoreAPI.Service
             Medicine med = MedicineRepository.GetByName(nameOfDrug);
             if (med == null)
                 return false;
-
-            if (CheckIsTheDrugAmountSatisfied(amountOfDrug, med))
-            {
-                DecreaseDrugAmount(amountOfDrug, med);
-                return true;
-            }
-            return false;
+            return CheckIsTheDrugAmountSatisfied(amountOfDrug, med);
         }
 
+
+        public bool SellDrugUrgent(string nameOfDrug, int amountOfDrug)
+        {
+            Medicine med = MedicineRepository.GetByName(nameOfDrug);
+            if (med == null)
+            {
+                return false;
+            }
+            if (!CheckIsTheDrugAmountSatisfied(amountOfDrug, med))
+            {
+                return false;
+            }
+            DecreaseDrugAmount(amountOfDrug, med);
+            return true;
+        }
+        
         private bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Medicine med)
         { 
             return med.Supply >= amountOfDrug;
@@ -76,5 +86,6 @@ namespace DrugstoreAPI.Service
             med.Supply += amountOfDrug;
             MedicineRepository.Update(med);
         }
+
     }
 }

@@ -5,6 +5,7 @@ using Shouldly;
 using Xunit;
 using System.IO;
 using Drugstore.Service;
+using System.Net.Sockets;
 
 namespace DrugstoreApiTests.Unit
 {
@@ -21,12 +22,22 @@ namespace DrugstoreApiTests.Unit
             Assert.Equal(expectedOutcome, isUploaded);
         }
 
+        [Fact]
+        public void Exception_for_Rebex_off_Upload()
+        {
+            DrugSpecificationService service = new DrugSpecificationService();
+
+            bool result = service.UploadDrugSpecification("Brufen");
+
+            Assert.False(result);
+        }
+
         public static IEnumerable<object[]> FileNames()
         {
             var retVal = new List<object[]>();
 
-            retVal.Add(new object[] { "Brufen - specifikacija.pdf", true });
-            retVal.Add(new object[] { "Panadol - specifikacija.pdf", false });
+            retVal.Add(new object[] { "Brufen", true });
+            retVal.Add(new object[] { "Panadol", false });
 
             return retVal;
         }

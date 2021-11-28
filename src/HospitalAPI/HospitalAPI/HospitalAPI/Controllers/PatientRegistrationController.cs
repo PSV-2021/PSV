@@ -11,6 +11,7 @@ using Hospital.SharedModel;
 using HospitalAPI.DTO;
 using Hospital.Service;
 using System.Net.Mail;
+using HospitalAPI.Verification;
 
 namespace HospitalAPI.Controllers
 {
@@ -21,6 +22,9 @@ namespace HospitalAPI.Controllers
         private readonly MyDbContext dbContext;
         public PatientService patientService;
         private MailService mailService = new MailService();
+        public PatientVerification patientVerification = new PatientVerification();
+
+
         public PatientRegistrationController(MyDbContext context)
         {
             this.dbContext = context;
@@ -30,6 +34,8 @@ namespace HospitalAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] PatientDto p)
         {
+            if (!patientVerification.Verify(p))
+                return BadRequest();
             Patient patient = GeneratePatientFromDTO(p);
             patientService.SavePatientSql(patient, dbContext);
             string link = GetLink(patient);

@@ -49,8 +49,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 11, 19, 20, 52, 11, 273, DateTimeKind.Local).AddTicks(1562),
-                            StartDate = new DateTime(2021, 11, 19, 20, 52, 11, 268, DateTimeKind.Local).AddTicks(8232),
+                            EndDate = new DateTime(2021, 11, 24, 17, 8, 27, 917, DateTimeKind.Local).AddTicks(7213),
+                            StartDate = new DateTime(2021, 11, 24, 17, 8, 27, 913, DateTimeKind.Local).AddTicks(1586),
                             Title = "title"
                         });
                 });
@@ -139,6 +139,9 @@ namespace Drugstore.Migrations
 
                     b.Property<int?>("MedicineId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("MedicineImage")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -240,7 +243,7 @@ namespace Drugstore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = 2,
+                            UserId = 5,
                             Password = "kupac",
                             Role = "Customer",
                             Username = "kupac",
