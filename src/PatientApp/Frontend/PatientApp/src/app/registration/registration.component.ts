@@ -1,11 +1,11 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { RegistrationService } from '../registration.service';
-import { ActivationService } from '../activation.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PatientDto } from './registration.dto';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
+import { ActivationService } from '../service/activation.service';
 
 interface Type {
   value: string;
@@ -88,10 +88,7 @@ export class RegistrationComponent implements OnInit {
         duration: 2000
       });
       this.router.navigate(['/registrationSuccess']);
-
-      
     });
-
   
   }
   PrepareDTO(){

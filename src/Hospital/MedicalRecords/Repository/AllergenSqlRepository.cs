@@ -16,6 +16,7 @@ namespace Hospital.MedicalRecords.Repository
             this.dbContext = dbContext;
         }
         public AllergenSqlRepository() { }
+        
 
         public bool Delete(int id)
         {
@@ -47,6 +48,7 @@ namespace Hospital.MedicalRecords.Repository
             List<string> listAllergiesOfPatient = new List<string>();
             try
             {
+                listAllergiesOfPatient = (from n in dbContext.Allergens where n.PatientId == id select n.Name).ToList();
                 if (dbContext.Allergens != null)
                 {
                     Console.WriteLine(dbContext.Allergens.Find(1));

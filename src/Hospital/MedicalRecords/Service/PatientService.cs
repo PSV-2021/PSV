@@ -13,7 +13,7 @@ namespace Hospital.MedicalRecords.Service
         private IPatientRepository PatientRepository { get; }
         private PatientSqlRepository PatientSqlRepository { get; set; }
         private MedicalRecordSqlRepository MedicalRecordRepository { get; set; }
-        private AllergenSqlRepository AllergenRepository { get; set; }
+        public AllergenSqlRepository AllergenRepository { get; set; }
         private IRepositoryFactory RepositoryFactory { get; }
 
 
@@ -22,6 +22,13 @@ namespace Hospital.MedicalRecords.Service
             PatientRepository = patientRepository;
         }
 
+        public PatientService(AllergenSqlRepository allergenSqlRepository)
+        {
+            PatientRepository = new PatientSqlRepository();
+            PatientSqlRepository = new PatientSqlRepository();
+            AllergenRepository = allergenSqlRepository;
+
+        }
         public PatientService()
         {
             PatientRepository = new PatientSqlRepository();
@@ -29,6 +36,7 @@ namespace Hospital.MedicalRecords.Service
             AllergenRepository = new AllergenSqlRepository();
 
         }
+
 
         public bool CheckIfExistsById(int id)
         {

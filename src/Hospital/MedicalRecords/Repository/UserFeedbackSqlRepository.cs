@@ -24,7 +24,13 @@ namespace Hospital.MedicalRecords.Repository
         {
             throw new NotImplementedException();
         }
-
+        public bool SaveUserFeedback(UserFeedback userFeedback)
+        {
+            userFeedback.Id = GetAll().Count + 1;
+            dbContext.UserFeedbacks.Add(userFeedback);
+            dbContext.SaveChanges();
+            return true;
+        }
         public List<UserFeedback> GetAll()
         {
             List<UserFeedback> result = new List<UserFeedback>();

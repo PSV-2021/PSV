@@ -30,7 +30,7 @@ namespace HospitalAPI.Controllers
             medicalRecordService = new MedicalRecordService(new MedicalRecordSqlRepository(context));
             patientService = new PatientService(new PatientSqlRepository(context));
             doctorService = new DoctorService(new DoctorSqlRepository(context));
-
+            patientService.AllergenRepository = new AllergenSqlRepository(context);
         }
         [HttpGet]
         public IActionResult Get([FromQuery] string id)

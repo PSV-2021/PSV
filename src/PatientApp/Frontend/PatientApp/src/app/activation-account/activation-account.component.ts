@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivationService } from '../activation.service';
 import { PatientDto } from '../registration/registration.dto';
+import { ActivationService } from '../service/activation.service';
 
 @Component({
   selector: 'app-activation-account',

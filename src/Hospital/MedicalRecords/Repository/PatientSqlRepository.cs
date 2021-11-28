@@ -38,7 +38,6 @@ namespace Hospital.MedicalRecords.Repository
 
         public Patient GetOne(int id)
         {
-            Console.WriteLine(id+ "u getone");
             Patient patientWithThatId = (from n in dbContext.Patients where n.Id == id select n).FirstOrDefault();
             return patientWithThatId;
         }

@@ -51,7 +51,6 @@ namespace HospitalAPI.Controllers
             {
                 Token = p.Token,
             };
-            Console.WriteLine(patientNew.Token);
             patientSqlRepository.dbContext = dbContext;
             Patient patient = (from n in dbContext.Patients where (n.Token == patientNew.Token && n.IsActive == false) select n).First();
             patientSqlRepository.activateAccount(patient.Id, patient.Token);
