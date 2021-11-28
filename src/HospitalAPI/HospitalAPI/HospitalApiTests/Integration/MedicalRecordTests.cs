@@ -17,8 +17,6 @@ namespace HospitalApiTests.Integration
     {
         private MyDbContext context;
 
-        private readonly WebApplicationFactory<Startup> factory;
-
         public void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();

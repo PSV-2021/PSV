@@ -29,7 +29,7 @@ namespace Hospital.MedicalRecords.Repository
         {
             List<SurveyQuestion> result = new List<SurveyQuestion>();
 
-            dbContext.SurveyQuestion.ToList().ForEach(survey => result.Add(new SurveyQuestion(survey.Id, survey.Text, survey.Rating, survey.QuestionType)));
+            dbContext.SurveyQuestion.ToList().ForEach(survey => result.Add(new SurveyQuestion(survey.Text, survey.Rating, survey.QuestionType)));
 
             return result;
         }

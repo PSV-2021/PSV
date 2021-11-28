@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SurveyDTO } from './survey-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,7 @@ export class SurveyService {
       return this.http.get<any>(this.url + '/survey');
   }
   
-  PostSurveyQuestions(Survey: SurveyDTO): Observable<any> {
+  PostSurveyQuestions(Survey: any): Observable<any> {
     return this.http.post<any>(this.url + "/survey", Survey);
   }
 }
