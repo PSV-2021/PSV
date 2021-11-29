@@ -22,15 +22,14 @@ namespace Hospital.MedicalRecords.Repository
 
         public bool CheckIfExistsById(int id)
         {
-            bool retVal = false;
             foreach (Survey s in GetAll())
             {
                 if (s.AppointmentId == id)
                 {
-                    retVal = true;
+                    return true;
                 }
             }
-            return retVal;
+            return false;
         }
 
         public bool Delete(int id)
@@ -42,7 +41,7 @@ namespace Hospital.MedicalRecords.Repository
         {
             List<Survey> result = new List<Survey>();
 
-            dbContext.Survey.ToList().ForEach(survey => result.Add(new Survey(survey.Id, survey.PatientId, survey.Date, survey.AppointmentId, survey.SurveyQuestions, survey.SurveyAnswers)));
+            dbContext.Survey.ToList().ForEach(survey => result.Add(new Survey(survey.PatientId, survey.Date, survey.AppointmentId)));
 
             return result;
         }
@@ -62,11 +61,25 @@ namespace Hospital.MedicalRecords.Repository
             throw new NotImplementedException();
         }
 
-        public void CreateSurvey(Survey survey)
+        public void CreateSurvey(List<AnsweredQuestion> answeredQuestion)
         {
-            dbContext.Survey.Add(survey);
+            dbContext.Survey.Add(new Survey(1, DateTime.Now, 1));
+            dbContext.SaveChanges();
+
+            var a = dbContext.Survey.Max(s => s.Id);
+
+            foreach (AnsweredQuestion answer in answeredQuestion)
+            {
+                answer.SurveyId = a;
+                dbContext.AnsweredQuestion.Add(answer);
+            }
 
             dbContext.SaveChanges();
+        }
+
+        public void CreateSurvey(Survey survey)
+        {
+            throw new NotImplementedException();
         }
     }
 }
