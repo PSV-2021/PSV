@@ -1,4 +1,5 @@
-﻿using Hospital.SharedModel;
+﻿using Hospital.Schedule.Model;
+using Hospital.SharedModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,7 +19,7 @@ namespace HospitalAPI.Controllers
             this.context = context;
         }
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post(Appointment appointment)
         {
             return Ok();
         }
