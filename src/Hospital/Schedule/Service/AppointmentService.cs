@@ -20,11 +20,12 @@ namespace Hospital.Schedule.Service
         public AppointmentService()
         {
             AppointmentRepository = new AppointmentFileRepository();
-
-
-
             EventsLogService = new EventsLogService();
             ChangingAppointment = new Appointment();
+        }
+        public AppointmentService(AppointmentSqlRepository appointmentSqlRepository)
+        {
+            AppointmentRepository = appointmentSqlRepository;
         }
         // Sekretar*******************************************************************************
 

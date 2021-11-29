@@ -50,7 +50,7 @@ namespace HospitalApiTests.Integration
             StandardAppointmentController standardAppointmentController = new StandardAppointmentController(context);
             IActionResult retVal = standardAppointmentController.Post(GenerateAppointment());
 
-            retVal.Equals(HttpStatusCode.OK);
+            retVal.Equals(true);
         }
 
         private Appointment GenerateAppointment()

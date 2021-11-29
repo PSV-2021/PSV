@@ -32,9 +32,13 @@ namespace Hospital.Schedule.Repository
             throw new NotImplementedException();
         }
 
-        public bool Save(Appointment newObject)
+        public bool Save(Appointment appointment)
         {
-            throw new NotImplementedException();
+            var ret = dbContext.Appointments.Add(appointment);
+            dbContext.SaveChanges();
+            if(ret == null)
+                 return false;
+            return true;
         }
 
         public bool Update(Appointment editedObject)
