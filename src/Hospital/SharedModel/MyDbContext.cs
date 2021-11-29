@@ -20,6 +20,7 @@ namespace Hospital.SharedModel
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<AnsweredQuestion> AnsweredQuestion { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -42,7 +43,8 @@ namespace Hospital.SharedModel
                new Ingridient(3, "Panadol")
               );
             modelBuilder.Entity<Speciality>().HasData(
-                new Speciality { Id = 1, Name = "general"}
+                new Speciality { Id = 1, Name = "general"},
+                new Speciality { Id = 2, Name = "cardiology"}
                 );
             modelBuilder.Entity<VacationDays>().HasData(
                new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25) }
@@ -71,6 +73,27 @@ namespace Hospital.SharedModel
                     AvailableDaysOff = 20,
                     Id = 1,
                     SpecialityId = 1,
+                    NumberOfPatients = 0
+                },
+                new Doctor
+                {
+                    Name = "Milica",
+                    Surname = "Milic",
+                    Jmbg = "3052123545852",
+                    DateOfBirth = new DateTime(1987, 04, 21),
+                    Sex = Sex.female,
+                    PhoneNumber = "0691457608",
+                    Adress = "Ravanicka 8",
+                    Email = "milica@gmail.com",
+                    Username = "mica56",
+                    Password = "mica1234",
+                    Type = UserType.doctor,
+                    SalaryInRsd = 250000,
+                    WorkingSchedule = new List<WorkingHours>(),
+                    VacationDays = new List<VacationDays>(),
+                    AvailableDaysOff = 15,
+                    Id = 2,
+                    SpecialityId = 2,
                     NumberOfPatients = 0
                 });
            

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Hospital.MedicalRecords.Model;
 using Hospital.RoomsAndEquipment.Model;
 using Hospital.RoomsAndEquipment.Repository;
@@ -11,54 +13,58 @@ namespace Hospital.Schedule.Model
 {
     public class Appointment : INotifyPropertyChanged
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public DateTime StartTime { get; set; }
         public int DurationInMunutes { get; set; }
         public String ApointmentDescription { get; set; }
-        public int AppointentId { get; set; }
+
         public Boolean IsDeleted { get; set; }
 
-        [JsonIgnore]
-        public Doctor Doctor { get; set; }
-        
-        [JsonIgnore]
-        public Room Room { get; set; }
+        [ForeignKey("DoctorId")]
+        public int DoctorId { get; set; }
+        public virtual Doctor Doctor { get; set; }
 
-        [JsonIgnore]
-        public Patient Patient { get; set; }
-        public Boolean IsEmergency { get; set; }
-        public Note Note { get; set; }
+        //[JsonIgnore]
+        //public Room Room { get; set; }
 
-        public Appointment(int id, Patient patient, Doctor doctor, Room room, DateTime startTime, int duration, string apDesc, Note note, Boolean IsEmergency = false)
+        [ForeignKey("PatientId")]
+        public int PatientId { get; set; }
+        public virtual Patient Patient { get; set; }
+        //public Boolean IsEmergency { get; set; }
+        //public Note Note { get; set; }
+
+        public Appointment(int id, Patient patient, Doctor doctor, DateTime startTime, int duration, string apDesc/*, Note note, Boolean IsEmergency = false*/)
         {
-            AppointentId = id;
+            Id = id;
             Patient = patient;
             Doctor = doctor;
-            Room = room;
+            //Room = room;
             StartTime = startTime;
             DurationInMunutes = duration;
             ApointmentDescription = apDesc;
             IsDeleted = false;
-            Note = note;
-            this.IsEmergency = IsEmergency;
+            //Note = note;
+            //this.IsEmergency = IsEmergency;
         }
 
         public Appointment(Doctor doctor, DateTime startTime, Patient patient) {
-            RoomFileRepository rs = new RoomFileRepository();
+            /*RoomFileRepository rs = new RoomFileRepository();
             List<Room> rooms = rs.GetAll();
             Room room = rooms[0];
             if (rooms.Count == 0)
             {
                 room = null;
-            }
+            }*/
             this.DurationInMunutes = 15;
             this.ApointmentDescription = "Pregled kod lekara opste prakse.";
             this.IsDeleted = false;
             this.Doctor = doctor;
             this.StartTime = startTime;
-            this.Room = room;
             this.Patient = patient;
         }
-        [JsonIgnore]
+        [NotMapped]
         public DateTime EndTime
         {
             get
@@ -67,7 +73,7 @@ namespace Hospital.Schedule.Model
             }
         }
 
-        [JsonIgnore]
+        [NotMapped]
         public String BeginTime
         {
             get
@@ -77,7 +83,7 @@ namespace Hospital.Schedule.Model
         }
 
 
-        [JsonIgnore]
+        [NotMapped]
         public String PatientName
         {
             get
@@ -88,7 +94,7 @@ namespace Hospital.Schedule.Model
                     return "";
             }
         }
-        [JsonIgnore]
+        /*[JsonIgnore]
         public String RoomName
         {
             get
@@ -102,8 +108,8 @@ namespace Hospital.Schedule.Model
             {
                 OnPropertyChanged("RoomName");
             }
-        }
-        [JsonIgnore]
+        }*/
+        [NotMapped]
         public String DoctorName
         {
             get
@@ -119,7 +125,7 @@ namespace Hospital.Schedule.Model
             }
         }
 
-        public String AppointmentDescription
+       /* public String AppointmentDescription
         {
             get => ApointmentDescription;
             set
@@ -138,7 +144,7 @@ namespace Hospital.Schedule.Model
                 OnPropertyChanged("StartTimee");
             }
 
-        }
+        }*/
 
         public Appointment() { }
 

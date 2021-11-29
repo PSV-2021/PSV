@@ -76,8 +76,8 @@ namespace Hospital.Schedule.Service
                     flag = false;
                 if (doctor != null && doctor.Jmbg != a.Doctor.Jmbg)
                     flag = false;
-                if (room != null && room.RoomNumber != a.Room.RoomNumber)
-                    flag = false;
+                //if (room != null && room.RoomNumber != a.Room.RoomNumber)
+                   // flag = false;
                 if (flag == true)
                     appointments.Add(a);
             }
@@ -99,8 +99,8 @@ namespace Hospital.Schedule.Service
                     flag = true;
                 if (doctor != null && doctor.Jmbg == a.Doctor.Jmbg)
                     flag = true;
-                if (room != null && room.RoomNumber == a.Room.RoomNumber)
-                    flag = true;
+                //if (room != null && room.RoomNumber == a.Room.RoomNumber)
+                   // flag = true;
                 if (flag == true)
                     appointments.Add(a);
             }
@@ -160,8 +160,8 @@ namespace Hospital.Schedule.Service
         private Boolean AppointmentsOverlap(Appointment appointment1, Appointment appointment2)
         {
             if (AppointmentsShareDoctor(appointment1, appointment2) ||
-                AppointmentsSharePatient(appointment1, appointment2) ||
-                AppointmentsShareRoom(appointment1, appointment2))
+                AppointmentsSharePatient(appointment1, appointment2))
+                //AppointmentsShareRoom(appointment1, appointment2))
             {
                 if (DateTime.Compare(appointment2.EndTime, appointment1.StartTime) <= 0) //drugi zavrsava pre pocetka prvog
                     return false;
@@ -189,10 +189,10 @@ namespace Hospital.Schedule.Service
             return appointment1.Doctor.Speciality.Name.Equals(appointment2.Doctor.Speciality.Name);
         }
 
-        private Boolean AppointmentsShareRoom(Appointment appointment1, Appointment appointment2)
+        /*private Boolean AppointmentsShareRoom(Appointment appointment1, Appointment appointment2)
         {
-            return appointment1.Room.RoomNumber == appointment2.Room.RoomNumber;
-        }
+            //return appointment1.Room.RoomNumber == appointment2.Room.RoomNumber;
+        }*/
 
         public DateTime FindNextFreeAppointmentStartTime(Appointment appointment)
         {
@@ -260,8 +260,8 @@ namespace Hospital.Schedule.Service
             foreach (Doctor d in doctors)
             {
                 Appointment emergencyAppointment = new Appointment(0, modelAppointment.Patient, d,
-                    modelAppointment.Room, DateTime.Now, modelAppointment.DurationInMunutes,
-                    modelAppointment.ApointmentDescription, null, true);
+                     DateTime.Now, modelAppointment.DurationInMunutes,
+                    modelAppointment.ApointmentDescription);
 
                 emergencyAppointment.StartTime = FindNextFreeAppointmentStartTime(emergencyAppointment);
                 appointments.Add(emergencyAppointment);
@@ -328,8 +328,8 @@ namespace Hospital.Schedule.Service
         private Boolean EmergencyAppointmentsOverlap(Appointment appointment1, Appointment appointment2)
         {
             if (AppointmentsShareDoctorSpeciality(appointment1, appointment2) ||
-                AppointmentsSharePatient(appointment1, appointment2) ||
-                AppointmentsShareRoom(appointment1, appointment2))
+                AppointmentsSharePatient(appointment1, appointment2))
+                //AppointmentsShareRoom(appointment1, appointment2))
             {
                 if (DateTime.Compare(appointment2.EndTime, appointment1.StartTime) <=
                     0) //drugi zavrsava pre pocetka prvog
@@ -377,7 +377,7 @@ namespace Hospital.Schedule.Service
         {
             foreach (Appointment oAppointment in appointmentsForRemoval)
             {
-                var appointment = appointments.FirstOrDefault(a => a.AppointentId.Equals(oAppointment.AppointentId));
+                var appointment = appointments.FirstOrDefault(a => a.Id.Equals(oAppointment.Id));
                 if (appointment != null)
                     appointments.Remove(appointment);
             }
@@ -549,7 +549,7 @@ namespace Hospital.Schedule.Service
         }
 
 
-        public void NoteNotification()
+       /* public void NoteNotification()
         {
             while (true)
             {
@@ -558,9 +558,9 @@ namespace Hospital.Schedule.Service
                     GenerateNotification(a);
                 }
             }
-        }
+        }*/
 
-        private List<DateTime> AddTimeToSpan(Appointment appointment)
+        /*private List<DateTime> AddTimeToSpan(Appointment appointment)
         {
             DateTime it = new DateTime();
             it = appointment.Note.StartDate;
@@ -576,9 +576,9 @@ namespace Hospital.Schedule.Service
             it = it.AddDays(1);
 
             return notifications;
-        }
+        }*/
 
-        public List<DateTime> GenerateNotification(Appointment appointment)
+       /* public List<DateTime> GenerateNotification(Appointment appointment)
         {
             List<DateTime> notifications = AddTimeToSpan(appointment);
             foreach (DateTime dt in notifications)
@@ -586,7 +586,7 @@ namespace Hospital.Schedule.Service
 
             }
             return notifications;
-        }
+        }*/
 
         // PacijentKraj***************************************************************************
 
@@ -608,7 +608,7 @@ namespace Hospital.Schedule.Service
         {
             foreach (var appointment in appointments)
             {
-                if (appointment.AppointentId == appointmentToRemove.AppointentId)
+                if (appointment.Id == appointmentToRemove.Id)
                 {
                     appointments.Remove(appointment);
                     break;
@@ -667,7 +667,7 @@ namespace Hospital.Schedule.Service
 
             List<Appointment> appointments = GetAllAppointments();
 
-            foreach (Appointment appointment in appointments)
+           /* foreach (Appointment appointment in appointments)
             {
                 if (appointment.Room != null)
                 {
@@ -682,7 +682,7 @@ namespace Hospital.Schedule.Service
                         }
                     }
                 }
-            }
+            }*/
             return has_appointment;
         }
 
@@ -693,7 +693,7 @@ namespace Hospital.Schedule.Service
 
             List<Appointment> appointments = GetAllAppointments();
 
-            foreach (Appointment appointment in appointments)
+            /*foreach (Appointment appointment in appointments)
             {
                 if (appointment.Room != null)
                 {
@@ -707,7 +707,7 @@ namespace Hospital.Schedule.Service
                         }
                     }
                 }
-            }
+            }*/
             return has_appointment;
         }
         // UpravnikKraj***************************************************************************
