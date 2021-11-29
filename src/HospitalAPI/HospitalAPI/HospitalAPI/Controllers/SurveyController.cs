@@ -8,6 +8,7 @@ using Hospital.MedicalRecords.Repository;
 using Hospital.MedicalRecords.Service;
 using Hospital.SharedModel;
 using HospitalAPI.DTO;
+using Hospital.MedicalRecords.Model;
 
 namespace HospitalAPI.Controllers
 {
@@ -25,7 +26,6 @@ namespace HospitalAPI.Controllers
             this.dbContext = db;
             repoSurvey = new SurveySqlRepository(db);
             surveyService = new SurveyService(repoSurvey);
-            //surveyService = new SurveyService(new SurveySqlRepository(db));
         }
 
         [HttpGet]   // GET 
@@ -33,12 +33,13 @@ namespace HospitalAPI.Controllers
         {
             repoSurveyQuestion.dbContext = dbContext;
             return Ok(repoSurveyQuestion.GetAll());
+
         }
 
         [HttpPost]
-        public IActionResult Post(SurveyDto survey)
+        public IActionResult Post(List<AnsweredQuestion> answeredQuestion)
         {
-            surveyService.CreateSurvey(survey.SurveyQuestions, survey.SurveyAnswers);
+            surveyService.CreateSurvey(answeredQuestion);
             return Ok();
         }
     }

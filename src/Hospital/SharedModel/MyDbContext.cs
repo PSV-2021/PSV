@@ -19,6 +19,7 @@ namespace Hospital.SharedModel
         public DbSet<Allergen> Allergens { get; set; }
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public DbSet<Survey> Survey { get; set; }
+        public DbSet<AnsweredQuestion> AnsweredQuestion { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 

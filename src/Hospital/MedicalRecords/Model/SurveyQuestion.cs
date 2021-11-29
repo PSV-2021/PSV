@@ -1,9 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hospital.MedicalRecords.Model
 {
     public class SurveyQuestion
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public String Text { get; set; }
         public int Rating { get; set; }
@@ -11,9 +15,8 @@ namespace Hospital.MedicalRecords.Model
 
         public SurveyQuestion() { }
 
-        public SurveyQuestion(int id, String text, int rating, int questionType) 
+        public SurveyQuestion(String text, int rating, int questionType) 
         {
-            Id = id;
             Text = text;
             Rating = rating;
             QuestionType = questionType;

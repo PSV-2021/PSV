@@ -24,13 +24,6 @@ namespace HospitalApiTests.Integration
     {
         private MyDbContext context;
 
-        private readonly WebApplicationFactory<Startup> factory;
-
-        public SurveySqlRepositoryTests(WebApplicationFactory<Startup> fact)
-        {
-            factory = fact;
-        }
-
         public void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
@@ -41,34 +34,19 @@ namespace HospitalApiTests.Integration
         }
 
         [Fact]
-        public async void Post_survey()
-        {
-            HttpClient client = factory.CreateClient();
-            var survey = CreateSurvey();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(survey), System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("/api/survey", content);
-            response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
-        }
-
-        [Fact]
         public void Get_surveys()
         {
             SetUpDbContext();
-
-            SurveyQuestion surveyQuestion1 = new SurveyQuestion { Id = 1, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 };
-            SurveyQuestion surveyQuestion2 = new SurveyQuestion { Id = 2, Text = "How satisfied were you with the time that your doctor spent with you?", Rating = 0, QuestionType = 0 };
-            SurveyQuestion surveyQuestion3 = new SurveyQuestion { Id = 3, Text = "During this hospital stay, did doctor treat you with courtesy and respect?", Rating = 0, QuestionType = 0 };
-
-            context.AddRange(surveyQuestion1, surveyQuestion2, surveyQuestion3);
+            context.Add(new SurveyQuestion { Id =1, Text = "How satisfied are you with the work of your doctor?", Rating= 0, QuestionType =0 });
+            context.Add(new SurveyQuestion { Id = 2, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 });
 
             SurveyController surveyController = new SurveyController(context);
-
             IActionResult retVal = surveyController.Get();
 
-            retVal.Equals(HttpStatusCode.OK);
+            retVal.Equals(Questions());
 
         }
-
+        
         [Fact]
         public void Post_answers()
         {           
@@ -83,58 +61,25 @@ namespace HospitalApiTests.Integration
             retVal.Equals(HttpStatusCode.OK);
         }
 
-        public static SurveyDto CreateSurvey()
-        {           
-            SurveyDto surveyDTO = new SurveyDto
-            {              
-                SurveyQuestions = CreateSurveyQuestions(),
-                SurveyAnswers = CreateSurveyAnswers(),
-            };
-            return surveyDTO;
+        public static IEnumerable<object[]> Questions()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { new SurveyQuestion { Id = 1, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 } });
+            retVal.Add(new object[] { new SurveyQuestion { Id = 2, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 } });
+            return retVal;
         }
 
-        private static List<int> CreateSurveyQuestions()
+        public static List<AnsweredQuestion> CreateSurvey()
         {
-            List<int> questions = new List<int>();
+            List<AnsweredQuestion> retVal = new List<AnsweredQuestion>();
 
-            questions.Add(1);
-            questions.Add(2);
-            questions.Add(3);
-            questions.Add(4);
-            questions.Add(5);
-            questions.Add(6);
-            questions.Add(7);
-            questions.Add(8);
-            questions.Add(9);
-            questions.Add(10);
-            questions.Add(11);
-            questions.Add(12);
-            questions.Add(13);
-            questions.Add(14);
+            AnsweredQuestion surveyAnswer1 = new AnsweredQuestion { Id = 1, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 };
+            AnsweredQuestion surveyAnswer2 = new AnsweredQuestion { Id = 2, Text = "How satisfied were you with the time that your doctor spent with you?", Rating = 0, QuestionType = 0 };
 
-            return questions;
-        }
+            retVal.Add(surveyAnswer1);
+            retVal.Add(surveyAnswer2);
 
-        private static List<int> CreateSurveyAnswers()
-        {
-            List<int> questions = new List<int>();
-
-            questions.Add(1);
-            questions.Add(2);
-            questions.Add(3);
-            questions.Add(4);
-            questions.Add(5);
-            questions.Add(1);
-            questions.Add(2);
-            questions.Add(3);
-            questions.Add(4);
-            questions.Add(5);
-            questions.Add(1);
-            questions.Add(2);
-            questions.Add(3);
-            questions.Add(4);
-
-            return questions;
+            return retVal;
         }
     }
 }
