@@ -26,10 +26,6 @@ namespace Hospital.Schedule.Service
             EventsLogService = new EventsLogService();
             ChangingAppointment = new Appointment();
         }
-        public AppointmentService(AppointmentSqlRepository appointmentSqlRepository)
-        {
-            AppointmentRepository = appointmentSqlRepository;
-        }
         // Sekretar*******************************************************************************
 
         public Appointment GetAppointmentById(int id)

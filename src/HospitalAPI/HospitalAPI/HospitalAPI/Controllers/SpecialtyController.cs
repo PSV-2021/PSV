@@ -16,19 +16,19 @@ namespace HospitalAPI.Controllers
     public class SpecialtyController : ControllerBase
     {
         private MyDbContext context;
-        public AppointmentService appointmentService;
+        public SpecialtyService specialtyService;
 
         public SpecialtyController(MyDbContext context)
         {
             this.context = context;
-            appointmentService = new AppointmentService(new AppointmentSqlRepository(context));
+            specialtyService = new SpecialtyService(new SpecialtySqlRepository(context));
 
         }
         [HttpGet]
         public IActionResult Get()
         {
-            List<Appointment> result = new List<Appointment>();
-            result = appointmentService.GetAllAppointments();
+            List<Speciality> result = new List<Speciality>();
+            result = specialtyService.GetAllSpecialty();
 
             return Ok(result);
         }
