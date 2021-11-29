@@ -1,5 +1,6 @@
 ﻿using System;
 using Hospital.MedicalRecords.Model;
+using Hospital.Medicines.Model;
 
 namespace Hospital.SharedModel
 {

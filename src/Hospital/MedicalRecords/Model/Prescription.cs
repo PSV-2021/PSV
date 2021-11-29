@@ -1,4 +1,5 @@
 using System;
+using Hospital.Medicines.Model;
 using Hospital.SharedModel;
 using Newtonsoft.Json;
 

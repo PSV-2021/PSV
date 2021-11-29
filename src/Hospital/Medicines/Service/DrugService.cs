@@ -1,11 +1,12 @@
-﻿using Integration.Model;
-using Integration.Repository.Interfaces;
-using Integration.Sql;
+﻿using Hospital.Medicines.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Hospital.MedicalRecords.Model;
+using Hospital.Medicines.Repository.Interfaces;
+using Hospital.Medicines.Repository.Sql;
 
-namespace Integration.Service
+namespace Hospital.Medicines.Service
 {
     public class DrugService
     {
@@ -22,14 +23,14 @@ namespace Integration.Service
 
         public bool CheckForAmountOfDrug(string nameOfDrug, int amountOfDrug)
         {
-            Drug med = MedicineRepository.GetByName(nameOfDrug);
+            Medicine med = MedicineRepository.GetByName(nameOfDrug);
             if (med == null)
                 return false;
 
             return CheckIsTheDrugAmountSatisfied(amountOfDrug, med);
         }
 
-        private static bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Drug med)
+        private static bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Medicine med)
         {
             if (med.Supply >= amountOfDrug)
             {
@@ -39,12 +40,13 @@ namespace Integration.Service
             return false;
         }
 
-        public void AddDrugUrgent(string nameOfDrug, int amountOfDrug)
+        public void AddDrugUrgent(string name, int amountOfDrug)
         {
-            Drug med = MedicineRepository.GetByName(nameOfDrug);
+            Medicine med = MedicineRepository.GetByName(name);
             if (med == null)
             {
-                MedicineRepository.Save(new Drug(nameOfDrug, amountOfDrug));
+                //med = new Medicine(name, amountOfDrug);
+                MedicineRepository.Save(new Medicine(name, amountOfDrug));
             }
             else
             {
@@ -52,12 +54,12 @@ namespace Integration.Service
             }
             
         }
-        private void IncreaseDrugAmount(int amountOfDrug, Drug med)
+        private void IncreaseDrugAmount(int amountOfDrug, Medicine med)
         {
             med.Supply += amountOfDrug;
             MedicineRepository.Update(med);
         }
-        private void DecreaseDrugAmount(int amountOfDrug, Drug med)
+        private void DecreaseDrugAmount(int amountOfDrug, Medicine med)
         {
             med.Supply -= amountOfDrug;
             MedicineRepository.Update(med);

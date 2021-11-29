@@ -29,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Hospital">
+      <HintPath>..\Hospital\bin\Debug\netcoreapp3.1\Hospital.dll</HintPath>
+    </Reference>
     <Reference Include="Integration">
       <HintPath>..\Integration\bin\Debug\netcoreapp3.1\Integration.dll</HintPath>
     </Reference>

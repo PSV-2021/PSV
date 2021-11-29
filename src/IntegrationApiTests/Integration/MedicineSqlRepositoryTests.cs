@@ -1,14 +1,14 @@
-﻿using Integration.Model;
+﻿using Hospital.Medicines.Model;
+using Hospital.Medicines.Repository.Interfaces;
+using Integration.Model;
 using Integration.Repository.Interfaces;
 using Integration.Service;
-using Integration.Sql;
 using Microsoft.EntityFrameworkCore;
-using Model.DataBaseContext;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Hospital.Medicines.Repository.Sql;
+using Hospital.Medicines.Service;
 using Xunit;
+using Hospital.SharedModel;
 
 namespace IntegrationApiTests.Integration
 {
@@ -30,10 +30,10 @@ namespace IntegrationApiTests.Integration
             IDrugRepository repo = new DrugSqlRepository(context);
             DrugService service = new DrugService(repo);
 
-            Drug oldVal = repo.GetByName("Brufen");
+            Medicine oldVal = repo.GetByName("Brufen");
             int oldAmount = oldVal.Supply;
             service.AddDrugUrgent("Brufen", 10);
-            Drug newVal = repo.GetByName("Brufen");
+            Medicine newVal = repo.GetByName("Brufen");
             newVal.Supply.ShouldBe(oldAmount + 10);
 
         }
@@ -43,11 +43,11 @@ namespace IntegrationApiTests.Integration
             SetUpDbContext();
             IDrugRepository repo = new DrugSqlRepository(context);
             DrugService service = new DrugService(repo);
-            Drug testMed = repo.GetByName("Brufen");
+            Medicine testMed = repo.GetByName("Brufen");
             repo.Remove(testMed);
             
             service.AddDrugUrgent("Brufen", 10);
-            Drug newVal = repo.GetByName("Brufen");
+            Medicine newVal = repo.GetByName("Brufen");
             newVal.Supply.ShouldBe(10);
 
         }

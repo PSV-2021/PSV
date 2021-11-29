@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hospital.Medicines.Model;
 using Integration.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
-using Integration.Service;
-using Integration.Sql;
+using Hospital.Medicines.Service;
+using Hospital.Medicines.Repository.Sql;
 
 namespace Integration_API.Controllers
 {
@@ -22,8 +23,8 @@ namespace Integration_API.Controllers
 
         public DrugPurchaseController(MyDbContext db)
         {
-            this.dbContext = db;
-            this.medicineService = new DrugService(new DrugSqlRepository(dbContext));
+            this.medicineService = new DrugService();
+            dbContext = db;
         }
 
         [HttpPut]

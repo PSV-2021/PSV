@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Repository;
+using Hospital.Medicines.Model;
 
 namespace Hospital.Schedule.Service
 {
     public class ValidMedicineGenerator
     {
         private IMedicineRepository MedicineRepository { get; }
+
         public ValidMedicineGenerator(IMedicineRepository medicineRepository)
         {
             MedicineRepository = medicineRepository;
@@ -27,8 +29,9 @@ namespace Hospital.Schedule.Service
 
         private bool AllergenMatchFound(Medicine medicine, MedicalRecord medicalRecord)
         {
+            /*
             var allergenMatchFound = false;
-            foreach (var ingredient in medicine.ingridient)
+            foreach (var ingredient in medicine.Ingridient)
             {
                 foreach (var allergen in medicalRecord.Allergens)
                 {
@@ -40,6 +43,9 @@ namespace Hospital.Schedule.Service
             }
 
             return allergenMatchFound;
+        }
+            */
+            return true;
         }
     }
 }
