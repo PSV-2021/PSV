@@ -27,13 +27,13 @@ namespace IntegrationApiTests.Integration
         public void Adding_existing_drugs_to_repository()
         {
             SetUpDbContext();
-            IMedicineRepository repo = new MedicineSqlRepository(context);
-            MedicineService service = new MedicineService(repo);
+            IDrugRepository repo = new DrugSqlRepository(context);
+            DrugService service = new DrugService(repo);
 
-            Medicine oldVal = repo.GetByName("Brufen");
+            Drug oldVal = repo.GetByName("Brufen");
             int oldAmount = oldVal.Supply;
             service.AddDrugUrgent("Brufen", 10);
-            Medicine newVal = repo.GetByName("Brufen");
+            Drug newVal = repo.GetByName("Brufen");
             newVal.Supply.ShouldBe(oldAmount + 10);
 
         }
@@ -41,13 +41,13 @@ namespace IntegrationApiTests.Integration
         public void Adding_nonexisting_drugs_to_repository()
         {
             SetUpDbContext();
-            IMedicineRepository repo = new MedicineSqlRepository(context);
-            MedicineService service = new MedicineService(repo);
-            Medicine testMed = repo.GetByName("Brufen");
+            IDrugRepository repo = new DrugSqlRepository(context);
+            DrugService service = new DrugService(repo);
+            Drug testMed = repo.GetByName("Brufen");
             repo.Remove(testMed);
             
             service.AddDrugUrgent("Brufen", 10);
-            Medicine newVal = repo.GetByName("Brufen");
+            Drug newVal = repo.GetByName("Brufen");
             newVal.Supply.ShouldBe(10);
 
         }

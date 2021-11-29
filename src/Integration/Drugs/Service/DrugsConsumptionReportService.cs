@@ -1,5 +1,4 @@
 ﻿using Integration.Model;
-using Integration.Repository.Dummies;
 using Integration.Repository.Sql;
 using Model.DataBaseContext;
 using Renci.SshNet;

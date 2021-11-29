@@ -7,29 +7,29 @@ using System.Text;
 
 namespace Integration.Service
 {
-    public class MedicineService
+    public class DrugService
     {
-        public IMedicineRepository MedicineRepository { get; set; }
-        public MedicineService(IMedicineRepository medicineRepository)
+        public IDrugRepository MedicineRepository { get; set; }
+        public DrugService(IDrugRepository medicineRepository)
         {
             MedicineRepository = medicineRepository;
         }
 
-        public MedicineService()
+        public DrugService()
         {
-            MedicineRepository = new MedicineSqlRepository();
+            MedicineRepository = new DrugSqlRepository();
         }
 
         public bool CheckForAmountOfDrug(string nameOfDrug, int amountOfDrug)
         {
-            Medicine med = MedicineRepository.GetByName(nameOfDrug);
+            Drug med = MedicineRepository.GetByName(nameOfDrug);
             if (med == null)
                 return false;
 
             return CheckIsTheDrugAmountSatisfied(amountOfDrug, med);
         }
 
-        private static bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Medicine med)
+        private static bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Drug med)
         {
             if (med.Supply >= amountOfDrug)
             {
@@ -41,10 +41,10 @@ namespace Integration.Service
 
         public void AddDrugUrgent(string nameOfDrug, int amountOfDrug)
         {
-            Medicine med = MedicineRepository.GetByName(nameOfDrug);
+            Drug med = MedicineRepository.GetByName(nameOfDrug);
             if (med == null)
             {
-                MedicineRepository.Save(new Medicine(nameOfDrug, amountOfDrug));
+                MedicineRepository.Save(new Drug(nameOfDrug, amountOfDrug));
             }
             else
             {
@@ -52,12 +52,12 @@ namespace Integration.Service
             }
             
         }
-        private void IncreaseDrugAmount(int amountOfDrug, Medicine med)
+        private void IncreaseDrugAmount(int amountOfDrug, Drug med)
         {
             med.Supply += amountOfDrug;
             MedicineRepository.Update(med);
         }
-        private void DecreaseDrugAmount(int amountOfDrug, Medicine med)
+        private void DecreaseDrugAmount(int amountOfDrug, Drug med)
         {
             med.Supply -= amountOfDrug;
             MedicineRepository.Update(med);

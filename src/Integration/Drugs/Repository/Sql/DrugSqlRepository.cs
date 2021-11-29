@@ -8,38 +8,38 @@ using System.Text;
 
 namespace Integration.Sql
 {
-    public class MedicineSqlRepository : IMedicineRepository
+    public class DrugSqlRepository : IDrugRepository
     {
         public MyDbContext DbContext { get; set; }
 
-        public MedicineSqlRepository(MyDbContext dbContext)
+        public DrugSqlRepository(MyDbContext dbContext)
         {
             this.DbContext = dbContext;
         }
 
-        public MedicineSqlRepository()
+        public DrugSqlRepository()
         {
         }
 
-        public List<Medicine> GetAll()
+        public List<Drug> GetAll()
         {
-            List<Medicine> result = new List<Medicine>();
-            DbContext.Medicines.ToList().ForEach(medicine => result.Add(new Medicine(medicine.Id, medicine.Name)));
+            List<Drug> result = new List<Drug>();
+            DbContext.Medicines.ToList().ForEach(medicine => result.Add(new Drug(medicine.Id, medicine.Name)));
 
             return result;
         }
 
-        public Medicine GetByName(string name)
+        public Drug GetByName(string name)
         {
-            return DbContext.Medicines.Where(m => m.Name == name).FirstOrDefault<Medicine>();
+            return DbContext.Medicines.Where(m => m.Name == name).FirstOrDefault<Drug>();
         }
 
-        public void Update(Medicine medicine)
+        public void Update(Drug medicine)
         {
             DbContext.Medicines.Update(medicine);
             DbContext.SaveChanges();
         }
-        public void Save(Medicine newMedicine)
+        public void Save(Drug newMedicine)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Integration.Sql
                 Console.WriteLine(e);
             }
         }
-        public void Remove(Medicine medicine)
+        public void Remove(Drug medicine)
         {
             if(GetByName(medicine.Name) != null)
             {

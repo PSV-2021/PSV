@@ -18,12 +18,12 @@ namespace Integration_API.Controllers
     public class DrugPurchaseController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public MedicineService medicineService;
+        public DrugService medicineService;
 
         public DrugPurchaseController(MyDbContext db)
         {
             this.dbContext = db;
-            this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
+            this.medicineService = new DrugService(new DrugSqlRepository(dbContext));
         }
 
         [HttpPut]
