@@ -14,7 +14,6 @@ namespace Hospital.Schedule.Service
     public class AppointmentService
     {
         private IAppointmentRepository AppointmentRepository { get; }
-        private AppointmentSqlRepository AppointmentSqlRepository { get; set; }
         private Appointment ChangingAppointment { get; set; }
         private EventsLogService EventsLogService { get; set; }
 
@@ -27,6 +26,10 @@ namespace Hospital.Schedule.Service
             EventsLogService = new EventsLogService();
             ChangingAppointment = new Appointment();
         }
+        public AppointmentService(AppointmentSqlRepository appointmentSqlRepository)
+        {
+            AppointmentRepository = appointmentSqlRepository;
+        }
         // Sekretar*******************************************************************************
 
         public Appointment GetAppointmentById(int id)
@@ -36,7 +39,7 @@ namespace Hospital.Schedule.Service
 
         public List<Appointment> GetAllAppointments()
         {
-            return AppointmentSqlRepository.GetAll();
+            return AppointmentRepository.GetAll();
         }
 
         public Boolean SaveAppointment(Appointment newAppointment)
