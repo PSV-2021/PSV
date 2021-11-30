@@ -275,7 +275,7 @@ namespace Hospital.MedicalRecords.Service
                 {
                     if (IsPrescriptionInTimeInterval(prescription, startDate, endDate))
                     {
-                        var medicineId = prescription.Medicine.MedicineID;
+                        var medicineId = prescription.Medicine.Id;
                         if (medicineCount.ContainsKey(medicineId))
                             medicineCount[medicineId] += 1;
                         else

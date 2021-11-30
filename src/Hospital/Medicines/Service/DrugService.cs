@@ -1,23 +1,24 @@
-﻿using Integration.Model;
-using Integration.Repository.Interfaces;
-using Integration.Sql;
+﻿using Hospital.Medicines.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Hospital.MedicalRecords.Model;
+using Hospital.Medicines.Repository.Interfaces;
+using Hospital.Medicines.Repository.Sql;
 
-namespace Integration.Service
+namespace Hospital.Medicines.Service
 {
-    public class MedicineService
+    public class DrugService
     {
-        public IMedicineRepository MedicineRepository { get; set; }
-        public MedicineService(IMedicineRepository medicineRepository)
+        public IDrugRepository MedicineRepository { get; set; }
+        public DrugService(IDrugRepository medicineRepository)
         {
             MedicineRepository = medicineRepository;
         }
 
-        public MedicineService()
+        public DrugService()
         {
-            MedicineRepository = new MedicineSqlRepository();
+            MedicineRepository = new DrugSqlRepository();
         }
 
         public bool CheckForAmountOfDrug(string nameOfDrug, int amountOfDrug)
@@ -39,12 +40,13 @@ namespace Integration.Service
             return false;
         }
 
-        public void AddDrugUrgent(string nameOfDrug, int amountOfDrug)
+        public void AddDrugUrgent(string name, int amountOfDrug)
         {
-            Medicine med = MedicineRepository.GetByName(nameOfDrug);
+            Medicine med = MedicineRepository.GetByName(name);
             if (med == null)
             {
-                MedicineRepository.Save(new Medicine(nameOfDrug, amountOfDrug));
+                //med = new Medicine(name, amountOfDrug);
+                MedicineRepository.Save(new Medicine(name, amountOfDrug));
             }
             else
             {

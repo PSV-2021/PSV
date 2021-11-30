@@ -1,14 +1,14 @@
-﻿using Integration.Model;
+﻿using Hospital.Medicines.Model;
+using Hospital.Medicines.Repository.Interfaces;
+using Integration.Model;
 using Integration.Repository.Interfaces;
 using Integration.Service;
-using Integration.Sql;
 using Microsoft.EntityFrameworkCore;
-using Model.DataBaseContext;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Hospital.Medicines.Repository.Sql;
+using Hospital.Medicines.Service;
 using Xunit;
+using Hospital.SharedModel;
 
 namespace IntegrationApiTests.Integration
 {
@@ -27,8 +27,8 @@ namespace IntegrationApiTests.Integration
         public void Adding_existing_drugs_to_repository()
         {
             SetUpDbContext();
-            IMedicineRepository repo = new MedicineSqlRepository(context);
-            MedicineService service = new MedicineService(repo);
+            IDrugRepository repo = new DrugSqlRepository(context);
+            DrugService service = new DrugService(repo);
 
             Medicine oldVal = repo.GetByName("Brufen");
             int oldAmount = oldVal.Supply;
@@ -41,8 +41,8 @@ namespace IntegrationApiTests.Integration
         public void Adding_nonexisting_drugs_to_repository()
         {
             SetUpDbContext();
-            IMedicineRepository repo = new MedicineSqlRepository(context);
-            MedicineService service = new MedicineService(repo);
+            IDrugRepository repo = new DrugSqlRepository(context);
+            DrugService service = new DrugService(repo);
             Medicine testMed = repo.GetByName("Brufen");
             repo.Remove(testMed);
             

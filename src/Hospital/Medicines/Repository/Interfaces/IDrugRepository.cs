@@ -1,11 +1,12 @@
-﻿using Integration.Model;
+﻿using Hospital.MedicalRecords.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Hospital.Medicines.Model;
 
-namespace Integration.Repository.Interfaces
+namespace Hospital.Medicines.Repository.Interfaces
 {
-    public interface IMedicineRepository
+    public interface IDrugRepository
     {
         public List<Medicine> GetAll();
 

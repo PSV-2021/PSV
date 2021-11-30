@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Hospital.MedicalRecords.Model;
+using Hospital.Medicines.Model;
 using Hospital.Schedule.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@ namespace Hospital.SharedModel
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<AnsweredQuestion> AnsweredQuestion { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -122,6 +124,7 @@ namespace Hospital.SharedModel
                 new SurveyQuestion { Id = 13, Text = "Do you feel that our work hours are well suited to treat you?", Rating = 0, QuestionType = 2 },
                 new SurveyQuestion { Id = 14, Text = "How likely are you to recommend our hospital to a friend or family member?", Rating = 0, QuestionType = 2 }
             );
+            modelBuilder.Entity<Medicine>().HasData(new Medicine(1,"Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
         }
 
     }

@@ -13,7 +13,6 @@ using DrugstoreFeedback = Integration.Model.DrugstoreFeedback;
 using System.Text.Json;
 using System.Net.NetworkInformation;
 using RestSharp;
-using Integration.Repository.Dummies;
 
 namespace Integration_API.Controllers
 {
