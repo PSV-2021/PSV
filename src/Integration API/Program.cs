@@ -12,7 +12,7 @@ using Integration_API.Repository.Interfaces;
 using DrugstoreAPI.Controllers;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
-
+using Integration_API.GRPC;
 
 namespace Integration_API
 {
@@ -29,7 +29,11 @@ namespace Integration_API
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)         
+            Host.CreateDefaultBuilder(args)
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddHostedService<ClientScheduledService>();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

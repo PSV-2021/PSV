@@ -6,7 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Model.DataBaseContext;
 using PrimerServis;
-using Integration_API;
+using Integration_API.Protos;
+using Grpc.Core;
 
 namespace Integration_API
 {
@@ -19,6 +20,8 @@ namespace Integration_API
         }
 
         public IConfiguration Configuration { get; }
+
+        private Server server;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -39,7 +42,7 @@ namespace Integration_API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +61,15 @@ namespace Integration_API
                 endpoints.MapControllers();
             });
             PrepDB.PrepPopulation(app);
+
+            server = new Server
+            {
+                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
+                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
+            };
+            server.Start();
+
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
         }
 
         private string GetDBConnectionString()
@@ -69,6 +81,15 @@ namespace Integration_API
             var database = Configuration["DB"];
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
+        }
+
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
+
         }
     }
 }
