@@ -5,11 +5,13 @@
     background-color: #DCDCDC;
   }
 .mat-stepper-next{
+    margin-top: 10%;
     background-color: white;
     float: right;
 }
 
 .mat-stepper-previous{
+    margin-top: 10%;
     background-color: white;
     float: left;
 }
