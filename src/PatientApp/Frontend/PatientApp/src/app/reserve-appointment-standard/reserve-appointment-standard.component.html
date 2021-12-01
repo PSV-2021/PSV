@@ -21,7 +21,7 @@
             <mat-label>Specialty</mat-label>
             <mat-select formControlName="specialty" required>
                 <mat-option *ngFor="let specialty of specialties" [value]="specialties">
-                  {{specialty.Name}}
+                  {{specialty.name}}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="hasErrorSecond('specialty', 'required')">Specialty is required</mat-error>

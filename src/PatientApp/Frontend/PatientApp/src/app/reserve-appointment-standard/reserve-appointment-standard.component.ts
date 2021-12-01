@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReserveAppointmentStandardService } from '../reserve-appointment-standard.service';
 
 export interface Specialty{
   Name: string;
@@ -21,12 +22,12 @@ export class ReserveAppointmentStandardComponent implements OnInit {
   thirdFormGroup: FormGroup;
   forthFormGroup: FormGroup;
 
-  specialties: Specialty[] = [{Id: 0, Name: ""}];
+  specialties: any[] = []
   doctors: Doctor[] = [{Name: ""}];
   appointments: any[] = [];
 
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private reserveAppointmentStandardService: ReserveAppointmentStandardService) { 
     this.firstFormGroup = formBuilder.group({
         title: formBuilder.control('initial value', Validators.required)
     });
@@ -67,7 +68,12 @@ export class ReserveAppointmentStandardComponent implements OnInit {
     this.forthFormGroup = this.formBuilder.group({
       appointment: ['', Validators.required],
     });
-    this.specialties = [{Id: 1, Name: "general"}, {Id:2, Name: "cardiology"}];
     this.doctors = [{Name: "Milan Mikic"}, {Name: "Danica Popovic"}];
+
+    this.reserveAppointmentStandardService.GetSpecialty().subscribe((data: any)=>{
+      for(const p of (data as any)){
+        this.specialties.push(p);
+      }
+    })
   }
 }
