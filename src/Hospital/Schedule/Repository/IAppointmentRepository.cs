@@ -2,7 +2,7 @@
 
 namespace Hospital.Schedule.Repository
 {
-    interface IAppointmentRepository: IGenericRepository<Appointment, int>
+    public interface IAppointmentRepository: IGenericRepository<Appointment, int>
     {
     }
 }

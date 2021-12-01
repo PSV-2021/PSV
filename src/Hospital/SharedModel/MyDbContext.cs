@@ -20,16 +20,17 @@ namespace Hospital.SharedModel
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<AnsweredQuestion> AnsweredQuestion { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           optionsBuilder.UseLazyLoadingProxies(true);
+            optionsBuilder.UseLazyLoadingProxies(true);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
+        {
 
             modelBuilder.Entity<UserFeedback>().HasData(
                 new UserFeedback { Id = 1, TimeWritten = DateTime.Now, Content = "Good!", Name = "Mika Mikic", canPublish = false },
@@ -42,7 +43,8 @@ namespace Hospital.SharedModel
                new Ingridient(3, "Panadol")
               );
             modelBuilder.Entity<Speciality>().HasData(
-                new Speciality { Id = 1, Name = "general"}
+                new Speciality { Id = 1, Name = "general" },
+                new Speciality { Id = 2, Name = "cardiology" }
                 );
             modelBuilder.Entity<VacationDays>().HasData(
                new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25) }
@@ -72,8 +74,29 @@ namespace Hospital.SharedModel
                     Id = 1,
                     SpecialityId = 1,
                     NumberOfPatients = 0
+                },
+                new Doctor
+                {
+                    Name = "Milica",
+                    Surname = "Milic",
+                    Jmbg = "3052123545852",
+                    DateOfBirth = new DateTime(1987, 04, 21),
+                    Sex = Sex.female,
+                    PhoneNumber = "0691457608",
+                    Adress = "Ravanicka 8",
+                    Email = "milica@gmail.com",
+                    Username = "mica56",
+                    Password = "mica1234",
+                    Type = UserType.doctor,
+                    SalaryInRsd = 250000,
+                    WorkingSchedule = new List<WorkingHours>(),
+                    VacationDays = new List<VacationDays>(),
+                    AvailableDaysOff = 15,
+                    Id = 2,
+                    SpecialityId = 2,
+                    NumberOfPatients = 0
                 });
-           
+
             modelBuilder.Entity<MedicalRecord>().HasData(
                  new MedicalRecord
                  {
@@ -81,7 +104,7 @@ namespace Hospital.SharedModel
                      HealthInsuranceNumber = "1ab",
                      Allergens = new List<Ingridient>()
                  }
-                ) ;
+                );
             modelBuilder.Entity<Patient>()
                .HasData(
                new Patient
@@ -105,7 +128,7 @@ namespace Hospital.SharedModel
                    DoctorId = 1,
                    MedicalRecordId = 1,
                    Allergen = new List<Allergen>()
-               }) ;
+               });
             modelBuilder.Entity<SurveyQuestion>().HasData(
                 new SurveyQuestion { Id = 1, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 },
                 new SurveyQuestion { Id = 2, Text = "How satisfied were you with the time that your doctor spent with you?", Rating = 0, QuestionType = 0 },
