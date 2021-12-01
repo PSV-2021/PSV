@@ -3,6 +3,7 @@ using Hospital.SharedModel;
 using HospitalAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -34,6 +35,7 @@ namespace HospitalApiTests.Integration
             IActionResult retVal = specialtyController.Get();
 
             retVal.Equals(Specialties());
+            retVal.ShouldNotBeNull();
         }
         public static IEnumerable<object[]> Specialties()
         {
@@ -55,7 +57,7 @@ namespace HospitalApiTests.Integration
 
         private Appointment GenerateAppointment()
         {
-            return new Appointment { };
+            return new Appointment { Id = 1, StartTime = new DateTime(2021, 05, 30), DoctorId = 1, PatientId = 1 };
         }
     }
 }
