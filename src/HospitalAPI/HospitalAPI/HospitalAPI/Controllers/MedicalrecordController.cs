@@ -33,9 +33,10 @@ namespace HospitalAPI.Controllers
             patientService.AllergenRepository = new AllergenSqlRepository(context);
         }
         [HttpGet]
-        public IActionResult Get([FromQuery] string id)
+        public IActionResult Get( string id)
         {
             int idPatient = Int32.Parse(id);
+
             Patient resultPatient = patientService.GetPatientById(idPatient);
             MedicalRecordDTO result = new MedicalRecordDTO(resultPatient);
             result.Allergens = patientService.GetAllergensById(idPatient);

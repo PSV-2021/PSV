@@ -76,7 +76,7 @@ namespace Hospital.MedicalRecords.Model
                 return Name + " " + Surname;
             }
         }
-        [NotMapped]
+      /*  [NotMapped]
         public List<Ingridient> Allergens
         {
             get
@@ -87,7 +87,7 @@ namespace Hospital.MedicalRecords.Model
             {
                 MedicalRecord.Allergens = value;
             }
-        }
+        }*/
   
         public List<Appointment> appointment;
 
