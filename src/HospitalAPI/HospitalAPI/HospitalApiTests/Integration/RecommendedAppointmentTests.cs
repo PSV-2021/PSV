@@ -1,10 +1,12 @@
 ﻿using Hospital.Schedule.Model;
 using Hospital.SharedModel;
 using HospitalAPI.Controllers;
+using Hospital.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using Xunit;
 
@@ -74,6 +76,27 @@ namespace HospitalApiTests.Integration
             IActionResult retVal = doctorController.Get();
 
             retVal.Equals(Doctors());
+        }
+
+        [Fact]
+        public void Get_available_appointment_by_doctor_priority()
+        {
+            SetUpDbContext();
+
+            var appointment = Create();
+
+            RecommendedAppointmentController recommendedAppointmentController = new RecommendedAppointmentController(context);
+
+            IActionResult retVal = recommendedAppointmentController.Get(appointment);
+
+            retVal.Equals(HttpStatusCode.OK);
+        }
+
+        public static SearchAppointmentsDTO Create()
+        {
+            SearchAppointmentsDTO retVal = new SearchAppointmentsDTO { StartInterval = new DateTime(2021, 12, 12, 12, 0, 0), EndInterval = new DateTime(2021, 12, 12, 14, 0, 0), DoctorId = 1, Priority = 1, SpecializationId = 1 };
+
+            return retVal;
         }
 
         public static IEnumerable<object[]> Doctors()

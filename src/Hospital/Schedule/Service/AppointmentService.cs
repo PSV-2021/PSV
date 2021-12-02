@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using Castle.Core.Internal;
+using Hospital.DTO;
 using Hospital.MedicalRecords.Model;
 using Hospital.RoomsAndEquipment.Model;
 using Hospital.Schedule.Model;
@@ -13,9 +15,12 @@ namespace Hospital.Schedule.Service
 {
     public class AppointmentService
     {
+        private const int appointmentDurationInMunutes = 30;
         private IAppointmentRepository AppointmentRepository { get; }
         private Appointment ChangingAppointment { get; set; }
         private EventsLogService EventsLogService { get; set; }
+        private RecommendedAppointmentSqlRepository RecommendedAppointmentSqlRepository { get; set; }
+        private WorkingHoursSqlRepository WorkingHoursSqlRepository { get; set; }
 
         public AppointmentService()
         {
@@ -24,9 +29,14 @@ namespace Hospital.Schedule.Service
             ChangingAppointment = new Appointment();
         }
 
-        public AppointmentService(IAppointmentRepository recommendedAppointmentSqlRepository)
+        public AppointmentService(IAppointmentRepository recommendAppointmentSqlRepository)
         {
-            AppointmentRepository = recommendedAppointmentSqlRepository;
+            AppointmentRepository = recommendAppointmentSqlRepository;
+        }
+
+        public AppointmentService(RecommendedAppointmentSqlRepository recommendedAppointmentSqlRepository)
+        {
+            RecommendedAppointmentSqlRepository = recommendedAppointmentSqlRepository;
         }
 
         // Sekretar*******************************************************************************
@@ -714,6 +724,122 @@ namespace Hospital.Schedule.Service
             return has_appointment;
         }
         // UpravnikKraj***************************************************************************
+
+
+
+        //RecommendedAppointments
+
+        public List<Appointment> GetAvailableAppointment(SearchAppointmentsDTO searchAppointments)
+        {
+            List<Appointment> appointments = AvailableDoctorAndDateRange(searchAppointments);
+
+            if (appointments.IsNullOrEmpty())
+            {
+                appointments = UseStrategy(searchAppointments);               
+            }
+
+            return appointments;
+        }
+
+        private List<Appointment> UseStrategy(SearchAppointmentsDTO searchAppointments)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+
+            if (searchAppointments.Priority == 1) //strategija za prioritet doktora
+            {
+                appointments = RecommendDoctor(searchAppointments);
+            }
+            else 
+            {
+                //strategija za prioritet datuma
+            }
+
+            return appointments;
+
+        }
+
+        public List<Appointment> AvailableDoctorAndDateRange(SearchAppointmentsDTO searchAppointments)
+        {
+            DateTime start = searchAppointments.StartInterval;
+            DateTime end = searchAppointments.EndInterval;
+
+            List<Appointment> availableAppointments = new List<Appointment>();
+
+            for (DateTime date = start; date.Date <= end.Date; date = date.AddDays(1))
+            {
+                availableAppointments.AddRange(GetAvailable(searchAppointments.DoctorId, date));
+            }
+
+            return availableAppointments;
+        }
+
+        public List<Appointment> GetAvailable(int doctorId, DateTime date)
+        {
+            List<Appointment> occupied = DoctorAndDate(doctorId, date);
+            List<Appointment> allAppointments = GetAppointments(doctorId, date);
+            List<Appointment> availableAppointments = new List<Appointment>(allAppointments);
+            
+            return availableAppointments;
+        }
+
+        public List<Appointment> GetAppointments(int doctorId, DateTime date)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            WorkingHours doctorWorkingHours = WorkingHoursSqlRepository.GetByDoctorAndDate(doctorId, date.Date);
+
+            if (doctorWorkingHours == null)
+                return appointments;
+
+            
+            return appointments;
+        }
+
+        public List<Appointment> DoctorAndDate(int doctorId, DateTime date)
+        {
+            return RecommendedAppointmentSqlRepository.Get(doctorId, date).ToList();
+        }
+
+        public List<Appointment> RecommendDoctor(SearchAppointmentsDTO searchAppointments)
+        {
+            List<Appointment> appointmentsBeforeDate = AppointmentsBeforeDate(searchAppointments);
+            List<Appointment> appointentsAfterDate = AppointmentsAfterDate(searchAppointments);
+            List<Appointment> recommendedAppointments = new List<Appointment>();
+
+            recommendedAppointments.AddRange(appointmentsBeforeDate);
+            recommendedAppointments.AddRange(appointentsAfterDate);
+
+            return recommendedAppointments;
+        }
+
+        public List<Appointment> AppointmentsBeforeDate(SearchAppointmentsDTO searchAppointments)
+        {
+            List<Appointment> availableAppointments = new List<Appointment>();
+            return availableAppointments;
+        }
+
+        public List<Appointment> AppointmentsAfterDate(SearchAppointmentsDTO searchAppointments)
+        {
+            List<Appointment> availableAppointments = new List<Appointment>();
+            return availableAppointments;
+        }
+
+        public static List<AvailableAppointmentsDTO> AvailableAppointmentsDTODoctor(List<Appointment> appointments)
+        {
+            List<AvailableAppointmentsDTO> availableAppointmentsDTO = new List<AvailableAppointmentsDTO>();
+
+            foreach (Appointment appointment in appointments)
+            {
+                AvailableAppointmentsDTO dto = new AvailableAppointmentsDTO
+                {
+                    Start = appointment.StartTime,
+                    End = appointment.EndTime,
+                    DoctorId = appointment.DoctorId,
+                    DoctorFullName = appointment.Doctor.Name + " " + appointment.Doctor.Surname
+                };
+                availableAppointmentsDTO.Add(dto);
+            }
+            return availableAppointmentsDTO;
+        }
     }
 }
 

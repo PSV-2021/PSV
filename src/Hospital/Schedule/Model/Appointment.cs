@@ -34,6 +34,7 @@ namespace Hospital.Schedule.Model
         public virtual Patient Patient { get; set; }
         //public Boolean IsEmergency { get; set; }
         //public Note Note { get; set; }
+        public bool Canceled { get; set; }
 
         public Appointment(int id, Patient patient, Doctor doctor, DateTime startTime, int duration, string apDesc/*, Note note, Boolean IsEmergency = false*/)
         {
@@ -65,12 +66,22 @@ namespace Hospital.Schedule.Model
             this.StartTime = startTime;
             this.Patient = patient;
         }
+
+        public bool IsOccupied(DateTime start, DateTime end)
+        {
+            return DateTime.Compare(StartTime, start) == 0 && DateTime.Compare(EndTime, end) == 0;
+        }
+
         [NotMapped]
         public DateTime EndTime
         {
             get
             {
                 return StartTime.AddMinutes(DurationInMunutes);
+            }
+            set
+            {
+                EndTime = value;
             }
         }
 

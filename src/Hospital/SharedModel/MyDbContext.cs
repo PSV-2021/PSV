@@ -50,7 +50,7 @@ namespace Hospital.SharedModel
                new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25) }
                );
             modelBuilder.Entity<WorkingHours>().HasData(
-               new WorkingHours { Id = 1, BeginningDate = new DateTime(2021, 01, 01), Shift = Shift.firstShift, EndDate = new DateTime(2021, 01, 08) }
+               new WorkingHours { Id = 1, BeginningDate = new DateTime(2021, 01, 01), EndDate = new DateTime(2021, 01, 08) }
                );
             modelBuilder.Entity<Doctor>()
                 .HasData(
@@ -73,7 +73,8 @@ namespace Hospital.SharedModel
                     AvailableDaysOff = 20,
                     Id = 1,
                     SpecialityId = 1,
-                    NumberOfPatients = 0
+                    NumberOfPatients = 0,
+                    WorkingHoursId = 1
                 },
                 new Doctor
                 {
@@ -94,7 +95,8 @@ namespace Hospital.SharedModel
                     AvailableDaysOff = 15,
                     Id = 2,
                     SpecialityId = 2,
-                    NumberOfPatients = 0
+                    NumberOfPatients = 0,
+                    WorkingHoursId = 1
                 });
 
             modelBuilder.Entity<MedicalRecord>().HasData(

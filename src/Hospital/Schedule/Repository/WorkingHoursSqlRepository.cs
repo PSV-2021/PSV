@@ -6,36 +6,36 @@ using System.Text;
 
 namespace Hospital.Schedule.Repository
 {
-    public class RecommendedAppointmentSqlRepository : IAppointmentRepository
+    public class WorkingHoursSqlRepository : IWorkingHoursRepository
     {
         public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Appointment> GetAll()
+        public List<WorkingHours> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Appointment GetOne(int id)
+        public WorkingHours GetOne(int id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Save(Appointment newObject)
+        public bool Save(WorkingHours newObject)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Appointment editedObject)
+        public bool Update(WorkingHours editedObject)
         {
             throw new NotImplementedException();
         }
 
-        public List<Appointment> Get(int doctorId, DateTime date)
+        public WorkingHours GetByDoctorAndDate(int id, DateTime date)
         {
-            return GetAll().Where(a => a.DoctorId.Equals(doctorId) && a.StartTime.Date.CompareTo(date.Date) == 0).ToList();
+            return GetAll().Where(day => day.Id.Equals(id) && DateTime.Compare(day.BeginningDate, date) == 0).FirstOrDefault();
         }
     }
 }

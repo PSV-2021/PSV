@@ -4,14 +4,19 @@
 // Purpose: Definition of Class WorkingHours
 
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hospital.Schedule.Model
 {
     public class WorkingHours
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime BeginningDate { get; set; }
         public DateTime EndDate { get; set; }
+        [NotMapped]
         public Shift Shift { get; set; }
 
         public WorkingHours(DateTime beginningDate, Shift shift)
@@ -36,7 +41,7 @@ namespace Hospital.Schedule.Model
                 return EndDate.ToString("dd.MM.yyyy.");
             }
         }
-
+        
         public string FormatedShift
         {
             get
@@ -48,7 +53,6 @@ namespace Hospital.Schedule.Model
                 return "";
             }
         }
-
 
     }
 }

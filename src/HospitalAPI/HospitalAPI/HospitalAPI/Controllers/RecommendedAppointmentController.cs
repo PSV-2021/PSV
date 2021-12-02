@@ -1,7 +1,7 @@
 ﻿using Hospital.Schedule.Model;
 using Hospital.Schedule.Service;
 using Hospital.SharedModel;
-using HospitalAPI.DTO;
+using Hospital.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,17 +21,17 @@ namespace HospitalAPI.Controllers
         public RecommendedAppointmentController(MyDbContext context)
         {
             this.context = context;
-            //repoSurvey = new SurveySqlRepository(db);
             appointmentService = new AppointmentService();
         }
 
 
-        [HttpPost("availablePriority")]
-        public IActionResult GetAvailable(SearchAppointmentsDTO searchAppointments)
+        [HttpGet]
+        public IActionResult Get(SearchAppointmentsDTO searchAppointments)
         {
-            //List<Appointment> appointments = appointmentService.GetAvailableByStrategy(searchAppointments.Priority).ToList();
-            
-            return Ok();
+            List<Appointment> appointments = appointmentService.GetAvailableAppointment(searchAppointments).ToList();
+            List<AvailableAppointmentsDTO> dto = AppointmentService.AvailableAppointmentsDTODoctor(appointments);
+
+            return Ok(dto);
         }
     }
 }

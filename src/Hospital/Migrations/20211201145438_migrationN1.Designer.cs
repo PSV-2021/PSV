@@ -3,15 +3,17 @@ using System;
 using Hospital.SharedModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211201145438_migrationN1")]
+    partial class migrationN1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -391,7 +393,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 1, 17, 3, 56, 795, DateTimeKind.Local).AddTicks(9074),
+                            TimeWritten = new DateTime(2021, 12, 1, 15, 54, 36, 274, DateTimeKind.Local).AddTicks(2123),
                             canPublish = false
                         },
                         new
@@ -399,7 +401,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 1, 17, 3, 56, 805, DateTimeKind.Local).AddTicks(7834),
+                            TimeWritten = new DateTime(2021, 12, 1, 15, 54, 36, 283, DateTimeKind.Local).AddTicks(8898),
                             canPublish = true
                         },
                         new
@@ -407,7 +409,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 1, 17, 3, 56, 805, DateTimeKind.Local).AddTicks(7934),
+                            TimeWritten = new DateTime(2021, 12, 1, 15, 54, 36, 283, DateTimeKind.Local).AddTicks(8998),
                             canPublish = true
                         });
                 });
@@ -421,9 +423,6 @@ namespace Hospital.Migrations
 
                     b.Property<string>("ApointmentDescription")
                         .HasColumnType("text");
-
-                    b.Property<bool>("Canceled")
-                        .HasColumnType("boolean");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("integer");

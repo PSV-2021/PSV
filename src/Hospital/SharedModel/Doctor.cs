@@ -12,6 +12,10 @@ namespace Hospital.SharedModel
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public virtual List<WorkingHours> WorkingSchedule { get; set; }
+
+        [ForeignKey("WorkingHoursId")]
+        public  int WorkingHoursId { get; set; }
+        public virtual WorkingHours WorkingHours { get; set; }
         public int AvailableDaysOff { get; set; }
         public virtual List<VacationDays> VacationDays { get; set; }
         [ForeignKey("SpecialityId")]
@@ -37,7 +41,7 @@ namespace Hospital.SharedModel
             this.Type = UserType.doctor;
             this.SalaryInRsd = salary;
             this.Speciality = new Speciality();
-            WorkingSchedule = new List<WorkingHours>();
+            //WorkingSchedule = new List<WorkingHours>();
             VacationDays = new List<VacationDays>();
             AvailableDaysOff = 20;
 
