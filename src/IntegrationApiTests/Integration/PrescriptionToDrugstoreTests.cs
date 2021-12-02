@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Integration_API.Controllers;
+using Integration_API.DTOs;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Http;
@@ -30,8 +31,8 @@ namespace IntegrationApiTests.Integration
             SetUpDbContext();
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Headers["ApiKey"] = "abcde";
-            httpContext.Request.Headers["Url"] = @"http://localhost:5005";
-            httpContext.Request.Headers["Patient"] = "Test testic";
+            //httpContext.Request.Headers["Url"] = @"http://localhost:5005";
+            //httpContext.Request.Headers["Patient"] = "Test testic";
 
             var controler = new PrescriptionController(context)
             {
@@ -41,7 +42,7 @@ namespace IntegrationApiTests.Integration
                 }
             };
 
-            var result = controler.QrPerscription("");
+            var result = controler.QrPerscription(new PrescriptionDto(@"http://localhost:5005", "Lek", 1, "Neki opis", "Ime Prezime"));
 
             Assert.IsType<BadRequestObjectResult>(result);
         }
@@ -52,8 +53,8 @@ namespace IntegrationApiTests.Integration
             SetUpDbContext();
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Headers["ApiKey"] = "abcde";
-            httpContext.Request.Headers["Url"] = @"http://localhost:5001";
-            httpContext.Request.Headers["Patient"] = "Test testic";
+            //httpContext.Request.Headers["Url"] = @"http://localhost:5001";
+            //httpContext.Request.Headers["Patient"] = "Test testic";
 
             var controler = new PrescriptionController(context)
             {
@@ -72,7 +73,7 @@ namespace IntegrationApiTests.Integration
             byte[] bytes = File.ReadAllBytes(entitySource);
             string file = Convert.ToBase64String(bytes);
 
-            var result = controler.QrPerscription("file");
+            var result = controler.QrPerscription(new PrescriptionDto(@"http://localhost:5001", "Brufen", 1, "Neki opis", "Ime Prezime"));
 
             Assert.IsType<OkObjectResult>(result);
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Integration_API.Controllers;
+using Integration_API.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
@@ -24,7 +25,8 @@ namespace IntegrationApiTests.Unit
                 }
             };
 
-            var result = controler.QrPerscription("");
+            var result = controler.QrPerscription(new PrescriptionDto(@"http://localhost:5001", "Brufen", 1,
+                "Neki opis", "Ime Prezime"));
 
             Assert.IsType<UnauthorizedResult>(result);
         }
@@ -43,7 +45,8 @@ namespace IntegrationApiTests.Unit
                 }
             };
 
-            var result = controler.QrPerscription("");
+            var result = controler.QrPerscription(new PrescriptionDto(null,
+                "Brufen", 1, "Neki opis", "Ime Prezime"));
 
             Assert.IsType<BadRequestResult>(result);
         }
@@ -63,7 +66,7 @@ namespace IntegrationApiTests.Unit
                 }
             };
 
-            var result = controler.QrPerscription("");
+            var result = controler.QrPerscription(new PrescriptionDto(@"http://localhost:5001", "Brufen", 1, "Neki opis", null));
 
             Assert.IsType<BadRequestResult>(result);
         }

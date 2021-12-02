@@ -39,7 +39,8 @@ namespace HospitalAPI.Controllers
 
             SetApiKeyInHeaderForQr(prescription ,request);
 
-            SetPdfInBody(prescription, request);
+            //SetPdfInBody(prescription, request);
+            SetRequestBody(prescription, request);
 
             IRestResponse responseSecond = client.Execute(request);
             if (responseSecond.StatusCode != HttpStatusCode.OK)
@@ -53,6 +54,8 @@ namespace HospitalAPI.Controllers
                 Name = prescription.Name,
                 Amount = 1,
                 PharmacyUrl = prescription.PharmacyUrl,
+                Description = prescription.Description,
+                PatientName = prescription.PatientName
             };
             string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
 
@@ -108,8 +111,8 @@ namespace HospitalAPI.Controllers
         {
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("ApiKey", "abcde");
-            request.AddHeader("Url", prescription.PharmacyUrl);
-            request.AddHeader("Patient", prescription.PatientName);
+            //request.AddHeader("Url", prescription.PharmacyUrl);
+            //request.AddHeader("Patient", prescription.PatientName);
         }
     }
 }
