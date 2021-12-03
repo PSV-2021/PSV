@@ -124,6 +124,64 @@ namespace Hospital.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Hospital.MedicalRecords.Model.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Manufacturer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MedicineImage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Precautions")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Reactions")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SideEffects")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Manufacturer = "Pfizer",
+                            MedicineImage = "",
+                            Name = "Brufen",
+                            Precautions = "Mozes sve lagano",
+                            Price = 200.0,
+                            Reactions = "Pa umres",
+                            SideEffects = "Umres",
+                            Supply = 100,
+                            Usage = "Kad god hoces",
+                            Weight = 100.0
+                        });
+                });
+
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Patient", b =>
                 {
                     b.Property<int>("Id")
@@ -425,7 +483,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 3, 19, 36, 1, 818, DateTimeKind.Local).AddTicks(5473),
+                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 616, DateTimeKind.Local).AddTicks(3795),
                             canPublish = false
                         },
                         new
@@ -433,7 +491,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 3, 19, 36, 1, 820, DateTimeKind.Local).AddTicks(9229),
+                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 618, DateTimeKind.Local).AddTicks(9722),
                             canPublish = true
                         },
                         new
@@ -441,7 +499,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 3, 19, 36, 1, 820, DateTimeKind.Local).AddTicks(9304),
+                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 618, DateTimeKind.Local).AddTicks(9798),
                             canPublish = true
                         });
                 });

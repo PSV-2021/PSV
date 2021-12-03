@@ -128,6 +128,7 @@ namespace Hospital.SharedModel
             modelBuilder.Entity<Medicine>().HasData(new Medicine(1,"Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
 
             modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
+
         }
 
     }
