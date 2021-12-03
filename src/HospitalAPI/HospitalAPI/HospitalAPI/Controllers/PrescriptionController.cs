@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
+using Hospital.MedicalRecords.Model;
+using Hospital.MedicalRecords.Service;
+using Hospital.SharedModel;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.qrcode;
@@ -17,6 +20,15 @@ namespace HospitalAPI.Controllers
     [ApiController]
     public class PrescriptionController : ControllerBase
     {
+        private readonly MyDbContext dbContext;
+        private PrescriptionService prescriptionService;
+        public PrescriptionController(MyDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+            prescriptionService = new PrescriptionService(dbContext);
+
+        }
+
         [HttpPost("qrprescription")]
         public IActionResult QrPrescription(PrescriptionDto prescription)
         {
@@ -29,7 +41,7 @@ namespace HospitalAPI.Controllers
 
             IRestResponse response = client.Execute(request);
 
-            if (response.StatusCode != HttpStatusCode.OK)
+            if (response.StatusCode != HttpStatusCode.OK || !Boolean.Parse(response.Content))
             {
                 return BadRequest(false);
             }
@@ -45,6 +57,8 @@ namespace HospitalAPI.Controllers
             IRestResponse responseSecond = client.Execute(request);
             if (responseSecond.StatusCode != HttpStatusCode.OK)
                 return BadRequest("Some error occured!");
+
+            prescriptionService.SaveNewPrescription(new Prescription(prescription.PatientName, prescription.Description, prescription.Name, DateTime.Now));
             return Ok(responseSecond.Content);
         }
         private static void SetRequestBody(PrescriptionDto prescription, RestRequest request)
