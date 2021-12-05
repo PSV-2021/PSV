@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReserveAppointmentStandardService } from '../reserve-appointment-standard.service';
@@ -7,8 +8,16 @@ export interface Specialty{
   Id: number;
 }
 
+export interface SelectedSpecialty{
+  Name: string;
+}
+
 export interface Doctor{
   Name: string;
+}
+
+export interface AppointmentDate{
+  date: Date;
 }
 
 @Component({
@@ -25,6 +34,11 @@ export class ReserveAppointmentStandardComponent implements OnInit {
   specialties: any[] = []
   doctors: Doctor[] = [{Name: ""}];
   appointments: any[] = [];
+
+  appointment: AppointmentDate = {date: new Date()}
+  returnDate: string = '';
+  selectedSpecialty: SelectedSpecialty = {Name: ""};
+  returnSpecialty: number = 0 ;
 
 
   constructor(private formBuilder: FormBuilder, private reserveAppointmentStandardService: ReserveAppointmentStandardService) { 
@@ -75,5 +89,19 @@ export class ReserveAppointmentStandardComponent implements OnInit {
         this.specialties.push(p);
       }
     })
+  }
+
+  onSubmit(): void{
+    
+    const format = "dd/MM/yyyy HH:mm:ss"
+    this.returnDate = formatDate(this.appointment.date, format, "en-US")
+  
+    for(const d of this.specialties){
+      if(d.name == this.selectedSpecialty.Name){
+        this.returnSpecialty = d.id
+      }
+    }
+
+    console.log(this.returnSpecialty)
   }
 }
