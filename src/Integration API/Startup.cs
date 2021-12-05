@@ -6,8 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Model.DataBaseContext;
 using PrimerServis;
-using Integration_API.Protos;
+
 using Grpc.Core;
+
 
 namespace Integration_API
 {
@@ -62,12 +63,12 @@ namespace Integration_API
             });
             PrepDB.PrepPopulation(app);
 
-            server = new Server
-            {
-                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
-                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
-            };
-            server.Start();
+            //server = new Server
+            //{
+            //    Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
+            //    Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
+            //};
+            //server.Start();
 
             applicationLifetime.ApplicationStopping.Register(OnShutdown);
         }

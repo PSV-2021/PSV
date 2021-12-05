@@ -11,6 +11,8 @@ using Integration_API.DTOs;
 using Model.DataBaseContext;
 using Hospital.Medicines.Service;
 using Hospital.Medicines.Repository.Sql;
+using Grpc.Net.Client;
+using DrugstoreAPI;
 
 namespace Integration_API.Controllers
 {
@@ -30,6 +32,8 @@ namespace Integration_API.Controllers
         [HttpPut]
         public IActionResult Put(DrugAmountDemandDto demand)
         {
+            drugDemandGrpc();
+
             var client = new RestClient(demand.PharmacyUrl);
             var request = new RestRequest("/api/drugDemand", Method.POST);
 
@@ -96,6 +100,18 @@ namespace Integration_API.Controllers
 
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("ApiKey", ApiKey);
+        }
+
+        static async Task drugDemandGrpc()
+        {
+            var channel = GrpcChannel.ForAddress("http://localhost:5001");
+            var client = new Greeter.GreeterClient(channel);
+
+            var response = await client.SayHelloAsync(new HelloRequest
+            {
+                Name = ".NET Conf"
+            });
+            Console.WriteLine("From server: " + response.Message);
         }
     }
 }
