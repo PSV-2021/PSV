@@ -1,4 +1,5 @@
 ﻿using Hospital.Schedule.Model;
+using Hospital.SharedModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,12 @@ namespace Hospital.Schedule.Repository
 {
     public class WorkingHoursSqlRepository : IWorkingHoursRepository
     {
+        private MyDbContext context;
+
+        public WorkingHoursSqlRepository(MyDbContext context)
+        {
+            this.context = context;
+        }
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -15,7 +22,7 @@ namespace Hospital.Schedule.Repository
 
         public List<WorkingHours> GetAll()
         {
-            throw new NotImplementedException();
+            return context.WorkingHours.ToList();
         }
 
         public WorkingHours GetOne(int id)

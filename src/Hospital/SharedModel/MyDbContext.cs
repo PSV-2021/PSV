@@ -52,6 +52,9 @@ namespace Hospital.SharedModel
             modelBuilder.Entity<WorkingHours>().HasData(
                new WorkingHours { Id = 1, BeginningDate = new DateTime(2021, 01, 01), EndDate = new DateTime(2021, 01, 08) }
                );
+            modelBuilder.Entity<Appointment>().HasData(
+               new Appointment { Id = 1, StartTime = new DateTime(2021, 01, 02), DurationInMunutes = 30, ApointmentDescription = "", IsDeleted = false, DoctorId = 1, PatientId = 1, Canceled = false }
+               );
             modelBuilder.Entity<Doctor>()
                 .HasData(
                 new Doctor

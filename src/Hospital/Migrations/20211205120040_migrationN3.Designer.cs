@@ -3,15 +3,17 @@ using System;
 using Hospital.SharedModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211205120040_migrationN3")]
+    partial class migrationN3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -391,7 +393,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 5, 13, 4, 46, 765, DateTimeKind.Local).AddTicks(1076),
+                            TimeWritten = new DateTime(2021, 12, 5, 13, 0, 38, 710, DateTimeKind.Local).AddTicks(4066),
                             canPublish = false
                         },
                         new
@@ -399,7 +401,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 5, 13, 4, 46, 777, DateTimeKind.Local).AddTicks(4279),
+                            TimeWritten = new DateTime(2021, 12, 5, 13, 0, 38, 721, DateTimeKind.Local).AddTicks(7462),
                             canPublish = true
                         },
                         new
@@ -407,7 +409,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 5, 13, 4, 46, 777, DateTimeKind.Local).AddTicks(4465),
+                            TimeWritten = new DateTime(2021, 12, 5, 13, 0, 38, 721, DateTimeKind.Local).AddTicks(7560),
                             canPublish = true
                         });
                 });
@@ -458,7 +460,7 @@ namespace Hospital.Migrations
                             DurationInMunutes = 30,
                             IsDeleted = false,
                             PatientId = 1,
-                            StartTime = new DateTime(2021, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            StartTime = new DateTime(2021, 12, 16, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

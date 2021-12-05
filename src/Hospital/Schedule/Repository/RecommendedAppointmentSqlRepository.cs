@@ -1,4 +1,5 @@
 ﻿using Hospital.Schedule.Model;
+using Hospital.SharedModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,13 @@ namespace Hospital.Schedule.Repository
 {
     public class RecommendedAppointmentSqlRepository : IAppointmentRepository
     {
+        private MyDbContext context;
+
+        public RecommendedAppointmentSqlRepository(MyDbContext context)
+        {
+            this.context = context;
+        }
+
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -15,7 +23,7 @@ namespace Hospital.Schedule.Repository
 
         public List<Appointment> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Appointments.ToList();
         }
 
         public Appointment GetOne(int id)

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hospital.Schedule.Repository;
 
 namespace HospitalAPI.Controllers
 {
@@ -21,7 +22,7 @@ namespace HospitalAPI.Controllers
         public RecommendedAppointmentController(MyDbContext context)
         {
             this.context = context;
-            appointmentService = new AppointmentService();
+            appointmentService = new AppointmentService(new RecommendedAppointmentSqlRepository(context), new WorkingHoursSqlRepository(context));
         }
 
 
