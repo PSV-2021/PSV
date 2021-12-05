@@ -50,6 +50,10 @@ namespace Hospital.Schedule.Service
         {
             return DoctorRepository.GetAll();
         }
+        public List<Doctor> GetDoctorsBySpeciality(int specialityId)
+        {
+            return DoctorSqlRepository.GetDoctorsBySpeciality(specialityId);
+        }
 
         public List<Doctor> GetDoctorsWithSpeciality(Speciality speciality)
         {

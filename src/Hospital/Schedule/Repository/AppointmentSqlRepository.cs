@@ -45,5 +45,11 @@ namespace Hospital.Schedule.Repository
         {
             throw new NotImplementedException();
         }
+
+        public List<Appointment> GetOccupiedAppointmentsByDoctorAndDate(int idDoctor, DateTime chosenDate)
+        {
+            return (List<Appointment>)dbContext.Appointments.ToList().Where(s => s.StartTime.Date == chosenDate).Where(s => s.DoctorId == idDoctor).ToList();
+
+        }
     }
 }
