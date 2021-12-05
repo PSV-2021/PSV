@@ -22,6 +22,9 @@ namespace Hospital.Schedule.Service
         private RecommendedAppointmentSqlRepository RecommendedAppointmentSqlRepository { get; set; }
         private WorkingHoursSqlRepository WorkingHoursSqlRepository { get; set; }
 
+        IWorkingHoursRepository WorkingHoursRepository;
+        IDoctorRepository DoctorRepository;
+
         public AppointmentService()
         {
             AppointmentRepository = new AppointmentFileRepository();
@@ -37,6 +40,13 @@ namespace Hospital.Schedule.Service
         public AppointmentService(RecommendedAppointmentSqlRepository recommendedAppointmentSqlRepository)
         {
             RecommendedAppointmentSqlRepository = recommendedAppointmentSqlRepository;
+        }
+
+        public AppointmentService(IWorkingHoursRepository doctorWorkingHoursRepository, IAppointmentRepository appointmentRepository, IDoctorRepository doctorRepository)
+        {
+            WorkingHoursRepository = doctorWorkingHoursRepository;
+            AppointmentRepository = appointmentRepository;
+            DoctorRepository = doctorRepository;
         }
 
         // Sekretar*******************************************************************************
@@ -778,7 +788,15 @@ namespace Hospital.Schedule.Service
             List<Appointment> occupied = DoctorAndDate(doctorId, date);
             List<Appointment> allAppointments = GetAppointments(doctorId, date);
             List<Appointment> availableAppointments = new List<Appointment>(allAppointments);
-            
+
+            foreach (Appointment appointmentIt in allAppointments)
+            {
+                Appointment appointment = occupied.FirstOrDefault(a => a.IsOccupied(appointmentIt.StartTime, appointmentIt.EndTime) && !a.Canceled);
+
+                if (appointment != null)
+                    availableAppointments.Remove(appointmentIt);
+            }
+
             return availableAppointments;
         }
 
@@ -790,7 +808,20 @@ namespace Hospital.Schedule.Service
             if (doctorWorkingHours == null)
                 return appointments;
 
-            
+            int startTime = doctorWorkingHours.BeginningDate.Day;
+            int endTime = doctorWorkingHours.EndDate.Day;
+            DateTime appointmentStart = new DateTime(date.Year, date.Month, date.Day, startTime, 0, 0);
+
+            for (int i = 0; i < endTime - 1; i++)
+            {
+                Appointment appointment = new Appointment
+                {
+                    DoctorId = doctorId,
+                    StartTime = appointmentStart.AddMinutes(appointmentDurationInMunutes * i),
+                    EndTime = appointmentStart.AddMinutes(appointmentDurationInMunutes * (i + 1))
+                };
+                appointments.Add(appointment);
+            }
             return appointments;
         }
 
@@ -811,16 +842,39 @@ namespace Hospital.Schedule.Service
             return recommendedAppointments;
         }
 
+        //potrebno dodati i za ostale doktore iste specijalizacije
         public List<Appointment> AppointmentsBeforeDate(SearchAppointmentsDTO searchAppointments)
         {
-            List<Appointment> availableAppointments = new List<Appointment>();
-            return availableAppointments;
+            DateTime startDate = searchAppointments.StartInterval.Date.AddDays(-1);
+            DateTime minDate = searchAppointments.EndInterval.Date.AddDays(-5);
+
+            List<Appointment> allAvailableAppointments = new List<Appointment>();
+
+            while (startDate >= minDate || startDate == DateTime.Now.Date)
+            {
+                List<Appointment> availableAppointments = GetAvailable(searchAppointments.DoctorId, startDate);
+                allAvailableAppointments.AddRange(availableAppointments);
+                startDate = startDate.AddDays(-1);
+            }
+            return allAvailableAppointments.Where(ap => allAvailableAppointments.IndexOf(ap) < 5).ToList(); //vrati 5 preporucenih termina
         }
 
+        //potrebno dodati i za ostale doktore iste specijalizacije
         public List<Appointment> AppointmentsAfterDate(SearchAppointmentsDTO searchAppointments)
         {
-            List<Appointment> availableAppointments = new List<Appointment>();
-            return availableAppointments;
+            DateTime endDate = searchAppointments.StartInterval.Date.AddDays(1);
+            DateTime maxDate = searchAppointments.EndInterval.Date.AddDays(5);
+
+            List<Appointment> allAvailableAppointments = new List<Appointment>();
+
+            while (endDate <= maxDate)
+            {
+                List<Appointment> availaAppointments = GetAvailable(searchAppointments.DoctorId, endDate);
+                allAvailableAppointments.AddRange(availaAppointments);
+                endDate = endDate.AddDays(1);
+            }
+
+            return allAvailableAppointments.Where(ap => allAvailableAppointments.IndexOf(ap) < 5).ToList();
         }
 
         public static List<AvailableAppointmentsDTO> AvailableAppointmentsDTODoctor(List<Appointment> appointments)

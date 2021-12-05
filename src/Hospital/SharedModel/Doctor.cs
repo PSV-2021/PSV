@@ -14,7 +14,7 @@ namespace Hospital.SharedModel
         public virtual List<WorkingHours> WorkingSchedule { get; set; }
 
         [ForeignKey("WorkingHoursId")]
-        public  int WorkingHoursId { get; set; }
+        public int WorkingHoursId { get; set; }
         public virtual WorkingHours WorkingHours { get; set; }
         public int AvailableDaysOff { get; set; }
         public virtual List<VacationDays> VacationDays { get; set; }

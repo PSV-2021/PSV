@@ -7,5 +7,6 @@ namespace Hospital.Schedule.Repository
 {
     public interface IWorkingHoursRepository : IGenericRepository<WorkingHours, int>
     {
+        public WorkingHours GetByDoctorAndDate(int id, DateTime date);
     }
 }
