@@ -28,5 +28,14 @@ namespace HospitalAPI.Controllers
         {
             return Ok(appointmentService.SaveAppointment(appointment));
         }
+
+        [HttpGet]
+        public IActionResult GetFreeAppointments(int idDoctor, DateTime chosenDate)
+        {
+            List<Appointment> result = new List<Appointment>();
+            result = appointmentService.GetAppointmentsByDoctorAndDate(idDoctor,chosenDate);
+            return Ok(result);
+        }
     }
 }
+
