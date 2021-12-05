@@ -5,6 +5,7 @@ import { CommentsObserveComponent } from './comments-observe/comments-observe.co
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
+import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { SurveyComponent } from './survey/survey.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'user' ,  children: [{ path:'activate', component: ActivationAccountComponent }]},
   { path: 'medicalRecord', component: MedicalRecordComponent },
   { path: 'registrationSuccess', component: RegistrationSuccessComponent},
+  { path: 'recommendAppointment', component: RecommendAppointmentComponent},
   { path: '**', redirectTo: ''}
 ];
 
