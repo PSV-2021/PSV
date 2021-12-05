@@ -5,7 +5,7 @@
         <ng-template matStepLabel>Pick date of appointment</ng-template>
         <mat-form-field color="accent" appearance="fill">
             <mat-label>Date of appointment</mat-label>
-            <input matInput formControlName="date" [matDatepicker]="picker" required/>
+            <input matInput formControlName="date" [matDatepicker]="picker" [(ngModel)]="appointment.date" required/>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi #picker></mat-datepicker>
             <mat-error *ngIf="hasErrorFirst('date', 'required')">Date is required</mat-error>
@@ -19,9 +19,9 @@
       <form [formGroup]="secondFormGroup">
         <mat-form-field appearance="fill">
             <mat-label>Specialty</mat-label>
-            <mat-select formControlName="specialty" required>
-                <mat-option *ngFor="let specialty of specialties" [value]="specialties">
-                  {{specialty.Name}}
+            <mat-select formControlName="specialty" [(ngModel)]="selectedSpecialty.Name" required>
+                <mat-option *ngFor="let specialty of specialties" [value]="specialty.name" >
+                  {{specialty.name}}
                 </mat-option>
             </mat-select>
             <mat-error *ngIf="hasErrorSecond('specialty', 'required')">Specialty is required</mat-error>
@@ -62,7 +62,6 @@
             </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button style=" background-color: white;float: right;margin-top: 10%;">Done</button>
           </div>
         </form>
     </mat-step>
