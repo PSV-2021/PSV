@@ -146,7 +146,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return notifications;
         }
-        */
+        
 
         private Boolean CanShowNotification(DateTime dateTime)
         {
@@ -186,7 +186,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return notifications;
         }
-
+        
         public Patient Save(Patient patient)
         {
             throw new NotImplementedException();
@@ -247,6 +247,7 @@ namespace Hospital.MedicalRecords.Service
             EditPatient(patient);
         }
 
+        
         public List<MedicineCount> GetMedicineCountForSelectedDate(DateTime startDate, DateTime endDate)
         {
             Dictionary<int, int> medicineCount = CreateMedicineCountDictionary(startDate, endDate);
@@ -262,7 +263,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return medicineTotals;
         }
-
+        
         private Dictionary<int, int> CreateMedicineCountDictionary(DateTime startDate, DateTime endDate)
         {
             List<Patient> allPatients = GetAllPatients();
@@ -303,7 +304,7 @@ namespace Hospital.MedicalRecords.Service
             return sum;
         }
 
-        
+        */
     }
 
 }
