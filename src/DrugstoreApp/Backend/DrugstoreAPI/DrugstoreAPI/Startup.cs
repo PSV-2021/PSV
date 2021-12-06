@@ -30,7 +30,7 @@ namespace DrugstoreAPI
             services.AddDbContext<Drugstore.Models.MyDbContext>(options =>
             options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")));
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddSingleton<IHostedService, BackgroundCompressionService>();
+            services.AddSingleton<IHostedService, BackgroundCompressionController>();
 
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>

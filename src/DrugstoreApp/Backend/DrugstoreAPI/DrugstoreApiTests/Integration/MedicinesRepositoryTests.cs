@@ -12,6 +12,7 @@ using Xunit;
 
 namespace DrugstoreApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class MedicinesRepositoryTests
     {
         private MyDbContext context;

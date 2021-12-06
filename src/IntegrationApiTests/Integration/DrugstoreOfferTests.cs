@@ -20,6 +20,7 @@ using Xunit;
 
 namespace IntegrationApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class DrugstoreOfferTests
     {
         private MyDbContext context;

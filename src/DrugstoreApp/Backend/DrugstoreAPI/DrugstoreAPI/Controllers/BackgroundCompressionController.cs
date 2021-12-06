@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Drugstore.Compression.Controller
 {
-    class BackgroundCompressionService: ScheduledProcessor
+    class BackgroundCompressionController: ScheduledProcessor
     {
         FileCompressionService fileCompressionServie = new FileCompressionService();
-        public BackgroundCompressionService(IServiceScopeFactory serviceScopeFactory) : base(serviceScopeFactory)
+        public BackgroundCompressionController(IServiceScopeFactory serviceScopeFactory) : base(serviceScopeFactory)
         {
 
         }

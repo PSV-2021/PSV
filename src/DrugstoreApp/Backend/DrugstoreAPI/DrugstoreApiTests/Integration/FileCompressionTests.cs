@@ -9,6 +9,7 @@ using Xunit;
 
 namespace DrugstoreApiTests.Unit
 {
+    [Trait("Type", "IntegrationTest")]
     public class FileCompressionTests
     {
         private string directoryPath = @"\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreApiTests\test folder\";
@@ -26,7 +27,7 @@ namespace DrugstoreApiTests.Unit
 
         }
         [Fact]
-        public void ThereAreFiles()
+        public void ThereAreFilesToCompress()
         {
             CreateFilesInDirectory();
            var result = fileCompressionService.CheckIfThereAreFIlesToCompress(directoryPath);
@@ -46,16 +47,10 @@ namespace DrugstoreApiTests.Unit
             fileCompressionService.Delete(fileNames);
             DirectoryInfo dir = new DirectoryInfo(directoryPath);
             FileInfo[] filesFromDIr = dir.GetFiles();
-            var res = filesFromDIr.Length;
-            Assert.Equal(0, res);
-
-        }
-        [Fact]
-        public void ThereAreNoFiles()
-        {
-            Thread.Sleep(100);
             var result = fileCompressionService.CheckIfThereAreFIlesToCompress(directoryPath);
             Assert.False(result);
+
         }
+
     }
 }

@@ -12,7 +12,7 @@ using Xunit;
 
 namespace DrugstoreApiTests.Integration
 {
-    
+    [Trait("Type", "IntegrationTest")]
     public class DrugstoreOfferTests
     {
    
