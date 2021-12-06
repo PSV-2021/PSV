@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Integration.Model
-{
+{ 
     public class Drug
     {
         public int Id { get; set; }
