@@ -42,6 +42,11 @@ export class DrugsConsumptionComponent implements OnInit {
     });
   }
 
+  public openSpec(): void{
+    var URL = "http://localhost:8887/Brufen - Specifikacija leka.pdf";
+    window.open(URL, '_blank');
+  }
+
   public requestDrugSpecification(): void{
     this.drugConsumptionSpecsService.RequestDrugSpecification(this.selectedPharmacy.Url, this.drugName).subscribe((d: any) =>{
       if (d){
