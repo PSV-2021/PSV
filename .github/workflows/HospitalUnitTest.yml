@@ -1,0 +1,26 @@
+name: HospitalUnitTests
+
+on:
+  push:
+    paths: 
+      - "src/HospitalAPI/**"
+      - "src/Hospital/**"
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '3.1.x' ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Install dependencies
+        run: dotnet restore src/HospitalAPI/HospitalAPI
+      - name: Build
+        run: dotnet build src/HospitalAPI/HospitalAPI --configuration Release --no-restore
+      - name: Test
+        run: dotnet test src/HospitalAPI/HospitalAPI --filter Type=UnitTest --no-restore --verbosity normal
