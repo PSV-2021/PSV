@@ -50,7 +50,6 @@ namespace Integration_API
 
             //app.UseCors();
             app.UseCors("MyPolicy");
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
