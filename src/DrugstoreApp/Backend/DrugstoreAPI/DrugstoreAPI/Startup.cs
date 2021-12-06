@@ -5,6 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Drugstore.Compression.Controller;
 
 namespace DrugstoreAPI
 {
@@ -24,6 +28,8 @@ namespace DrugstoreAPI
             services.AddDbContext<Drugstore.Models.MyDbContext>(options =>
             options.UseNpgsql(GetDBConnectionString()));
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddSingleton<IHostedService, BackgroundCompressionController>();
+
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

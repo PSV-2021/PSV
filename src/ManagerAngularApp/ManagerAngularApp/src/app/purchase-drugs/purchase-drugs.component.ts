@@ -14,6 +14,7 @@ export class PurchaseDrugsComponent implements OnInit {
   public searchInput: DrugstoreSearchDto;
   public drugAmount: number;
   public drugName: string;
+  public disableButton: boolean;
 
   constructor(private pharmacyService: PharmacyService) {
     this.selectedPharmacy = new PharmacyDto();
@@ -21,6 +22,7 @@ export class PurchaseDrugsComponent implements OnInit {
     this.pharmacies = [];
     this.drugName = '';
     this.drugAmount = 1;
+    this.disableButton = true;
    }
 
 
@@ -43,11 +45,24 @@ export class PurchaseDrugsComponent implements OnInit {
   public sendDemand(): void{
     this.pharmacyService.SendDrugDemand(this.selectedPharmacy.Url, this.drugAmount, this.drugName).subscribe((d: any) =>{
       if (d){
+        this.disableButton = false;
         alert("You CAN order this drug from this drugstore ");
       }else if(!d){
+        this.disableButton = true;
         alert("You CAN'T order this drug from this drugstore ");
       }
 
+    });
+  }
+
+  public sendUrgedPurchase(): void{
+    this.pharmacyService.SendUrgentDrugPurchase(this.selectedPharmacy.Url, this.drugAmount, this.drugName).subscribe((d: any) =>{
+      this.disableButton = true;
+      if (d){
+        alert("You have successfully purchased drugs!");
+      }else if(!d){
+        alert("Something went wrong!");
+      }
     });
   }
 
@@ -64,7 +79,12 @@ export class PurchaseDrugsComponent implements OnInit {
           "Address": p.address
         });
       }
+      this.disableButton = true;
     });
+  }
+
+  inputChanged(e: any){
+    this.disableButton = true;
   }
 
 }

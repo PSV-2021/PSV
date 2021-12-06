@@ -5,11 +5,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Model.DataBaseContext;
+using PrimerServis;
+using Integration_API;
 
 namespace Integration_API
 {
     public class Startup
     {
+       
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -21,9 +24,9 @@ namespace Integration_API
         public void ConfigureServices(IServiceCollection services)
         {           
             services.AddControllers();
-            
+            services.AddHostedService<RabbitMQService>();
             services.AddDbContext<MyDbContext>(options =>
-                options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
+                options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
             services.AddControllersWithViews().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -31,6 +34,8 @@ namespace Integration_API
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +57,18 @@ namespace Integration_API
             {
                 endpoints.MapControllers();
             });
+            PrepDB.PrepPopulation(app);
+        }
+
+        private string GetDBConnectionString()
+        {
+            var server = Configuration["DBServer"];
+            var port = Configuration["DBPort"];
+            var user = Configuration["DBUser"];
+            var password = Configuration["DBPassword"];
+            var database = Configuration["DB"];
+            if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
+            return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
     }
 }

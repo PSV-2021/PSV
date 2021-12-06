@@ -1,0 +1,28 @@
+<div>
+    <div *ngFor="let ds of drugstoreOffers">
+    <mat-card >
+        <mat-card-header>
+            <mat-card-title>{{ ds.Title }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <p>
+                {{ ds.Content }}
+            </p>
+            <label> Valid from {{ ds.StartDate | date:'dd-MM-yyyy' }} </label>
+            <label>to {{ ds.EndDate | date:'dd-MM-yyyy' }} </label>
+        </mat-card-content>
+    
+        <mat-card-actions >
+            <button *ngIf=" !ds.IsPublished;" mat-button style=
+                "background-color:blue; color:white" (click)="publishOffer(ds)">
+                Publish
+            </button>
+                <button *ngIf=" ds.IsPublished;" disabled="true" mat-button style=
+                "background-color:red; color:white ">
+                Published
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+</div>

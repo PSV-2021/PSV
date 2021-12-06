@@ -10,6 +10,7 @@ using DrugstoreAPI.Dtos;
 using DrugstoreAPI.Service;
 using Drugstore.Repository.Interfaces;
 using Service;
+using Drugstore.Service;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -21,6 +22,7 @@ namespace DrugstoreAPI.Controllers
         private readonly MyDbContext dbContext;
         public MedicineService medicineService;
         public HospitalService HospitalService;
+
 
         public DrugDemandController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
@@ -46,6 +48,24 @@ namespace DrugstoreAPI.Controllers
                 }
             }
             return Unauthorized();
+        }
+        [HttpPost ("urgent")]
+        public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
+        {
+            Microsoft.Extensions.Primitives.StringValues headerValues;
+
+            if (Request.Headers.TryGetValue("ApiKey", out headerValues))
+            {
+                var headers = Request.Headers["ApiKey"];
+                foreach (string header in headers)
+                {
+                    if (HospitalService.CheckApiKey(header))
+                    {
+                        return Ok(medicineService.SellDrugUrgent(demand.Name, demand.Amount));
+                    }
+                }
+            }
+            return Unauthorized(false);
         }
 
 
