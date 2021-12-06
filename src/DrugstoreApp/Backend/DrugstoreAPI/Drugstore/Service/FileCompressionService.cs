@@ -10,7 +10,6 @@ using System.IO;
 using System.IO.Compression;
 using Aspose.Zip;
 using Aspose.Zip.Saving;
-using DrugstoreAPI.Models;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using System.Timers;
@@ -20,8 +19,9 @@ namespace Drugstore.Service
     public class FileCompressionService 
     {
 
-        private List<FileCompressionDto> fileInfos = new List<FileCompressionDto>();
+        private List<FileInfo> fileInfos = new List<FileInfo>();
         private List<string> fileDeletionList = new List<string>();
+        private string path = @"\rebex\data\public\Drugstore files\";
 
         public  void CompressOldFiles()
         {
@@ -32,28 +32,20 @@ namespace Drugstore.Service
                 + " i " + DateTime.Now.Minute.ToString()
                 + ".zip";
 
-            if (this.CheckIfThereAreFIlesToCompress(@"\rebex\data\public\Drugstore files\"))
+            if (this.CheckIfThereAreFIlesToCompress(path))
             {
                 using (FileStream file = File.Open(zipName, FileMode.Create))
                 {
-                    foreach (string fileName in Directory.GetFiles(@"\rebex\data\public\Drugstore files\"))
-                    {
-                        if (File.GetCreationTime(fileName).CompareTo(DateTime.Now) < 0)
-                        {
-                            FileInfo fileInfo = new FileInfo(fileName);
-                            string uniqueFileName = fileInfo.Name;
-                            FileCompressionDto fileCompressed = new FileCompressionDto(uniqueFileName, fileInfo);
-                            fileInfos.Add(fileCompressed);
-                            fileDeletionList.Add(fileName);
-
-                        }
-                    }
+                    fileInfos = this.getFilesForCompression(path);
+                    
+                   
 
                     using (var archive = new Archive(new ArchiveEntrySettings()))
                     {
-                        foreach (FileCompressionDto fileInfo in fileInfos)
+                        foreach (FileInfo fileInfo in fileInfos)
                         {
-                            archive.CreateEntry(fileInfo.FileName, fileInfo.FileInfo);
+                            fileDeletionList.Add(fileInfo.FullName);
+                            archive.CreateEntry(fileInfo.Name, fileInfo);
                         }
 
                         archive.Save(file);
@@ -67,25 +59,37 @@ namespace Drugstore.Service
             
         }
         public void Delete(List<string> filesForDeletion)
-        {
+        { 
             foreach (string file in filesForDeletion)
             {
-                
                     File.Delete(file);
             }
         }
         public bool CheckIfThereAreFIlesToCompress(string path)
         {
+            bool result = false;
             foreach (string fileName in Directory.GetFiles(path))
             {
                 if (File.GetCreationTime(fileName).CompareTo(DateTime.Now) < 0)
                 {
-                    return true;
+                    result = true;
                 }
             }
-            return false;
+            return result;
         }
+        public List<FileInfo> getFilesForCompression(string path)
+        {
+            List<FileInfo> fileInfosNew = new List<FileInfo>();
+                foreach (string fileName in Directory.GetFiles(path))
+                {
+                    if (File.GetCreationTime(fileName).CompareTo(DateTime.Now) < 0)
+                    {
+                        FileInfo fileInfo = new FileInfo(fileName);
+                        fileInfosNew.Add(fileInfo);
+                    }
 
- 
+                }
+            return fileInfosNew;
+        }
     }
 }
