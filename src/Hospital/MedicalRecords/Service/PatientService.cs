@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Factory;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Repository;
 using Hospital.SharedModel;
@@ -11,30 +13,72 @@ namespace Hospital.MedicalRecords.Service
         private IPatientRepository PatientRepository { get; }
         private PatientSqlRepository PatientSqlRepository { get; set; }
         private MedicalRecordSqlRepository MedicalRecordRepository { get; set; }
+        public AllergenSqlRepository AllergenRepository { get; set; }
+        private IRepositoryFactory RepositoryFactory { get; }
+
 
         public PatientService(IPatientRepository patientRepository)
         {
             PatientRepository = patientRepository;
         }
 
+        public PatientService(AllergenSqlRepository allergenSqlRepository)
+        {
+            PatientRepository = new PatientSqlRepository();
+            PatientSqlRepository = new PatientSqlRepository();
+            AllergenRepository = allergenSqlRepository;
+
+        }
         public PatientService()
         {
             PatientRepository = new PatientSqlRepository();
+            PatientSqlRepository = new PatientSqlRepository();
+            AllergenRepository = new AllergenSqlRepository();
+
         }
+
+
+        public bool CheckIfExistsById(int id)
+        {
+            bool retVal = false;
+            List<Patient> patients = PatientRepository.GetAll().ToList();
+            foreach (Patient patient in patients)
+            {
+                if (patient.Id == id)
+                    retVal = true;
+
+            }
+            return retVal;
+        }
+
         public PatientService(PatientSqlRepository patientSqlRepository)
         {
             PatientSqlRepository = patientSqlRepository;
+            AllergenRepository = new AllergenSqlRepository();
         }
 
         public Patient GetPatientByJmbg(string jmbg)
         {
             return PatientRepository.GetOne(jmbg);
         }
+        public Patient GetPatientById(int id)
+        {
+            Patient patientFound = PatientSqlRepository.GetOne(id);
+            return patientFound;
+        }
 
         public List<Patient> GetAllPatients()
         {
             return PatientRepository.GetAll();
         }
+
+        public List<string> GetAllergensById(int id)
+        {
+            List<string> allergensOfPatient = AllergenRepository.GetByIdPatient(id);
+            return allergensOfPatient;
+
+        }
+
         public Boolean SavePatient(Patient newPatient)
         {
             return PatientRepository.Save(newPatient);
@@ -102,7 +146,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return notifications;
         }
-        */
+        
 
         private Boolean CanShowNotification(DateTime dateTime)
         {
@@ -142,7 +186,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return notifications;
         }
-
+        
         public Patient Save(Patient patient)
         {
             throw new NotImplementedException();
@@ -203,6 +247,7 @@ namespace Hospital.MedicalRecords.Service
             EditPatient(patient);
         }
 
+        
         public List<MedicineCount> GetMedicineCountForSelectedDate(DateTime startDate, DateTime endDate)
         {
             Dictionary<int, int> medicineCount = CreateMedicineCountDictionary(startDate, endDate);
@@ -218,7 +263,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return medicineTotals;
         }
-
+        
         private Dictionary<int, int> CreateMedicineCountDictionary(DateTime startDate, DateTime endDate)
         {
             List<Patient> allPatients = GetAllPatients();
@@ -231,7 +276,7 @@ namespace Hospital.MedicalRecords.Service
                 {
                     if (IsPrescriptionInTimeInterval(prescription, startDate, endDate))
                     {
-                        var medicineId = prescription.Medicine.MedicineID;
+                        var medicineId = prescription.Medicine.Id;
                         if (medicineCount.ContainsKey(medicineId))
                             medicineCount[medicineId] += 1;
                         else
@@ -259,7 +304,7 @@ namespace Hospital.MedicalRecords.Service
             return sum;
         }
 
-        
+        */
     }
 
 }

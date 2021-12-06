@@ -41,10 +41,10 @@ namespace DrugstoreAPI.Controllers
                         {
                             drugSpecificationService.SaveDrugSpecification(drugSpec.Name, specificationContent);
                             drugSpecificationService.UploadDrugSpecification(drugSpec.Name);
-                            return Ok(true);
+                            return Ok();
                         }
                         else
-                            return Ok(false);
+                            return NoContent();
                     }
                 }
             }
@@ -53,9 +53,12 @@ namespace DrugstoreAPI.Controllers
 
         private string FormatString(string drugName)
         {
-            drugName = drugName.Trim();
-            drugName = char.ToUpper(drugName[0]) + drugName.Substring(1).ToLower();
-            return drugName;
+            if (drugName != "")
+            {
+                drugName = drugName.Trim();
+                drugName = char.ToUpper(drugName[0]) + drugName.Substring(1).ToLower();
+            }
+                return drugName;
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Hospital.MedicalRecords.Model;
+using Hospital.Medicines.Model;
 using Hospital.Schedule.Repository;
 
 namespace Hospital.MedicalRecords.Repository

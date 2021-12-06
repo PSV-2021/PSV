@@ -8,6 +8,7 @@ namespace Drugstore.Models
     {
         public List<ShoppingCartItem> ShoppingCartItems;
         public double TotalPrice { get; set; }
+        public OrderType OrderType { get; set; }
 
         public ShoppingCart()
         {

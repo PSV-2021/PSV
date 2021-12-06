@@ -22,11 +22,8 @@ namespace HospitalApiTests.Integration
         public void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
-
             //builder.UseNpgsql(Constants.ConnectionString);
-
             //context = new MyDbContext(builder.Options);
-
             builder.UseInMemoryDatabase("Base");
             context = new MyDbContext(builder.Options);
         }
@@ -55,30 +52,29 @@ namespace HospitalApiTests.Integration
                 SpecialityId = 1,
                 NumberOfPatients = 1
             });
-                context.Add(new Doctor
-                {
-                    Name = "Milan",
-                    Surname = "Popovic",
-                    Jmbg = "3009998805137",
-                    DateOfBirth = new DateTime(1998, 04, 20),
-                    Sex = Sex.male,
-                    PhoneNumber = "0641664608",
-                    Adress = "Bulevar Oslobodjenja 4",
-                    Email = "milan@gmail.com",
-                    Username = "miki56",
-                    Password = "02145",
-                    Type = UserType.doctor,
-                    SalaryInRsd = 200000,
-                    WorkingSchedule = new List<WorkingHours>(),
-                    VacationDays = new List<VacationDays>(),
-                    AvailableDaysOff = 20,
-                    Id = 2,
-                    SpecialityId = 1,
-                    NumberOfPatients = 5
-                });
-            DoctorSqlRepository doctorSqlRepository = new DoctorSqlRepository(context);
-
-            List<Doctor> retVal = doctorSqlRepository.GetAvalibleGeneralDoctors();
+            context.Add(new Doctor
+            {
+                Name = "Milan", 
+                Surname = "Popovic",
+                Jmbg = "3009998805137",
+                DateOfBirth = new DateTime(1998, 04, 20),
+                Sex = Sex.male,
+                PhoneNumber = "0641664608",
+                Adress = "Bulevar Oslobodjenja 4",
+                Email = "milan@gmail.com",
+                Username = "miki56",
+                Password = "02145",
+                Type = UserType.doctor,
+                SalaryInRsd = 200000,
+                WorkingSchedule = new List<WorkingHours>(),
+                VacationDays = new List<VacationDays>(),
+                AvailableDaysOff = 20,
+                Id = 2,
+                SpecialityId = 1,
+                NumberOfPatients = 5
+            });
+            DoctorsController doctorController = new DoctorsController(context);
+            IActionResult retVal = doctorController.Get();
 
             retVal.Equals(Doctors());
         }
@@ -149,7 +145,6 @@ namespace HospitalApiTests.Integration
             context.Add(new Ingridient(3, "Panadol"));
 
             IngredientsController ingredientsController = new IngredientsController(context);
-
             IActionResult retVal = ingredientsController.Get();
 
             retVal.Equals(Ingridients());
@@ -160,7 +155,6 @@ namespace HospitalApiTests.Integration
             retVal.Add(new object[] { new Ingridient(1, "Panclav") });
             retVal.Add(new object[] { new Ingridient(2, "Penicilin") });
             retVal.Add(new object[] { new Ingridient(3, "Panadol") });
-
             return retVal;
         }
         [Fact]
@@ -169,7 +163,7 @@ namespace HospitalApiTests.Integration
             SetUpDbContext();
             context.Add(new Doctor
             {
-                Id = 2,
+                Id = 1,
                 Name = "Milan",
                 Surname = "Popovic",
                 Jmbg = "3009998805137",
@@ -188,8 +182,8 @@ namespace HospitalApiTests.Integration
                 SpecialityId = 1,
                 NumberOfPatients = 0
             });
-            PatientRegistrationController patientRegistrationController = new PatientRegistrationController(context);
 
+            PatientRegistrationController patientRegistrationController = new PatientRegistrationController(context);
             IActionResult retVal = patientRegistrationController.Post(GeneratePatient());
 
             retVal.Equals(HttpStatusCode.OK);

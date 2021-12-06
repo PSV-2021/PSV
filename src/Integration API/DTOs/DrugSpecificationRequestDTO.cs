@@ -10,9 +10,9 @@ namespace Integration_API.DTOs
         public string PharmacyUrl { get; set; }
         public string Name { get; set; }
 
-        DrugSpecificationRequestDTO() { }
+        public DrugSpecificationRequestDTO() { }
 
-        DrugSpecificationRequestDTO(string pharmacyUrl, string drugName)
+        public DrugSpecificationRequestDTO(string pharmacyUrl, string drugName)
         {
             this.PharmacyUrl = pharmacyUrl;
             this.Name = drugName;

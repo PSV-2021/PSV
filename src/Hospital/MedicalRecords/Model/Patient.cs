@@ -25,7 +25,7 @@ namespace Hospital.MedicalRecords.Model
         public int MedicalRecordId { get; set; }
         public virtual MedicalRecord MedicalRecord { get; set; }
         
-       
+       public String Token { get; set; }
 
         public Patient() { }
         public Patient(string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string emContact, MedicalRecord med, string username, string password, Boolean block = false)

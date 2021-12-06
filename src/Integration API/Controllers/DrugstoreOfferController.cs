@@ -46,10 +46,6 @@ namespace DrugstoreAPI.Controllers
         }
 
 
-        public void Deregister()
-        {
-            this.connection.Close();
-        }
 
         [HttpPost("pls")]
         public IActionResult Post(PublishedOfferDto offer)
@@ -57,11 +53,16 @@ namespace DrugstoreAPI.Controllers
             
             IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(dbContext);
             
-            DrugstoreOffer forEdit = repo.GetOne(offer.OfferId);
-            Console.WriteLine(offer.OfferId);
-            forEdit.IsPublished = true;
-            repo.Update(forEdit);
-            return Ok();
+                DrugstoreOffer forEdit = repo.GetOne(offer.OfferId);
+            if (forEdit != null)
+            {
+                Console.WriteLine(offer.OfferId);
+                forEdit.IsPublished = true;
+                repo.Update(forEdit);
+                return Ok();
+            }
+            else
+                return Unauthorized();
         }
     }
 }

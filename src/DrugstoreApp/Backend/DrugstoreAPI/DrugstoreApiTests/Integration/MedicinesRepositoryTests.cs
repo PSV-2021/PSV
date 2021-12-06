@@ -15,7 +15,7 @@ namespace DrugstoreApiTests.Integration
     public class MedicinesRepositoryTests
     {
         private MyDbContext context;
-        public void SetUpDbContext()
+        private void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
 
@@ -31,9 +31,9 @@ namespace DrugstoreApiTests.Integration
 
              MedicineSqlRepository medicineSqlRepository = new MedicineSqlRepository(context);
 
-             Medicine retVal = medicineSqlRepository.GetByName("Test1");
+             Medicine retVal = medicineSqlRepository.GetByName("Brufen");
 
-             retVal.Name.ShouldBe("Test1");
+             retVal.Name.ShouldBe("Brufen");
         }
 
         [Theory]

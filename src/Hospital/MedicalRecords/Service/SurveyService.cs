@@ -8,41 +8,52 @@ namespace Hospital.MedicalRecords.Service
 {
     public class SurveyService
     {
-        private ISurveyRepository SurveyRepository { get; set; }
+        private SurveySqlRepository SurveyRepository { get; set; }
+        private ISurveyRepository ISurveyRepository { get; set; }
+        private SurveyQuestionSqlRepository SurveyQuestionRepository { get; set; }
 
-        public SurveyService(ISurveyRepository surveyRepository)
+        public SurveyService(SurveySqlRepository surveyRepository)
         {
             SurveyRepository = surveyRepository;
         }
 
+        public SurveyService(ISurveyRepository IsurveyRepository)
+        {
+            ISurveyRepository = IsurveyRepository;
+        }
+
+        public SurveyService(SurveyQuestionSqlRepository SurveyQuestionSqlRepository)
+        {
+            SurveyQuestionRepository = SurveyQuestionSqlRepository;
+        }
+
         public bool CheckIfExistsById(int id)
         {
-            bool retVal = false;
-            List<Survey> surveys = SurveyRepository.GetAll().ToList();
+            List<Survey> surveys = ISurveyRepository.GetAll().ToList();
             foreach (Survey s in surveys)
             {
                 if (s.AppointmentId == id)
-                    retVal = true;
+                    return true;
                 
             }
-            return retVal;
+            return false;
         }
 
-        public void CreateSurvey(List<int> surveyQuestions, List<int> surveyAnswers)
+        public void CreateSurvey(List<AnsweredQuestion> answeredQuestion)
         {
             /*
             if (!CheckIfExistsById(appointmentId))
             {
                 return null;
-            }*/
-            Survey survey = new Survey();
-            survey.PatientId = 1;  //Ove vrednosti se moraju posle promeniti
-            survey.Date = DateTime.Now;
-            survey.AppointmentId = 3; //Ove vrednosti se moraju posle promeniti
-            survey.SurveyQuestions = surveyQuestions;
-            survey.SurveyAnswers = surveyAnswers;
-            SurveyRepository.CreateSurvey(survey);
+            }
+            */
+            SurveyRepository.CreateSurvey(answeredQuestion);
 
+        }
+
+        public List<SurveyQuestion> GetAll()
+        {
+            return SurveyQuestionRepository.GetAll();
         }
 
     }
