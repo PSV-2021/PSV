@@ -9,6 +9,7 @@ using Xunit;
 
 namespace IntegrationApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class PrescriptionTests
     {
         [Fact]

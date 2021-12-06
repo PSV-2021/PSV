@@ -54,10 +54,19 @@ namespace Integration.Service
             return DrugstoreRepository.GetDrugstoreName(id);
         }
 
+        public Drugstore GetDrugstoreById(int id)
+        {
+            return DrugstoreRepository.GetOne(id);
+        }
+
         public void AddNewDrugstore(Drugstore ds)
         {
             DrugstoreRepository.Save(ds);
         }
 
+        public void Update(Drugstore edit)
+        {
+            DrugstoreRepository.Update(edit);
+        }
     }
 }

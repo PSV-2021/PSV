@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntegrationApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class DrugsConsumptionReportTests
     {
         private MyDbContext context;

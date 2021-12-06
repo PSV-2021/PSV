@@ -19,6 +19,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
+import { DrugstoreComponent } from './drugstore/drugstore.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     PurchaseDrugsComponent,
     DrugstoreOfferComponent,
     DrugsConsumptionComponent,
+    AllDrugstoresComponent,
+    DrugstoreComponent,
   ],
   imports: [
     BrowserModule,
