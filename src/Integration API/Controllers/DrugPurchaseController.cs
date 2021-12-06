@@ -13,6 +13,7 @@ using Hospital.Medicines.Service;
 using Hospital.Medicines.Repository.Sql;
 using Grpc.Net.Client;
 using DrugstoreAPI;
+using Grpc.Core;
 
 namespace Integration_API.Controllers
 {
@@ -32,19 +33,23 @@ namespace Integration_API.Controllers
         [HttpPut]
         public IActionResult Put(DrugAmountDemandDto demand)
         {
-            drugDemandGrpc();
+            if (drugDemandGrpc(demand))
+            {
+                return Ok();
+            }
+            
 
-            var client = new RestClient(demand.PharmacyUrl);
-            var request = new RestRequest("/api/drugDemand", Method.POST);
+            //var client = new RestClient(demand.PharmacyUrl);
+            //var request = new RestRequest("/api/drugDemand", Method.POST);
 
-            SetApiKeyInHeader(demand, request);
+            //SetApiKeyInHeader(demand, request);
 
-            SetRequestBody(demand, request);
+            //SetRequestBody(demand, request);
 
-            IRestResponse response = client.Execute(request);
+            //IRestResponse response = client.Execute(request);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return Ok(Boolean.Parse(response.Content));
+            //if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            //    return Ok(Boolean.Parse(response.Content));
 
             return Unauthorized(false);
         }
@@ -102,16 +107,27 @@ namespace Integration_API.Controllers
             request.AddHeader("ApiKey", ApiKey);
         }
 
-        static async Task drugDemandGrpc()
+        public bool drugDemandGrpc(DrugAmountDemandDto demand)
         {
-            var channel = GrpcChannel.ForAddress("http://localhost:5001");
+            var input = new HelloRequest { Name = "ali preko gRPC" };
+            var channel = new Channel("127.0.0.1:4111", ChannelCredentials.Insecure);
             var client = new Greeter.GreeterClient(channel);
 
-            var response = await client.SayHelloAsync(new HelloRequest
+            var response = client.SayHello(input);
+           Console.WriteLine("From server: " + response.Message);
+
+            if (response.Message.Equals("OK"))
             {
-                Name = ".NET Conf"
-            });
-            Console.WriteLine("From server: " + response.Message);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+        //private static async Task drugDemandAsync(HelloRequest input)
+        //{
+        //    return await 
+        //}
     }
 }
