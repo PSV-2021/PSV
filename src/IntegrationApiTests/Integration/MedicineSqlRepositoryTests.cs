@@ -12,6 +12,7 @@ using Hospital.SharedModel;
 
 namespace IntegrationApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class MedicineSqlRepositoryTests
     {
         private MyDbContext context;
