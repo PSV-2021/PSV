@@ -16,16 +16,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v1.7.2
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        working-directory: src/DrugstoreApp/Backend/DrugstoreAPI
-        run: dotnet restore 
+        run: dotnet restore src/DrugstoreApp/Backend/DrugstoreAPI
       - name: Build
-        working-directory: src/DrugstoreApp/Backend/DrugstoreAPI
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build src/DrugstoreApp/Backend/DrugstoreAPI --configuration Release --no-restore
       - name: Test
-        working-directory: src/DrugstoreApp/Backend/DrugstoreAPI
-        run: dotnet test --filter Type=UnitTest --no-restore
+        run: dotnet test src/DrugstoreApp/Backend/DrugstoreAPI --filter Type=UnitTest 
