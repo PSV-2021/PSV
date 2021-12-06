@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
         dotnet-version: ['5.0.402' ]
@@ -20,10 +20,7 @@ jobs:
         uses: actions/setup-dotnet@v1.7.2
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Setup .NET Core SDK 3.0.
-        uses: actions/setup-dotnet@v1.7.2
-        with:
-          dotnet-version: '3.0.1'
+    
       - name: Install dependencies
         run: dotnet restore src/DrugstoreApp/Backend/DrugstoreAPI
       - name: Build
