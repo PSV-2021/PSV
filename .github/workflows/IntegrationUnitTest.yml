@@ -1,11 +1,8 @@
 name: IntegrationUnitTests
 
 on:
-  push:
-    paths: 
-      - "src/Integration/**"
-      - "src/\"Integration API\"/**"
-      - "src/IntegrationApiTests/**"
+  pull_request: 
+    branches: [ development ]
 jobs:
   build:
     runs-on: windows-latest
