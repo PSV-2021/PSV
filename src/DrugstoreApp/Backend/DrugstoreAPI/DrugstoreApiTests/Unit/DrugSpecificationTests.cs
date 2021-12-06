@@ -9,7 +9,7 @@ using System.Net.Sockets;
 
 namespace DrugstoreApiTests.Unit
 {
-    [Trait("Type", "UnitTest")]
+    
     public class DrugSpecificationTests
     {
 
