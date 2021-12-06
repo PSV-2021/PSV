@@ -91,6 +91,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Integration\Integration.csproj" />
+    <ProjectReference Include="..\Hospital\Hospital.csproj" />
   </ItemGroup>
 
 
