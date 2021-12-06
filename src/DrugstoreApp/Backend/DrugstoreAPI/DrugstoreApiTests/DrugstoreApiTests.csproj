@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Aspose.Zip" Version="21.11.0" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="ncrontab" Version="3.3.1" />

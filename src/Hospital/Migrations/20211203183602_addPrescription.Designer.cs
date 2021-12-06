@@ -3,15 +3,17 @@ using System;
 using Hospital.SharedModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211203183602_addPrescription")]
+    partial class addPrescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,64 +123,6 @@ namespace Hospital.Migrations
                         {
                             Id = 1,
                             HealthInsuranceNumber = "1ab"
-                        });
-                });
-
-            modelBuilder.Entity("Hospital.MedicalRecords.Model.Medicine", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Manufacturer")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MedicineImage")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Precautions")
-                        .HasColumnType("text");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("Reactions")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SideEffects")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Supply")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Usage")
-                        .HasColumnType("text");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medicines");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Manufacturer = "Pfizer",
-                            MedicineImage = "",
-                            Name = "Brufen",
-                            Precautions = "Mozes sve lagano",
-                            Price = 200.0,
-                            Reactions = "Pa umres",
-                            SideEffects = "Umres",
-                            Supply = 100,
-                            Usage = "Kad god hoces",
-                            Weight = 100.0
                         });
                 });
 
@@ -483,7 +427,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 616, DateTimeKind.Local).AddTicks(3795),
+                            TimeWritten = new DateTime(2021, 12, 3, 19, 36, 1, 818, DateTimeKind.Local).AddTicks(5473),
                             canPublish = false
                         },
                         new
@@ -491,7 +435,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 618, DateTimeKind.Local).AddTicks(9722),
+                            TimeWritten = new DateTime(2021, 12, 3, 19, 36, 1, 820, DateTimeKind.Local).AddTicks(9229),
                             canPublish = true
                         },
                         new
@@ -499,7 +443,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 618, DateTimeKind.Local).AddTicks(9798),
+                            TimeWritten = new DateTime(2021, 12, 3, 19, 36, 1, 820, DateTimeKind.Local).AddTicks(9304),
                             canPublish = true
                         });
                 });

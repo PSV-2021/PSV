@@ -19,7 +19,7 @@ namespace DrugstoreApiTests.Integration
         public DrugstoreOfferDto drugstoreOfferDto = new DrugstoreOfferDto("12","brufen na akciji","Akcija", DateTime.Now, DateTime.Now, "Apoteka");
 
         private MyDbContext context;
-        public void SetUpDbContext()
+        private void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
 
