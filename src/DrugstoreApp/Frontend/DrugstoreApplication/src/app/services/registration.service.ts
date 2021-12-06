@@ -12,10 +12,10 @@ import { RegistrationDto } from '../registration/registration.dto';
 export class RegistrationService {
     url: string;
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:1234/registration/" //ovo ne znam posto ne pisem ja backend za sad
+        this.url = "http://"+location.hostname+":8081/registration/" //ovo ne znam posto ne pisem ja backend za sad
     }
 
     registerNewHospital(hospital: RegistrationDto): Observable<string> {
-        return this.http.post<string>(this.url + '/new', hospital);
+        return this.http.post<string>(this.url, hospital);
     }
 }

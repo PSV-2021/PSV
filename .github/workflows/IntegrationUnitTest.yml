@@ -4,7 +4,7 @@ on:
   push:
     paths: 
       - "src/Integration/**"
-      - "src/IntegrationAPI/**"
+      - "src/\"Integration API\"/**"
       - "src/IntegrationApiTests/**"
 jobs:
   build:
@@ -20,8 +20,8 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        run: dotnet restore src/IntegrationAPI
+        run: dotnet restore src/\"Integration API\"
       - name: Build
-        run: dotnet build src/IntegrationAPI --configuration Release --no-restore
+        run: dotnet build src/\"Integration API\" --configuration Release --no-restore
       - name: Test
-        run: dotnet test src/IntegrationAPI --filter Type=UnitTest --no-restore --verbosity normal
+        run: dotnet test src/\"Integration API\" --filter Type=UnitTest --no-restore --verbosity normal
