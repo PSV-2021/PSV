@@ -12,7 +12,7 @@ namespace HospitalApiTests.Integration
     [Trait("Type", "IntegrationTest")]
     public class PrescriptionTests
     {
-        [Fact]
+        /*[Fact]
         public void Check_if_drug_doesnt_exists_in_this_drugstore()
         {
             var httpContext = new DefaultHttpContext();
@@ -50,7 +50,7 @@ namespace HospitalApiTests.Integration
         public void Check_if_everything_is_ok()
         {
             var httpContext = new DefaultHttpContext();
-            var controler = new PrescriptionController
+           var controler = new PrescriptionController
             {
                 ControllerContext = new ControllerContext
                 {
@@ -61,6 +61,6 @@ namespace HospitalApiTests.Integration
             var result = controler.QrPrescription(new PrescriptionDto("http://localhost:5001", "Brufen",
                 "Some description...", "Zvonko Zvonkovic"));
             Assert.IsType<OkObjectResult>(result);
-        }
+        }*/
     }
 }
