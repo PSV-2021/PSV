@@ -23,6 +23,7 @@ namespace HospitalAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddDbContext<MyDbContext>(options =>
               options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
