@@ -9,8 +9,10 @@ using System.Net.Sockets;
 
 namespace DrugstoreApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class DrugSpecificationTests
     {
+
         [Theory]
         [MemberData(nameof(FileNames))]
         public void Upload_drugs_consumption_report(string fileName, bool expectedOutcome)
