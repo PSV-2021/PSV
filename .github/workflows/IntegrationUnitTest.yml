@@ -4,7 +4,7 @@ on:
   push:
     paths: 
       - "src/Integration/**"
-      - "src/IntegrationAPI/**"
+      - "src/\"Integration API\"/**"
       - "src/IntegrationApiTests/**"
 jobs:
   build:
