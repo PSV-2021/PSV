@@ -52,9 +52,6 @@ namespace Hospital.SharedModel
             modelBuilder.Entity<VacationDays>().HasData(
                new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25) }
                );
-            modelBuilder.Entity<Appointment>().HasData(
-              new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false}
-              );
             modelBuilder.Entity<WorkingHours>().HasData(
                new WorkingHours { Id = 1, BeginningDate = new DateTime(2021, 01, 01), Shift = Shift.firstShift, EndDate = new DateTime(2021, 01, 08) }
                );
@@ -152,8 +149,10 @@ namespace Hospital.SharedModel
                 new SurveyQuestion { Id = 14, Text = "How likely are you to recommend our hospital to a friend or family member?", Rating = 0, QuestionType = 2 }
             );
             modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
-        
-    }
+            modelBuilder.Entity<Appointment>().HasData(
+              new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false }
+              );
+        }
 
     }
 }
