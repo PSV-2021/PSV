@@ -7,7 +7,7 @@ using Hospital.SharedModel;
 
 namespace Hospital.Schedule.Service
 {
-    public class DoctorService
+    public class DoctorService : IDoctorService
     {
         private IDoctorRepository DoctorRepository { get; }
 

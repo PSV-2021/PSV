@@ -20,6 +20,7 @@ namespace HospitalApiTests.Unit
         {
             var doctorWorkingHoursRepository = CreateDoctorWorkingHoursStubRepository();
             var appointmentRepository = CreateAppointmentStubRepository();
+            //var doctorService = CreateDoctorService();
             var doctorRepository = CreateDoctorStubRepository();
             var searchAppointments = CreateSearchAppointmentsDTOSuccess();
 
@@ -54,7 +55,7 @@ namespace HospitalApiTests.Unit
             AppointmentService appointmentService = new AppointmentService(doctorWorkingHoursRepository, appointmentRepository, null);
 
             var workDay = appointmentService.GetAvailable(1, new DateTime(2021, 12, 12));
-            workDay.Count.ShouldBe(1);
+            workDay.Count.ShouldBe(3);
         }
 
         /*
@@ -86,13 +87,9 @@ namespace HospitalApiTests.Unit
         {
             List<WorkingHours> doctorWorkingHours = new List<WorkingHours>();
 
-            WorkingHours day1 = new WorkingHours{ Id = 1, BeginningDate = new DateTime(2021, 12, 12, 7, 0, 0), EndDate = new DateTime(2021, 12, 12, 15, 0, 0) };
-            WorkingHours day2 = new WorkingHours { Id = 2, BeginningDate = new DateTime(2021, 12, 13, 7, 0, 0), EndDate = new DateTime(2021, 12, 13, 15, 0, 0) };
-            WorkingHours day3 = new WorkingHours { Id = 3, BeginningDate = new DateTime(2021, 12, 14, 7, 0, 0), EndDate = new DateTime(2021, 12, 14, 15, 0, 0) };
+            WorkingHours day1 = new WorkingHours{ Id = 1, BeginningDate = new DateTime(2021, 12, 12), EndDate = new DateTime(2021, 12, 16)};
 
             doctorWorkingHours.Add(day1);
-            doctorWorkingHours.Add(day2);
-            doctorWorkingHours.Add(day3);
 
             return doctorWorkingHours;
         }
@@ -212,8 +209,8 @@ namespace HospitalApiTests.Unit
                 WorkingHoursId = 1
 
             };
-            doctors.Add(doctor2);
             doctors.Add(doctor1);
+            doctors.Add(doctor2);
 
             return doctors;
         }
@@ -242,6 +239,15 @@ namespace HospitalApiTests.Unit
                 SpecializationId = 1
             };
 
+        }
+
+        public IDoctorService CreateDoctorService()
+        {
+            var doctorStubRepository = CreateDoctorStubRepository();
+
+            DoctorService doctorService = new DoctorService(doctorStubRepository);
+
+            return doctorService;
         }
 
     }

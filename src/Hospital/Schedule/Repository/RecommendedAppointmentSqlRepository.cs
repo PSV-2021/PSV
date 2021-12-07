@@ -16,6 +16,11 @@ namespace Hospital.Schedule.Repository
             this.context = context;
         }
 
+        public RecommendedAppointmentSqlRepository()
+        {
+            
+        }
+
         public bool Delete(int id)
         {
             throw new NotImplementedException();

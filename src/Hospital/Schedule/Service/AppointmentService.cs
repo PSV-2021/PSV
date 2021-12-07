@@ -21,9 +21,12 @@ namespace Hospital.Schedule.Service
         private EventsLogService EventsLogService { get; set; }
         private RecommendedAppointmentSqlRepository RecommendedAppointmentSqlRepository { get; set; }
         private WorkingHoursSqlRepository WorkingHoursSqlRepository { get; set; }
+        private DoctorSqlRepository DoctorSqlRepository { get; set; }
 
-        IWorkingHoursRepository WorkingHoursRepository;
-        IDoctorRepository DoctorRepository;
+        private IWorkingHoursRepository IWorkingHoursRepository { get; set; }
+        private IDoctorRepository IDoctorRepository { get; set; }
+        private IDoctorService IDoctorService { get; set; }
+        private DoctorService DoctorService { get; set; }
 
         public AppointmentService()
         {
@@ -42,12 +45,26 @@ namespace Hospital.Schedule.Service
             RecommendedAppointmentSqlRepository = recommendedAppointmentSqlRepository;
             WorkingHoursSqlRepository = workingHoursSqlRepository;
         }
+        /*
+        public AppointmentService(IWorkingHoursRepository doctorWorkingHoursRepository, IAppointmentRepository appointmentRepository, IDoctorService doctorRepository)
+        {
+            IWorkingHoursRepository = doctorWorkingHoursRepository;
+            AppointmentRepository = appointmentRepository;
+            IDoctorService = doctorRepository;
+        }
+        */
+        public AppointmentService(WorkingHoursSqlRepository doctorWorkingHoursRepository, RecommendedAppointmentSqlRepository appointmentRepository, DoctorService doctorRepository)
+        {
+            WorkingHoursSqlRepository = doctorWorkingHoursRepository;
+            RecommendedAppointmentSqlRepository = appointmentRepository;
+            DoctorService = doctorRepository;
+        }
 
         public AppointmentService(IWorkingHoursRepository doctorWorkingHoursRepository, IAppointmentRepository appointmentRepository, IDoctorRepository doctorRepository)
         {
-            WorkingHoursRepository = doctorWorkingHoursRepository;
+            IWorkingHoursRepository = doctorWorkingHoursRepository;
             AppointmentRepository = appointmentRepository;
-            DoctorRepository = doctorRepository;
+            IDoctorRepository = doctorRepository;
         }
 
         // Sekretar*******************************************************************************
