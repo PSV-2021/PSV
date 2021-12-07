@@ -24,7 +24,7 @@ namespace HospitalAPI.Controllers
             observeAppointmentsService = new ObserveAppointmentsService(new ObserveAppointmentsSqlRepository(context));
         }
         [HttpGet]
-        public IActionResult Get(string id)
+        public IActionResult Get([FromQuery]string id)
         {
             int idPatient = Int32.Parse(id);
             List<Appointment> appointments = observeAppointmentsService.GetAppointmentsById(idPatient);

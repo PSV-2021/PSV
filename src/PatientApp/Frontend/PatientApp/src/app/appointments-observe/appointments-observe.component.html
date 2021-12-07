@@ -1,0 +1,31 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="start time">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Start Time </th>
+      <td mat-cell *matCellDef="let element"> {{element.startTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.apointmentDescription}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="doctor">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Doctor </th>
+      <td mat-cell *matCellDef="let element"> {{element.doctorName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="survey">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Survey</th>
+      <td mat-cell *matCellDef="let element"><button>Take survey</button> </td>
+      
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

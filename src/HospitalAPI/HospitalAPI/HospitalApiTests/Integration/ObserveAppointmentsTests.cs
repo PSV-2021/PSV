@@ -4,6 +4,7 @@ using Hospital.SharedModel;
 using HospitalAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,6 +55,7 @@ namespace HospitalApiTests.Integration
             ObserveAppointmentsController observeAppointmentsController = new ObserveAppointmentsController(context);
             IActionResult retVal = observeAppointmentsController.Get(patient.Id.ToString());
 
+            retVal.ShouldNotBeNull();
             retVal.Equals(Appointments());
         }
         public static IEnumerable<object[]> Appointments()
