@@ -1,41 +1,46 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="box">
       <mat-card-header>
-        <mat-card-title>Recommended appointment</mat-card-title>
+        <mat-card-title>Recommended appointments</mat-card-title>
       </mat-card-header>
-      <form #f="ngForm" class="example-form">
-        <div class="example-container">            
+      <form #f="ngForm" [formGroup]="recommendForm" class="example-form">
+        <div class="example-container">   
             <mat-form-field appearance="fill" class="width-100">
-                <mat-label>Enter a date range</mat-label>
-                    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-                        <input matStartDate formControlName="start" placeholder="Start date">
-                        <input matEndDate formControlName="end" placeholder="End date">
-                    </mat-date-range-input>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate formControlName="startDate" placeholder="Start date" [(ngModel)]="appointment.startDate">
+                <input matEndDate formControlName="endDate" placeholder="End date" [(ngModel)]="appointment.endDate">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+              <mat-error *ngIf="hasError('startDate', 'required')">Date is required</mat-error>
+              <mat-error *ngIf="hasError('endDate', 'required')">Date is required</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="width-100">
-                <mat-label>Doctor</mat-label>
-                <mat-select>
-                    <mat-option>
-                      
+                <mat-label>Chosen doctor</mat-label>
+                <mat-select formControlName="doctor" [(ngModel)]="selectedDoctor.name" required>
+                    <mat-option *ngFor="let doctor of doctors" [value]="doctor.nameAndSurname">
+                      {{doctor.nameAndSurname}}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="hasError('doctor', 'required')">Doctor is required</mat-error>
             </mat-form-field>
 
+            
             <p>Select priority</p>
-            <mat-radio-group aria-label="Select">
-                <mat-radio-button [value]=1>Doctor</mat-radio-button>
+            <mat-radio-group formControlName="priority" [(ngModel)]="appointment.priority">
+                <mat-radio-button [value]=1 checked="true">Doctor</mat-radio-button>
                 <mat-radio-button [value]=2>Date</mat-radio-button>
             </mat-radio-group>
+          
 
             <br>
             <br>
                         
         </div> 
         
-        <button mat-stroked-button color="accent" class="btn-block">Find</button>
+        <button mat-stroked-button color="accent" class="btn-block" (click)="onSubmit()">Find</button>
   
       </form>
     </mat-card>
