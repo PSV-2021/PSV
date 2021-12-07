@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hospital.Schedule.Repository;
+using System.Globalization;
 
 namespace HospitalAPI.Controllers
 {
@@ -26,8 +27,8 @@ namespace HospitalAPI.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult Get(SearchAppointmentsDTO searchAppointments)
+        [HttpPost]
+        public IActionResult Post(SearchAppointmentsDTO searchAppointments)
         {
             List<Appointment> appointments = appointmentService.GetAvailableAppointment(searchAppointments).ToList();
             List<AvailableAppointmentsDTO> dto = AppointmentService.AvailableAppointmentsDTODoctor(appointments);

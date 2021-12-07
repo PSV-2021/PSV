@@ -6,5 +6,7 @@ namespace Hospital.Schedule.Repository
     public interface IDoctorRepository : IGenericRepository<Doctor, string>
     {
         List<Doctor> GetDoctorsWithSpeciality(Speciality speciality);
+
+        public Doctor GetDoctorBy(int id);
     }
 }

@@ -219,8 +219,8 @@ namespace HospitalApiTests.Unit
         {
             return new SearchAppointmentsDTO
             {               
-                StartInterval = new DateTime(2021, 12, 12),
-                EndInterval = new DateTime(2021, 12, 16),
+                StartInterval = "12/12/2021",
+                EndInterval = "12/16/2021",
                 DoctorId = 1,
                 Priority = 1,
                 SpecializationId = 1
@@ -232,8 +232,8 @@ namespace HospitalApiTests.Unit
         {
             return new SearchAppointmentsDTO
             {
-                StartInterval = new DateTime(2021, 12, 17),
-                EndInterval = new DateTime(2021, 12, 19),
+                StartInterval = "12/17/2021",
+                EndInterval = "12/19/2021",
                 DoctorId = 1,
                 Priority = 1,
                 SpecializationId = 1

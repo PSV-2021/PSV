@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import { RecommendAppointmentService } from '../service/recommend-appointment.service';
 import { RecommendAppointmentDto } from './recommend-appointment-dto';
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AvailableRecommendedAppointments } from './available-recommended-appointments';
 
 export interface SelectedDoctor{
   name: string;
@@ -27,6 +28,7 @@ export class RecommendAppointmentComponent implements OnInit {
   doctors: any[]=[];
   selectedDoctor: SelectedDoctor = {name: ""};
   recommendForm: FormGroup;
+  appointmentsRecomended: AvailableRecommendedAppointments[] = new Array();
 
   appointment: RecommendedAppointment = {startDate: new Date(),endDate: new Date(), doctorId: 0, specializationId: 0, priority: 1};
   public returnAppointment: RecommendAppointmentDto;
@@ -35,7 +37,7 @@ export class RecommendAppointmentComponent implements OnInit {
     this.returnAppointment = new RecommendAppointmentDto(); 
     this.recommendForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
-  });
+    });
   }
 
   get f() { return this.recommendForm.controls; }
@@ -74,26 +76,31 @@ export class RecommendAppointmentComponent implements OnInit {
     console.log(this.returnAppointment.DoctorId);
     console.log(this.returnAppointment.SpecializationId);
     console.log(this.returnAppointment.Priority);
-    console.log(this.returnAppointment.StartDate);
-    console.log(this.returnAppointment.EndDate);
+    console.log(this.returnAppointment.StartInterval);
+    console.log(this.returnAppointment.EndInterval);
 
-    /*
+    console.log(this.returnAppointment);
+
+    
     this.recommendAppointmentService.FindAppointments(this.returnAppointment).subscribe((data: any)=>{
       this._snackBar.open('Appointments found!', '', {
         duration: 2000
       });
-    });*/
-     
-   }
+      this.appointmentsRecomended = data;
+    });
 
-   PrepareDTO(){
+    console.log(this.appointmentsRecomended);
+     
+  }
+
+  PrepareDTO(){
     this.returnAppointment.Priority = this.appointment.priority;
 
-    const format = "MM/dd/yyyy HH:mm:ss"
+    const format = "MM/dd/yyyy HH:mm:ss a"
 
-    this.returnAppointment.StartDate = formatDate(this.appointment.startDate, format, "en-US")
-    this.returnAppointment.EndDate = formatDate(this.appointment.endDate, format, "en-US")
-  
+    this.returnAppointment.StartInterval = formatDate(this.appointment.startDate, format, "en-US");
+    this.returnAppointment.EndInterval = formatDate(this.appointment.endDate, format, "en-US");
+
   }
 
 }

@@ -15,13 +15,8 @@ export class RecommendAppointmentService {
   GetAllDoctors(): Observable<any> {
     return this.http.get<any>(this.url + '/doctors/findDoctors');
   }
-  /*
+  
   FindAppointments(appointment: RecommendAppointmentDto): Observable<any>{
-    const body = {
-      appointment: appointment
-    }
-    const ret = this.http.get<any>(this.url + "/recommendedAppointment", appointment);
-    
-    return ret;
-  }*/
+    return this.http.post<any>(this.url + "/recommendedAppointment", appointment);
+  }
 }

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Hospital.Schedule.Repository
 {
-    public class DoctorFileRepository:IDoctorRepository
+    public class DoctorFileRepository: IDoctorRepository
     {
         public String FileName { get; set; }
 
@@ -125,6 +125,11 @@ namespace Hospital.Schedule.Repository
             catch
             {
             }
+        }
+
+        public Doctor GetDoctorBy(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

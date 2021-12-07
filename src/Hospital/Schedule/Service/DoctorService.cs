@@ -56,6 +56,11 @@ namespace Hospital.Schedule.Service
             return DoctorRepository.GetDoctorsWithSpeciality(speciality);
         }
 
+        public Doctor GetDoctorBy(int id)
+        {
+            return DoctorRepository.GetDoctorBy(id);
+        }
+
         public Boolean EditDoctor(Doctor editedDoctor)
         {
             Doctor doctor = SortWorkingHoursForDoctor(editedDoctor);

@@ -766,6 +766,16 @@ namespace Hospital.Schedule.Service
                 appointments = UseStrategy(searchAppointments);               
             }
 
+            return AddDoctors(appointments);
+        }
+
+        public List<Appointment> AddDoctors(List<Appointment> appointments)
+        {
+            foreach (Appointment appointment in appointments)
+            {
+                appointment.Doctor = IDoctorService.GetDoctorBy(appointment.DoctorId);
+            }
+
             return appointments;
         }
 
@@ -788,8 +798,8 @@ namespace Hospital.Schedule.Service
 
         public List<Appointment> AvailableDoctorAndDateRange(SearchAppointmentsDTO searchAppointments)
         {
-            DateTime start = searchAppointments.StartInterval;
-            DateTime end = searchAppointments.EndInterval;
+            DateTime start = DateTime.Parse(searchAppointments.StartInterval);
+            DateTime end = DateTime.Parse(searchAppointments.EndInterval);
 
             List<Appointment> availableAppointments = new List<Appointment>();
 
@@ -863,8 +873,8 @@ namespace Hospital.Schedule.Service
         //potrebno dodati i za ostale doktore iste specijalizacije
         public List<Appointment> AppointmentsBeforeDate(SearchAppointmentsDTO searchAppointments)
         {
-            DateTime startDate = searchAppointments.StartInterval.Date.AddDays(-1);
-            DateTime minDate = searchAppointments.EndInterval.Date.AddDays(-5);
+            DateTime startDate = DateTime.Parse(searchAppointments.StartInterval).Date.AddDays(-1);
+            DateTime minDate = DateTime.Parse(searchAppointments.EndInterval).Date.AddDays(-5);
 
             List<Appointment> allAvailableAppointments = new List<Appointment>();
 
@@ -880,8 +890,8 @@ namespace Hospital.Schedule.Service
         //potrebno dodati i za ostale doktore iste specijalizacije
         public List<Appointment> AppointmentsAfterDate(SearchAppointmentsDTO searchAppointments)
         {
-            DateTime endDate = searchAppointments.StartInterval.Date.AddDays(1);
-            DateTime maxDate = searchAppointments.EndInterval.Date.AddDays(5);
+            DateTime endDate = DateTime.Parse(searchAppointments.StartInterval).Date.AddDays(1);
+            DateTime maxDate = DateTime.Parse(searchAppointments.EndInterval).Date.AddDays(5);
 
             List<Appointment> allAvailableAppointments = new List<Appointment>();
 
