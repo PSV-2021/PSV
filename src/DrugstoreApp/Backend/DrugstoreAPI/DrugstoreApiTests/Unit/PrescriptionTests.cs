@@ -13,6 +13,7 @@ using Xunit;
 
 namespace DrugstoreApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class PrescriptionTests
     {
         [Fact]
