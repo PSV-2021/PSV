@@ -19,6 +19,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FilesComponent } from './files/files.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     PurchaseDrugsComponent,
     DrugstoreOfferComponent,
     DrugsConsumptionComponent,
+    FilesComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

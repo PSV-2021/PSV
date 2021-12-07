@@ -1,4 +1,5 @@
-﻿using Renci.SshNet;
+﻿using Integration.Drugs.DTOs;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +50,34 @@ namespace Integration.Drugs.Service
         {
             string[] absolute = Directory.GetCurrentDirectory().Split("src");
             return Path.Combine(absolute[0], "src\\Integration\\Drugs Specifications\\" + fileName);
+        }
+
+        public List<FileInfoDto> GetFiles()
+        {
+            List<FileInfoDto> filenames = new List<FileInfoDto>();
+            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\Rebex\\data\\public\\Hospital files");
+            FileInfo[] Files = d.GetFiles("*.pdf");
+            foreach (FileInfo file in Files)
+            {
+                if (IsFileDownloaded(file.Name))
+                    filenames.Add(new FileInfoDto(file.Name, true));
+                else
+                    filenames.Add(new FileInfoDto(file.Name, false));
+            }
+            return filenames;
+        }
+
+        public bool IsFileDownloaded(string filename)
+        {
+            bool retVal = false;
+            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\Integration\\Drugs Specifications");
+            FileInfo[] Files = d.GetFiles("*.pdf");
+            foreach (FileInfo file in Files)
+            {
+                if (file.Name.Equals(filename))
+                    retVal = true;
+            }
+            return retVal;
         }
     }
 }

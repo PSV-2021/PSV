@@ -7,6 +7,7 @@ import { PurchaseDrugsComponent } from './purchase-drugs/purchase-drugs.componen
 import { RegistrationComponent } from './registration/registration.component';
 import { ReviewComponent } from './review/review.component';
 import { DrugsConsumptionComponent } from './drugs-consumption-specs/drugs-consumption.component';
+import { FilesComponent } from './files/files.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'feedbacks', component: FeedbacksComponent},
   { path: 'landingPage', component: LandingPageComponent},
   { path: 'purchase', component: PurchaseDrugsComponent},
+  { path: 'files', component: FilesComponent},
   { path: 'drugstore-offer', component: DrugstoreOfferComponent},
   { path: 'drugs-consumption', component: DrugsConsumptionComponent},
   { path: '', redirectTo: 'landingPage', pathMatch: 'full' },

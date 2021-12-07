@@ -1,0 +1,18 @@
+<div class="container-fluid">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col" style="font-size: large;" >File name</th>
+        <th scope="col" style="font-size: large;">Download</th>
+        <th scope="col" style="font-size: large;">Open</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files; let i = index">
+        <td style="font-size: large;">{{ file.Name }}</td>
+        <td><button type="button" [disabled]="file.Downloaded" (click)="downloadFile(file.Name)" class="btn btn-secondary">Download</button></td>
+        <td><button type="button" [disabled]="!file.Downloaded" (click)="openFile(file.Name)"  class="btn btn-danger">Open</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
