@@ -11,8 +11,9 @@ using System.Net.Sockets;
 using Model.DataBaseContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace IntegrationApiTests.Unit
+namespace IntegrationApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class DrugsConsumptionReportTests
     {
         private MyDbContext context;
