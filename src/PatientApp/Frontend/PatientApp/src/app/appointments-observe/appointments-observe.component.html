@@ -31,7 +31,7 @@
 
     <ng-container matColumnDef="survey">
       <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Survey</th>
-      <td mat-cell *matCellDef="let element"><button>Take survey</button> </td>
+      <td mat-cell *matCellDef="let element"><button *ngIf="element.isCancelled==false && element.status!==2">Take survey</button> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
