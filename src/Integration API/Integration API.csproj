@@ -14,6 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Protos\drugPurchase.proto" />
+    <None Remove="Protos\greet.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="packages.config" />
   </ItemGroup>
 
@@ -107,11 +112,9 @@
     <Folder Include="GRPC\" />
   </ItemGroup>
 
+
   <ItemGroup>
-    <Protobuf Include="..\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreAPI\Protos\greet.proto" GrpcServices="Client">
-      <Link>Protos\greet.proto</Link>
-    </Protobuf>
+    <Protobuf Include="Protos\drugPurchase.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\greet.proto" GrpcServices="Client" />
   </ItemGroup>
-
-
 </Project>

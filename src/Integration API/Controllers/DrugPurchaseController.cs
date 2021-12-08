@@ -37,7 +37,7 @@ namespace Integration_API.Controllers
             {
                 return Ok();
             }
-            
+
 
             //var client = new RestClient(demand.PharmacyUrl);
             //var request = new RestRequest("/api/drugDemand", Method.POST);
@@ -107,16 +107,32 @@ namespace Integration_API.Controllers
             request.AddHeader("ApiKey", ApiKey);
         }
 
+        private string GetApiKey(DrugAmountDemandDto demand)
+        {
+            string ApiKey = "";
+            foreach (var df in dbContext.Drugstores.ToList())
+            {
+                if (df.Url.Equals(demand.PharmacyUrl))
+                {
+                    ApiKey = df.ApiKey;
+                    break;
+                }
+            }
+            return ApiKey;
+            
+        }
+
         public bool drugDemandGrpc(DrugAmountDemandDto demand)
         {
-            var input = new HelloRequest { Name = "ali preko gRPC" };
+            //var input = new HelloRequest { Name = "world" };
+            var input = new DrugRequest { Amount = demand.Amount, Name = demand.Name, PharmacyUrl = demand.PharmacyUrl, ApiKey = GetApiKey(demand) };
             var channel = new Channel("127.0.0.1:4111", ChannelCredentials.Insecure);
-            var client = new Greeter.GreeterClient(channel);
+            var client = new gRPCDrugPurchaseService.gRPCDrugPurchaseServiceClient(channel);
 
-            var response = client.SayHello(input);
-           Console.WriteLine("From server: " + response.Message);
+            var response = client.DrugDemand(input);
+            Console.WriteLine("From server: " + response.Message);
 
-            if (response.Message.Equals("OK"))
+            if (response.IsOk)
             {
                 return true;
             }
@@ -124,6 +140,7 @@ namespace Integration_API.Controllers
             {
                 return false;
             }
+            //return true;
         }
         //private static async Task drugDemandAsync(HelloRequest input)
         //{

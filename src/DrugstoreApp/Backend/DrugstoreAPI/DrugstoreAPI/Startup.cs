@@ -63,7 +63,7 @@ namespace DrugstoreAPI
 
             server = new Server
             {
-                Services = { Greeter.BindService(new GreeterService()) },
+                Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },
                 Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
             };
             server.Start();

@@ -18,7 +18,7 @@ namespace DrugstoreAPI
         {
             return Task.FromResult(new HelloReply
             {
-                Message = "Ide IZUZETAN gas " + request.Name
+                Message = "hello " + request.Name
             });
         }
     }
