@@ -39,7 +39,7 @@ namespace Hospital.MedicalRecords.Service
             return false;
         }
 
-        public void CreateSurvey(List<AnsweredQuestion> answeredQuestion)
+        public void CreateSurvey(List<AnsweredQuestion> answeredQuestion, string id, string ap)
         {
             /*
             if (!CheckIfExistsById(appointmentId))
@@ -47,7 +47,7 @@ namespace Hospital.MedicalRecords.Service
                 return null;
             }
             */
-            SurveyRepository.CreateSurvey(answeredQuestion);
+            SurveyRepository.CreateSurvey(answeredQuestion, id, ap);
 
         }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppointmentObserveService } from '../appointment-observe.service';
 
 
@@ -21,7 +22,16 @@ export class AppointmentsObserveComponent implements OnInit {
   appointments: any[]=[];
   dataSource = [];
 
-  constructor(private observeAppointemntsService: AppointmentObserveService) { }
+  constructor(private observeAppointemntsService: AppointmentObserveService, private router: Router) { }
+
+  TakeSurvey($myParam: number = 0, $myParam1: number = 0): void {
+    const navigationDetails: string[] = ['/survey'];
+    if($myParam && $myParam1) {
+      navigationDetails.push($myParam.toString());
+      navigationDetails.push($myParam1.toString());
+    }
+    this.router.navigate(navigationDetails);
+  }
 
   ngOnInit(): void {
     this.observeAppointemntsService.GetAppointments('2').subscribe((data: any)=>{

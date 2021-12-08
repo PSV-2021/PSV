@@ -61,9 +61,9 @@ namespace Hospital.MedicalRecords.Repository
             throw new NotImplementedException();
         }
 
-        public void CreateSurvey(List<AnsweredQuestion> answeredQuestion)
+        public void CreateSurvey(List<AnsweredQuestion> answeredQuestion, string id, string ap)
         {
-            dbContext.Survey.Add(new Survey(1, DateTime.Now, 1));
+            dbContext.Survey.Add(new Survey { Date = DateTime.Now, PatientId = Int32.Parse(id), AppointmentId = Int32.Parse(ap)});
             dbContext.SaveChanges();
 
             var a = dbContext.Survey.Max(s => s.Id);
