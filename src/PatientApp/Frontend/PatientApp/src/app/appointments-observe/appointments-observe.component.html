@@ -7,7 +7,7 @@
   
     <ng-container matColumnDef="start time">
       <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Start Time </th>
-      <td mat-cell *matCellDef="let element"> {{element.startTime}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.startTime | date: 'short'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description">
@@ -20,10 +20,18 @@
       <td mat-cell *matCellDef="let element"> {{element.doctorName}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Status</th>
+      <td mat-cell *matCellDef="let element">
+         <div *ngIf="element.status==0">DONE</div>
+         <div *ngIf="element.status==1">CANCELLED</div>
+         <div *ngIf="element.status==2">UPCOMING</div>
+        </td>
+    </ng-container>
+
     <ng-container matColumnDef="survey">
       <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Survey</th>
       <td mat-cell *matCellDef="let element"><button>Take survey</button> </td>
-      
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -50,7 +50,7 @@ namespace Hospital.SharedModel
                 new Speciality { Id = 2, Name = "cardiology" }
                 );
             modelBuilder.Entity<VacationDays>().HasData(
-               new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25) }
+               new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25)}
                );
             modelBuilder.Entity<WorkingHours>().HasData(
                new WorkingHours { Id = 1, BeginningDate = new DateTime(2021, 01, 01), Shift = Shift.firstShift, EndDate = new DateTime(2021, 01, 08) }
@@ -150,7 +150,7 @@ namespace Hospital.SharedModel
             );
             modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
             modelBuilder.Entity<Appointment>().HasData(
-              new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false }
+              new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false , isCancelled = false}
               );
         }
 

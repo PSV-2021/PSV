@@ -16,7 +16,19 @@ namespace Hospital.Schedule.Service
         }
         public List<Appointment> GetAppointmentsById(int id)
         {
-            return ObserveAppointmentsSqlRepository.GetById(id);
+            List<Appointment> appointments = ObserveAppointmentsSqlRepository.GetById(id);
+
+            foreach(Appointment a in appointments)
+            {
+                if (a.isCancelled)
+                    a.Status = AppointmentStatus.CANCELLED;
+                else if (a.StartTime < DateTime.Now)
+                    a.Status = AppointmentStatus.DONE;
+                else if (a.StartTime > DateTime.Now)
+                    a.Status = AppointmentStatus.UPCOMING;
+            }
+
+            return appointments;
         }
     }
 }
