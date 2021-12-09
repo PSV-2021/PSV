@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hospital\Hospital.csproj" />
     <ProjectReference Include="..\Integration API\Integration API.csproj" />
     <ProjectReference Include="..\Integration\Integration.csproj" />
   </ItemGroup>
