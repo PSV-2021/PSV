@@ -1,20 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Model.DataBaseContext;
 using RestSharp;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Integration_API.DTOs;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using MessagingToolkit.QRCode.Codec;
+using Integration.Service;
+using Renci.SshNet;
+using System.Net.Sockets;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 
 namespace Integration_API.Controllers
 {
@@ -96,6 +97,7 @@ namespace Integration_API.Controllers
             doc.Close();
         }
 
+
         private void SetPdfInBody(PrescriptionDto prescription, RestRequest request)
         {
             QRCodeEncoder encoder = new QRCodeEncoder();
@@ -115,5 +117,86 @@ namespace Integration_API.Controllers
             string file = Convert.ToBase64String(bytes);
             return file;
         }
+
+
+
+
+        [HttpPost("pdf")]
+        public IActionResult PdfPerscription( PrescriptionDto prescription)
+        {
+            var key = Request.Headers["ApiKey"].FirstOrDefault();
+            if (key == null || !key.Equals("abcde"))
+                return Unauthorized();
+
+            //var url = Request.Headers["Url"].FirstOrDefault();
+            if (prescription.PharmacyUrl == null)
+                return BadRequest();
+
+            //var name = Request.Headers["Patient"].FirstOrDefault();
+            if (prescription.PatientName == null)
+                return BadRequest();
+
+
+            bool val = GenerateAndUploadPrescription(prescription);
+            if(val)    
+            return Ok(val);
+            else            
+            return BadRequest(val);
+        }
+
+        
+        public bool UploadPrescription(string fileName)
+        {
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.107", "user", "password")))
+            {
+                try
+                {
+                    client.Connect();
+                    string sourceFile = FormatPath(fileName);
+                    if (System.IO.File.Exists(sourceFile))
+                    {
+                        using (Stream stream = System.IO.File.OpenRead(sourceFile))
+                        {
+                            client.UploadFile(stream, @"\public\Drugstore files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            client.Disconnect();
+                            return true;
+                        }
+                    }
+                }
+                catch (SocketException se)
+                {
+                    string ErrorString = se.Message;
+                }
+                return false;
+            }
+        }
+        private string FormatPath(string fileName)
+        {
+            string[] absolute = Directory.GetCurrentDirectory().Split("src");
+            return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
+        }
+        public bool GenerateAndUploadPrescription(PrescriptionDto prescriptionDto)
+        {
+            bool returnVal = false;
+            using (Syncfusion.Pdf.PdfDocument Document = new Syncfusion.Pdf.PdfDocument())
+            {
+                Syncfusion.Pdf.PdfPage Page = Document.Pages.Add();
+                PdfGraphics Graphics = Page.Graphics;
+                Syncfusion.Pdf.Graphics.PdfFont HeaderFont = new PdfStandardFont(PdfFontFamily.Helvetica, 16);
+                Syncfusion.Pdf.Graphics.PdfFont BodyFont = new PdfStandardFont(PdfFontFamily.Helvetica, 7);
+                Graphics.DrawString(" Recept za " + prescriptionDto.PatientName , HeaderFont, PdfBrushes.Blue, new PointF(120, 20));
+                Graphics.DrawString("Detalji: " + prescriptionDto.Description, BodyFont, PdfBrushes.Black, new PointF(90, 60));
+                Graphics.DrawString("Lekovi: " + prescriptionDto.Name, BodyFont, PdfBrushes.Black, new PointF(90, 50));
+                Graphics.DrawString("Datum izdavanja " + DateTime.Now.ToShortDateString(), BodyFont, PdfBrushes.Black, new PointF(90, 40));
+               
+                string FileName = "Recept " + prescriptionDto.PatientName + " " + DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year + " " + DateTime.Now.Hour + "." + DateTime.Now.Minute + ".pdf";
+                Document.Save("..\\..\\src\\Integration\\Reports\\" + FileName);
+                Document.Close(true);
+                UploadPrescription(FileName);
+                 returnVal = true;
+            }
+            return returnVal;
+        }
+
     }
 }

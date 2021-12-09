@@ -61,6 +61,37 @@ namespace HospitalAPI.Controllers
             prescriptionService.SaveNewPrescription(new Prescription(prescription.PatientName, prescription.Description, prescription.Name, DateTime.Now));
             return Ok(responseSecond.Content);
         }
+        [HttpPost("pdfprescription")]
+        public IActionResult PdfPrescription(PrescriptionDto prescription)
+        {
+            var client = new RestClient("http://localhost:5000");
+            var request = new RestRequest("/api/drugpurchase", Method.PUT);
+
+            SetApiKeyInHeader(request);
+
+            SetRequestBody(prescription, request);
+
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode != HttpStatusCode.OK || !Boolean.Parse(response.Content))
+            {
+                return BadRequest(false);
+            }
+
+            client = new RestClient("http://localhost:5000");
+            request = new RestRequest("/api/prescription/pdf", Method.POST);
+
+            SetApiKeyInHeaderForQr(prescription, request);
+
+            SetRequestBody(prescription, request);
+
+            IRestResponse responseSecond = client.Execute(request);
+            if (responseSecond.StatusCode != HttpStatusCode.OK)
+                return BadRequest("Some error occured!");
+
+            prescriptionService.SaveNewPrescription(new Prescription(prescription.PatientName, prescription.Description, prescription.Name, DateTime.Now));
+            return Ok(responseSecond.Content);
+        }
         private static void SetRequestBody(PrescriptionDto prescription, RestRequest request)
         {
             var body = new
