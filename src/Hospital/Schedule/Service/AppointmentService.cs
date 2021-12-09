@@ -766,9 +766,10 @@ namespace Hospital.Schedule.Service
                 appointments = UseStrategy(searchAppointments);               
             }
 
-            return AddDoctors(appointments);
+            return appointments;
         }
 
+        /*
         public List<Appointment> AddDoctors(List<Appointment> appointments)
         {
             foreach (Appointment appointment in appointments)
@@ -777,7 +778,7 @@ namespace Hospital.Schedule.Service
             }
 
             return appointments;
-        }
+        }*/
 
         private List<Appointment> UseStrategy(SearchAppointmentsDTO searchAppointments)
         {
@@ -831,16 +832,30 @@ namespace Hospital.Schedule.Service
         public List<Appointment> GetAppointments(int doctorId, DateTime date)
         {
             List<Appointment> appointments = new List<Appointment>();
-            WorkingHours doctorWorkingHours = WorkingHoursSqlRepository.GetByDoctorAndDate(doctorId, date.Date);
+            int appointmentsInDay = 16;
+            DateTime appointmentStart = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
+            Appointment appointment = new Appointment { StartTime = appointmentStart.AddHours(8) };
 
-            if (doctorWorkingHours == null)
-                return appointments;
+            for (int i = 0; i < appointmentsInDay; i++)
+            {
+                Appointment newAppointmentLocal = new Appointment { StartTime = appointment.StartTime, DoctorId = doctorId };
+                appointments.Add(newAppointmentLocal);
+                appointment.StartTime = appointment.StartTime.AddMinutes(appointmentDurationInMunutes);
+            }
 
+            return appointments;
+
+            //WorkingHours doctorWorkingHours = WorkingHoursSqlRepository.GetByDoctorAndDate(doctorId, date.Date);
+
+            //if (doctorWorkingHours == null)
+            //    return appointments;
+
+            /*
             int startTime = doctorWorkingHours.BeginningDate.Day;
             int endTime = doctorWorkingHours.EndDate.Day;
-            DateTime appointmentStart = new DateTime(date.Year, date.Month, date.Day, startTime, 0, 0);
+            DateTime appointmentStart = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
 
-            for (int i = 0; i < endTime - 1; i++)
+            for (int i = startTime; i < endTime - 1; i++)
             {
                 Appointment appointment = new Appointment
                 {
@@ -850,7 +865,7 @@ namespace Hospital.Schedule.Service
                 };
                 appointments.Add(appointment);
             }
-            return appointments;
+            return appointments;*/
         }
 
         public List<Appointment> DoctorAndDate(int doctorId, DateTime date)
@@ -914,13 +929,25 @@ namespace Hospital.Schedule.Service
                 AvailableAppointmentsDTO dto = new AvailableAppointmentsDTO
                 {
                     Start = appointment.StartTime,
-                    End = appointment.EndTime,
-                    DoctorId = appointment.DoctorId,
-                    DoctorFullName = appointment.Doctor.Name + " " + appointment.Doctor.Surname
+                    //End = appointment.EndTime,
+                    DoctorId = appointment.DoctorId
                 };
                 availableAppointmentsDTO.Add(dto);
             }
             return availableAppointmentsDTO;
+        }
+
+        //zakazivanje
+
+        public Appointment Schedule(Appointment appointment)
+        {
+            List<Appointment> available = GetAvailable(appointment.DoctorId, appointment.StartTime);
+            appointment.PatientId = 1;
+            bool isAvailable = available.Any(a => a.IsOccupied(appointment.StartTime, appointment.EndTime));
+            if (isAvailable)
+                return null;  //AppointmentRepository.Create(appointment);
+
+            return null;
         }
     }
 }

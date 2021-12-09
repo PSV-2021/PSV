@@ -42,7 +42,7 @@ namespace Hospital.Schedule.Repository
 
         public WorkingHours GetByDoctorAndDate(int id, DateTime date)
         {
-            return GetAll().Where(day => day.Id.Equals(id) && DateTime.Compare(day.BeginningDate, date) == 0).FirstOrDefault();
+            return GetAll().Where(day => day.Id.Equals(id) && DateTime.Compare(day.BeginningDate, date) == -1 && DateTime.Compare(date, day.EndDate) == -1).FirstOrDefault();
         }
     }
 }

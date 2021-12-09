@@ -116,14 +116,14 @@ namespace HospitalApiTests.Integration
 
             RecommendedAppointmentController recommendedAppointmentController = new RecommendedAppointmentController(context);
 
-            IActionResult retVal = recommendedAppointmentController.Get(appointment);
+            IActionResult retVal = recommendedAppointmentController.Post(appointment);
 
             retVal.Equals(HttpStatusCode.OK);
         }
 
         public static SearchAppointmentsDTO Create()
         {
-            SearchAppointmentsDTO retVal = new SearchAppointmentsDTO { StartInterval = new DateTime(2021, 01, 01), EndInterval = new DateTime(2021, 01, 02), DoctorId = 1, Priority = 1, SpecializationId = 1 };
+            SearchAppointmentsDTO retVal = new SearchAppointmentsDTO { StartInterval = "12/12/2021", EndInterval = "12/12/2021", DoctorId = 1, Priority = 1, SpecializationId = 1 };
 
             return retVal;
         }

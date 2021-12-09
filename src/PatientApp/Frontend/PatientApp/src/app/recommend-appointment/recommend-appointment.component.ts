@@ -33,6 +33,8 @@ export class RecommendAppointmentComponent implements OnInit {
   appointment: RecommendedAppointment = {startDate: new Date(),endDate: new Date(), doctorId: 0, specializationId: 0, priority: 1};
   public returnAppointment: RecommendAppointmentDto;
 
+  displayedColumns: string[] = ['position', 'Date', 'Time', 'Doctor', '#'];
+
   constructor(private recommendAppointmentService: RecommendAppointmentService,private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
     this.returnAppointment = new RecommendAppointmentDto(); 
     this.recommendForm = formBuilder.group({
@@ -73,24 +75,13 @@ export class RecommendAppointmentComponent implements OnInit {
        }
      }
 
-    console.log(this.returnAppointment.DoctorId);
-    console.log(this.returnAppointment.SpecializationId);
-    console.log(this.returnAppointment.Priority);
-    console.log(this.returnAppointment.StartInterval);
-    console.log(this.returnAppointment.EndInterval);
-
-    console.log(this.returnAppointment);
-
-    
-    this.recommendAppointmentService.FindAppointments(this.returnAppointment).subscribe((data: any)=>{
-      this._snackBar.open('Appointments found!', '', {
-        duration: 2000
-      });
+    this.recommendAppointmentService.FindAppointments(this.returnAppointment).subscribe(data => {
       this.appointmentsRecomended = data;
+      console.log(this.appointmentsRecomended);
+      this.DoctorsNames();
     });
 
-    console.log(this.appointmentsRecomended);
-     
+   
   }
 
   PrepareDTO(){
@@ -101,6 +92,22 @@ export class RecommendAppointmentComponent implements OnInit {
     this.returnAppointment.StartInterval = formatDate(this.appointment.startDate, format, "en-US");
     this.returnAppointment.EndInterval = formatDate(this.appointment.endDate, format, "en-US");
 
+  }
+
+  DoctorsNames(){
+    console.log("ovde");
+    for(const a of this.appointmentsRecomended){
+      for(const d of this.doctors){
+        if(a.doctorId == d.id){
+          a.doctorFullName = d.nameAndSurname;
+          console.log(d.nameAndSurname);
+        }
+      }
+    }
+  }
+
+  schedule() {
+    
   }
 
 }

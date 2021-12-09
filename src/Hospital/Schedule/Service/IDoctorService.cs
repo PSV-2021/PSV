@@ -10,5 +10,7 @@ namespace Hospital.Schedule.Service
         public List<Doctor> GetAllDoctors();
 
         public Doctor GetDoctorBy(int id);
+
+        public string GetDoctorById(int id);
     }
 }
