@@ -9,6 +9,8 @@ import { ReviewComponent } from './review/review.component';
 import { DrugsConsumptionComponent } from './drugs-consumption-specs/drugs-consumption.component';
 import { FilesComponent } from './files/files.component';
 
+
+
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'reviews', component: ReviewComponent},

@@ -21,6 +21,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FilesComponent } from './files/files.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ToastrModule } from 'ngx-toastr';
+import { timeout } from 'rxjs/operators';
 
 @NgModule({
   declarations: [
@@ -48,8 +50,13 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatNativeDateModule,
     MatFormFieldModule,
     MatBadgeModule,
+    ToastrModule.forRoot({
+      preventDuplicates: false,
+      timeOut: 4000,
+      positionClass: 'toast-top-right',
+    })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }

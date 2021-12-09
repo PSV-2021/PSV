@@ -8,9 +8,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let file of files; let i = index">
+      <tr *ngFor="let file of files">
         <td style="font-size: large;">{{ file.Name }}</td>
-        <td><button type="button" [disabled]="file.Downloaded" (click)="downloadFile(file.Name)" class="btn btn-secondary">Download</button></td>
+        <td><button type="button" (click)="downloadFile(file.Name)" class="btn btn-secondary">Download</button>
+          <button style="margin-left: 5%;" type="button" disabled *ngIf="file.isNew" class="btn-sm btn-primary">New</button>
+        </td>
         <td><button type="button" [disabled]="!file.Downloaded" (click)="openFile(file.Name)"  class="btn btn-danger">Open</button></td>
       </tr>
     </tbody>

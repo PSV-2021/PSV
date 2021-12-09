@@ -34,8 +34,9 @@ namespace Integration_API.Controllers
         [HttpGet("files")]
         public IActionResult GetRefreshedFiles([FromQuery] string filename)
         {
-            drugSpecificationService.DownloadDrugConsumptionReport(filename);
-            return Ok(drugSpecificationService.GetFiles());
+            if (drugSpecificationService.DownloadDrugConsumptionReport(filename))
+                return Ok(true);
+            return Ok(false);
         }
 
         [HttpPut]

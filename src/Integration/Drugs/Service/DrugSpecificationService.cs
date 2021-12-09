@@ -49,7 +49,7 @@ namespace Integration.Drugs.Service
         private string FormatFilePath(string fileName)
         {
             string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\Integration\\Drugs Specifications\\" + fileName);
+            return Path.Combine(absolute[0], "src\\ManagerAngularApp\\ManagerAngularApp\\src\\assets\\Drugs Specifications\\" + fileName);
         }
 
         public List<FileInfoDto> GetFiles()
@@ -70,7 +70,7 @@ namespace Integration.Drugs.Service
         public bool IsFileDownloaded(string filename)
         {
             bool retVal = false;
-            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\Integration\\Drugs Specifications");
+            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\ManagerAngularApp\\ManagerAngularApp\\src\\assets\\Drugs Specifications\\");
             FileInfo[] Files = d.GetFiles("*.pdf");
             foreach (FileInfo file in Files)
             {
