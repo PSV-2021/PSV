@@ -16,7 +16,7 @@ namespace Drugstore.Compression.Controller
 
         }
 
-        protected override string Schedule => "*/1 * * * *"; // every 2 min 
+        protected override string Schedule => "* * * */6 *"; 
 
         public override async Task ProcessInScope(IServiceProvider scopeServiceProvider)
         {
