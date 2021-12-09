@@ -50,5 +50,11 @@ namespace Hospital.Schedule.Repository
         {
             return GetAll().Where(a => a.DoctorId.Equals(doctorId) && a.StartTime.Date.CompareTo(date.Date) == 0).ToList();
         }
+
+        internal void Create(Appointment appointment)
+        {
+            context.Appointments.Add(appointment);
+            context.SaveChanges();
+        }
     }
 }

@@ -5,6 +5,7 @@ import { RecommendAppointmentDto } from './recommend-appointment-dto';
 import { DatePipe, formatDate } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AvailableRecommendedAppointments } from './available-recommended-appointments';
+import { Router } from '@angular/router';
 
 export interface SelectedDoctor{
   name: string;
@@ -29,13 +30,17 @@ export class RecommendAppointmentComponent implements OnInit {
   selectedDoctor: SelectedDoctor = {name: ""};
   recommendForm: FormGroup;
   appointmentsRecomended: AvailableRecommendedAppointments[] = new Array();
+  start: Date = new Date;
+  doctorName: string = "";
+  doctorId: number = 0;
 
   appointment: RecommendedAppointment = {startDate: new Date(),endDate: new Date(), doctorId: 0, specializationId: 0, priority: 1};
   public returnAppointment: RecommendAppointmentDto;
 
+
   displayedColumns: string[] = ['position', 'Date', 'Time', 'Doctor', '#'];
 
-  constructor(private recommendAppointmentService: RecommendAppointmentService,private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
+  constructor(private recommendAppointmentService: RecommendAppointmentService,private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private router: Router) {
     this.returnAppointment = new RecommendAppointmentDto(); 
     this.recommendForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
@@ -59,8 +64,7 @@ export class RecommendAppointmentComponent implements OnInit {
 
     this.recommendAppointmentService.GetAllDoctors().subscribe((data: any)=>{
       for(const p of (data as any)){
-        this.doctors.push(p);
-        
+        this.doctors.push(p);      
       }
     })
   }
@@ -77,7 +81,6 @@ export class RecommendAppointmentComponent implements OnInit {
 
     this.recommendAppointmentService.FindAppointments(this.returnAppointment).subscribe(data => {
       this.appointmentsRecomended = data;
-      console.log(this.appointmentsRecomended);
       this.DoctorsNames();
     });
 
@@ -95,19 +98,32 @@ export class RecommendAppointmentComponent implements OnInit {
   }
 
   DoctorsNames(){
-    console.log("ovde");
     for(const a of this.appointmentsRecomended){
       for(const d of this.doctors){
         if(a.doctorId == d.id){
           a.doctorFullName = d.nameAndSurname;
-          console.log(d.nameAndSurname);
         }
       }
     }
   }
 
-  schedule() {
-    
+  schedule(element: { start: Date; doctorFullName: string; }) {
+    this.start = element.start;
+    this.doctorName = element.doctorFullName;
+
+    for(const d of this.doctors){
+      if(d.nameAndSurname == this.doctorName){
+        this.doctorId = d.id;
+      }
+    }
+
+    console.log(this.start);
+    console.log(this.doctorId);
+
+    /*
+    this.recommendAppointmentService.Schedule(this.start, this.doctorId).subscribe(data => {
+      this.router.navigate(['/medicalRecord']);
+    });*/
   }
 
 }

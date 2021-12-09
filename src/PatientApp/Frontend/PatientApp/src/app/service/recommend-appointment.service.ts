@@ -19,4 +19,8 @@ export class RecommendAppointmentService {
   FindAppointments(appointment: RecommendAppointmentDto): Observable<any>{
     return this.http.post<any>(this.url + "/recommendedAppointment", appointment);
   }
+
+  Schedule(start: Date, id: number): Observable<any>{
+    return this.http.post<any>(this.url + "/recommendedAppointment/schedule", {params:{start: start, id: id}});
+  }
 }

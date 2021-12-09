@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hospital.Schedule.Repository;
 using System.Globalization;
+using Hospital.MedicalRecords.Model;
+using Hospital.MedicalRecords.Service;
 
 namespace HospitalAPI.Controllers
 {
@@ -19,6 +21,7 @@ namespace HospitalAPI.Controllers
     {
         private readonly MyDbContext context;
         public AppointmentService appointmentService;
+        public MedicalRecordService medicalRecordService;
 
         public RecommendedAppointmentController(MyDbContext context)
         {
@@ -34,6 +37,23 @@ namespace HospitalAPI.Controllers
             List<AvailableAppointmentsDTO> dto = AppointmentService.AvailableAppointmentsDTODoctor(appointments);
 
             return Ok(dto);
+        }
+
+        [HttpPost("schedule")]
+        public IActionResult Schedule(DateTime start, int doctorId)
+        {
+            List<MedicalRecord> medicalRecord = medicalRecordService.GetMedicalRecordById(1);
+
+            if (medicalRecord == null)
+                return BadRequest("Can not schedule appointment");
+
+            Appointment appointment = AppointmentService.ScheduleAppointmentDTOToAppointment(start, doctorId);
+            Appointment scheduledAppointment = appointmentService.Schedule(appointment);
+
+            if (scheduledAppointment == null)
+                return BadRequest("Can not schedule appointment");
+
+            return Ok("Scheduled!");
         }
     }
 }

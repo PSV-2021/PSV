@@ -769,17 +769,6 @@ namespace Hospital.Schedule.Service
             return appointments;
         }
 
-        /*
-        public List<Appointment> AddDoctors(List<Appointment> appointments)
-        {
-            foreach (Appointment appointment in appointments)
-            {
-                appointment.Doctor = IDoctorService.GetDoctorBy(appointment.DoctorId);
-            }
-
-            return appointments;
-        }*/
-
         private List<Appointment> UseStrategy(SearchAppointmentsDTO searchAppointments)
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -845,27 +834,6 @@ namespace Hospital.Schedule.Service
 
             return appointments;
 
-            //WorkingHours doctorWorkingHours = WorkingHoursSqlRepository.GetByDoctorAndDate(doctorId, date.Date);
-
-            //if (doctorWorkingHours == null)
-            //    return appointments;
-
-            /*
-            int startTime = doctorWorkingHours.BeginningDate.Day;
-            int endTime = doctorWorkingHours.EndDate.Day;
-            DateTime appointmentStart = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
-
-            for (int i = startTime; i < endTime - 1; i++)
-            {
-                Appointment appointment = new Appointment
-                {
-                    DoctorId = doctorId,
-                    StartTime = appointmentStart.AddMinutes(appointmentDurationInMunutes * i),
-                    EndTime = appointmentStart.AddMinutes(appointmentDurationInMunutes * (i + 1))
-                };
-                appointments.Add(appointment);
-            }
-            return appointments;*/
         }
 
         public List<Appointment> DoctorAndDate(int doctorId, DateTime date)
@@ -929,7 +897,6 @@ namespace Hospital.Schedule.Service
                 AvailableAppointmentsDTO dto = new AvailableAppointmentsDTO
                 {
                     Start = appointment.StartTime,
-                    //End = appointment.EndTime,
                     DoctorId = appointment.DoctorId
                 };
                 availableAppointmentsDTO.Add(dto);
@@ -942,12 +909,25 @@ namespace Hospital.Schedule.Service
         public Appointment Schedule(Appointment appointment)
         {
             List<Appointment> available = GetAvailable(appointment.DoctorId, appointment.StartTime);
-            appointment.PatientId = 1;
             bool isAvailable = available.Any(a => a.IsOccupied(appointment.StartTime, appointment.EndTime));
             if (isAvailable)
-                return null;  //AppointmentRepository.Create(appointment);
+                RecommendedAppointmentSqlRepository.Create(appointment);
 
             return null;
+        }
+
+        public static Appointment ScheduleAppointmentDTOToAppointment(DateTime start, int doctorId)
+        {
+            return new Appointment
+            {
+                StartTime = start,
+                DurationInMunutes = 30,
+                ApointmentDescription = "",
+                IsDeleted = false,
+                DoctorId = doctorId,
+                PatientId = 1, //ovo treba promeniti posle
+                Canceled = false
+            };
         }
     }
 }
