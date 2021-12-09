@@ -21,11 +21,11 @@ namespace Drugstore.Service
 
         private List<FileInfo> fileInfos = new List<FileInfo>();
         private List<string> fileDeletionList = new List<string>();
-        private string path = @"\rebex\data\public\Drugstore files\";
+        private string path = @"\PSV\src\Rebex\data\public\Drugstore files\";
 
         public  void CompressOldFiles()
         {
-            string zipName = @"\rebex\data\public\Compressed Drugstore files\Kompersovano-" + DateTime.Now.Day.ToString() + "." +
+            string zipName = @"\PSV\src\Rebex\data\public\Compressed Drugstore files\Kompersovano-" + DateTime.Now.Day.ToString() + "." +
                 DateTime.Now.Month.ToString()
                 + "." + DateTime.Now.Year.ToString()
                 + ". " + DateTime.Now.Hour.ToString()
