@@ -20,6 +20,7 @@ using Xunit;
 
 namespace HospitalApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class SurveySqlRepositoryTests
     {
         private MyDbContext context;

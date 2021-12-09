@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Integration.Drugs.Service;
 using Integration.Model;
 using Integration.Repository.Sql;
 using Integration.Service;
@@ -18,6 +19,8 @@ using Xunit;
 
 namespace IntegrationApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
+
     public class DrugSpecificationTests
     {
         private MyDbContext context;
@@ -59,6 +62,27 @@ namespace IntegrationApiTests.Integration
 
             var result = dsController.Put(new DrugSpecificationRequestDTO("http://localhost:8080", "prospan"));
             Assert.IsType<UnauthorizedObjectResult>(result);
+        }
+
+        [Theory]
+        [MemberData(nameof(FileNames))]
+        public void Download_drug_specification_file(string fileName, bool expectedOutcome)
+        {
+            DrugSpecificationService service = new DrugSpecificationService();
+
+            bool isDownloaded = service.DownloadDrugConsumptionReport(fileName);
+
+            Assert.Equal(expectedOutcome, isDownloaded);
+        }
+
+        public static IEnumerable<object[]> FileNames()
+        {
+            var retVal = new List<object[]>();
+
+            retVal.Add(new object[] { "Brufen - Specifikacija leka.pdf", true });
+            retVal.Add(new object[] { "Neki random lek.pdf", false });
+
+            return retVal;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Integration.Repository.Sql
         {
             List<Drugstore> result = new List<Drugstore>();
 
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.City,drugstore.Address)));
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.City,drugstore.Address, drugstore.Comment, drugstore.Base64Image)));
 
             return result;
         }
@@ -46,7 +46,7 @@ namespace Integration.Repository.Sql
 
         public Drugstore GetOne(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.Drugstores.Find(id);
         }
 
         public void Save(Drugstore newObject)
@@ -57,7 +57,8 @@ namespace Integration.Repository.Sql
 
         public void Update(Drugstore editedObject)
         {
-            throw new NotImplementedException();
+            dbContext.Drugstores.Update(editedObject);
+            dbContext.SaveChanges();
         }
 
         public List<Drugstore> SearchDrugstoresByCityAndAddress(string city, string address)

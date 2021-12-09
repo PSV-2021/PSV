@@ -278,6 +278,40 @@ namespace Hospital.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Hospital.MedicalRecords.Model.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DrugName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("IssuedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PatientName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prescriptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Random opis nekog leka",
+                            DrugName = "Palitrex",
+                            IssuedTime = new DateTime(2021, 12, 3, 19, 36, 1, 823, DateTimeKind.Local).AddTicks(2956),
+                            PatientName = "Zoran Zoranic"
+                        });
+                });
+
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Survey", b =>
                 {
                     b.Property<int>("Id")
@@ -467,6 +501,64 @@ namespace Hospital.Migrations
                             Name = "Sara Saric",
                             TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 618, DateTimeKind.Local).AddTicks(9798),
                             canPublish = true
+                        });
+                });
+
+            modelBuilder.Entity("Hospital.Medicines.Model.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Manufacturer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MedicineImage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Precautions")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Reactions")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SideEffects")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Manufacturer = "Pfizer",
+                            MedicineImage = "",
+                            Name = "Brufen",
+                            Precautions = "Mozes sve lagano",
+                            Price = 200.0,
+                            Reactions = "Pa umres",
+                            SideEffects = "Umres",
+                            Supply = 100,
+                            Usage = "Kad god hoces",
+                            Weight = 100.0
                         });
                 });
 

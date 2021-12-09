@@ -14,6 +14,8 @@ namespace Integration.Model
         public string Email { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
+        public string Comment { get; set; }
+        public string Base64Image { get; set; }
 
         public Drugstore()
         {
@@ -37,6 +39,19 @@ namespace Integration.Model
             Email = email;
             City = city;
             Address = address;
+        }
+
+        public Drugstore(int id, string name, string url, string api, string email, string city, string address, string comment, string image)
+        {
+            Id = id;
+            Name = name;
+            Url = url;
+            ApiKey = api;
+            Email = email;
+            City = city;
+            Address = address;
+            Comment = comment;
+            Base64Image = image;
         }
 
         public Drugstore(string name, string url, string api)

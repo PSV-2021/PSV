@@ -7,10 +7,13 @@ using System.IO;
 using Drugstore.Service;
 using System.Net.Sockets;
 
-namespace DrugstoreApiTests.Unit
+namespace DrugstoreApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
+
     public class DrugSpecificationTests
     {
+
         [Theory]
         [MemberData(nameof(FileNames))]
         public void Upload_drugs_consumption_report(string fileName, bool expectedOutcome)
@@ -29,7 +32,7 @@ namespace DrugstoreApiTests.Unit
 
             bool result = service.UploadDrugSpecification("Brufen");
 
-            Assert.False(result);
+            Assert.True(result);
         }
 
         public static IEnumerable<object[]> FileNames()

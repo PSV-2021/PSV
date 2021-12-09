@@ -13,6 +13,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Reflection;
 
+
 namespace Integration.Service
 {
     public class DrugsConsumptionReportService
@@ -26,7 +27,7 @@ namespace Integration.Service
 
         public bool UploadDrugConsumptionReport(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.107", "user", "password")))
             {
                 try
                 {
@@ -80,10 +81,11 @@ namespace Integration.Service
                 string FileName = "Izvestaj o potrosnji lekova " + FormatDateRange(range) + ".pdf";
                 Document.Save("..\\..\\src\\Integration\\Reports\\" + FileName);
                 Document.Close(true);
-                UploadDrugConsumptionReport(FileName);
+                this.UploadDrugConsumptionReport(FileName);
             }
             return counter;
         }
+        
 
         private bool IsDateInRange(DateRange range, DrugConsumed drug)
         {
