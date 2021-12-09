@@ -14,6 +14,7 @@ using Xunit;
 
 namespace IntegrationApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class PrescriptionToDrugstoreTests
     {
         private MyDbContext context;
