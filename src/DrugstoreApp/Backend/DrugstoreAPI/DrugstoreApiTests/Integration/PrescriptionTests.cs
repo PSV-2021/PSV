@@ -11,9 +11,9 @@ using Moq;
 using Shouldly;
 using Xunit;
 
-namespace DrugstoreApiTests.Unit
+namespace DrugstoreApiTests.Integration
 {
-    [Trait("Type", "UnitTest")]
+    [Trait("Type", "IntegrationTest")]
     public class PrescriptionTests
     {
         [Fact]
