@@ -23,6 +23,8 @@ import { FilesComponent } from './files/files.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ToastrModule } from 'ngx-toastr';
 import { timeout } from 'rxjs/operators';
+import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
+import { DrugstoreComponent } from './drugstore/drugstore.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { timeout } from 'rxjs/operators';
     DrugstoreOfferComponent,
     DrugsConsumptionComponent,
     FilesComponent,
+    AllDrugstoresComponent,
+    DrugstoreComponent,
   ],
   imports: [
     BrowserModule,

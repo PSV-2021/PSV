@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 namespace IntegrationApiTests.Integration
 {
     [Trait("Type", "IntegrationTest")]
+
     public class DrugsConsumptionReportTests
     {
         private MyDbContext context;

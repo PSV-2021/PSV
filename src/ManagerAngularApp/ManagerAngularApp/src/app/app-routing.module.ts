@@ -8,8 +8,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ReviewComponent } from './review/review.component';
 import { DrugsConsumptionComponent } from './drugs-consumption-specs/drugs-consumption.component';
 import { FilesComponent } from './files/files.component';
-
-
+import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
+import { DrugstoreComponent } from './drugstore/drugstore.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -20,8 +20,10 @@ const routes: Routes = [
   { path: 'files', component: FilesComponent},
   { path: 'drugstore-offer', component: DrugstoreOfferComponent},
   { path: 'drugs-consumption', component: DrugsConsumptionComponent},
+  { path: 'all-drugstores', component: AllDrugstoresComponent},
+  { path: 'drugstore/:id', component: DrugstoreComponent},
   { path: '', redirectTo: 'landingPage', pathMatch: 'full' },
-  { path: '**', redirectTo: 'landingPage', pathMatch: 'full' }
+  { path: '**', redirectTo: 'landingPage', pathMatch: 'full' },
 ];
 
 @NgModule({

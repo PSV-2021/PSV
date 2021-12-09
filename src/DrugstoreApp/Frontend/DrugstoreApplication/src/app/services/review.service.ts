@@ -16,7 +16,7 @@ export class ReviewsService {
     url: string;
     smartphone: any = [];
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5001/api" //ovo ne znam posto ne pisem ja backend za sad
+        this.url = "http://"+location.hostname+":8081/api" //ovo ne znam posto ne pisem ja backend za sad
     }
 
     GetAllMyReviews(): Observable<any> {

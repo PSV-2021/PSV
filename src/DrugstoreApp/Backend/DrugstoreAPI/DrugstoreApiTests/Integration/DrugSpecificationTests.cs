@@ -10,8 +10,10 @@ using System.Net.Sockets;
 namespace DrugstoreApiTests.Integration
 {
     [Trait("Type", "IntegrationTest")]
+
     public class DrugSpecificationTests
     {
+
         [Theory]
         [MemberData(nameof(FileNames))]
         public void Upload_drugs_consumption_report(string fileName, bool expectedOutcome)
