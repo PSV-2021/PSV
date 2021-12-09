@@ -17,6 +17,8 @@ namespace Drugstore.Models
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Medicine>().HasData(

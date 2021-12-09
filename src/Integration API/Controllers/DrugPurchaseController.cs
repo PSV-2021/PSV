@@ -35,7 +35,11 @@ namespace Integration_API.Controllers
         {
             if (drugDemandGrpc(demand))
             {
-                return Ok();
+                return Ok(true);
+            }
+            else
+            {
+                return Ok(false);
             }
 
 

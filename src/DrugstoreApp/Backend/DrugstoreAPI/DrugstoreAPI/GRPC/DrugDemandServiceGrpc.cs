@@ -3,6 +3,7 @@ using Drugstore.Models;
 using Drugstore.Repository.Sql;
 using DrugstoreAPI.Service;
 using Grpc.Core;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Service;
 using System.Threading.Tasks;
@@ -11,13 +12,21 @@ namespace DrugstoreAPI
 {
     public class DrugDemandServiceGrpc : gRPCDrugPurchaseService.gRPCDrugPurchaseServiceBase
     {
-        private readonly MyDbContext dbContext;
+        private MyDbContext dbContext;
               
         private MedicineService medicineService;
         public HospitalService hospitalService;
         private readonly ILogger<GreeterService> _logger;
-        public DrugDemandServiceGrpc(ILogger<GreeterService> logger)
+
+        private void SetupDbContext()
         {
+            DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
+            builder.UseNpgsql("server=localhost; port=5432; database=drugstore; User Id=postgres; password=12345");
+            this.dbContext = new MyDbContext(builder.Options);
+        }
+        public DrugDemandServiceGrpc(ILogger<GreeterService> logger, MyDbContext dbContext)
+        {
+            
             _logger = logger;
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.hospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
@@ -32,6 +41,7 @@ namespace DrugstoreAPI
         }
         public DrugDemandServiceGrpc() 
         {
+            SetupDbContext();
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.hospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
         }
