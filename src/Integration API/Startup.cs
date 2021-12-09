@@ -75,15 +75,15 @@ namespace Integration_API
 
         private string GetDBConnectionString()
         {
-            var server = Configuration["DBServer"];
-            var port = Configuration["DBPort"];
-            var user = Configuration["DBUser"];
-            var password = Configuration["DBPassword"];
-            var database = Configuration["DB"];
+            var server = Configuration["DBServer"] ?? "localhost";
+            var port = Configuration["DBPort"] ?? "5432";
+            var user = Configuration["DBUser"] ?? "postgres";
+            var password = Configuration["DBPassword"] ?? "12345";
+            var database = Configuration["DB"] ?? "hospital";
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
-
+        
         private void OnShutdown()
         {
             if (server != null)

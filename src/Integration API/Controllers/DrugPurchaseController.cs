@@ -9,8 +9,6 @@ using Hospital.Medicines.Model;
 using Integration.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
-using Hospital.Medicines.Service;
-using Hospital.Medicines.Repository.Sql;
 using Grpc.Net.Client;
 using DrugstoreAPI;
 using Grpc.Core;
@@ -22,11 +20,9 @@ namespace Integration_API.Controllers
     public class DrugPurchaseController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public DrugService medicineService;
-
+       
         public DrugPurchaseController(MyDbContext db)
-        {
-            this.medicineService = new DrugService();
+        {           
             dbContext = db;
         }
 
@@ -75,13 +71,23 @@ namespace Integration_API.Controllers
             {
                 if (Boolean.Parse(response.Content))
                 {
-                    medicineService.AddDrugUrgent(demand.Name, demand.Amount);
-                    return Ok(Boolean.Parse(response.Content));
+                    var clientH = new RestClient(this.GetHospitalLink());
+                    var requestH = new RestRequest("/api/drugPurchase/urgent", Method.PUT);
+
+                    //SetApiKeyInHeader(demand, request);
+
+                    SetRequestBody(demand, requestH);
+
+                    IRestResponse responseH = clientH.Execute(requestH);
+
+                    return Ok(responseH.Content);
                 }
                 
             }
             return Unauthorized(false);
         }
+
+
 
         private static void SetRequestBody(DrugAmountDemandDto demand, RestRequest request)
         {
@@ -146,6 +152,16 @@ namespace Integration_API.Controllers
             }
             //return true;
         }
+
+        private string GetHospitalLink()
+        {
+            string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("PORT") ?? "6666";
+            string domport = $"http://{domain}:{port}";
+
+            return domport;
+        }
+        
         //private static async Task drugDemandAsync(HelloRequest input)
         //{
         //    return await 
