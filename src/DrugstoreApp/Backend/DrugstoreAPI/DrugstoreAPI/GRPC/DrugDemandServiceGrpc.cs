@@ -4,6 +4,7 @@ using Drugstore.Repository.Sql;
 using DrugstoreAPI.Service;
 using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Service;
 using System.Threading.Tasks;
@@ -72,6 +73,8 @@ namespace DrugstoreAPI
                 Message = "unauthorized ",
                 IsOk = false
             });
+
         }
+             
     }
 }
