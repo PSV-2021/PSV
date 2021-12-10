@@ -12,7 +12,8 @@ namespace HospitalApiTests.Unit
 {
     public class SurveyUnitTests
     {
- 
+        [Trait("Type", "UnitTest")]
+
         [Theory]
         [MemberData(nameof(Data))]
         public void Appointment_id_exist_or_doesnt_exist(int id, bool expectedValue)
