@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211129182105_AddMedicine")]
-    partial class AddMedicine
+    [Migration("20211207161529_initialMigrationM")]
+    partial class initialMigrationM
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,64 +123,6 @@ namespace Hospital.Migrations
                         {
                             Id = 1,
                             HealthInsuranceNumber = "1ab"
-                        });
-                });
-
-            modelBuilder.Entity("Hospital.MedicalRecords.Model.Medicine", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Manufacturer")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MedicineImage")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Precautions")
-                        .HasColumnType("text");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("Reactions")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SideEffects")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Supply")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Usage")
-                        .HasColumnType("text");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medicines");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Manufacturer = "Pfizer",
-                            MedicineImage = "",
-                            Name = "Brufen",
-                            Precautions = "Mozes sve lagano",
-                            Price = 200.0,
-                            Reactions = "Pa umres",
-                            SideEffects = "Umres",
-                            Supply = 100,
-                            Usage = "Kad god hoces",
-                            Weight = 100.0
                         });
                 });
 
@@ -451,7 +393,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 616, DateTimeKind.Local).AddTicks(3795),
+                            TimeWritten = new DateTime(2021, 12, 7, 17, 15, 26, 434, DateTimeKind.Local).AddTicks(5922),
                             canPublish = false
                         },
                         new
@@ -459,7 +401,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 618, DateTimeKind.Local).AddTicks(9722),
+                            TimeWritten = new DateTime(2021, 12, 7, 17, 15, 26, 445, DateTimeKind.Local).AddTicks(2545),
                             canPublish = true
                         },
                         new
@@ -467,9 +409,101 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 11, 29, 19, 21, 4, 618, DateTimeKind.Local).AddTicks(9798),
+                            TimeWritten = new DateTime(2021, 12, 7, 17, 15, 26, 445, DateTimeKind.Local).AddTicks(2739),
                             canPublish = true
                         });
+                });
+
+            modelBuilder.Entity("Hospital.Medicines.Model.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Manufacturer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MedicineImage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Precautions")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Reactions")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SideEffects")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Manufacturer = "Pfizer",
+                            MedicineImage = "",
+                            Name = "Brufen",
+                            Precautions = "Mozes sve lagano",
+                            Price = 200.0,
+                            Reactions = "Pa umres",
+                            SideEffects = "Umres",
+                            Supply = 100,
+                            Usage = "Kad god hoces",
+                            Weight = 100.0
+                        });
+                });
+
+            modelBuilder.Entity("Hospital.Schedule.Model.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("ApointmentDescription")
+                        .HasColumnType("text");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DurationInMunutes")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>
@@ -615,6 +649,25 @@ namespace Hospital.Migrations
                             Surname = "Popovic",
                             Type = 2,
                             Username = "miki56"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Adress = "Ravanicka 8",
+                            AvailableDaysOff = 15,
+                            DateOfBirth = new DateTime(1987, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "milica@gmail.com",
+                            Jmbg = "3052123545852",
+                            Name = "Milica",
+                            NumberOfPatients = 0,
+                            Password = "mica1234",
+                            PhoneNumber = "0691457608",
+                            SalaryInRsd = 250000,
+                            Sex = 1,
+                            SpecialityId = 2,
+                            Surname = "Milic",
+                            Type = 2,
+                            Username = "mica56"
                         });
                 });
 
@@ -637,6 +690,11 @@ namespace Hospital.Migrations
                         {
                             Id = 1,
                             Name = "general"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "cardiology"
                         });
                 });
 
@@ -686,6 +744,25 @@ namespace Hospital.Migrations
                     b.Navigation("ChosenDoctor");
 
                     b.Navigation("MedicalRecord");
+                });
+
+            modelBuilder.Entity("Hospital.Schedule.Model.Appointment", b =>
+                {
+                    b.HasOne("Hospital.SharedModel.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Hospital.MedicalRecords.Model.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>

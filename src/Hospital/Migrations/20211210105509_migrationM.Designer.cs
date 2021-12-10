@@ -3,15 +3,17 @@ using System;
 using Hospital.SharedModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211210105509_migrationM")]
+    partial class migrationM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,40 +219,6 @@ namespace Hospital.Migrations
                             Surname = "Markovic",
                             Type = 3,
                             Username = "miki98"
-                        });
-                });
-
-            modelBuilder.Entity("Hospital.MedicalRecords.Model.Prescription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DrugName")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("IssuedTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("PatientName")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Prescriptions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Random opis nekog leka",
-                            DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 3, 19, 36, 1, 823, DateTimeKind.Local).AddTicks(2956),
-                            PatientName = "Zoran Zoranic"
                         });
                 });
 
@@ -562,7 +530,7 @@ namespace Hospital.Migrations
                             isCancelled = false
                         });
                 });
-                
+
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>
                 {
                     b.Property<int>("Id")
