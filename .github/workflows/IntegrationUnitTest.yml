@@ -21,4 +21,4 @@ jobs:
       - name: Build
         run: dotnet build src/\"Integration API\"/IntegrationAPI.sln --configuration Release --no-restore
       - name: Test
-        run: dotnet test src/\"Integration API\" --filter Type=UnitTest --no-restore --verbosity normal
+        run: dotnet test src/\"Integration API\"/IntegrationAPI.sln --filter Type=UnitTest --no-restore --verbosity normal
