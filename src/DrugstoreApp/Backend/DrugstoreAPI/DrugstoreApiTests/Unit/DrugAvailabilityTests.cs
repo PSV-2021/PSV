@@ -16,6 +16,7 @@ using Shouldly;
 
 namespace DrugstoreApiTests
 {
+    [Trait("Type", "UnitTest")]
     public class DrugAvailabilityTests
     {
         [Theory]

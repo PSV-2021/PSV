@@ -146,7 +146,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return notifications;
         }
-        */
+        
 
         private Boolean CanShowNotification(DateTime dateTime)
         {
@@ -186,7 +186,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return notifications;
         }
-
+        
         public Patient Save(Patient patient)
         {
             throw new NotImplementedException();
@@ -246,7 +246,7 @@ namespace Hospital.MedicalRecords.Service
             patient.MedicalRecord.RemoveAnamnesis(anamnesis);
             EditPatient(patient);
         }*/
-
+      
         /*public List<MedicineCount> GetMedicineCountForSelectedDate(DateTime startDate, DateTime endDate)
         {
             Dictionary<int, int> medicineCount = CreateMedicineCountDictionary(startDate, endDate);
@@ -285,7 +285,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return medicineCount;
         }*/
-
+        /*
         private Boolean IsPrescriptionInTimeInterval(Prescription prescription, DateTime startDate, DateTime endDate)
         {
             var prescriptionStartDate = prescription.StartDate;
@@ -303,7 +303,7 @@ namespace Hospital.MedicalRecords.Service
             return sum;
         }
 
-        
+        */
     }
 
 }

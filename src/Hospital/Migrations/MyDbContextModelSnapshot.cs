@@ -220,6 +220,40 @@ namespace Hospital.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Hospital.MedicalRecords.Model.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DrugName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("IssuedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PatientName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prescriptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Random opis nekog leka",
+                            DrugName = "Palitrex",
+                            IssuedTime = new DateTime(2021, 12, 3, 19, 36, 1, 823, DateTimeKind.Local).AddTicks(2956),
+                            PatientName = "Zoran Zoranic"
+                        });
+                });
+
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Survey", b =>
                 {
                     b.Property<int>("Id")
@@ -528,7 +562,7 @@ namespace Hospital.Migrations
                             isCancelled = false
                         });
                 });
-
+                
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>
                 {
                     b.Property<int>("Id")

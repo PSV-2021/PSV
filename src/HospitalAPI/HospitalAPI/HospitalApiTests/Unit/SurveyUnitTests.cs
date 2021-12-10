@@ -10,6 +10,7 @@ using Xunit;
 
 namespace HospitalApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class SurveyUnitTests
     {
         [Trait("Type", "UnitTest")]

@@ -23,7 +23,7 @@ namespace Hospital.SharedModel
         public DbSet<AnsweredQuestion> AnsweredQuestion { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-
+        public DbSet<Prescription> Prescriptions { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -152,6 +152,7 @@ namespace Hospital.SharedModel
             modelBuilder.Entity<Appointment>().HasData(
               new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false , isCancelled = false}
               );
+            modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
         }
 
     }
