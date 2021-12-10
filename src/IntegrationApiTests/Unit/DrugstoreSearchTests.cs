@@ -6,11 +6,11 @@ using Integration.Model;
 using Integration.Service;
 using Integration_API.Controllers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Shouldly;
 using Xunit;
+using Microsoft.AspNetCore.Mvc;
 
-namespace IntegrationApiTests
+namespace IntegrationApiTests.Unit
 {
     [Trait("Type", "UnitTest")]
     public class DrugstoreSearchTests
