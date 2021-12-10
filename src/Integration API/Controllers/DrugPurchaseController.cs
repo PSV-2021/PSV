@@ -135,7 +135,7 @@ namespace Integration_API.Controllers
         {
             //var input = new HelloRequest { Name = "world" };
             var input = new DrugRequest { Amount = demand.Amount, Name = demand.Name, PharmacyUrl = demand.PharmacyUrl, ApiKey = GetApiKey(demand) };
-            var channel = new Channel("127.0.0.1:4111", ChannelCredentials.Insecure);
+            var channel = new Channel(GetGrpcDrugstoreLink(), ChannelCredentials.Insecure);
             var client = new gRPCDrugPurchaseService.gRPCDrugPurchaseServiceClient(channel);
 
             var response = client.DrugDemand(input);
@@ -160,7 +160,15 @@ namespace Integration_API.Controllers
 
             return domport;
         }
-        
+        private string GetGrpcDrugstoreLink()
+        {
+            string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "127.0.0.1";
+            string port = Environment.GetEnvironmentVariable("PORT") ?? "4111";
+            string domport = $"{domain}:{port}";
+
+            return domport;
+        }
+
         //private static async Task drugDemandAsync(HelloRequest input)
         //{
         //    return await 
