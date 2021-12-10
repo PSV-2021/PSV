@@ -21,22 +21,28 @@ namespace Drugstore.Service
 
         private List<FileInfo> fileInfos = new List<FileInfo>();
         private List<string> fileDeletionList = new List<string>();
-        private string path = @"\PSV\src\Rebex\data\public\Drugstore files\";
+        private string path = "";
 
         public  void CompressOldFiles()
         {
-            string zipName = @"\PSV\src\Rebex\data\public\Compressed Drugstore files\Kompersovano-" + DateTime.Now.Day.ToString() + "." +
+            string current = Directory.GetCurrentDirectory().ToString();
+            var gparent = Directory.GetParent(Directory.GetParent(current).ToString()).ToString();
+            var path2 = Directory.GetParent(Directory.GetParent(gparent).ToString()).ToString();
+            path = path2 + @"\Rebex\data\public\";
+            string drugstoreFilesPath = path + @"Drugstore files";
+            string compressionPath = path + @"Compressed Drugstore files";
+            string zipName = compressionPath + @"\Kompersovano-" + DateTime.Now.Day.ToString() + "." +
                 DateTime.Now.Month.ToString()
                 + "." + DateTime.Now.Year.ToString()
                 + ". " + DateTime.Now.Hour.ToString()
                 + " i " + DateTime.Now.Minute.ToString()
                 + ".zip";
 
-            if (this.CheckIfThereAreFIlesToCompress(path))
+            if (this.CheckIfThereAreFIlesToCompress(drugstoreFilesPath))
             {
                 using (FileStream file = File.Open(zipName, FileMode.Create))
                 {
-                    fileInfos = this.getFilesForCompression(path);
+                    fileInfos = this.getFilesForCompression(drugstoreFilesPath);
                     
                    
 
@@ -67,6 +73,7 @@ namespace Drugstore.Service
         }
         public bool CheckIfThereAreFIlesToCompress(string path)
         {
+            Console.WriteLine(path);
             bool result = false;
             foreach (string fileName in Directory.GetFiles(path))
             {
