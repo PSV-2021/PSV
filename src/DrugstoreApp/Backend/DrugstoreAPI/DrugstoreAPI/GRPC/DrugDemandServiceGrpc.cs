@@ -22,7 +22,7 @@ namespace DrugstoreAPI
         private void SetupDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
-            builder.UseNpgsql("server=localhost; port=5432; database=drugstore; User Id=postgres; password=12345");
+            builder.UseNpgsql("server=localhost; port=5432; database=drugstore; User Id=postgres; password=firma4");
             this.dbContext = new MyDbContext(builder.Options);
         }
         public DrugDemandServiceGrpc(ILogger<GreeterService> logger, MyDbContext dbContext)

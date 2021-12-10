@@ -89,7 +89,7 @@ namespace DrugstoreAPI
             var server = Configuration["DBServer"] ?? "localhost";
             var port = Configuration["DBPort"] ?? "5432";
             var user = Configuration["DBUser"] ?? "postgres";
-            var password = Configuration["DBPassword"] ?? "12345";
+            var password = Configuration["DBPassword"] ?? "firma4";
             var database = Configuration["DB"] ?? "drugstore";
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
