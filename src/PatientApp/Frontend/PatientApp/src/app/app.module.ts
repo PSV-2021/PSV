@@ -29,6 +29,7 @@ import { ActivationAccountComponent } from './activation-account/activation-acco
 import { LoginComponent } from './login/login.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
+import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { RegistrationSuccessComponent } from './registration-success/registratio
     ActivationAccountComponent,
     LoginComponent,
     MedicalRecordComponent,
-    RegistrationSuccessComponent
+    RegistrationSuccessComponent,
+    AppointmentsObserveComponent
 
   ],
   imports: [

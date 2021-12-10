@@ -57,7 +57,7 @@ namespace HospitalApiTests.Integration
 
             SurveyController surveyController = new SurveyController(context);
 
-            IActionResult retVal = surveyController.Post(survey);
+            IActionResult retVal = surveyController.Post(survey,"2", "1");
 
             retVal.Equals(HttpStatusCode.OK);
         }

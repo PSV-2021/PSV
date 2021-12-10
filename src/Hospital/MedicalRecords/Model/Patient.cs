@@ -42,7 +42,7 @@ namespace Hospital.MedicalRecords.Model
             this.MedicalRecord = med;
             this.Username = username;
             this.Password = password;
-            this.appointment = null;
+            //this.appointment = null;
             this.Type = UserType.patient;
             this.IsBlocked = block;
         }
@@ -61,7 +61,7 @@ namespace Hospital.MedicalRecords.Model
             this.MedicalRecord = med;
             this.Username = username;
             this.Password = password;
-            this.appointment = null;
+            //this.appointment = null;
             this.Type = UserType.patient;
             this.IsBlocked = block;
             this.BloodType = bt;
@@ -88,7 +88,7 @@ namespace Hospital.MedicalRecords.Model
                 MedicalRecord.Allergens = value;
             }
         }
-  
+  /*
         public List<Appointment> appointment;
 
         [NotMapped]
@@ -151,7 +151,7 @@ namespace Hospital.MedicalRecords.Model
                     oldAppointment.Patient = null;
                 tmpAppointment.Clear();
             }
-        }
+        }*/
 
         public override string ToString()
         {

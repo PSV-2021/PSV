@@ -16,7 +16,7 @@ export class SurveyService {
       return this.http.get<any>(this.url + '/survey');
   }
   
-  PostSurveyQuestions(Survey: any): Observable<any> {
-    return this.http.post<any>(this.url + "/survey", Survey);
+  PostSurveyQuestions(Survey: any, id: any, ap: any): Observable<any> {
+    return this.http.post<any>(this.url + "/survey/"+id +"/"+ap, Survey);
   }
 }
