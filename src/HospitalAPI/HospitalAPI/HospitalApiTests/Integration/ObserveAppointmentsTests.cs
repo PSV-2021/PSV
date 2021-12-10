@@ -64,6 +64,28 @@ namespace HospitalApiTests.Integration
             retVal.Add(new object[] { new Appointment { Id = 1, StartTime = new DateTime(2021, 11, 30, 15, 30, 00), DurationInMunutes = 20, DoctorId = 1, PatientId = 1 } });
             return retVal;
         }
-        
+
+        [Fact]
+        public void Get_survey()
+        {
+            SetUpDbContext();
+            context.Add(new Appointment { Id = 1, StartTime = new DateTime(2021, 11, 30, 15, 30, 00), DurationInMunutes = 20, DoctorId = 1, PatientId = 1 });
+            Survey survey = new Survey { Id = 1, AppointmentId = 1, PatientId = 1 };
+            context.Add(survey);
+            Patient patient = new Patient { Id = 1, Name = "Andjelka" };
+            context.Add(patient);
+
+            SurveyController surveyController = new SurveyController(context);
+            IActionResult retVal = surveyController.Get(survey.PatientId.ToString(), survey.PatientId.ToString());
+
+            retVal.Equals(true);
+        }
+        public static IEnumerable<object[]> Survey()
+        {
+            var retVal = new List<object[]>();
+            retVal.Add(new object[] { new Survey { Id = 1,AppointmentId = 1, PatientId = 1 } });
+            return retVal;
+        }
+
     }
 }

@@ -26,6 +26,10 @@ namespace Hospital.Schedule.Model
         [ForeignKey("DoctorId")]
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
+
+        [ForeignKey("SurveyId")]
+        public int SurveyId { get; set; }
+        public virtual Survey Survey { get; set; }
         [NotMapped]
         public AppointmentStatus Status { get; set; }
 

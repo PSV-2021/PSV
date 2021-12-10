@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../survey.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Route } from '@angular/compiler/src/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-survey',
@@ -14,7 +14,7 @@ export class SurveyComponent implements OnInit {
   pageTitle="Survey"
   public surveys: any[];
 
-  constructor(private surveyService:SurveyService, private _snackBar: MatSnackBar, private route: ActivatedRoute) { 
+  constructor(private surveyService:SurveyService, private _snackBar: MatSnackBar, private route: ActivatedRoute, private router: Router) { 
     this.surveys = [];
   }
 
@@ -36,6 +36,7 @@ export class SurveyComponent implements OnInit {
       this._snackBar.open('Anketa poslata!', '', {
         duration: 2000
       });;
+      this.router.navigate(['/medicalRecord']);
     });
   }
 

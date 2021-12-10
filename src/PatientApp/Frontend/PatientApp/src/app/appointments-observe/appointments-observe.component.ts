@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppointmentObserveService } from '../appointment-observe.service';
 
 
 export interface Appointment {
   id: number;
-  startTime: Date;
-  appointmentDescription: string;
-  doctorId: number;
-  surveyId: number;
-  status: number;
+  patientId: number;
 }
 @Component({
   selector: 'app-appointments-observe',
@@ -19,8 +15,11 @@ export interface Appointment {
 })
 export class AppointmentsObserveComponent implements OnInit {
   displayedColumns: string[] = ['id', 'start time', 'description', 'doctor', 'status','survey'];
-  appointments: any[]=[];
   dataSource = [];
+  surveys: any[] = []
+
+ 
+
 
   constructor(private observeAppointemntsService: AppointmentObserveService, private router: Router) { }
 
@@ -35,9 +34,9 @@ export class AppointmentsObserveComponent implements OnInit {
 
   ngOnInit(): void {
     this.observeAppointemntsService.GetAppointments('2').subscribe((data: any)=>{
-    console.log(data);
-     this.dataSource = data;
-  });    
-  }
+      console.log(data);
+    this.dataSource = data;
+  });
+}
 
 }
