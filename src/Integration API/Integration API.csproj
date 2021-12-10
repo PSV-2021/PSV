@@ -48,10 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Hospital">
-      <HintPath>..\Hospital\bin\Debug\netcoreapp3.1\Hospital.dll</HintPath>
-    </Reference>
-    <Reference Include="Integration">
+	  <Reference Include="Integration">
       <HintPath>..\Integration\bin\Debug\netcoreapp3.1\Integration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.EntityFrameworkCore, Version=5.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
