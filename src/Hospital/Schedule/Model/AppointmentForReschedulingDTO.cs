@@ -17,10 +17,10 @@ namespace Hospital.Schedule.Model
 
         public AppointmentForReschedulingDTO(Appointment a)
         {
-            AppointmentId = a.AppointentId;
+            AppointmentId = a.Id;
             PatientName = a.PatientName;
             DoctorName = a.DoctorName;
-            RoomNumber = a.RoomName;
+            //RoomNumber = a.RoomName;
             StartTime = a.StartTime;
             DurationInMunutes = a.DurationInMunutes;
             AppointmentDescription = a.ApointmentDescription;
@@ -30,4 +30,3 @@ namespace Hospital.Schedule.Model
         //public AppointmentForReschedulingDTO() { }
     }
 }
-
