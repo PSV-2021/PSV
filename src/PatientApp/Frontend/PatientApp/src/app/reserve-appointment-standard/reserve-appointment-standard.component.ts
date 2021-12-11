@@ -16,6 +16,11 @@ export interface Specialty{
 
 export interface SelectedSpecialty{
   Name: string;
+  Id: number;
+}
+export interface SelectedDoctor{
+  Name: string;
+  Id: number;
 }
 
 export interface Doctor{
