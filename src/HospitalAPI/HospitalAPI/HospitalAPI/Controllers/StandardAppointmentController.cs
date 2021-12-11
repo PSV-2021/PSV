@@ -3,6 +3,7 @@ using Hospital.Schedule.Repository;
 using Hospital.Schedule.Service;
 using Hospital.SharedModel;
 using HospitalAPI.DTO;
+using HospitalAPI.Verification;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,6 +19,7 @@ namespace HospitalAPI.Controllers
     {
         private readonly MyDbContext context;
         public AppointmentService appointmentService;
+        public AppointmentVerification appointmentVerification = new AppointmentVerification();
 
         public StandardAppointmentController(MyDbContext context)
         {
@@ -44,8 +46,8 @@ namespace HospitalAPI.Controllers
         [HttpPost("schedule")]
         public IActionResult Schedule([FromBody] AppointmentDTO appointment)
         {
-           /* if (!patientVerification.Verify(p))
-                return BadRequest();*/
+            if (!appointmentVerification.Verify(appointment))
+                return BadRequest();
             Appointment appointmentToSchedule = GenerateAppointmentFromDTO(appointment);
             appointmentService.SaveAppointmentSql(appointmentToSchedule, context);
             return Ok();

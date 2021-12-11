@@ -7,11 +7,14 @@ using Moq;
 using Hospital.Schedule.Model;
 using Hospital.Schedule.Service;
 using Shouldly;
+using HospitalAPI.DTO;
+using HospitalAPI.Verification;
 
 namespace HospitalApiTests.Unit
 {
     public class StandardAppointmentUnitTests
     {
+        private AppointmentVerification appointmentVerification = new AppointmentVerification();
 
         [Theory]
         [MemberData(nameof(Data))]
@@ -79,6 +82,35 @@ namespace HospitalApiTests.Unit
             appointments.Add(ap3);
 
             return appointments;
+        }
+
+        [Fact]
+        public void Check_appointment_start_null()
+        {
+            AppointmentDTO appointment = GenerateAppointment();
+            appointment.StartTime = null;
+            Assert.False(appointmentVerification.Verify(appointment));
+        }
+
+        [Fact]
+        public void Check_appointment_doctorId_null()
+        {
+            AppointmentDTO appointment = GenerateAppointment();
+            appointment.DoctorId = null;
+            Assert.False(appointmentVerification.Verify(appointment));
+        }
+
+        [Fact]
+        public void Check_appointment_patientId_null()
+        {
+            AppointmentDTO appointment = GenerateAppointment();
+            appointment.PatientId = null;
+            Assert.False(appointmentVerification.Verify(appointment));
+        }
+
+        private AppointmentDTO GenerateAppointment()
+        {
+            return new AppointmentDTO { StartTime = "20/01/2000 00:00:00", DoctorId = "1", PatientId = "1" };
         }
     }
 }
