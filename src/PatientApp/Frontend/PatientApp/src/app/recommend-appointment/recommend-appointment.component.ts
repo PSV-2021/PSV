@@ -116,14 +116,12 @@ export class RecommendAppointmentComponent implements OnInit {
         this.doctorId = d.id;
       }
     }
-
-    console.log(this.start);
-    console.log(this.doctorId);
-
-    
+   
     this.recommendAppointmentService.Schedule(this.start, this.doctorId).subscribe(data => {
-      this.router.navigate(['/medicalRecord']);
+     
     });
+
+    this.router.navigate(['medicalRecord']);
   }
 
 }

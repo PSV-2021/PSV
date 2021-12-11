@@ -832,11 +832,13 @@ namespace Hospital.Schedule.Service
             return recommendedAppointments;
         }
 
-        //potrebno dodati i za ostale doktore iste specijalizacije
         public List<Appointment> AppointmentsBeforeDate(SearchAppointmentsDTO searchAppointments)
         {
             DateTime startDate = DateTime.Parse(searchAppointments.StartInterval).Date.AddDays(-1);
             DateTime minDate = DateTime.Parse(searchAppointments.EndInterval).Date.AddDays(-5);
+
+            if (minDate < DateTime.Now.Date)
+                minDate = DateTime.Now.Date;
 
             List<Appointment> allAvailableAppointments = new List<Appointment>();
 
@@ -846,10 +848,9 @@ namespace Hospital.Schedule.Service
                 allAvailableAppointments.AddRange(availableAppointments);
                 startDate = startDate.AddDays(-1);
             }
-            return allAvailableAppointments.Where(ap => allAvailableAppointments.IndexOf(ap) < 5).ToList(); //vrati 5 preporucenih termina
+            return allAvailableAppointments;
         }
 
-        //potrebno dodati i za ostale doktore iste specijalizacije
         public List<Appointment> AppointmentsAfterDate(SearchAppointmentsDTO searchAppointments)
         {
             DateTime endDate = DateTime.Parse(searchAppointments.StartInterval).Date.AddDays(1);
@@ -864,7 +865,7 @@ namespace Hospital.Schedule.Service
                 endDate = endDate.AddDays(1);
             }
 
-            return allAvailableAppointments.Where(ap => allAvailableAppointments.IndexOf(ap) < 5).ToList();
+            return allAvailableAppointments;
         }
 
         public static List<AvailableAppointmentsDTO> AvailableAppointmentsDTODoctor(List<Appointment> appointments)
@@ -899,7 +900,7 @@ namespace Hospital.Schedule.Service
                 ApointmentDescription = "",
                 IsDeleted = false,
                 DoctorId = doctorId,
-                PatientId = 1, //ovo treba promeniti posle
+                PatientId = 2, //ovo treba promeniti posle
                 Canceled = false
             };
         }

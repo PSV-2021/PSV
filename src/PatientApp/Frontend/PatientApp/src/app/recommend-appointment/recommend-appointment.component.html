@@ -22,7 +22,8 @@
                 <mat-label>Chosen doctor</mat-label>
                 <mat-select formControlName="doctor" [(ngModel)]="selectedDoctor.name" required>
                     <mat-option *ngFor="let doctor of doctors" [value]="doctor.nameAndSurname">
-                      {{doctor.nameAndSurname}}
+                      <p *ngIf="doctor.specialityId == 1">dr. {{doctor.nameAndSurname}} - general</p> 
+                      <p *ngIf="doctor.specialityId == 2">dr. {{doctor.nameAndSurname}} - cardiology</p>                   
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="hasError('doctor', 'required')">Doctor is required</mat-error>
