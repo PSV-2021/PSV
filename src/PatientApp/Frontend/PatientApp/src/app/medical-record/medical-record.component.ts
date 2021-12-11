@@ -14,7 +14,7 @@ export class MedicalRecordComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.medicalRecordService.GetMedicalRecord('1').subscribe((data: any)=>{
+    this.medicalRecordService.GetMedicalRecord('2').subscribe((data: any)=>{
         console.log(data);
         this.medicalRecord = data;
     });
