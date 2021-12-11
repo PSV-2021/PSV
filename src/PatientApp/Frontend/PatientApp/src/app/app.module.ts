@@ -31,7 +31,6 @@ import { MedicalRecordComponent } from './medical-record/medical-record.componen
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { ReserveAppointmentStandardComponent } from './reserve-appointment-standard/reserve-appointment-standard.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { FullCalendarModule } from '@fullcalendar/angular'; 
 import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
 
 
@@ -47,7 +46,7 @@ import { AppointmentsObserveComponent } from './appointments-observe/appointment
     LoginComponent,
     MedicalRecordComponent,
     RegistrationSuccessComponent,
-    ReserveAppointmentStandardComponent
+    ReserveAppointmentStandardComponent,
     AppointmentsObserveComponent
 
 
@@ -74,8 +73,7 @@ import { AppointmentsObserveComponent } from './appointments-observe/appointment
     MatRadioModule,
     MatSnackBarModule,
     FormsModule,
-    MatStepperModule,
-    FullCalendarModule
+    MatStepperModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

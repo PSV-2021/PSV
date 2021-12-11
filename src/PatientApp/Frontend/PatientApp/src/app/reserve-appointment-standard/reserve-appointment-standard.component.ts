@@ -2,8 +2,6 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReserveAppointmentStandardService } from '../reserve-appointment-standard.service';
-import { Calendar } from '@fullcalendar/core';
-import dayGridPlugin, { DayGridView } from '@fullcalendar/daygrid'; 
 import { StandardAppointmentDto } from './standard-appointment.dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -37,8 +35,6 @@ export interface AppointmentDate{
   styleUrls: ['./reserve-appointment-standard.component.css']
 })
 export class ReserveAppointmentStandardComponent implements OnInit {
-  calendarPlugins = [dayGridPlugin];
-  dayGridView = new DayGridView;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -72,7 +68,6 @@ export class ReserveAppointmentStandardComponent implements OnInit {
     this.forthFormGroup = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
     });
-    const name = Calendar.name
     
   }
 
