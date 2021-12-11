@@ -27,3 +27,13 @@
 ::ng-deep .mat-horizontal-stepper-header{
     pointer-events: none !important;
 }
+table {
+    width: 50vw;
+}
+
+#tableContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vw;
+}

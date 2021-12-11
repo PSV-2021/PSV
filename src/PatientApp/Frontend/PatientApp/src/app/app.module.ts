@@ -30,7 +30,9 @@ import { LoginComponent } from './login/login.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { ReserveAppointmentStandardComponent } from './reserve-appointment-standard/reserve-appointment-standard.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { FullCalendarModule } from '@fullcalendar/angular'; 
+
 
 
 @NgModule({
@@ -70,7 +72,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatRadioModule,
     MatSnackBarModule,
     FormsModule,
-    MatStepperModule
+    MatStepperModule,
+    FullCalendarModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -2,6 +2,7 @@
 using Hospital.Schedule.Repository;
 using Hospital.Schedule.Service;
 using Hospital.SharedModel;
+using HospitalAPI.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,13 +30,43 @@ namespace HospitalAPI.Controllers
             return Ok(appointmentService.SaveAppointment(appointment));
         }
 
-        [HttpGet]
-        public IActionResult GetFreeAppointments(int idDoctor, DateTime chosenDate)
+        [HttpGet("{idDoctor}/{chosenDate}")]
+        public IActionResult GetFreeAppointments(string idDoctor, string chosenDate)
         {
+            Console.WriteLine(chosenDate);
+            Console.WriteLine(idDoctor);
             List<Appointment> result = new List<Appointment>();
-            result = appointmentService.GetAppointmentsByDoctorAndDate(idDoctor,chosenDate);
+            int id = int.Parse(idDoctor);
+            DateTime date = DateTime.Parse(chosenDate);
+            result = appointmentService.GetAppointmentsByDoctorAndDate(id, date);
             return Ok(result);
         }
+        [HttpPost("schedule")]
+        public IActionResult Schedule([FromBody] AppointmentDTO appointment)
+        {
+           /* if (!patientVerification.Verify(p))
+                return BadRequest();*/
+            Appointment appointmentToSchedule = GenerateAppointmentFromDTO(appointment);
+            appointmentService.SaveAppointmentSql(appointmentToSchedule, context);
+            return Ok();
+        }
+
+
+        private static Appointment GenerateAppointmentFromDTO(AppointmentDTO p)
+        {
+            Appointment appointment = new Appointment
+            {
+                StartTime = DateTime.ParseExact(p.StartTime, "dd/MM/yyyy hh:mm:ss", null),
+                DurationInMunutes = 30,
+                ApointmentDescription = "",
+                IsDeleted = false,
+                DoctorId = Int32.Parse(p.DoctorId),
+                PatientId = Int32.Parse(p.PatientId)
+            };
+
+            return appointment;
+        }
+
     }
 }
 

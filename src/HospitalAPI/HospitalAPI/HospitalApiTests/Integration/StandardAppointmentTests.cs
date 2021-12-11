@@ -1,6 +1,7 @@
 ﻿using Hospital.Schedule.Model;
 using Hospital.SharedModel;
 using HospitalAPI.Controllers;
+using HospitalAPI.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
@@ -57,7 +58,7 @@ namespace HospitalApiTests.Integration
 
         private Appointment GenerateAppointment()
         {
-            return new Appointment { Id = 1, StartTime = new DateTime(2021, 05, 30), DoctorId = 1, PatientId = 1 };
+            return new Appointment { StartTime = new DateTime(2021, 05, 30), DoctorId = 1, PatientId = 1 };
         }
 
         [Fact]
@@ -109,7 +110,7 @@ namespace HospitalApiTests.Integration
             });
 
             DoctorsController doctorController = new DoctorsController(context);
-            IActionResult retVal = doctorController.GetDoctorsBySpecialty(2);
+            IActionResult retVal = doctorController.GetDoctorsBySpecialty("2");
 
             retVal.ShouldNotBeNull();
             retVal.Equals(Doctors());
@@ -152,7 +153,7 @@ namespace HospitalApiTests.Integration
             SetUpDbContext();
             context.Add(new Appointment
             {
-                 Id =1,
+                 Id =2,
                  StartTime = new DateTime(2021,12,12, 14, 30, 00),
                  DurationInMunutes = 30,
                  ApointmentDescription = "",
@@ -162,8 +163,8 @@ namespace HospitalApiTests.Integration
             });
             context.Add(new Appointment
             {
-                Id = 2,
-                StartTime = new DateTime(2021, 12, 12, 8, 0, 00),
+                Id = 3,
+                StartTime = new DateTime(2021, 12, 12, 8, 30, 00),
                 DurationInMunutes = 30,
                 ApointmentDescription = "",
                 IsDeleted = false,
@@ -173,7 +174,7 @@ namespace HospitalApiTests.Integration
             });
             
             StandardAppointmentController standardAppointmentController = new StandardAppointmentController(context);
-            IActionResult retVal = standardAppointmentController.GetFreeAppointments(1,new DateTime(2021,12,12));
+            IActionResult retVal = standardAppointmentController.GetFreeAppointments("1","12.12.2021");
 
             retVal.ShouldNotBeNull();
             retVal.Equals(Appointments());
@@ -202,6 +203,21 @@ namespace HospitalApiTests.Integration
             
             return retVal;
         }
+        [Fact]
+        public void Schedule_appointment()
+        {
+            SetUpDbContext();
+            var appointment = GenerateAppointmentDTO();
+            StandardAppointmentController surveyController = new StandardAppointmentController(context);
+            IActionResult retVal = surveyController.Schedule(appointment);
+            retVal.Equals(HttpStatusCode.OK);
+        }
+        private AppointmentDTO GenerateAppointmentDTO()
+        {
+            return new AppointmentDTO { StartTime = "20/01/2000 09:00:00", DoctorId = "1", PatientId = "1" };
+        }
+
+
 
     }
 }
