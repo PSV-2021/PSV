@@ -31,11 +31,13 @@ namespace HospitalAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("/chooseDoctor/{id}")]
-        public IActionResult GetDoctorsBySpecialty(int id)
+        [HttpGet("{id}")]
+        public IActionResult GetDoctorsBySpecialty(string id)
         {
+            int idSpecialty = int.Parse(id);
+            Console.WriteLine(id);
             List<Doctor> result = new List<Doctor>();
-            result = doctorService.GetDoctorsBySpeciality(id);
+            result = doctorService.GetDoctorsBySpeciality(idSpecialty);
             return Ok(result);
         }
     }

@@ -18,12 +18,31 @@ namespace Hospital.Schedule.Service
         private Appointment ChangingAppointment { get; set; }
         private EventsLogService EventsLogService { get; set; }
 
+        int numberOfAppointmentsInDay = 16;
+        double lengthOfAppointmentInMinutes = 30;
         public AppointmentService()
         {
             AppointmentRepository = new AppointmentFileRepository();
             EventsLogService = new EventsLogService();
             ChangingAppointment = new Appointment();
         }
+
+        public bool CheckIfExistsByTime(DateTime timeofAppointment)
+        {
+            List<Appointment> appointments = AppointmentRepository.GetAll().ToList();
+            foreach (Appointment a in appointments)
+            {
+                if (DateTime.Compare(a.StartTime, timeofAppointment) == 0)
+                    return true;
+            }
+            return false;
+        }
+
+        public AppointmentService(IAppointmentRepository IsurveyRepository)
+        {
+            AppointmentRepository = IsurveyRepository;
+        }
+
         public AppointmentService(AppointmentSqlRepository appointmentSqlRepository)
         {
             AppointmentRepository = appointmentSqlRepository;
@@ -39,9 +58,10 @@ namespace Hospital.Schedule.Service
         public List<Appointment> GetAppointmentsByDoctorAndDate(int idDoctor, DateTime chosenDate)
         {
             List<Appointment> appointments = new List<Appointment>();
-            List<Appointment> occupiedAppointments = AppointmentSqlRepository.GetOccupiedAppointmentsByDoctorAndDate(idDoctor, chosenDate);
+            List<Appointment> occupiedAppointments = new List<Appointment>();
+            occupiedAppointments.AddRange(AppointmentSqlRepository.GetOccupiedAppointmentsByDoctorAndDate(idDoctor, chosenDate));
 
-            if (occupiedAppointments == null)
+            if (occupiedAppointments.Count == 0)
             {
                 appointments = CreateAllFreeAppointmentsByDate(chosenDate);
             }
@@ -54,11 +74,16 @@ namespace Hospital.Schedule.Service
             return appointments;
         }
 
+        public void SaveAppointmentSql(Appointment appointment, MyDbContext dbContext)
+        {
+            AppointmentSqlRepository.Save(appointment);
+        }
+
         private List<Appointment> RemoveAppointmentFromAppointmentList(Appointment occupiedAppointment, DateTime chosenDate)
         {
 
             List<Appointment> appointments = CreateAllFreeAppointmentsByDate(chosenDate);
-            foreach (Appointment appointment in appointments)
+            foreach (Appointment appointment in appointments.ToList())
             {
                 if(DateTime.Compare(occupiedAppointment.StartTime,appointment.StartTime) == 0)
                 {
@@ -71,14 +96,12 @@ namespace Hospital.Schedule.Service
         private List<Appointment> CreateAllFreeAppointmentsByDate(DateTime chosenDate)
         {
             List<Appointment> allPossibleAppointmentsForDate = new List<Appointment>();
-            int numberOfAppointmentsInDay = 16;
-            double lengthOfAppointmentInMinutes = 30;
             Appointment appointment = new Appointment { StartTime = chosenDate.AddHours(8) }; //hospital begins to work at 8 am
-            allPossibleAppointmentsForDate.Add(appointment);
-            for(int i = 0; i < numberOfAppointmentsInDay - 1; i++)
+            for (int i = 0; i < numberOfAppointmentsInDay ; i++)
             {
-                appointment.StartTime.AddMinutes(lengthOfAppointmentInMinutes);
-                allPossibleAppointmentsForDate.Add(appointment);
+                Appointment newAppointmentLocal = new Appointment { StartTime = appointment.StartTime };
+                allPossibleAppointmentsForDate.Add(newAppointmentLocal);
+                appointment.StartTime = appointment.StartTime.AddMinutes(lengthOfAppointmentInMinutes);
             }
             return allPossibleAppointmentsForDate;
         }

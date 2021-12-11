@@ -19,8 +19,8 @@
       <form #f2="ngForm" [formGroup]="secondFormGroup">
         <mat-form-field appearance="fill">
             <mat-label>Specialty</mat-label>
-            <mat-select formControlName="specialty" [(ngModel)]="selectedSpecialty.Name" required>
-                <mat-option *ngFor="let specialty of specialties" [value]="specialty.name" >
+            <mat-select formControlName="specialty" [(ngModel)]="selectedSpecialty.Id" required>
+                <mat-option *ngFor="let specialty of specialties" [value]="specialty.id"  >
                   {{specialty.name}}
                 </mat-option>
             </mat-select>
@@ -28,7 +28,7 @@
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext [disabled]="!f2.valid">Next</button>
+          <button mat-button matStepperNext [disabled]="!f2.valid" (click)="chosedSpecialty()>Next</button>
         </div>
       </form>
     </mat-step>
@@ -36,32 +36,47 @@
         <form #f3="ngForm" [formGroup]="thirdFormGroup">
             <mat-form-field appearance="fill">
                 <mat-label>Doctor</mat-label>
-                <mat-select formControlName="doctor" required>
-                    <mat-option *ngFor="let doctor of doctors" [value]="doctors">
-                      {{doctor.Name}}
+                <mat-select formControlName="doctor"  [(ngModel)]="selectedDoctor.Id" required>
+                    <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
+                      {{doctor.nameAndSurname}}
                     </mat-option>
              </mat-select>
              <mat-error *ngIf="hasErrorThird('doctor', 'required')">Doctor is required</mat-error>
             </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext [disabled]="!f3.valid">Next</button>
+            <button mat-button matStepperNext [disabled]="!f3.valid" (click)="chosedDoctor()">Next</button>
           </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="forthFormGroup" label="Pick appointment">
         <form [formGroup]="forthFormGroup">
-            <mat-form-field appearance="fill">
-                <mat-label>Appointment</mat-label>
-                <mat-select formControlName="appointment" required>
-                    <mat-option *ngFor="let appointment of appointments" [value]="appointments">
-                      {{appointment}}
-                    </mat-option>
-             </mat-select>
-             <mat-error *ngIf="hasErrorForth('appointment', 'required')">Appointment is required</mat-error>
-            </mat-form-field>
+            <mat-title>Free appointments for {{appointment.date | date : 'dd.MM.yyyy.' }}</mat-title>
+
+            <div class="container" id="tableContainer">
+              <table mat-table [dataSource]="appointments" >
+              
+              
+                  <ng-container matColumnDef="Time">
+                  <th mat-header-cell *matHeaderCellDef> Time </th>
+                  <td mat-cell *matCellDef="let element"> {{ element.startTime | date : 'shortTime' }} </td>
+                  </ng-container>
+          
+                  <ng-container matColumnDef="#">
+                      <th mat-header-cell *matHeaderCellDef> # </th>
+                      <td mat-cell *matCellDef="let element"> 
+                          <button mat-raised-button color="primary" id="button" (click)="schedule(element)" >Schedule</button>
+                      </td>
+                      </ng-container>
+              
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+          </div>
           <div>
             <button mat-button matStepperPrevious>Back</button>
+
           </div>
         </form>
     </mat-step>
