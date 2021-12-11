@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Hospital.Schedule.Repository
 {
-    public class AppointmentFileRepository: IAppointmentRepository
+    public class AppointmentFileRepository : IAppointmentRepository
     {
         public String FileName { get; set; }
 
@@ -117,13 +117,13 @@ namespace Hospital.Schedule.Repository
             DoctorFileRepository doctorRepository = new DoctorFileRepository();
             foreach (var deserializedAppointment in deserializedAppointments)
             {
-                var patientId = (String) deserializedAppointment["patientId"];
+                var patientId = (String)deserializedAppointment["patientId"];
                 deserializedAppointment.Remove("patientId");
 
-                var roomId = (int) deserializedAppointment["roomId"];
+                var roomId = (int)deserializedAppointment["roomId"];
                 deserializedAppointment.Remove("roomId");
 
-                var doctorId = (String) deserializedAppointment["doctorId"];
+                var doctorId = (String)deserializedAppointment["doctorId"];
                 deserializedAppointment.Remove("doctorId");
 
                 var appointment = deserializedAppointment.ToObject<Appointment>();
@@ -158,7 +158,7 @@ namespace Hospital.Schedule.Repository
         {
             List<Appointment> appointments = ReadFromFile();
             return appointments.Count;
-		}
+        }
 
         private List<JObject> PrepareForSerialization(List<Appointment> appointments)
         {

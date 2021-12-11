@@ -32,7 +32,7 @@ import { RegistrationSuccessComponent } from './registration-success/registratio
 import { ReserveAppointmentStandardComponent } from './reserve-appointment-standard/reserve-appointment-standard.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
-
+import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
 
 
 @NgModule({
@@ -48,6 +48,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     MedicalRecordComponent,
     RegistrationSuccessComponent,
     ReserveAppointmentStandardComponent
+    AppointmentsObserveComponent
+
 
   ],
   imports: [

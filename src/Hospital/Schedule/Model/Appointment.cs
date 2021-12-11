@@ -19,12 +19,18 @@ namespace Hospital.Schedule.Model
         public DateTime StartTime { get; set; }
         public int DurationInMunutes { get; set; }
         public String ApointmentDescription { get; set; }
-
+        public Boolean isCancelled { get; set; }
         public Boolean IsDeleted { get; set; }
 
         [ForeignKey("DoctorId")]
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
+
+        [ForeignKey("SurveyId")]
+        public int SurveyId { get; set; }
+        public virtual Survey Survey { get; set; }
+        [NotMapped]
+        public AppointmentStatus Status { get; set; }
 
         //[JsonIgnore]
         //public Room Room { get; set; }
@@ -49,7 +55,8 @@ namespace Hospital.Schedule.Model
             //this.IsEmergency = IsEmergency;
         }
 
-        public Appointment(Doctor doctor, DateTime startTime, Patient patient) {
+        public Appointment(Doctor doctor, DateTime startTime, Patient patient)
+        {
             /*RoomFileRepository rs = new RoomFileRepository();
             List<Room> rooms = rs.GetAll();
             Room room = rooms[0];
@@ -125,26 +132,27 @@ namespace Hospital.Schedule.Model
             }
         }
 
-       /* public String AppointmentDescription
-        {
-            get => ApointmentDescription;
-            set
-            {
-                ApointmentDescription = value;
-                OnPropertyChanged("AppointmentDescription");
-            }
-        }
+        /* public String AppointmentDescription
+         {
+             get => ApointmentDescription;
+             set
+             {
+                 ApointmentDescription = value;
+                 OnPropertyChanged("AppointmentDescription");
+             }
+         }
 
-        public DateTime StartTimee
-        {
-            get => StartTime;
-            set
-            {
-                StartTime = value;
-                OnPropertyChanged("StartTimee");
-            }
+         public DateTime StartTimee
+         {
+             get => StartTime;
+             set
+             {
+                 StartTime = value;
+                 OnPropertyChanged("StartTimee");
+             }
 
-        }*/
+         }*/
+
 
         public Appointment() { }
 

@@ -1,0 +1,29 @@
+version: '3'
+services:
+  postgres-server:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: drugstore
+    ports:
+      - "5433:5432"
+  drugstore_api:
+    depends_on:
+      - postgres-server
+    build: ./Backend/DrugstoreAPI
+    image: aco99/drugstore_api
+    environment:
+      DBServer: postgres-server
+      DBPerver: 5433
+      DBUser: postgres
+      DBPassword: 123
+      DB: drugstore
+    ports:
+      - "8081:80"  
+  drugstore_client:
+    depends_on:
+      - drugstore_api
+    build: ./Frontend/DrugstoreApplication
+    image: aco99/drugstore_client
+    ports:
+      - "4201:80"

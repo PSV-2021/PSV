@@ -24,7 +24,7 @@ namespace Template
             if (appointment.PatientName.ToLower().Contains(input.ToLower()))
                 return true;
             //if (appointment.RoomName.ToLower().Contains(input.ToLower()))
-                //return true;
+              //return true;
             if (appointment.DurationInMunutes.ToString().Contains(input))
                 return true;
             return false;

@@ -1,0 +1,14 @@
+<div *ngFor="let drugstore of drugstores">
+    <mat-card class="example-card">
+        <mat-card-title-group>
+            <mat-card-title>{{drugstore.Name}}</mat-card-title>
+            <mat-card-subtitle>{{drugstore.Address}}, {{drugstore.City}} </mat-card-subtitle>
+            <img mat-card-lg-image src={{drugstore.ImageBase64}} alt="No logo">
+        </mat-card-title-group>
+        <mat-card-content>
+            {{drugstore.Comment}}
+        </mat-card-content>
+        <br>
+        <a mat-raised-button href="/drugstore/{{drugstore.Id}}">Change</a>
+    </mat-card>
+</div>

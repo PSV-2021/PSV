@@ -10,6 +10,7 @@ using Hospital.MedicalRecords.Model;
 
 namespace HospitalApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class MedicalRecordTests
     {
         [Theory]

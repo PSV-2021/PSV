@@ -150,7 +150,8 @@ namespace Hospital.Schedule.Service
                 if (doctor != null && doctor.Jmbg != a.Doctor.Jmbg)
                     flag = false;
                 //if (room != null && room.RoomNumber != a.Room.RoomNumber)
-                   // flag = false;
+                // flag = false;
+              
                 if (flag == true)
                     appointments.Add(a);
             }
@@ -173,7 +174,7 @@ namespace Hospital.Schedule.Service
                 if (doctor != null && doctor.Jmbg == a.Doctor.Jmbg)
                     flag = true;
                 //if (room != null && room.RoomNumber == a.Room.RoomNumber)
-                   // flag = true;
+                // flag = true;
                 if (flag == true)
                     appointments.Add(a);
             }
@@ -234,7 +235,7 @@ namespace Hospital.Schedule.Service
         {
             if (AppointmentsShareDoctor(appointment1, appointment2) ||
                 AppointmentsSharePatient(appointment1, appointment2))
-                //AppointmentsShareRoom(appointment1, appointment2))
+             //AppointmentsShareRoom(appointment1, appointment2))
             {
                 if (DateTime.Compare(appointment2.EndTime, appointment1.StartTime) <= 0) //drugi zavrsava pre pocetka prvog
                     return false;
@@ -622,16 +623,17 @@ namespace Hospital.Schedule.Service
         }
 
 
-       /* public void NoteNotification()
-        {
-            while (true)
-            {
-                foreach (Appointment a in GetPatientPastAppointments())
-                {
-                    GenerateNotification(a);
-                }
-            }
-        }*/
+        /* public void NoteNotification()
+         {
+             while (true)
+             {
+                 foreach (Appointment a in GetPatientPastAppointments())
+                 {
+                     GenerateNotification(a);
+                 }
+             }
+         }*/
+
 
         /*private List<DateTime> AddTimeToSpan(Appointment appointment)
         {
@@ -651,15 +653,16 @@ namespace Hospital.Schedule.Service
             return notifications;
         }*/
 
-       /* public List<DateTime> GenerateNotification(Appointment appointment)
-        {
-            List<DateTime> notifications = AddTimeToSpan(appointment);
-            foreach (DateTime dt in notifications)
-            {
+        /* public List<DateTime> GenerateNotification(Appointment appointment)
+         {
+             List<DateTime> notifications = AddTimeToSpan(appointment);
+             foreach (DateTime dt in notifications)
+             {
 
-            }
-            return notifications;
-        }*/
+             }
+             return notifications;
+         }*/
+
 
         // PacijentKraj***************************************************************************
 
@@ -740,22 +743,23 @@ namespace Hospital.Schedule.Service
 
             List<Appointment> appointments = GetAllAppointments();
 
-           /* foreach (Appointment appointment in appointments)
-            {
-                if (appointment.Room != null)
-                {
-                    if (appointment.Room.RoomNumber == number)
-                    {
-                        DateTime appointmentStart = appointment.StartTime;
-                        if (DateTime.Compare(appointmentStart, StartTime) > 0 &&
-                            DateTime.Compare(appointmentStart, EndTime) < 0)
-                        {
 
-                            has_appointment = true;
-                        }
-                    }
-                }
-            }*/
+            /* foreach (Appointment appointment in appointments)
+             {
+                 if (appointment.Room != null)
+                 {
+                     if (appointment.Room.RoomNumber == number)
+                     {
+                         DateTime appointmentStart = appointment.StartTime;
+                         if (DateTime.Compare(appointmentStart, StartTime) > 0 &&
+                             DateTime.Compare(appointmentStart, EndTime) < 0)
+                         {
+
+                             has_appointment = true;
+                         }
+                     }
+                 }
+             }*/
             return has_appointment;
         }
 

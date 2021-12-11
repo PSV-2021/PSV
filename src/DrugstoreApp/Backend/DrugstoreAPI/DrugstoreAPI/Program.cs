@@ -1,4 +1,5 @@
 using Drugstore.Models;
+using Drugstore.Service;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -10,10 +11,13 @@ using System.Threading.Tasks;
 
 namespace DrugstoreAPI
 {
+   
     public class Program
     {
         public static void Main(string[] args)
         {
+            FileCompressionService fcs = new FileCompressionService();
+            fcs.CompressOldFiles();
             CreateHostBuilder(args).Build().Run();
         }
 
