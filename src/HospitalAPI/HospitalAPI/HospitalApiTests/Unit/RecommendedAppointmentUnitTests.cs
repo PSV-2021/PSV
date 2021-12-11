@@ -51,29 +51,7 @@ namespace HospitalApiTests.Unit
             AppointmentService appointmentService = new AppointmentService(appointmentRepository, null);
 
             var workDay = appointmentService.GetAvailable(1, new DateTime(2021, 12, 12));
-            workDay.Count.ShouldBe(16);
-        }
-
-     
-        [Fact]
-        public void Schedule_appointment()
-        {
-            var appointmentRepository = CreateAppointmentStubRepository();
-
-            AppointmentService appointmentService = new AppointmentService(appointmentRepository, null);
-            Appointment appointment = new Appointment
-            {
-                Id = 1,
-                StartTime = new DateTime(2021, 12, 12, 8, 30, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 1,
-                Canceled = false
-            };
-
-            bool createdAppointment = appointmentService.Schedule(appointment);
-            createdAppointment.ShouldBeFalse();
-
+            workDay.Count.ShouldBe(13);
         }
 
         public static IAppointmentRepository CreateAppointmentStubRepository()

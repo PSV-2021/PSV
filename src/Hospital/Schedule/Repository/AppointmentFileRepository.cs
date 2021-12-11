@@ -186,5 +186,6 @@ namespace Hospital.Schedule.Repository
         {
             throw new NotImplementedException();
         }
+
     }
 }

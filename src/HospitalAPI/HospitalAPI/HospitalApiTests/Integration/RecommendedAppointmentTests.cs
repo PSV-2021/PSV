@@ -147,11 +147,9 @@ namespace HospitalApiTests.Integration
                 WorkingHoursId = 1
             });
 
-            context.Add(new Appointment { Id = 1, StartTime = new DateTime(2021, 12, 12), DurationInMunutes = 30, ApointmentDescription = "", IsDeleted = false, DoctorId = 1, PatientId = 1, Canceled = false });
-
             RecommendedAppointmentController recommendedAppointmentController = new RecommendedAppointmentController(context);
 
-            IActionResult retVal = recommendedAppointmentController.Schedule(new DateTime(2021, 12, 15, 8, 0, 0), 1);
+            IActionResult retVal = recommendedAppointmentController.Schedule(new ScheduleDTO { Start = new DateTime(2021, 12, 15, 8, 0, 0), Id = 1 });
 
             retVal.Equals(HttpStatusCode.OK);
         }

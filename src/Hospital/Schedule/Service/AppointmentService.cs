@@ -20,10 +20,6 @@ namespace Hospital.Schedule.Service
         private Appointment ChangingAppointment { get; set; }
         private EventsLogService EventsLogService { get; set; }
         private RecommendedAppointmentSqlRepository RecommendedAppointmentSqlRepository { get; set; }
-        //private WorkingHoursSqlRepository WorkingHoursSqlRepository { get; set; }
-        //private DoctorSqlRepository DoctorSqlRepository { get; set; }
-
-        //private IWorkingHoursRepository IWorkingHoursRepository { get; set; }
         private IDoctorRepository IDoctorRepository { get; set; }
 
 
@@ -49,21 +45,6 @@ namespace Hospital.Schedule.Service
             AppointmentRepository = appointmentRepository;
             IDoctorRepository = doctorRepository;
         }
-
-        /*
-        public AppointmentService(WorkingHoursSqlRepository doctorWorkingHoursRepository, RecommendedAppointmentSqlRepository appointmentRepository, DoctorService doctorRepository)
-        {
-            WorkingHoursSqlRepository = doctorWorkingHoursRepository;
-            RecommendedAppointmentSqlRepository = appointmentRepository;
-            DoctorService = doctorRepository;
-        }
-
-        public AppointmentService(IWorkingHoursRepository doctorWorkingHoursRepository, IAppointmentRepository appointmentRepository, IDoctorRepository doctorRepository)
-        {
-            IWorkingHoursRepository = doctorWorkingHoursRepository;
-            AppointmentRepository = appointmentRepository;
-            IDoctorRepository = doctorRepository;
-        }*/
 
         // Sekretar*******************************************************************************
 
@@ -798,7 +779,7 @@ namespace Hospital.Schedule.Service
 
             return availableAppointments;
         }
-
+      
         public List<Appointment> GetAvailable(int doctorId, DateTime date)
         {
             List<Appointment> occupied = DoctorAndDate(doctorId, date);
@@ -807,7 +788,7 @@ namespace Hospital.Schedule.Service
 
             foreach (Appointment appointmentIt in allAppointments)
             {
-                Appointment appointment = occupied.FirstOrDefault(a => a.IsOccupied(appointmentIt.StartTime, appointmentIt.EndTime) && !a.Canceled);
+                Appointment appointment = occupied.FirstOrDefault(a => a.IsOccupied(appointmentIt.StartTime) && !a.Canceled);
 
                 if (appointment != null)
                     availableAppointments.Remove(appointmentIt);
@@ -904,17 +885,9 @@ namespace Hospital.Schedule.Service
 
         //zakazivanje
 
-        public bool Schedule(Appointment appointment)
+        public void Schedule(Appointment appointment)
         {
-            List<Appointment> available = GetAvailable(appointment.DoctorId, appointment.StartTime);
-            bool isAvailable = available.Any(a => a.IsOccupied(appointment.StartTime, appointment.EndTime));
-            if (isAvailable)
-            {
-                AppointmentRepository.Create(appointment);
-                return true;
-            }                
-            
-            return false;
+            AppointmentRepository.Create(appointment);
         }
 
         public static Appointment ScheduleAppointmentDTOToAppointment(DateTime start, int doctorId)

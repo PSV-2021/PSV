@@ -40,15 +40,12 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPost("schedule")]
-        public IActionResult Schedule(DateTime start, int doctorId)
+        public IActionResult Schedule(ScheduleDTO scheduleDTO)
         {
-            Appointment appointment = AppointmentService.ScheduleAppointmentDTOToAppointment(start, doctorId);
-            bool scheduledAppointment = appointmentService.Schedule(appointment);
+            Appointment appointment = AppointmentService.ScheduleAppointmentDTOToAppointment(scheduleDTO.Start, scheduleDTO.Id);
+            appointmentService.Schedule(appointment);
 
-            if (scheduledAppointment == false)
-                return BadRequest("Can not schedule appointment");
-
-            return Ok("Scheduled!");
+            return Ok();
         }
     }
 }

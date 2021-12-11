@@ -53,6 +53,7 @@ namespace Hospital.Schedule.Repository
 
         public void Create(Appointment appointment)
         {
+            appointment.Id = GetAll().Count + 1;
             context.Appointments.Add(appointment);
             context.SaveChanges();
         }

@@ -21,6 +21,10 @@ export class RecommendAppointmentService {
   }
 
   Schedule(start: Date, id: number): Observable<any>{
-    return this.http.post<any>(this.url + "/recommendedAppointment/schedule", {params:{start: start, id: id}});
+    const body = {
+      Start : start,
+      Id : id
+    }
+    return this.http.post<any>(this.url + "/recommendedAppointment/schedule", body);
   }
 }

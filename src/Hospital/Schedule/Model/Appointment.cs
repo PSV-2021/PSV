@@ -67,9 +67,9 @@ namespace Hospital.Schedule.Model
             this.Patient = patient;
         }
 
-        public bool IsOccupied(DateTime start, DateTime end)
+        public bool IsOccupied(DateTime start)
         {
-            return DateTime.Compare(StartTime, start) == 0 && DateTime.Compare(EndTime, end) == 0;
+            return DateTime.Compare(StartTime, start) == 0;
         }
 
         [NotMapped]
