@@ -18,15 +18,13 @@ namespace HospitalApiTests.Unit
         [Fact]
         public void Recommended_by_doctor_priority_success()
         {
-            var doctorWorkingHoursRepository = CreateDoctorWorkingHoursStubRepository();
             var appointmentRepository = CreateAppointmentStubRepository();
-            //var doctorService = CreateDoctorService();
             var doctorRepository = CreateDoctorStubRepository();
             var searchAppointments = CreateSearchAppointmentsDTOSuccess();
 
-            AppointmentService appointmentService = new AppointmentService(doctorWorkingHoursRepository, appointmentRepository, doctorRepository);
+            AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository);
 
-            List<Appointment> recommendedAppointments = appointmentService.GetAvailableAppointment(searchAppointments);
+            List<Appointment> recommendedAppointments = appointmentService.RecommendDoctor(searchAppointments);
 
             recommendedAppointments.ShouldNotBeEmpty();
         }
@@ -34,64 +32,48 @@ namespace HospitalApiTests.Unit
         [Fact]
         public void Recommended_by_doctor_priority_fail()
         {
-            var doctorWorkingHoursRepository = CreateDoctorWorkingHoursStubRepository();
             var appointmentRepository = CreateAppointmentStubRepository();
             var doctorRepository = CreateDoctorStubRepository();
             var searchAppointments = CreateSearchAppointmentsDTOFail();
 
-            AppointmentService appointmentService = new AppointmentService(doctorWorkingHoursRepository, appointmentRepository, doctorRepository);
+            AppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository);
 
-            List<Appointment> recommendedAppointments = appointmentService.GetAvailableAppointment(searchAppointments);
+            List<Appointment> recommendedAppointments = appointmentService.RecommendDoctor(searchAppointments);
 
-            recommendedAppointments.ShouldBeEmpty();
+            recommendedAppointments.ShouldNotBeEmpty();
         }
 
         [Fact]
         public void Get_available()
         {
-            var doctorWorkingHoursRepository = CreateDoctorWorkingHoursStubRepository();
             var appointmentRepository = CreateAppointmentStubRepository();
 
-            AppointmentService appointmentService = new AppointmentService(doctorWorkingHoursRepository, appointmentRepository, null);
+            AppointmentService appointmentService = new AppointmentService(appointmentRepository, null);
 
             var workDay = appointmentService.GetAvailable(1, new DateTime(2021, 12, 12));
-            workDay.Count.ShouldBe(3);
+            workDay.Count.ShouldBe(16);
         }
 
-        /*
+     
         [Fact]
         public void Schedule_appointment()
         {
-            var doctorWorkingHoursRepository = CreateDoctorWorkingHoursStubRepository();
             var appointmentRepository = CreateAppointmentStubRepository();
 
-            AppointmentService appointmentService = new AppointmentService(doctorWorkingHoursRepository, appointmentRepository, null);
+            AppointmentService appointmentService = new AppointmentService(appointmentRepository, null);
+            Appointment appointment = new Appointment
+            {
+                Id = 1,
+                StartTime = new DateTime(2021, 12, 12, 8, 30, 0),
+                DurationInMunutes = 30,
+                DoctorId = 1,
+                PatientId = 1,
+                Canceled = false
+            };
 
-            //var createdAppointment = appointmentService.ScheduleAppointment(appointment);
-            //createdAppointment.ShouldNotBe(null);
+            bool createdAppointment = appointmentService.Schedule(appointment);
+            createdAppointment.ShouldBeFalse();
 
-        }*/
-
-        public static IWorkingHoursRepository CreateDoctorWorkingHoursStubRepository()
-        {
-            var stubRepository = new Mock<IWorkingHoursRepository>();
-            var workDays = CreateDoctorWorkingHours();
-            stubRepository.Setup(x => x.GetByDoctorAndDate(It.IsAny<int>(), It.IsAny<DateTime>())).Returns(
-                (int id, DateTime date) =>
-                    workDays.FirstOrDefault(wd => wd.Id.Equals(id) && wd.BeginningDate.Day.CompareTo(date) == 0));
-
-            return stubRepository.Object;
-        }
-
-        public static List<WorkingHours> CreateDoctorWorkingHours()
-        {
-            List<WorkingHours> doctorWorkingHours = new List<WorkingHours>();
-
-            WorkingHours day1 = new WorkingHours{ Id = 1, BeginningDate = new DateTime(2021, 12, 12), EndDate = new DateTime(2021, 12, 16)};
-
-            doctorWorkingHours.Add(day1);
-
-            return doctorWorkingHours;
         }
 
         public static IAppointmentRepository CreateAppointmentStubRepository()
@@ -99,7 +81,6 @@ namespace HospitalApiTests.Unit
             var stubRepository = new Mock<IAppointmentRepository>();
             var appointments = CreateListOfAppointments();
 
-            //stubRepository.Setup(x => x.Create(It.IsAny<Appointment>())).Returns(appointment);
             stubRepository.Setup(x => x.Get(It.IsAny<int>(), It.IsAny<DateTime>())).Returns(
                 (int id, DateTime date) =>
                     appointments.Where(a => a.DoctorId.Equals(id) && a.StartTime.Date.CompareTo(date.Date) == 0).ToList());
@@ -115,7 +96,7 @@ namespace HospitalApiTests.Unit
             Appointment appointment1 = new Appointment
             {
                 Id = 1,
-                StartTime = new DateTime(2021, 12, 12, 7, 0, 0),
+                StartTime = new DateTime(2021, 12, 12, 8, 0, 0),
                 DurationInMunutes = 30,
                 DoctorId = 1,
                 PatientId = 1,
@@ -125,7 +106,7 @@ namespace HospitalApiTests.Unit
             Appointment appointment2 = new Appointment
             {
                 Id = 2,
-                StartTime = new DateTime(2021, 12, 12, 7, 30, 0),
+                StartTime = new DateTime(2021, 12, 12, 8, 30, 0),
                 DurationInMunutes = 30,
                 DoctorId = 1,
                 PatientId = 2,
@@ -135,7 +116,7 @@ namespace HospitalApiTests.Unit
             Appointment appointment3 = new Appointment
             {
                 Id = 3,
-                StartTime = new DateTime(2021, 12, 12, 8, 0, 0),
+                StartTime = new DateTime(2021, 12, 12, 9, 0, 0),
                 DurationInMunutes = 30,
                 DoctorId = 1,
                 PatientId = 3,
@@ -239,15 +220,6 @@ namespace HospitalApiTests.Unit
                 SpecializationId = 1
             };
 
-        }
-
-        public IDoctorService CreateDoctorService()
-        {
-            var doctorStubRepository = CreateDoctorStubRepository();
-
-            DoctorService doctorService = new DoctorService(doctorStubRepository);
-
-            return doctorService;
         }
 
     }

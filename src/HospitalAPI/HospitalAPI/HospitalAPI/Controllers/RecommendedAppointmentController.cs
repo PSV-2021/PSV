@@ -26,7 +26,7 @@ namespace HospitalAPI.Controllers
         public RecommendedAppointmentController(MyDbContext context)
         {
             this.context = context;
-            appointmentService = new AppointmentService(new RecommendedAppointmentSqlRepository(context), new WorkingHoursSqlRepository(context));
+            appointmentService = new AppointmentService(new RecommendedAppointmentSqlRepository(context));
         }
 
 
@@ -42,15 +42,10 @@ namespace HospitalAPI.Controllers
         [HttpPost("schedule")]
         public IActionResult Schedule(DateTime start, int doctorId)
         {
-            List<MedicalRecord> medicalRecord = medicalRecordService.GetMedicalRecordById(1);
-
-            if (medicalRecord == null)
-                return BadRequest("Can not schedule appointment");
-
             Appointment appointment = AppointmentService.ScheduleAppointmentDTOToAppointment(start, doctorId);
-            Appointment scheduledAppointment = appointmentService.Schedule(appointment);
+            bool scheduledAppointment = appointmentService.Schedule(appointment);
 
-            if (scheduledAppointment == null)
+            if (scheduledAppointment == false)
                 return BadRequest("Can not schedule appointment");
 
             return Ok("Scheduled!");

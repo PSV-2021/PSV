@@ -181,5 +181,10 @@ namespace Hospital.Schedule.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void Create(Appointment appointment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

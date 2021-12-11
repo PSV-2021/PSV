@@ -20,13 +20,12 @@ namespace Hospital.Schedule.Service
         private Appointment ChangingAppointment { get; set; }
         private EventsLogService EventsLogService { get; set; }
         private RecommendedAppointmentSqlRepository RecommendedAppointmentSqlRepository { get; set; }
-        private WorkingHoursSqlRepository WorkingHoursSqlRepository { get; set; }
-        private DoctorSqlRepository DoctorSqlRepository { get; set; }
+        //private WorkingHoursSqlRepository WorkingHoursSqlRepository { get; set; }
+        //private DoctorSqlRepository DoctorSqlRepository { get; set; }
 
-        private IWorkingHoursRepository IWorkingHoursRepository { get; set; }
+        //private IWorkingHoursRepository IWorkingHoursRepository { get; set; }
         private IDoctorRepository IDoctorRepository { get; set; }
-        private IDoctorService IDoctorService { get; set; }
-        private DoctorService DoctorService { get; set; }
+
 
         public AppointmentService()
         {
@@ -39,20 +38,19 @@ namespace Hospital.Schedule.Service
         {
             AppointmentRepository = recommendAppointmentSqlRepository;
         }
-
-        public AppointmentService(RecommendedAppointmentSqlRepository recommendedAppointmentSqlRepository, WorkingHoursSqlRepository workingHoursSqlRepository)
+        
+        public AppointmentService(RecommendedAppointmentSqlRepository recommendedAppointmentSqlRepository)
         {
-            RecommendedAppointmentSqlRepository = recommendedAppointmentSqlRepository;
-            WorkingHoursSqlRepository = workingHoursSqlRepository;
+            AppointmentRepository = recommendedAppointmentSqlRepository;
         }
-        /*
-        public AppointmentService(IWorkingHoursRepository doctorWorkingHoursRepository, IAppointmentRepository appointmentRepository, IDoctorService doctorRepository)
+        
+        public AppointmentService(IAppointmentRepository appointmentRepository, IDoctorRepository doctorRepository)
         {
-            IWorkingHoursRepository = doctorWorkingHoursRepository;
             AppointmentRepository = appointmentRepository;
-            IDoctorService = doctorRepository;
+            IDoctorRepository = doctorRepository;
         }
-        */
+
+        /*
         public AppointmentService(WorkingHoursSqlRepository doctorWorkingHoursRepository, RecommendedAppointmentSqlRepository appointmentRepository, DoctorService doctorRepository)
         {
             WorkingHoursSqlRepository = doctorWorkingHoursRepository;
@@ -65,7 +63,7 @@ namespace Hospital.Schedule.Service
             IWorkingHoursRepository = doctorWorkingHoursRepository;
             AppointmentRepository = appointmentRepository;
             IDoctorRepository = doctorRepository;
-        }
+        }*/
 
         // Sekretar*******************************************************************************
 
@@ -838,7 +836,7 @@ namespace Hospital.Schedule.Service
 
         public List<Appointment> DoctorAndDate(int doctorId, DateTime date)
         {
-            return RecommendedAppointmentSqlRepository.Get(doctorId, date).ToList();
+            return AppointmentRepository.Get(doctorId, date).ToList();
         }
 
         public List<Appointment> RecommendDoctor(SearchAppointmentsDTO searchAppointments)
@@ -906,14 +904,17 @@ namespace Hospital.Schedule.Service
 
         //zakazivanje
 
-        public Appointment Schedule(Appointment appointment)
+        public bool Schedule(Appointment appointment)
         {
             List<Appointment> available = GetAvailable(appointment.DoctorId, appointment.StartTime);
             bool isAvailable = available.Any(a => a.IsOccupied(appointment.StartTime, appointment.EndTime));
             if (isAvailable)
-                RecommendedAppointmentSqlRepository.Create(appointment);
-
-            return null;
+            {
+                AppointmentRepository.Create(appointment);
+                return true;
+            }                
+            
+            return false;
         }
 
         public static Appointment ScheduleAppointmentDTOToAppointment(DateTime start, int doctorId)
