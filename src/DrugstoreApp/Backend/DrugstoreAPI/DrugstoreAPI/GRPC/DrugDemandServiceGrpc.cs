@@ -19,10 +19,10 @@ namespace DrugstoreAPI
         public HospitalService hospitalService;
         private readonly ILogger<GreeterService> _logger;
 
-        private void SetupDbContext()
+        private void SetupDbContext(string connectionString)
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
-            builder.UseNpgsql("server=localhost; port=5432; database=drugstore; User Id=postgres; password=firma4");
+            builder.UseNpgsql(connectionString);
             this.dbContext = new MyDbContext(builder.Options);
         }
         public DrugDemandServiceGrpc(ILogger<GreeterService> logger, MyDbContext dbContext)
@@ -42,7 +42,7 @@ namespace DrugstoreAPI
         }
         public DrugDemandServiceGrpc() 
         {
-            SetupDbContext();
+            SetupDbContext("server=localhost; port=5432; database=drugstore; User Id=postgres; password=firma4");
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.hospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
         }
