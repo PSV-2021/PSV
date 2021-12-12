@@ -18,43 +18,68 @@ namespace DrugstoreApiTests.Unit
         [Fact]
         public void Check_searched_medicine_by_name_and_substance()
         {
-            var medicineStubRepository = new Mock<IMedicineRepository>();
-            var medicineService = new MedicineService(medicineStubRepository.Object);
-            List<Medicine> medicines = GenerateStubData();
-
-            medicineStubRepository.Setup(m => m.GetAll()).Returns(medicines);
-
+            //arrange
+            var medicineService = new MedicineService(GenerateStubData());
+            //act
             List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("", "");
-
+            //assert
             retVal.Count.ShouldBe(3);
         }
 
-        private static List<Medicine> GenerateStubData()
+        [Fact]
+        public void Check_searched_medicine_by_name_and_substance1()
         {
-            List<Medicine> searchedMedicines = new List<Medicine>();
-
-            Medicine m1 = new Medicine(1, "Lek1", "paracetamol, kiselina");
-            Medicine m2 = new Medicine(2, "Lek2", "kiselina2");
-            Medicine m3 = new Medicine(3, "Lek3", "paracetamol, protein");
-
-            searchedMedicines.Add(m1);
-            searchedMedicines.Add(m2);
-            searchedMedicines.Add(m3);
-            return searchedMedicines;
+            //arrange
+            var medicineService = new MedicineService(GenerateStubData());
+            //act
+            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("Lek1", "");
+            //assert
+            retVal.Count.ShouldBe(1);
         }
-        
 
-        /*[Theory]
-        [MemberData(nameof(Searches))]
-        public void Searched_drugs(Medicine drug, bool expectedValue)
+        [Fact]
+        public void Check_searched_medicine_by_name_and_substance2()
         {
-            foreach (Medicine m in GenerateStubData()) {
-                m.SearchMedicineByNameAndSubstance(m.Name, m.Substances);
-            }
-            bool retVal = service.CheckForAmountOfDrug(drug.Name, drug.Supply);
+            //arrange
+            var medicineService = new MedicineService(GenerateStubData());
+            //act
+            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("", "paracetamol");
+            //assert
+            retVal.Count.ShouldBe(2);
+        }
 
-            retVal.ShouldBe(expectedValue);
-        }*/
+        [Fact]
+        public void Check_searched_medicine_by_name_and_substance3()
+        {
+            //arrange
+            var medicineService = new MedicineService(GenerateStubData());
+            //act
+            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("lek2", "protein");
+            //assert
+            retVal.Count.ShouldBe(0);
+        }
+
+        [Fact]
+        public void Check_searched_medicine_by_name_and_substance4()
+        {
+            //arrange
+            var medicineService = new MedicineService(GenerateStubData());
+            //act
+            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("Probiotik", "mlecno-kiselinska bakterija");
+            //assert
+            retVal.Count.ShouldBe(0);
+        }
+
+        [Fact]
+        public void Check_searched_medicine_by_name_and_substance5()
+        {
+            //arrange
+            var medicineService = new MedicineService(GenerateStubData());
+            //act
+            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("", "kiselina");
+            //assert
+            retVal.Count.ShouldBe(2);
+        }
 
         public static IEnumerable<object[]> Searches()
         {
@@ -66,6 +91,24 @@ namespace DrugstoreApiTests.Unit
             retVal.Add(new object[] { "Probiotik", "mlecno-kiselinska bakterija", 0 });
             retVal.Add(new object[] { "", "kiselina", 2 });
             return retVal;
+        }
+
+        private static IMedicineRepository GenerateStubData()
+        {
+            var medicineStubRepository = new Mock<IMedicineRepository>();
+            List<Medicine> searchedMedicines = new List<Medicine>();
+
+            Medicine m1 = new Medicine(1, "Lek1", "paracetamol, kiselina");
+            Medicine m2 = new Medicine(2, "Lek2", "kiselina2");
+            Medicine m3 = new Medicine(3, "Lek3", "paracetamol, protein");
+
+            searchedMedicines.Add(m1);
+            searchedMedicines.Add(m2);
+            searchedMedicines.Add(m3);
+
+            medicineStubRepository.Setup(m => m.GetAll()).Returns(searchedMedicines);
+
+            return medicineStubRepository.Object;
         }
     }
 }
