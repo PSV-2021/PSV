@@ -13,72 +13,19 @@ using Xunit;
 
 namespace DrugstoreApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class MedicineSearchTests
     {
-        [Fact]
-        public void Check_searched_medicine_by_name_and_substance()
+        [Theory]
+        [MemberData(nameof(Searches))]
+        public void Check_searched_medicine_by_name_and_substance(string search1, string search2, int expected)
         {
             //arrange
             var medicineService = new MedicineService(GenerateStubData());
             //act
-            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("", "");
+            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance(search1, search2);
             //assert
-            retVal.Count.ShouldBe(3);
-        }
-
-        [Fact]
-        public void Check_searched_medicine_by_name_and_substance1()
-        {
-            //arrange
-            var medicineService = new MedicineService(GenerateStubData());
-            //act
-            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("Lek1", "");
-            //assert
-            retVal.Count.ShouldBe(1);
-        }
-
-        [Fact]
-        public void Check_searched_medicine_by_name_and_substance2()
-        {
-            //arrange
-            var medicineService = new MedicineService(GenerateStubData());
-            //act
-            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("", "paracetamol");
-            //assert
-            retVal.Count.ShouldBe(2);
-        }
-
-        [Fact]
-        public void Check_searched_medicine_by_name_and_substance3()
-        {
-            //arrange
-            var medicineService = new MedicineService(GenerateStubData());
-            //act
-            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("lek2", "protein");
-            //assert
-            retVal.Count.ShouldBe(0);
-        }
-
-        [Fact]
-        public void Check_searched_medicine_by_name_and_substance4()
-        {
-            //arrange
-            var medicineService = new MedicineService(GenerateStubData());
-            //act
-            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("Probiotik", "mlecno-kiselinska bakterija");
-            //assert
-            retVal.Count.ShouldBe(0);
-        }
-
-        [Fact]
-        public void Check_searched_medicine_by_name_and_substance5()
-        {
-            //arrange
-            var medicineService = new MedicineService(GenerateStubData());
-            //act
-            List<Medicine> retVal = medicineService.SearchMedicineByNameAndSubstance("", "kiselina");
-            //assert
-            retVal.Count.ShouldBe(2);
+            retVal.Count.ShouldBe(expected);
         }
 
         public static IEnumerable<object[]> Searches()
