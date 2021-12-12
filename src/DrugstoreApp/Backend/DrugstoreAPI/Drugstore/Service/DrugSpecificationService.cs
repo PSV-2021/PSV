@@ -17,7 +17,7 @@ namespace Drugstore.Service
 
         public bool UploadDrugSpecification(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.107", "user", "password")))
             {
                 try
                 {
@@ -27,7 +27,7 @@ namespace Drugstore.Service
                     {
                         using (Stream stream = File.OpenRead(sourceFile))
                         {
-                            client.UploadFile(stream, @"\public\Hospital files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            client.UploadFile(stream, @"\public\HospitalFiles\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                             client.Disconnect();
                             return true;
                         }
@@ -71,7 +71,7 @@ namespace Drugstore.Service
         private string FormatPath()
         {
             string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\Drug Specifications\\");
+            return Path.Combine(absolute[0], "src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\DrugsSpecifications\\");
         }
 
         private string FormatString(string drugName)
