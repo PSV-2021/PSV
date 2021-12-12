@@ -28,7 +28,7 @@ namespace Integration_API
         public void ConfigureServices(IServiceCollection services)
         {           
             services.AddControllers();
-            //services.AddHostedService<RabbitMQService>();
+            services.AddHostedService<RabbitMQService>();
             services.AddDbContext<MyDbContext>(options =>
                 options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
             services.AddControllersWithViews().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

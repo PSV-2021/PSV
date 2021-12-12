@@ -14,6 +14,7 @@ namespace Drugstore.Models
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<DrugstoreOffer> DrugstoreOffers { get; set; }
+        public DbSet<DrugSpecification> DrugSpecifications { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -49,7 +50,13 @@ namespace Drugstore.Models
             
             modelBuilder.Entity<DrugstoreOffer>().HasData(
                 new DrugstoreOffer("1", "Content", "title", DateTime.Now, DateTime.Now,"Apotekica")
-            ); 
+            );
+
+            modelBuilder.Entity<DrugSpecification>().HasData(
+               new DrugSpecification("Brufen", "Ovde ide tekst specifikacije za Brufen"),
+               new DrugSpecification("Paracetamol", "Ovde ide tekst specifikacije za Paracetamol"),
+               new DrugSpecification("Palitreks", "Ovde ide tekst specifikacije za Palitreks")
+           );
         }
     }
 }

@@ -15,12 +15,13 @@ namespace DrugstoreAPI.Controllers
 
         private readonly MyDbContext dbContext;
         public HospitalService HospitalService;
-        public DrugSpecificationService drugSpecificationService = new DrugSpecificationService();
+        public DrugSpecificationService drugSpecificationService;
 
         public DrugSpecificationController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
             this.HospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
+            drugSpecificationService = new DrugSpecificationService(dbContext);
         }
 
         [HttpPost]

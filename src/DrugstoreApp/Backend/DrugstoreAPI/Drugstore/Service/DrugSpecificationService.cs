@@ -1,4 +1,6 @@
-﻿using Renci.SshNet;
+﻿using Drugstore.Models;
+using Drugstore.Repository.Sql;
+using Renci.SshNet;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System;
@@ -13,11 +15,15 @@ namespace Drugstore.Service
 {
     public class DrugSpecificationService
     {
-        public DrugSpecificationService() { }
+        public DrugSpecificationSqlRespository specificationRepository { get; set; }
+        public DrugSpecificationService(MyDbContext dbContext) 
+        {
+            specificationRepository = new DrugSpecificationSqlRespository(dbContext);
+        }
 
         public bool UploadDrugSpecification(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.107", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
             {
                 try
                 {
@@ -58,12 +64,12 @@ namespace Drugstore.Service
 
         public string ReadDrugSpecification(string drugName)
         {
-            drugName = FormatString(drugName);
-            string path = FormatPath() + drugName + ".txt";
-
-            if (File.Exists(path))
+            foreach (DrugSpecification ds in specificationRepository.GetAll())
             {
-                return File.ReadAllText(path);
+                if (ds.Name.Equals(drugName))
+                {
+                    return ds.Text;
+                }
             }
             return "";
         }

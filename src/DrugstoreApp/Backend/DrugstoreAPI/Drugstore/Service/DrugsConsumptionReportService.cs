@@ -14,7 +14,7 @@ namespace Drugstore.Service
     {
         public bool DownloadDrugConsumtpionReport(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.107", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
             {
                 client.Connect();
                 string serverFile = @"\public\HospitalFiles\" + fileName + ".pdf";

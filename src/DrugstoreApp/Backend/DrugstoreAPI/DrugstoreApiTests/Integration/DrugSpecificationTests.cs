@@ -6,6 +6,8 @@ using Xunit;
 using System.IO;
 using Drugstore.Service;
 using System.Net.Sockets;
+using Drugstore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DrugstoreApiTests.Integration
 {
@@ -14,11 +16,21 @@ namespace DrugstoreApiTests.Integration
     public class DrugSpecificationTests
     {
 
+        private MyDbContext context;
+        private void SetUpDbContext()
+        {
+            DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
+
+            builder.UseNpgsql(Constants.ConnectionString);
+
+            context = new MyDbContext(builder.Options);
+        }
+
         [Theory]
         [MemberData(nameof(FileNames))]
         public void Upload_drugs_consumption_report(string fileName, bool expectedOutcome)
         {
-            DrugSpecificationService service = new DrugSpecificationService();
+            DrugSpecificationService service = new DrugSpecificationService(context);
 
             bool isUploaded = service.UploadDrugSpecification(fileName);
 
@@ -28,7 +40,7 @@ namespace DrugstoreApiTests.Integration
         [Fact]
         public void Exception_for_Rebex_off_Upload()
         {
-            DrugSpecificationService service = new DrugSpecificationService();
+            DrugSpecificationService service = new DrugSpecificationService(context);
 
             bool result = service.UploadDrugSpecification("Brufen");
 
