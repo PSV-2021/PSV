@@ -69,9 +69,9 @@ namespace DrugstoreAPI.Service
             DecreaseDrugAmount(amountOfDrug, med);
             return true;
         }
-        
+
         private bool CheckIsTheDrugAmountSatisfied(int amountOfDrug, Medicine med)
-        { 
+        {
             return med.Supply >= amountOfDrug;
         }
 
@@ -87,5 +87,9 @@ namespace DrugstoreAPI.Service
             MedicineRepository.Update(med);
         }
 
+        public List<Medicine> SearchMedicineByNameAndSubstance(string name, string substance)
+        {
+            return MedicineRepository.SearchMedicineByNameAndSubstance(name, substance);
+        }
     }
 }

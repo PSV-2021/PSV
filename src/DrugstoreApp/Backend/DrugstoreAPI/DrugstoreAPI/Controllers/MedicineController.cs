@@ -53,5 +53,24 @@ namespace DrugstoreAPI.Controllers
             if (!medicineService.Delete(id)) return NotFound();
             else return Ok();
         }
+
+        public IActionResult Filter([FromQuery] string name, [FromQuery] string substance)
+        {
+            IEnumerable<string> headerValues = Request.Headers["ApiKey"];
+            var key = headerValues.FirstOrDefault();
+            if (key == null || !key.Equals("abcde"))
+                return Unauthorized();
+            CheckFilterParameters(ref name, ref substance);
+            List<Medicine> result = medicineService.SearchMedicineByNameAndSubstance(name, substance);
+            return Ok(result);
+        }
+
+        private static void CheckFilterParameters(ref string name, ref string substance)
+        {
+            if (name == null)
+                name = "";
+            if (substance == null)
+                substance = "";
+        }
     }
 }
