@@ -18,7 +18,6 @@ export class AppointmentsObserveComponent implements OnInit {
   dataSource = [];
   surveys: any[] = []
   appointmentId: any;
- 
 
 
   constructor(private observeAppointemntsService: AppointmentObserveService, private router: Router) { }
@@ -36,7 +35,6 @@ export class AppointmentsObserveComponent implements OnInit {
     this.appointmentId = element.id;
     
     this.observeAppointemntsService.CancelAppointment(element.id).subscribe((data: any) =>{
-      console.log("cancel");
       this.ngOnInit();
     });
     

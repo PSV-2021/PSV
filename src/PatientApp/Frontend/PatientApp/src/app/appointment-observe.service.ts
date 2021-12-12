@@ -15,7 +15,6 @@ export class AppointmentObserveService {
   }
 
   CancelAppointment(id: number): any {
-    console.log(id);
     return this.http.post<any>(this.url + '/cancelAppointments', id);
   }
 }

@@ -32,6 +32,9 @@ namespace Hospital.Schedule.Service
                     a.Status = AppointmentStatus.DONE;
                 else if (a.StartTime > DateTime.Now)
                     a.Status = AppointmentStatus.UPCOMING;
+
+                if (a.StartTime.Day < DateTime.Now.Day + 3)
+                    a.canCancel = false;
             }
 
             return appointments;
