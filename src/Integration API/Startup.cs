@@ -37,6 +37,7 @@ namespace Integration_API
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
+                    
             }));
             
 

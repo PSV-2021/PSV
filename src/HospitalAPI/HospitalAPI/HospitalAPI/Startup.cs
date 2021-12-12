@@ -34,6 +34,7 @@ namespace HospitalAPI
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
+                    
             }));
         }
 

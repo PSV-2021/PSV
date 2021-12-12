@@ -40,6 +40,7 @@ namespace DrugstoreAPI
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
+                    
             }));
         }
 

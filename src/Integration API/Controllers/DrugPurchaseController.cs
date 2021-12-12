@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using Model.DataBaseContext;
 using Grpc.Net.Client;
 using DrugstoreAPI;
 using Grpc.Core;
+using Microsoft.AspNetCore.Cors;
 
 namespace Integration_API.Controllers
 {
@@ -25,7 +25,8 @@ namespace Integration_API.Controllers
             dbContext = db;
         }
 
-        [HttpPost]
+        [EnableCors("MyPolicy")]
+        [HttpPut]
         public IActionResult Put(DrugAmountDemandDto demand)
         {
             if (drugDemandGrpc(demand))
@@ -56,43 +57,43 @@ namespace Integration_API.Controllers
         [HttpPut("urgent")]
         public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
         {
-            //if (drugPurchaseGrpc(demand))
-            //{
-            //    return Ok(true);
-            //}
-            //else
-            //{
-            //    return Ok(false);
-            //}
-
-            var client = new RestClient(demand.PharmacyUrl);
-            var request = new RestRequest("/api/drugDemand/urgent", Method.POST);
-
-            SetApiKeyInHeader(demand, request);
-
-            SetRequestBody(demand, request);
-
-            IRestResponse response = client.Execute(request);
-
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            if (drugPurchaseGrpc(demand))
             {
-                if (Boolean.Parse(response.Content))
-                {
-                    var clientH = new RestClient(this.GetHospitalLink());
-                    var requestH = new RestRequest("/api/drugPurchase/urgent", Method.PUT);
-
-                    //SetApiKeyInHeader(demand, request);
-
-                    SetRequestBody(demand, requestH);
-
-                    IRestResponse responseH = clientH.Execute(requestH);
-
-                    return Ok(responseH.Content);
-                }
-
+                return Ok(true);
             }
-            return Unauthorized(false);
+            else
+            {
+                return Ok(false);
+            }
+
+        //    var client = new RestClient(demand.PharmacyUrl);
+        //    var request = new RestRequest("/api/drugDemand/urgent", Method.POST);
+
+        //    SetApiKeyInHeader(demand, request);
+
+        //    SetRequestBody(demand, request);
+
+        //    IRestResponse response = client.Execute(request);
+
+
+        //    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        //    {
+        //        if (Boolean.Parse(response.Content))
+        //        {
+        //            var clientH = new RestClient(this.GetHospitalLink());
+        //            var requestH = new RestRequest("/api/drugPurchase/urgent", Method.PUT);
+
+        //            //SetApiKeyInHeader(demand, request);
+
+        //            SetRequestBody(demand, requestH);
+
+        //            IRestResponse responseH = clientH.Execute(requestH);
+
+        //            return Ok(responseH.Content);
+        //        }
+
+        //    }
+        //    return Unauthorized(false);
         }
 
 
