@@ -24,7 +24,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CancelAppointment(int appointmentId)
+        public IActionResult CancelAppointment([FromBody] int appointmentId)
         {
             observeAppointmentsService.CancelAppointment(appointmentId);
             return Ok();
