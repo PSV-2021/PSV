@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Hospital.MedicalRecords.Model;
+using Hospital.Medicines.Model;
 using Hospital.Schedule.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,16 +21,19 @@ namespace Hospital.SharedModel
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<AnsweredQuestion> AnsweredQuestion { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           optionsBuilder.UseLazyLoadingProxies(true);
+            optionsBuilder.UseLazyLoadingProxies(true);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
+        {
 
             modelBuilder.Entity<UserFeedback>().HasData(
                 new UserFeedback { Id = 1, TimeWritten = DateTime.Now, Content = "Good!", Name = "Mika Mikic", canPublish = false },
@@ -42,10 +46,11 @@ namespace Hospital.SharedModel
                new Ingridient(3, "Panadol")
               );
             modelBuilder.Entity<Speciality>().HasData(
-                new Speciality { Id = 1, Name = "general"}
+                new Speciality { Id = 1, Name = "general" },
+                new Speciality { Id = 2, Name = "cardiology" }
                 );
             modelBuilder.Entity<VacationDays>().HasData(
-               new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25) }
+               new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25)}
                );
             modelBuilder.Entity<WorkingHours>().HasData(
                new WorkingHours { Id = 1, BeginningDate = new DateTime(2021, 01, 01), Shift = Shift.firstShift, EndDate = new DateTime(2021, 01, 08) }
@@ -72,8 +77,29 @@ namespace Hospital.SharedModel
                     Id = 1,
                     SpecialityId = 1,
                     NumberOfPatients = 0
+                },
+                new Doctor
+                {
+                    Name = "Milica",
+                    Surname = "Milic",
+                    Jmbg = "3052123545852",
+                    DateOfBirth = new DateTime(1987, 04, 21),
+                    Sex = Sex.female,
+                    PhoneNumber = "0691457608",
+                    Adress = "Ravanicka 8",
+                    Email = "milica@gmail.com",
+                    Username = "mica56",
+                    Password = "mica1234",
+                    Type = UserType.doctor,
+                    SalaryInRsd = 250000,
+                    WorkingSchedule = new List<WorkingHours>(),
+                    VacationDays = new List<VacationDays>(),
+                    AvailableDaysOff = 15,
+                    Id = 2,
+                    SpecialityId = 2,
+                    NumberOfPatients = 0
                 });
-           
+
             modelBuilder.Entity<MedicalRecord>().HasData(
                  new MedicalRecord
                  {
@@ -81,7 +107,7 @@ namespace Hospital.SharedModel
                      HealthInsuranceNumber = "1ab",
                      Allergens = new List<Ingridient>()
                  }
-                ) ;
+                );
             modelBuilder.Entity<Patient>()
                .HasData(
                new Patient
@@ -105,7 +131,7 @@ namespace Hospital.SharedModel
                    DoctorId = 1,
                    MedicalRecordId = 1,
                    Allergen = new List<Allergen>()
-               }) ;
+               });
             modelBuilder.Entity<SurveyQuestion>().HasData(
                 new SurveyQuestion { Id = 1, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 },
                 new SurveyQuestion { Id = 2, Text = "How satisfied were you with the time that your doctor spent with you?", Rating = 0, QuestionType = 0 },
@@ -122,6 +148,11 @@ namespace Hospital.SharedModel
                 new SurveyQuestion { Id = 13, Text = "Do you feel that our work hours are well suited to treat you?", Rating = 0, QuestionType = 2 },
                 new SurveyQuestion { Id = 14, Text = "How likely are you to recommend our hospital to a friend or family member?", Rating = 0, QuestionType = 2 }
             );
+            modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
+            modelBuilder.Entity<Appointment>().HasData(
+              new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false , isCancelled = false}
+              );
+            modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
         }
 
     }

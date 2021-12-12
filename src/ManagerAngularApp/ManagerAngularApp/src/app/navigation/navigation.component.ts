@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationComponent implements OnInit {
   pageTitle="Manager App";
   
-  constructor() { }
+  constructor() {
+   }
   ngOnInit(): void {
   }
 

@@ -1,0 +1,15 @@
+<div >
+    <mat-card class="example-card">
+        <mat-card-title-group>
+            <mat-card-title>{{drugstore.Name}}</mat-card-title>
+            <mat-card-subtitle>{{drugstore.Address}}, {{drugstore.City}} </mat-card-subtitle>
+            <img mat-card-lg-image src={{drugstore.ImageBase64}} alt="No logo">
+            <input #imageInput
+                type="file"
+                accept="image/*"
+                (change)="handleFileSelect($event)">
+        </mat-card-title-group>
+        <textarea matInput placeholder="Your comment" [(ngModel)]="drugstore.Comment" name="comment" matInput></textarea>
+        <a mat-raised-button (click)="editDrugstore()">Izmeni</a>
+    </mat-card>
+</div>
