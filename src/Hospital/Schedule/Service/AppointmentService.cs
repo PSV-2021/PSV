@@ -708,6 +708,7 @@ namespace Hospital.Schedule.Service
             return has_appointment;
         }
         // UpravnikKraj***************************************************************************
+        
     }
 }
 

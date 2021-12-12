@@ -1,8 +1,10 @@
 ﻿using Hospital.Schedule.Model;
+using System.Collections.Generic;
 
 namespace Hospital.Schedule.Repository
 {
-    interface IAppointmentRepository: IGenericRepository<Appointment, int>
+    public interface IAppointmentRepository : IGenericRepository<Appointment, int>
     {
+        public Appointment GetByAppointmentId(int appointmentId);
     }
 }
