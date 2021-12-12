@@ -6,12 +6,13 @@ package drug;
 
 service gRPCDrugPurchaseService{
 	rpc DrugDemand (DrugRequest) returns (DrugReply);
+	rpc DrugPurchase (DrugRequest) returns (DrugReply);
 }
 
 message DrugRequest {
 	string pharmacyUrl = 1;
 	string name = 2;
-	int64 amount = 3;
+	int32 amount = 3;
 	string apiKey = 4;
 }
 

@@ -75,6 +75,36 @@ namespace DrugstoreAPI
             });
 
         }
-             
+
+        public override Task<DrugReply> DrugPurchase(DrugRequest request, ServerCallContext context)
+        {
+            if (request.ApiKey != null && request.ApiKey != "")
+            {
+                if (hospitalService.CheckApiKey(request.ApiKey))
+                {
+                    if (medicineService.CheckForAmountOfDrug(request.Name, request.Amount))
+                    {
+                        medicineService.SellDrugUrgent(request.Name, request.Amount);
+                        return Task.FromResult(new DrugReply
+                        {
+                            Message = "you sold some " + request.Name,
+                            IsOk = true
+                        });
+                    }
+                    return Task.FromResult(new DrugReply
+                    {
+                        Message = "you can't sell some " + request.Name,
+                        IsOk = false
+                    });
+                }
+            }
+            return Task.FromResult(new DrugReply
+            {
+                Message = "unauthorized ",
+                IsOk = false
+            });
+
+        }
+
     }
 }

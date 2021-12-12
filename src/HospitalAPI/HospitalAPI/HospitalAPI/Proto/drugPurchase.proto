@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "DrugstoreAPI";
+option csharp_namespace = "HospitalAPI";
 
 package drug;
 
