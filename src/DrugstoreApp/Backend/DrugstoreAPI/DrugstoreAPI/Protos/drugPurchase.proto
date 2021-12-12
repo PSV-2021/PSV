@@ -6,7 +6,6 @@ package drug;
 
 service gRPCDrugPurchaseService{
 	rpc DrugDemand (DrugRequest) returns (DrugReply);
-	rpc DrugPurchase (DrugRequest) returns (DrugReply);
 }
 
 message DrugRequest {

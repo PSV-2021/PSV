@@ -37,7 +37,7 @@ namespace Integration.Service
                     {
                         using (Stream stream = File.OpenRead(sourceFile))
                         {
-                            client.UploadFile(stream, @"\public\DrugstoreFiles\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            client.UploadFile(stream, @"\public\Drugstore files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                             client.Disconnect();
                             return true;
                         }

@@ -14,12 +14,12 @@ namespace Integration.Drugs.Service
 
         public bool DownloadDrugConsumptionReport(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.107", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
             {
                 try
                 {
                     client.Connect();
-                    string serverFile = @"\public\HospitalFiles\" + fileName;
+                    string serverFile = @"\public\Hospital files\" + fileName;
                     
                     if (File.Exists(FormatRebexPath() + fileName))
                     {
@@ -43,19 +43,19 @@ namespace Integration.Drugs.Service
         private string FormatRebexPath()
         {
             string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\Rebex\\data\\public\\HospitalFiles\\");
+            return Path.Combine(absolute[0], "src\\Rebex\\data\\public\\Hospital files\\");
         }
 
         private string FormatFilePath(string fileName)
         {
             string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\ManagerAngularApp\\ManagerAngularApp\\src\\assets\\DrugsSpecifications\\" + fileName);
+            return Path.Combine(absolute[0], "src\\ManagerAngularApp\\ManagerAngularApp\\src\\assets\\Drugs Specifications\\" + fileName);
         }
 
         public List<FileInfoDto> GetFiles()
         {
             List<FileInfoDto> filenames = new List<FileInfoDto>();
-            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\Rebex\\data\\public\\HospitalFiles");
+            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\Rebex\\data\\public\\Hospital files");
             FileInfo[] Files = d.GetFiles("*.pdf");
             foreach (FileInfo file in Files)
             {
@@ -70,7 +70,7 @@ namespace Integration.Drugs.Service
         public bool IsFileDownloaded(string filename)
         {
             bool retVal = false;
-            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\ManagerAngularApp\\ManagerAngularApp\\src\\assets\\DrugsSpecifications\\");
+            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\ManagerAngularApp\\ManagerAngularApp\\src\\assets\\Drugs Specifications\\");
             FileInfo[] Files = d.GetFiles("*.pdf");
             foreach (FileInfo file in Files)
             {

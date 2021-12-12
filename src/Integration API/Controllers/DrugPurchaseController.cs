@@ -25,7 +25,7 @@ namespace Integration_API.Controllers
             dbContext = db;
         }
 
-        [HttpPost]
+        [HttpPut]
         public IActionResult Put(DrugAmountDemandDto demand)
         {
             if (drugDemandGrpc(demand))
@@ -50,21 +50,12 @@ namespace Integration_API.Controllers
             //if (response.StatusCode == System.Net.HttpStatusCode.OK)
             //    return Ok(Boolean.Parse(response.Content));
 
-            //return Unauthorized(false);
+            return Unauthorized(false);
         }
 
         [HttpPut("urgent")]
         public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
         {
-            //if (drugPurchaseGrpc(demand))
-            //{
-            //    return Ok(true);
-            //}
-            //else
-            //{
-            //    return Ok(false);
-            //}
-
             var client = new RestClient(demand.PharmacyUrl);
             var request = new RestRequest("/api/drugDemand/urgent", Method.POST);
 
@@ -90,7 +81,7 @@ namespace Integration_API.Controllers
 
                     return Ok(responseH.Content);
                 }
-
+                
             }
             return Unauthorized(false);
         }
@@ -144,7 +135,7 @@ namespace Integration_API.Controllers
         {
             //var input = new HelloRequest { Name = "world" };
             var input = new DrugRequest { Amount = demand.Amount, Name = demand.Name, PharmacyUrl = demand.PharmacyUrl, ApiKey = GetApiKey(demand) };
-            var channel = new Channel(GetGrpcDrugstoreLink(), ChannelCredentials.Insecure);
+            var channel = new Channel("127.0.0.1:4111", ChannelCredentials.Insecure);
             var client = new gRPCDrugPurchaseService.gRPCDrugPurchaseServiceClient(channel);
 
             var response = client.DrugDemand(input);
@@ -161,38 +152,6 @@ namespace Integration_API.Controllers
             //return true;
         }
 
-        public bool drugPurchaseGrpc(DrugAmountDemandDto demand)
-        {
-            //var input = new HelloRequest { Name = "world" };
-            var input = new DrugRequest { Amount = demand.Amount, Name = demand.Name, PharmacyUrl = demand.PharmacyUrl, ApiKey = GetApiKey(demand) };
-            var channel = new Channel(GetGrpcDrugstoreLink(), ChannelCredentials.Insecure);
-            var client = new gRPCDrugPurchaseService.gRPCDrugPurchaseServiceClient(channel);
-
-            var response = client.DrugPurchase(input);
-            Console.WriteLine("From server: " + response.Message);
-
-            if (response.IsOk)
-            {
-                var inputH = new DrugRequest { Amount = demand.Amount, Name = demand.Name, PharmacyUrl = demand.PharmacyUrl, ApiKey = GetApiKey(demand) };
-                var channelH = new Channel(GetGrpcHospitalLink(), ChannelCredentials.Insecure);
-                var clientH = new gRPCDrugPurchaseService.gRPCDrugPurchaseServiceClient(channelH);
-
-                var responseH = clientH.DrugPurchase(inputH);
-                Console.WriteLine("From server: " + responseH.Message);
-
-                if (responseH.IsOk)
-                {
-                    return true;
-                }
-                return false;
-            }
-            else
-            {
-                return false;
-            }
-            //return true;
-        }
-
         private string GetHospitalLink()
         {
             string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "localhost";
@@ -201,24 +160,7 @@ namespace Integration_API.Controllers
 
             return domport;
         }
-        private string GetGrpcDrugstoreLink()
-        {
-            string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "127.0.0.1";
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "4111";
-            string domport = $"{domain}:{port}";
-
-            return domport;
-        }
-
-        private string GetGrpcHospitalLink()
-        {
-            string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "127.0.0.1";
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "4112";
-            string domport = $"{domain}:{port}";
-
-            return domport;
-        }
-
+        
         //private static async Task drugDemandAsync(HelloRequest input)
         //{
         //    return await 

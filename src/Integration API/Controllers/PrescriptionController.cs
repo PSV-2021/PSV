@@ -157,7 +157,7 @@ namespace Integration_API.Controllers
                     {
                         using (Stream stream = System.IO.File.OpenRead(sourceFile))
                         {
-                            client.UploadFile(stream, @"\public\DrugstoreFiles\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            client.UploadFile(stream, @"\public\Drugstore files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                             client.Disconnect();
                             return true;
                         }

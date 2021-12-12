@@ -5,6 +5,10 @@
     <RootNamespace>Integration_API</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Remove="packages.config" />
   </ItemGroup>

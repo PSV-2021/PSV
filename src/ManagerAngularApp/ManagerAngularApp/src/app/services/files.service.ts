@@ -25,7 +25,7 @@ export class FileService {
     }
 
     OpenFile(filename: string) {
-        var URL = "../../assets/DrugsSpecifications/" + filename;
+        var URL = "../../assets/Drugs Specifications/" + filename;
         window.open(URL, '_blank');
     }
 }
