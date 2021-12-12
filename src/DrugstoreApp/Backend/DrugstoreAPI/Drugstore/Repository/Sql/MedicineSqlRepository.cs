@@ -65,10 +65,5 @@ namespace Drugstore.Repository.Sql
             DbContext.Medicines.Update(medicine);
             DbContext.SaveChanges();
         }
-
-        public List<Medicine> SearchMedicineByNameAndSubstance(string name, string substance)
-        {
-            return DbContext.Medicines.Where(medicine => medicine.Name.Contains(name) && medicine.Substances.Contains(substance)).ToList(); ;
-        }
     }
 }

@@ -89,7 +89,7 @@ namespace DrugstoreAPI.Service
 
         public List<Medicine> SearchMedicineByNameAndSubstance(string name, string substance)
         {
-            return MedicineRepository.SearchMedicineByNameAndSubstance(name, substance);
+            return MedicineRepository.GetAll().Where(medicine => medicine.Name.Contains(name) && medicine.Substances.Contains(substance)).ToList();
         }
     }
 }
