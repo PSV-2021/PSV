@@ -29,8 +29,8 @@ namespace Drugstore.Service
             var gparent = Directory.GetParent(Directory.GetParent(current).ToString()).ToString();
             var path2 = Directory.GetParent(Directory.GetParent(gparent).ToString()).ToString();
             path = path2 + @"\Rebex\data\public\";
-            string drugstoreFilesPath = path + @"Drugstore files";
-            string compressionPath = path + @"Compressed Drugstore files";
+            string drugstoreFilesPath = path + @"DrugstoreFiles";
+            string compressionPath = path + @"CompressedDrugstoreFiles";
             string zipName = compressionPath + @"\Kompersovano-" + DateTime.Now.Day.ToString() + "." +
                 DateTime.Now.Month.ToString()
                 + "." + DateTime.Now.Year.ToString()

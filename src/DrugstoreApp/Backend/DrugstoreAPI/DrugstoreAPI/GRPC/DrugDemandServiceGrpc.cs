@@ -19,10 +19,10 @@ namespace DrugstoreAPI
         public HospitalService hospitalService;
         private readonly ILogger<GreeterService> _logger;
 
-        private void SetupDbContext()
+        private void SetupDbContext(string connectionString)
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
-            builder.UseNpgsql("server=localhost; port=5432; database=drugstore; User Id=postgres; password=firma4");
+            builder.UseNpgsql(connectionString);
             this.dbContext = new MyDbContext(builder.Options);
         }
         public DrugDemandServiceGrpc(ILogger<GreeterService> logger, MyDbContext dbContext)
@@ -42,7 +42,7 @@ namespace DrugstoreAPI
         }
         public DrugDemandServiceGrpc() 
         {
-            SetupDbContext();
+            SetupDbContext("server=localhost; port=5432; database=drugstore; User Id=postgres; password=firma4");
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.hospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
         }
@@ -75,6 +75,36 @@ namespace DrugstoreAPI
             });
 
         }
-             
+
+        public override Task<DrugReply> DrugPurchase(DrugRequest request, ServerCallContext context)
+        {
+            if (request.ApiKey != null && request.ApiKey != "")
+            {
+                if (hospitalService.CheckApiKey(request.ApiKey))
+                {
+                    if (medicineService.CheckForAmountOfDrug(request.Name, request.Amount))
+                    {
+                        medicineService.SellDrugUrgent(request.Name, request.Amount);
+                        return Task.FromResult(new DrugReply
+                        {
+                            Message = "you sold some " + request.Name,
+                            IsOk = true
+                        });
+                    }
+                    return Task.FromResult(new DrugReply
+                    {
+                        Message = "you can't sell some " + request.Name,
+                        IsOk = false
+                    });
+                }
+            }
+            return Task.FromResult(new DrugReply
+            {
+                Message = "unauthorized ",
+                IsOk = false
+            });
+
+        }
+
     }
 }
