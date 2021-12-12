@@ -86,11 +86,11 @@ namespace IntegrationApiTests.Unit
             List<Drugstore> seachedDrugstores = new List<Drugstore>();
 
             Drugstore drugstore1 = new Drugstore(1, "Apoteka prva", "http://localhost:5001", "aaabbbccc",
-                "apoteka1@gmail.com", "Novi Sad", "some address");
+                "apoteka1@gmail.com", "Novi Sad", "some address", true);
             Drugstore drugstore2 = new Drugstore(2, "Apoteka druga", "http://localhost:5001", "aaabbbccc",
-                "apoteka1@gmail.com", "Novi Sad", "some address");
+                "apoteka1@gmail.com", "Novi Sad", "some address", false);
             Drugstore drugstore3 = new Drugstore(3, "Apoteka treca", "http://localhost:5001", "aaabbbccc",
-                "apoteka1@gmail.com", "Novi Sad", "some address");
+                "apoteka1@gmail.com", "Novi Sad", "some address", false);
 
             seachedDrugstores.Add(drugstore1);
             seachedDrugstores.Add(drugstore2);

@@ -454,6 +454,9 @@ namespace Integration.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("text");
 
+                    b.Property<bool>("gRPC")
+                        .HasColumnType("boolean");
+
                     b.HasKey("Id");
 
                     b.ToTable("Drugstores");
@@ -467,7 +470,8 @@ namespace Integration.Migrations
                             City = "Novi Sad",
                             Email = "apoteka1@gmail.com",
                             Name = "Apoteka prva",
-                            Url = "http://localhost:5001"
+                            Url = "http://localhost:5001",
+                            gRPC = true
                         },
                         new
                         {
@@ -477,7 +481,8 @@ namespace Integration.Migrations
                             City = "Novi Sad",
                             Email = "apoteka2@gmail.com",
                             Name = "Apoteka druga",
-                            Url = "http://localhost:5002"
+                            Url = "http://localhost:5002",
+                            gRPC = false
                         },
                         new
                         {
@@ -487,7 +492,8 @@ namespace Integration.Migrations
                             City = "Beograd",
                             Email = "apoteka3@gmail.com",
                             Name = "Apoteka treca",
-                            Url = "http://localhost:5003"
+                            Url = "http://localhost:5003",
+                            gRPC = false
                         });
                 });
 
@@ -521,27 +527,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 12, 6, 12, 43, 38, 523, DateTimeKind.Local).AddTicks(9754),
+                            RecievedTime = new DateTime(2021, 12, 12, 20, 25, 49, 142, DateTimeKind.Local).AddTicks(5313),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(4997)
+                            SentTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(2014)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5327),
+                            RecievedTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(3937),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5353)
+                            SentTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(3993)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5363),
+                            RecievedTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4040),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5367)
+                            SentTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4047)
                         });
                 });
 
@@ -578,9 +584,9 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5888),
+                            EndDate = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4837),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5880),
+                            StartDate = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4827),
                             Title = "title"
                         });
                 });
