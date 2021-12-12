@@ -19,7 +19,9 @@ namespace Integration.Service
     public class DrugsConsumptionReportService
     {
         public DrugsConsumptionSqlRepository DrugsConsumptionRepository { get; set; }
-
+        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP") ?? "192.168.1.107";
+        private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME") ?? "user";
+        private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
         public DrugsConsumptionReportService(MyDbContext dbContext)
         {
             DrugsConsumptionRepository = new DrugsConsumptionSqlRepository(dbContext);
@@ -27,17 +29,17 @@ namespace Integration.Service
 
         public bool UploadDrugConsumptionReport(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo(sftp_ip, sftp_name, sftp_password)))
             {
                 try
                 {
                     client.Connect();
-                    string sourceFile = FormatPath(fileName);
+                    string sourceFile = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar + fileName;
                     if (File.Exists(sourceFile))
                     {
                         using (Stream stream = File.OpenRead(sourceFile))
                         {
-                            client.UploadFile(stream, @"\public\DrugstoreFiles\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            client.UploadFile(stream, "public" + Path.DirectorySeparatorChar + "DrugstoreFiles" + Path.DirectorySeparatorChar + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                             client.Disconnect();
                             return true;
                         }
@@ -51,11 +53,11 @@ namespace Integration.Service
             }
         }
 
-        private string FormatPath(string fileName)
-        {
-            string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
-        }
+        //private string FormatPath(string fileName)
+        //{
+        //    string[] absolute = Directory.GetCurrentDirectory().Split("src");
+        //    return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
+        //}
 
         public int SaveDrugsConsumptionReport(DateRange range)
         {
@@ -79,7 +81,8 @@ namespace Integration.Service
                 PdfLightTable.DataSource = Table;
                 PdfLightTable.Draw(Page, new PointF(0, 70));
                 string FileName = "Izvestaj o potrosnji lekova " + FormatDateRange(range) + ".pdf";
-                Document.Save("..\\..\\src\\Integration\\Reports\\" + FileName);
+                string localFile = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar + FileName;
+                Document.Save(localFile);
                 Document.Close(true);
                 this.UploadDrugConsumptionReport(FileName);
             }
@@ -128,7 +131,7 @@ namespace Integration.Service
         public List<string> GetReportNames()
         {
             List<string> filenames = new List<string>();
-            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\Integration\\Reports\\"); 
+            DirectoryInfo d = new DirectoryInfo(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar); 
             FileInfo[] Files = d.GetFiles("*.pdf"); 
             foreach (FileInfo file in Files)
             {

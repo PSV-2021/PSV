@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import { catchError } from 'rxjs/operators';
 import { ReviewDto } from '../review/review.dto';
 import { map } from 'rxjs-compat/operator/map';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class ReviewService {
     url: string;
     smartphone: any = [];
     constructor (private http: HttpClient) {
-      this.url = "http://"+location.hostname+":5000/api";
+      this.url = environment.api;
     }
 
     GetAllReviews(): Observable<any> {

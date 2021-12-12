@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,7 @@ import 'rxjs/add/operator/catch';
 export class FileService {
     url: string;
     constructor (private http: HttpClient) {
-        this.url = "http://"+location.hostname+":5000/api";
+        this.url = environment.api;
     }
     
     GetAllFiles(): Observable<any> {

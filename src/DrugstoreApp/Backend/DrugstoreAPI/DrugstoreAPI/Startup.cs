@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Grpc.Core;
 using Drugstore.Compression.Controller;
-
+using Drugstore.Service;
 
 namespace DrugstoreAPI
 {
@@ -71,7 +71,6 @@ namespace DrugstoreAPI
             };
             server.Start();
             applicationLifetime.ApplicationStopping.Register(OnShutdown);
-
         }
      
         private void OnShutdown()
@@ -80,10 +79,7 @@ namespace DrugstoreAPI
             {
                 server.ShutdownAsync().Wait();
             }
-
-           
         }
-
 
         public string GetDBConnectionString()
         {

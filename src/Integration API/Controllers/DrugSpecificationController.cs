@@ -18,11 +18,12 @@ namespace Integration_API.Controllers
     public class DrugSpecificationController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        private DrugSpecificationService drugSpecificationService = new DrugSpecificationService();
+        private DrugSpecificationService drugSpecificationService;
 
         public DrugSpecificationController(MyDbContext db)
         {
             this.dbContext = db;
+            this.drugSpecificationService = new DrugSpecificationService();
         }
 
         [HttpGet]

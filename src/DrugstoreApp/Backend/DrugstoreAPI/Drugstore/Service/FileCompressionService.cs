@@ -18,34 +18,42 @@ namespace Drugstore.Service
 {
     public class FileCompressionService 
     {
-
         private List<FileInfo> fileInfos = new List<FileInfo>();
         private List<string> fileDeletionList = new List<string>();
         private string path = "";
-
+        DrugsConsumptionReportService reportService;
+        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP")??"192.168.1.107";
+        private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME")??"user";
+        private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD")?? "password";
+        public FileCompressionService()
+        {
+            this.reportService = new DrugsConsumptionReportService(sftp_ip, sftp_name, sftp_password);
+        }
         public  void CompressOldFiles()
         {
-            string current = Directory.GetCurrentDirectory().ToString();
-            var gparent = Directory.GetParent(Directory.GetParent(current).ToString()).ToString();
-            var path2 = Directory.GetParent(Directory.GetParent(gparent).ToString()).ToString();
-            path = path2 + @"\Rebex\data\public\";
-            string drugstoreFilesPath = path + @"DrugstoreFiles";
-            string compressionPath = path + @"CompressedDrugstoreFiles";
-            string zipName = compressionPath + @"\Kompersovano-" + DateTime.Now.Day.ToString() + "." +
+            path = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar;
+            string pathForCompression = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "ReportsCompressed" + Path.DirectorySeparatorChar;
+            reportService.DownloadDrugConsupationReports();
+            string zipName = pathForCompression + @"\Kompersovano-" + DateTime.Now.Day.ToString() + "." +
                 DateTime.Now.Month.ToString()
                 + "." + DateTime.Now.Year.ToString()
                 + ". " + DateTime.Now.Hour.ToString()
                 + " i " + DateTime.Now.Minute.ToString()
                 + ".zip";
 
-            if (this.CheckIfThereAreFIlesToCompress(drugstoreFilesPath))
+            if (this.CheckIfThereAreFIlesToCompress(path))
             {
                 using (FileStream file = File.Open(zipName, FileMode.Create))
                 {
-                    fileInfos = this.getFilesForCompression(drugstoreFilesPath);
-                    
                    
+                        foreach (string fileName in Directory.GetFiles(path))
+                        {
+                            {
+                            FileInfo fileInfo = new FileInfo(fileName);
+                            fileInfos.Add(fileInfo);
+                            }
 
+                        }
                     using (var archive = new Archive(new ArchiveEntrySettings()))
                     {
                         foreach (FileInfo fileInfo in fileInfos)
@@ -55,6 +63,7 @@ namespace Drugstore.Service
                         }
 
                         archive.Save(file);
+                        reportService.UploadDrugConsumptionReport(file.Name);
                     }
 
                 }
@@ -77,26 +86,26 @@ namespace Drugstore.Service
             bool result = false;
             foreach (string fileName in Directory.GetFiles(path))
             {
-                if (File.GetCreationTime(fileName).CompareTo(DateTime.Now) < 0)
+                if (File.GetCreationTime(fileName).CompareTo(DateTime.Now.AddMonths(-6)) < 0)
                 {
                     result = true;
                 }
             }
             return result;
         }
-        public List<FileInfo> getFilesForCompression(string path)
-        {
-            List<FileInfo> fileInfosNew = new List<FileInfo>();
-                foreach (string fileName in Directory.GetFiles(path))
-                {
-                    if (File.GetCreationTime(fileName).CompareTo(DateTime.Now) < 0)
-                    {
-                        FileInfo fileInfo = new FileInfo(fileName);
-                        fileInfosNew.Add(fileInfo);
-                    }
+        //public List<FileInfo> getFilesForCompression(string path)
+        //{
+        //    List<FileInfo> fileInfosNew = new List<FileInfo>();
+        ////        foreach (string fileName in Directory.GetFiles(path))
+        ////        {
+        ////            if (File.GetCreationTime(fileName).CompareTo(DateTime.Now) < 0)
+        ////            {
+        ////                FileInfo fileInfo = new FileInfo(fileName);
+        ////                fileInfosNew.Add(fileInfo);
+        ////            }
 
-                }
-            return fileInfosNew;
-        }
+        ////        }
+        //    return fileInfosNew;
+        //}
     }
 }

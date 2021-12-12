@@ -215,16 +215,16 @@ namespace Integration_API.Controllers
 
         private string GetHospitalLink()
         {
-            string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "localhost";
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "6666";
+            string domain = Environment.GetEnvironmentVariable("HOSPITAL_DOMAIN") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("HOSPITAL_PORT") ?? "5003";
             string domport = $"http://{domain}:{port}";
 
             return domport;
         }
         private string GetGrpcDrugstoreLink()
         {
-            string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "127.0.0.1";
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "4111";
+            string domain = Environment.GetEnvironmentVariable("DRUGSTORE_GRPC_DOMAIN") ?? "127.0.0.1";
+            string port = Environment.GetEnvironmentVariable("DRUGSTORE_GRPC_PORT") ?? "4111";
             string domport = $"{domain}:{port}";
 
             return domport;
@@ -232,8 +232,8 @@ namespace Integration_API.Controllers
 
         private string GetGrpcHospitalLink()
         {
-            string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "127.0.0.1";
-            string port = Environment.GetEnvironmentVariable("PORT") ?? "4112";
+            string domain = Environment.GetEnvironmentVariable("HOSPITAL_GRPC_DOMAIN") ?? "127.0.0.1";
+            string port = Environment.GetEnvironmentVariable("HOSPITAL_GRPC_PORT") ?? "4112";
             string domport = $"{domain}:{port}";
 
             return domport;

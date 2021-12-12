@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import { catchError } from 'rxjs/operators';
 import { RegistrationDto } from '../registration/registration.dto';
 import { DrugstoreSearchDto } from '../purchase-drugs/drugstore.search.dto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ import { DrugstoreSearchDto } from '../purchase-drugs/drugstore.search.dto';
 export class PharmacyService {
     url: string;
     constructor (private http: HttpClient) {
-      this.url = "http://"+location.hostname+":5000/api";
+      this.url = environment.api;
     }
 
     GetAllDrugstoresWithImage(): Observable<any> {

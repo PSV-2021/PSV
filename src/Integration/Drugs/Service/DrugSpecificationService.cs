@@ -10,18 +10,22 @@ namespace Integration.Drugs.Service
 {
     public class DrugSpecificationService
     {
-        public DrugSpecificationService() { }
+        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP") ?? "192.168.1.107";
+        private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME") ?? "user";
+        private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
+        public DrugSpecificationService() 
+        {
+        }
 
         public bool DownloadDrugConsumptionReport(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo(this.sftp_ip, this.sftp_name, this.sftp_password)))
             {
                 try
                 {
                     client.Connect();
-                    string serverFile = @"\public\HospitalFiles\" + fileName;
-                    
-                    if (File.Exists(FormatRebexPath() + fileName))
+                    string serverFile = "public" + Path.DirectorySeparatorChar + "HospitalFiles" + Path.DirectorySeparatorChar + fileName;
+                    if (File.Exists(serverFile + fileName))
                     {
                         string localFile = FormatFilePath(fileName);
                         using (Stream stream = File.OpenWrite(localFile))
@@ -40,11 +44,7 @@ namespace Integration.Drugs.Service
             }
         }
 
-        private string FormatRebexPath()
-        {
-            string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\Rebex\\data\\public\\HospitalFiles\\");
-        }
+        
 
         private string FormatFilePath(string fileName)
         {
