@@ -12,6 +12,7 @@ using Xunit;
 
 namespace HospitalApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class CancelAppointmentsTests
     {
         private MyDbContext context;
@@ -20,8 +21,6 @@ namespace HospitalApiTests.Integration
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
             builder.UseNpgsql(Constants.ConnectionString);
             context = new MyDbContext(builder.Options);
-            //builder.UseInMemoryDatabase("Base");
-            //context = new MyDbContext(builder.Options);
         }
 
         [Fact]

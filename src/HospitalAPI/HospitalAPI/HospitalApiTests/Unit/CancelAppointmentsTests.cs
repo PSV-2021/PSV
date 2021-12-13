@@ -11,6 +11,7 @@ using Xunit;
 
 namespace HospitalApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class CancelAppointmentsTests
     {
         [Fact]
@@ -19,20 +20,27 @@ namespace HospitalApiTests.Unit
             var appointmentStubRepository = CreateAppointmentStubRepository();
             ObserveAppointmentsService service = new ObserveAppointmentsService(appointmentStubRepository);
             bool b = service.CancelAppointment(1);
-            b.ShouldBeFalse();
+            b.ShouldBeTrue();
         }
 
         public static IAppointmentRepository CreateAppointmentStubRepository()
         {
             var stubRepository = new Mock<IAppointmentRepository>();
             var appointments = CreateListOfAppointments();
-            var appointmentCancel = CreateAppointment();
 
-            stubRepository.Setup(x => x.GetByAppointmentId(It.IsAny<int>())).Returns(
-                (int id) =>
-                appointments.Where(a => a.Id == id).FirstOrDefault());
+            Appointment appointment = new Appointment
+            {
+                Id = 1,
+                StartTime = new DateTime(2021, 12, 12, 8, 0, 0),
+                DurationInMunutes = 30,
+                DoctorId = 1,
+                PatientId = 1,
+                isCancelled = false
+            };
 
-            stubRepository.Setup(x => x.Update(appointmentCancel)).Returns(false);
+            stubRepository.Setup(x => x.GetByAppointmentId(1)).Returns(appointment);
+
+            stubRepository.Setup(x => x.Update(appointment)).Returns(true);
 
             return stubRepository.Object;
         }
@@ -78,17 +86,5 @@ namespace HospitalApiTests.Unit
             return appointments;
         }
 
-        public static Appointment CreateAppointment()
-        {
-            return new Appointment
-            {
-                Id = 1,
-                StartTime = new DateTime(2021, 12, 12, 8, 0, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 1,
-                isCancelled = true
-            };
-        }
     }
 }
