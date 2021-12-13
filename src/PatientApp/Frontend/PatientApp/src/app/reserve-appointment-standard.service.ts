@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StandardAppointmentDto } from './reserve-appointment-standard/standard-appointment.dto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ReserveAppointmentStandardService {
   
   url: string;
   constructor(private http: HttpClient) { 
-    this.url = "http://localhost:5000/api";
+    this.url = "http://" + environment.apiUrl + ":" + environment.port +"/api";
   }
   
   GetSpecialty(): Observable<any> {
