@@ -21,7 +21,7 @@ namespace DrugstoreApiTests.Integration
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
 
-            builder.UseNpgsql(Constants.ConnectionString);
+            builder.UseNpgsql(Constants.ConnectionString());
 
             context = new MyDbContext(builder.Options);
         }

@@ -61,7 +61,7 @@ namespace HospitalAPI
             server = new Server
             {
                 Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },
-                Ports = { new ServerPort("localhost", 4112, ServerCredentials.Insecure) }
+                Ports = { new ServerPort(Configuration["GrpcServer"] ?? "localhost", int.Parse(Configuration["GrpcPort"] ?? "4112"), ServerCredentials.Insecure) }
             };
             server.Start();
             applicationLifetime.ApplicationStopping.Register(OnShutdown);

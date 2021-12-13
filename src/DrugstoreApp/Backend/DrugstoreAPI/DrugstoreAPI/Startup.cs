@@ -67,7 +67,7 @@ namespace DrugstoreAPI
             server = new Server
             {
                 Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },
-                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
+                Ports = { new ServerPort(Configuration["GrpcServer"] ?? "localhost", int.Parse(Configuration["GrpcPort"] ?? "4111"), ServerCredentials.Insecure) }
             };
             server.Start();
             applicationLifetime.ApplicationStopping.Register(OnShutdown);
@@ -91,6 +91,7 @@ namespace DrugstoreAPI
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
+        
 
     }
 }

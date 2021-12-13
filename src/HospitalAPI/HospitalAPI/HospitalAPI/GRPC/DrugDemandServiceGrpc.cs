@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Hospital.SharedModel;
+using System;
 
 namespace HospitalAPI
 {
@@ -40,7 +41,7 @@ namespace HospitalAPI
         }
         public DrugDemandServiceGrpc()
         {
-            SetupDbContext("server=localhost; port=5432; database=hospitalNew; User Id=postgres; password=firma4");
+            SetupDbContext(GetDBConnectionString());
             this.medicineService = new DrugService(dbContext);
         }
 
@@ -53,6 +54,16 @@ namespace HospitalAPI
                 IsOk = true
             });
 
+        }
+        public string GetDBConnectionString()
+        {
+            var server = Environment.GetEnvironmentVariable("DBServer") ?? "localhost";
+            var port = Environment.GetEnvironmentVariable("DBPort") ?? "5432";
+            var user = Environment.GetEnvironmentVariable("DBUser") ?? "postgres";
+            var password = Environment.GetEnvironmentVariable("DBPassword") ?? "firma4";
+            var database = Environment.GetEnvironmentVariable("DB") ?? "hospitalNew";
+
+            return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
 
     }
