@@ -24,6 +24,7 @@ namespace PrimerServis
     {
         IConnection connection;
         IModel channel;
+        private string host = Environment.GetEnvironmentVariable("RABBIT_HOST") ?? "localhost";
         private readonly IServiceScopeFactory scopeFactory;
         public DrugstoreOfferService drugstoreOfferService;
 
@@ -52,7 +53,7 @@ namespace PrimerServis
         }
         public void CreateConnection()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = host };
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
             channel.ExchangeDeclare(exchange: "logs", type: ExchangeType.Fanout);
