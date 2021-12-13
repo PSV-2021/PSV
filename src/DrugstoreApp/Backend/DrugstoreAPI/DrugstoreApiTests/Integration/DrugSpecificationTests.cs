@@ -52,7 +52,7 @@ namespace DrugstoreApiTests.Integration
             var retVal = new List<object[]>();
 
             retVal.Add(new object[] { "Brufen", true });
-            retVal.Add(new object[] { "Panadol", false });
+            retVal.Add(new object[] { "Palitreks", true });
 
             return retVal;
         }
