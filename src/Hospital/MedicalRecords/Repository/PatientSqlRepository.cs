@@ -31,7 +31,8 @@ namespace Hospital.MedicalRecords.Repository
         {
             dbContext.MedicalRecords.Add(new MedicalRecord { Id = patient.MedicalRecordId });
             Doctor d = (from n in dbContext.Doctors where n.Id == patient.DoctorId select n).FirstOrDefault();
-            if(d != null && d.NumberOfPatients != 0)    d.NumberOfPatients++;
+            if(d != null)    
+                d.NumberOfPatients++;
             dbContext.Patients.Add(patient);
             dbContext.SaveChanges();
         }
