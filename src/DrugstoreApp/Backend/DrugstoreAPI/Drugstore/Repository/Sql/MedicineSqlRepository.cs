@@ -7,7 +7,7 @@ using Drugstore.Repository.Interfaces;
 
 namespace Drugstore.Repository.Sql
 {
-    public class MedicineSqlRepository:IMedicineRepository
+    public class MedicineSqlRepository : IMedicineRepository
     {
         public MyDbContext DbContext { get; set; }
 
@@ -23,7 +23,8 @@ namespace Drugstore.Repository.Sql
         public List<Medicine> GetAll()
         {
             List<Medicine> result = new List<Medicine>();
-            DbContext.Medicines.ToList().ForEach(medicine => result.Add(new Medicine(medicine.Id, medicine.Name, medicine.Price, medicine.Supply)));
+            DbContext.Medicines.ToList().ForEach(medicine => result.Add(new Medicine(medicine.Id, medicine.Name, medicine.Price, medicine.Supply, medicine.Manufacturer, medicine.SideEffects,
+                                                                medicine.Reactions, medicine.Usage, medicine.CompatibleMedicines, medicine.Weight, medicine.Precautions, medicine.Substances)));
 
             return result;
         }
