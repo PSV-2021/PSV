@@ -104,8 +104,12 @@ namespace Hospital.SharedModel
                  new MedicalRecord
                  {
                      Id = 1,
-                     HealthInsuranceNumber = "1ab",
-                     Allergens = new List<Ingridient>()
+                     HealthInsuranceNumber = "1ab"
+                 },
+                 new MedicalRecord
+                 {
+                     Id = 2,
+                     HealthInsuranceNumber = "2ab"
                  }
                 );
             modelBuilder.Entity<Patient>()
@@ -130,6 +134,28 @@ namespace Hospital.SharedModel
                    FathersName = "Petar",
                    DoctorId = 1,
                    MedicalRecordId = 1,
+                   Allergen = new List<Allergen>()
+               },
+               new Patient
+               {
+                   Name = "Masa",
+                   Surname = "Bursac",
+                   Jmbg = "300999880513",
+                   DateOfBirth = new DateTime(1998, 09, 30),
+                   Sex = Sex.female,
+                   PhoneNumber = "0641664608",
+                   Adress = "Ravanicka 11",
+                   Email = "masa@gmail.com",
+                   Username = "masa98",
+                   Password = "masa98",
+                   Type = UserType.patient,
+                   Id = 2,
+                   IsBlocked = false,
+                   IsActive = true,
+                   BloodType = BloodType.A,
+                   FathersName = "Milan",
+                   DoctorId = 1,
+                   MedicalRecordId = 2,
                    Allergen = new List<Allergen>()
                });
             modelBuilder.Entity<SurveyQuestion>().HasData(
