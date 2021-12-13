@@ -20,7 +20,7 @@ namespace Hospital.Schedule.Service
         private Appointment ChangingAppointment { get; set; }
         private EventsLogService EventsLogService { get; set; }
         private RecommendedAppointmentSqlRepository RecommendedAppointmentSqlRepository { get; set; }
-        private IDoctorRepository IDoctorRepository { get; set; }
+        private IDoctorRepository DoctorRepository { get; }
 
 
         public AppointmentService()
@@ -35,15 +35,17 @@ namespace Hospital.Schedule.Service
             AppointmentRepository = recommendAppointmentSqlRepository;
         }
         
-        public AppointmentService(RecommendedAppointmentSqlRepository recommendedAppointmentSqlRepository)
+        public AppointmentService(RecommendedAppointmentSqlRepository recommendedAppointmentSqlRepository, 
+            DoctorSqlRepository doctorSqlRepository)
         {
             AppointmentRepository = recommendedAppointmentSqlRepository;
+            DoctorRepository = doctorSqlRepository;
         }
         
         public AppointmentService(IAppointmentRepository appointmentRepository, IDoctorRepository doctorRepository)
         {
             AppointmentRepository = appointmentRepository;
-            IDoctorRepository = doctorRepository;
+            DoctorRepository = doctorRepository;
         }
 
         // Sekretar*******************************************************************************
@@ -759,6 +761,8 @@ namespace Hospital.Schedule.Service
             else 
             {
                 //strategija za prioritet datuma
+                appointments = RecommendDatePriority(searchAppointments);
+
             }
 
             return appointments;
@@ -903,6 +907,28 @@ namespace Hospital.Schedule.Service
                 PatientId = 2, //ovo treba promeniti posle
                 Canceled = false
             };
+        }
+
+        public List<Appointment> RecommendDatePriority(SearchAppointmentsDTO searchAppointments)
+        {
+            List<Doctor> doctors = DoctorRepository.GetDoctorsBySpeciality(searchAppointments.SpecializationId);
+            DateTime start = DateTime.Parse(searchAppointments.StartInterval);
+            DateTime end = DateTime.Parse(searchAppointments.EndInterval);
+            List<Appointment> availableAppointments = new List<Appointment>();
+            foreach (Doctor d in doctors)
+            {
+                if(d.Id != searchAppointments.DoctorId)
+                    availableAppointments = AppointmentsForDoctorInDateRange(start, end, d.Id);
+            }
+            return availableAppointments;
+        }
+
+        private List<Appointment> AppointmentsForDoctorInDateRange(DateTime start, DateTime end, int doctorId)
+        {
+            List<Appointment> availableAppointments = new List<Appointment>();
+            for (DateTime date = start; date.Date <= end.Date; date = date.AddDays(1))
+                availableAppointments.AddRange(GetAvailable(doctorId, date));
+            return availableAppointments;
         }
     }
 }
