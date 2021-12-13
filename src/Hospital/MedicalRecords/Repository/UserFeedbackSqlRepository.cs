@@ -27,21 +27,21 @@ namespace Hospital.MedicalRecords.Repository
         public bool SaveUserFeedback(UserFeedback userFeedback)
         {
             userFeedback.Id = GetAll().Count + 1;
-            dbContext.UserFeedbacks.Add(userFeedback);
+            dbContext.UserFeedback.Add(userFeedback);
             dbContext.SaveChanges();
             return true;
         }
         public List<UserFeedback> GetAll()
         {
             List<UserFeedback> result = new List<UserFeedback>();
-            dbContext.UserFeedbacks.ToList().ForEach(userFeedbacks => result.Add(userFeedbacks));
+            dbContext.UserFeedback.ToList().ForEach(userFeedbacks => result.Add(userFeedbacks));
 
             return result;
         }
 
         public string GetUserFeedback(int id)
         {
-            var query = from st in dbContext.UserFeedbacks
+            var query = from st in dbContext.UserFeedback
                         where st.Id == id
                         select st.Content;
             return query.FirstOrDefault();
@@ -49,7 +49,7 @@ namespace Hospital.MedicalRecords.Repository
 
         public List<CommentDTO> GetAllAproved()
         {
-            var a = dbContext.UserFeedbacks.Where(f => f.canPublish == true);
+            var a = dbContext.UserFeedback.Where(f => f.canPublish == true);
 
             List<UserFeedback> list = new List<UserFeedback>();
             list = a.ToList<UserFeedback>();
