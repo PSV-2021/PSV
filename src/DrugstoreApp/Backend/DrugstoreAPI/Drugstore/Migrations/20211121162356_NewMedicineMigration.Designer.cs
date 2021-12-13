@@ -3,87 +3,23 @@ using System;
 using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211121162356_NewMedicineMigration")]
+    partial class NewMedicineMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("Drugstore.Models.DrugSpecification", b =>
-                {
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("text");
-
-                    b.HasKey("Name");
-
-                    b.ToTable("DrugSpecifications");
-
-                    b.HasData(
-                        new
-                        {
-                            Name = "Brufen",
-                            Text = "Ovde ide tekst specifikacije za Brufen"
-                        },
-                        new
-                        {
-                            Name = "Paracetamol",
-                            Text = "Ovde ide tekst specifikacije za Paracetamol"
-                        },
-                        new
-                        {
-                            Name = "Palitreks",
-                            Text = "Ovde ide tekst specifikacije za Palitreks"
-                        });
-                });
-
-            modelBuilder.Entity("Drugstore.Models.DrugstoreOffer", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DrugstoreName")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DrugstoreOffers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Content = "Content",
-                            DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 12, 21, 21, 23, 573, DateTimeKind.Local).AddTicks(3007),
-                            StartDate = new DateTime(2021, 12, 12, 21, 21, 23, 570, DateTimeKind.Local).AddTicks(4367),
-                            Title = "title"
-                        });
-                });
 
             modelBuilder.Entity("Drugstore.Models.Feedback", b =>
                 {
@@ -170,9 +106,6 @@ namespace Drugstore.Migrations
                     b.Property<int?>("MedicineId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("MedicineImage")
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -233,88 +166,16 @@ namespace Drugstore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Drugstore.Models.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("Drugstore.Models.Customer", b =>
-                {
-                    b.HasBaseType("Drugstore.Models.User");
-
-                    b.Property<string>("Adress")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("Customer_Name");
-
-                    b.HasDiscriminator().HasValue("Customer");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 5,
-                            Password = "kupac",
-                            Role = "Customer",
-                            Username = "kupac",
-                            Adress = "Adresa kupca 123",
-                            Name = "Kupac"
-                        });
-                });
-
-            modelBuilder.Entity("Drugstore.Models.Pharmacist", b =>
-                {
-                    b.HasBaseType("Drugstore.Models.User");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasDiscriminator().HasValue("Pharmacist");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Password = "farmaceut",
-                            Role = "Pharmacist",
-                            Username = "farmaceut",
-                            Name = "Farmaceut"
-                        });
-                });
-
             modelBuilder.Entity("Drugstore.Models.Medicine", b =>
                 {
                     b.HasOne("Drugstore.Models.Medicine", null)
-                        .WithMany("compatibleMedicines")
+                        .WithMany("CompatibleMedicines")
                         .HasForeignKey("MedicineId");
                 });
 
             modelBuilder.Entity("Drugstore.Models.Medicine", b =>
                 {
-                    b.Navigation("compatibleMedicines");
+                    b.Navigation("CompatibleMedicines");
                 });
 #pragma warning restore 612, 618
         }
