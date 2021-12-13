@@ -70,7 +70,7 @@ namespace IntegrationApiTests.Integration
         {
             DrugSpecificationService service = new DrugSpecificationService();
 
-            bool isDownloaded = service.DownloadDrugConsumptionReport(fileName);
+            bool isDownloaded = service.DownloadDrugSpecification(fileName);
 
             Assert.Equal(expectedOutcome, isDownloaded);
         }

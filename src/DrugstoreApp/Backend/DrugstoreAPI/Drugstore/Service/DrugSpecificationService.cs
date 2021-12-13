@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -16,6 +17,9 @@ namespace Drugstore.Service
     public class DrugSpecificationService
     {
         public DrugSpecificationSqlRespository specificationRepository { get; set; }
+        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP") ?? GetLocalIPAddress();
+        private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME") ?? "user";
+        private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
         public DrugSpecificationService(MyDbContext dbContext) 
         {
             specificationRepository = new DrugSpecificationSqlRespository(dbContext);
@@ -23,17 +27,18 @@ namespace Drugstore.Service
 
         public bool UploadDrugSpecification(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo(sftp_ip, sftp_name, sftp_password)))
             {
                 try
                 {
                     client.Connect();
-                    string sourceFile = FormatPath() + fileName + " - Specifikacija leka.pdf";
+                    string sourceFile = FormatDrugsSpecificationsPath() + fileName + " - Specifikacija leka.pdf";
                     if (File.Exists(sourceFile))
                     {
                         using (Stream stream = File.OpenRead(sourceFile))
                         {
-                            client.UploadFile(stream, @"\public\HospitalFiles\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            string serverPath = "public" + Path.DirectorySeparatorChar + "HospitalFiles" + Path.DirectorySeparatorChar;
+                            client.UploadFile(stream, serverPath + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                             client.Disconnect();
                             return true;
                         }
@@ -47,6 +52,19 @@ namespace Drugstore.Service
             }
         }
 
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
         public void SaveDrugSpecification(string drugName, string specification)
         {
             using (PdfDocument Document = new PdfDocument())
@@ -57,7 +75,7 @@ namespace Drugstore.Service
                 PdfFont BodyFont = new PdfStandardFont(PdfFontFamily.Helvetica, 7);
                 Graphics.DrawString(drugName + " - Specifikacija leka", HeaderFont, PdfBrushes.Blue, new PointF(120, 20));
                 Graphics.DrawString(specification, BodyFont, PdfBrushes.Black, new PointF(90, 50));
-                Document.Save(FormatPath() + drugName + " - Specifikacija leka.pdf");
+                Document.Save(FormatDrugsSpecificationsPath() + drugName + " - Specifikacija leka.pdf");
                 Document.Close(true);
             }
         }
@@ -74,10 +92,9 @@ namespace Drugstore.Service
             return "";
         }
 
-        private string FormatPath()
+        private string FormatDrugsSpecificationsPath()
         {
-            string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\DrugstoreApp\\Backend\\DrugstoreAPI\\Drugstore\\DrugsSpecifications\\");
+            return Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "DrugsSpecifications" + Path.DirectorySeparatorChar;
         }
 
         private string FormatString(string drugName)

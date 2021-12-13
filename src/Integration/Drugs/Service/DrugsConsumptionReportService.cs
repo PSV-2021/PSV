@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 
@@ -19,7 +20,7 @@ namespace Integration.Service
     public class DrugsConsumptionReportService
     {
         public DrugsConsumptionSqlRepository DrugsConsumptionRepository { get; set; }
-        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP") ?? "192.168.1.107";
+        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP") ?? GetLocalIPAddress();
         private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME") ?? "user";
         private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
         public DrugsConsumptionReportService(MyDbContext dbContext)
@@ -34,7 +35,7 @@ namespace Integration.Service
                 try
                 {
                     client.Connect();
-                    string sourceFile = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar + fileName;
+                    string sourceFile = FormatReportsPath() + fileName;
                     if (File.Exists(sourceFile))
                     {
                         using (Stream stream = File.OpenRead(sourceFile))
@@ -51,6 +52,19 @@ namespace Integration.Service
                 }
                 return false;
             }
+        }
+
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
         //private string FormatPath(string fileName)
@@ -81,14 +95,19 @@ namespace Integration.Service
                 PdfLightTable.DataSource = Table;
                 PdfLightTable.Draw(Page, new PointF(0, 70));
                 string FileName = "Izvestaj o potrosnji lekova " + FormatDateRange(range) + ".pdf";
-                string localFile = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar + FileName;
+                string localFile = FormatReportsPath() + FileName;
                 Document.Save(localFile);
                 Document.Close(true);
                 this.UploadDrugConsumptionReport(FileName);
             }
             return counter;
         }
-        
+
+        private string FormatReportsPath()
+        {
+            return Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar;
+        }
+
 
         private bool IsDateInRange(DateRange range, DrugConsumed drug)
         {

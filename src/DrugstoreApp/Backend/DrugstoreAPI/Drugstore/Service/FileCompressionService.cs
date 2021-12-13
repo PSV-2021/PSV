@@ -13,6 +13,8 @@ using Aspose.Zip.Saving;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Net;
+using System.Net.Sockets;
 
 namespace Drugstore.Service
 {
@@ -22,9 +24,9 @@ namespace Drugstore.Service
         private List<string> fileDeletionList = new List<string>();
         private string path = "";
         DrugsConsumptionReportService reportService;
-        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP")??"192.168.1.107";
-        private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME")??"user";
-        private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD")?? "password";
+        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP") ?? GetLocalIPAddress();
+        private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME") ?? "user";
+        private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
         public FileCompressionService()
         {
             this.reportService = new DrugsConsumptionReportService(sftp_ip, sftp_name, sftp_password);
@@ -73,6 +75,20 @@ namespace Drugstore.Service
             }
             
         }
+
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
         public void Delete(List<string> filesForDeletion)
         { 
             foreach (string file in filesForDeletion)
