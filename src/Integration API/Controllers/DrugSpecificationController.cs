@@ -10,6 +10,7 @@ using Integration_API.DTOs;
 using Model.DataBaseContext;
 using Integration.Drugs.DTOs;
 using Integration.Drugs.Service;
+using System.IO;
 
 namespace Integration_API.Controllers
 {
@@ -18,11 +19,44 @@ namespace Integration_API.Controllers
     public class DrugSpecificationController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        private DrugSpecificationService drugSpecificationService = new DrugSpecificationService();
+        private DrugSpecificationService drugSpecificationService;
 
         public DrugSpecificationController(MyDbContext db)
         {
             this.dbContext = db;
+            this.drugSpecificationService = new DrugSpecificationService();
+        }
+
+        private string FormatDrugsSpecificationsPath()
+        {
+            return Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "DrugsSpecifications" + Path.DirectorySeparatorChar;
+        }
+
+        [HttpGet]
+        [Route("pdf/{fileName?}")]
+        public IActionResult GetSpec(string fileName)
+        {
+            if (fileName == null)
+                return BadRequest();
+            var localFile = FormatDrugsSpecificationsPath() + fileName;
+            Stream stream = System.IO.File.OpenRead(localFile);
+
+            var binaryFile = ReadFile(stream);
+            return File(binaryFile, "application/pdf");
+        }
+
+        private static byte[] ReadFile(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
         }
 
         [HttpGet]
@@ -34,7 +68,7 @@ namespace Integration_API.Controllers
         [HttpGet("files")]
         public IActionResult GetRefreshedFiles([FromQuery] string filename)
         {
-            if (drugSpecificationService.DownloadDrugConsumptionReport(filename))
+            if (drugSpecificationService.DownloadDrugSpecification(filename))
                 return Ok(true);
             return Ok(false);
         }

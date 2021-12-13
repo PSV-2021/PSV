@@ -15,9 +15,7 @@ namespace DrugstoreAPI
     public class Program
     {
         public static void Main(string[] args)
-        {
-            FileCompressionService fcs = new FileCompressionService();
-            fcs.CompressOldFiles();
+        {        
             CreateHostBuilder(args).Build().Run();
         }
 
