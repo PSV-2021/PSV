@@ -67,7 +67,7 @@ namespace DrugstoreAPI
             server = new Server
             {
                 Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },
-                Ports = { new ServerPort(Configuration["GrpcServer"] ?? "localhost", int.Parse(Configuration["GrpcPort"] ?? "4111"), ServerCredentials.Insecure) }
+                Ports = { new ServerPort(Configuration["DRUGSTORE_GRPC_DOMAIN"] ?? "localhost", int.Parse(Configuration["DRUGSTORE_GRPC_PORT"] ?? "4111"), ServerCredentials.Insecure) }
             };
             server.Start();
             applicationLifetime.ApplicationStopping.Register(OnShutdown);
