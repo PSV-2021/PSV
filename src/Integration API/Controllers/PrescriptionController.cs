@@ -24,7 +24,9 @@ namespace Integration_API.Controllers
     public class PrescriptionController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-
+        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP") ?? GetLocalIPAddress();
+        private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME") ?? "user";
+        private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
         public PrescriptionController(MyDbContext db)
         {
             dbContext = db;
@@ -147,17 +149,17 @@ namespace Integration_API.Controllers
         
         public bool UploadPrescription(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.107", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo(sftp_ip, sftp_name, sftp_password)))
             {
                 try
                 {
                     client.Connect();
-                    string sourceFile = FormatPath(fileName);
+                    string sourceFile = FormatReportsPath() + fileName;
                     if (System.IO.File.Exists(sourceFile))
                     {
                         using (Stream stream = System.IO.File.OpenRead(sourceFile))
                         {
-                            client.UploadFile(stream, @"\public\DrugstoreFiles\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
+                            client.UploadFile(stream, "public" + Path.DirectorySeparatorChar + "DrugstoreFiles" + Path.DirectorySeparatorChar + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                             client.Disconnect();
                             return true;
                         }
@@ -170,11 +172,11 @@ namespace Integration_API.Controllers
                 return false;
             }
         }
-        private string FormatPath(string fileName)
-        {
-            string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
-        }
+        //private string FormatPath(string fileName)
+        //{
+        //    string[] absolute = Directory.GetCurrentDirectory().Split("src");
+        //    return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
+        //}
         public bool GenerateAndUploadPrescription(PrescriptionDto prescriptionDto)
         {
             bool returnVal = false;
@@ -190,12 +192,29 @@ namespace Integration_API.Controllers
                 Graphics.DrawString("Datum izdavanja " + DateTime.Now.ToShortDateString(), BodyFont, PdfBrushes.Black, new PointF(90, 40));
                
                 string FileName = "Recept " + prescriptionDto.PatientName + " " + DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year + " " + DateTime.Now.Hour + "." + DateTime.Now.Minute + ".pdf";
-                Document.Save("..\\..\\src\\Integration\\Reports\\" + FileName);
+                string localFile = FormatReportsPath() + FileName;
+                Document.Save(localFile);
                 Document.Close(true);
                 UploadPrescription(FileName);
                  returnVal = true;
             }
             return returnVal;
+        }
+        private string FormatReportsPath()
+        {
+            return Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar;
+        }
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
     }
