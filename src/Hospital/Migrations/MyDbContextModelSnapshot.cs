@@ -220,6 +220,40 @@ namespace Hospital.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Hospital.MedicalRecords.Model.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DrugName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("IssuedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PatientName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prescriptions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Random opis nekog leka",
+                            DrugName = "Palitrex",
+                            IssuedTime = new DateTime(2021, 12, 3, 19, 36, 1, 823, DateTimeKind.Local).AddTicks(2956),
+                            PatientName = "Zoran Zoranic"
+                        });
+                });
+
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Survey", b =>
                 {
                     b.Property<int>("Id")
@@ -391,7 +425,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 5, 13, 4, 46, 765, DateTimeKind.Local).AddTicks(1076),
+                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 683, DateTimeKind.Local).AddTicks(1779),
                             canPublish = false
                         },
                         new
@@ -399,7 +433,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 5, 13, 4, 46, 777, DateTimeKind.Local).AddTicks(4279),
+                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 686, DateTimeKind.Local).AddTicks(6562),
                             canPublish = true
                         },
                         new
@@ -407,8 +441,66 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 5, 13, 4, 46, 777, DateTimeKind.Local).AddTicks(4465),
+                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 686, DateTimeKind.Local).AddTicks(6635),
                             canPublish = true
+                        });
+                });
+
+            modelBuilder.Entity("Hospital.Medicines.Model.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Manufacturer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MedicineImage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Precautions")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Reactions")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SideEffects")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Manufacturer = "Pfizer",
+                            MedicineImage = "",
+                            Name = "Brufen",
+                            Precautions = "Mozes sve lagano",
+                            Price = 200.0,
+                            Reactions = "Pa umres",
+                            SideEffects = "Umres",
+                            Supply = 100,
+                            Usage = "Kad god hoces",
+                            Weight = 100.0
                         });
                 });
 
@@ -440,28 +532,40 @@ namespace Hospital.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("SurveyId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("SurveyId1")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("isCancelled")
+                        .HasColumnType("boolean");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
 
+                    b.HasIndex("SurveyId1");
+                    
                     b.ToTable("Appointments");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            ApointmentDescription = "",
-                            Canceled = false,
+                            ApointmentDescription = "All good",
                             DoctorId = 1,
-                            DurationInMunutes = 30,
+                            DurationInMunutes = 0,
                             IsDeleted = false,
-                            PatientId = 1,
-                            StartTime = new DateTime(2021, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            PatientId = 2,
+                            StartTime = new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            SurveyId = 0,
+                            isCancelled = false
                         });
                 });
-
+                
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>
                 {
                     b.Property<int>("Id")
@@ -606,7 +710,8 @@ namespace Hospital.Migrations
                             Surname = "Popovic",
                             Type = 2,
                             Username = "miki56",
-                            WorkingHoursId = 1
+                            WorkingHoursId = 1d,
+                            Username = "miki56"
                         },
                         new
                         {
@@ -719,9 +824,15 @@ namespace Hospital.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Hospital.MedicalRecords.Model.Survey", "Survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyId1");
+
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+
+                    b.Navigation("Survey");
                 });
 
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>

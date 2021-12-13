@@ -12,10 +12,11 @@ using Xunit;
 
 namespace DrugstoreApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class MedicinesRepositoryTests
     {
         private MyDbContext context;
-        public void SetUpDbContext()
+        private void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
 
@@ -52,7 +53,7 @@ namespace DrugstoreApiTests.Integration
         public static IEnumerable<object[]> Medicines()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new Medicine(5, "Test1", 500, 5), true });
+            retVal.Add(new object[] { new Medicine(5, "Test1", 500, 5), false });
             retVal.Add(new object[] { new Medicine(6, "Test2", 500, 30), false });
             retVal.Add(new object[] { new Medicine(7, "Test3", 500, 10), false });
             return retVal;

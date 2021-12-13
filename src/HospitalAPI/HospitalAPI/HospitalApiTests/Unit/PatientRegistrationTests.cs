@@ -19,6 +19,7 @@ using Hospital.MedicalRecords.Model;
 
 namespace HospitalApiTests.Unit
 {
+    [Trait("Type", "UnitTest")]
     public class PatientRegistrationTests
     {
         private PatientVerification patientVerification = new PatientVerification();

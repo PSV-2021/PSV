@@ -13,6 +13,7 @@ using Xunit;
 
 namespace IntegrationApiTests.Integration
 {
+    [Trait("Type", "IntegrationTest")]
     public class DrugstoresSqlRepositoryTests
     {
         private MyDbContext context;
@@ -37,6 +38,7 @@ namespace IntegrationApiTests.Integration
 
             retVal.Count.ShouldBe(expectedValue);
         }
+
 
 
         public static IEnumerable<object[]> Searches()

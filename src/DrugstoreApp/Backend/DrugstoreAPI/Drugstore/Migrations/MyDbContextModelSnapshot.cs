@@ -158,6 +158,9 @@ namespace Drugstore.Migrations
                     b.Property<string>("SideEffects")
                         .HasColumnType("text");
 
+                    b.Property<string>("Substances")
+                        .HasColumnType("text");
+
                     b.Property<int>("Supply")
                         .HasColumnType("integer");
 
