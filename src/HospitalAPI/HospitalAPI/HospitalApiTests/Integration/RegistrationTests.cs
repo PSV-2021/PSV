@@ -15,7 +15,6 @@ using Xunit;
 
 namespace HospitalApiTests.Integration
 {
-    [Trait("Type", "IntegrationTest")]
     public class RegistrationTests
     {
         //private readonly string communicationLink = "http://localhost:5000";

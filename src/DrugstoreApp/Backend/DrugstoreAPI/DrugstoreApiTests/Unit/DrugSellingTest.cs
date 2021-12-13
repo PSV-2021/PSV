@@ -15,7 +15,6 @@ using Xunit;
 
 namespace DrugstoreApiTests.Unit
 {
-    [Trait("Type", "UnitTest")]
     public class DrugSellingTest
     {
         [Theory]

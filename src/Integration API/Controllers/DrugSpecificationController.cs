@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 using Integration.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
-using Integration.Drugs.DTOs;
-using Integration.Drugs.Service;
 
 namespace Integration_API.Controllers
 {
@@ -18,25 +16,10 @@ namespace Integration_API.Controllers
     public class DrugSpecificationController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        private DrugSpecificationService drugSpecificationService = new DrugSpecificationService();
 
         public DrugSpecificationController(MyDbContext db)
         {
             this.dbContext = db;
-        }
-
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(drugSpecificationService.GetFiles());
-        }
-
-        [HttpGet("files")]
-        public IActionResult GetRefreshedFiles([FromQuery] string filename)
-        {
-            if (drugSpecificationService.DownloadDrugConsumptionReport(filename))
-                return Ok(true);
-            return Ok(false);
         }
 
         [HttpPut]

@@ -35,10 +35,11 @@ namespace HospitalAPI.Controllers
             return Ok(repoSurveyQuestion.GetAll());
 
         }
-        [HttpPost("{id}/{ap}")]
-        public IActionResult Post(List<AnsweredQuestion> answeredQuestion, string id, string ap)
+
+        [HttpPost]
+        public IActionResult Post(List<AnsweredQuestion> answeredQuestion)
         {
-            surveyService.CreateSurvey(answeredQuestion, id, ap);
+            surveyService.CreateSurvey(answeredQuestion);
             return Ok();
         }
     }

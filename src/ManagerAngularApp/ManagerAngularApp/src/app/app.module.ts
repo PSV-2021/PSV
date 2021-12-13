@@ -19,12 +19,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FilesComponent } from './files/files.component';
-import { MatBadgeModule } from '@angular/material/badge';
-import { ToastrModule } from 'ngx-toastr';
-import { timeout } from 'rxjs/operators';
-import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
-import { DrugstoreComponent } from './drugstore/drugstore.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +31,6 @@ import { DrugstoreComponent } from './drugstore/drugstore.component';
     PurchaseDrugsComponent,
     DrugstoreOfferComponent,
     DrugsConsumptionComponent,
-    FilesComponent,
-    AllDrugstoresComponent,
-    DrugstoreComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,14 +44,8 @@ import { DrugstoreComponent } from './drugstore/drugstore.component';
     ReactiveFormsModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatBadgeModule,
-    ToastrModule.forRoot({
-      preventDuplicates: false,
-      timeOut: 4000,
-      positionClass: 'toast-top-right',
-    })
   ],
   providers: [],
-  bootstrap: [AppComponent,]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PharmacyDto } from '../review/pharmacy.dto';
 import { DrugConsumptionSpecsService } from '../services/drug consumption specs.service';
 import { FormControl, FormGroup} from '@angular/forms'
-import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs/operators';
-import { FilesComponent } from '../files/files.component';
 
 
 @Component({
@@ -22,7 +19,7 @@ export class DrugsConsumptionComponent implements OnInit {
   });
   
 
-  constructor(private drugConsumptionSpecsService: DrugConsumptionSpecsService, private toastr: ToastrService) {
+  constructor(private drugConsumptionSpecsService: DrugConsumptionSpecsService) {
     this.selectedPharmacy = new PharmacyDto();
     this.pharmacies = [];
     this.drugName = '';
@@ -46,14 +43,13 @@ export class DrugsConsumptionComponent implements OnInit {
   }
 
   public requestDrugSpecification(): void{
-    let filename = '';
     this.drugConsumptionSpecsService.RequestDrugSpecification(this.selectedPharmacy.Url, this.drugName).subscribe((d: any) =>{
       if (d){
-        filename = this.drugName.charAt(0).toUpperCase() + this.drugName.slice(1).toLowerCase();
-        this.toastr.info(filename + ' - Specifikacija leka.pdf has been recieved !', 'New file alert');
+        alert("Your request has been sent successfully !");
       }else if(!d){
         alert("Drugstore doesn't have requested drug specification for that drug.");
       }
+
     });
   }
 

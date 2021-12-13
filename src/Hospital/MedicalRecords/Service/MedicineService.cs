@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Repository;
-using Hospital.Medicines.Model;
 
 namespace Hospital.MedicalRecords.Service
 {
@@ -30,7 +29,7 @@ namespace Hospital.MedicalRecords.Service
             List<Medicine> medicineForReplacement = GetApproved();
             foreach (var replacement in medicineForReplacement)
             {
-                if (replacement.Id == medicine.Id)
+                if (replacement.MedicineID == medicine.MedicineID)
                 {
                     medicineForReplacement.Remove(replacement);
                     break;
@@ -49,13 +48,12 @@ namespace Hospital.MedicalRecords.Service
         {
             return MedicineRepository.Delete(medicineID);
         }
-        /*
+
         public void ApproveMedicine(Medicine medicineToApprove)
         {
             medicineToApprove.Status = MedicineStatus.approved;
             UpdateMedicine(medicineToApprove);
         }
-        */
 
         public Medicine getMedicineById(int medicineId)
         {

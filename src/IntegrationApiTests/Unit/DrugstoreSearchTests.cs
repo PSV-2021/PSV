@@ -12,7 +12,6 @@ using Xunit;
 
 namespace IntegrationApiTests
 {
-    [Trait("Type", "UnitTest")]
     public class DrugstoreSearchTests
     {
         [Fact]

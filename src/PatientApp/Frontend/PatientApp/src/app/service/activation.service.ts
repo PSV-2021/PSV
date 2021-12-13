@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PatientDto } from '../registration/registration.dto';
-import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -13,7 +12,7 @@ export class ActivationService {
   url: string;
   data: string = "";
   constructor(private http: HttpClient) {
-    this.url = "http://" + environment.apiUrl + ":" + environment.port +"/api";
+    this.url = "http://localhost:5000/api";
 
    }
    IsTokenValid(patient: PatientDto): Observable<any> {

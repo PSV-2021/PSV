@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PatientDto } from './registration/registration.dto';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class RegistrationService {
   url: string;
   constructor(private http: HttpClient) { 
-    this.url = "http://" + environment.apiUrl + ":" + environment.port +"/api";
+    this.url = "http://localhost:5000/api";
   }
   GetDoctors(): Observable<any> {
     return this.http.get<any>(this.url + '/doctors');

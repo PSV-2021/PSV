@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Hospital.SharedModel;
 
 namespace Hospital.MedicalRecords.Model
@@ -44,7 +43,7 @@ namespace Hospital.MedicalRecords.Model
         }
         public MedicalRecord() { }
 
-
+       
 
         public void AddAllergen(Ingridient newAllergen)
         {
@@ -71,7 +70,7 @@ namespace Hospital.MedicalRecords.Model
                 allergen.Clear();
         }
 
-        /*public System.Collections.Generic.List<Anamnesis> anamnesis;
+        public System.Collections.Generic.List<Anamnesis> anamnesis;
         [NotMapped]
         public System.Collections.Generic.List<Anamnesis> Anamnesis
         {
@@ -115,143 +114,142 @@ namespace Hospital.MedicalRecords.Model
         {
             if (anamnesis != null)
                 anamnesis.Clear();
-        }*/
-        /* public System.Collections.Generic.List<Prescription> prescription;
-         [NotMapped]
-         public System.Collections.Generic.List<Prescription> Prescription
-         {
-             get
-             {
-                 if (prescription == null)
-                     prescription = new System.Collections.Generic.List<Prescription>();
-                 return prescription;
-             }
-             set
-             {
-                 RemoveAllPrescription();
-                 if (value != null)
-                 {
-                     foreach (Prescription oPrescription in value)
-                         AddPrescription(oPrescription);
-                 }
-             }
-         }
+        }
+        public System.Collections.Generic.List<Prescription> prescription;
+        [NotMapped]
+        public System.Collections.Generic.List<Prescription> Prescription
+        {
+            get
+            {
+                if (prescription == null)
+                    prescription = new System.Collections.Generic.List<Prescription>();
+                return prescription;
+            }
+            set
+            {
+                RemoveAllPrescription();
+                if (value != null)
+                {
+                    foreach (Prescription oPrescription in value)
+                        AddPrescription(oPrescription);
+                }
+            }
+        }
 
-         public void AddPrescription(Prescription newPrescription)
-         {
-             if (newPrescription == null)
-                 return;
-             if (this.prescription == null)
-                 this.prescription = new System.Collections.Generic.List<Prescription>();
-             if (!this.prescription.Contains(newPrescription))
-                 this.prescription.Add(newPrescription);
-         }
+        public void AddPrescription(Prescription newPrescription)
+        {
+            if (newPrescription == null)
+                return;
+            if (this.prescription == null)
+                this.prescription = new System.Collections.Generic.List<Prescription>();
+            if (!this.prescription.Contains(newPrescription))
+                this.prescription.Add(newPrescription);
+        }
 
-         public void RemovePrescription(Prescription oldPrescription)
-         {
-             if (oldPrescription == null)
-                 return;
-             if (this.prescription != null)
-                 if (this.prescription.Contains(oldPrescription))
-                     this.prescription.Remove(oldPrescription);
-         }
+        public void RemovePrescription(Prescription oldPrescription)
+        {
+            if (oldPrescription == null)
+                return;
+            if (this.prescription != null)
+                if (this.prescription.Contains(oldPrescription))
+                    this.prescription.Remove(oldPrescription);
+        }
 
-         public void RemoveAllPrescription()
-         {
-             if (prescription != null)
-                 prescription.Clear();
-         }
+        public void RemoveAllPrescription()
+        {
+            if (prescription != null)
+                prescription.Clear();
+        }
 
-         public System.Collections.Generic.List<ReferralLetter> referralLetter;
-         [NotMapped]
-         public System.Collections.Generic.List<ReferralLetter> ReferralLetter
-         {
-             get
-             {
-                 if (referralLetter == null)
-                     referralLetter = new System.Collections.Generic.List<ReferralLetter>();
-                 return referralLetter;
-             }
-             set
-             {
-                 RemoveAllReferralLetter();
-                 if (value != null)
-                 {
-                     foreach (ReferralLetter oReferralLetter in value)
-                         AddReferralLetter(oReferralLetter);
-                 }
-             }
-         }
+        public System.Collections.Generic.List<ReferralLetter> referralLetter;
+        [NotMapped]
+        public System.Collections.Generic.List<ReferralLetter> ReferralLetter
+        {
+            get
+            {
+                if (referralLetter == null)
+                    referralLetter = new System.Collections.Generic.List<ReferralLetter>();
+                return referralLetter;
+            }
+            set
+            {
+                RemoveAllReferralLetter();
+                if (value != null)
+                {
+                    foreach (ReferralLetter oReferralLetter in value)
+                        AddReferralLetter(oReferralLetter);
+                }
+            }
+        }
 
-         public void AddReferralLetter(ReferralLetter newReferralLetter)
-         {
-             if (newReferralLetter == null)
-                 return;
-             if (this.referralLetter == null)
-                 this.referralLetter = new System.Collections.Generic.List<ReferralLetter>();
-             if (!this.referralLetter.Contains(newReferralLetter))
-                 this.referralLetter.Add(newReferralLetter);
-         }
+        public void AddReferralLetter(ReferralLetter newReferralLetter)
+        {
+            if (newReferralLetter == null)
+                return;
+            if (this.referralLetter == null)
+                this.referralLetter = new System.Collections.Generic.List<ReferralLetter>();
+            if (!this.referralLetter.Contains(newReferralLetter))
+                this.referralLetter.Add(newReferralLetter);
+        }
 
-         public void RemoveReferralLetter(ReferralLetter oldReferralLetter)
-         {
-             if (oldReferralLetter == null)
-                 return;
-             if (this.referralLetter != null)
-                 if (this.referralLetter.Contains(oldReferralLetter))
-                     this.referralLetter.Remove(oldReferralLetter);
-         }
+        public void RemoveReferralLetter(ReferralLetter oldReferralLetter)
+        {
+            if (oldReferralLetter == null)
+                return;
+            if (this.referralLetter != null)
+                if (this.referralLetter.Contains(oldReferralLetter))
+                    this.referralLetter.Remove(oldReferralLetter);
+        }
 
-         public void RemoveAllReferralLetter()
-         {
-             if (referralLetter != null)
-                 referralLetter.Clear();
-         }
-         public System.Collections.Generic.List<HospitalTreatment> hospitalTreatment;
-         [NotMapped]
-         public System.Collections.Generic.List<HospitalTreatment> HospitalTreatment
-         {
-             get
-             {
-                 if (hospitalTreatment == null)
-                     hospitalTreatment = new System.Collections.Generic.List<HospitalTreatment>();
-                 return hospitalTreatment;
-             }
-             set
-             {
-                 RemoveAllHospitalTreatment();
-                 if (value != null)
-                 {
-                     foreach (HospitalTreatment oHospitalTreatment in value)
-                         AddHospitalTreatment(oHospitalTreatment);
-                 }
-             }
-         }
+        public void RemoveAllReferralLetter()
+        {
+            if (referralLetter != null)
+                referralLetter.Clear();
+        }
+        public System.Collections.Generic.List<HospitalTreatment> hospitalTreatment;
+        [NotMapped]
+        public System.Collections.Generic.List<HospitalTreatment> HospitalTreatment
+        {
+            get
+            {
+                if (hospitalTreatment == null)
+                    hospitalTreatment = new System.Collections.Generic.List<HospitalTreatment>();
+                return hospitalTreatment;
+            }
+            set
+            {
+                RemoveAllHospitalTreatment();
+                if (value != null)
+                {
+                    foreach (HospitalTreatment oHospitalTreatment in value)
+                        AddHospitalTreatment(oHospitalTreatment);
+                }
+            }
+        }
 
-         public void AddHospitalTreatment(HospitalTreatment newHospitalTreatment)
-         {
-             if (newHospitalTreatment == null)
-                 return;
-             if (this.hospitalTreatment == null)
-                 this.hospitalTreatment = new System.Collections.Generic.List<HospitalTreatment>();
-             if (!this.hospitalTreatment.Contains(newHospitalTreatment))
-                 this.HospitalTreatment.Add(newHospitalTreatment);
-         }
+        public void AddHospitalTreatment(HospitalTreatment newHospitalTreatment)
+        {
+            if (newHospitalTreatment == null)
+                return;
+            if (this.hospitalTreatment == null)
+                this.hospitalTreatment = new System.Collections.Generic.List<HospitalTreatment>();
+            if (!this.hospitalTreatment.Contains(newHospitalTreatment))
+                this.HospitalTreatment.Add(newHospitalTreatment);
+        }
 
-         public void RemoveHospitalTreatment(HospitalTreatment oldHospitalTreatment)
-         {
-             if (oldHospitalTreatment == null)
-                 return;
-             if (this.hospitalTreatment != null)
-                 if (this.hospitalTreatment.Contains(oldHospitalTreatment))
-                     this.hospitalTreatment.Remove(oldHospitalTreatment);
-         }
+        public void RemoveHospitalTreatment(HospitalTreatment oldHospitalTreatment)
+        {
+            if (oldHospitalTreatment == null)
+                return;
+            if (this.hospitalTreatment != null)
+                if (this.hospitalTreatment.Contains(oldHospitalTreatment))
+                    this.hospitalTreatment.Remove(oldHospitalTreatment);
+        }
 
-         public void RemoveAllHospitalTreatment()
-         {
-             if (hospitalTreatment != null)
-                 hospitalTreatment.Clear();
-         }
-     }*/
+        public void RemoveAllHospitalTreatment()
+        {
+            if (hospitalTreatment != null)
+                hospitalTreatment.Clear();
+        }
     }
 }

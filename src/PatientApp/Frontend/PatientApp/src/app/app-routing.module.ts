@@ -12,7 +12,7 @@ import { SurveyComponent } from './survey/survey.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
-  { path: 'survey/:id/:ap', component: SurveyComponent },
+  { path: 'survey', component: SurveyComponent },
   { path: '', component: LandingComponent, pathMatch: 'full'},
   { path: 'comments', component: CommentsObserveComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent},

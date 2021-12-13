@@ -1,6 +1,4 @@
-﻿using Hospital.Medicines.Model;
-
-namespace Hospital.MedicalRecords.Model
+﻿namespace Hospital.MedicalRecords.Model
 {
     public class MedicineCount
     {

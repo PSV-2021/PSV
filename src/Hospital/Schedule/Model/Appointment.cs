@@ -19,18 +19,12 @@ namespace Hospital.Schedule.Model
         public DateTime StartTime { get; set; }
         public int DurationInMunutes { get; set; }
         public String ApointmentDescription { get; set; }
-        public Boolean isCancelled { get; set; }
+
         public Boolean IsDeleted { get; set; }
 
         [ForeignKey("DoctorId")]
         public int DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
-
-        [ForeignKey("SurveyId")]
-        public int SurveyId { get; set; }
-        public virtual Survey Survey { get; set; }
-        [NotMapped]
-        public AppointmentStatus Status { get; set; }
 
         //[JsonIgnore]
         //public Room Room { get; set; }
@@ -40,6 +34,7 @@ namespace Hospital.Schedule.Model
         public virtual Patient Patient { get; set; }
         //public Boolean IsEmergency { get; set; }
         //public Note Note { get; set; }
+        public bool Canceled { get; set; }
 
         public Appointment(int id, Patient patient, Doctor doctor, DateTime startTime, int duration, string apDesc/*, Note note, Boolean IsEmergency = false*/)
         {
@@ -76,7 +71,7 @@ namespace Hospital.Schedule.Model
         {
             return DateTime.Compare(StartTime, start) == 0;
         }
-        
+
         [NotMapped]
         public DateTime EndTime
         {

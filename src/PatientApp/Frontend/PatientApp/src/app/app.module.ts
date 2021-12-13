@@ -30,8 +30,6 @@ import { LoginComponent } from './login/login.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
-import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
-
 
 
 @NgModule({
@@ -46,9 +44,7 @@ import { AppointmentsObserveComponent } from './appointments-observe/appointment
     LoginComponent,
     MedicalRecordComponent,
     RegistrationSuccessComponent,
-    RecommendAppointmentComponent,
-    AppointmentsObserveComponent
-
+    RecommendAppointmentComponent
 
   ],
   imports: [

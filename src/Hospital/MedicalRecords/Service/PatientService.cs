@@ -146,7 +146,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return notifications;
         }
-        
+        */
 
         private Boolean CanShowNotification(DateTime dateTime)
         {
@@ -186,7 +186,7 @@ namespace Hospital.MedicalRecords.Service
             }
             return notifications;
         }
-        
+
         public Patient Save(Patient patient)
         {
             throw new NotImplementedException();
@@ -199,19 +199,19 @@ namespace Hospital.MedicalRecords.Service
             return false;
         }
 
-        /*public void AddPrescriptionToPatient(Patient patient, Prescription newPrescription)
+        public void AddPrescriptionToPatient(Patient patient, Prescription newPrescription)
         {
             patient.MedicalRecord.AddPrescription(newPrescription);
             EditPatient(patient);
-        }*/
+        }
 
-        /*public void AddAnamnesisToPatient(Patient patient, Anamnesis newAnamnesis)
+        public void AddAnamnesisToPatient(Patient patient, Anamnesis newAnamnesis)
         {
             patient.MedicalRecord.AddAnamnesis(newAnamnesis);
             EditPatient(patient);
-        }*/
+        }
 
-       /* public void AddReferralLetterToPatient(Patient patient, ReferralLetter newReferralLetter)
+        public void AddReferralLetterToPatient(Patient patient, ReferralLetter newReferralLetter)
         {
             patient.MedicalRecord.AddReferralLetter(newReferralLetter);
             EditPatient(patient);
@@ -221,9 +221,9 @@ namespace Hospital.MedicalRecords.Service
         {
             patient.MedicalRecord.AddHospitalTreatment(newHospitalTreatment);
             EditPatient(patient);
-        }*/
+        }
 
-       /* public void RemovePrescriptionFromPatient(Patient patient, Prescription prescription)
+        public void RemovePrescriptionFromPatient(Patient patient, Prescription prescription)
         {
             patient.MedicalRecord.RemovePrescription(prescription);
             EditPatient(patient);
@@ -241,13 +241,13 @@ namespace Hospital.MedicalRecords.Service
             EditPatient(patient);
         }
 
-        /*public void RemoveAnamnesisFromPatient(Patient patient, Anamnesis anamnesis)
+        public void RemoveAnamnesisFromPatient(Patient patient, Anamnesis anamnesis)
         {
             patient.MedicalRecord.RemoveAnamnesis(anamnesis);
             EditPatient(patient);
-        }*/
-      
-        /*public List<MedicineCount> GetMedicineCountForSelectedDate(DateTime startDate, DateTime endDate)
+        }
+
+        public List<MedicineCount> GetMedicineCountForSelectedDate(DateTime startDate, DateTime endDate)
         {
             Dictionary<int, int> medicineCount = CreateMedicineCountDictionary(startDate, endDate);
 
@@ -261,9 +261,9 @@ namespace Hospital.MedicalRecords.Service
                 medicineTotals.Add(medicineTotal);
             }
             return medicineTotals;
-        }*/
+        }
 
-       /* private Dictionary<int, int> CreateMedicineCountDictionary(DateTime startDate, DateTime endDate)
+        private Dictionary<int, int> CreateMedicineCountDictionary(DateTime startDate, DateTime endDate)
         {
             List<Patient> allPatients = GetAllPatients();
             Dictionary<int, int> medicineCount = new Dictionary<int, int>();
@@ -275,7 +275,7 @@ namespace Hospital.MedicalRecords.Service
                 {
                     if (IsPrescriptionInTimeInterval(prescription, startDate, endDate))
                     {
-                        var medicineId = prescription.Medicine.Id;
+                        var medicineId = prescription.Medicine.MedicineID;
                         if (medicineCount.ContainsKey(medicineId))
                             medicineCount[medicineId] += 1;
                         else
@@ -284,8 +284,8 @@ namespace Hospital.MedicalRecords.Service
                 }
             }
             return medicineCount;
-        }*/
-        /*
+        }
+
         private Boolean IsPrescriptionInTimeInterval(Prescription prescription, DateTime startDate, DateTime endDate)
         {
             var prescriptionStartDate = prescription.StartDate;
@@ -303,7 +303,7 @@ namespace Hospital.MedicalRecords.Service
             return sum;
         }
 
-        */
+        
     }
 
 }

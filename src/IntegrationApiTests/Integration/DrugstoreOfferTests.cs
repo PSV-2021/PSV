@@ -20,7 +20,6 @@ using Xunit;
 
 namespace IntegrationApiTests.Integration
 {
-    [Trait("Type", "IntegrationTest")]
     public class DrugstoreOfferTests
     {
         private MyDbContext context;
@@ -44,7 +43,7 @@ namespace IntegrationApiTests.Integration
             IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(context);
             List<DrugstoreOffer> offers = repo.GetAll();
             int val = offers.Count;
-            int checkVal = val + 1;
+           int checkVal = val + 1;
             this.SendDrugOffers();
             int newVal = repo.GetAll().Count;
             newVal.ShouldBe(checkVal);

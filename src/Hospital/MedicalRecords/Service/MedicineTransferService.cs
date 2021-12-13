@@ -1,7 +1,6 @@
 ﻿using System;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Repository;
-using Hospital.Medicines.Model;
 using Hospital.Schedule.Repository;
 using Hospital.SharedModel;
 
@@ -21,7 +20,7 @@ namespace Hospital.MedicalRecords.Service
         public DeclinedMedicine DeclineMedicine(Medicine medicineToDecline, String description)
         {
             var declinedMedicine = new DeclinedMedicine(0, medicineToDecline, description);
-            MedicineRepository.Delete(medicineToDecline.Id);
+            MedicineRepository.Delete(medicineToDecline.MedicineID);
             DeclinedMedicineRepository.Save(declinedMedicine);
             return declinedMedicine;
         }

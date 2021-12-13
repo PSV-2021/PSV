@@ -30,3 +30,4 @@ namespace Hospital.Schedule.Model
         //public AppointmentForReschedulingDTO() { }
     }
 }
+

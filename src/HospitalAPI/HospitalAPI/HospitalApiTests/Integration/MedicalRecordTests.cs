@@ -13,7 +13,6 @@ using Xunit;
 
 namespace HospitalApiTests.Integration
 {
-    [Trait("Type", "IntegrationTest")]
     public class MedicalRecordTests
     {
         private MyDbContext context;

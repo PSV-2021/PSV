@@ -5,12 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Hospital.Medicines.Model;
 using Integration.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
-using Hospital.Medicines.Service;
-using Hospital.Medicines.Repository.Sql;
+using Integration.Service;
+using Integration.Sql;
 
 namespace Integration_API.Controllers
 {
@@ -19,12 +18,12 @@ namespace Integration_API.Controllers
     public class DrugPurchaseController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        public DrugService medicineService;
+        public MedicineService medicineService;
 
         public DrugPurchaseController(MyDbContext db)
         {
-            this.medicineService = new DrugService();
-            dbContext = db;
+            this.dbContext = db;
+            this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
         }
 
         [HttpPut]

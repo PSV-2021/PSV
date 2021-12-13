@@ -16,36 +16,8 @@ export class PharmacyService {
       this.url = "http://"+location.hostname+":5000/api";
     }
 
-    GetAllDrugstoresWithImage(): Observable<any> {
-      return this.http.get<any>(this.url + '/drugstore/withimage');
-    }
-
     GetAllDrugstores(): Observable<any> {
       return this.http.get<any>(this.url + '/drugstore');
-    }
-
-    GetOneDrugstore(id: number): Observable<any> {
-      let headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'ApiKey': "abcde" });
-
-      const params = new HttpParams()
-      .set('id', id)
-      return this.http.get<any>(this.url + '/drugstore/one', {params, headers});
-    }
-
-    EditPharmacy(Id: number, ImageBase64: string, Comment: string) {
-      const body = {
-        id : Id,
-        imageBase64: ImageBase64,
-        comment : Comment
-      };
-      let headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'ApiKey': "abcde" });
-      let options = { headers: headers };
-      const ret = this.http.put<any>(this.url + '/drugstore/edit', body, options);
-      return ret;
     }
 
     SendDrugDemand(Url: string, DrugAmount: number, DrugName: string): Observable<any> {

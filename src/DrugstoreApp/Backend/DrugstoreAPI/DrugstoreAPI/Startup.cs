@@ -1,14 +1,15 @@
+using Drugstore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Drugstore.Compression.Controller;
 
 namespace DrugstoreAPI
 {
@@ -21,15 +22,14 @@ namespace DrugstoreAPI
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
             services.AddDbContext<Drugstore.Models.MyDbContext>(options =>
-            options.UseNpgsql(GetDBConnectionString()));
+            options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")));
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddSingleton<IHostedService, BackgroundCompressionController>();
-
+            
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -37,8 +37,10 @@ namespace DrugstoreAPI
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
+
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -56,20 +58,6 @@ namespace DrugstoreAPI
             {
                 endpoints.MapControllers();
             });
-            PrepDB.PrepPopulation(app);
         }
-
-
-        private String GetDBConnectionString()
-        {
-            var server = Configuration["DBServer"];
-            var port = Configuration["DBPort"];
-            var user = Configuration["DBUser"];
-            var password = Configuration["DBPassword"];
-            var database = Configuration["DB"];
-            if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
-            return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
-        }
-
     }
 }

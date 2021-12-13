@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Hospital.MedicalRecords.Model;
-using Hospital.Schedule.Model;
 using Hospital.SharedModel;
 
 namespace Hospital.MedicalRecords.Repository
@@ -62,11 +61,10 @@ namespace Hospital.MedicalRecords.Repository
             throw new NotImplementedException();
         }
 
-        public void CreateSurvey(List<AnsweredQuestion> answeredQuestion, string id, string ap)
+        public void CreateSurvey(List<AnsweredQuestion> answeredQuestion)
         {
-            dbContext.Survey.Add(new Survey { Date = DateTime.Now, PatientId = Int32.Parse(id), AppointmentId = Int32.Parse(ap) });
+            dbContext.Survey.Add(new Survey(1, DateTime.Now, 1));
             dbContext.SaveChanges();
-            ChangeAppointment(ap);
 
             var a = dbContext.Survey.Max(s => s.Id);
 
@@ -76,17 +74,6 @@ namespace Hospital.MedicalRecords.Repository
                 dbContext.AnsweredQuestion.Add(answer);
             }
 
-            dbContext.SaveChanges();
-        }
-
-        private void ChangeAppointment(string ap)
-        {
-            Survey sur = dbContext.Survey.Where(s => s.AppointmentId == Int32.Parse(ap)).FirstOrDefault();
-            Appointment app = dbContext.Appointments.Where(s => s.Id == sur.AppointmentId).FirstOrDefault();
-            dbContext.Remove(app);
-            dbContext.SaveChanges();
-            app.SurveyId = sur.Id;
-            dbContext.Appointments.Add(app);
             dbContext.SaveChanges();
         }
 

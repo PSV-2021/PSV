@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Hospital.MedicalRecords.Model;
-using Hospital.Medicines.Model;
 using Newtonsoft.Json;
 
 namespace Hospital.MedicalRecords.Repository
@@ -19,7 +18,6 @@ namespace Hospital.MedicalRecords.Repository
        public List<Medicine> GetAll()
        { 
            var allMedicine = new List<Medicine>();
-           /*
            var medicineFromFile = ReadFromFile();
            foreach (var medicine in medicineFromFile)
            { 
@@ -28,34 +26,30 @@ namespace Hospital.MedicalRecords.Repository
                    allMedicine.Add(medicine);
                }
            }
-           */
            return allMedicine;
        }
        public Boolean Save(Medicine newMedicine)
        {
-           /*
-           newMedicine.Id = GenerateNextId();
+           newMedicine.MedicineID = GenerateNextId();
            var storedMedicine = ReadFromFile();
            foreach (var medicine in storedMedicine)
            {
-               if (!medicine.IsDeleted && medicine.Id == newMedicine.Id)
+               if (!medicine.IsDeleted && medicine.MedicineID == newMedicine.MedicineID)
                {
                    return false;
                }
            }
            storedMedicine.Add(newMedicine);
            WriteToFile(storedMedicine);
-           */
            return true;
        }
       
       public Boolean Update(Medicine editedMedicine)
       {
-          /*
             var storedMedicine = ReadFromFile();
             foreach (var medicine in storedMedicine)
             {
-                if (medicine.Id == editedMedicine.Id)
+                if (medicine.MedicineID == editedMedicine.MedicineID)
                 {
                     medicine.Manufacturer = editedMedicine.Manufacturer;
                     medicine.Name = editedMedicine.Name;
@@ -68,7 +62,6 @@ namespace Hospital.MedicalRecords.Repository
                     return true;
                 }
             }
-          */
             return false;
         }
       
@@ -77,7 +70,7 @@ namespace Hospital.MedicalRecords.Repository
             var allMedicine = GetAll();
             foreach (var medicine in allMedicine)
             {
-                if (medicine.Id.Equals(id))
+                if (medicine.MedicineID.Equals(id))
                 {
                     return medicine;
                 }
@@ -87,18 +80,16 @@ namespace Hospital.MedicalRecords.Repository
       
       public Boolean Delete(int id)
       {
-          /*
           var storedMedicine = ReadFromFile();
           foreach (var medicine in storedMedicine)
           {
-              if (medicine.Id == id && medicine.IsDeleted == false)
+              if (medicine.MedicineID == id && medicine.IsDeleted == false)
               {
                   medicine.IsDeleted = true;
                   WriteToFile(storedMedicine);
                   return true;
               }
           }
-          */
           return false;
       }
       
@@ -138,7 +129,6 @@ namespace Hospital.MedicalRecords.Repository
       public List<Medicine> GetAwaiting()
       {
           var awaitingMedicine = new List<Medicine>();
-          /*
           var storedMedicine = ReadFromFile();
           foreach (var medicine in storedMedicine)
           {
@@ -147,14 +137,12 @@ namespace Hospital.MedicalRecords.Repository
                   awaitingMedicine.Add(medicine);
               }
           }
-          */
           return awaitingMedicine;
       }
 
       public List<Medicine> GetApproved()
       {
           var approvedMedicine = new List<Medicine>();
-          /*
           var storedMedicine = ReadFromFile();
           foreach (var medicine in storedMedicine)
           {
@@ -163,7 +151,6 @@ namespace Hospital.MedicalRecords.Repository
                   approvedMedicine.Add(medicine);
               }
           }
-          */
           return approvedMedicine;
       }
     }

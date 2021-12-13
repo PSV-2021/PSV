@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="iTextSharp" Version="5.5.13.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.16.1" />
     <PackageReference Include="Shouldly" Version="4.0.3" />
@@ -23,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hospital\Hospital.csproj" />
     <ProjectReference Include="..\Integration API\Integration API.csproj" />
     <ProjectReference Include="..\Integration\Integration.csproj" />
   </ItemGroup>

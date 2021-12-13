@@ -1,5 +1,4 @@
 using System;
-using Hospital.Medicines.Model;
 using Hospital.SharedModel;
 using Newtonsoft.Json;
 
@@ -7,30 +6,6 @@ namespace Hospital.MedicalRecords.Model
 {
    public class Prescription
    {
-       public int Id { get; set; }
-       public string PatientName { get; set; }
-       public string Description { get; set; }
-       public string DrugName { get; set; }
-       public DateTime IssuedTime { get; set; }
-
-       public Prescription(int id,string patientName, string description, string drugName, DateTime issuedTime)
-       {
-           Id = id;
-           PatientName = patientName;
-           Description = description;
-           DrugName = drugName;
-           IssuedTime = issuedTime;
-       }
-
-        public Prescription(string patientName, string description, string drugName, DateTime issuedTime)
-       {
-           PatientName = patientName;
-           Description = description;
-           DrugName = drugName;
-           IssuedTime = issuedTime;
-       }
-
-       /*
        public DateTime StartDate { get; set; }
         public int DurationInDays { get; set; }
         public Period ReferencePeriod { get; set; }
@@ -50,6 +25,23 @@ namespace Hospital.MedicalRecords.Model
             this.isActive = a;
             this.Medicine = m;
         }
-       */
+
+        [JsonIgnore]
+        public String Consumption
+        {
+            get
+            {
+                return Number + " " + ((ReferencePeriod == Period.daily) ? "dnevno" : "meseèno");
+            }
+        }
+
+        [JsonIgnore]
+        public String ReferencePeriodSerbian
+        {
+            get
+            {
+                return ((ReferencePeriod == Period.daily) ? "dnevno" : "meseèno");
+            }
+        }
    }
 }

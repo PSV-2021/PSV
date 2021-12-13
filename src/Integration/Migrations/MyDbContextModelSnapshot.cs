@@ -19,44 +19,6 @@ namespace Integration.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("Integration.Model.Drug", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Supply")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medicines");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Brufen",
-                            Supply = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Paracetamol",
-                            Supply = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Palitreks",
-                            Supply = 0
-                        });
-                });
-
             modelBuilder.Entity("Integration.Model.DrugConsumed", b =>
                 {
                     b.Property<int>("Id")
@@ -436,13 +398,7 @@ namespace Integration.Migrations
                     b.Property<string>("ApiKey")
                         .HasColumnType("text");
 
-                    b.Property<string>("Base64Image")
-                        .HasColumnType("text");
-
                     b.Property<string>("City")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Comment")
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
@@ -521,27 +477,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 12, 6, 12, 43, 38, 523, DateTimeKind.Local).AddTicks(9754),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 863, DateTimeKind.Local).AddTicks(4790),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(4997)
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(1767)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5327),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2581),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5353)
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2617)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5363),
+                            RecievedTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2629),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5367)
+                            SentTime = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(2633)
                         });
                 });
 
@@ -578,10 +534,48 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5888),
+                            EndDate = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(3344),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 12, 6, 12, 43, 38, 527, DateTimeKind.Local).AddTicks(5880),
+                            StartDate = new DateTime(2021, 11, 24, 17, 8, 57, 871, DateTimeKind.Local).AddTicks(3336),
                             Title = "title"
+                        });
+                });
+
+            modelBuilder.Entity("Integration.Model.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Brufen",
+                            Supply = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Paracetamol",
+                            Supply = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Palitreks",
+                            Supply = 0
                         });
                 });
 #pragma warning restore 612, 618

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Hospital.MedicalRecords.Model;
-using Hospital.Medicines.Model;
 using Hospital.Schedule.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,10 +20,7 @@ namespace Hospital.SharedModel
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
         public DbSet<Survey> Survey { get; set; }
         public DbSet<AnsweredQuestion> AnsweredQuestion { get; set; }
-        public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<Prescription> Prescriptions { get; set; }
-
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -51,7 +47,7 @@ namespace Hospital.SharedModel
                 new Speciality { Id = 2, Name = "cardiology" }
                 );
             modelBuilder.Entity<VacationDays>().HasData(
-               new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25)}
+               new VacationDays { Id = 1, StartDate = new DateTime(2021, 05, 20), EndDate = new DateTime(2021, 05, 25) }
                );
             modelBuilder.Entity<WorkingHours>().HasData(
                new WorkingHours { Id = 1, BeginningDate = new DateTime(2021, 01, 01), EndDate = new DateTime(2021, 01, 08) }
@@ -154,11 +150,6 @@ namespace Hospital.SharedModel
                 new SurveyQuestion { Id = 13, Text = "Do you feel that our work hours are well suited to treat you?", Rating = 0, QuestionType = 2 },
                 new SurveyQuestion { Id = 14, Text = "How likely are you to recommend our hospital to a friend or family member?", Rating = 0, QuestionType = 2 }
             );
-            modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
-            modelBuilder.Entity<Appointment>().HasData(
-              new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false , isCancelled = false}
-              );
-            modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
         }
 
     }

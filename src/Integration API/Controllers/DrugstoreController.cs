@@ -44,14 +44,6 @@ namespace Integration_API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("withimage")]       // GET /api/drugstore
-        public IActionResult GetWithImageAndComment()
-        {
-            List<Drugstore> result = new List<Drugstore>();
-            drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.City, drugstore.Address, drugstore.Comment, drugstore.Base64Image)));
-            return Ok(result);
-        }
-
         [HttpGet ("filter")] // GET /api/drugstore/filter
 
         public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
@@ -79,16 +71,6 @@ namespace Integration_API.Controllers
         {
             string result = drugstoreService.GetDrugstoreName(id);
             return Ok(result);
-        }
-
-        [HttpGet("one")] // GET /api/test2/int/3
-        public IActionResult GetDrugstoreById([FromQuery] int id)
-        {
-            Drugstore result = drugstoreService.GetDrugstoreById(id);
-            if (result != null)
-                return Ok(result);
-            
-            return BadRequest(false);
         }
 
         [HttpPost] // POST /api/drugstore/newdrugstore
@@ -121,25 +103,6 @@ namespace Integration_API.Controllers
                 return Ok(ds);
             }
             return Unauthorized();
-        }
-
-        [HttpPut("edit")]
-        public IActionResult EditDrugstore(DrugstoreEditDto editDto)
-        {
-            IEnumerable<string> headerValues = Request.Headers["ApiKey"];
-            var key = headerValues.FirstOrDefault();
-            if (key == null || !key.Equals("abcde"))
-                return Unauthorized(false);
-
-            Drugstore edit = drugstoreService.GetDrugstoreById(editDto.Id);
-            if (edit == null)
-                return BadRequest(false);
-            edit.Base64Image = editDto.ImageBase64;
-            edit.Comment = editDto.Comment;
-
-            drugstoreService.Update(edit);
-
-            return Ok(true);
         }
     }
 }
