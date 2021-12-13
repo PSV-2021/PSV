@@ -26,7 +26,7 @@ namespace HospitalAPI.Controllers
         public RecommendedAppointmentController(MyDbContext context)
         {
             this.context = context;
-            appointmentService = new AppointmentService(new RecommendedAppointmentSqlRepository(context));
+            appointmentService = new AppointmentService(new RecommendedAppointmentSqlRepository(context), new DoctorSqlRepository(context));
         }
 
 
@@ -47,5 +47,7 @@ namespace HospitalAPI.Controllers
 
             return Ok();
         }
+
+       
     }
 }
