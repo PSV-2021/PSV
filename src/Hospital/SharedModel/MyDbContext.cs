@@ -106,6 +106,12 @@ namespace Hospital.SharedModel
                      Id = 1,
                      HealthInsuranceNumber = "1ab",
                      Allergens = new List<Ingridient>()
+                 },
+                 new MedicalRecord
+                 {
+                     Id = 2,
+                     HealthInsuranceNumber = "1b",
+                     Allergens = new List<Ingridient>()
                  }
                 );
             modelBuilder.Entity<Patient>()
@@ -131,7 +137,29 @@ namespace Hospital.SharedModel
                    DoctorId = 1,
                    MedicalRecordId = 1,
                    Allergen = new List<Allergen>()
-               });
+               },
+                new Patient
+                {
+                    Name = "Milica",
+                    Surname = "Markovic",
+                    Jmbg = "3009998805138",
+                    DateOfBirth = new DateTime(1997, 06, 25),
+                    Sex = Sex.female,
+                    PhoneNumber = "0641664608",
+                    Adress = "Bulevar Oslobodjenja 8",
+                    Email = "marko@gmail.com",
+                    Username = "miki98",
+                    Password = "miki985",
+                    Type = UserType.patient,
+                    Id = 2,
+                    IsBlocked = false,
+                    IsActive = true,
+                    BloodType = BloodType.B,
+                    FathersName = "Petar",
+                    DoctorId = 1,
+                    MedicalRecordId = 2,
+                    Allergen = new List<Allergen>()
+                });
             modelBuilder.Entity<SurveyQuestion>().HasData(
                 new SurveyQuestion { Id = 1, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 },
                 new SurveyQuestion { Id = 2, Text = "How satisfied were you with the time that your doctor spent with you?", Rating = 0, QuestionType = 0 },

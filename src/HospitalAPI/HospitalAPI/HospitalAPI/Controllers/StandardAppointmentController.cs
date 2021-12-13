@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,7 +40,9 @@ namespace HospitalAPI.Controllers
             Console.WriteLine(idDoctor);
             List<Appointment> result = new List<Appointment>();
             int id = int.Parse(idDoctor);
-            DateTime date = DateTime.Parse(chosenDate);
+            DateTime date = DateTime.ParseExact(chosenDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+
+            //DateTime date = DateTime.Parse(chosenDate);
             result = appointmentService.GetAppointmentsByDoctorAndDate(id, date);
             return Ok(result);
         }
