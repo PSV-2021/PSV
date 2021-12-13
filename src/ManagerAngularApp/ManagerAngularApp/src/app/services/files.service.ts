@@ -25,8 +25,14 @@ export class FileService {
         return responseData;
     }
 
-    OpenFile(filename: string) {
-        var URL = "../../assets/DrugsSpecifications/" + filename;
-        window.open(URL, '_blank');
-    }
+    OpenFile(reportName: string): any {
+        var mediaType = 'application/pdf';
+        this.http.get(this.url + '/drugSpecification/pdf/' + reportName, { responseType: 'blob' }).subscribe(
+            (response) => {
+                var blob = new Blob([response], { type: mediaType });
+                const url= window.URL.createObjectURL(blob);
+                window.open(url);
+            }
+        );
+      }
 }

@@ -41,8 +41,10 @@ namespace DrugstoreAPI.Controllers
                         if (!specificationContent.Equals(""))
                         {
                             drugSpecificationService.SaveDrugSpecification(drugSpec.Name, specificationContent);
-                            drugSpecificationService.UploadDrugSpecification(drugSpec.Name);
-                            return Ok();
+                            if (drugSpecificationService.UploadDrugSpecification(drugSpec.Name))
+                                return Ok(true);
+                            else
+                                return NoContent();
                         }
                         else
                             return NoContent();

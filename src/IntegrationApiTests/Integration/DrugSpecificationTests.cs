@@ -40,7 +40,7 @@ namespace IntegrationApiTests.Integration
             SetUpDbContext();
             var dsController = new DrugSpecificationController(context);
 
-            var result = dsController.Put(new DrugSpecificationRequestDTO("http://localhost:5001", "brufen"));
+            var result = dsController.Put(new DrugSpecificationRequestDTO("http://localhost:5001", "Brufen"));
             Assert.IsType<OkObjectResult>(result);
         }
 
@@ -80,7 +80,7 @@ namespace IntegrationApiTests.Integration
             var retVal = new List<object[]>();
 
             retVal.Add(new object[] { "Brufen - Specifikacija leka.pdf", true });
-            retVal.Add(new object[] { "Neki random lek.pdf", false });
+            retVal.Add(new object[] { "Palitreks - Specifikacija leka.pdf", true });
 
             return retVal;
         }

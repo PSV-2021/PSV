@@ -33,16 +33,20 @@ namespace Drugstore.Service
                 {
                     client.Connect();
                     string sourceFile = FormatDrugsSpecificationsPath() + fileName + " - Specifikacija leka.pdf";
-                    if (File.Exists(sourceFile))
+                    try
                     {
                         using (Stream stream = File.OpenRead(sourceFile))
                         {
                             string serverPath = "public" + Path.DirectorySeparatorChar + "HospitalFiles" + Path.DirectorySeparatorChar;
-                            client.UploadFile(stream, serverPath + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
-                            client.Disconnect();
-                            return true;
+                            client.UploadFile(stream, serverPath + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });     
                         }
                     }
+                    catch (Exception e)
+                    {
+                        string ErrorString = e.Message;
+                    }
+                    client.Disconnect();
+                    return true;
                 }
                 catch (SocketException se)
                 {

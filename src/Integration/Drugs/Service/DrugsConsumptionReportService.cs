@@ -36,17 +36,21 @@ namespace Integration.Service
                 {
                     client.Connect();
                     string sourceFile = FormatReportsPath() + fileName;
-                    if (File.Exists(sourceFile))
+                    try
                     {
                         using (Stream stream = File.OpenRead(sourceFile))
                         {
                             client.UploadFile(stream, "public" + Path.DirectorySeparatorChar + "DrugstoreFiles" + Path.DirectorySeparatorChar + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
-                            client.Disconnect();
-                            return true;
                         }
                     }
+                    catch (Exception e)
+                    {
+                        string ErrorString = e.Message;
+                    }
+                    client.Disconnect();
+                    return true;
                 }
-                catch (SocketException se) 
+                catch (SocketException se)
                 {
                     string ErrorString = se.Message;
                 }

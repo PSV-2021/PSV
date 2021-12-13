@@ -28,15 +28,17 @@ namespace Integration.Drugs.Service
                 {
                     client.Connect();
                     string serverFile = "public" + Path.DirectorySeparatorChar + "HospitalFiles" + Path.DirectorySeparatorChar + fileName;
-                    string localFile = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar + fileName;
-                    string angularFile = FormatAngularFilePath(fileName);
-                    using (Stream stream = File.OpenWrite(angularFile))
+                    string localFile = FormatDrugsSpecificationsPath() + fileName;
+                    try
                     {
-                        client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
+                        using (Stream stream = File.OpenWrite(localFile))
+                        {
+                            client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
+                        }
                     }
-                    using (Stream stream = File.OpenWrite(localFile))
+                    catch (Exception e)
                     {
-                        client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
+                        string ErrorString = e.Message;
                     }
                     client.Disconnect();
                     return true;
@@ -47,6 +49,11 @@ namespace Integration.Drugs.Service
                 }
                 return false;
             }
+        }
+
+        private string FormatDrugsSpecificationsPath()
+        {
+            return Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "DrugsSpecifications" + Path.DirectorySeparatorChar;
         }
 
         public static string GetLocalIPAddress()
@@ -60,12 +67,6 @@ namespace Integration.Drugs.Service
                 }
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
-        }
-
-        private string FormatAngularFilePath(string fileName)
-        {
-            string[] absolute = Directory.GetCurrentDirectory().Split("src");   //ova putanja treba jos da se izmeni 
-            return Path.Combine(absolute[0], "src\\ManagerAngularApp\\ManagerAngularApp\\src\\assets\\DrugsSpecifications\\" + fileName);
         }
 
         public List<FileInfoDto> GetFiles()
@@ -124,7 +125,7 @@ namespace Integration.Drugs.Service
         public bool IsFileDownloaded(string filename)
         {
             bool retVal = false;
-            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\ManagerAngularApp\\ManagerAngularApp\\src\\assets\\DrugsSpecifications\\");
+            DirectoryInfo d = new DirectoryInfo(FormatDrugsSpecificationsPath());
             FileInfo[] Files = d.GetFiles("*.pdf");
             foreach (FileInfo file in Files)
             {

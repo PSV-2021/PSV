@@ -57,7 +57,7 @@ namespace IntegrationApiTests.Integration
             SetUpDbContext();
             DrugsConsumptionReportService service = new DrugsConsumptionReportService(context);
 
-            bool result = service.UploadDrugConsumptionReport("Izvestaj o potrosnji lekova 14.11.2021. - 15.11.2021..pdf");
+            bool result = service.UploadDrugConsumptionReport("Izvestaj o potrosnji lekova 15.11.2021. - 19.11.2021..pdf");
 
             Assert.True(result);
         }
@@ -81,8 +81,8 @@ namespace IntegrationApiTests.Integration
         {
             var retVal = new List<object[]>();
 
-            retVal.Add(new object[] { "Izvestaj o potrosnji lekova 14.11.2021. - 15.11.2021..pdf", true});
-            retVal.Add(new object[] { "Izvestaj.pdf", false });
+            retVal.Add(new object[] { "Izvestaj o potrosnji lekova 15.11.2021. - 19.11.2021..pdf", true});
+            retVal.Add(new object[] { "Izvestaj o potrosnji lekova 16.11.2021. - 18.11.2021..pdf", true });
 
             return retVal;
         }
