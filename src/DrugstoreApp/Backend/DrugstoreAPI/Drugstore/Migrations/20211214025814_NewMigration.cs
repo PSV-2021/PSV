@@ -4,10 +4,22 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
-    public partial class newMigration : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "DrugSpecifications",
+                columns: table => new
+                {
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Text = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DrugSpecifications", x => x.Name);
+                });
+
             migrationBuilder.CreateTable(
                 name: "DrugstoreOffers",
                 columns: table => new
@@ -69,6 +81,7 @@ namespace Drugstore.Migrations
                     Weight = table.Column<double>(type: "double precision", nullable: false),
                     Precautions = table.Column<string>(type: "text", nullable: true),
                     MedicineImage = table.Column<string>(type: "text", nullable: true),
+                    Substances = table.Column<string>(type: "text", nullable: true),
                     MedicineId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -80,6 +93,22 @@ namespace Drugstore.Migrations
                         principalTable: "Medicines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TotalPrice = table.Column<double>(type: "double precision", nullable: false),
+                    OrderType = table.Column<int>(type: "integer", nullable: false),
+                    Delivered = table.Column<bool>(type: "boolean", nullable: false),
+                    PickedUp = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -102,9 +131,19 @@ namespace Drugstore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "DrugSpecifications",
+                columns: new[] { "Name", "Text" },
+                values: new object[,]
+                {
+                    { "Brufen", "Ovde ide tekst specifikacije za Brufen" },
+                    { "Paracetamol", "Ovde ide tekst specifikacije za Paracetamol" },
+                    { "Palitreks", "Ovde ide tekst specifikacije za Palitreks" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 11, 24, 17, 8, 27, 917, DateTimeKind.Local).AddTicks(7213), new DateTime(2021, 11, 24, 17, 8, 27, 913, DateTimeKind.Local).AddTicks(1586), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 14, 3, 58, 13, 378, DateTimeKind.Local).AddTicks(5813), new DateTime(2021, 12, 14, 3, 58, 13, 371, DateTimeKind.Local).AddTicks(9311), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
@@ -123,12 +162,12 @@ namespace Drugstore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Medicines",
-                columns: new[] { "Id", "Manufacturer", "MedicineId", "MedicineImage", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Supply", "Usage", "Weight" },
+                columns: new[] { "Id", "Manufacturer", "MedicineId", "MedicineImage", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Substances", "Supply", "Usage", "Weight" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, "Brufen", null, 150.0, null, null, 150, null, 0.0 },
-                    { 2, null, null, null, "Paracetamol", null, 150.0, null, null, 10, null, 0.0 },
-                    { 3, null, null, null, "Palitreks", null, 150.0, null, null, 30, null, 0.0 }
+                    { 1, "bla", null, null, "Brufen", "bla", 150.0, "bla", "bla", "bla", 150, "bla", 100.0 },
+                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 10, "bla", 100.0 },
+                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 30, "bla", 100.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -150,6 +189,9 @@ namespace Drugstore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DrugSpecifications");
+
+            migrationBuilder.DropTable(
                 name: "DrugstoreOffers");
 
             migrationBuilder.DropTable(
@@ -160,6 +202,9 @@ namespace Drugstore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Medicines");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Users");

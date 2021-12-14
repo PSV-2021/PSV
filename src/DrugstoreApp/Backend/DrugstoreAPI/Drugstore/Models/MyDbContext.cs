@@ -6,19 +6,15 @@ namespace Drugstore.Models
 {
     public class MyDbContext : DbContext
     {
-        public DbSet<Medicine> Medicines
-        {
-            get; set;
-        }
+        public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<DrugstoreOffer> DrugstoreOffers { get; set; }
         public DbSet<DrugSpecification> DrugSpecifications { get; set; }
+        public DbSet<ShoppingCart> Orders { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
-
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

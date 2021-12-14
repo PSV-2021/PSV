@@ -3,6 +3,7 @@ using Drugstore.Models;
 using Drugstore.Repository.Sql;
 using System.Collections.Generic;
 using System.Linq;
+using Drugstore.Service;
 
 namespace DrugstoreAPI.Service
 {
@@ -10,6 +11,7 @@ namespace DrugstoreAPI.Service
     {
         public IMedicineRepository MedicineRepository { get; set; }
         public readonly MyDbContext dbContext;
+        public OrderService OrderService { get; set; }
         public MedicineService(IMedicineRepository medicineRepository)
         {
             MedicineRepository = medicineRepository;
@@ -41,9 +43,14 @@ namespace DrugstoreAPI.Service
             return MedicineRepository.Delete(id);
         }
 
+        public Medicine GetByName(string name)
+        {
+            return MedicineRepository.GetByName(name);
+        }
+
         public void PurchaseDrugs(ShoppingCart shoppingCart)
         {
-            shoppingCart.ShoppingCartItems.ForEach(item => DecreaseDrugAmount(item.Amount, MedicineRepository.GetByName(item.MedicineName)));
+            shoppingCart.ShoppingCartItems.ForEach(item => DecreaseDrugAmount(item.Amount, MedicineRepository.GetByName1(item.MedicineName)));
         }
 
         public bool CheckForAmountOfDrug(string nameOfDrug, int amountOfDrug)
@@ -75,10 +82,12 @@ namespace DrugstoreAPI.Service
             return med.Supply >= amountOfDrug;
         }
 
-        private void DecreaseDrugAmount(int amountOfDrug, Medicine med)
+        public void DecreaseDrugAmount(int amountOfDrug, Medicine med)
         {
-            med.Supply -= amountOfDrug;
-            MedicineRepository.Update(med);
+            if(med!=null) { 
+                med.Supply -= amountOfDrug;
+                MedicineRepository.Update(med);
+            }
         }
 
         private void IncreaseDrugAmount(int amountOfDrug, Medicine med)
@@ -90,6 +99,15 @@ namespace DrugstoreAPI.Service
         public List<Medicine> SearchMedicineByNameAndSubstance(string name, string substance)
         {
             return MedicineRepository.GetAll().Where(medicine => medicine.Name.Contains(name) && medicine.Substances.Contains(substance)).ToList();
+        }
+
+        public void FinishOrder(ShoppingCart order)
+        {
+            if (order.OrderType == OrderType.Delivery) { order.Delivered = true; }
+            else { order.PickedUp = true; }
+
+            PurchaseDrugs(order);
+            OrderService.Add(order);
         }
     }
 }
