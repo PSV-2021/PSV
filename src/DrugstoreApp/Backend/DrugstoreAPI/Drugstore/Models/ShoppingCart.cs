@@ -7,6 +7,7 @@ namespace Drugstore.Models
     public class ShoppingCart
     {
         public int Id { get; set; }
+        public int CustomerId { get; set; }
         public List<ShoppingCartItem> ShoppingCartItems;
         public double TotalPrice { get; set; }
         public OrderType OrderType { get; set; }
