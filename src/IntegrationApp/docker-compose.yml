@@ -1,0 +1,39 @@
+version: '3'
+services:
+  postgres-server:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: hospital
+      POSTGRES_USER: postgres
+    ports:
+      - "5433:5432"
+  sftp-server:
+    image: atmoz/sftp
+    ports:
+      - "22:22"
+    volumes:
+      - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
+      - /upload/HospitalFiles:/home/user/upload/HospitalFiles
+    command: user:password:1001
+  integration_api:
+    depends_on:
+      - sftp-server
+      - postgres-server
+    build:
+      context: .
+      args:
+        SFTP_IP: sftp-server
+        SFTP_USERNAME: user
+        SFTP_PASSWORD: password
+        
+    image: aco99/integration_api
+    environment:
+      DBServer: postgres-server
+      DBPort: 5432
+      DBUser: postgres
+      DBPassword: 123
+      DB: hospital
+    ports:
+      - "8081:80"  
+  
