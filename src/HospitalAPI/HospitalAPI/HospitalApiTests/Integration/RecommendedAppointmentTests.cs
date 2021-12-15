@@ -50,8 +50,7 @@ namespace HospitalApiTests.Integration
                 AvailableDaysOff = 20,
                 Id = 1,
                 SpecialityId = 1,
-                NumberOfPatients = 1,
-                WorkingHoursId = 1
+                NumberOfPatients = 1
             });
             context.Add(new Doctor
             {
@@ -72,8 +71,7 @@ namespace HospitalApiTests.Integration
                 AvailableDaysOff = 20,
                 Id = 2,
                 SpecialityId = 2,
-                NumberOfPatients = 7,
-                WorkingHoursId = 1
+                NumberOfPatients = 7
             });
 
             DoctorsController doctorController = new DoctorsController(context);
@@ -108,8 +106,7 @@ namespace HospitalApiTests.Integration
                 AvailableDaysOff = 20,
                 Id = 1,
                 SpecialityId = 1,
-                NumberOfPatients = 0,
-                WorkingHoursId = 1
+                NumberOfPatients = 0
             });
 
             context.Add(new Appointment { Id = 1, StartTime = new DateTime(2021, 01, 02), DurationInMunutes = 30, ApointmentDescription = "", IsDeleted = false, DoctorId = 1, PatientId = 1, isCancelled = false });
@@ -145,8 +142,7 @@ namespace HospitalApiTests.Integration
                 AvailableDaysOff = 20,
                 Id = 1,
                 SpecialityId = 1,
-                NumberOfPatients = 0,
-                WorkingHoursId = 1
+                NumberOfPatients = 0
             });
 
             RecommendedAppointmentController recommendedAppointmentController = new RecommendedAppointmentController(context);
@@ -185,8 +181,7 @@ namespace HospitalApiTests.Integration
                     AvailableDaysOff = 20,
                     Id = 1,
                     SpecialityId = 1,
-                    NumberOfPatients = 0,
-                    WorkingHoursId = 1
+                    NumberOfPatients = 0
             } });
             retVal.Add(new object[] { new Doctor
                 {
@@ -207,8 +202,7 @@ namespace HospitalApiTests.Integration
                     AvailableDaysOff = 20,
                     Id = 1,
                     SpecialityId = 2,
-                    NumberOfPatients = 0,
-                    WorkingHoursId = 1
+                    NumberOfPatients = 0
             } });
             return retVal;
         }
@@ -239,8 +233,7 @@ namespace HospitalApiTests.Integration
                 AvailableDaysOff = 20,
                 Id = 4,
                 SpecialityId = 1,
-                NumberOfPatients = 0,
-                WorkingHoursId = 1
+                NumberOfPatients = 0
             });
 
             context.Add(new Appointment { Id = 4, StartTime = new DateTime(2021, 12, 12, 8, 30,0), DurationInMunutes = 30, ApointmentDescription = "", IsDeleted = false, DoctorId = 1, PatientId = 1, isCancelled = false });

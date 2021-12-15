@@ -144,8 +144,7 @@ namespace HospitalApiTests.Unit
                 AvailableDaysOff = 20,
                 Id = 1,
                 SpecialityId = 1,
-                NumberOfPatients = 0,
-                WorkingHoursId = 1
+                NumberOfPatients = 0
             };
 
             Doctor doctor2 = new Doctor
@@ -167,8 +166,7 @@ namespace HospitalApiTests.Unit
                 AvailableDaysOff = 20,
                 Id = 1,
                 SpecialityId = 2,
-                NumberOfPatients = 0,
-                WorkingHoursId = 1
+                NumberOfPatients = 0
 
             };
             doctors.Add(doctor1);
