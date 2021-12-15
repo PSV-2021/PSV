@@ -21,7 +21,6 @@ jobs:
         id: install-sonarcloud
         shell: powershell
         run: |
-          cd src/DrugstoreApp/Backend/DrugstoreAPI
           New-Item -Path .sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .sonar\scanner
       - name: Directory
@@ -31,9 +30,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          hospital_api_path: src\HospitalAPI\HospitalAPI\HospitalAPI\HospitalAPI.csproj
+          hospital_path: src\Hospital\Hospital.csrpoj
+          integration_api_path: src\IntegrationAPI\IntegrtaionAPI.csproj
+          integration_path: src\Integration\Integration.csproj
+          drugstore_api_path: src\DrugstoreApp\Backend\DrugstoreAPI\DrgstoreAPI.csproj
+          drugstore_path: src\DrugsotoreApp\Backend\Drugstore\Drugstore.csproj
         shell: powershell
-        working-directory: ./src/DrugstoreApp/Backend/DrugstoreAPI
         run: |
            .sonar\scanner\dotnet-sonarscanner begin /k:"PSV-2021_PSV" /o:"psv-2021" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-           dotnet build
+           dotnet build ${{env.hospital_api_path}}
+           dotnet build ${{env.hospital_path}}
+           dotnet build ${{env.integration_api_path}}
+           dotnet build ${{env.integration_path}}
+           dotnet build ${{env.drugstore_api_path}}
+           dotnet build ${{env.drugstore_path}}
            .sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
