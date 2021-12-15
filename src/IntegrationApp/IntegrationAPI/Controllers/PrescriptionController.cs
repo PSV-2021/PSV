@@ -29,6 +29,7 @@ namespace Integration_API.Controllers
         private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
         public PrescriptionController(MyDbContext db)
         {
+            Console.WriteLine(sftp_ip + sftp_name + sftp_password);
             dbContext = db;
         }
 

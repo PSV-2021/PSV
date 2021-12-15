@@ -1,14 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Integration.Model;
 using Integration_API.DTOs;
 using Model.DataBaseContext;
-using Grpc.Net.Client;
-using DrugstoreAPI;
 using Grpc.Core;
 using Microsoft.AspNetCore.Cors;
 using Integration.Service;

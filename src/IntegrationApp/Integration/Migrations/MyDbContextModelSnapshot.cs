@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -10,10 +9,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211212192550_pozzzzzz")]
-    partial class pozzzzzz
+    partial class MyDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -529,27 +527,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 12, 12, 20, 25, 49, 142, DateTimeKind.Local).AddTicks(5313),
+                            RecievedTime = new DateTime(2021, 12, 14, 9, 28, 8, 898, DateTimeKind.Local).AddTicks(3425),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(2014)
+                            SentTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5118)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(3937),
+                            RecievedTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5517),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(3993)
+                            SentTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5546)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4040),
+                            RecievedTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5569),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4047)
+                            SentTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5573)
                         });
                 });
 
@@ -586,9 +584,9 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4837),
+                            EndDate = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(6075),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4827),
+                            StartDate = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(6069),
                             Title = "title"
                         });
                 });

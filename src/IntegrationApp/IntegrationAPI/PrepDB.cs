@@ -1,12 +1,9 @@
-using Integration.Model;
+
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Model.DataBaseContext;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Integration_API
 {
@@ -17,8 +14,9 @@ namespace Integration_API
             using (var serviceScope = appBuilder.ApplicationServices.CreateScope())
             {
                 MyDbContext dbContext = serviceScope.ServiceProvider.GetService<MyDbContext>();
-                Console.WriteLine("Applying Migration..");
+                Console.WriteLine("Applying Migration...");
                 dbContext.Database.Migrate();
+                Console.WriteLine("Migration done");
             }
         }
     }

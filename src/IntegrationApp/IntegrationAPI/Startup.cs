@@ -5,10 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Model.DataBaseContext;
-using PrimerServis;
 
 using Grpc.Core;
-
+using System;
 
 namespace Integration_API
 {
@@ -79,9 +78,9 @@ namespace Integration_API
             var server = Configuration["DBServer"] ?? "localhost";
             var port = Configuration["DBPort"] ?? "5432";
             var user = Configuration["DBUser"] ?? "postgres";
-            var password = Configuration["DBPassword"] ?? "firma4";
+            var password = Configuration["DBPassword"] ?? "123";
             var database = Configuration["DB"] ?? "hospital";
-            if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
+            Console.WriteLine($"server={server}; port={port}; database={database}; User Id={user}; password={password}");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
         

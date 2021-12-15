@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Integration API\IntegrationAPI.csproj" />
+    <ProjectReference Include="..\IntegrationAPI\IntegrationAPI.csproj" />
     <ProjectReference Include="..\Integration\Integration.csproj" />
   </ItemGroup>
 

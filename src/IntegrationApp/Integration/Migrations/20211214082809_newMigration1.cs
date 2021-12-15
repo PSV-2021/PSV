@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration.Migrations
 {
-    public partial class pozzzzzz : Migration
+    public partial class newMigration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -152,15 +152,15 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "Content", "DrugstoreId", "RecievedTime", "Response", "SentTime" },
                 values: new object[,]
                 {
-                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4040), "Nemoj da lazes!", new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4047) },
-                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 12, 12, 20, 25, 49, 142, DateTimeKind.Local).AddTicks(5313), "Nemoj da lazes!", new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(2014) },
-                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(3937), "Nemoj da lazes!", new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(3993) }
+                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5569), "Nemoj da lazes!", new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5573) },
+                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 12, 14, 9, 28, 8, 898, DateTimeKind.Local).AddTicks(3425), "Nemoj da lazes!", new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5118) },
+                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5517), "Nemoj da lazes!", new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5546) }
                 });
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "IsPublished", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4837), false, new DateTime(2021, 12, 12, 20, 25, 49, 149, DateTimeKind.Local).AddTicks(4827), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(6075), false, new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(6069), "title" });
 
             migrationBuilder.InsertData(
                 table: "Drugstores",
