@@ -15,4 +15,21 @@
         <br>
         <br>
     </div>
+    <div class="review-holder">
+        <form class="example-form">
+            <div class="example-container">
+                <mat-form-field appearance="fill" class="width-100">
+                  <mat-label>My opinion</mat-label>
+                  <textarea  matInput placeholder="" [(ngModel)]="content" [ngModelOptions]="{standalone: true}" class="review"></textarea>
+                </mat-form-field>
+                </div>
+                <div class="checkboxes">
+                <input type="checkbox" [(ngModel)]="anonymous" [ngModelOptions]="{standalone: true}" /><label>Anonymous</label><br>
+                <input type="checkbox" [(ngModel)]="publicCom" [ngModelOptions]="{standalone: true}" /><label>Submit</label><br>
+      </div>
+            <button mat-stroked-button color="accent" (click)="onSubmit()" class="btn-block">Send</button>
+      
+          </form>
+        </div>
+
     </div>

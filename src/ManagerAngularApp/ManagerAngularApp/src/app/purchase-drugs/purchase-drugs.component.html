@@ -1,0 +1,76 @@
+<div>
+    <mat-card class="example-card">
+        <mat-card-content>
+              <mat-form-field  appearance="fill" >
+                <mat-label>Drugstore city</mat-label>
+                <textarea matInput placeholder="Drugstore city" [(ngModel)]="searchInput.City" name="city" matInput></textarea>
+              </mat-form-field>
+              <br>
+              <mat-form-field  appearance="fill" >
+                <mat-label>Drugstore address</mat-label>
+                <textarea textarea matInput placeholder="Drugstore address" [(ngModel)]="searchInput.Address" name="address" matInput></textarea>
+              </mat-form-field>
+              <br>
+              <mat-card-actions>
+                <button mat-raised-button (click)="sendFilter()" color="primary">Filter</button>
+              </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<div>
+  <mat-card class="example-card">
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose pharmacy:</mat-label>
+            <mat-select [(ngModel)]="selectedPharmacy" name="phar" (ngModelChange)="inputChanged($event)">
+              <mat-option *ngFor="let pharmacy of pharmacies" [value]="pharmacy">
+                {{pharmacy.Name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width" appearance="fill" >
+            <mat-label>Drug name</mat-label>
+            <textarea matInput placeholder="Drug name" [(ngModel)]="drugName" name="drugName" (ngModelChange)="inputChanged($event)" matInput></textarea>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="example-full-width" appearance="fill" >
+            <mat-label>Amount of drug</mat-label>
+            <input matInput type="number" min="1" [(ngModel)]="drugAmount" name="drugAmount" (ngModelChange)="inputChanged($event)" matInput>
+          </mat-form-field>
+          <br>
+          <mat-card-actions>
+            <button mat-raised-button (click)="sendDemand()" color="primary">Send request</button>
+            <button mat-raised-button [disabled]="disableButton" (click)="sendUrgedPurchase()" color="primary">Urgend request</button>
+          </mat-card-actions>
+    </mat-card-content>
+</mat-card>
+
+</div>
+
+<br>
+
+<div class="reviews-holder">
+  <div *ngFor="let pharmacy of pharmacies">
+    <div class="review-holder">
+    <mat-card class="example-card">
+        <mat-card-title>{{pharmacy.Name}}</mat-card-title>
+        <mat-card-content>
+        <br>
+        <p>{{ pharmacy.City }}</p>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-subtitle>Address</mat-card-subtitle>
+        <br>
+        <p>{{ pharmacy.Address }}</p>
+    </mat-card>
+    </div>
+    <br>
+    <br>
+</div>
+</div>
+
+<br>
+<br>

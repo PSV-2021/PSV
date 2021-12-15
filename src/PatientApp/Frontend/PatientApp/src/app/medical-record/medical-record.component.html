@@ -1,0 +1,34 @@
+<div class="reviews-holder">
+    <div>
+        <mat-card class="example-card">
+            <mat-card-title class="medtitle">Medical record</mat-card-title>
+            <mat-card-content class = "content"><br>
+                <mat-card-content class="label"> Name:</mat-card-content>
+                 <mat-card-content class="contentlabel"> {{medicalRecord.name}}</mat-card-content> <br>
+                 <mat-card-content class="label">Surname:</mat-card-content>
+                 <mat-card-content class="contentlabel"> {{medicalRecord.surname}} </mat-card-content><br>
+              <mat-card-content class="label"> Jmbg:</mat-card-content>
+               <mat-card-content class="contentlabel"> {{medicalRecord.jmbg}} </mat-card-content><br>
+               <mat-card-content class="label"> Email:</mat-card-content>
+                <mat-card-content class="contentlabel"> {{medicalRecord.email}} </mat-card-content><br>
+                <mat-card-content class="label"> Username:</mat-card-content>
+                <mat-card-content class="contentlabel"> {{medicalRecord.username}} </mat-card-content><br>
+                <mat-card-content class="label"> BirthDate</mat-card-content>
+                <mat-card-content class="contentlabel"> {{medicalRecord.date}} </mat-card-content><br>
+                <mat-card-content class="label"> Fathers Name:</mat-card-content>
+                <mat-card-content class="contentlabel"> {{medicalRecord.fathersName}} </mat-card-content><br>
+                <mat-card-content class="label"> Phone Number:</mat-card-content>
+                <mat-card-content class="contentlabel"> {{medicalRecord.phoneNumber}} </mat-card-content><br>
+                <mat-card-content class="label"> Gender:</mat-card-content>
+                <mat-card-content class="contentlabel"> {{medicalRecord.gender}} </mat-card-content><br>
+                <mat-card-content class="label"> Blood Type:</mat-card-content>
+                <mat-card-content class="contentlabel"> {{medicalRecord.bType}} </mat-card-content><br>
+                <mat-card-content class="label"> Chosen Doctor:</mat-card-content>
+                <mat-card-content class="contentlabel" style="margin-bottom: 5%;"> {{medicalRecord.doctorName}} </mat-card-content><br>
+            </mat-card-content>
+            <app-appointments-observe class="content"></app-appointments-observe>
+        </mat-card>
+    </div>
+        <br>
+        <br>
+</div>

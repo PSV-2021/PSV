@@ -1,14 +1,15 @@
-﻿using Hospital.Model;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Hospital;
-using Hospital.Repository;
-using Model;
-using Hospital.DTO;
+using Hospital.MedicalRecords.Repository;
+using Hospital.SharedModel;
+using HospitalAPI.DTO;
+using Hospital.MedicalRecords.Model;
+using Hospital.MedicalRecords.Service;
 
 namespace HospitalAPI.Controllers
 {
@@ -18,20 +19,45 @@ namespace HospitalAPI.Controllers
     {
         private readonly MyDbContext dbContext;
         public UserFeedbackSqlRepository repoFeedback = new UserFeedbackSqlRepository();
-      
+        public UserFeedbackService userFeedbackService = new UserFeedbackService();
+
         public CommentsController(MyDbContext db)
         {
             this.dbContext = db;
+            userFeedbackService = new UserFeedbackService(new UserFeedbackSqlRepository(dbContext));
+
+        }
+
+        [HttpPost]   // POST /api/comments
+        public IActionResult Post([FromBody]CommentDTO comment)
+        {
+            Console.WriteLine(comment.Content);
+            UserFeedback feedback = GenerateUserFeedbackFromDTO(comment);
+            userFeedbackService.SaveUserFeedback(feedback);
+            return Ok();
         }
 
         [HttpGet]   // GET /api/comments
         public IActionResult Get()
         {
             repoFeedback.dbContext = dbContext;
-            List<CommentDTO> result = new List<CommentDTO>();
+            List<Hospital.DTO.CommentDTO> result = new List<Hospital.DTO.CommentDTO>();
             result = repoFeedback.GetAllAproved();
             return Ok(result);
         }
 
+        
+
+        private UserFeedback GenerateUserFeedbackFromDTO(CommentDTO comDTO)
+        {
+            UserFeedback comment = new UserFeedback
+            {
+                TimeWritten = DateTime.Now,
+                Content = comDTO.Content,
+                Name = comDTO.Name,
+                canPublish = false
+            };
+            return comment;
+        }
     }
 }

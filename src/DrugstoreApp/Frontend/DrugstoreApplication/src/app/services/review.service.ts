@@ -8,6 +8,7 @@ import { ReviewDto } from '../reviews/review.dto';
 import { ResponseDto } from '../reviews/response.dto';
 
 import { map } from 'rxjs-compat/operator/map';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class ReviewsService {
     url: string;
     smartphone: any = [];
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5001/api" //ovo ne znam posto ne pisem ja backend za sad
+      this.url = environment.api //ovo ne znam posto ne pisem ja backend za sad
     }
 
     GetAllMyReviews(): Observable<any> {

@@ -8,16 +8,20 @@ namespace Integration_API.DTOs
     public class RegistrationDto
     { 
         public string DrugstoreName { get; set; }
+        public string City { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
         public string URLAddress { get; set; }
+        public bool gRPC { get; set; }
 
-        public RegistrationDto(string name, string address, string email, string url)
+        public RegistrationDto(string name,string city, string address, string email, string url)
         {
             this.DrugstoreName = name;
+            this.City = city;
             this.Address = address;
             this.Email = email;
             this.URLAddress = url;
+            this.gRPC = true;
         }
 
         public RegistrationDto()

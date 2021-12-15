@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { catchError } from 'rxjs/operators';
 import { RegistrationDto } from '../registration/registration.dto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -12,12 +13,13 @@ import { RegistrationDto } from '../registration/registration.dto';
 export class RegistrationService {
     url: string;
     constructor (private http: HttpClient) {
-        this.url = "http://localhost:5000/api"
+      this.url = environment.api;
     }
 
     public RegisterDrugstore(drugstore: RegistrationDto){
         const body = {
             DrugstoreName : drugstore.DrugstoreName,
+            City: drugstore.City,
             Address : drugstore.Address,
             URLAddress : drugstore.URLAddress,
             Email : drugstore.Email

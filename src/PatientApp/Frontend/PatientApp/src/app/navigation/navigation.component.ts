@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pm-navigation',
@@ -8,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationComponent implements OnInit {
   pageTitle="Patient App";
   
-  constructor() { }
+  constructor(private router: Router) { }
   ngOnInit(): void {
+  }
+
+  navigate() {
+    this.router.navigate(['/registration']);
+  }
+  
+  login() {
+  this.router.navigate(['/login']);
   }
 }
