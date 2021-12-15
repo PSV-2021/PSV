@@ -40,7 +40,7 @@ namespace Integration_API.Controllers
         public IActionResult Get()
         {
             List<Drugstore> result = new List<Drugstore>();
-            drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email,drugstore.City, drugstore.Address)));
+            drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email,drugstore.City, drugstore.Address, drugstore.gRPC)));
             return Ok(result);
         }
 
@@ -48,7 +48,7 @@ namespace Integration_API.Controllers
         public IActionResult GetWithImageAndComment()
         {
             List<Drugstore> result = new List<Drugstore>();
-            drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.City, drugstore.Address, drugstore.Comment, drugstore.Base64Image)));
+            drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.City, drugstore.Address, drugstore.Comment, drugstore.Base64Image, drugstore.gRPC)));
             return Ok(result);
         }
 
@@ -116,7 +116,7 @@ namespace Integration_API.Controllers
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.City,newPharmacy.Address);
+                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.City,newPharmacy.Address, newPharmacy.gRPC);
                 drugstoreService.AddNewDrugstore(ds);
                 return Ok(ds);
             }

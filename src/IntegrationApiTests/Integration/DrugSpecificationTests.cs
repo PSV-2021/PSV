@@ -29,7 +29,7 @@ namespace IntegrationApiTests.Integration
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
 
-            builder.UseNpgsql(Constants.ConnectionString);
+            builder.UseNpgsql(Constants.ConnectionString());
 
             context = new MyDbContext(builder.Options);
         }
@@ -40,7 +40,7 @@ namespace IntegrationApiTests.Integration
             SetUpDbContext();
             var dsController = new DrugSpecificationController(context);
 
-            var result = dsController.Put(new DrugSpecificationRequestDTO("http://localhost:5001", "brufen"));
+            var result = dsController.Put(new DrugSpecificationRequestDTO("http://localhost:5001", "Brufen"));
             Assert.IsType<OkObjectResult>(result);
         }
 
@@ -70,7 +70,7 @@ namespace IntegrationApiTests.Integration
         {
             DrugSpecificationService service = new DrugSpecificationService();
 
-            bool isDownloaded = service.DownloadDrugConsumptionReport(fileName);
+            bool isDownloaded = service.DownloadDrugSpecification(fileName);
 
             Assert.Equal(expectedOutcome, isDownloaded);
         }
@@ -80,7 +80,7 @@ namespace IntegrationApiTests.Integration
             var retVal = new List<object[]>();
 
             retVal.Add(new object[] { "Brufen - Specifikacija leka.pdf", true });
-            retVal.Add(new object[] { "Neki random lek.pdf", false });
+            retVal.Add(new object[] { "Palitreks - Specifikacija leka.pdf", true });
 
             return retVal;
         }

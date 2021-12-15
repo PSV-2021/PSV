@@ -22,7 +22,7 @@ namespace DrugstoreAPI.Controllers
     [ApiController]
     public class DrugstoreOfferController : ControllerBase
     {
-
+        private string host = Environment.GetEnvironmentVariable("RABBIT_HOST") ?? "localhost";
         private readonly MyDbContext dbContext;
         public DrugstoreOfferService drugstoreOfferService;
 
@@ -35,7 +35,7 @@ namespace DrugstoreAPI.Controllers
         public IActionResult Post(DrugstoreOfferDto offer)
         {
             drugstoreOfferService = new DrugstoreOfferService(dbContext);
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = host };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {

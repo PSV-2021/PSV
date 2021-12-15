@@ -12,7 +12,6 @@ namespace Drugstore.Repository.Interfaces
         public void Add(Medicine medicine);
         public bool Delete(int id);
         public Medicine GetByName(string name);
-        public void Update(Medicine medicine);
-
+        public void Update(Medicine med);
     }
 }

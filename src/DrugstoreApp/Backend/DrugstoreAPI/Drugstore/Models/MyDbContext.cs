@@ -14,15 +14,18 @@ namespace Drugstore.Models
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<DrugstoreOffer> DrugstoreOffers { get; set; }
+        public DbSet<DrugSpecification> DrugSpecifications { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Medicine>().HasData(
-                new Medicine(1, "Brufen", 150, 150),
-                new Medicine(2, "Paracetamol", 150, 10),
-                new Medicine(3, "Palitreks", 150, 30)
+                new Medicine(1, "Brufen", 150, 150, "bla", "bla", "bla", "bla", null, 100.00, "bla", "bla"),
+                new Medicine(2, "Paracetamol", 150, 10, "bla", "bla", "bla", "bla", null, 100.00, "bla", "bla"),
+                new Medicine(3, "Palitreks", 150, 30, "bla", "bla", "bla", "bla", null, 100.00, "bla", "bla")
             );
 
             modelBuilder.Entity<Feedback>().HasData(
@@ -47,7 +50,13 @@ namespace Drugstore.Models
             
             modelBuilder.Entity<DrugstoreOffer>().HasData(
                 new DrugstoreOffer("1", "Content", "title", DateTime.Now, DateTime.Now,"Apotekica")
-            ); 
+            );
+
+            modelBuilder.Entity<DrugSpecification>().HasData(
+               new DrugSpecification("Brufen", "Ovde ide tekst specifikacije za Brufen"),
+               new DrugSpecification("Paracetamol", "Ovde ide tekst specifikacije za Paracetamol"),
+               new DrugSpecification("Palitreks", "Ovde ide tekst specifikacije za Palitreks")
+           );
         }
     }
 }

@@ -5,15 +5,18 @@ using System.Text;
 using Hospital.MedicalRecords.Model;
 using Hospital.Medicines.Repository.Interfaces;
 using Hospital.Medicines.Repository.Sql;
+using Hospital.SharedModel;
 
 namespace Hospital.Medicines.Service
 {
     public class DrugService
     {
+        private readonly MyDbContext dbContext;
         public IDrugRepository MedicineRepository { get; set; }
-        public DrugService(IDrugRepository medicineRepository)
+        public DrugService(MyDbContext dbContext)
         {
-            MedicineRepository = medicineRepository;
+            this.dbContext = dbContext;
+            MedicineRepository = new DrugSqlRepository(dbContext);
         }
 
         public DrugService()
@@ -45,7 +48,6 @@ namespace Hospital.Medicines.Service
             Medicine med = MedicineRepository.GetByName(name);
             if (med == null)
             {
-                //med = new Medicine(name, amountOfDrug);
                 MedicineRepository.Save(new Medicine(name, amountOfDrug));
             }
             else

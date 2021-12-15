@@ -12,6 +12,7 @@ namespace Integration_API.DTOs
         public string Address { get; set; }
         public string Email { get; set; }
         public string URLAddress { get; set; }
+        public bool gRPC { get; set; }
 
         public RegistrationDto(string name,string city, string address, string email, string url)
         {
@@ -20,6 +21,7 @@ namespace Integration_API.DTOs
             this.Address = address;
             this.Email = email;
             this.URLAddress = url;
+            this.gRPC = true;
         }
 
         public RegistrationDto()
