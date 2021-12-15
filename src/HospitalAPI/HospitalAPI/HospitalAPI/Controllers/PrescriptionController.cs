@@ -32,7 +32,7 @@ namespace HospitalAPI.Controllers
         [HttpPost("qrprescription")]
         public IActionResult QrPrescription(PrescriptionDto prescription)
         {
-            var client = new RestClient("http://localhost:5000");
+            var client = new RestClient(GetIntegrationLink());
             var request = new RestRequest("/api/drugpurchase", Method.PUT);
 
             SetApiKeyInHeader(request);
@@ -46,7 +46,7 @@ namespace HospitalAPI.Controllers
                 return BadRequest(false);
             }
 
-            client = new RestClient("http://localhost:5000");
+            client = new RestClient(GetIntegrationLink());
             request = new RestRequest("/api/prescription/qr", Method.POST);
 
             SetApiKeyInHeaderForQr(prescription ,request);
@@ -64,7 +64,7 @@ namespace HospitalAPI.Controllers
         [HttpPost("pdfprescription")]
         public IActionResult PdfPrescription(PrescriptionDto prescription)
         {
-            var client = new RestClient("http://localhost:5000");
+            var client = new RestClient(GetIntegrationLink());
             var request = new RestRequest("/api/drugpurchase", Method.PUT);
 
             SetApiKeyInHeader(request);
@@ -78,7 +78,7 @@ namespace HospitalAPI.Controllers
                 return BadRequest(false);
             }
 
-            client = new RestClient("http://localhost:5000");
+            client = new RestClient(GetIntegrationLink());
             request = new RestRequest("/api/prescription/pdf", Method.POST);
 
             SetApiKeyInHeaderForQr(prescription, request);
@@ -158,6 +158,15 @@ namespace HospitalAPI.Controllers
             request.AddHeader("ApiKey", "abcde");
             //request.AddHeader("Url", prescription.PharmacyUrl);
             //request.AddHeader("Patient", prescription.PatientName);
+        }
+
+        private string GetIntegrationLink()
+        {
+            string domain = Environment.GetEnvironmentVariable("DOMAIN") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+            string domport = $"http://{domain}:{port}";
+
+            return domport;
         }
     }
 }

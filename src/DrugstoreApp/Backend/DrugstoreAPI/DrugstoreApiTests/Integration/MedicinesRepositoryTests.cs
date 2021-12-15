@@ -20,7 +20,7 @@ namespace DrugstoreApiTests.Integration
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
 
-            builder.UseNpgsql(Constants.ConnectionString);
+            builder.UseNpgsql(Constants.ConnectionString());
 
             context = new MyDbContext(builder.Options);
         }
@@ -53,7 +53,7 @@ namespace DrugstoreApiTests.Integration
         public static IEnumerable<object[]> Medicines()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new Medicine(5, "Brufen", 500, 5), true });
+            retVal.Add(new object[] { new Medicine(5, "Test1", 500, 5), false });
             retVal.Add(new object[] { new Medicine(6, "Test2", 500, 30), false });
             retVal.Add(new object[] { new Medicine(7, "Test3", 500, 10), false });
             return retVal;

@@ -19,6 +19,36 @@ namespace Drugstore.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Drugstore.Models.DrugSpecification", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("DrugSpecifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Name = "Brufen",
+                            Text = "Ovde ide tekst specifikacije za Brufen"
+                        },
+                        new
+                        {
+                            Name = "Paracetamol",
+                            Text = "Ovde ide tekst specifikacije za Paracetamol"
+                        },
+                        new
+                        {
+                            Name = "Palitreks",
+                            Text = "Ovde ide tekst specifikacije za Palitreks"
+                        });
+                });
+
             modelBuilder.Entity("Drugstore.Models.DrugstoreOffer", b =>
                 {
                     b.Property<string>("Id")
@@ -49,8 +79,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 11, 24, 17, 8, 27, 917, DateTimeKind.Local).AddTicks(7213),
-                            StartDate = new DateTime(2021, 11, 24, 17, 8, 27, 913, DateTimeKind.Local).AddTicks(1586),
+                            EndDate = new DateTime(2021, 12, 12, 21, 21, 23, 573, DateTimeKind.Local).AddTicks(3007),
+                            StartDate = new DateTime(2021, 12, 12, 21, 21, 23, 570, DateTimeKind.Local).AddTicks(4367),
                             Title = "title"
                         });
                 });
@@ -156,6 +186,9 @@ namespace Drugstore.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("SideEffects")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Substances")
                         .HasColumnType("text");
 
                     b.Property<int>("Supply")

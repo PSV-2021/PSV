@@ -18,7 +18,7 @@ namespace Integration_API
             {
                 MyDbContext dbContext = serviceScope.ServiceProvider.GetService<MyDbContext>();
                 Console.WriteLine("Applying Migration..");
-                //dbContext.Database.Migrate();
+                dbContext.Database.Migrate();
             }
         }
     }

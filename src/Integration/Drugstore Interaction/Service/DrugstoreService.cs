@@ -59,6 +59,21 @@ namespace Integration.Service
             return DrugstoreRepository.GetOne(id);
         }
 
+        //public Drugstore GetDrugstoreByName
+
+        public bool GetDrugstoreProtocolByName(string name)
+        {
+            foreach (Drugstore dg in DrugstoreRepository.GetAll())
+            {
+                if (dg.Name == name)
+                {
+                    return dg.gRPC;
+                }
+            }
+
+            return false;
+        }
+
         public void AddNewDrugstore(Drugstore ds)
         {
             DrugstoreRepository.Save(ds);
