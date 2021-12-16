@@ -7,11 +7,13 @@ import { LoginComponent } from './login/login.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ReserveAppointmentStandardComponent } from './reserve-appointment-standard/reserve-appointment-standard.component';
 import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 import { SurveyComponent } from './survey/survey.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
+  { path: 'appointment-standard', component: ReserveAppointmentStandardComponent},
   { path: 'survey/:id/:ap', component: SurveyComponent },
   { path: '', component: LandingComponent, pathMatch: 'full'},
   { path: 'comments', component: CommentsObserveComponent, pathMatch: 'full'},

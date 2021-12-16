@@ -27,7 +27,7 @@ namespace HospitalApiTests.Integration
         [Fact] public void ValidateAccount()
         {
             SetUpDbContext();
-            EmailValidationController emailValidationController = new EmailValidationController(context);
+         //   EmailValidationController emailValidationController = new EmailValidationController(context);
          //   IActionResult retVal = emailValidationController.Post(GeneratePatientForValidation());
 
          //   Boolean retValidation = emailValidationController.Get(GeneratePatientForValidation().Token);
@@ -39,7 +39,7 @@ namespace HospitalApiTests.Integration
         public void Save_new_patient()
         {
             SetUpDbContext();
-            EmailValidationController emailValidationController = new EmailValidationController(context);
+         //   EmailValidationController emailValidationController = new EmailValidationController(context);
 
          //   IActionResult retVal = emailValidationController.Post(GeneratePatient());
 

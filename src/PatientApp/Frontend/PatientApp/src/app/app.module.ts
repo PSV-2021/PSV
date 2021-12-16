@@ -29,6 +29,8 @@ import { ActivationAccountComponent } from './activation-account/activation-acco
 import { LoginComponent } from './login/login.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
+import { ReserveAppointmentStandardComponent } from './reserve-appointment-standard/reserve-appointment-standard.component';
+import { MatStepperModule } from '@angular/material/stepper';
 import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
 import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 
@@ -45,8 +47,10 @@ import { RecommendAppointmentComponent } from './recommend-appointment/recommend
     LoginComponent,
     MedicalRecordComponent,
     RegistrationSuccessComponent,
+    ReserveAppointmentStandardComponent,
     AppointmentsObserveComponent,
     RecommendAppointmentComponent
+
 
   ],
   imports: [
@@ -70,7 +74,8 @@ import { RecommendAppointmentComponent } from './recommend-appointment/recommend
     MatNativeDateModule,
     MatRadioModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    MatStepperModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -20,6 +20,7 @@ namespace Hospital.Schedule.Repository
         {
             throw new System.NotImplementedException();
         }
+
         public Doctor GetDoctorBy(int id)
         {
             return dbContext.Doctors.Where(d => d.Id == id).FirstOrDefault();

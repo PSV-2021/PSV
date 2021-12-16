@@ -121,6 +121,11 @@ namespace Hospital.Migrations
                         {
                             Id = 1,
                             HealthInsuranceNumber = "1ab"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            HealthInsuranceNumber = "1b"
                         });
                 });
 
@@ -217,6 +222,27 @@ namespace Hospital.Migrations
                             Surname = "Markovic",
                             Type = 3,
                             Username = "miki98"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Adress = "Bulevar Oslobodjenja 8",
+                            BloodType = 1,
+                            DateOfBirth = new DateTime(1997, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Email = "marko@gmail.com",
+                            FathersName = "Petar",
+                            IsActive = true,
+                            IsBlocked = false,
+                            Jmbg = "3009998805138",
+                            MedicalRecordId = 2,
+                            Name = "Milica",
+                            Password = "miki985",
+                            PhoneNumber = "0641664608",
+                            Sex = 1,
+                            Surname = "Markovic",
+                            Type = 3,
+                            Username = "miki98"
                         });
                 });
 
@@ -249,7 +275,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 3, 19, 36, 1, 823, DateTimeKind.Local).AddTicks(2956),
+                            IssuedTime = new DateTime(2021, 12, 13, 14, 26, 47, 101, DateTimeKind.Local).AddTicks(3660),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -425,7 +451,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 683, DateTimeKind.Local).AddTicks(1779),
+                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 83, DateTimeKind.Local).AddTicks(6386),
                             canPublish = false
                         },
                         new
@@ -433,7 +459,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 686, DateTimeKind.Local).AddTicks(6562),
+                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 89, DateTimeKind.Local).AddTicks(8726),
                             canPublish = true
                         },
                         new
@@ -441,7 +467,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 686, DateTimeKind.Local).AddTicks(6635),
+                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 89, DateTimeKind.Local).AddTicks(8845),
                             canPublish = true
                         });
                 });
@@ -562,7 +588,7 @@ namespace Hospital.Migrations
                             isCancelled = false
                         });
                 });
-                
+
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>
                 {
                     b.Property<int>("Id")
