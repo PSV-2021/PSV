@@ -55,11 +55,6 @@ namespace Hospital.Schedule.Service
             AppointmentSqlRepository = appointmentSqlRepository;
         }
 
-        public AppointmentService(IAppointmentRepository recommendAppointmentSqlRepository)
-        {
-            AppointmentRepository = recommendAppointmentSqlRepository;
-        }
-
         public AppointmentService(RecommendedAppointmentSqlRepository recommendedAppointmentSqlRepository,
             DoctorSqlRepository doctorSqlRepository)
         {
