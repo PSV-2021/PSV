@@ -20,6 +20,15 @@ namespace Hospital.Schedule.Repository
         {
             throw new System.NotImplementedException();
         }
+        public Doctor GetDoctorBy(int id)
+        {
+            return dbContext.Doctors.Where(d => d.Id == id).FirstOrDefault();
+        }
+
+        public List<Doctor> GetDoctorsBySpeciality(int specialityId)
+        {
+            return (from n in dbContext.Doctors where n.SpecialityId == specialityId select n).ToList();
+        }
 
         public List<Doctor> GetAll()
         {

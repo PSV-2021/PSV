@@ -7,13 +7,18 @@ using System.Text;
 
 namespace Hospital.Schedule.Repository
 {
-    public class ObserveAppointmentsSqlRepository : IAppointmentRepository
+    public class RecommendedAppointmentSqlRepository : IAppointmentRepository
     {
         private MyDbContext context;
 
-        public ObserveAppointmentsSqlRepository(MyDbContext context)
+        public RecommendedAppointmentSqlRepository(MyDbContext context)
         {
             this.context = context;
+        }
+
+        public RecommendedAppointmentSqlRepository()
+        {
+            
         }
 
         public bool Delete(int id)
@@ -23,12 +28,7 @@ namespace Hospital.Schedule.Repository
 
         public List<Appointment> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        internal List<Appointment> GetById(int id)
-        {
-            return context.Appointments.Where(s => s.PatientId == id).ToList();
+            return context.Appointments.ToList();
         }
 
         public Appointment GetOne(int id)
@@ -48,12 +48,15 @@ namespace Hospital.Schedule.Repository
 
         public List<Appointment> Get(int doctorId, DateTime date)
         {
-            throw new NotImplementedException();
+            return GetAll().Where(a => a.DoctorId.Equals(doctorId) && a.StartTime.Date.CompareTo(date.Date) == 0).ToList();
         }
 
         public void Create(Appointment appointment)
         {
-            throw new NotImplementedException();
+            appointment.Id = GetAll().Count + 1;
+            context.Appointments.Add(appointment);
+            context.SaveChanges();
         }
+
     }
 }

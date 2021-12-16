@@ -30,5 +30,11 @@ namespace HospitalAPI.Controllers
             result = doctorService.GetGeneralDoctors();
             return Ok(result);
         }
+
+        [HttpGet("findDoctors")]
+        public IActionResult GetAllDoctors()
+        {
+            return Ok(doctorService.GetAllDoctors());
+        }
     }
 }

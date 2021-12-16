@@ -48,7 +48,7 @@ namespace Hospital.Schedule.Service
 
         public List<Doctor> GetAllDoctors()
         {
-            return DoctorRepository.GetAll();
+            return DoctorSqlRepository.GetAll();
         }
 
         public List<Doctor> GetDoctorsWithSpeciality(Speciality speciality)
