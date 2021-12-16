@@ -9,7 +9,7 @@ namespace Hospital.SharedModel
 {
     public class MyDbContext : DbContext
     {
-        public DbSet<UserFeedback> UserFeedbacks { get; set; }
+        public DbSet<UserFeedback> UserFeedback { get; set; }
         public DbSet<Ingridient> Ingridients { get; set; }
         public DbSet<Speciality> Speciality { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
@@ -149,10 +149,11 @@ namespace Hospital.SharedModel
                 new SurveyQuestion { Id = 14, Text = "How likely are you to recommend our hospital to a friend or family member?", Rating = 0, QuestionType = 2 }
             );
             modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
-            modelBuilder.Entity<Appointment>().HasData(
-              new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false , isCancelled = false}
-              );
+            
             modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
+            modelBuilder.Entity<Appointment>().HasData(
+              new Appointment { Id = 1, PatientId = 1, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false, isCancelled = false }
+              );
         }
 
     }

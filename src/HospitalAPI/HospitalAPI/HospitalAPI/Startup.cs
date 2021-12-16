@@ -6,8 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-
+using System;
 
 namespace HospitalAPI
 {
@@ -65,17 +64,14 @@ namespace HospitalAPI
             };
             server.Start();
             applicationLifetime.ApplicationStopping.Register(OnShutdown);
-
-
         }
+      
         private void OnShutdown()
         {
             if (server != null)
             {
                 server.ShutdownAsync().Wait();
             }
-
-
         }
 
         public string GetDBConnectionString()
@@ -83,8 +79,9 @@ namespace HospitalAPI
             var server = Configuration["DBServer"] ?? "localhost";
             var port = Configuration["DBPort"] ?? "5432";
             var user = Configuration["DBUser"] ?? "postgres";
-            var password = Configuration["DBPassword"] ?? "masa3009";
+            var password = Configuration["DBPassword"] ?? "123";
             var database = Configuration["DB"] ?? "hospital";
+            Console.WriteLine(server + port + user + password + database);
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }

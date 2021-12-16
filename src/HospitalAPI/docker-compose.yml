@@ -1,0 +1,37 @@
+version: '3'
+services:
+  postgres-server:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: hospital
+      POSTGRES_USER: postgres
+    ports:
+      - "5433:5432"
+  proxy:
+    depends_on:
+      - hospital_api
+      - patient_client
+    image: aco99/hospital_proxy
+    ports:
+      - "80:80"
+  hospital_api:
+    depends_on:
+      - postgres-server
+    #build: ../
+    image: aco99/hospital_api
+    environment:
+      DBServer: postgres-server
+      DBPort: 5432
+      DBUser: postgres
+      DBPassword: 123
+      DB: hospital
+    ports:
+      - "8081:80"  
+  patient_client:
+    links:
+      - hospital_api
+    build: ../PatientApp/Frontend/PatientApp
+    image: aco99/patient_client
+    ports:
+      - "4201:80"

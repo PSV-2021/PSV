@@ -35,7 +35,7 @@ namespace HospitalAPI.Controllers
         public IActionResult Post([FromBody] int id)
         {
             repoFeedback.dbContext = dbContext;
-            UserFeedback matchedRecords = dbContext.UserFeedbacks.ToList().Find(matchedRecords => matchedRecords.Id == id);
+            UserFeedback matchedRecords = dbContext.UserFeedback.ToList().Find(matchedRecords => matchedRecords.Id == id);
 
             if (matchedRecords != null)
             {

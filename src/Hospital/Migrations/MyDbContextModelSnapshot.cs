@@ -249,7 +249,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 3, 19, 36, 1, 823, DateTimeKind.Local).AddTicks(2956),
+                            IssuedTime = new DateTime(2021, 12, 13, 1, 3, 13, 137, DateTimeKind.Local).AddTicks(5476),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -417,7 +417,7 @@ namespace Hospital.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserFeedbacks");
+                    b.ToTable("UserFeedback");
 
                     b.HasData(
                         new
@@ -425,7 +425,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 683, DateTimeKind.Local).AddTicks(1779),
+                            TimeWritten = new DateTime(2021, 12, 13, 1, 3, 13, 130, DateTimeKind.Local).AddTicks(561),
                             canPublish = false
                         },
                         new
@@ -433,7 +433,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 686, DateTimeKind.Local).AddTicks(6562),
+                            TimeWritten = new DateTime(2021, 12, 13, 1, 3, 13, 133, DateTimeKind.Local).AddTicks(1931),
                             canPublish = true
                         },
                         new
@@ -441,7 +441,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 10, 11, 55, 8, 686, DateTimeKind.Local).AddTicks(6635),
+                            TimeWritten = new DateTime(2021, 12, 13, 1, 3, 13, 133, DateTimeKind.Local).AddTicks(2371),
                             canPublish = true
                         });
                 });
@@ -556,13 +556,13 @@ namespace Hospital.Migrations
                             DoctorId = 1,
                             DurationInMunutes = 0,
                             IsDeleted = false,
-                            PatientId = 2,
+                            PatientId = 1,
                             StartTime = new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
                             SurveyId = 0,
                             isCancelled = false
                         });
                 });
-                
+
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>
                 {
                     b.Property<int>("Id")
