@@ -181,5 +181,15 @@ namespace Hospital.Schedule.Repository
         {
             throw new NotImplementedException();
         }
+
+        public List<Appointment> Get(int doctorId, DateTime date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Create(Appointment appointment)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

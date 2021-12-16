@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 import { SurveyComponent } from './survey/survey.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'user' ,  children: [{ path:'activate', component: ActivationAccountComponent }]},
   { path: 'medicalRecord', component: MedicalRecordComponent },
   { path: 'registrationSuccess', component: RegistrationSuccessComponent},
+  { path: 'recommendAppointment', component: RecommendAppointmentComponent},
   { path: '**', redirectTo: ''}
 ];
 
