@@ -1,3 +1,4 @@
+using Grpc.Core;
 using Hospital.SharedModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,7 +19,7 @@ namespace HospitalAPI
         }
 
         public IConfiguration Configuration { get; }
-
+        private Server server;
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -33,12 +34,13 @@ namespace HospitalAPI
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
+                    
             }));
         }
 
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -55,6 +57,25 @@ namespace HospitalAPI
             {
                 endpoints.MapControllers();
             });
+
+            server = new Server
+            {
+                Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },
+                Ports = { new ServerPort(Configuration["HOSPITAL_GRPC_DOMAIN"] ?? "localhost", int.Parse(Configuration["HOSPITAL_GRPC_PORT"] ?? "4112"), ServerCredentials.Insecure) }
+            };
+            server.Start();
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+
+
+        }
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
+
+
         }
 
         public string GetDBConnectionString()

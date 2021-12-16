@@ -41,6 +41,10 @@ namespace Hospital.Schedule.Model
         //public Boolean IsEmergency { get; set; }
         //public Note Note { get; set; }
 
+        public bool IsOccupied(DateTime start)
+        {
+            return DateTime.Compare(StartTime, start) == 0;
+        }
         public Appointment(int id, Patient patient, Doctor doctor, DateTime startTime, int duration, string apDesc/*, Note note, Boolean IsEmergency = false*/)
         {
             Id = id;

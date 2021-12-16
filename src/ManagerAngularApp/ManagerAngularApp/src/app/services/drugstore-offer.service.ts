@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import { catchError } from 'rxjs/operators';
 import { DrugstoreOfferDto } from '../drugstore-offer/drugstore-offer.dto';
 import { PublishedDrugstoreOfferDto } from '../drugstore-offer/published-drugstore-offer.dto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class DrugStoreOffersService {
     url: string;
     smartphone: any = [];
     constructor (private http: HttpClient) {
-      this.url = "http://"+location.hostname+":5000/api";
+      this.url = environment.api;
     }
     GetAllOffers(): Observable<any> {
         return this.http.get<any>(this.url + '/drugstoreoffer');

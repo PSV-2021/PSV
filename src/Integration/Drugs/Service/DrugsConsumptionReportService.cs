@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 
@@ -19,7 +20,9 @@ namespace Integration.Service
     public class DrugsConsumptionReportService
     {
         public DrugsConsumptionSqlRepository DrugsConsumptionRepository { get; set; }
-
+        private string sftp_ip = Environment.GetEnvironmentVariable("SFTP_IP") ?? GetLocalIPAddress();
+        private string sftp_name = Environment.GetEnvironmentVariable("SFTP_USERNAME") ?? "user";
+        private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
         public DrugsConsumptionReportService(MyDbContext dbContext)
         {
             DrugsConsumptionRepository = new DrugsConsumptionSqlRepository(dbContext);
@@ -27,23 +30,27 @@ namespace Integration.Service
 
         public bool UploadDrugConsumptionReport(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.107", "user", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo(sftp_ip, sftp_name, sftp_password)))
             {
                 try
                 {
                     client.Connect();
-                    string sourceFile = FormatPath(fileName);
-                    if (File.Exists(sourceFile))
+                    string sourceFile = FormatReportsPath() + fileName;
+                    try
                     {
                         using (Stream stream = File.OpenRead(sourceFile))
                         {
-                            client.UploadFile(stream, @"\public\Drugstore files\" + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
-                            client.Disconnect();
-                            return true;
+                            client.UploadFile(stream, "public" + Path.DirectorySeparatorChar + "DrugstoreFiles" + Path.DirectorySeparatorChar + Path.GetFileName(sourceFile), x => { Console.WriteLine(x); });
                         }
                     }
+                    catch (Exception e)
+                    {
+                        string ErrorString = e.Message;
+                    }
+                    client.Disconnect();
+                    return true;
                 }
-                catch (SocketException se) 
+                catch (SocketException se)
                 {
                     string ErrorString = se.Message;
                 }
@@ -51,11 +58,24 @@ namespace Integration.Service
             }
         }
 
-        private string FormatPath(string fileName)
+        public static string GetLocalIPAddress()
         {
-            string[] absolute = Directory.GetCurrentDirectory().Split("src");
-            return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
+
+        //private string FormatPath(string fileName)
+        //{
+        //    string[] absolute = Directory.GetCurrentDirectory().Split("src");
+        //    return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
+        //}
 
         public int SaveDrugsConsumptionReport(DateRange range)
         {
@@ -79,13 +99,19 @@ namespace Integration.Service
                 PdfLightTable.DataSource = Table;
                 PdfLightTable.Draw(Page, new PointF(0, 70));
                 string FileName = "Izvestaj o potrosnji lekova " + FormatDateRange(range) + ".pdf";
-                Document.Save("..\\..\\src\\Integration\\Reports\\" + FileName);
+                string localFile = FormatReportsPath() + FileName;
+                Document.Save(localFile);
                 Document.Close(true);
                 this.UploadDrugConsumptionReport(FileName);
             }
             return counter;
         }
-        
+
+        private string FormatReportsPath()
+        {
+            return Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar;
+        }
+
 
         private bool IsDateInRange(DateRange range, DrugConsumed drug)
         {
@@ -128,7 +154,7 @@ namespace Integration.Service
         public List<string> GetReportNames()
         {
             List<string> filenames = new List<string>();
-            DirectoryInfo d = new DirectoryInfo(@"..\\..\\src\\Integration\\Reports\\"); 
+            DirectoryInfo d = new DirectoryInfo(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Reports" + Path.DirectorySeparatorChar); 
             FileInfo[] Files = d.GetFiles("*.pdf"); 
             foreach (FileInfo file in Files)
             {

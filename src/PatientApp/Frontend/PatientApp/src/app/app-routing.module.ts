@@ -8,6 +8,7 @@ import { MedicalRecordComponent } from './medical-record/medical-record.componen
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ReserveAppointmentStandardComponent } from './reserve-appointment-standard/reserve-appointment-standard.component';
+import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 import { SurveyComponent } from './survey/survey.component';
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'user' ,  children: [{ path:'activate', component: ActivationAccountComponent }]},
   { path: 'medicalRecord', component: MedicalRecordComponent },
   { path: 'registrationSuccess', component: RegistrationSuccessComponent},
+  { path: 'recommendAppointment', component: RecommendAppointmentComponent},
   { path: '**', redirectTo: ''}
 ];
 

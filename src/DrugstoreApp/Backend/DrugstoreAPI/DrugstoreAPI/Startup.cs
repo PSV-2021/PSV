@@ -8,7 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Grpc.Core;
 using Drugstore.Compression.Controller;
+using Drugstore.Service;
 
 namespace DrugstoreAPI
 {
@@ -21,6 +24,7 @@ namespace DrugstoreAPI
 
         public IConfiguration Configuration { get; }
 
+        private Server server;
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -36,10 +40,12 @@ namespace DrugstoreAPI
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
+                    
             }));
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -53,23 +59,39 @@ namespace DrugstoreAPI
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
+            { 
                 endpoints.MapControllers();
             });
             PrepDB.PrepPopulation(app);
+
+            server = new Server
+            {
+                Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },
+                Ports = { new ServerPort(Configuration["DRUGSTORE_GRPC_DOMAIN"] ?? "localhost", int.Parse(Configuration["DRUGSTORE_GRPC_PORT"] ?? "4111"), ServerCredentials.Insecure) }
+            };
+            server.Start();
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+        }
+     
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
         }
 
-
-        private String GetDBConnectionString()
+        public string GetDBConnectionString()
         {
-            var server = Configuration["DBServer"];
-            var port = Configuration["DBPort"];
-            var user = Configuration["DBUser"];
-            var password = Configuration["DBPassword"];
-            var database = Configuration["DB"];
+            var server = Configuration["DBServer"] ?? "localhost";
+            var port = Configuration["DBPort"] ?? "5432";
+            var user = Configuration["DBUser"] ?? "postgres";
+            var password = Configuration["DBPassword"] ?? "firma4";
+            var database = Configuration["DB"] ?? "drugstore";
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
+        
 
     }
 }

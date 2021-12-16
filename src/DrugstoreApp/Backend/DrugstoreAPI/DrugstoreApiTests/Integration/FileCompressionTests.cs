@@ -7,50 +7,64 @@ using System.Text;
 using System.Threading;
 using Xunit;
 
-namespace DrugstoreApiTests.Unit
+namespace DrugstoreApiTests.Integration
 {
     [Trait("Type", "IntegrationTest")]
     public class FileCompressionTests
     {
-        private string directoryPath = @"\PSV\src\DrugstoreApp\Backend\DrugstoreAPI\DrugstoreApiTests\test folder\";
         private FileCompressionService fileCompressionService = new FileCompressionService();
+        
+        public string CreatePath()
+        {
+            string current = Directory.GetCurrentDirectory().ToString();
+            var gparent = Directory.GetParent(Directory.GetParent(current).ToString()).ToString();
+            var path2 = Directory.GetParent(Directory.GetParent(gparent).ToString()).ToString();
+            var pathFin = Directory.GetParent(Directory.GetParent(path2).ToString()).ToString();
+            return pathFin + @"\Backend\DrugstoreAPI\DrugstoreApiTests\test folder\";
+        }
         public void CreateFilesInDirectory()
         {
-            string path1 = directoryPath + "prvifajl.txt";
+            string path = this.CreatePath();
+            if(!Directory.Exists(path))
+            Directory.CreateDirectory(path);
+            string path1 = path + "prvifajl.txt";
             using (FileStream fs = File.Create(path1)) ;
-            string path2 = directoryPath + "drugifajl.txt";
+            string path2 = path + "drugifajl.txt";
             using (FileStream fs = File.Create(path2)) ;
-            string path3 = directoryPath + "treci.txt";
+            string path3 = path + "treci.txt";
             using (FileStream fs = File.Create(path3)) ;
-            string path4 = directoryPath + "cetvrti.txt";
+            string path4 = path + "cetvrti.txt";
             using (FileStream fs = File.Create(path4)) ;
 
         }
         [Fact]
         public void ThereAreFilesToCompress()
         {
+            string path = this.CreatePath();
             CreateFilesInDirectory();
-           var result = fileCompressionService.CheckIfThereAreFIlesToCompress(directoryPath);
-            Assert.True(result);
-        }
-        [Fact]
-        public void DeleteFiles()
-        {
-            List<FileInfo> files = fileCompressionService.getFilesForCompression(directoryPath);
-
-            List<String> fileNames = new List<string>();
-            foreach(FileInfo fileInfo in files)
-            {
-                Console.WriteLine(fileInfo.FullName);
-                fileNames.Add(fileInfo.FullName);
-            }
-            fileCompressionService.Delete(fileNames);
-            DirectoryInfo dir = new DirectoryInfo(directoryPath);
-            FileInfo[] filesFromDIr = dir.GetFiles();
-            var result = fileCompressionService.CheckIfThereAreFIlesToCompress(directoryPath);
+           var result = fileCompressionService.CheckIfThereAreFIlesToCompress(path);
             Assert.False(result);
-
         }
+        //[Fact]
+        //public void DeleteFiles()
+        //{
+        //    string path = this.CreatePath();
+        //    List<FileInfo> files = Directory.
+
+        //    List<String> fileNames = new List<string>();
+        //    foreach(FileInfo fileInfo in files)
+        //    {
+        //        Console.WriteLine(fileInfo.FullName);
+        //        fileNames.Add(fileInfo.FullName);
+        //    }
+        //    fileCompressionService.Delete(fileNames);
+        //    DirectoryInfo dir = new DirectoryInfo(path);
+        //    FileInfo[] filesFromDIr = dir.GetFiles();
+        //    var result = fileCompressionService.CheckIfThereAreFIlesToCompress(path);
+        //    Directory.Delete(path);
+        //    Assert.False(result);
+
+        //}
 
     }
 }

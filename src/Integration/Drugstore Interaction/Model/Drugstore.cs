@@ -17,11 +17,13 @@ namespace Integration.Model
         public string Comment { get; set; }
         public string Base64Image { get; set; }
 
+        public bool gRPC { get; set; }
+
         public Drugstore()
         {
 
         }
-        public Drugstore( string name, string url, string api, string email,string city, string address)
+        public Drugstore( string name, string url, string api, string email,string city, string address, bool grpc)
         {
             Name = name;
             Url = url;
@@ -29,8 +31,9 @@ namespace Integration.Model
             Email = email;
             City = city;
             Address = address;
+            gRPC = grpc;
         }
-        public Drugstore(int id,string name, string url, string api, string email, string city,string address)
+        public Drugstore(int id,string name, string url, string api, string email, string city,string address, bool grpc)
         {
             Id = id;
             Name = name;
@@ -39,9 +42,10 @@ namespace Integration.Model
             Email = email;
             City = city;
             Address = address;
+            gRPC = grpc;
         }
 
-        public Drugstore(int id, string name, string url, string api, string email, string city, string address, string comment, string image)
+        public Drugstore(int id, string name, string url, string api, string email, string city, string address, string comment, string image, bool grpc)
         {
             Id = id;
             Name = name;
@@ -52,6 +56,7 @@ namespace Integration.Model
             Address = address;
             Comment = comment;
             Base64Image = image;
+            gRPC = grpc;
         }
 
         public Drugstore(string name, string url, string api)
