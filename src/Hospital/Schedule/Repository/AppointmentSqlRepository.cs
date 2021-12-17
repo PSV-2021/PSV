@@ -70,5 +70,10 @@ namespace Hospital.Schedule.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Appointment GetByAppointmentId(int appointmentId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
