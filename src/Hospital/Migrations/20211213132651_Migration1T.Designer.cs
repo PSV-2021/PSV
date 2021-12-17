@@ -3,15 +3,17 @@ using System;
 using Hospital.SharedModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211213132651_Migration1T")]
+    partial class Migration1T
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -561,9 +563,6 @@ namespace Hospital.Migrations
                     b.Property<int?>("SurveyId1")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("canCancel")
-                        .HasColumnType("boolean");
-
                     b.Property<bool>("isCancelled")
                         .HasColumnType("boolean");
 
@@ -585,10 +584,9 @@ namespace Hospital.Migrations
                             DoctorId = 1,
                             DurationInMunutes = 0,
                             IsDeleted = false,
-                            PatientId = 1,
+                            PatientId = 2,
                             StartTime = new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
                             SurveyId = 0,
-                            canCancel = true,
                             isCancelled = false
                         });
                 });

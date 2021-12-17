@@ -21,7 +21,6 @@ namespace Hospital.Schedule.Model
         public String ApointmentDescription { get; set; }
         public Boolean isCancelled { get; set; }
         public Boolean canCancel { get; set; }
-
         public Boolean IsDeleted { get; set; }
 
         [ForeignKey("DoctorId")]
@@ -158,6 +157,7 @@ namespace Hospital.Schedule.Model
              }
 
          }*/
+
 
         public Appointment() { }
 

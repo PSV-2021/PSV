@@ -17,12 +17,15 @@ namespace Hospital.Schedule.Service
     {
         private const int appointmentDurationInMunutes = 30;
         private IAppointmentRepository AppointmentRepository { get; }
+        private AppointmentSqlRepository AppointmentSqlRepository { get; set; }
         private Appointment ChangingAppointment { get; set; }
         private EventsLogService EventsLogService { get; set; }
         private RecommendedAppointmentSqlRepository RecommendedAppointmentSqlRepository { get; set; }
         private IDoctorRepository DoctorRepository { get; }
 
 
+        int numberOfAppointmentsInDay = 16;
+        double lengthOfAppointmentInMinutes = 30;
         public AppointmentService()
         {
             AppointmentRepository = new AppointmentFileRepository();
@@ -30,9 +33,26 @@ namespace Hospital.Schedule.Service
             ChangingAppointment = new Appointment();
         }
 
-        public AppointmentService(IAppointmentRepository recommendAppointmentSqlRepository)
+        public bool CheckIfExistsByTime(DateTime timeofAppointment)
         {
-            AppointmentRepository = recommendAppointmentSqlRepository;
+            List<Appointment> appointments = AppointmentRepository.GetAll().ToList();
+            foreach (Appointment a in appointments)
+            {
+                if (DateTime.Compare(a.StartTime, timeofAppointment) == 0)
+                    return true;
+            }
+            return false;
+        }
+
+        public AppointmentService(IAppointmentRepository IsurveyRepository)
+        {
+            AppointmentRepository = IsurveyRepository;
+        }
+
+        public AppointmentService(AppointmentSqlRepository appointmentSqlRepository)
+        {
+            AppointmentRepository = appointmentSqlRepository;
+            AppointmentSqlRepository = appointmentSqlRepository;
         }
 
         public AppointmentService(RecommendedAppointmentSqlRepository recommendedAppointmentSqlRepository,
@@ -53,6 +73,57 @@ namespace Hospital.Schedule.Service
         public Appointment GetAppointmentById(int id)
         {
             return AppointmentRepository.GetOne(id);
+        }
+
+        public List<Appointment> GetAppointmentsByDoctorAndDate(int idDoctor, DateTime chosenDate)
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            List<Appointment> occupiedAppointments = new List<Appointment>();
+            occupiedAppointments.AddRange(AppointmentSqlRepository.GetOccupiedAppointmentsByDoctorAndDate(idDoctor, chosenDate));
+
+            if (occupiedAppointments.Count == 0)
+            {
+                appointments = CreateAllFreeAppointmentsByDate(chosenDate);
+            }
+            else
+            { 
+                foreach (Appointment occupiedAppointment in occupiedAppointments){
+                    appointments = RemoveAppointmentFromAppointmentList(occupiedAppointment, chosenDate);
+                }
+            }
+            return appointments;
+        }
+
+        public void SaveAppointmentSql(Appointment appointment, MyDbContext dbContext)
+        {
+            AppointmentSqlRepository.Save(appointment);
+        }
+
+        private List<Appointment> RemoveAppointmentFromAppointmentList(Appointment occupiedAppointment, DateTime chosenDate)
+        {
+
+            List<Appointment> appointments = CreateAllFreeAppointmentsByDate(chosenDate);
+            foreach (Appointment appointment in appointments.ToList())
+            {
+                if(DateTime.Compare(occupiedAppointment.StartTime,appointment.StartTime) == 0)
+                {
+                    appointments.Remove(appointment);
+                }
+            }
+            return appointments;
+        }
+
+        private List<Appointment> CreateAllFreeAppointmentsByDate(DateTime chosenDate)
+        {
+            List<Appointment> allPossibleAppointmentsForDate = new List<Appointment>();
+            Appointment appointment = new Appointment { StartTime = chosenDate.AddHours(8) }; //hospital begins to work at 8 am
+            for (int i = 0; i < numberOfAppointmentsInDay ; i++)
+            {
+                Appointment newAppointmentLocal = new Appointment { StartTime = appointment.StartTime };
+                allPossibleAppointmentsForDate.Add(newAppointmentLocal);
+                appointment.StartTime = appointment.StartTime.AddMinutes(lengthOfAppointmentInMinutes);
+            }
+            return allPossibleAppointmentsForDate;
         }
 
         public List<Appointment> GetAllAppointments()
@@ -100,6 +171,7 @@ namespace Hospital.Schedule.Service
                     flag = false;
                 //if (room != null && room.RoomNumber != a.Room.RoomNumber)
                 // flag = false;
+              
                 if (flag == true)
                     appointments.Add(a);
             }
@@ -183,7 +255,7 @@ namespace Hospital.Schedule.Service
         {
             if (AppointmentsShareDoctor(appointment1, appointment2) ||
                 AppointmentsSharePatient(appointment1, appointment2))
-            //AppointmentsShareRoom(appointment1, appointment2))
+             //AppointmentsShareRoom(appointment1, appointment2))
             {
                 if (DateTime.Compare(appointment2.EndTime, appointment1.StartTime) <= 0) //drugi zavrsava pre pocetka prvog
                     return false;
@@ -351,7 +423,7 @@ namespace Hospital.Schedule.Service
         {
             if (AppointmentsShareDoctorSpeciality(appointment1, appointment2) ||
                 AppointmentsSharePatient(appointment1, appointment2))
-            //AppointmentsShareRoom(appointment1, appointment2))
+                //AppointmentsShareRoom(appointment1, appointment2))
             {
                 if (DateTime.Compare(appointment2.EndTime, appointment1.StartTime) <=
                     0) //drugi zavrsava pre pocetka prvog
@@ -582,6 +654,7 @@ namespace Hospital.Schedule.Service
              }
          }*/
 
+
         /*private List<DateTime> AddTimeToSpan(Appointment appointment)
         {
             DateTime it = new DateTime();
@@ -609,6 +682,7 @@ namespace Hospital.Schedule.Service
              }
              return notifications;
          }*/
+
 
         // PacijentKraj***************************************************************************
 
@@ -688,6 +762,7 @@ namespace Hospital.Schedule.Service
             var has_appointment = false;
 
             List<Appointment> appointments = GetAllAppointments();
+
 
             /* foreach (Appointment appointment in appointments)
              {

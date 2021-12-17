@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HospitalApiTests": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
