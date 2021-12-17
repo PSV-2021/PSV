@@ -178,7 +178,7 @@ namespace Hospital.SharedModel
             );
             modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
             modelBuilder.Entity<Appointment>().HasData(
-              new Appointment { Id = 1, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false , isCancelled = false}
+              new Appointment { Id = 1, PatientId = 1, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false , isCancelled = false, canCancel = true }
               );
             modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
         }

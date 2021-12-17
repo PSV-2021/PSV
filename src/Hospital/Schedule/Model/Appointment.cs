@@ -20,6 +20,7 @@ namespace Hospital.Schedule.Model
         public int DurationInMunutes { get; set; }
         public String ApointmentDescription { get; set; }
         public Boolean isCancelled { get; set; }
+        public Boolean canCancel { get; set; }
         public Boolean IsDeleted { get; set; }
 
         [ForeignKey("DoctorId")]

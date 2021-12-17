@@ -809,8 +809,7 @@ namespace Hospital.Schedule.Service
         }
         // UpravnikKraj***************************************************************************
 
-
-
+      
         //RecommendedAppointments
 
         public List<Appointment> GetAvailableAppointment(SearchAppointmentsDTO searchAppointments)
@@ -1005,6 +1004,7 @@ namespace Hospital.Schedule.Service
                 availableAppointments.AddRange(GetAvailable(doctorId, date));
             return availableAppointments;
         }
+
     }
 }
 

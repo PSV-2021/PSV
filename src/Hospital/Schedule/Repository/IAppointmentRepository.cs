@@ -8,6 +8,7 @@ namespace Hospital.Schedule.Repository
     {
         public List<Appointment> Get(int doctorId, DateTime date);
         public void Create(Appointment appointment);
+        public Appointment GetByAppointmentId(int appointmentId);
 
     }
 }

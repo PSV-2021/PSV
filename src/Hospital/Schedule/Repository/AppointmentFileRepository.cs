@@ -177,6 +177,11 @@ namespace Hospital.Schedule.Repository
             return appointmentsForSerialization;
         }
 
+        public Appointment GetByAppointmentId(int appointmentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Appointment> Get(int doctorId, DateTime date)
         {
             throw new NotImplementedException();

@@ -23,7 +23,7 @@ namespace Hospital.Schedule.Repository
 
         public List<Appointment> GetAll()
         {
-            throw new NotImplementedException();
+            return context.Appointments.ToList();
         }
 
         internal List<Appointment> GetById(int id)
@@ -43,7 +43,14 @@ namespace Hospital.Schedule.Repository
 
         public bool Update(Appointment editedObject)
         {
-            throw new NotImplementedException();
+            context.Appointments.Update(editedObject);
+            context.SaveChanges();
+            return true;
+        }
+
+        public Appointment GetByAppointmentId(int appointmentId)
+        {
+            return context.Appointments.Find(appointmentId);
         }
 
         public List<Appointment> Get(int doctorId, DateTime date)

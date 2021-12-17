@@ -58,5 +58,9 @@ namespace Hospital.Schedule.Repository
             context.SaveChanges();
         }
 
+        public Appointment GetByAppointmentId(int appointmentId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

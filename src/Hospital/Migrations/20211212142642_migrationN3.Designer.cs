@@ -3,15 +3,17 @@ using System;
 using Hospital.SharedModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211212142642_migrationN3")]
+    partial class migrationN3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,11 +123,6 @@ namespace Hospital.Migrations
                         {
                             Id = 1,
                             HealthInsuranceNumber = "1ab"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            HealthInsuranceNumber = "1b"
                         });
                 });
 
@@ -222,27 +219,6 @@ namespace Hospital.Migrations
                             Surname = "Markovic",
                             Type = 3,
                             Username = "miki98"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Adress = "Bulevar Oslobodjenja 8",
-                            BloodType = 1,
-                            DateOfBirth = new DateTime(1997, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = 1,
-                            Email = "marko@gmail.com",
-                            FathersName = "Petar",
-                            IsActive = true,
-                            IsBlocked = false,
-                            Jmbg = "3009998805138",
-                            MedicalRecordId = 2,
-                            Name = "Milica",
-                            Password = "miki985",
-                            PhoneNumber = "0641664608",
-                            Sex = 1,
-                            Surname = "Markovic",
-                            Type = 3,
-                            Username = "miki98"
                         });
                 });
 
@@ -275,7 +251,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 13, 14, 26, 47, 101, DateTimeKind.Local).AddTicks(3660),
+                            IssuedTime = new DateTime(2021, 12, 12, 15, 26, 41, 458, DateTimeKind.Local).AddTicks(3090),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -451,7 +427,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 83, DateTimeKind.Local).AddTicks(6386),
+                            TimeWritten = new DateTime(2021, 12, 12, 15, 26, 41, 443, DateTimeKind.Local).AddTicks(3726),
                             canPublish = false
                         },
                         new
@@ -459,7 +435,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 89, DateTimeKind.Local).AddTicks(8726),
+                            TimeWritten = new DateTime(2021, 12, 12, 15, 26, 41, 452, DateTimeKind.Local).AddTicks(1055),
                             canPublish = true
                         },
                         new
@@ -467,7 +443,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 89, DateTimeKind.Local).AddTicks(8845),
+                            TimeWritten = new DateTime(2021, 12, 12, 15, 26, 41, 452, DateTimeKind.Local).AddTicks(1151),
                             canPublish = true
                         });
                 });
