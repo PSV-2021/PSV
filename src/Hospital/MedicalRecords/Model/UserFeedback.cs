@@ -6,11 +6,8 @@ namespace Hospital.MedicalRecords.Model
     {
         public int Id { get; set; }
         public DateTime TimeWritten { get; set; }
-        //public int Rating { get; set; }
         public String Content { get; set; }
-        //public Boolean IsDeleted { get; set; }
         public String Name { get; set; }
-        //public String Date { get; set; }
         public Boolean canPublish { get; set; }
 
         public UserFeedback() { }
@@ -23,13 +20,21 @@ namespace Hospital.MedicalRecords.Model
             Content = con;
             //IsDeleted = false;
         }
-        public UserFeedback(int id, DateTime date, string name, Boolean canPublish, string context)
+        public UserFeedback(int id, DateTime date, string context, string name, Boolean canPublish)
         {
             Id = id;
             TimeWritten = date;
             Name = name;
             Content = context;
             canPublish = true;
+        }
+
+        public UserFeedback(DateTime time, string content, string name, bool v)
+        {
+            TimeWritten = time;
+            Content = content;
+            Name = name;
+            canPublish = v;
         }
     }
 }

@@ -46,9 +46,6 @@ namespace HospitalApiTests.Integration
                 Password = "02145",
                 Type = UserType.doctor,
                 SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
                 Id = 1,
                 SpecialityId = 1,
                 NumberOfPatients = 1
@@ -67,9 +64,6 @@ namespace HospitalApiTests.Integration
                 Password = "02145",
                 Type = UserType.doctor,
                 SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
                 Id = 2,
                 SpecialityId = 1,
                 NumberOfPatients = 5
@@ -98,10 +92,7 @@ namespace HospitalApiTests.Integration
                 Password = "02145",
                 Type = UserType.doctor,
                 SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
-                Id = 1,
+                Id = 21,
                 SpecialityId = 1,
                 NumberOfPatients = 0
             });
@@ -128,10 +119,7 @@ namespace HospitalApiTests.Integration
                     Password = "02145",
                     Type = UserType.doctor,
                     SalaryInRsd = 200000,
-                    WorkingSchedule = new List<WorkingHours>(),
-                    VacationDays = new List<VacationDays>(),
-                    AvailableDaysOff = 20,
-                    Id = 1,
+                    Id = 21,
                     SpecialityId = 1,
                     NumberOfPatients = 0
             } });
@@ -164,7 +152,7 @@ namespace HospitalApiTests.Integration
             SetUpDbContext();
             context.Add(new Doctor
             {
-                Id = 1,
+                Id = 21,
                 Name = "Milan",
                 Surname = "Popovic",
                 Jmbg = "3009998805137",
@@ -177,9 +165,6 @@ namespace HospitalApiTests.Integration
                 Password = "02145",
                 Type = UserType.doctor,
                 SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
                 SpecialityId = 1,
                 NumberOfPatients = 0
             });
@@ -192,7 +177,7 @@ namespace HospitalApiTests.Integration
 
         private PatientDto GeneratePatient()
         {
-            return new PatientDto { Name = "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType = BloodType.A, DoctorId = 1, Allergens = new List<String>() };
+            return new PatientDto { Name = "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType = BloodType.A, DoctorId = 21, Allergens = new List<String>() };
         }
     }
 }

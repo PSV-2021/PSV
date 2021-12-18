@@ -43,14 +43,12 @@ namespace HospitalApiTests.Integration
                 Password = "02145",
                 Type = UserType.doctor,
                 SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
                 Id = 1,
                 SpecialityId = 1,
                 NumberOfPatients = 0,
             });
-            Patient patient = new Patient { Id = 1, Name = "Andjelka" };
+            Patient patient = new Patient(1, "Andjelka", "Andjic", "andji", "andji", "1821099320191", new DateTime(1980, 9, 17), BloodType.A,
+                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com");
             context.Add(patient);
 
             ObserveAppointmentsController observeAppointmentsController = new ObserveAppointmentsController(context);

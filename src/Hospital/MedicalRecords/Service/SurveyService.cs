@@ -41,14 +41,7 @@ namespace Hospital.MedicalRecords.Service
 
         public void CreateSurvey(List<AnsweredQuestion> answeredQuestion, string id, string ap)
         {
-            /*
-            if (!CheckIfExistsById(appointmentId))
-            {
-                return null;
-            }
-            */
             SurveyRepository.CreateSurvey(answeredQuestion, id, ap);
-
         }
 
         public List<SurveyQuestion> GetAll()

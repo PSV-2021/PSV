@@ -79,9 +79,6 @@ namespace HospitalApiTests.Integration
                 Password = "02145",
                 Type = UserType.doctor,
                 SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
                 Id = 1,
                 SpecialityId = 2,
                 NumberOfPatients = 1
@@ -101,9 +98,6 @@ namespace HospitalApiTests.Integration
                 Password = "02145",
                 Type = UserType.doctor,
                 SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
                 Id = 2,
                 SpecialityId = 1,
                 NumberOfPatients = 5
@@ -134,9 +128,6 @@ namespace HospitalApiTests.Integration
                     Password = "02145",
                     Type = UserType.doctor,
                     SalaryInRsd = 200000,
-                    WorkingSchedule = new List<WorkingHours>(),
-                    VacationDays = new List<VacationDays>(),
-                    AvailableDaysOff = 20,
                     Id = 1,
                     SpecialityId = 2,
                     NumberOfPatients = 1

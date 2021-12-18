@@ -1,8 +1,10 @@
+using Hospital.SharedModel;
 using System;
+using System.Collections.Generic;
 
 namespace Hospital.MedicalRecords.Model
 {
-    public class Ingridient
+    public class Ingridient : ValueObject
     {
         public int Id { get; set; }
         public String Name { get; set; }
@@ -19,6 +21,12 @@ namespace Hospital.MedicalRecords.Model
 
         public Ingridient()
         {
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Id;
+            yield return Name;
         }
     }
 }

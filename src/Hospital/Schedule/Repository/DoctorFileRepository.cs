@@ -78,24 +78,6 @@ namespace Hospital.Schedule.Repository
             return true;
         }
 
-        public Boolean Update(Doctor editedDoctor)
-        {
-            List<Doctor> storedDoctors = ReadFromFile();
-            foreach (Doctor doctor in storedDoctors)
-            {
-                //if (doctor.Jmbg == editedDoctor.Jmbg && doctor.IsDeleted == false)
-                {
-                    doctor.VacationDays = editedDoctor.VacationDays;
-                    doctor.WorkingSchedule = editedDoctor.WorkingSchedule;
-                    doctor.AvailableDaysOff = editedDoctor.AvailableDaysOff;
-
-                    WriteToFile(storedDoctors);
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public Boolean Delete(string jmbg)
         {
             List<Doctor> storedDoctors = ReadFromFile();
@@ -133,6 +115,11 @@ namespace Hospital.Schedule.Repository
         }
 
         public Doctor GetDoctorBy(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(Doctor editedObject)
         {
             throw new NotImplementedException();
         }

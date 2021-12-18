@@ -10,6 +10,7 @@ namespace Hospital.Schedule.Service
     {
         private ObserveAppointmentsSqlRepository ObserveAppointmentsSqlRepository;
         private IAppointmentRepository AppointmentRepository { get; set; }
+        private Appointment Appointment = new Appointment();
 
         public ObserveAppointmentsService(ObserveAppointmentsSqlRepository observeAppointmentsSqlRepository)
         {
@@ -24,20 +25,7 @@ namespace Hospital.Schedule.Service
         {
             List<Appointment> appointments = ObserveAppointmentsSqlRepository.GetById(id);
 
-            foreach(Appointment a in appointments)
-            {
-                if (a.isCancelled)
-                    a.Status = AppointmentStatus.CANCELLED;
-                else if (a.StartTime < DateTime.Now)
-                    a.Status = AppointmentStatus.DONE;
-                else if (a.StartTime > DateTime.Now)
-                    a.Status = AppointmentStatus.UPCOMING;
-
-                if (a.StartTime.Day < DateTime.Now.Day + 3)
-                    a.canCancel = false;
-            }
-
-            return appointments;
+            return Appointment.StatusAppointment(appointments);
         }
 
         //CancelAppointments
@@ -45,7 +33,7 @@ namespace Hospital.Schedule.Service
         public bool CancelAppointment(int appointmentId)
         {
             Appointment appointment = AppointmentRepository.GetByAppointmentId(appointmentId);
-            appointment.isCancelled = true;
+            appointment.SetCancel(appointment);
             bool retVal = AppointmentRepository.Update(appointment);
             return retVal;
         }

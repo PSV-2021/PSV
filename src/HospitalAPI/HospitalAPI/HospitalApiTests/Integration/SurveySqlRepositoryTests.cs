@@ -17,6 +17,7 @@ using Hospital.MedicalRecords.Model;
 using Hospital.SharedModel;
 using HospitalAPI.DTO;
 using Xunit;
+using Hospital.Schedule.Model;
 
 namespace HospitalApiTests.Integration
 {
@@ -38,8 +39,8 @@ namespace HospitalApiTests.Integration
         public void Get_surveys()
         {
             SetUpDbContext();
-            context.Add(new SurveyQuestion { Id =1, Text = "How satisfied are you with the work of your doctor?", Rating= 0, QuestionType =0 });
-            context.Add(new SurveyQuestion { Id = 2, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 });
+            context.Add(new SurveyQuestion (1, "How satisfied are you with the work of your doctor?", 0, 0 ));
+            context.Add(new SurveyQuestion (2, "How satisfied are you with the work of your doctor?", 0, 0 ));
 
             SurveyController surveyController = new SurveyController(context);
             IActionResult retVal = surveyController.Get();
@@ -53,11 +54,17 @@ namespace HospitalApiTests.Integration
         {           
             SetUpDbContext();
 
+            context.Add(new Appointment { Id = 11, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false, isCancelled = false, canCancel = true }
+              );
+            context.Add(new Patient(12, "Milica", "Mikic", "3009998805137", new DateTime(1997, 10, 12), Sex.female, "065245987", "Kisacka 5", "milica@gmail.com",
+               "mici97", "mici789", true, BloodType.A, "Nenad", 1, 2, new List<Allergen>())
+               );
+
             var survey = CreateSurvey();
 
             SurveyController surveyController = new SurveyController(context);
 
-            IActionResult retVal = surveyController.Post(survey,"2", "1");
+            IActionResult retVal = surveyController.Post(survey,"12", "11");
 
             retVal.Equals(HttpStatusCode.OK);
         }
@@ -65,8 +72,8 @@ namespace HospitalApiTests.Integration
         public static IEnumerable<object[]> Questions()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new SurveyQuestion { Id = 1, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 } });
-            retVal.Add(new object[] { new SurveyQuestion { Id = 2, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 } });
+            retVal.Add(new object[] { new SurveyQuestion(1, "How satisfied are you with the work of your doctor?", 0, 0) });
+            retVal.Add(new object[] { new SurveyQuestion(2, "How satisfied are you with the work of your doctor?", 0, 0) });
             return retVal;
         }
 
@@ -74,8 +81,8 @@ namespace HospitalApiTests.Integration
         {
             List<AnsweredQuestion> retVal = new List<AnsweredQuestion>();
 
-            AnsweredQuestion surveyAnswer1 = new AnsweredQuestion { Id = 1, Text = "How satisfied are you with the work of your doctor?", Rating = 0, QuestionType = 0 };
-            AnsweredQuestion surveyAnswer2 = new AnsweredQuestion { Id = 2, Text = "How satisfied were you with the time that your doctor spent with you?", Rating = 0, QuestionType = 0 };
+            AnsweredQuestion surveyAnswer1 = new AnsweredQuestion(1, "How satisfied are you with the work of your doctor?", 0, 0 );
+            AnsweredQuestion surveyAnswer2 = new AnsweredQuestion(2, "How satisfied were you with the time that your doctor spent with you?", 0, 0 );
 
             retVal.Add(surveyAnswer1);
             retVal.Add(surveyAnswer2);

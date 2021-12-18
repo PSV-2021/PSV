@@ -33,42 +33,28 @@ namespace Hospital.Schedule.Model
         [NotMapped]
         public AppointmentStatus Status { get; set; }
 
-        //[JsonIgnore]
-        //public Room Room { get; set; }
-
         [ForeignKey("PatientId")]
         public int PatientId { get; set; }
         public virtual Patient Patient { get; set; }
-        //public Boolean IsEmergency { get; set; }
-        //public Note Note { get; set; }
+     
 
         public bool IsOccupied(DateTime start)
         {
             return DateTime.Compare(StartTime, start) == 0;
         }
-        public Appointment(int id, Patient patient, Doctor doctor, DateTime startTime, int duration, string apDesc/*, Note note, Boolean IsEmergency = false*/)
+        public Appointment(int id, Patient patient, Doctor doctor, DateTime startTime, int duration, string apDesc)
         {
             Id = id;
             Patient = patient;
             Doctor = doctor;
-            //Room = room;
             StartTime = startTime;
             DurationInMunutes = duration;
             ApointmentDescription = apDesc;
             IsDeleted = false;
-            //Note = note;
-            //this.IsEmergency = IsEmergency;
         }
 
         public Appointment(Doctor doctor, DateTime startTime, Patient patient)
         {
-            /*RoomFileRepository rs = new RoomFileRepository();
-            List<Room> rooms = rs.GetAll();
-            Room room = rooms[0];
-            if (rooms.Count == 0)
-            {
-                room = null;
-            }*/
             this.DurationInMunutes = 15;
             this.ApointmentDescription = "Pregled kod lekara opste prakse.";
             this.IsDeleted = false;
@@ -106,21 +92,7 @@ namespace Hospital.Schedule.Model
                     return "";
             }
         }
-        /*[JsonIgnore]
-        public String RoomName
-        {
-            get
-            {
-                if (Room != null)
-                    return Convert.ToString(Room.RoomNumber);
-                else
-                    return "";
-            }
-            set
-            {
-                OnPropertyChanged("RoomName");
-            }
-        }*/
+        
         [NotMapped]
         public String DoctorName
         {
@@ -137,27 +109,7 @@ namespace Hospital.Schedule.Model
             }
         }
 
-        /* public String AppointmentDescription
-         {
-             get => ApointmentDescription;
-             set
-             {
-                 ApointmentDescription = value;
-                 OnPropertyChanged("AppointmentDescription");
-             }
-         }
-
-         public DateTime StartTimee
-         {
-             get => StartTime;
-             set
-             {
-                 StartTime = value;
-                 OnPropertyChanged("StartTimee");
-             }
-
-         }*/
-
+        
 
         public Appointment() { }
 
@@ -169,6 +121,27 @@ namespace Hospital.Schedule.Model
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
+        }
+        public List<Appointment> StatusAppointment(List<Appointment> appointments)
+        {
+            foreach (Appointment a in appointments)
+            {
+                if (a.isCancelled)
+                    a.Status = AppointmentStatus.CANCELLED;
+                else if (a.StartTime < DateTime.Now)
+                    a.Status = AppointmentStatus.DONE;
+                else if (a.StartTime > DateTime.Now)
+                    a.Status = AppointmentStatus.UPCOMING;
+
+                if (a.StartTime.Day < DateTime.Now.Day + 3)
+                    a.canCancel = false;
+            }
+            return appointments;
+        }
+
+        public void SetCancel(Appointment appointment)
+        {
+            appointment.isCancelled = true;
         }
     }
 }

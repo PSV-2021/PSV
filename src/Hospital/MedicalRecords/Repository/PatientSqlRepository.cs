@@ -29,7 +29,7 @@ namespace Hospital.MedicalRecords.Repository
 
         public void SavePatient(Patient patient)
         {
-            dbContext.MedicalRecords.Add(new MedicalRecord { Id = patient.MedicalRecordId });
+            dbContext.MedicalRecords.Add(new MedicalRecord(patient.MedicalRecordId, null));
             Doctor d = (from n in dbContext.Doctors where n.Id == patient.DoctorId select n).FirstOrDefault();
             if(d != null)    
                 d.NumberOfPatients++;
