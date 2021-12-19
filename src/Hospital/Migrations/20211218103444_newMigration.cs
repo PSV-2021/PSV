@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
-    public partial class new_migration : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,7 +103,7 @@ namespace Hospital.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserFeedback",
+                name: "UserFeedbacks",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -115,7 +115,7 @@ namespace Hospital.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserFeedback", x => x.Id);
+                    table.PrimaryKey("PK_UserFeedbacks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -361,7 +361,7 @@ namespace Hospital.Migrations
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
-                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 13, 1, 3, 13, 137, DateTimeKind.Local).AddTicks(5476), "Zoran Zoranic" });
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 18, 11, 34, 42, 787, DateTimeKind.Local).AddTicks(911), "Zoran Zoranic" });
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -394,13 +394,13 @@ namespace Hospital.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "UserFeedback",
+                table: "UserFeedbacks",
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
-                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 13, 1, 3, 13, 130, DateTimeKind.Local).AddTicks(561), false },
-                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 13, 1, 3, 13, 133, DateTimeKind.Local).AddTicks(1931), true },
-                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 13, 1, 3, 13, 133, DateTimeKind.Local).AddTicks(2371), true }
+                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 18, 11, 34, 42, 742, DateTimeKind.Local).AddTicks(1548), false },
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 18, 11, 34, 42, 768, DateTimeKind.Local).AddTicks(4867), true },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 18, 11, 34, 42, 768, DateTimeKind.Local).AddTicks(5372), true }
                 });
 
             migrationBuilder.InsertData(
@@ -512,7 +512,7 @@ namespace Hospital.Migrations
                 name: "SurveyQuestion");
 
             migrationBuilder.DropTable(
-                name: "UserFeedback");
+                name: "UserFeedbacks");
 
             migrationBuilder.DropTable(
                 name: "VacationDays");

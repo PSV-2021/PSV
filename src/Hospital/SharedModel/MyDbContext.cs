@@ -9,7 +9,7 @@ namespace Hospital.SharedModel
 {
     public class MyDbContext : DbContext
     {
-        public DbSet<UserFeedback> UserFeedback { get; set; }
+        public DbSet<UserFeedback> UserFeedbacks { get; set; }
         public DbSet<Ingridient> Ingridients { get; set; }
         public DbSet<Speciality> Speciality { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
