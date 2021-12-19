@@ -13,6 +13,10 @@ namespace Hospital.SharedModel
         public int Id { get; set; }
         public virtual List<WorkingHours> WorkingSchedule { get; set; }
         public int AvailableDaysOff { get; set; }
+        /*
+        [ForeignKey("WorkingHoursId")]
+        public int WorkingHoursId { get; set; }
+        public virtual WorkingHours WorkingHours { get; set; }*/
         public virtual List<VacationDays> VacationDays { get; set; }
         [ForeignKey("SpecialityId")]
         public int SpecialityId { get; set; }

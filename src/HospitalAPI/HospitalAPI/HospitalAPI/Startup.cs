@@ -24,7 +24,7 @@ namespace HospitalAPI
         {
             services.AddControllers();
             services.AddDbContext<MyDbContext>(options =>
-              options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
+            options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
@@ -85,6 +85,7 @@ namespace HospitalAPI
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
+
     }   
  }
 

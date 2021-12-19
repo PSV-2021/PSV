@@ -4,7 +4,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
+<<<<<<< HEAD:src/Hospital/Migrations/20211218103444_newMigration.cs
     public partial class newMigration : Migration
+=======
+    public partial class migrationN1 : Migration
+>>>>>>> development:src/Hospital/Migrations/20211212091603_migrationN1.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -361,7 +365,11 @@ namespace Hospital.Migrations
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
+<<<<<<< HEAD:src/Hospital/Migrations/20211218103444_newMigration.cs
                 values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 18, 11, 34, 42, 787, DateTimeKind.Local).AddTicks(911), "Zoran Zoranic" });
+=======
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 12, 10, 16, 1, 558, DateTimeKind.Local).AddTicks(3634), "Zoran Zoranic" });
+>>>>>>> development:src/Hospital/Migrations/20211212091603_migrationN1.cs
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -398,9 +406,15 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
+<<<<<<< HEAD:src/Hospital/Migrations/20211218103444_newMigration.cs
                     { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 18, 11, 34, 42, 742, DateTimeKind.Local).AddTicks(1548), false },
                     { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 18, 11, 34, 42, 768, DateTimeKind.Local).AddTicks(4867), true },
                     { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 18, 11, 34, 42, 768, DateTimeKind.Local).AddTicks(5372), true }
+=======
+                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 12, 10, 16, 1, 537, DateTimeKind.Local).AddTicks(5695), false },
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 12, 10, 16, 1, 549, DateTimeKind.Local).AddTicks(9976), true },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 12, 10, 16, 1, 550, DateTimeKind.Local).AddTicks(162), true }
+>>>>>>> development:src/Hospital/Migrations/20211212091603_migrationN1.cs
                 });
 
             migrationBuilder.InsertData(

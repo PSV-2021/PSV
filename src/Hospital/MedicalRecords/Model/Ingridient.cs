@@ -16,5 +16,9 @@ namespace Hospital.MedicalRecords.Model
             this.Id = id;
             this.Name = name;
         }
+
+        public Ingridient()
+        {
+        }
     }
 }
