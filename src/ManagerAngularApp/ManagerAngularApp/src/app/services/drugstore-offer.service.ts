@@ -1,10 +1,6 @@
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import { catchError } from 'rxjs/operators';
-import { DrugstoreOfferDto } from '../drugstore-offer/drugstore-offer.dto';
 import { PublishedDrugstoreOfferDto } from '../drugstore-offer/published-drugstore-offer.dto';
 import { environment } from 'src/environments/environment';
 

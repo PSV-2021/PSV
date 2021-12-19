@@ -1,8 +1,6 @@
 import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { catchError } from 'rxjs/operators';
 import { ReviewDto } from '../review/review.dto';
 import { map } from 'rxjs-compat/operator/map';
