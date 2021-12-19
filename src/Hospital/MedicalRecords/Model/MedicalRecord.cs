@@ -11,8 +11,8 @@ namespace Hospital.MedicalRecords.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public String HealthInsuranceNumber { get; set; }
+        public int Id { get; private set; }
+        public String HealthInsuranceNumber { get; private set; }
 
         public MedicalRecord(int id, string hid)
         {

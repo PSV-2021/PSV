@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211218124927_initalMigrationM")]
-    partial class initalMigrationM
+    [Migration("20211219130917_migrationM3")]
+    partial class migrationM3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -258,7 +258,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 18, 13, 49, 25, 853, DateTimeKind.Local).AddTicks(311),
+                            IssuedTime = new DateTime(2021, 12, 19, 14, 9, 14, 875, DateTimeKind.Local).AddTicks(386),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -434,7 +434,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 18, 13, 49, 25, 841, DateTimeKind.Local).AddTicks(2174),
+                            TimeWritten = new DateTime(2021, 12, 19, 14, 9, 14, 853, DateTimeKind.Local).AddTicks(9154),
                             canPublish = false
                         },
                         new
@@ -442,7 +442,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 18, 13, 49, 25, 848, DateTimeKind.Local).AddTicks(5129),
+                            TimeWritten = new DateTime(2021, 12, 19, 14, 9, 14, 861, DateTimeKind.Local).AddTicks(6766),
                             canPublish = false
                         },
                         new
@@ -450,7 +450,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 18, 13, 49, 25, 848, DateTimeKind.Local).AddTicks(5252),
+                            TimeWritten = new DateTime(2021, 12, 19, 14, 9, 14, 861, DateTimeKind.Local).AddTicks(7210),
                             canPublish = false
                         });
                 });
@@ -541,9 +541,6 @@ namespace Hospital.Migrations
                     b.Property<int>("SurveyId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("SurveyId1")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("canCancel")
                         .HasColumnType("boolean");
 
@@ -551,12 +548,6 @@ namespace Hospital.Migrations
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("SurveyId1");
 
                     b.ToTable("Appointments");
 
@@ -566,13 +557,52 @@ namespace Hospital.Migrations
                             Id = 1,
                             ApointmentDescription = "All good",
                             DoctorId = 1,
-                            DurationInMunutes = 0,
+                            DurationInMunutes = 30,
                             IsDeleted = false,
                             PatientId = 1,
                             StartTime = new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
                             SurveyId = 0,
                             canCancel = true,
                             isCancelled = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ApointmentDescription = "",
+                            DoctorId = 1,
+                            DurationInMunutes = 30,
+                            IsDeleted = false,
+                            PatientId = 2,
+                            StartTime = new DateTime(2022, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            SurveyId = 0,
+                            canCancel = true,
+                            isCancelled = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ApointmentDescription = "All good",
+                            DoctorId = 1,
+                            DurationInMunutes = 30,
+                            IsDeleted = false,
+                            PatientId = 2,
+                            StartTime = new DateTime(2021, 12, 7, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            SurveyId = 0,
+                            canCancel = true,
+                            isCancelled = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ApointmentDescription = "All good",
+                            DoctorId = 1,
+                            DurationInMunutes = 30,
+                            IsDeleted = false,
+                            PatientId = 2,
+                            StartTime = new DateTime(2021, 11, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            SurveyId = 0,
+                            canCancel = true,
+                            isCancelled = true
                         });
                 });
 
@@ -683,8 +713,6 @@ namespace Hospital.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpecialityId");
-
                     b.ToTable("Doctors");
 
                     b.HasData(
@@ -760,42 +788,6 @@ namespace Hospital.Migrations
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Hospital.Schedule.Model.Appointment", b =>
-                {
-                    b.HasOne("Hospital.SharedModel.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital.MedicalRecords.Model.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital.MedicalRecords.Model.Survey", "Survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyId1");
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("Survey");
-                });
-
-            modelBuilder.Entity("Hospital.SharedModel.Doctor", b =>
-                {
-                    b.HasOne("Hospital.SharedModel.Speciality", "Speciality")
-                        .WithMany()
-                        .HasForeignKey("SpecialityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Speciality");
                 });
 
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Patient", b =>

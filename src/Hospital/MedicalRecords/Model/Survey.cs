@@ -9,9 +9,9 @@ namespace Hospital.MedicalRecords.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public int PatientId { get; set; }
-        public DateTime Date { get; set; }
+        public int Id { get; private set; }
+        public int PatientId { get; private set; }
+        public DateTime Date { get; private set; }
         public int AppointmentId { get; set; }
         public Survey() { }
 

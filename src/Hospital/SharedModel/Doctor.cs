@@ -10,9 +10,9 @@ namespace Hospital.SharedModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int Id { get; private set; }
         [ForeignKey("SpecialityId")]
-        public int SpecialityId { get; set; }
+        public int SpecialityId { get; private set; }
         public virtual Speciality Speciality { get; }
         public int NumberOfPatients { get; set; }
 

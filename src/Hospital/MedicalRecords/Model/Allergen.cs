@@ -8,8 +8,8 @@ namespace Hospital.MedicalRecords.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public String Name { get; set; }
+        public int Id { get; private set; }
+        public String Name { get; private set; }
         [ForeignKey("PatientId")]
         public int PatientId {get; set; }
         public virtual Patient Patient { get; }

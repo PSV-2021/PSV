@@ -11,10 +11,10 @@ namespace Hospital.MedicalRecords.Model
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public String Text { get; set; }
-        public int Rating { get; set; }
-        public int QuestionType { get; set; }
+        public int Id { get; private set; }
+        public String Text { get; private set; }
+        public int Rating { get; private set; }
+        public int QuestionType { get; private set; }
 
         public SurveyQuestion() { }
 

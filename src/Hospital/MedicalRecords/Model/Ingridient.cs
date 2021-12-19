@@ -6,8 +6,8 @@ namespace Hospital.MedicalRecords.Model
 {
     public class Ingridient : ValueObject
     {
-        public int Id { get; set; }
-        public String Name { get; set; }
+        public int Id { get; private set; }
+        public String Name { get; private set; }
 
         public Ingridient(string name) {
             this.Name = name;

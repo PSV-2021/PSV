@@ -12,13 +12,13 @@ namespace Hospital.MedicalRecords.Model
    
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; } 
-        public BloodType BloodType { get; set; }
+        public int Id { get; private set; } 
+        public BloodType BloodType { get; private set; }
         public Boolean IsActive { get; set; }
-        public String FathersName { get; set; }
+        public String FathersName { get; private set; }
         public virtual List<Allergen> Allergen { get; }
         [ForeignKey("DoctorId")]
-        public int DoctorId { get; set; }
+        public int DoctorId { get; private set; }
         public virtual Doctor ChosenDoctor { get; }
         [ForeignKey("MedicalRecordId")]
         public int MedicalRecordId { get; set; }

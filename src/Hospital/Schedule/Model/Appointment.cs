@@ -18,7 +18,7 @@ namespace Hospital.Schedule.Model
         public int Id { get; set; }
         public DateTime StartTime { get; set; }
         public int DurationInMunutes { get; private set; }
-        public String ApointmentDescription { get; }
+        public String ApointmentDescription { get; private set; }
         public Boolean isCancelled { get; private set; }
         public Boolean canCancel { get; private set; }
         public Boolean IsDeleted { get; private set; }
