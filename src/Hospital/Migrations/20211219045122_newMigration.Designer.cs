@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211212091837_migrationN2")]
-    partial class migrationN2
+    [Migration("20211219045122_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,6 +123,11 @@ namespace Hospital.Migrations
                         {
                             Id = 1,
                             HealthInsuranceNumber = "1ab"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            HealthInsuranceNumber = "1b"
                         });
                 });
 
@@ -219,6 +224,27 @@ namespace Hospital.Migrations
                             Surname = "Markovic",
                             Type = 3,
                             Username = "miki98"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Adress = "Bulevar Oslobodjenja 8",
+                            BloodType = 1,
+                            DateOfBirth = new DateTime(1997, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Email = "marko@gmail.com",
+                            FathersName = "Petar",
+                            IsActive = true,
+                            IsBlocked = false,
+                            Jmbg = "3009998805138",
+                            MedicalRecordId = 2,
+                            Name = "Milica",
+                            Password = "miki985",
+                            PhoneNumber = "0641664608",
+                            Sex = 1,
+                            Surname = "Markovic",
+                            Type = 3,
+                            Username = "miki98"
                         });
                 });
 
@@ -251,7 +277,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 12, 10, 18, 35, 216, DateTimeKind.Local).AddTicks(1523),
+                            IssuedTime = new DateTime(2021, 12, 19, 5, 51, 21, 630, DateTimeKind.Local).AddTicks(7995),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -427,7 +453,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 12, 10, 18, 35, 197, DateTimeKind.Local).AddTicks(537),
+                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 619, DateTimeKind.Local).AddTicks(2590),
                             canPublish = false
                         },
                         new
@@ -435,7 +461,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 12, 10, 18, 35, 205, DateTimeKind.Local).AddTicks(5883),
+                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 625, DateTimeKind.Local).AddTicks(9419),
                             canPublish = true
                         },
                         new
@@ -443,7 +469,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 12, 10, 18, 35, 205, DateTimeKind.Local).AddTicks(5979),
+                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 625, DateTimeKind.Local).AddTicks(9565),
                             canPublish = true
                         });
                 });
@@ -537,6 +563,9 @@ namespace Hospital.Migrations
                     b.Property<int?>("SurveyId1")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("canCancel")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("isCancelled")
                         .HasColumnType("boolean");
 
@@ -561,6 +590,7 @@ namespace Hospital.Migrations
                             PatientId = 1,
                             StartTime = new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
                             SurveyId = 0,
+                            canCancel = true,
                             isCancelled = false
                         });
                 });

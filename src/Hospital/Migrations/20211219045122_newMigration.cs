@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
-    public partial class Migration1T : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -309,6 +309,7 @@ namespace Hospital.Migrations
                     DurationInMunutes = table.Column<int>(type: "integer", nullable: false),
                     ApointmentDescription = table.Column<string>(type: "text", nullable: true),
                     isCancelled = table.Column<bool>(type: "boolean", nullable: false),
+                    canCancel = table.Column<bool>(type: "boolean", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     DoctorId = table.Column<int>(type: "integer", nullable: false),
                     SurveyId = table.Column<int>(type: "integer", nullable: false),
@@ -365,7 +366,7 @@ namespace Hospital.Migrations
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
-                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 13, 14, 26, 47, 101, DateTimeKind.Local).AddTicks(3660), "Zoran Zoranic" });
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 19, 5, 51, 21, 630, DateTimeKind.Local).AddTicks(7995), "Zoran Zoranic" });
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -402,9 +403,9 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
-                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 13, 14, 26, 47, 83, DateTimeKind.Local).AddTicks(6386), false },
-                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 13, 14, 26, 47, 89, DateTimeKind.Local).AddTicks(8726), true },
-                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 13, 14, 26, 47, 89, DateTimeKind.Local).AddTicks(8845), true }
+                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 19, 5, 51, 21, 619, DateTimeKind.Local).AddTicks(2590), false },
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 19, 5, 51, 21, 625, DateTimeKind.Local).AddTicks(9419), true },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 19, 5, 51, 21, 625, DateTimeKind.Local).AddTicks(9565), true }
                 });
 
             migrationBuilder.InsertData(
@@ -437,8 +438,8 @@ namespace Hospital.Migrations
 
             migrationBuilder.InsertData(
                 table: "Appointments",
-                columns: new[] { "Id", "ApointmentDescription", "DoctorId", "DurationInMunutes", "IsDeleted", "PatientId", "StartTime", "SurveyId", "SurveyId1", "isCancelled" },
-                values: new object[] { 1, "All good", 1, 0, false, 2, new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, null, false });
+                columns: new[] { "Id", "ApointmentDescription", "DoctorId", "DurationInMunutes", "IsDeleted", "PatientId", "StartTime", "SurveyId", "SurveyId1", "canCancel", "isCancelled" },
+                values: new object[] { 1, "All good", 1, 0, false, 1, new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, null, true, false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Allergens_PatientId",

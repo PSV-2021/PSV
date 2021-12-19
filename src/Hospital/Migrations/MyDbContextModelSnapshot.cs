@@ -275,7 +275,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 13, 14, 26, 47, 101, DateTimeKind.Local).AddTicks(3660),
+                            IssuedTime = new DateTime(2021, 12, 19, 5, 51, 21, 630, DateTimeKind.Local).AddTicks(7995),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -451,7 +451,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 83, DateTimeKind.Local).AddTicks(6386),
+                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 619, DateTimeKind.Local).AddTicks(2590),
                             canPublish = false
                         },
                         new
@@ -459,7 +459,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 89, DateTimeKind.Local).AddTicks(8726),
+                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 625, DateTimeKind.Local).AddTicks(9419),
                             canPublish = true
                         },
                         new
@@ -467,7 +467,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 13, 14, 26, 47, 89, DateTimeKind.Local).AddTicks(8845),
+                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 625, DateTimeKind.Local).AddTicks(9565),
                             canPublish = true
                         });
                 });
