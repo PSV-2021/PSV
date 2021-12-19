@@ -10,54 +10,16 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211214082809_newMigration1")]
-    partial class newMigration1
+    [Migration("20211218104540_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("Integration.Model.Drug", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Supply")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medicines");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Brufen",
-                            Supply = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Paracetamol",
-                            Supply = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Palitreks",
-                            Supply = 0
-                        });
-                });
 
             modelBuilder.Entity("Integration.Model.DrugConsumed", b =>
                 {
@@ -529,27 +491,27 @@ namespace Integration.Migrations
                             Id = "aaa",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 1,
-                            RecievedTime = new DateTime(2021, 12, 14, 9, 28, 8, 898, DateTimeKind.Local).AddTicks(3425),
+                            RecievedTime = new DateTime(2021, 12, 18, 11, 45, 39, 266, DateTimeKind.Local).AddTicks(8243),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5118)
+                            SentTime = new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2038)
                         },
                         new
                         {
                             Id = "bbb",
                             Content = "Svidjela usluga",
                             DrugstoreId = 2,
-                            RecievedTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5517),
+                            RecievedTime = new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2813),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5546)
+                            SentTime = new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2881)
                         },
                         new
                         {
                             Id = "ccc",
                             Content = "Nije mi se svidela usluga",
                             DrugstoreId = 3,
-                            RecievedTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5569),
+                            RecievedTime = new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2900),
                             Response = "Nemoj da lazes!",
-                            SentTime = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(5573)
+                            SentTime = new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2907)
                         });
                 });
 
@@ -586,9 +548,9 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(6075),
+                            EndDate = new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(4298),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 12, 14, 9, 28, 8, 901, DateTimeKind.Local).AddTicks(6069),
+                            StartDate = new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(4239),
                             Title = "title"
                         });
                 });

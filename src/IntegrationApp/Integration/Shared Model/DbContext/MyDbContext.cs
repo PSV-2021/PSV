@@ -9,10 +9,10 @@ namespace Model.DataBaseContext
 {
     public class MyDbContext: DbContext
     {
-        public DbSet<Drug> Medicines
+        /*public DbSet<Drug> Medicines
         {
             get; set;
-        }
+        }*/
         public DbSet<Drugstore> Drugstores { get; set; }
         public DbSet<DrugstoreFeedback> DrugstoreFeedbacks { get; set; }
         public DbSet<DrugstoreOffer> DrugstoreOffers { get; set; }
@@ -23,11 +23,11 @@ namespace Model.DataBaseContext
         // only for testing purposes
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Drug>().HasData(
+           /* modelBuilder.Entity<Drug>().HasData(
                 new Drug(1, "Brufen", 0),
                 new Drug(2, "Paracetamol", 0),
                 new Drug(3, "Palitreks", 0)
-            );
+            );*/
             modelBuilder.Entity<Drugstore>().HasData(
 
                 new Drugstore(1,"Apoteka prva", "http://localhost:5001", "DrugStoreSecretKey", "apoteka1@gmail.com","Novi Sad", "Tolstojeva 3", true),
