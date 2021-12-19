@@ -48,6 +48,7 @@ namespace Hospital.MedicalRecords.Model
             Token = token;
             Allergen = allergens;
             Type = UserType.patient;
+            Validate();
         }
 
         public Patient(int id, string fathersName, string name, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber, string address, string email,
@@ -68,6 +69,7 @@ namespace Hospital.MedicalRecords.Model
             BloodType = bloodType;
             IsActive = isActive;
             ChosenDoctor = doc;
+            Validate();
         }
 
         public Patient(int id, string name, string surname, string username, string password, string jmbg, DateTime date, BloodType btype, string father, 
@@ -86,6 +88,7 @@ namespace Hospital.MedicalRecords.Model
             PhoneNumber = phone;
             Adress = address;
             Email = email;
+            Validate();
         }
 
         public Patient(int id, string name, string surname, string jmbg, DateTime date, Sex sex, string phone, string address, string email, string username,
@@ -108,6 +111,7 @@ namespace Hospital.MedicalRecords.Model
             MedicalRecordId = medicalRecordId;
             DoctorId = doctorId;
             Allergen = allergens;
+            Validate();
 
         }
 
@@ -122,6 +126,26 @@ namespace Hospital.MedicalRecords.Model
         public override string ToString()
         {
             return this.Name + " " + this.Surname;
+        }
+
+        public bool IdEqual(List<Patient> patients, int id)
+        {
+            foreach (Patient patient in patients)
+            {
+                if (patient.Id == id)
+                    return true;
+            }
+            return false;
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (MedicalRecordId < 0)
+                throw new ArgumentException(String.Format("MedicalRecordId must be positive number"));
+            if (DoctorId < 0)
+                throw new ArgumentException(String.Format("DoctorId must be positive number"));
         }
 
     }

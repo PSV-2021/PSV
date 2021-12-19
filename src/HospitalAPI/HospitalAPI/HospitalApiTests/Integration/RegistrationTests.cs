@@ -32,42 +32,10 @@ namespace HospitalApiTests.Integration
         public void Get_avalible_general_doctors()
         {
             SetUpDbContext();
-            context.Add(new Doctor
-            {
-                Name = "Milan",
-                Surname = "Popovic",
-                Jmbg = "3009998805137",
-                DateOfBirth = new DateTime(1998, 04, 20),
-                Sex = Sex.male,
-                PhoneNumber = "0641664608",
-                Adress = "Bulevar Oslobodjenja 4",
-                Email = "milan@gmail.com",
-                Username = "miki56",
-                Password = "02145",
-                Type = UserType.doctor,
-                SalaryInRsd = 200000,
-                Id = 1,
-                SpecialityId = 1,
-                NumberOfPatients = 1
-            });
-            context.Add(new Doctor
-            {
-                Name = "Milan", 
-                Surname = "Popovic",
-                Jmbg = "3009998805137",
-                DateOfBirth = new DateTime(1998, 04, 20),
-                Sex = Sex.male,
-                PhoneNumber = "0641664608",
-                Adress = "Bulevar Oslobodjenja 4",
-                Email = "milan@gmail.com",
-                Username = "miki56",
-                Password = "02145",
-                Type = UserType.doctor,
-                SalaryInRsd = 200000,
-                Id = 2,
-                SpecialityId = 1,
-                NumberOfPatients = 5
-            });
+            context.Add(new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 1, 1, 1, Sex.male));
+            context.Add(new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 2, 1, 5, Sex.male));
             DoctorsController doctorController = new DoctorsController(context);
             IActionResult retVal = doctorController.Get();
 
@@ -78,24 +46,8 @@ namespace HospitalApiTests.Integration
         public void Get_doctors()
         {
             SetUpDbContext();
-            context.Add(new Doctor
-            {
-                Name = "Milan",
-                Surname = "Popovic",
-                Jmbg = "3009998805137",
-                DateOfBirth = new DateTime(1998, 04, 20),
-                Sex = Sex.male,
-                PhoneNumber = "0641664608",
-                Adress = "Bulevar Oslobodjenja 4",
-                Email = "milan@gmail.com",
-                Username = "miki56",
-                Password = "02145",
-                Type = UserType.doctor,
-                SalaryInRsd = 200000,
-                Id = 21,
-                SpecialityId = 1,
-                NumberOfPatients = 0
-            });
+            context.Add(new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 21, 1, 0, Sex.male));
 
             DoctorsController doctorsController = new DoctorsController(context);
             IActionResult retVal = doctorsController.Get();
@@ -105,24 +57,9 @@ namespace HospitalApiTests.Integration
         public static IEnumerable<object[]> Doctors()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new Doctor
-                {
-                    Name = "Milan",
-                    Surname = "Popovic",
-                    Jmbg = "3009998805137",
-                    DateOfBirth = new DateTime(1998, 04, 20),
-                    Sex = Sex.male,
-                    PhoneNumber = "0641664608",
-                    Adress = "Bulevar Oslobodjenja 4",
-                    Email = "milan@gmail.com",
-                    Username = "miki56",
-                    Password = "02145",
-                    Type = UserType.doctor,
-                    SalaryInRsd = 200000,
-                    Id = 21,
-                    SpecialityId = 1,
-                    NumberOfPatients = 0
-            } });
+            retVal.Add(new object[] { new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 21, 1, 0, Sex.male)
+         });
             return retVal;
         }
         [Fact]
@@ -150,24 +87,8 @@ namespace HospitalApiTests.Integration
         public void Save_patient()
         {
             SetUpDbContext();
-            context.Add(new Doctor
-            {
-                Id = 21,
-                Name = "Milan",
-                Surname = "Popovic",
-                Jmbg = "3009998805137",
-                DateOfBirth = new DateTime(1998, 04, 20),
-                Sex = Sex.male,
-                PhoneNumber = "0641664608",
-                Adress = "Bulevar Oslobodjenja 4",
-                Email = "milan@gmail.com",
-                Username = "miki56",
-                Password = "02145",
-                Type = UserType.doctor,
-                SalaryInRsd = 200000,
-                SpecialityId = 1,
-                NumberOfPatients = 0
-            });
+            context.Add(new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 21, 1, 0, Sex.male));
 
             PatientRegistrationController patientRegistrationController = new PatientRegistrationController(context);
             IActionResult retVal = patientRegistrationController.Post(GeneratePatient());

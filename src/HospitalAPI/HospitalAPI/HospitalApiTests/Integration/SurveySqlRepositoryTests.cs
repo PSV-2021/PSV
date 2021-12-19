@@ -54,8 +54,8 @@ namespace HospitalApiTests.Integration
         {           
             SetUpDbContext();
 
-            context.Add(new Appointment { Id = 11, PatientId = 2, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false, isCancelled = false, canCancel = true }
-              );
+            context.Add(new Appointment(11, new DateTime(2021, 12, 07, 16, 30, 00), 30, "All good", false, 1, 2, false, true));
+             
             context.Add(new Patient(12, "Milica", "Mikic", "3009998805137", new DateTime(1997, 10, 12), Sex.female, "065245987", "Kisacka 5", "milica@gmail.com",
                "mici97", "mici789", true, BloodType.A, "Nenad", 1, 2, new List<Allergen>())
                );

@@ -22,6 +22,7 @@ namespace Hospital.Schedule.Service
         private EventsLogService EventsLogService { get; set; }
         private RecommendedAppointmentSqlRepository RecommendedAppointmentSqlRepository { get; set; }
         private IDoctorRepository DoctorRepository { get; }
+        private Appointment appointment = new Appointment();
 
 
         int numberOfAppointmentsInDay = 16;
@@ -203,7 +204,7 @@ namespace Hospital.Schedule.Service
 
             for (int i = 0; i < appointmentsInDay; i++)
             {
-                Appointment newAppointmentLocal = new Appointment { StartTime = appointment.StartTime, DoctorId = doctorId };
+                Appointment newAppointmentLocal = new Appointment(appointment.StartTime,doctorId);
                 appointments.Add(newAppointmentLocal);
                 appointment.StartTime = appointment.StartTime.AddMinutes(appointmentDurationInMunutes);
             }
@@ -239,7 +240,7 @@ namespace Hospital.Schedule.Service
 
             List<Appointment> allAvailableAppointments = new List<Appointment>();
 
-            while (startDate >= minDate || startDate == DateTime.Now.Date)
+            while (appointment.CheckBeforeDate(startDate, minDate))
             {
                 List<Appointment> availableAppointments = GetAvailable(searchAppointments.DoctorId, startDate);
                 allAvailableAppointments.AddRange(availableAppointments);
@@ -255,7 +256,7 @@ namespace Hospital.Schedule.Service
 
             List<Appointment> allAvailableAppointments = new List<Appointment>();
 
-            while (endDate <= maxDate)
+            while (appointment.CheckAfterDate(endDate, maxDate))
             {
                 List<Appointment> availaAppointments = GetAvailable(searchAppointments.DoctorId, endDate);
                 allAvailableAppointments.AddRange(availaAppointments);
@@ -290,16 +291,7 @@ namespace Hospital.Schedule.Service
 
         public static Appointment ScheduleAppointmentDTOToAppointment(DateTime start, int doctorId)
         {
-            return new Appointment
-            {
-                StartTime = start,
-                DurationInMunutes = 30,
-                ApointmentDescription = "",
-                IsDeleted = false,
-                DoctorId = doctorId,
-                PatientId = 2, //ovo treba promeniti posle
-                isCancelled = false
-            };
+            return new Appointment(start, 30, "", false, doctorId, 2, false);
         }
 
         public List<Appointment> RecommendDatePriority(SearchAppointmentsDTO searchAppointments)

@@ -18,6 +18,7 @@ namespace Hospital.MedicalRecords.Model
         {
             this.Id = id;
             this.HealthInsuranceNumber = hid;
+            Validate();
         }
         public MedicalRecord() { }
 
@@ -25,6 +26,12 @@ namespace Hospital.MedicalRecords.Model
         {
             yield return Id;
             yield return HealthInsuranceNumber;
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
         }
     }
 }

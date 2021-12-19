@@ -28,25 +28,9 @@ namespace HospitalApiTests.Integration
         public void Get_appointments()
         {
             SetUpDbContext();
-            context.Add(new Appointment { Id = 1, StartTime = new DateTime(2021,11,30,15,30,00), DurationInMunutes = 20, DoctorId = 1, PatientId = 1});
-            context.Add(new Doctor
-            {
-                Name = "Milan",
-                Surname = "Popovic",
-                Jmbg = "3009998805137",
-                DateOfBirth = new DateTime(1998, 04, 20),
-                Sex = Sex.male,
-                PhoneNumber = "0641664608",
-                Adress = "Bulevar Oslobodjenja 4",
-                Email = "milan@gmail.com",
-                Username = "miki56",
-                Password = "02145",
-                Type = UserType.doctor,
-                SalaryInRsd = 200000,
-                Id = 1,
-                SpecialityId = 1,
-                NumberOfPatients = 0,
-            });
+            context.Add(new Appointment( 1, new DateTime(2021,11,30,15,30,00), 20, 1, 1));
+            context.Add(new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 1, 1, 0, Sex.male));
             Patient patient = new Patient(1, "Andjelka", "Andjic", "andji", "andji", "1821099320191", new DateTime(1980, 9, 17), BloodType.A,
                 "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com");
             context.Add(patient);
@@ -60,7 +44,7 @@ namespace HospitalApiTests.Integration
         public static IEnumerable<object[]> Appointments()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { new Appointment { Id = 1, StartTime = new DateTime(2021, 11, 30, 15, 30, 00), DurationInMunutes = 20, DoctorId = 1, PatientId = 1 } });
+            retVal.Add(new object[] { new Appointment (1, new DateTime(2021, 11, 30, 15, 30, 00), 20, 1, 1 ) });
             return retVal;
         }
 

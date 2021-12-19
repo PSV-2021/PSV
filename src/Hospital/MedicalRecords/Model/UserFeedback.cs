@@ -27,6 +27,7 @@ namespace Hospital.MedicalRecords.Model
             Name = name;
             Content = context;
             canPublish = true;
+            Validate();
         }
 
         public UserFeedback(DateTime time, string content, string name, bool v)
@@ -35,6 +36,13 @@ namespace Hospital.MedicalRecords.Model
             Content = content;
             Name = name;
             canPublish = v;
+            Validate();
+        }
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+
         }
     }
 }

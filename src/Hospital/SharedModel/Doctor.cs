@@ -33,10 +33,32 @@ namespace Hospital.SharedModel
             this.Type = UserType.doctor;
             this.SalaryInRsd = salary;
             this.Speciality = new Speciality();
+            Validate();
 
     }
 
         public Doctor() {
+        }
+
+        public Doctor(string name, string surname, string jmbg, DateTime date, string phone, string address, string email, string username, string password, 
+            UserType type, int salary, int id, int specialtyId, int numberOfPatients, Sex sex)
+        {
+            Name = name;
+            Surname = surname;
+            Jmbg = jmbg;
+            DateOfBirth = date;
+            PhoneNumber = phone;
+            Adress = address;
+            Email = email;
+            Username = username;
+            Password = password;
+            Type = type;
+            SalaryInRsd = salary;
+            Id = id;
+            SpecialityId = specialtyId;
+            NumberOfPatients = numberOfPatients;
+            Sex = sex;
+            Validate();
         }
 
         public string NameAndSurname
@@ -49,6 +71,15 @@ namespace Hospital.SharedModel
         public override string ToString()
         {
             return this.Name + " " + this.Surname;
+        }
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (SpecialityId < 0)
+                throw new ArgumentException(String.Format("SpecialityId must be positive number"));
+            if (NumberOfPatients < 0)
+                throw new ArgumentException(String.Format("NumberOfPatients must be positive number"));
         }
     }
 }

@@ -57,43 +57,11 @@ namespace Hospital.SharedModel
                );
             modelBuilder.Entity<Doctor>()
                 .HasData(
-                new Doctor
-                {
-                    Name = "Milan",
-                    Surname = "Popovic",
-                    Jmbg = "3009998805137",
-                    DateOfBirth = new DateTime(1998, 04, 20),
-                    Sex = Sex.male,
-                    PhoneNumber = "0641664608",
-                    Adress = "Bulevar Oslobodjenja 4",
-                    Email = "milan@gmail.com",
-                    Username = "miki56",
-                    Password = "02145",
-                    Type = UserType.doctor,
-                    SalaryInRsd = 200000,
-                    Id = 1,
-                    SpecialityId = 1,
-                    NumberOfPatients = 0
-                },
-                new Doctor
-                {
-                    Name = "Milica",
-                    Surname = "Milic",
-                    Jmbg = "3052123545852",
-                    DateOfBirth = new DateTime(1987, 04, 21),
-                    Sex = Sex.female,
-                    PhoneNumber = "0691457608",
-                    Adress = "Ravanicka 8",
-                    Email = "milica@gmail.com",
-                    Username = "mica56",
-                    Password = "mica1234",
-                    Type = UserType.doctor,
-                    SalaryInRsd = 250000,
-                    Id = 2,
-                    SpecialityId = 2,
-                    NumberOfPatients = 0
-                });
-
+                new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 1, 1, 0, Sex.male),
+                new Doctor("Milica", "Milic", "3052123545852", new DateTime(1987, 04, 21), "0691457608", "Ravanicka 8", "milica@gmail.com",
+                "mica56", "mica1234", UserType.doctor, 250000, 2, 2, 0, Sex.female)
+                );
             modelBuilder.Entity<MedicalRecord>().HasData(
                  new MedicalRecord(1, "1ab"),
                  new MedicalRecord(2, "2ab")
@@ -124,8 +92,8 @@ namespace Hospital.SharedModel
             );
             modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
             modelBuilder.Entity<Appointment>().HasData(
-              new Appointment { Id = 1, PatientId = 1, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false , isCancelled = false, canCancel = true }
-              );
+             new Appointment(1, new DateTime(2021, 12, 07, 16, 30, 00), 30, "All good", false, 1, 1, false)
+            );
             modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
         }
 

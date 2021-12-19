@@ -44,42 +44,13 @@ namespace HospitalApiTests.Unit
         public static List<Appointment> CreateAppointments()
         {
             List<Appointment> appointments = new List<Appointment>();
-            Appointment ap1 = new Appointment
-            {
-                Id = 1,
-                StartTime = new DateTime(2021, 12, 15, 8, 0, 0),
-                DurationInMunutes = 30,
-                ApointmentDescription = "",
-                IsDeleted = false,
-                DoctorId = 1,
-                PatientId = 1
-            };
+            Appointment appointment1 = new Appointment(1, new DateTime(2021, 12, 15, 8, 0, 0), 30, "", false, 1, 1, false);
+            Appointment appointment2 = new Appointment(2, new DateTime(2021, 12, 12, 8, 30, 0), 30, "", false, 1, 2, false);
+            Appointment appointment3 = new Appointment(3, new DateTime(2021, 12, 12, 9, 0, 0), 30, "", false, 1, 1, false);
 
-            Appointment ap2 = new Appointment
-            {
-                Id = 2,
-                StartTime = new DateTime(2021, 12, 15, 8, 30, 0),
-                DurationInMunutes = 30,
-                ApointmentDescription = "",
-                IsDeleted = false,
-                DoctorId = 1,
-                PatientId = 1
-            };
-
-            Appointment ap3 = new Appointment
-            {
-                Id = 3,
-                StartTime = new DateTime(2021, 12, 15, 9, 0, 0),
-                DurationInMunutes = 30,
-                ApointmentDescription = "",
-                IsDeleted = false,
-                DoctorId = 1,
-                PatientId = 1
-            };
-            
-            appointments.Add(ap1);
-            appointments.Add(ap2);
-            appointments.Add(ap3);
+            appointments.Add(appointment1);
+            appointments.Add(appointment2);
+            appointments.Add(appointment3);
 
             return appointments;
         }

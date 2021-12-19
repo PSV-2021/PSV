@@ -19,6 +19,15 @@ namespace Hospital.MedicalRecords.Model
         {
             Id = id;
             Name = s;
+            Validate();
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (PatientId < 0)
+                throw new ArgumentException(String.Format("PatientId must be positive number"));
         }
     }
 }

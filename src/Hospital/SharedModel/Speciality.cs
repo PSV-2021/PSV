@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,6 +16,7 @@ namespace Hospital.SharedModel
         {
             this.Id = id;
             this.Name = n;
+            Validate();
         }
         public Speciality() { }
 
@@ -22,6 +24,12 @@ namespace Hospital.SharedModel
         {
             yield return Id;
             yield return Name;
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
         }
     }
 }

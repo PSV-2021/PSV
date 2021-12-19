@@ -15,6 +15,7 @@ namespace Hospital.MedicalRecords.Service
         private MedicalRecordSqlRepository MedicalRecordRepository { get; set; }
         public AllergenSqlRepository AllergenRepository { get; set; }
         private IRepositoryFactory RepositoryFactory { get; }
+        private Patient patient = new Patient();
 
 
         public PatientService(IPatientRepository patientRepository)
@@ -40,15 +41,10 @@ namespace Hospital.MedicalRecords.Service
 
         public bool CheckIfExistsById(int id)
         {
-            bool retVal = false;
+            
             List<Patient> patients = PatientRepository.GetAll().ToList();
-            foreach (Patient patient in patients)
-            {
-                if (patient.Id == id)
-                    retVal = true;
-
-            }
-            return retVal;
+            
+            return patient.IdEqual(patients, id);
         }
 
         public PatientService(PatientSqlRepository patientSqlRepository)
@@ -59,8 +55,7 @@ namespace Hospital.MedicalRecords.Service
 
         public Patient GetPatientById(int id)
         {
-            Patient patientFound = PatientSqlRepository.GetOne(id);
-            return patientFound;
+            return PatientSqlRepository.GetOne(id);
         }
 
         public List<Patient> GetAllPatients()
@@ -70,9 +65,7 @@ namespace Hospital.MedicalRecords.Service
 
         public List<string> GetAllergensById(int id)
         {
-            List<string> allergensOfPatient = AllergenRepository.GetByIdPatient(id);
-            return allergensOfPatient;
-
+            return AllergenRepository.GetByIdPatient(id);
         }
 
         public void SavePatientSql(Patient newPatient, MyDbContext context)

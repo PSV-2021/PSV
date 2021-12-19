@@ -23,6 +23,7 @@ namespace Hospital.MedicalRecords.Model
             Text = text;
             Rating = rating;
             QuestionType = questionType;
+            Validate();
         }
 
         public SurveyQuestion(int id, string text, int rating, int type)
@@ -31,6 +32,7 @@ namespace Hospital.MedicalRecords.Model
             Text = text;
             Rating = rating;
             QuestionType = type;
+            Validate();
         }
 
         protected override IEnumerable<object> GetEqualityComponents()
@@ -39,6 +41,16 @@ namespace Hospital.MedicalRecords.Model
             yield return Text;
             yield return Rating;
             yield return QuestionType;
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (Rating < 0)
+                throw new ArgumentException(String.Format("Rating must be positive number"));
+            if (QuestionType < 0)
+                throw new ArgumentException(String.Format("QuestionType must be positive number"));
         }
     }
 }

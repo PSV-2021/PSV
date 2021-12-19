@@ -11,6 +11,7 @@ namespace Hospital.MedicalRecords.Service
         private SurveySqlRepository SurveyRepository { get; set; }
         private ISurveyRepository ISurveyRepository { get; set; }
         private SurveyQuestionSqlRepository SurveyQuestionRepository { get; set; }
+        private Survey survey = new Survey();
 
         public SurveyService(SurveySqlRepository surveyRepository)
         {
@@ -30,13 +31,8 @@ namespace Hospital.MedicalRecords.Service
         public bool CheckIfExistsById(int id)
         {
             List<Survey> surveys = ISurveyRepository.GetAll().ToList();
-            foreach (Survey s in surveys)
-            {
-                if (s.AppointmentId == id)
-                    return true;
-                
-            }
-            return false;
+
+            return survey.IdEqual(surveys, id);
         }
 
         public void CreateSurvey(List<AnsweredQuestion> answeredQuestion, string id, string ap)

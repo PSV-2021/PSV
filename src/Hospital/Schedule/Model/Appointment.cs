@@ -17,26 +17,26 @@ namespace Hospital.Schedule.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime StartTime { get; set; }
-        public int DurationInMunutes { get; set; }
-        public String ApointmentDescription { get; set; }
-        public Boolean isCancelled { get; set; }
-        public Boolean canCancel { get; set; }
-        public Boolean IsDeleted { get; set; }
+        public int DurationInMunutes { get; private set; }
+        public String ApointmentDescription { get; }
+        public Boolean isCancelled { get; private set; }
+        public Boolean canCancel { get; private set; }
+        public Boolean IsDeleted { get; private set; }
 
         [ForeignKey("DoctorId")]
-        public int DoctorId { get; set; }
-        public virtual Doctor Doctor { get; set; }
+        public int DoctorId { get; private set; }
+        public virtual Doctor Doctor { get; }
 
         [ForeignKey("SurveyId")]
         public int SurveyId { get; set; }
-        public virtual Survey Survey { get; set; }
+        public virtual Survey Survey { get; }
         [NotMapped]
-        public AppointmentStatus Status { get; set; }
+        public AppointmentStatus Status { get; private set; }
 
         [ForeignKey("PatientId")]
-        public int PatientId { get; set; }
-        public virtual Patient Patient { get; set; }
-     
+        public int PatientId { get; private set; }
+        public virtual Patient Patient { get; }
+
 
         public bool IsOccupied(DateTime start)
         {
@@ -92,7 +92,7 @@ namespace Hospital.Schedule.Model
                     return "";
             }
         }
-        
+
         [NotMapped]
         public String DoctorName
         {
@@ -109,9 +109,67 @@ namespace Hospital.Schedule.Model
             }
         }
 
-        
+
 
         public Appointment() { }
+
+        public Appointment(int id, DateTime date, int duration, int doctorId, int patientId)
+        {
+            Id = id;
+            StartTime = date;
+            DurationInMunutes = duration;
+            DoctorId = doctorId;
+            PatientId = patientId;
+            Validate();
+        }
+
+        public Appointment(int id, DateTime date, int duration, string text, bool isDeleted, int doctorId, int patientId, bool isCancelled)
+        {
+            Id = id;
+            StartTime = date;
+            DurationInMunutes = duration;
+            ApointmentDescription = text;
+            IsDeleted = isDeleted;
+            DoctorId = doctorId;
+            PatientId = patientId;
+            this.isCancelled = isCancelled;
+            Validate();
+        }
+
+        public Appointment(int id, DateTime date, int duration, string text, bool isDeleted, int doctorId, int patientId, bool isCancelled, bool canCancel)
+        {
+            Id = id;
+            StartTime = date;
+            DurationInMunutes = duration;
+            ApointmentDescription = text;
+            IsDeleted = isDeleted;
+            DoctorId = doctorId;
+            PatientId = patientId;
+            this.isCancelled = isCancelled;
+            this.canCancel = canCancel;
+            Validate();
+        }
+
+        public Appointment(DateTime start, int duration, string description, bool isDeleted, int doctorId, int patientId, bool isCancelled)
+        {
+            StartTime = start;
+            DurationInMunutes = duration;
+            ApointmentDescription = description;
+            IsDeleted = isDeleted;
+            DoctorId = doctorId;
+            PatientId = patientId;
+            this.isCancelled = isCancelled;
+            Validate();
+        }
+
+
+
+        public Appointment(DateTime startTime, int doctorId)
+        {
+            StartTime = startTime;
+            DoctorId = doctorId;
+            Validate();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -143,5 +201,32 @@ namespace Hospital.Schedule.Model
         {
             appointment.isCancelled = true;
         }
+
+        public bool CheckBeforeDate(DateTime startDate, DateTime minDate )
+        {
+            if (startDate >= minDate || startDate == DateTime.Now.Date)
+                return true;
+            return false;
+        }
+
+        public bool CheckAfterDate(DateTime afterDate, DateTime maxDate)
+        {
+            if (afterDate <= maxDate)
+                return true;
+            return false;
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (PatientId < 0)
+                throw new ArgumentException(String.Format("PatientId must be positive number"));
+            if (DoctorId < 0)
+                throw new ArgumentException(String.Format("DoctorId must be positive number"));
+            if (SurveyId < 0)
+                throw new ArgumentException(String.Format("SurveyId must be positive number"));
+        }
+
     }
 }

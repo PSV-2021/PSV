@@ -21,5 +21,25 @@ namespace Hospital.MedicalRecords.Model
             Date = date;
             AppointmentId = appointmentId;
         }
+
+        public bool IdEqual(List<Survey> surveys,int id)
+        {
+            foreach (Survey s in surveys)
+            {
+                if (s.AppointmentId == id)
+                    return true;
+            }
+            return false;
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (PatientId < 0)
+                throw new ArgumentException(String.Format("PatientId must be positive number"));
+            if (AppointmentId < 0)
+                throw new ArgumentException(String.Format("AppointmentId must be positive number"));
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace Hospital.MedicalRecords.Model
         {
             this.Id = id;
             this.Name = name;
+            Validate();
         }
 
         public Ingridient()
@@ -27,6 +28,12 @@ namespace Hospital.MedicalRecords.Model
         {
             yield return Id;
             yield return Name;
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
         }
     }
 }
