@@ -63,7 +63,7 @@ namespace DrugstoreAPI
                 endpoints.MapControllers();
             });
             PrepDB.PrepPopulation(app);
-
+            Console.WriteLine("SFTP_IP:" + Environment.GetEnvironmentVariable("SFTP_IP"));
             server = new Server
             {
                 Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },

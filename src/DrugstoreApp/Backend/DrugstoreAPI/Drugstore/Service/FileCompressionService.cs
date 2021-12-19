@@ -29,6 +29,7 @@ namespace Drugstore.Service
         private string sftp_password = Environment.GetEnvironmentVariable("SFTP_PASSWORD") ?? "password";
         public FileCompressionService()
         {
+            Console.WriteLine(sftp_ip, sftp_name, sftp_password);
             this.reportService = new DrugsConsumptionReportService(sftp_ip, sftp_name, sftp_password);
         }
         public  void CompressOldFiles()
