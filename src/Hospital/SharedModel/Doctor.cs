@@ -46,13 +46,6 @@ namespace Hospital.SharedModel
                 return Name + " " + Surname;
             }
         }
-        public string SpecialityName
-        {
-            get
-            {
-                return Speciality.Name;
-            }
-        }
         public override string ToString()
         {
             return this.Name + " " + this.Surname;

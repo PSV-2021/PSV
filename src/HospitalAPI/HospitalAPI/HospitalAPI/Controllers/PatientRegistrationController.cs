@@ -53,7 +53,7 @@ namespace HospitalAPI.Controllers
                 patient.Allergen.Add(new Allergen(patient.Id, s));
             }
             patient.DateOfBirth = DateTime.ParseExact(p.Date, "dd/MM/yyyy hh:mm:ss", null);
-            // patient.DateOfBirth = DateTime.Parse(p.Date);
+            //patient.DateOfBirth = DateTime.Parse(p.Date);
             patient.Type = UserType.patient;
 
             return patient;
