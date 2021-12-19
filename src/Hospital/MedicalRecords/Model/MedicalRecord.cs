@@ -7,7 +7,7 @@ using Hospital.SharedModel;
 
 namespace Hospital.MedicalRecords.Model
 {
-    public class MedicalRecord : ValueObject
+    public class MedicalRecord
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -21,13 +21,6 @@ namespace Hospital.MedicalRecords.Model
             Validate();
         }
         public MedicalRecord() { }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Id;
-            yield return HealthInsuranceNumber;
-        }
-
         private void Validate()
         {
             if (Id < 0)
