@@ -56,7 +56,7 @@ namespace HospitalAPI
             {
                 endpoints.MapControllers();
             });
-
+            PrepDB.PrepPopulation(app);
             server = new Server
             {
                 Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },
