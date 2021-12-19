@@ -138,15 +138,15 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "Content", "DrugstoreId", "RecievedTime", "Response", "SentTime" },
                 values: new object[,]
                 {
-                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2900), "Nemoj da lazes!", new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2907) },
-                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 12, 18, 11, 45, 39, 266, DateTimeKind.Local).AddTicks(8243), "Nemoj da lazes!", new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2038) },
-                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2813), "Nemoj da lazes!", new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(2881) }
+                    { "ccc", "Nije mi se svidela usluga", 3, new DateTime(2021, 12, 19, 21, 12, 36, 832, DateTimeKind.Local).AddTicks(1242), "Nemoj da lazes!", new DateTime(2021, 12, 19, 21, 12, 36, 832, DateTimeKind.Local).AddTicks(1247) },
+                    { "aaa", "Nije mi se svidela usluga", 1, new DateTime(2021, 12, 19, 21, 12, 36, 826, DateTimeKind.Local).AddTicks(987), "Nemoj da lazes!", new DateTime(2021, 12, 19, 21, 12, 36, 832, DateTimeKind.Local).AddTicks(489) },
+                    { "bbb", "Svidjela usluga", 2, new DateTime(2021, 12, 19, 21, 12, 36, 832, DateTimeKind.Local).AddTicks(1172), "Nemoj da lazes!", new DateTime(2021, 12, 19, 21, 12, 36, 832, DateTimeKind.Local).AddTicks(1223) }
                 });
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "IsPublished", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(4298), false, new DateTime(2021, 12, 18, 11, 45, 39, 274, DateTimeKind.Local).AddTicks(4239), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 19, 21, 12, 36, 832, DateTimeKind.Local).AddTicks(1982), false, new DateTime(2021, 12, 19, 21, 12, 36, 832, DateTimeKind.Local).AddTicks(1973), "title" });
 
             migrationBuilder.InsertData(
                 table: "Drugstores",
