@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hospital.SharedModel
 {
-    public class Speciality : ValueObject
+    public class Speciality
     { 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,12 +19,6 @@ namespace Hospital.SharedModel
             Validate();
         }
         public Speciality() { }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Id;
-            yield return Name;
-        }
 
         private void Validate()
         {
