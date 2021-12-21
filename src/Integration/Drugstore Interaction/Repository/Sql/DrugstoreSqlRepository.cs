@@ -30,7 +30,7 @@ namespace Integration.Repository.Sql
         {
             List<Drugstore> result = new List<Drugstore>();
 
-            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.City,drugstore.Address, drugstore.Comment, drugstore.Base64Image, drugstore.gRPC)));
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email.EmailValue,drugstore.Address.Country ,drugstore.Address.City,drugstore.Address.Street, drugstore.Comment, drugstore.Base64Image, drugstore.gRPC)));
 
             return result;
         }
@@ -64,7 +64,7 @@ namespace Integration.Repository.Sql
         public List<Drugstore> SearchDrugstoresByCityAndAddress(string city, string address)
         {
             var retVal = dbContext.Drugstores.Where(drugstore => 
-                drugstore.City.Contains(city) && drugstore.Address.Contains(address)
+                drugstore.Address.City.Contains(city) && drugstore.Address.Street.Contains(address)
                 ).ToList();
             return retVal;
         }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211221140716_ValueObjectProba")]
+    partial class ValueObjectProba
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -430,10 +432,16 @@ namespace Integration.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
                     b.Property<string>("ApiKey")
                         .HasColumnType("text");
 
                     b.Property<string>("Base64Image")
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
                         .HasColumnType("text");
 
                     b.Property<string>("Comment")
@@ -456,25 +464,11 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 1,
+                            Address = "Tolstojeva 3",
                             ApiKey = "DrugStoreSecretKey",
+                            City = "Novi Sad",
                             Name = "Apoteka prva",
                             Url = "http://localhost:5001",
-                            gRPC = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ApiKey = "nestorandom",
-                            Name = "Apoteka druga",
-                            Url = "http://localhost:6001",
-                            gRPC = true
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ApiKey = "gasic",
-                            Name = "Apoteka treca",
-                            Url = "http://localhost:7001",
                             gRPC = true
                         });
                 });
@@ -537,62 +531,15 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 21, 15, 56, 0, 331, DateTimeKind.Local).AddTicks(6090),
+                            EndDate = new DateTime(2021, 12, 21, 15, 7, 16, 306, DateTimeKind.Local).AddTicks(9348),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 12, 21, 15, 56, 0, 329, DateTimeKind.Local).AddTicks(2835),
+                            StartDate = new DateTime(2021, 12, 21, 15, 7, 16, 304, DateTimeKind.Local).AddTicks(8690),
                             Title = "title"
                         });
                 });
 
             modelBuilder.Entity("Integration.Model.Drugstore", b =>
                 {
-                    b.OwnsOne("Integration.Drugstore_Interaction.Model.ValueObjects.Address", "Address", b1 =>
-                        {
-                            b1.Property<int>("DrugstoreId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                            b1.Property<string>("City")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Country")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Street")
-                                .HasColumnType("text");
-
-                            b1.HasKey("DrugstoreId");
-
-                            b1.ToTable("Drugstores");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DrugstoreId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    DrugstoreId = 1,
-                                    City = "Novi Sad",
-                                    Country = "Srbija",
-                                    Street = "Tolstojeva 5"
-                                },
-                                new
-                                {
-                                    DrugstoreId = 2,
-                                    City = "Beograd",
-                                    Country = "Srbija",
-                                    Street = "Balzakova 31"
-                                },
-                                new
-                                {
-                                    DrugstoreId = 3,
-                                    City = "Subotica",
-                                    Country = "Srbija",
-                                    Street = "Cara Dusana 56"
-                                });
-                        });
-
                     b.OwnsOne("Integration.Drugstore_Interaction.Model.ValueObjects.Email", "Email", b1 =>
                         {
                             b1.Property<int>("DrugstoreId")
@@ -615,20 +562,8 @@ namespace Integration.Migrations
                                 {
                                     DrugstoreId = 1,
                                     EmailValue = "apotekaprva@gmail.com"
-                                },
-                                new
-                                {
-                                    DrugstoreId = 2,
-                                    EmailValue = "drugimeil@gmail.com"
-                                },
-                                new
-                                {
-                                    DrugstoreId = 3,
-                                    EmailValue = "trecimejl@gmail.com"
                                 });
                         });
-
-                    b.Navigation("Address");
 
                     b.Navigation("Email");
                 });

@@ -22,8 +22,9 @@ export class AllDrugstoresComponent implements OnInit {
           "Id": p.id,
           "Name": p.name,
           "Url": p.url,
-          "City": p.city,
-          "Address": p.address,
+          "Country" : p.address.country,
+          "City": p.address.city,
+          "Address": p.address.street,
           "Comment": p.comment,
           "ImageBase64": p.base64Image
         });

@@ -36,8 +36,9 @@ export class DrugsConsumptionComponent implements OnInit {
           "Id": p.id,
           "Name": p.name,
           "Url": p.url,
-          "City": p.city,
-          "Address": p.address
+          "City": p.address.city,
+          "Country": p.address.country,
+          "Address": p.address.street
         });
       }
       this.range.value.start = null;
