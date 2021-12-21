@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hospital.MedicalRecords.Model
 {
-    public class SurveyQuestion : ValueObject
+    public class SurveyQuestion
     {
 
         [Key]
@@ -33,14 +33,6 @@ namespace Hospital.MedicalRecords.Model
             Rating = rating;
             QuestionType = type;
             Validate();
-        }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Id;
-            yield return Text;
-            yield return Rating;
-            yield return QuestionType;
         }
 
         private void Validate()

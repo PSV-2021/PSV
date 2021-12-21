@@ -197,17 +197,13 @@ namespace Hospital.Schedule.Model
             return appointments;
         }
 
-        public void SetCancel(Appointment appointment)
-        {
-            appointment.isCancelled = true;
-        }
-
         public bool CheckBeforeDate(DateTime startDate, DateTime minDate )
         {
             if (startDate >= minDate || startDate == DateTime.Now.Date)
                 return true;
             return false;
         }
+
 
         public bool CheckAfterDate(DateTime afterDate, DateTime maxDate)
         {
@@ -226,6 +222,13 @@ namespace Hospital.Schedule.Model
                 throw new ArgumentException(String.Format("DoctorId must be positive number"));
             if (SurveyId < 0)
                 throw new ArgumentException(String.Format("SurveyId must be positive number"));
+            if (DurationInMunutes < 0)
+                throw new ArgumentException(String.Format("DurationInMunutes must be positive number"));
+        }
+
+        public void SetCancel(Appointment appointment)
+        {
+            appointment.isCancelled = true;
         }
 
     }

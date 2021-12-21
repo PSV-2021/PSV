@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Hospital.MedicalRecords.Model
 {
-    public class Ingridient : ValueObject
+    public class Ingridient
     {
         public int Id { get; private set; }
         public String Name { get; private set; }
@@ -22,12 +22,6 @@ namespace Hospital.MedicalRecords.Model
 
         public Ingridient()
         {
-        }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Id;
-            yield return Name;
         }
 
         private void Validate()
