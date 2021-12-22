@@ -56,7 +56,7 @@ namespace Integration.Model
 
         public void ChangeDrugstoreLogo(string base64Image)
         {
-            if (base64Image.Length >= 116 || Base64Image.Length < 1) {
+            if (base64Image.Length >= 116 || base64Image.Length < 1) {
                 this.Base64Image = base64Image;
                 return;
             }

@@ -51,9 +51,15 @@ namespace Model.DataBaseContext
                 );
             });
 
-            modelBuilder.Entity<DrugstoreOffer>().HasData(
-                new DrugstoreOffer("1", "Content", "title", DateTime.Now, DateTime.Now, "Apotekica",false)
-            );
+            
+            modelBuilder.Entity<DrugstoreOffer>(dof =>
+            {
+                dof.HasData(new DrugstoreOffer("1", "Content", "title", "Apotekica", false));
+
+                dof.OwnsOne(dr => dr.TimeRange).HasData(
+                    new {DrugstoreOfferId = "1", From = new DateTime(2021, 10, 10), To = new DateTime(2021,11, 1)}
+                );
+            });
 
             modelBuilder.Entity<DrugConsumed>().HasData(
                 new DrugConsumed(1, "Brufen", 98, new DateTime(2021, 11, 14)),

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Shared_Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
 namespace Integration.Model
 {
+    [Owned]
     public class DateRange: ValueObject
     { 
         public DateTime From { get; }
@@ -15,11 +17,10 @@ namespace Integration.Model
 
         public DateRange(DateTime from, DateTime to)
         {
-            if (from.Equals(DateTime.MinValue) || to.Equals(DateTime.MinValue))
-                throw new ArgumentException("Both dates must be entered!");
+            if(to.Equals(DateTime.MinValue))
+                to = DateTime.MaxValue;
 
-            if(from.CompareTo(to) > 0)
-                throw new ArgumentException("Both dates must be entered!");
+            if (from.CompareTo(to) > 0) throw new ArgumentException("DateTime from must be before DateTIme to");
 
             this.From = from;
             this.To = to;
