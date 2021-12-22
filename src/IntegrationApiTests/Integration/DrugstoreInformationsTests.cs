@@ -42,7 +42,7 @@ namespace IntegrationApiTests.Integration
                 }
             };
 
-            var result = controler.EditDrugstore(new DrugstoreEditDto(1, "nesto", "Test komentar"));
+            var result = controler.EditDrugstore(new DrugstoreEditDto(1, "", "Test komentar"));
 
             Assert.IsType<OkObjectResult>(result);
         }

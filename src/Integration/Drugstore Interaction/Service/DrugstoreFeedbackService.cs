@@ -32,7 +32,7 @@ namespace Integration.Service
 
         public bool CheckApiKey(string apiKey)
         {
-            Drugstore drugstore = DrugstoreRepository.GetAll().Where(drugstore => drugstore.ApiKey.Equals(apiKey)).FirstOrDefault();
+            Drugstore drugstore = DrugstoreRepository.GetAll().Where(drugstore => drugstore.IsApiKeyEqual(apiKey)).FirstOrDefault();
             if (drugstore == null)
                 return false;
             return true;

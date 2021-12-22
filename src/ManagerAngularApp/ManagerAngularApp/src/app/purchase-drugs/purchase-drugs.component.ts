@@ -35,8 +35,9 @@ export class PurchaseDrugsComponent implements OnInit {
           "Id": p.id,
           "Name": p.name,
           "Url": p.url,
-          "City": p.city,
-          "Address": p.address
+          "Country": p.address.country,
+          "City": p.address.city,
+          "Address": p.address.street
         });
       }
     });
@@ -75,8 +76,9 @@ export class PurchaseDrugsComponent implements OnInit {
           "Id": p.id,
           "Name": p.name,
           "Url": p.url,
-          "City": p.city,
-          "Address": p.address
+          "Country": p.address.country,
+          "City": p.address.city,
+          "Address": p.address.street
         });
       }
       this.disableButton = true;

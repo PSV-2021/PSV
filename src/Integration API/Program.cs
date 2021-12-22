@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Model.DataBaseContext;
 using Integration.Repository.Sql;
 using Integration_API.Repository.Interfaces;
 using DrugstoreAPI.Controllers;

@@ -26,7 +26,7 @@ namespace Integration.Repository.Sql
         {
             List<DrugstoreOffer> result = new List<DrugstoreOffer>();
 
-            dbContext.DrugstoreOffers.ToList().ForEach(drugstoreOffer => result.Add(new DrugstoreOffer(drugstoreOffer.Id, drugstoreOffer.Content, drugstoreOffer.Title, drugstoreOffer.StartDate, drugstoreOffer.EndDate, drugstoreOffer.DrugstoreName, drugstoreOffer.IsPublished)));
+            dbContext.DrugstoreOffers.ToList().ForEach(drugstoreOffer => result.Add(drugstoreOffer));
 
             return result;
         }

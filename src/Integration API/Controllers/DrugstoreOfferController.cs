@@ -53,11 +53,10 @@ namespace DrugstoreAPI.Controllers
             
             IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(dbContext);
             
-                DrugstoreOffer forEdit = repo.GetOne(offer.OfferId);
+            DrugstoreOffer forEdit = repo.GetOne(offer.OfferId);
             if (forEdit != null)
             {
-                Console.WriteLine(offer.OfferId);
-                forEdit.IsPublished = true;
+                forEdit.PublishOffer();
                 repo.Update(forEdit);
                 return Ok();
             }
