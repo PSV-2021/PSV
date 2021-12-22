@@ -74,36 +74,10 @@ namespace HospitalApiTests.Unit
         {
             List<Appointment> appointments = new List<Appointment>();
 
-            Appointment appointment1 = new Appointment
-            {
-                Id = 1,
-                StartTime = new DateTime(2021, 12, 12, 8, 0, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 1,
-                isCancelled = false
-            };
+            Appointment appointment1 = new Appointment(1, new DateTime(2021, 12, 12, 8, 0, 0), 30, "", false, 1, 1, false);
+            Appointment appointment2 = new Appointment(2, new DateTime(2021, 12, 12, 8, 30, 0), 30, "", false, 1, 2, false);
+            Appointment appointment3 = new Appointment(3, new DateTime(2021, 12, 12, 9, 0, 0), 30, "", false, 1, 3, false);
 
-            Appointment appointment2 = new Appointment
-            {
-                Id = 2,
-                StartTime = new DateTime(2021, 12, 12, 8, 30, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 2,
-                isCancelled = false
-            };
-
-            Appointment appointment3 = new Appointment
-            {
-                Id = 3,
-                StartTime = new DateTime(2021, 12, 12, 9, 0, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 3,
-                isCancelled = false
-            };
-            
             appointments.Add(appointment1);
             appointments.Add(appointment2);
             appointments.Add(appointment3);
@@ -125,50 +99,12 @@ namespace HospitalApiTests.Unit
         {
             List<Doctor> doctors = new List<Doctor>();
 
-            Doctor doctor1 = new Doctor
-            {
-                Name = "Milan",
-                Surname = "Popovic",
-                Jmbg = "3009998805137",
-                DateOfBirth = new DateTime(1998, 04, 20),
-                Sex = Sex.male,
-                PhoneNumber = "0641664608",
-                Adress = "Bulevar Oslobodjenja 4",
-                Email = "milan@gmail.com",
-                Username = "miki56",
-                Password = "02145",
-                Type = UserType.doctor,
-                SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
-                Id = 1,
-                SpecialityId = 1,
-                NumberOfPatients = 0
-            };
+            Doctor doctor1 = new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 1, 1, 0, Sex.male);
 
-            Doctor doctor2 = new Doctor
-            {
-                Name = "Rade",
-                Surname = "Radic",
-                Jmbg = "3009998805137",
-                DateOfBirth = new DateTime(1998, 04, 20),
-                Sex = Sex.male,
-                PhoneNumber = "0641664608",
-                Adress = "Bulevar Oslobodjenja 4",
-                Email = "milan@gmail.com",
-                Username = "miki56",
-                Password = "02145",
-                Type = UserType.doctor,
-                SalaryInRsd = 200000,
-                WorkingSchedule = new List<WorkingHours>(),
-                VacationDays = new List<VacationDays>(),
-                AvailableDaysOff = 20,
-                Id = 1,
-                SpecialityId = 2,
-                NumberOfPatients = 0
-
-            };
+            Doctor doctor2 = new Doctor("Rade", "Radic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
+                "miki56", "02145", UserType.doctor, 200000, 2, 2, 0, Sex.male);
+         
             doctors.Add(doctor1);
             doctors.Add(doctor2);
 

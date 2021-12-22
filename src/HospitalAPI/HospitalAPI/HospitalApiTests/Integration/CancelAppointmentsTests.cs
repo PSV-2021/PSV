@@ -27,7 +27,7 @@ namespace HospitalApiTests.Integration
         public void Cancel_appointments()
         {
             SetUpDbContext();
-            context.Add(new Appointment { Id = 1, PatientId = 1, DoctorId = 1, StartTime = new DateTime(2021, 12, 07, 16, 30, 00), ApointmentDescription = "All good", IsDeleted = false, isCancelled = false });
+            context.Add(new Appointment ( 1, new DateTime(2021, 12, 07, 16, 30, 00),30, "All good",false, 1,1,false ));
 
             CancelAppointmentsController cancelAppointmentsController = new CancelAppointmentsController(context);
             IActionResult retVal = cancelAppointmentsController.CancelAppointment(1);

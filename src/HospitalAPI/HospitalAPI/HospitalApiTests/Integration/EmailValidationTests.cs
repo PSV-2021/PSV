@@ -49,14 +49,14 @@ namespace HospitalApiTests.Integration
 
         private Patient GeneratePatient()
         {
-            Patient patient = new Patient("Milica", "Marko", "Milic", "1104978805057", new DateTime(1978, 11, 04), Sex.female, "0641664608", "Resavska 5", "mica@gmail.com", null, "n", "n", BloodType.A, false, null, false);
-            patient.Id = 2;
+            Patient patient = new Patient(1, "Milica", "Marko", "Milic", "1104978805057", new DateTime(1978, 11, 04), Sex.female, "0641664608", "Resavska 5", "mica@gmail.com", "n", "n", BloodType.A, false, null);
+            
             return patient;
         }
         private Patient GeneratePatientForValidation()
         {
-            Patient patient = new Patient("Milica", "Marko", "Milic", "1104978805057", new DateTime(1978, 11, 04), Sex.female, "0641664608", "Resavska 5", "mica@gmail.com", null, "n", "n", BloodType.A, false, null, false);
-            patient.Id = 3;
+            Patient patient = new Patient(2,"Milica", "Marko", "Milic", "1104978805057", new DateTime(1978, 11, 04), Sex.female, "0641664608", "Resavska 5", "mica@gmail.com", "n", "n", BloodType.A, false, null);
+            
             patient.Token = "C1FVPYKHME";
             return patient;
         }

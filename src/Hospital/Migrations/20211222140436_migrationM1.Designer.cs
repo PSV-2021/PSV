@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211212091603_migrationN1")]
-    partial class migrationN1
+    [Migration("20211222140436_migrationM1")]
+    partial class migrationM1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,8 +62,6 @@ namespace Hospital.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SurveyId");
-
                     b.ToTable("AnsweredQuestion");
                 });
 
@@ -74,15 +72,10 @@ namespace Hospital.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("MedicalRecordId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MedicalRecordId");
 
                     b.ToTable("Ingridients");
 
@@ -101,28 +94,6 @@ namespace Hospital.Migrations
                         {
                             Id = 3,
                             Name = "Panadol"
-                        });
-                });
-
-            modelBuilder.Entity("Hospital.MedicalRecords.Model.MedicalRecord", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("HealthInsuranceNumber")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MedicalRecords");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            HealthInsuranceNumber = "1ab"
                         });
                 });
 
@@ -148,23 +119,14 @@ namespace Hospital.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
-                    b.Property<string>("EmergencyContact")
-                        .HasColumnType("text");
-
                     b.Property<string>("FathersName")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsBlocked")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Jmbg")
                         .HasColumnType("text");
-
-                    b.Property<int>("MedicalRecordId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -192,10 +154,6 @@ namespace Hospital.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("MedicalRecordId");
-
                     b.ToTable("Patients");
 
                     b.HasData(
@@ -209,16 +167,33 @@ namespace Hospital.Migrations
                             Email = "marko@gmail.com",
                             FathersName = "Petar",
                             IsActive = true,
-                            IsBlocked = false,
                             Jmbg = "3009998805138",
-                            MedicalRecordId = 1,
                             Name = "Marko",
                             Password = "miki985",
                             PhoneNumber = "0641664608",
                             Sex = 0,
                             Surname = "Markovic",
-                            Type = 3,
+                            Type = 0,
                             Username = "miki98"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Adress = "Kisacka 5",
+                            BloodType = 0,
+                            DateOfBirth = new DateTime(1997, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = 1,
+                            Email = "milica@gmail.com",
+                            FathersName = "Nenad",
+                            IsActive = true,
+                            Jmbg = "3009998805137",
+                            Name = "Milica",
+                            Password = "mici789",
+                            PhoneNumber = "065245987",
+                            Sex = 1,
+                            Surname = "Mikic",
+                            Type = 0,
+                            Username = "mici97"
                         });
                 });
 
@@ -251,7 +226,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 12, 10, 16, 1, 558, DateTimeKind.Local).AddTicks(3634),
+                            IssuedTime = new DateTime(2021, 12, 22, 15, 4, 34, 848, DateTimeKind.Local).AddTicks(575),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -427,7 +402,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 12, 10, 16, 1, 537, DateTimeKind.Local).AddTicks(5695),
+                            TimeWritten = new DateTime(2021, 12, 22, 15, 4, 34, 805, DateTimeKind.Local).AddTicks(8947),
                             canPublish = false
                         },
                         new
@@ -435,16 +410,16 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 12, 10, 16, 1, 549, DateTimeKind.Local).AddTicks(9976),
-                            canPublish = true
+                            TimeWritten = new DateTime(2021, 12, 22, 15, 4, 34, 813, DateTimeKind.Local).AddTicks(5000),
+                            canPublish = false
                         },
                         new
                         {
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 12, 10, 16, 1, 550, DateTimeKind.Local).AddTicks(162),
-                            canPublish = true
+                            TimeWritten = new DateTime(2021, 12, 22, 15, 4, 34, 813, DateTimeKind.Local).AddTicks(5516),
+                            canPublish = false
                         });
                 });
 
@@ -534,21 +509,69 @@ namespace Hospital.Migrations
                     b.Property<int>("SurveyId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("SurveyId1")
-                        .HasColumnType("integer");
+                    b.Property<bool>("canCancel")
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("isCancelled")
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("SurveyId1");
-
                     b.ToTable("Appointments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ApointmentDescription = "All good",
+                            DoctorId = 1,
+                            DurationInMunutes = 30,
+                            IsDeleted = false,
+                            PatientId = 1,
+                            StartTime = new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            SurveyId = 0,
+                            canCancel = true,
+                            isCancelled = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ApointmentDescription = "",
+                            DoctorId = 1,
+                            DurationInMunutes = 30,
+                            IsDeleted = false,
+                            PatientId = 2,
+                            StartTime = new DateTime(2022, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            SurveyId = 0,
+                            canCancel = true,
+                            isCancelled = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ApointmentDescription = "All good",
+                            DoctorId = 1,
+                            DurationInMunutes = 30,
+                            IsDeleted = false,
+                            PatientId = 2,
+                            StartTime = new DateTime(2021, 12, 7, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            SurveyId = 0,
+                            canCancel = true,
+                            isCancelled = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ApointmentDescription = "All good",
+                            DoctorId = 1,
+                            DurationInMunutes = 30,
+                            IsDeleted = false,
+                            PatientId = 2,
+                            StartTime = new DateTime(2021, 11, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            SurveyId = 0,
+                            canCancel = true,
+                            isCancelled = true
+                        });
                 });
 
             modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>
@@ -558,9 +581,6 @@ namespace Hospital.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("DoctorId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -568,8 +588,6 @@ namespace Hospital.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
 
                     b.ToTable("VacationDays");
 
@@ -592,9 +610,6 @@ namespace Hospital.Migrations
                     b.Property<DateTime>("BeginningDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int?>("DoctorId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -602,8 +617,6 @@ namespace Hospital.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
 
                     b.ToTable("WorkingHours");
 
@@ -626,9 +639,6 @@ namespace Hospital.Migrations
 
                     b.Property<string>("Adress")
                         .HasColumnType("text");
-
-                    b.Property<int>("AvailableDaysOff")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp without time zone");
@@ -671,8 +681,6 @@ namespace Hospital.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpecialityId");
-
                     b.ToTable("Doctors");
 
                     b.HasData(
@@ -680,7 +688,6 @@ namespace Hospital.Migrations
                         {
                             Id = 1,
                             Adress = "Bulevar Oslobodjenja 4",
-                            AvailableDaysOff = 20,
                             DateOfBirth = new DateTime(1998, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "milan@gmail.com",
                             Jmbg = "3009998805137",
@@ -699,7 +706,6 @@ namespace Hospital.Migrations
                         {
                             Id = 2,
                             Adress = "Ravanicka 8",
-                            AvailableDaysOff = 15,
                             DateOfBirth = new DateTime(1987, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "milica@gmail.com",
                             Jmbg = "3052123545852",
@@ -745,117 +751,54 @@ namespace Hospital.Migrations
 
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Allergen", b =>
                 {
-                    b.HasOne("Hospital.MedicalRecords.Model.Patient", "Patient")
+                    b.HasOne("Hospital.MedicalRecords.Model.Patient", null)
                         .WithMany("Allergen")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("Hospital.MedicalRecords.Model.AnsweredQuestion", b =>
-                {
-                    b.HasOne("Hospital.MedicalRecords.Model.Survey", "survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("survey");
-                });
-
-            modelBuilder.Entity("Hospital.MedicalRecords.Model.Ingridient", b =>
-                {
-                    b.HasOne("Hospital.MedicalRecords.Model.MedicalRecord", null)
-                        .WithMany("Allergens")
-                        .HasForeignKey("MedicalRecordId");
                 });
 
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Patient", b =>
                 {
-                    b.HasOne("Hospital.SharedModel.Doctor", "ChosenDoctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.OwnsOne("Hospital.MedicalRecords.Model.MedicalRecord", "MedicalRecord", b1 =>
+                        {
+                            b1.Property<int>("PatientId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.HasOne("Hospital.MedicalRecords.Model.MedicalRecord", "MedicalRecord")
-                        .WithMany()
-                        .HasForeignKey("MedicalRecordId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                            b1.Property<string>("CompanyName")
+                                .HasColumnType("text");
 
-                    b.Navigation("ChosenDoctor");
+                            b1.Property<string>("HealthInsuranceNumber")
+                                .HasColumnType("text");
+
+                            b1.HasKey("PatientId");
+
+                            b1.ToTable("Patients");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PatientId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    PatientId = 1,
+                                    CompanyName = "WellCare"
+                                },
+                                new
+                                {
+                                    PatientId = 2,
+                                    CompanyName = "WellCare"
+                                });
+                        });
 
                     b.Navigation("MedicalRecord");
-                });
-
-            modelBuilder.Entity("Hospital.Schedule.Model.Appointment", b =>
-                {
-                    b.HasOne("Hospital.SharedModel.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital.MedicalRecords.Model.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital.MedicalRecords.Model.Survey", "Survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyId1");
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("Survey");
-                });
-
-            modelBuilder.Entity("Hospital.Schedule.Model.VacationDays", b =>
-                {
-                    b.HasOne("Hospital.SharedModel.Doctor", null)
-                        .WithMany("VacationDays")
-                        .HasForeignKey("DoctorId");
-                });
-
-            modelBuilder.Entity("Hospital.Schedule.Model.WorkingHours", b =>
-                {
-                    b.HasOne("Hospital.SharedModel.Doctor", null)
-                        .WithMany("WorkingSchedule")
-                        .HasForeignKey("DoctorId");
-                });
-
-            modelBuilder.Entity("Hospital.SharedModel.Doctor", b =>
-                {
-                    b.HasOne("Hospital.SharedModel.Speciality", "Speciality")
-                        .WithMany()
-                        .HasForeignKey("SpecialityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Speciality");
-                });
-
-            modelBuilder.Entity("Hospital.MedicalRecords.Model.MedicalRecord", b =>
-                {
-                    b.Navigation("Allergens");
                 });
 
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Patient", b =>
                 {
                     b.Navigation("Allergen");
-                });
-
-            modelBuilder.Entity("Hospital.SharedModel.Doctor", b =>
-                {
-                    b.Navigation("VacationDays");
-
-                    b.Navigation("WorkingSchedule");
                 });
 #pragma warning restore 612, 618
         }

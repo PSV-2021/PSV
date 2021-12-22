@@ -9,64 +9,108 @@ namespace Hospital.MedicalRecords.Model
 {
     public class Patient : User
     {
+   
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; } 
-        public Boolean IsBlocked { get; set; }
-        public BloodType BloodType { get; set; }
+        public int Id { get; private set; } 
+        public BloodType BloodType { get; private set; }
         public Boolean IsActive { get; set; }
-        public String FathersName { get; set; }
-        public virtual List<Allergen> Allergen { get; set; }
+        public String FathersName { get; private set; }
+        public virtual List<Allergen> Allergen { get; }
         [ForeignKey("DoctorId")]
-        public int DoctorId { get; set; }
-        public virtual Doctor ChosenDoctor { get; set; }
-        public String EmergencyContact { get; set; }
-        [ForeignKey("MedicalRecordId")]
-        public int MedicalRecordId { get; set; }
-        public virtual MedicalRecord MedicalRecord { get; set; }
+        public int DoctorId { get; private set; }
+        public virtual Doctor ChosenDoctor { get; }
+        public MedicalRecord MedicalRecord { get; private set; }
         
        public String Token { get; set; }
 
-        public Patient() { }
-        public Patient(string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string emContact, MedicalRecord med, string username, string password, Boolean block = false)
-        {
-            this.Name = name;
-            this.Surname = surname;
-            this.Jmbg = jmbg;
-            this.DateOfBirth = date;
-            this.Sex = sex;
-            this.PhoneNumber = phoneNumber;
-            this.Adress = adress;
-            this.Email = email;
-            this.EmergencyContact = emContact;
-            this.MedicalRecord = med;
-            this.Username = username;
-            this.Password = password;
-            //this.appointment = null;
-            this.Type = UserType.patient;
-            this.IsBlocked = block;
+        public Patient() {
+           
         }
 
-        public Patient(string name, string fathersName, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber, string adress, string email, MedicalRecord med, string username, string password, BloodType bt, Boolean isActive, Doctor cd, Boolean block = false)
+        public Patient(string name, string surname, string jmbg, BloodType bloodType, string fathersName, Sex sex, string address, string email,
+            string username, string phoneNumber, string password, int doctorId, string token, List<Allergen> allergens)
         {
-            this.Name = name;
-            this.FathersName = fathersName;
-            this.Surname = surname;
-            this.Jmbg = jmbg;
-            this.DateOfBirth = date;
-            this.Sex = sex;
-            this.PhoneNumber = phoneNumber;
-            this.Adress = adress;
-            this.Email = email;
-            this.MedicalRecord = med;
-            this.Username = username;
-            this.Password = password;
-            //this.appointment = null;
-            this.Type = UserType.patient;
-            this.IsBlocked = block;
-            this.BloodType = bt;
-            this.IsActive = isActive;
-            this.ChosenDoctor = cd;
+            Name = name;
+            Surname = surname;
+            Jmbg = jmbg;
+            BloodType = bloodType;
+            FathersName = fathersName;
+            Sex = sex;
+            Adress = address;
+            Email = email;
+            Username = username;
+            PhoneNumber = phoneNumber;
+            Password = password;
+            DoctorId = doctorId;
+            Token = token;
+            Allergen = allergens;
+            Type = UserType.patient;
+            MedicalRecord = new MedicalRecord("PT" + jmbg, "WellCare");
+            Validate();
+        }
+
+        public Patient(int id, string fathersName, string name, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber, string address, string email,
+            string username, string password, BloodType bloodType, Boolean isActive, Doctor doc)
+        {
+            Id = id;
+            FathersName = fathersName;
+            Name = name;
+            Surname = surname;
+            Jmbg = jmbg;
+            DateOfBirth = date;
+            Sex = sex;
+            PhoneNumber = phoneNumber;
+            Adress = address;
+            Email = email;
+            Username = username;
+            Password = password;
+            BloodType = bloodType;
+            IsActive = isActive;
+            ChosenDoctor = doc;
+            Validate();
+        }
+
+        public Patient(int id, string name, string surname, string username, string password, string jmbg, DateTime date, BloodType btype, string father, 
+            Sex sex, string phone, string address, string email)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            Username = username;
+            Password = password;
+            Jmbg = jmbg;
+            DateOfBirth = date;
+            BloodType = btype;
+            FathersName = father;
+            Sex = sex;
+            PhoneNumber = phone;
+            Adress = address;
+            Email = email;
+            Validate();
+        }
+
+        public Patient(int id, string name, string surname, string jmbg, DateTime date, Sex sex, string phone, string address, string email, string username,
+            string password, bool isActive, BloodType btype, string father, int doctorId, List<Allergen> allergens)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            Username = username;
+            Password = password;
+            Jmbg = jmbg;
+            DateOfBirth = date;
+            BloodType = btype;
+            FathersName = father;
+            Sex = sex;
+            PhoneNumber = phone;
+            Adress = address;
+            Email = email;
+            IsActive = isActive;
+            DoctorId = doctorId;
+            Allergen = allergens;
+            Validate();
+
         }
 
         public string NameAndSurname
@@ -76,86 +120,28 @@ namespace Hospital.MedicalRecords.Model
                 return Name + " " + Surname;
             }
         }
-      /*  [NotMapped]
-        public List<Ingridient> Allergens
-        {
-            get
-            {
-                return MedicalRecord.Allergens;
-            }
-            set
-            {
-                MedicalRecord.Allergens = value;
-            }
-        }
-  /*
-        public List<Appointment> appointment;
-
-        [NotMapped]
-        public List<Appointment> Appointment
-        {
-            get
-            {
-                if (appointment == null)
-                    appointment = new List<Appointment>();
-                return appointment;
-            }
-            set
-            {
-                RemoveAllAppointment();
-                if (value != null)
-                {
-                    foreach (Appointment oAppointment in value)
-                        AddAppointment(oAppointment);
-                }
-            }
-        }
-
-
-        public void AddAppointment(Appointment newAppointment)
-        {
-            if (newAppointment == null)
-                return;
-            if (this.appointment == null)
-                this.appointment = new System.Collections.Generic.List<Appointment>();
-            if (!this.appointment.Contains(newAppointment))
-            {
-                this.appointment.Add(newAppointment);
-                newAppointment.Patient = this;
-            }
-        }
-
-
-        public void RemoveAppointment(Appointment oldAppointment)
-        {
-            if (oldAppointment == null)
-                return;
-            if (this.appointment != null)
-                if (this.appointment.Contains(oldAppointment))
-                {
-                    this.appointment.Remove(oldAppointment);
-                    oldAppointment.Patient = null;
-                }
-        }
-
-
-        public void RemoveAllAppointment()
-        {
-            if (appointment != null)
-            {
-                System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
-                foreach (Appointment oldAppointment in appointment)
-                    tmpAppointment.Add(oldAppointment);
-                appointment.Clear();
-                foreach (Appointment oldAppointment in tmpAppointment)
-                    oldAppointment.Patient = null;
-                tmpAppointment.Clear();
-            }
-        }*/
-
+ 
         public override string ToString()
         {
             return this.Name + " " + this.Surname;
+        }
+
+        public bool IdEqual(List<Patient> patients, int id)
+        {
+            foreach (Patient patient in patients)
+            {
+                if (patient.Id == id)
+                    return true;
+            }
+            return false;
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (DoctorId < 0)
+                throw new ArgumentException(String.Format("DoctorId must be positive number"));
         }
 
     }

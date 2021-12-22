@@ -64,7 +64,7 @@ namespace Hospital.MedicalRecords.Repository
 
         public void CreateSurvey(List<AnsweredQuestion> answeredQuestion, string id, string ap)
         {
-            dbContext.Survey.Add(new Survey { Date = DateTime.Now, PatientId = Int32.Parse(id), AppointmentId = Int32.Parse(ap) });
+            dbContext.Survey.Add(new Survey(Int32.Parse(id), DateTime.Now, Int32.Parse(ap)));
             dbContext.SaveChanges();
             ChangeAppointment(ap);
 
