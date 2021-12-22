@@ -25,6 +25,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { timeout } from 'rxjs/operators';
 import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
 import { DrugstoreComponent } from './drugstore/drugstore.component';
+import { TenderComponent } from './tender/tender.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DrugstoreComponent } from './drugstore/drugstore.component';
     FilesComponent,
     AllDrugstoresComponent,
     DrugstoreComponent,
+    TenderComponent,
   ],
   imports: [
     BrowserModule,
