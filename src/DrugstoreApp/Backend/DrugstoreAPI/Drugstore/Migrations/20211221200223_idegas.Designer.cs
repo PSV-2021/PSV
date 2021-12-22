@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211212202124_newMigr")]
-    partial class newMigr
+    [Migration("20211221200223_idegas")]
+    partial class idegas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,8 +81,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 12, 21, 21, 23, 573, DateTimeKind.Local).AddTicks(3007),
-                            StartDate = new DateTime(2021, 12, 12, 21, 21, 23, 570, DateTimeKind.Local).AddTicks(4367),
+                            EndDate = new DateTime(2021, 12, 21, 21, 2, 22, 867, DateTimeKind.Local).AddTicks(5716),
+                            StartDate = new DateTime(2021, 12, 21, 21, 2, 22, 865, DateTimeKind.Local).AddTicks(4584),
                             Title = "title"
                         });
                 });
@@ -190,6 +190,9 @@ namespace Drugstore.Migrations
                     b.Property<string>("SideEffects")
                         .HasColumnType("text");
 
+                    b.Property<string>("Substances")
+                        .HasColumnType("text");
+
                     b.Property<int>("Supply")
                         .HasColumnType("integer");
 
@@ -209,26 +212,44 @@ namespace Drugstore.Migrations
                         new
                         {
                             Id = 1,
+                            Manufacturer = "bla",
                             Name = "Brufen",
+                            Precautions = "bla",
                             Price = 150.0,
+                            Reactions = "bla",
+                            SideEffects = "bla",
+                            Substances = "bla",
                             Supply = 150,
-                            Weight = 0.0
+                            Usage = "bla",
+                            Weight = 100.0
                         },
                         new
                         {
                             Id = 2,
+                            Manufacturer = "bla",
                             Name = "Paracetamol",
+                            Precautions = "bla",
                             Price = 150.0,
+                            Reactions = "bla",
+                            SideEffects = "bla",
+                            Substances = "bla",
                             Supply = 10,
-                            Weight = 0.0
+                            Usage = "bla",
+                            Weight = 100.0
                         },
                         new
                         {
                             Id = 3,
+                            Manufacturer = "bla",
                             Name = "Palitreks",
+                            Precautions = "bla",
                             Price = 150.0,
+                            Reactions = "bla",
+                            SideEffects = "bla",
+                            Substances = "bla",
                             Supply = 30,
-                            Weight = 0.0
+                            Usage = "bla",
+                            Weight = 100.0
                         });
                 });
 
@@ -307,13 +328,13 @@ namespace Drugstore.Migrations
             modelBuilder.Entity("Drugstore.Models.Medicine", b =>
                 {
                     b.HasOne("Drugstore.Models.Medicine", null)
-                        .WithMany("compatibleMedicines")
+                        .WithMany("CompatibleMedicines")
                         .HasForeignKey("MedicineId");
                 });
 
             modelBuilder.Entity("Drugstore.Models.Medicine", b =>
                 {
-                    b.Navigation("compatibleMedicines");
+                    b.Navigation("CompatibleMedicines");
                 });
 #pragma warning restore 612, 618
         }

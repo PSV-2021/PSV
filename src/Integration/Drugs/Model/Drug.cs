@@ -28,7 +28,7 @@ namespace Integration.Model
             this.Supply = supply;
         }
 
-        public Drug() { }
+        private Drug() { }
     }
 }
 

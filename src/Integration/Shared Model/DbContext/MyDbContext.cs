@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Integration.Drugstore_Interaction.Model.ValueObjects;
 using Integration.Model;
+using Integration.Shared_Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Model.DataBaseContext
