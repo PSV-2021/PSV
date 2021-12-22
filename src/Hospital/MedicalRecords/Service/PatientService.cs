@@ -70,15 +70,7 @@ namespace Hospital.MedicalRecords.Service
 
         public void SavePatientSql(Patient newPatient, MyDbContext context)
         {
-           GenerateMedicalRecordId(newPatient, context);
-           PatientSqlRepository.SavePatient(newPatient);
-        }
-
-        public void GenerateMedicalRecordId(Patient p, MyDbContext context)
-        {
-            MedicalRecordRepository = new MedicalRecordSqlRepository(context);
-            List<Model.MedicalRecord> mr = MedicalRecordRepository.GetAll();
-            p.MedicalRecordId = (mr.Count + 1);
+            PatientSqlRepository.SavePatient(newPatient);
         }
 
     }

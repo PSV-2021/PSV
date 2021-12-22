@@ -20,9 +20,7 @@ namespace Hospital.MedicalRecords.Model
         [ForeignKey("DoctorId")]
         public int DoctorId { get; private set; }
         public virtual Doctor ChosenDoctor { get; }
-        [ForeignKey("MedicalRecordId")]
-        public int MedicalRecordId { get; set; }
-        public virtual MedicalRecord MedicalRecord { get; }
+        public MedicalRecord MedicalRecord { get; private set; }
         
        public String Token { get; set; }
 
@@ -48,6 +46,7 @@ namespace Hospital.MedicalRecords.Model
             Token = token;
             Allergen = allergens;
             Type = UserType.patient;
+            MedicalRecord = new MedicalRecord("PT" + jmbg, "WellCare");
             Validate();
         }
 
@@ -92,7 +91,7 @@ namespace Hospital.MedicalRecords.Model
         }
 
         public Patient(int id, string name, string surname, string jmbg, DateTime date, Sex sex, string phone, string address, string email, string username,
-            string password, bool isActive, BloodType btype, string father, int doctorId, int medicalRecordId, List<Allergen> allergens)
+            string password, bool isActive, BloodType btype, string father, int doctorId, List<Allergen> allergens)
         {
             Id = id;
             Name = name;
@@ -108,7 +107,6 @@ namespace Hospital.MedicalRecords.Model
             Adress = address;
             Email = email;
             IsActive = isActive;
-            MedicalRecordId = medicalRecordId;
             DoctorId = doctorId;
             Allergen = allergens;
             Validate();
@@ -142,8 +140,6 @@ namespace Hospital.MedicalRecords.Model
         {
             if (Id < 0)
                 throw new ArgumentException(String.Format("Id must be positive number"));
-            if (MedicalRecordId < 0)
-                throw new ArgumentException(String.Format("MedicalRecordId must be positive number"));
             if (DoctorId < 0)
                 throw new ArgumentException(String.Format("DoctorId must be positive number"));
         }

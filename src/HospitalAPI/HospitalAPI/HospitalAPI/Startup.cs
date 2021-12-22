@@ -84,7 +84,7 @@ namespace HospitalAPI
             var port = Configuration["DBPort"] ?? "5432";
             var user = Configuration["DBUser"] ?? "postgres";
             var password = Configuration["DBPassword"] ?? "masa3009";
-            var database = Configuration["DB"] ?? "proba";
+            var database = Configuration["DB"] ?? "hospitalNew";
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }

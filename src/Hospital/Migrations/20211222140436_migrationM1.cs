@@ -85,19 +85,6 @@ namespace Hospital.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicalRecords",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    HealthInsuranceNumber = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedicalRecords", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Medicines",
                 columns: table => new
                 {
@@ -129,7 +116,8 @@ namespace Hospital.Migrations
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     FathersName = table.Column<string>(type: "text", nullable: true),
                     DoctorId = table.Column<int>(type: "integer", nullable: false),
-                    MedicalRecordId = table.Column<int>(type: "integer", nullable: false),
+                    MedicalRecord_HealthInsuranceNumber = table.Column<string>(type: "text", nullable: true),
+                    MedicalRecord_CompanyName = table.Column<string>(type: "text", nullable: true),
                     Token = table.Column<string>(type: "text", nullable: true),
                     Username = table.Column<string>(type: "text", nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
@@ -277,10 +265,10 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "ApointmentDescription", "DoctorId", "DurationInMunutes", "IsDeleted", "PatientId", "StartTime", "SurveyId", "canCancel", "isCancelled" },
                 values: new object[,]
                 {
-                    { 4, "All good", 1, 30, false, 1, new DateTime(2021, 11, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 0, false, true },
-                    { 3, "All good", 1, 30, false, 2, new DateTime(2021, 12, 7, 14, 30, 0, 0, DateTimeKind.Unspecified), 0, false, false },
-                    { 2, "", 1, 30, false, 2, new DateTime(2022, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, false, false },
-                    { 1, "All good", 1, 30, false, 1, new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, false, false }
+                    { 4, "All good", 1, 30, false, 2, new DateTime(2021, 11, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 0, true, true },
+                    { 3, "All good", 1, 30, false, 2, new DateTime(2021, 12, 7, 14, 30, 0, 0, DateTimeKind.Unspecified), 0, true, false },
+                    { 2, "", 1, 30, false, 2, new DateTime(2022, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, true, false },
+                    { 1, "All good", 1, 30, false, 1, new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, true, false }
                 });
 
             migrationBuilder.InsertData(
@@ -303,32 +291,23 @@ namespace Hospital.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "MedicalRecords",
-                columns: new[] { "Id", "HealthInsuranceNumber" },
-                values: new object[,]
-                {
-                    { 1, "1ab" },
-                    { 2, "2ab" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Medicines",
                 columns: new[] { "Id", "Manufacturer", "MedicineImage", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Supply", "Usage", "Weight" },
                 values: new object[] { 1, "Pfizer", "", "Brufen", "Mozes sve lagano", 200.0, "Pa umres", "Umres", 100, "Kad god hoces", 100.0 });
 
             migrationBuilder.InsertData(
                 table: "Patients",
-                columns: new[] { "Id", "Adress", "BloodType", "DateOfBirth", "DoctorId", "Email", "FathersName", "IsActive", "Jmbg", "MedicalRecordId", "Name", "Password", "PhoneNumber", "Sex", "Surname", "Token", "Type", "Username" },
+                columns: new[] { "Id", "Adress", "BloodType", "DateOfBirth", "DoctorId", "Email", "FathersName", "IsActive", "Jmbg", "Name", "Password", "PhoneNumber", "Sex", "Surname", "Token", "Type", "Username", "MedicalRecord_CompanyName", "MedicalRecord_HealthInsuranceNumber" },
                 values: new object[,]
                 {
-                    { 1, "Bulevar Oslobodjenja 8", 1, new DateTime(1998, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "marko@gmail.com", "Petar", true, "3009998805138", 1, "Marko", "miki985", "0641664608", 0, "Markovic", null, 0, "miki98" },
-                    { 2, "Kisacka 5", 0, new DateTime(1997, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "milica@gmail.com", "Nenad", true, "3009998805137", 2, "Milica", "mici789", "065245987", 1, "Mikic", null, 0, "mici97" }
+                    { 1, "Bulevar Oslobodjenja 8", 1, new DateTime(1998, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "marko@gmail.com", "Petar", true, "3009998805138", "Marko", "miki985", "0641664608", 0, "Markovic", null, 0, "miki98", "WellCare", null },
+                    { 2, "Kisacka 5", 0, new DateTime(1997, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "milica@gmail.com", "Nenad", true, "3009998805137", "Milica", "mici789", "065245987", 1, "Mikic", null, 0, "mici97", "WellCare", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
-                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 19, 14, 3, 34, 974, DateTimeKind.Local).AddTicks(1930), "Zoran Zoranic" });
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 22, 15, 4, 34, 848, DateTimeKind.Local).AddTicks(575), "Zoran Zoranic" });
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -344,7 +323,7 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "QuestionType", "Rating", "Text" },
                 values: new object[,]
                 {
-                    { 8, 1, 0, "During this hospital stay, did nurses explain things in a way you could understand?" },
+                    { 10, 2, 0, "How satisfied are you with the cleanliness and appearance of our hospital?" },
                     { 1, 0, 0, "How satisfied are you with the work of your doctor?" },
                     { 2, 0, 0, "How satisfied were you with the time that your doctor spent with you?" },
                     { 3, 0, 0, "During this hospital stay, did doctor treat you with courtesy and respect?" },
@@ -356,8 +335,8 @@ namespace Hospital.Migrations
                     { 14, 2, 0, "How likely are you to recommend our hospital to a friend or family member?" },
                     { 13, 2, 0, "Do you feel that our work hours are well suited to treat you?" },
                     { 12, 2, 0, "How satisfied were you with the co-ordination between different departments?" },
-                    { 11, 2, 0, "How would you rate the professionalism of our staff?" },
-                    { 10, 2, 0, "How satisfied are you with the cleanliness and appearance of our hospital?" }
+                    { 8, 1, 0, "During this hospital stay, did nurses explain things in a way you could understand?" },
+                    { 11, 2, 0, "How would you rate the professionalism of our staff?" }
                 });
 
             migrationBuilder.InsertData(
@@ -365,9 +344,9 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
-                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 19, 14, 3, 34, 961, DateTimeKind.Local).AddTicks(338), false },
-                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 19, 14, 3, 34, 952, DateTimeKind.Local).AddTicks(1065), false },
-                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 19, 14, 3, 34, 961, DateTimeKind.Local).AddTicks(714), false }
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 22, 15, 4, 34, 813, DateTimeKind.Local).AddTicks(5000), false },
+                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 22, 15, 4, 34, 805, DateTimeKind.Local).AddTicks(8947), false },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 22, 15, 4, 34, 813, DateTimeKind.Local).AddTicks(5516), false }
                 });
 
             migrationBuilder.InsertData(
@@ -402,9 +381,6 @@ namespace Hospital.Migrations
 
             migrationBuilder.DropTable(
                 name: "Ingridients");
-
-            migrationBuilder.DropTable(
-                name: "MedicalRecords");
 
             migrationBuilder.DropTable(
                 name: "Medicines");

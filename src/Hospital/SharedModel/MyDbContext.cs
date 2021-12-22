@@ -4,6 +4,7 @@ using Hospital.MedicalRecords.Model;
 using Hospital.Medicines.Model;
 using Hospital.Schedule.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Hospital.SharedModel
 {
@@ -15,7 +16,6 @@ namespace Hospital.SharedModel
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<WorkingHours> WorkingHours { get; set; }
         public DbSet<VacationDays> VacationDays { get; set; }
-        public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Allergen> Allergens { get; set; }
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
@@ -30,10 +30,12 @@ namespace Hospital.SharedModel
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies(true);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           
 
             modelBuilder.Entity<UserFeedback>().HasData(
                 new UserFeedback( 1, DateTime.Now, "Good!", "Mika Mikic", false ),
@@ -62,17 +64,21 @@ namespace Hospital.SharedModel
                 new Doctor("Milica", "Milic", "3052123545852", new DateTime(1987, 04, 21), "0691457608", "Ravanicka 8", "milica@gmail.com",
                 "mica56", "mica1234", UserType.doctor, 250000, 2, 2, 0, Sex.female)
                 );
-            modelBuilder.Entity<MedicalRecord>().HasData(
-                 new MedicalRecord(1, "1ab"),
-                 new MedicalRecord(2, "2ab")
-                 );
-            modelBuilder.Entity<Patient>()
-               .HasData(
-               new Patient(1,"Marko", "Markovic", "3009998805138", new DateTime(1998, 06, 25), Sex.male, "0641664608",
-                "Bulevar Oslobodjenja 8", "marko@gmail.com", "miki98", "miki985", true, BloodType.B, "Petar", 1, 1, new List<Allergen>()),
-               new Patient(2,"Milica", "Mikic", "3009998805137", new DateTime(1997, 10, 12), Sex.female, "065245987", "Kisacka 5", "milica@gmail.com",
-               "mici97", "mici789", true, BloodType.A, "Nenad", 1, 2, new List<Allergen>())
+            modelBuilder.Entity<Patient>(mb =>
+            {
+               
+                mb.HasData(
+               new Patient(1, "Marko", "Markovic", "3009998805138", new DateTime(1998, 06, 25), Sex.male, "0641664608",
+                "Bulevar Oslobodjenja 8", "marko@gmail.com", "miki98", "miki985", true, BloodType.B, "Petar", 1, new List<Allergen>()),
+               new Patient(2, "Milica", "Mikic", "3009998805137", new DateTime(1997, 10, 12), Sex.female, "065245987", "Kisacka 5", "milica@gmail.com",
+               "mici97", "mici789", true, BloodType.A, "Nenad", 1, new List<Allergen>())
                );
+
+                mb.OwnsOne(p => p.MedicalRecord).HasData(
+                  new { PatientId = 1, HealthInsuranceNumber = "1ab", CompanyName = "WellCare" },
+                  new { PatientId = 2, HealthInsuranceNumber = "2ab", CompanyName = "WellCare" });
+            });
+               
 
             modelBuilder.Entity<SurveyQuestion>().HasData(
                 new SurveyQuestion( 1, "How satisfied are you with the work of your doctor?", 0, 0),
@@ -101,5 +107,6 @@ namespace Hospital.SharedModel
         }
 
     }
-}
 
+   
+}

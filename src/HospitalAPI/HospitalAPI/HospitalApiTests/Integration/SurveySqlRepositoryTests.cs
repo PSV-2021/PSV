@@ -57,7 +57,7 @@ namespace HospitalApiTests.Integration
             context.Add(new Appointment(11, new DateTime(2021, 12, 07, 16, 30, 00), 30, "All good", false, 1, 2, false, true));
              
             context.Add(new Patient(12, "Milica", "Mikic", "3009998805137", new DateTime(1997, 10, 12), Sex.female, "065245987", "Kisacka 5", "milica@gmail.com",
-               "mici97", "mici789", true, BloodType.A, "Nenad", 1, 2, new List<Allergen>())
+               "mici97", "mici789", true, BloodType.A, "Nenad", 1, new List<Allergen>())
                );
 
             var survey = CreateSurvey();

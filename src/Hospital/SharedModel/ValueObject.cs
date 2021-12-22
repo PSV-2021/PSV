@@ -6,7 +6,7 @@ using System.Text;
 namespace Hospital.SharedModel
 {
     public abstract class ValueObject
-    {
+    { 
         protected static bool EqualOperator(ValueObject left, ValueObject right)
         {
             if (left is null ^ right is null)
@@ -41,5 +41,7 @@ namespace Hospital.SharedModel
                 .Select(x => x != null ? x.GetHashCode() : 0)
                 .Aggregate((x, y) => x ^ y);
         }
+
+
     }
 }
