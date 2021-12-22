@@ -44,7 +44,7 @@ namespace IntegrationApiTests.Integration
         public static IEnumerable<object[]> Searches()
         {
             var retVal = new List<object[]>();
-            retVal.Add(new object[] { "Novi Sad", "", 2 });
+            retVal.Add(new object[] { "Novi Sad", "", 1 });
             retVal.Add(new object[] { "Novi Sad", "Tol", 1 });
             retVal.Add(new object[] { "Kragujevac", "", 0 });
             return retVal;

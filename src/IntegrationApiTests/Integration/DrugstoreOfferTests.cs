@@ -56,7 +56,7 @@ namespace IntegrationApiTests.Integration
             IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(context);
             var stubRabbitMqService = new Mock<IRabbitMQService>();
             List<DrugstoreOffer> offers = new List<DrugstoreOffer>();
-           offer1.Id = Guid.NewGuid().ToString();
+            offer1.SetOfferIdForTesting();
             stubRabbitMqService.Setup(x => x.CreateConnection());
             stubRabbitMqService.Setup(x => x.RecieveMessage()).Returns(offer1);
             repo.Save(offer1);

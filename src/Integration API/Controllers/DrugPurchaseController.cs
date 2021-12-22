@@ -152,8 +152,7 @@ namespace Integration_API.Controllers
             {
                 if (df.Url.Equals(demand.PharmacyUrl))
                 {
-                    ApiKey = df.ApiKey;
-                    break;
+                    return df.ApiKey;
                 }
             }
             return ApiKey;

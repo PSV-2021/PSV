@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Integration.Drugstore_Interaction.Model.ValueObjects;
 using Integration.Model;
+using Integration.Shared_Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Model.DataBaseContext
@@ -28,23 +30,36 @@ namespace Model.DataBaseContext
                 new Drug(2, "Paracetamol", 0),
                 new Drug(3, "Palitreks", 0)
             );
-            modelBuilder.Entity<Drugstore>().HasData(
 
-                new Drugstore(1,"Apoteka prva", "http://localhost:5001", "DrugStoreSecretKey", "apoteka1@gmail.com","Novi Sad", "Tolstojeva 3", true),
-                new Drugstore(2,"Apoteka druga", "http://localhost:5002", "wnjgjowenfweo", "apoteka2@gmail.com", "Novi Sad","Balzakova 3", false),
-                new Drugstore(3,"Apoteka treca", "http://localhost:5003", "wuhguiwoehfuhw", "apoteka3@gmail.com", "Beograd","Puskinova 3", false)
-            );
+            modelBuilder.Entity<Drugstore>(mb =>
+            {
+                mb.HasData(new Drugstore(1, "Apoteka prva", "http://localhost:5001", "DrugStoreSecretKey",true),
 
+                    new Drugstore(2, "Apoteka druga", "http://localhost:6001", "nestorandom", true),
 
-            modelBuilder.Entity<DrugstoreFeedback>().HasData(
-                new DrugstoreFeedback {Id = "aaa", DrugstoreId = 1, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now},
-                new DrugstoreFeedback { Id = "bbb", DrugstoreId = 2, Content = "Svidjela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now },
-                new DrugstoreFeedback { Id = "ccc", DrugstoreId = 3, Content = "Nije mi se svidela usluga", RecievedTime = DateTime.Now, Response = "Nemoj da lazes!", SentTime = DateTime.Now }
+                    new Drugstore(3, "Apoteka treca", "http://localhost:7001", "gasic", true));
 
-            );
-            modelBuilder.Entity<DrugstoreOffer>().HasData(
-                new DrugstoreOffer("1", "Content", "title", DateTime.Now, DateTime.Now, "Apotekica",false)
-            );
+                mb.OwnsOne(e => e.Email).HasData(
+                    new { DrugstoreId = 1, EmailValue = "apotekaprva@gmail.com" },
+                    new { DrugstoreId = 2, EmailValue = "drugimeil@gmail.com" },
+                    new { DrugstoreId = 3, EmailValue = "trecimejl@gmail.com" }
+                    );
+                mb.OwnsOne(a => a.Address).HasData(
+                    new {DrugstoreId = 1, Country = "Srbija", City = "Novi Sad", Street = "Tolstojeva 5"},
+                    new { DrugstoreId = 2, Country = "Srbija", City = "Beograd", Street = "Balzakova 31" },
+                    new { DrugstoreId = 3, Country = "Srbija", City = "Subotica", Street = "Cara Dusana 56" }
+                );
+            });
+
+            
+            modelBuilder.Entity<DrugstoreOffer>(dof =>
+            {
+                dof.HasData(new DrugstoreOffer("1", "Content", "title", "Apotekica", false));
+
+                dof.OwnsOne(dr => dr.TimeRange).HasData(
+                    new {DrugstoreOfferId = "1", From = new DateTime(2021, 10, 10), To = new DateTime(2021,11, 1)}
+                );
+            });
 
             modelBuilder.Entity<DrugConsumed>().HasData(
                 new DrugConsumed(1, "Brufen", 98, new DateTime(2021, 11, 14)),
