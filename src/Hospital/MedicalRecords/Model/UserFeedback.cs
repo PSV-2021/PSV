@@ -17,7 +17,7 @@ namespace Hospital.MedicalRecords.Model
             TimeWritten = date;
             Name = name;
             Content = context;
-            canPublish = true;
+            this.canPublish = canPublish;
             Validate();
         }
 
