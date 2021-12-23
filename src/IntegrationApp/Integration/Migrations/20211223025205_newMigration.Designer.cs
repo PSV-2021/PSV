@@ -10,54 +10,16 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211221145601_ValueObjectAddress")]
-    partial class ValueObjectAddress
+    [Migration("20211223025205_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("Integration.Model.Drug", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Supply")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Medicines");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Brufen",
-                            Supply = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Paracetamol",
-                            Supply = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Palitreks",
-                            Supply = 0
-                        });
-                });
 
             modelBuilder.Entity("Integration.Model.DrugConsumed", b =>
                 {
@@ -517,14 +479,8 @@ namespace Integration.Migrations
                     b.Property<string>("DrugstoreName")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<bool>("IsPublished")
                         .HasColumnType("boolean");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
@@ -539,9 +495,7 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 21, 15, 56, 0, 331, DateTimeKind.Local).AddTicks(6090),
                             IsPublished = false,
-                            StartDate = new DateTime(2021, 12, 21, 15, 56, 0, 329, DateTimeKind.Local).AddTicks(2835),
                             Title = "title"
                         });
                 });
@@ -633,6 +587,30 @@ namespace Integration.Migrations
                     b.Navigation("Address");
 
                     b.Navigation("Email");
+                });
+
+            modelBuilder.Entity("Integration.Model.DrugstoreOffer", b =>
+                {
+                    b.OwnsOne("Integration.Model.DateRange", "TimeRange", b1 =>
+                        {
+                            b1.Property<string>("DrugstoreOfferId")
+                                .HasColumnType("text");
+
+                            b1.HasKey("DrugstoreOfferId");
+
+                            b1.ToTable("DrugstoreOffers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DrugstoreOfferId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    DrugstoreOfferId = "1"
+                                });
+                        });
+
+                    b.Navigation("TimeRange");
                 });
 #pragma warning restore 612, 618
         }

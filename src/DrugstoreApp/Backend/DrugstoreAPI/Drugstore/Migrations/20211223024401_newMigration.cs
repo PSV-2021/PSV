@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
-    public partial class idegas : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -127,11 +127,7 @@ namespace Drugstore.Migrations
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-<<<<<<< HEAD:src/DrugstoreApp/Backend/DrugstoreAPI/Drugstore/Migrations/20211216211100_newMigration.cs
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 16, 22, 10, 59, 863, DateTimeKind.Local).AddTicks(6251), new DateTime(2021, 12, 16, 22, 10, 59, 861, DateTimeKind.Local).AddTicks(4581), "title" });
-=======
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 21, 21, 2, 22, 867, DateTimeKind.Local).AddTicks(5716), new DateTime(2021, 12, 21, 21, 2, 22, 865, DateTimeKind.Local).AddTicks(4584), "title" });
->>>>>>> development:src/DrugstoreApp/Backend/DrugstoreAPI/Drugstore/Migrations/20211221200223_idegas.cs
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 23, 3, 44, 0, 183, DateTimeKind.Local).AddTicks(9798), new DateTime(2021, 12, 23, 3, 44, 0, 174, DateTimeKind.Local).AddTicks(1759), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",

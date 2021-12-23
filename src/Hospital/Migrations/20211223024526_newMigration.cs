@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
-    public partial class migrationM1 : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -300,14 +300,14 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Adress", "BloodType", "DateOfBirth", "DoctorId", "Email", "FathersName", "IsActive", "Jmbg", "Name", "Password", "PhoneNumber", "Sex", "Surname", "Token", "Type", "Username", "MedicalRecord_CompanyName", "MedicalRecord_HealthInsuranceNumber" },
                 values: new object[,]
                 {
-                    { 1, "Bulevar Oslobodjenja 8", 1, new DateTime(1998, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "marko@gmail.com", "Petar", true, "3009998805138", "Marko", "miki985", "0641664608", 0, "Markovic", null, 0, "miki98", "WellCare", null },
-                    { 2, "Kisacka 5", 0, new DateTime(1997, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "milica@gmail.com", "Nenad", true, "3009998805137", "Milica", "mici789", "065245987", 1, "Mikic", null, 0, "mici97", "WellCare", null }
+                    { 1, "Bulevar Oslobodjenja 8", 1, new DateTime(1998, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "marko@gmail.com", "Petar", true, "3009998805138", "Marko", "miki985", "0641664608", 0, "Markovic", null, 0, "miki98", "WellCare", "1ab" },
+                    { 2, "Kisacka 5", 0, new DateTime(1997, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "milica@gmail.com", "Nenad", true, "3009998805137", "Milica", "mici789", "065245987", 1, "Mikic", null, 0, "mici97", "WellCare", "2ab" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
-                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 22, 15, 4, 34, 848, DateTimeKind.Local).AddTicks(575), "Zoran Zoranic" });
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 23, 3, 45, 25, 68, DateTimeKind.Local).AddTicks(6075), "Zoran Zoranic" });
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -344,9 +344,9 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
-                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 22, 15, 4, 34, 813, DateTimeKind.Local).AddTicks(5000), false },
-                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 22, 15, 4, 34, 805, DateTimeKind.Local).AddTicks(8947), false },
-                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 22, 15, 4, 34, 813, DateTimeKind.Local).AddTicks(5516), false }
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 23, 3, 45, 25, 51, DateTimeKind.Local).AddTicks(2949), false },
+                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 23, 3, 45, 25, 48, DateTimeKind.Local).AddTicks(7528), false },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 23, 3, 45, 25, 51, DateTimeKind.Local).AddTicks(3073), false }
                 });
 
             migrationBuilder.InsertData(

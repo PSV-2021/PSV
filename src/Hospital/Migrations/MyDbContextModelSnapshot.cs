@@ -224,11 +224,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-<<<<<<< HEAD
-                            IssuedTime = new DateTime(2021, 12, 19, 5, 51, 21, 630, DateTimeKind.Local).AddTicks(7995),
-=======
-                            IssuedTime = new DateTime(2021, 12, 22, 15, 6, 28, 949, DateTimeKind.Local).AddTicks(5083),
->>>>>>> development
+                            IssuedTime = new DateTime(2021, 12, 23, 3, 45, 25, 68, DateTimeKind.Local).AddTicks(6075),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -404,11 +400,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-<<<<<<< HEAD
-                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 619, DateTimeKind.Local).AddTicks(2590),
-=======
-                            TimeWritten = new DateTime(2021, 12, 22, 15, 6, 28, 923, DateTimeKind.Local).AddTicks(6206),
->>>>>>> development
+                            TimeWritten = new DateTime(2021, 12, 23, 3, 45, 25, 48, DateTimeKind.Local).AddTicks(7528),
                             canPublish = false
                         },
                         new
@@ -416,26 +408,16 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-<<<<<<< HEAD
-                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 625, DateTimeKind.Local).AddTicks(9419),
-                            canPublish = true
-=======
-                            TimeWritten = new DateTime(2021, 12, 22, 15, 6, 28, 929, DateTimeKind.Local).AddTicks(8164),
+                            TimeWritten = new DateTime(2021, 12, 23, 3, 45, 25, 51, DateTimeKind.Local).AddTicks(2949),
                             canPublish = false
->>>>>>> development
                         },
                         new
                         {
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-<<<<<<< HEAD
-                            TimeWritten = new DateTime(2021, 12, 19, 5, 51, 21, 625, DateTimeKind.Local).AddTicks(9565),
-                            canPublish = true
-=======
-                            TimeWritten = new DateTime(2021, 12, 22, 15, 6, 28, 929, DateTimeKind.Local).AddTicks(8619),
+                            TimeWritten = new DateTime(2021, 12, 23, 3, 45, 25, 51, DateTimeKind.Local).AddTicks(3073),
                             canPublish = false
->>>>>>> development
                         });
                 });
 

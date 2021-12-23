@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Integration.Drugstore_Interaction.Model.ValueObjects;
 using Integration.Model;
-using Integration.Shared_Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Model.DataBaseContext
@@ -30,8 +28,6 @@ namespace Model.DataBaseContext
                 new Drug(2, "Paracetamol", 0),
                 new Drug(3, "Palitreks", 0)
             );*/
-            modelBuilder.Entity<Drugstore>().HasData(
-            );
 
             modelBuilder.Entity<Drugstore>(mb =>
             {

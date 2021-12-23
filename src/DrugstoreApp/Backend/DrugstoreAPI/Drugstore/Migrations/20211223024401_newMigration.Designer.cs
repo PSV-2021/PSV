@@ -10,13 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-<<<<<<< HEAD:src/DrugstoreApp/Backend/DrugstoreAPI/Drugstore/Migrations/20211216211100_newMigration.Designer.cs
-    [Migration("20211216211100_newMigration")]
+    [Migration("20211223024401_newMigration")]
     partial class newMigration
-=======
-    [Migration("20211221200223_idegas")]
-    partial class idegas
->>>>>>> development:src/DrugstoreApp/Backend/DrugstoreAPI/Drugstore/Migrations/20211221200223_idegas.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,13 +81,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-<<<<<<< HEAD:src/DrugstoreApp/Backend/DrugstoreAPI/Drugstore/Migrations/20211216211100_newMigration.Designer.cs
-                            EndDate = new DateTime(2021, 12, 16, 22, 10, 59, 863, DateTimeKind.Local).AddTicks(6251),
-                            StartDate = new DateTime(2021, 12, 16, 22, 10, 59, 861, DateTimeKind.Local).AddTicks(4581),
-=======
-                            EndDate = new DateTime(2021, 12, 21, 21, 2, 22, 867, DateTimeKind.Local).AddTicks(5716),
-                            StartDate = new DateTime(2021, 12, 21, 21, 2, 22, 865, DateTimeKind.Local).AddTicks(4584),
->>>>>>> development:src/DrugstoreApp/Backend/DrugstoreAPI/Drugstore/Migrations/20211221200223_idegas.Designer.cs
+                            EndDate = new DateTime(2021, 12, 23, 3, 44, 0, 183, DateTimeKind.Local).AddTicks(9798),
+                            StartDate = new DateTime(2021, 12, 23, 3, 44, 0, 174, DateTimeKind.Local).AddTicks(1759),
                             Title = "title"
                         });
                 });
