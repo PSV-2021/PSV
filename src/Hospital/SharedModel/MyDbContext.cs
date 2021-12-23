@@ -97,6 +97,8 @@ namespace Hospital.SharedModel
                 new SurveyQuestion(14, "How likely are you to recommend our hospital to a friend or family member?", 0, 2)
             );
             modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
+            
+            //modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
             modelBuilder.Entity<Appointment>().HasData(
              new Appointment(1, new DateTime(2021, 12, 07, 16, 30, 00), 30, "All good", false, 1, 1, false, true),
              new Appointment(2, new DateTime(2022, 12, 07, 16, 30, 00), 30, "", false, 1, 2, false, true),

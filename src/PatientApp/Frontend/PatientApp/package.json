@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "axios": "^0.24.0",
     "@fullcalendar/angular": "^5.10.1",
     "@fullcalendar/daygrid": "^5.10.1",
     "fullcalendar": "^5.10.1",
