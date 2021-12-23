@@ -69,10 +69,10 @@ namespace IntegrationApiTests.Integration
             retVal.Add(new object[] { new DateTime(2021, 11, 20), new DateTime(2021, 11, 20), 7 });     //edge case
             retVal.Add(new object[] { new DateTime(2021, 11, 12), new DateTime(2021, 11, 14), 7 });     //edge case, from is OOR
             retVal.Add(new object[] { new DateTime(2021, 11, 10), new DateTime(2021, 11, 13), 0 });     //should be 0, not data for this date range
-            retVal.Add(new object[] { new DateTime(2021, 11, 17), new DateTime(2021, 11, 15), 0 });     //should be 0, first date is after the second one
-            retVal.Add(new object[] { null, null, 0 });                 
+            retVal.Add(new object[] { new DateTime(2022, 11, 17), new DateTime(2022, 11, 18), 0 });     //should be 0
+            retVal.Add(new object[] { null, null, 7 }); //prikazi sve                 
             retVal.Add(new object[] { null, new DateTime(2021, 11, 18), 7 });
-            retVal.Add(new object[] { new DateTime(2021, 11, 19), null, 0 });
+            retVal.Add(new object[] { new DateTime(2021, 11, 19), null, 7 });
 
             return retVal;
         }

@@ -50,13 +50,8 @@ namespace HospitalAPI.Controllers
 
         private UserFeedback GenerateUserFeedbackFromDTO(CommentDTO comDTO)
         {
-            UserFeedback comment = new UserFeedback
-            {
-                TimeWritten = DateTime.Now,
-                Content = comDTO.Content,
-                Name = comDTO.Name,
-                canPublish = false
-            };
+            UserFeedback comment = new UserFeedback(DateTime.Now, comDTO.Content, comDTO.Name, false);
+          
             return comment;
         }
     }

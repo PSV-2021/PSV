@@ -17,15 +17,9 @@ namespace Template
             return allDoctors;
         }
 
-        protected override bool ItemContainsInput(Doctor doctor, string input)
+        protected override bool ItemContainsInput(Doctor item, string input)
         {
-            if (doctor.NameAndSurname.ToLower().Contains(input.ToLower()))
-                return true;
-            if (doctor.SpecialityName.ToLower().Contains(input.ToLower()))
-                return true;
-            if (doctor.Jmbg.ToLower().Contains(input.ToLower()))
-                return true;
-            return false;
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,15 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Integration.Repository.Sql;
+using Integration_API.Repository.Interfaces;
+using DrugstoreAPI.Controllers;
+using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Integration_API
 {

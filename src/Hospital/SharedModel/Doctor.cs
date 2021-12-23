@@ -10,18 +10,10 @@ namespace Hospital.SharedModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public virtual List<WorkingHours> WorkingSchedule { get; set; }
-        public int AvailableDaysOff { get; set; }
-        /*
-        [ForeignKey("WorkingHoursId")]
-        public int WorkingHoursId { get; set; }
-        public virtual WorkingHours WorkingHours { get; set; }*/
-        public virtual List<VacationDays> VacationDays { get; set; }
+        public int Id { get; private set; }
         [ForeignKey("SpecialityId")]
-        public int SpecialityId { get; set; }
-       
-        public virtual Speciality Speciality { get; set; }
+        public int SpecialityId { get; private set; }
+        public virtual Speciality Speciality { get; }
         public int NumberOfPatients { get; set; }
 
         public Doctor(string name, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber,
@@ -41,13 +33,32 @@ namespace Hospital.SharedModel
             this.Type = UserType.doctor;
             this.SalaryInRsd = salary;
             this.Speciality = new Speciality();
-            WorkingSchedule = new List<WorkingHours>();
-            VacationDays = new List<VacationDays>();
-            AvailableDaysOff = 20;
+            Validate();
 
     }
 
         public Doctor() {
+        }
+
+        public Doctor(string name, string surname, string jmbg, DateTime date, string phone, string address, string email, string username, string password, 
+            UserType type, int salary, int id, int specialtyId, int numberOfPatients, Sex sex)
+        {
+            Name = name;
+            Surname = surname;
+            Jmbg = jmbg;
+            DateOfBirth = date;
+            PhoneNumber = phone;
+            Adress = address;
+            Email = email;
+            Username = username;
+            Password = password;
+            Type = type;
+            SalaryInRsd = salary;
+            Id = id;
+            SpecialityId = specialtyId;
+            NumberOfPatients = numberOfPatients;
+            Sex = sex;
+            Validate();
         }
 
         public string NameAndSurname
@@ -57,16 +68,18 @@ namespace Hospital.SharedModel
                 return Name + " " + Surname;
             }
         }
-        public string SpecialityName
-        {
-            get
-            {
-                return Speciality.Name;
-            }
-        }
         public override string ToString()
         {
             return this.Name + " " + this.Surname;
+        }
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (SpecialityId < 0)
+                throw new ArgumentException(String.Format("SpecialityId must be positive number"));
+            if (NumberOfPatients < 0)
+                throw new ArgumentException(String.Format("NumberOfPatients must be positive number"));
         }
     }
 }

@@ -79,8 +79,13 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
+<<<<<<< HEAD
                             EndDate = new DateTime(2021, 12, 16, 22, 10, 59, 863, DateTimeKind.Local).AddTicks(6251),
                             StartDate = new DateTime(2021, 12, 16, 22, 10, 59, 861, DateTimeKind.Local).AddTicks(4581),
+=======
+                            EndDate = new DateTime(2021, 12, 21, 21, 2, 22, 867, DateTimeKind.Local).AddTicks(5716),
+                            StartDate = new DateTime(2021, 12, 21, 21, 2, 22, 865, DateTimeKind.Local).AddTicks(4584),
+>>>>>>> development
                             Title = "title"
                         });
                 });

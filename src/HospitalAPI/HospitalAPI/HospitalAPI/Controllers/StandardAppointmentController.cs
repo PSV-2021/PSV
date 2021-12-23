@@ -59,15 +59,9 @@ namespace HospitalAPI.Controllers
 
         private static Appointment GenerateAppointmentFromDTO(AppointmentDTO p)
         {
-            Appointment appointment = new Appointment
-            {
-                StartTime = DateTime.ParseExact(p.StartTime, "dd/MM/yyyy hh:mm:ss", null),
-                DurationInMunutes = 30,
-                ApointmentDescription = "",
-                IsDeleted = false,
-                DoctorId = Int32.Parse(p.DoctorId),
-                PatientId = Int32.Parse(p.PatientId)
-            };
+            Appointment appointment = new Appointment(DateTime.ParseExact(p.StartTime, "dd/MM/yyyy hh:mm:ss", null), 30, "", false, 
+                Int32.Parse(p.DoctorId), Int32.Parse(p.PatientId), false);
+            
 
             return appointment;
         }

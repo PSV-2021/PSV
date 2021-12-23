@@ -9,7 +9,6 @@ using Integration.Service;
 using Integration.Model;
 using Model.DataBaseContext;
 using Integration_API.DTOs;
-
 using Integration.Service;
 using Integration_API.Filters;
 using Integration_API.Repository.Interfaces;
@@ -40,7 +39,7 @@ namespace Integration_API.Controllers
         public IActionResult Get()
         {
             List<Drugstore> result = new List<Drugstore>();
-            drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email,drugstore.City, drugstore.Address, drugstore.gRPC)));
+            drugstoreService.GetAll().ForEach(drugstore => result.Add(drugstore));
             return Ok(result);
         }
 
@@ -48,7 +47,7 @@ namespace Integration_API.Controllers
         public IActionResult GetWithImageAndComment()
         {
             List<Drugstore> result = new List<Drugstore>();
-            drugstoreService.GetAll().ForEach(drugstore => result.Add(new Drugstore(drugstore.Id, drugstore.Name, drugstore.Url, drugstore.ApiKey, drugstore.Email, drugstore.City, drugstore.Address, drugstore.Comment, drugstore.Base64Image, drugstore.gRPC)));
+            drugstoreService.GetAll().ForEach(drugstore => result.Add(drugstore));
             return Ok(result);
         }
 
@@ -116,7 +115,7 @@ namespace Integration_API.Controllers
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, newPharmacy.City,newPharmacy.Address, newPharmacy.gRPC);
+                Drugstore ds = new Drugstore(newPharmacy.DrugstoreName, newPharmacy.URLAddress, ApiKey, newPharmacy.Email, "Srbija",newPharmacy.City,newPharmacy.Address, newPharmacy.gRPC);
                 drugstoreService.AddNewDrugstore(ds);
                 return Ok(ds);
             }
@@ -134,12 +133,19 @@ namespace Integration_API.Controllers
             Drugstore edit = drugstoreService.GetDrugstoreById(editDto.Id);
             if (edit == null)
                 return BadRequest(false);
-            edit.Base64Image = editDto.ImageBase64;
-            edit.Comment = editDto.Comment;
 
-            drugstoreService.Update(edit);
+            UpdateDrugstoreInfo(editDto, edit);
 
             return Ok(true);
+        }
+
+        private void UpdateDrugstoreInfo(DrugstoreEditDto editDto, Drugstore edit)
+        {
+            if (editDto.ImageBase64 != null)
+                edit.ChangeDrugstoreLogo(editDto.ImageBase64);
+            if (editDto.Comment != null)
+                edit.ChangeDrugstoreComment(editDto.Comment);
+            drugstoreService.Update(edit);
         }
     }
 }

@@ -33,15 +33,17 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/DrugsConsumptionReportController
         public IActionResult Post(DateRange range)
         {
-            drugsConsumptionService.SaveDrugsConsumptionReport(ConvertDateFromAngular(range));
+            drugsConsumptionService.SaveDrugsConsumptionReport(range.ConvertDateFromAngular());
             return Ok(true);
         }
-
+        
+        /*
         private DateRange ConvertDateFromAngular(DateRange range)
         {
             range.From = range.From.AddHours(1);
             range.To = range.To.AddHours(1);
             return range;
         }
+        */
     }
 }

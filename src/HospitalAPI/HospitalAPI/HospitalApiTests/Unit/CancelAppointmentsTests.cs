@@ -28,15 +28,7 @@ namespace HospitalApiTests.Unit
             var stubRepository = new Mock<IAppointmentRepository>();
             var appointments = CreateListOfAppointments();
 
-            Appointment appointment = new Appointment
-            {
-                Id = 1,
-                StartTime = new DateTime(2021, 12, 12, 8, 0, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 1,
-                isCancelled = false
-            };
+            Appointment appointment = new Appointment(1, new DateTime(2021, 12, 12, 8, 0, 0), 30, "", false, 1, 1, false);
 
             stubRepository.Setup(x => x.GetByAppointmentId(1)).Returns(appointment);
 
@@ -49,35 +41,9 @@ namespace HospitalApiTests.Unit
         {
             List<Appointment> appointments = new List<Appointment>();
 
-            Appointment appointment1 = new Appointment
-            {
-                Id = 1,
-                StartTime = new DateTime(2021, 12, 12, 8, 0, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 1,
-                isCancelled = false
-            };
-
-            Appointment appointment2 = new Appointment
-            {
-                Id = 2,
-                StartTime = new DateTime(2021, 12, 12, 8, 30, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 2,
-                isCancelled = false
-            };
-
-            Appointment appointment3 = new Appointment
-            {
-                Id = 3,
-                StartTime = new DateTime(2021, 12, 12, 9, 0, 0),
-                DurationInMunutes = 30,
-                DoctorId = 1,
-                PatientId = 1,
-                isCancelled = false
-            };
+            Appointment appointment1 = new Appointment(1, new DateTime(2021, 12, 12, 8, 0, 0), 30, "", false, 1, 1, false);
+            Appointment appointment2 = new Appointment(2, new DateTime(2021, 12, 12, 8, 30, 0), 30, "", false, 1, 2, false);
+            Appointment appointment3 = new Appointment(2, new DateTime(2021, 12, 12, 9, 0, 0), 30, "", false, 1, 1, false);
 
             appointments.Add(appointment1);
             appointments.Add(appointment2);
