@@ -10,6 +10,7 @@ import { DrugsConsumptionComponent } from './drugs-consumption-specs/drugs-consu
 import { FilesComponent } from './files/files.component';
 import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
 import { DrugstoreComponent } from './drugstore/drugstore.component';
+import { TenderComponent } from './tender/tender.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'drugs-consumption', component: DrugsConsumptionComponent},
   { path: 'all-drugstores', component: AllDrugstoresComponent},
   { path: 'drugstore/:id', component: DrugstoreComponent},
+  { path: 'tender', component: TenderComponent},
   { path: '', redirectTo: 'landingPage', pathMatch: 'full' },
   { path: '**', redirectTo: 'landingPage', pathMatch: 'full' },
 ];
