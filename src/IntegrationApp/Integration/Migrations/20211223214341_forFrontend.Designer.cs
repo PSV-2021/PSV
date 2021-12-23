@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211223025205_newMigration")]
-    partial class newMigration
+    [Migration("20211223214341_forFrontend")]
+    partial class forFrontend
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -497,6 +497,36 @@ namespace Integration.Migrations
                             DrugstoreName = "Apotekica",
                             IsPublished = false,
                             Title = "title"
+                        });
+                });
+
+            modelBuilder.Entity("Integration.Tendering.Model.DrugTender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("TenderEnd")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("TenderInfo")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("isFinished")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugTenders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            TenderEnd = new DateTime(2021, 12, 16, 22, 43, 40, 780, DateTimeKind.Local).AddTicks(7406),
+                            TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
+                            isFinished = true
                         });
                 });
 
