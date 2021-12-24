@@ -16,6 +16,13 @@ namespace Integration_API.DTOs
             TenderInfo = new List<DrugTenderDto>();
         }
 
+        public TenderDto(int id, DateTime tenderEnd)
+        {
+            Id = id;
+            TenderEnd = tenderEnd;
+            TenderInfo = new List<DrugTenderDto>();
+        }
+
         public TenderDto(DateTime tenderEnd, List<DrugTenderDto> tenderInfo)
         {
             TenderEnd = tenderEnd;

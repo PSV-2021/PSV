@@ -43,17 +43,7 @@ namespace Integration_API.Controllers
                 List<DrugTender> rawTenders = DrugTenderService.GetOngoingTenders();
                 foreach (DrugTender rawTender in rawTenders)
                 {
-                    TenderDto oneTender = new TenderDto();
-                    oneTender.Id = rawTender.Id;
-                    oneTender.TenderEnd = rawTender.TenderEnd;
-                    string[] drugsWithPrices = rawTender.TenderInfo.Split(",");
-                    foreach (string drugWithPrice in drugsWithPrices)
-                    {
-                        string[] info = drugWithPrice.Split(" - ");
-                        oneTender.TenderInfo.Add(new DrugTenderDto(info[0], Int32.Parse(info[1])));
-                    }
-
-                    retVal.Add(oneTender);
+                    AddOneTender(rawTender, retVal);
                 }
 
                 return Ok(retVal);
@@ -66,6 +56,7 @@ namespace Integration_API.Controllers
             }
         }
 
+
         [HttpGet] // Get /api/drugTender/ongoing
         [Route("offer/{id?}")]
         public IActionResult GetOnGoing(int id)
@@ -76,16 +67,7 @@ namespace Integration_API.Controllers
                 List<TenderOffer> rawOffers = DrugTenderService.GetOffersForTender(id);
                 foreach (TenderOffer rawOffer in rawOffers)
                 {
-                    List<DrugTenderDto> listOfDrugs = new List<DrugTenderDto>();
-                    string[] drugsWithAmount = rawOffer.TenderOfferInfo.Split(",");
-                    foreach (string drugWithAmount in drugsWithAmount)
-                    {
-                        string[] info = drugWithAmount.Split(" - ");
-                        DrugTenderDto oneDrug = new DrugTenderDto(info[0], Int32.Parse(info[1]));
-                        listOfDrugs.Add(oneDrug);
-                    }
-                    TenderOfferDto oneOffer = new TenderOfferDto(DrugstoreService.GetDrugstoreById(id).Name ,listOfDrugs, rawOffer.Price);
-                    retVal.Add(oneOffer);
+                    FillDrugList(id, rawOffer, retVal);
                 }
                 return Ok(retVal);
             }
@@ -94,6 +76,41 @@ namespace Integration_API.Controllers
                 Console.WriteLine(e);
                 return NotFound();
             }
+        }
+
+        private static void AddOneTender(DrugTender rawTender, List<TenderDto> retVal)
+        {
+            TenderDto oneTender = new TenderDto(rawTender.Id, rawTender.TenderEnd);
+            foreach (string drugWithPrice in rawTender.TenderInfo.Split(","))
+            {
+                AddOneDrug(drugWithPrice, oneTender);
+            }
+
+            retVal.Add(oneTender);
+        }
+
+        private static void AddOneDrug(string drugWithPrice, TenderDto oneTender)
+        {
+            string[] info = drugWithPrice.Split(" - ");
+            oneTender.TenderInfo.Add(new DrugTenderDto(info[0], Int32.Parse(info[1])));
+        }
+
+        private void FillDrugList(int id, TenderOffer rawOffer, List<TenderOfferDto> retVal)
+        {
+            List<DrugTenderDto> listOfDrugs = new List<DrugTenderDto>();
+            foreach (string drugWithAmount in rawOffer.TenderOfferInfo.Split(","))
+            {
+                AddDrugToList(drugWithAmount, listOfDrugs);
+            }
+
+            retVal.Add(new TenderOfferDto(DrugstoreService.GetDrugstoreById(id).Name, listOfDrugs, rawOffer.Price));
+        }
+
+        private static void AddDrugToList(string drugWithAmount, List<DrugTenderDto> listOfDrugs)
+        {
+            string[] info = drugWithAmount.Split(" - ");
+            DrugTenderDto oneDrug = new DrugTenderDto(info[0], Int32.Parse(info[1]));
+            listOfDrugs.Add(oneDrug);
         }
 
         private string FormatTenderInfo(List<DrugTenderDto> info) {
