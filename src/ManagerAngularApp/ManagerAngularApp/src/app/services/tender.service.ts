@@ -19,6 +19,10 @@ export class TenderService {
         return this.http.get<any>(this.url + '/drugTender');
     }
 
+    GetAllActiveTenders(): Observable<any>{
+      return this.http.get<any>(this.url + '/drugTender/ongoing');
+    }
+
     SaveTender(tenderEnd: Date, tenderInfo: TenderDto[]): Observable<any> {
         const body = {
             TenderEnd : tenderEnd,

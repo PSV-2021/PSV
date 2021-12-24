@@ -10,7 +10,10 @@ namespace Integration_API.DTOs
         public DateTime TenderEnd { get; set; }
         public List<DrugTenderDto> TenderInfo { get; set; }
 
-        public TenderDto() { }
+        public TenderDto()
+        {
+            TenderInfo = new List<DrugTenderDto>();
+        }
 
         public TenderDto(DateTime tenderEnd, List<DrugTenderDto> tenderInfo)
         {

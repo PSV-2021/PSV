@@ -1,6 +1,9 @@
-﻿using Integration.Repository.Sql;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Integration.Repository.Sql;
 using Integration.Tendering.Model;
 using Model.DataBaseContext;
+using Syncfusion.XPS;
 
 namespace Integration.Service
 {
@@ -17,6 +20,11 @@ namespace Integration.Service
         public void Save(DrugTender tender)
         {
             drugTenderRepository.Save(tender);
+        }
+
+        public List<DrugTender> GetOngoingTenders()
+        {
+            return drugTenderRepository.GetAll().Where(tender => !tender.isFinished).ToList();
         }
 
     }

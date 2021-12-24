@@ -4,6 +4,7 @@ import { FormControl, FormGroup} from '@angular/forms'
 import { validateHorizontalPosition } from '@angular/cdk/overlay';
 import { TenderService } from '../services/tender.service';
 import { ToastrService } from 'ngx-toastr';
+import { WholeTenderDto } from './whole.tender.dto';
 
 @Component({
   selector: 'app-tender',
@@ -12,20 +13,35 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TenderComponent implements OnInit {
   public tenderItems: TenderDto[];
+  public ongoingTenders : WholeTenderDto[];
   public newTender: TenderDto;
   public tenderEnd = new Date();
+
 
   constructor(private tenderService: TenderService, private toastr: ToastrService) { 
     this.tenderItems = [];
     this.newTender = new TenderDto();
+    this.ongoingTenders = [];
   }
 
   ngOnInit(): void {
-    this.tenderEnd.setDate(this.tenderEnd.getDate() + 10)
+    this.tenderEnd.setDate(this.tenderEnd.getDate() + 10);
+
+    this.tenderService.GetAllActiveTenders().subscribe((data: any)=>{
+      console.log(data);
+      for(const p of (data as any)){
+        this.ongoingTenders.push({
+          "tenderEnd": p.tenderEnd,
+          "tenderInfo": p.tenderInfo
+        });
+      }
+      console.log(this.ongoingTenders);
+    });
+
   }
 
   valid(): boolean {
-    if (this.newTender.Amount < 1 || this.newTender.DrugName.trim() == "")
+    if (this.newTender.amount < 1 || this.newTender.drugName.trim() == "")
       return false;
     return true;
   }
@@ -33,7 +49,7 @@ export class TenderComponent implements OnInit {
   notRepeat(drugname: string): boolean {
     let name2 = drugname.trim().toLowerCase();
     for (let i = 0; i < this.tenderItems.length; i++){
-      let name1 = this.tenderItems[i].DrugName.trim().toLowerCase();
+      let name1 = this.tenderItems[i].drugName.trim().toLowerCase();
       if (name1 == name2)
         return false;      
       }
@@ -45,11 +61,11 @@ export class TenderComponent implements OnInit {
     if (this.valid()){
       if (this.notRepeat(drugname)){
         let item = new TenderDto();
-        item.DrugName = this.newTender.DrugName;
-        item.Amount = Math.floor(this.newTender.Amount); 
+        item.drugName = this.newTender.drugName;
+        item.amount = Math.floor(this.newTender.amount); 
         this.tenderItems.push(item);
-        this.newTender.DrugName = "";
-        this.newTender.Amount = 1;
+        this.newTender.drugName = "";
+        this.newTender.amount = 1;
       }
       else
       this.toastr.error('You have already added that drug to tender !', 'Error');
@@ -61,7 +77,7 @@ export class TenderComponent implements OnInit {
   removeDrug(drugname: string): void {
     let index = 0;
     for (let i = 0; i < this.tenderItems.length; i++){
-      if (this.tenderItems[i].DrugName == drugname) {
+      if (this.tenderItems[i].drugName == drugname) {
         index = i;
       }
     }

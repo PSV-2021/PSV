@@ -1,10 +1,10 @@
 export class TenderDto{
 
-    DrugName: string;
-    Amount: number;
+    drugName: string;
+    amount: number;
 
     constructor(){
-        this.DrugName = "";
-        this.Amount = 1;
+        this.drugName = "";
+        this.amount = 1;
     }
 }
