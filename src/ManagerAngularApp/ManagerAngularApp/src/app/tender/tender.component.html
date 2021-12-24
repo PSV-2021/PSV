@@ -49,9 +49,10 @@
           <tr>
             <th scope="col" style="font-size: x-large;" >Tender ends: {{ot.tenderEnd}}</th>
             <th>
-              <button mat-mini-fab color="warn" aria-label="See offers">
+              <button mat-mini-fab color="warn" aria-label="See offers" (click)="seeOffers(ot.id)">
                 <mat-icon>help</mat-icon>
               </button>
+            </th>
           </tr>
           <tr>
             <th scope="col" style="font-size: large;" >Drug name</th>

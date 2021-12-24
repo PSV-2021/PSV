@@ -5,21 +5,22 @@ using System.Threading.Tasks;
 
 namespace Integration_API.DTOs
 {
-    public class TenderDto
+    public class TenderOfferDto
     {
-        public int Id { get; set; }
-        public DateTime TenderEnd { get; set; }
+        public string DrugstoreName { get; set; }
         public List<DrugTenderDto> TenderInfo { get; set; }
+        public int Price { get; set; }
 
-        public TenderDto()
+        public TenderOfferDto()
         {
             TenderInfo = new List<DrugTenderDto>();
         }
 
-        public TenderDto(DateTime tenderEnd, List<DrugTenderDto> tenderInfo)
+        public TenderOfferDto(string drugstoreName ,List<DrugTenderDto> tenderInfo, int price)
         {
-            TenderEnd = tenderEnd;
+            DrugstoreName = drugstoreName;
             TenderInfo = tenderInfo;
+            Price = price;
         }
     }
 }

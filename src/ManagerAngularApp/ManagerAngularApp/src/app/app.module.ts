@@ -26,6 +26,7 @@ import { timeout } from 'rxjs/operators';
 import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
 import { DrugstoreComponent } from './drugstore/drugstore.component';
 import { TenderComponent } from './tender/tender.component';
+import { TenderOffersComponent } from './tender-offers/tender-offers.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { TenderComponent } from './tender/tender.component';
     AllDrugstoresComponent,
     DrugstoreComponent,
     TenderComponent,
+    TenderOffersComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { validateHorizontalPosition } from '@angular/cdk/overlay';
 import { TenderService } from '../services/tender.service';
 import { ToastrService } from 'ngx-toastr';
 import { WholeTenderDto } from './whole.tender.dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tender',
@@ -18,7 +19,7 @@ export class TenderComponent implements OnInit {
   public tenderEnd = new Date();
 
 
-  constructor(private tenderService: TenderService, private toastr: ToastrService) { 
+  constructor(private tenderService: TenderService, private toastr: ToastrService, private router: Router) { 
     this.tenderItems = [];
     this.newTender = new TenderDto();
     this.ongoingTenders = [];
@@ -31,6 +32,7 @@ export class TenderComponent implements OnInit {
       console.log(data);
       for(const p of (data as any)){
         this.ongoingTenders.push({
+          "id": p.id,
           "tenderEnd": p.tenderEnd,
           "tenderInfo": p.tenderInfo
         });
@@ -101,6 +103,10 @@ export class TenderComponent implements OnInit {
     }
     else 
       this.toastr.error('Your tender ending date must be valid (after today) and your drug list must contain at least one drug !', 'Error');
+  }
+
+  seeOffers(id: number){
+    this.router.navigate(['offer/' + id]);
   }
 
 }
