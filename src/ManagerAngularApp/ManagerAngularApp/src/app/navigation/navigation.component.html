@@ -11,6 +11,10 @@
         <a routerLink='/feedbacks'> Feedbacks </a>
     </span> 
 
+    <span class="registration"> 
+        <a routerLink='/registration'> Register </a>
+    </span> 
+
     <span> 
         <a routerLink='/drugs-consumption'> Drugs Report and Specs </a>
     </span> 
@@ -36,10 +40,7 @@
     <span class="example-spacer"></span>
 
     <span class="registration"> 
-        <a routerLink='/registration'> Register </a>
-    </span> 
-    <span class="registration"> 
-        <a routerLink='/login'> Log in </a>
+        <button mat-raised-button (click)="LogOut()">Log Out</button>
     </span> 
 
 </mat-toolbar>

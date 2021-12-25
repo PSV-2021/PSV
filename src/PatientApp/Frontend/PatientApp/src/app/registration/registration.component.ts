@@ -48,6 +48,7 @@ export class RegistrationComponent implements OnInit {
     {value: 'AB'},
     {value: 'O'}
   ]
+  pageTitle="Patient App";
 
   doctors: any[]=[];
   selectedDoctor: SelectedDoctor = {name: ""};
@@ -107,6 +108,9 @@ export class RegistrationComponent implements OnInit {
         this.allergenList.push(p);
       }
     })
+  }
+  login(){
+    this.router.navigate(['/login']);
   }
 
   onSubmit(){

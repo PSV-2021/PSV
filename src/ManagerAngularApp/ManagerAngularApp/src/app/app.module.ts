@@ -27,6 +27,7 @@ import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.componen
 import { DrugstoreComponent } from './drugstore/drugstore.component';
 import { TenderComponent } from './tender/tender.component';
 import { TenderOffersComponent } from './tender-offers/tender-offers.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TenderOffersComponent } from './tender-offers/tender-offers.component';
     DrugstoreComponent,
     TenderComponent,
     TenderOffersComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
