@@ -121,7 +121,8 @@ namespace Model.DataBaseContext
             );
 
             modelBuilder.Entity<DrugTender>().HasData(
-                new DrugTender(1, DateTime.Now.AddDays(-7), "Brufen - 150, Palitreks - 100, Andol - 40", true)
+                new DrugTender(1, DateTime.Now.AddDays(-7), "Brufen - 150, Palitreks - 100, Andol - 40", true),
+                new DrugTender(2, DateTime.Now.AddDays(21), "Brufen - 120, Palitreks - 90, Andol - 50", false)
             );
 
             modelBuilder.Entity<TenderOffer>().HasData(

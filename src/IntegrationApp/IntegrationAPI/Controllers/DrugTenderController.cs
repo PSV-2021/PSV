@@ -57,9 +57,9 @@ namespace Integration_API.Controllers
         }
 
 
-        [HttpGet] // Get /api/drugTender/ongoing
+        [HttpGet] // Get /api/drugTender/offer/2
         [Route("offer/{id?}")]
-        public IActionResult GetOnGoing(int id)
+        public IActionResult GetAllOffersForTender(int id)
         {
             List<TenderOfferDto> retVal = new List<TenderOfferDto>();
             try

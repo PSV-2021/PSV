@@ -19,6 +19,11 @@ namespace Integration.Service
             TenderOfferSqlRepository = new TenderOfferSqlRepository(dbContext);
         }
 
+        public DrugTenderService(TenderOfferSqlRepository repository)
+        {
+            this.TenderOfferSqlRepository = repository;
+        }
+
         public void Save(DrugTender tender)
         {
             drugTenderRepository.Save(tender);
