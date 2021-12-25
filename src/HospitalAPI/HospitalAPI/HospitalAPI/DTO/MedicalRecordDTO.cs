@@ -26,5 +26,9 @@ namespace HospitalAPI.DTO
             Address = resultPatient.Adress;
             Email = resultPatient.Email;
         }
+
+        public MedicalRecordDTO()
+        {
+        }
     }
 }

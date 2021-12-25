@@ -46,28 +46,14 @@ namespace HospitalAPI.Controllers
         private static Patient GeneratePatientFromDTO(PatientDto p)
         {
           TokenGenerator tokenGenerator = new TokenGenerator();
-          Patient patient = new Patient
-            {
-                Name = p.Name,
-                Surname = p.Surname,
-                Jmbg = p.Jmbg,
-                BloodType = p.BloodType,
-                FathersName = p.FathersName,
-                Sex = p.Sex,
-                Adress = p.Address,
-                Email = p.Email,
-                Username = p.Username,
-                PhoneNumber = p.PhoneNumber,
-                Password = p.Password,
-                DoctorId = p.DoctorId,
-                Token = tokenGenerator.getNewToken()
-            };
-            patient.Allergen = new List<Allergen>();
+            Patient patient = new Patient(p.Name, p.Surname, p.Jmbg, p.BloodType, p.FathersName, p.Sex, p.Address, p.Email, p.Username, p.PhoneNumber, p.Password, p.DoctorId,
+                tokenGenerator.getNewToken(), new List<Allergen>());
             foreach (String s in p.Allergens)
             {
-                patient.Allergen.Add(new Allergen { Name = s, PatientId = patient.Id});
+                patient.Allergen.Add(new Allergen(patient.Id, s));
             }
             patient.DateOfBirth = DateTime.ParseExact(p.Date, "dd/MM/yyyy hh:mm:ss", null);
+            //patient.DateOfBirth = DateTime.Parse(p.Date);
             patient.Type = UserType.patient;
 
             return patient;

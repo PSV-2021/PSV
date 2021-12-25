@@ -14,11 +14,10 @@ export interface Appointment {
   
 })
 export class AppointmentsObserveComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'start time', 'description', 'doctor', 'status','survey'];
+  displayedColumns: string[] = ['id', 'start time', 'description', 'doctor', 'status','survey','cancel'];
   dataSource = [];
   surveys: any[] = []
-
- 
+  appointmentId: any;
 
 
   constructor(private observeAppointemntsService: AppointmentObserveService, private router: Router) { }
@@ -32,11 +31,21 @@ export class AppointmentsObserveComponent implements OnInit {
     this.router.navigate(navigationDetails);
   }
 
+  CancelAppointment(element: { id: number }){
+    this.appointmentId = element.id;
+    
+    this.observeAppointemntsService.CancelAppointment(element.id).subscribe((data: any) =>{
+      this.ngOnInit();
+    });
+    
+  }
+
   ngOnInit(): void {
     this.observeAppointemntsService.GetAppointments('2').subscribe((data: any)=>{
       console.log(data);
     this.dataSource = data;
   });
-}
+  }
+ 
 
 }

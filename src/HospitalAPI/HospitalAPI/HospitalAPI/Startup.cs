@@ -6,8 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-
+using System;
 
 namespace HospitalAPI
 {
@@ -25,7 +24,7 @@ namespace HospitalAPI
         {
             services.AddControllers();
             services.AddDbContext<MyDbContext>(options =>
-              options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
+            options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
@@ -57,7 +56,7 @@ namespace HospitalAPI
             {
                 endpoints.MapControllers();
             });
-
+            PrepDB.PrepPopulation(app);
             server = new Server
             {
                 Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },
@@ -65,17 +64,14 @@ namespace HospitalAPI
             };
             server.Start();
             applicationLifetime.ApplicationStopping.Register(OnShutdown);
-
-
         }
+      
         private void OnShutdown()
         {
             if (server != null)
             {
                 server.ShutdownAsync().Wait();
             }
-
-
         }
 
         public string GetDBConnectionString()
@@ -84,10 +80,12 @@ namespace HospitalAPI
             var port = Configuration["DBPort"] ?? "5432";
             var user = Configuration["DBUser"] ?? "postgres";
             var password = Configuration["DBPassword"] ?? "masa3009";
-            var database = Configuration["DB"] ?? "hospital";
+            var database = Configuration["DB"] ?? "hospitalNew";
+            Console.WriteLine(server + port + user + password + database);
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
+
     }   
  }
 

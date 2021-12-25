@@ -20,11 +20,5 @@ namespace Hospital.MedicalRecords.Service
         public MedicalRecordService()
         {
         }
-
-        public List<MedicalRecord> GetMedicalRecordById(int idPatient)
-        {
-            int idMedicalRecord = patientSqlRepository.FindIdMedRecordByIdPatient(idPatient);
-            return MedicalRecordSqlRepository.GetMedicalRecordById(idMedicalRecord);
-        }
     }
 }

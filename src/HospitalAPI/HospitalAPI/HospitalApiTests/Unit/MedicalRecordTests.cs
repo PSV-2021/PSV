@@ -7,6 +7,7 @@ using Xunit;
 using Hospital.MedicalRecords.Repository;
 using Hospital.MedicalRecords.Service;
 using Hospital.MedicalRecords.Model;
+using Hospital.SharedModel;
 
 namespace HospitalApiTests.Unit
 {
@@ -39,9 +40,11 @@ namespace HospitalApiTests.Unit
         private static List<Patient> GenerateStubData()
         {
             List<Patient> patients = new List<Patient>();
-
-            Patient patient1 = new Patient { Name = "Nikola", Id = 12 };
-            Patient patient2 = new Patient { Name = "Nikolina", Id = 13};
+          
+            Patient patient1 = new Patient(12, "Andjelka", "Andjic", "andji", "andji", "1821099320191", new DateTime(1980, 9, 17), BloodType.A,
+                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com");
+            Patient patient2 = new Patient(13, "Milica", "Andjic", "andji", "andji", "1821099320191", new DateTime(1980, 9, 17), BloodType.A,
+                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com");
 
             patients.Add(patient1);
             patients.Add(patient2);

@@ -9,26 +9,33 @@ namespace Hospital.Schedule.Service
     public class ObserveAppointmentsService
     {
         private ObserveAppointmentsSqlRepository ObserveAppointmentsSqlRepository;
+        private IAppointmentRepository AppointmentRepository { get; set; }
+        private Appointment Appointment = new Appointment();
 
         public ObserveAppointmentsService(ObserveAppointmentsSqlRepository observeAppointmentsSqlRepository)
         {
             this.ObserveAppointmentsSqlRepository = observeAppointmentsSqlRepository;
+            AppointmentRepository = observeAppointmentsSqlRepository;
+        }
+        public ObserveAppointmentsService(IAppointmentRepository iAppointmentRepository)
+        {
+            AppointmentRepository = iAppointmentRepository;
         }
         public List<Appointment> GetAppointmentsById(int id)
         {
             List<Appointment> appointments = ObserveAppointmentsSqlRepository.GetById(id);
 
-            foreach(Appointment a in appointments)
-            {
-                if (a.isCancelled)
-                    a.Status = AppointmentStatus.CANCELLED;
-                else if (a.StartTime < DateTime.Now)
-                    a.Status = AppointmentStatus.DONE;
-                else if (a.StartTime > DateTime.Now)
-                    a.Status = AppointmentStatus.UPCOMING;
-            }
+            return Appointment.StatusAppointment(appointments);
+        }
 
-            return appointments;
+        //CancelAppointments
+
+        public bool CancelAppointment(int appointmentId)
+        {
+            Appointment appointment = AppointmentRepository.GetByAppointmentId(appointmentId);
+            appointment.SetCancel(appointment);
+            bool retVal = AppointmentRepository.Update(appointment);
+            return retVal;
         }
     }
 }
