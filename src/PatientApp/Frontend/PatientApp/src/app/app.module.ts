@@ -33,6 +33,7 @@ import { ReserveAppointmentStandardComponent } from './reserve-appointment-stand
 import { MatStepperModule } from '@angular/material/stepper';
 import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
 import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { RecommendAppointmentComponent } from './recommend-appointment/recommend
     RegistrationSuccessComponent,
     ReserveAppointmentStandardComponent,
     AppointmentsObserveComponent,
-    RecommendAppointmentComponent
+    RecommendAppointmentComponent,
+    HomePageComponent
 
 
   ],

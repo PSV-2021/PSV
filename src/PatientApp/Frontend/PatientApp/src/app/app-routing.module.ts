@@ -10,8 +10,10 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ReserveAppointmentStandardComponent } from './reserve-appointment-standard/reserve-appointment-standard.component';
 import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 import { SurveyComponent } from './survey/survey.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
+  { path: 'home', component: HomePageComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'appointment-standard', component: ReserveAppointmentStandardComponent},
   { path: 'survey/:id/:ap', component: SurveyComponent },
