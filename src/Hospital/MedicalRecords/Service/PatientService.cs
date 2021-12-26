@@ -73,6 +73,11 @@ namespace Hospital.MedicalRecords.Service
             PatientSqlRepository.SavePatient(newPatient);
         }
 
+        public Patient FindByUsernameAndPassword(String username, String password)
+        {
+            return PatientSqlRepository.FindByUsernameAndPassword(username, password);
+        }
+
     }
 
 }
