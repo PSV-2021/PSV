@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,15 +10,54 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211222140609_tenderMigration")]
+    partial class tenderMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.12")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("Integration.Model.Drug", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Supply")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Brufen",
+                            Supply = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Paracetamol",
+                            Supply = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Palitreks",
+                            Supply = 0
+                        });
+                });
 
             modelBuilder.Entity("Integration.Model.DrugConsumed", b =>
                 {
@@ -392,13 +432,22 @@ namespace Integration.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
                     b.Property<string>("ApiKey")
                         .HasColumnType("text");
 
                     b.Property<string>("Base64Image")
                         .HasColumnType("text");
 
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
                     b.Property<string>("Comment")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -418,7 +467,10 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 1,
+                            Address = "Tolstojeva 3",
                             ApiKey = "DrugStoreSecretKey",
+                            City = "Novi Sad",
+                            Email = "apoteka1@gmail.com",
                             Name = "Apoteka prva",
                             Url = "http://localhost:5001",
                             gRPC = true
@@ -426,18 +478,24 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 2,
-                            ApiKey = "nestorandom",
+                            Address = "Balzakova 3",
+                            ApiKey = "wnjgjowenfweo",
+                            City = "Novi Sad",
+                            Email = "apoteka2@gmail.com",
                             Name = "Apoteka druga",
-                            Url = "http://localhost:6001",
-                            gRPC = true
+                            Url = "http://localhost:5002",
+                            gRPC = false
                         },
                         new
                         {
                             Id = 3,
-                            ApiKey = "gasic",
+                            Address = "Puskinova 3",
+                            ApiKey = "wuhguiwoehfuhw",
+                            City = "Beograd",
+                            Email = "apoteka3@gmail.com",
                             Name = "Apoteka treca",
-                            Url = "http://localhost:7001",
-                            gRPC = true
+                            Url = "http://localhost:5003",
+                            gRPC = false
                         });
                 });
 
@@ -464,6 +522,35 @@ namespace Integration.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DrugstoreFeedbacks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "aaa",
+                            Content = "Nije mi se svidela usluga",
+                            DrugstoreId = 1,
+                            RecievedTime = new DateTime(2021, 12, 22, 15, 6, 8, 808, DateTimeKind.Local).AddTicks(3480),
+                            Response = "Nemoj da lazes!",
+                            SentTime = new DateTime(2021, 12, 22, 15, 6, 8, 811, DateTimeKind.Local).AddTicks(3748)
+                        },
+                        new
+                        {
+                            Id = "bbb",
+                            Content = "Svidjela usluga",
+                            DrugstoreId = 2,
+                            RecievedTime = new DateTime(2021, 12, 22, 15, 6, 8, 811, DateTimeKind.Local).AddTicks(4535),
+                            Response = "Nemoj da lazes!",
+                            SentTime = new DateTime(2021, 12, 22, 15, 6, 8, 811, DateTimeKind.Local).AddTicks(4569)
+                        },
+                        new
+                        {
+                            Id = "ccc",
+                            Content = "Nije mi se svidela usluga",
+                            DrugstoreId = 3,
+                            RecievedTime = new DateTime(2021, 12, 22, 15, 6, 8, 811, DateTimeKind.Local).AddTicks(4584),
+                            Response = "Nemoj da lazes!",
+                            SentTime = new DateTime(2021, 12, 22, 15, 6, 8, 811, DateTimeKind.Local).AddTicks(4588)
+                        });
                 });
 
             modelBuilder.Entity("Integration.Model.DrugstoreOffer", b =>
@@ -477,8 +564,14 @@ namespace Integration.Migrations
                     b.Property<string>("DrugstoreName")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<bool>("IsPublished")
                         .HasColumnType("boolean");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
@@ -493,7 +586,9 @@ namespace Integration.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
+                            EndDate = new DateTime(2021, 12, 22, 15, 6, 8, 811, DateTimeKind.Local).AddTicks(5136),
                             IsPublished = false,
+                            StartDate = new DateTime(2021, 12, 22, 15, 6, 8, 811, DateTimeKind.Local).AddTicks(5128),
                             Title = "title"
                         });
                 });
@@ -522,182 +617,10 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 1,
-                            TenderEnd = new DateTime(2021, 12, 18, 20, 41, 37, 543, DateTimeKind.Local).AddTicks(6606),
+                            TenderEnd = new DateTime(2021, 12, 15, 15, 6, 8, 812, DateTimeKind.Local).AddTicks(4150),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            TenderEnd = new DateTime(2022, 1, 15, 20, 41, 37, 548, DateTimeKind.Local).AddTicks(1532),
-                            TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
-                            isFinished = false
                         });
-                });
-
-            modelBuilder.Entity("Integration.Tendering.Model.TenderOffer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("DrugstoreId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TenderId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("TenderOfferInfo")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TenderOffers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DrugstoreId = 1,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 5000,
-                            TenderId = 2,
-                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DrugstoreId = 2,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 5900,
-                            TenderId = 2,
-                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
-                        });
-                });
-
-            modelBuilder.Entity("Integration.Model.Drugstore", b =>
-                {
-                    b.OwnsOne("Integration.Drugstore_Interaction.Model.ValueObjects.Address", "Address", b1 =>
-                        {
-                            b1.Property<int>("DrugstoreId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                            b1.Property<string>("City")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Country")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Street")
-                                .HasColumnType("text");
-
-                            b1.HasKey("DrugstoreId");
-
-                            b1.ToTable("Drugstores");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DrugstoreId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    DrugstoreId = 1,
-                                    City = "Novi Sad",
-                                    Country = "Srbija",
-                                    Street = "Tolstojeva 5"
-                                },
-                                new
-                                {
-                                    DrugstoreId = 2,
-                                    City = "Beograd",
-                                    Country = "Srbija",
-                                    Street = "Balzakova 31"
-                                },
-                                new
-                                {
-                                    DrugstoreId = 3,
-                                    City = "Subotica",
-                                    Country = "Srbija",
-                                    Street = "Cara Dusana 56"
-                                });
-                        });
-
-                    b.OwnsOne("Integration.Drugstore_Interaction.Model.ValueObjects.Email", "Email", b1 =>
-                        {
-                            b1.Property<int>("DrugstoreId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                            b1.Property<string>("EmailValue")
-                                .HasColumnType("text");
-
-                            b1.HasKey("DrugstoreId");
-
-                            b1.ToTable("Drugstores");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DrugstoreId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    DrugstoreId = 1,
-                                    EmailValue = "apotekaprva@gmail.com"
-                                },
-                                new
-                                {
-                                    DrugstoreId = 2,
-                                    EmailValue = "drugimeil@gmail.com"
-                                },
-                                new
-                                {
-                                    DrugstoreId = 3,
-                                    EmailValue = "trecimejl@gmail.com"
-                                });
-                        });
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Email");
-                });
-
-            modelBuilder.Entity("Integration.Model.DrugstoreOffer", b =>
-                {
-                    b.OwnsOne("Integration.Model.DateRange", "TimeRange", b1 =>
-                        {
-                            b1.Property<string>("DrugstoreOfferId")
-                                .HasColumnType("text");
-
-                            b1.HasKey("DrugstoreOfferId");
-
-                            b1.ToTable("DrugstoreOffers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DrugstoreOfferId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    DrugstoreOfferId = "1"
-                                });
-                        });
-
-                    b.Navigation("TimeRange");
                 });
 #pragma warning restore 612, 618
         }

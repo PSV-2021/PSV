@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211224223629_tenderOffer")]
+    partial class tenderOffer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -522,16 +524,9 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 1,
-                            TenderEnd = new DateTime(2021, 12, 18, 20, 41, 37, 543, DateTimeKind.Local).AddTicks(6606),
+                            TenderEnd = new DateTime(2021, 12, 17, 23, 36, 28, 937, DateTimeKind.Local).AddTicks(4802),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            TenderEnd = new DateTime(2022, 1, 15, 20, 41, 37, 548, DateTimeKind.Local).AddTicks(1532),
-                            TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
-                            isFinished = false
                         });
                 });
 
@@ -572,7 +567,7 @@ namespace Integration.Migrations
                             IsAccepted = false,
                             IsActive = true,
                             Price = 5000,
-                            TenderId = 2,
+                            TenderId = 1,
                             TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
                         },
                         new
@@ -582,7 +577,7 @@ namespace Integration.Migrations
                             IsAccepted = false,
                             IsActive = true,
                             Price = 5900,
-                            TenderId = 2,
+                            TenderId = 1,
                             TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
                         });
                 });

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211223214341_forFrontend")]
+    partial class forFrontend
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -522,68 +524,9 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 1,
-                            TenderEnd = new DateTime(2021, 12, 18, 20, 41, 37, 543, DateTimeKind.Local).AddTicks(6606),
+                            TenderEnd = new DateTime(2021, 12, 16, 22, 43, 40, 780, DateTimeKind.Local).AddTicks(7406),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            TenderEnd = new DateTime(2022, 1, 15, 20, 41, 37, 548, DateTimeKind.Local).AddTicks(1532),
-                            TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
-                            isFinished = false
-                        });
-                });
-
-            modelBuilder.Entity("Integration.Tendering.Model.TenderOffer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("DrugstoreId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TenderId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("TenderOfferInfo")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TenderOffers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DrugstoreId = 1,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 5000,
-                            TenderId = 2,
-                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DrugstoreId = 2,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 5900,
-                            TenderId = 2,
-                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
                         });
                 });
 
