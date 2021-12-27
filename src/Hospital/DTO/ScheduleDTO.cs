@@ -8,6 +8,7 @@ namespace Hospital.DTO
     {
         public DateTime Start { get; set; }
         public int Id { get; set; }
+        public int PatientId { get; set; }
         public ScheduleDTO() { }
     }
 }

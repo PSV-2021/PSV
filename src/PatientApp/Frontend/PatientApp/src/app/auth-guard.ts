@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTr
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { AuthService } from "./auth.service"
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthGuard implements CanActivate{
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree>{
         const isAuthenticated = this.authenticationService.getAuthStatus();
-
+        //let tokenInfo = this.getDecodedToken(isAuthenticated as string);
         if(isAuthenticated != null && !this.jwtHelper.isTokenExpired(isAuthenticated)) {
             return true;           
         }
@@ -26,4 +27,13 @@ export class AuthGuard implements CanActivate{
         }
         
     }
+
+    getDecodedToken(token: string): any{
+        try{
+          return jwt_decode(token);
+        }
+        catch(Error){
+          token = "";
+        }
+      }
 }
