@@ -11,20 +11,21 @@ import { ReserveAppointmentStandardComponent } from './reserve-appointment-stand
 import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 import { SurveyComponent } from './survey/survey.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { AuthGuard } from './auth-guard';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent},
   { path: 'registration', component: RegistrationComponent},
-  { path: 'appointment-standard', component: ReserveAppointmentStandardComponent},
-  { path: 'survey/:id/:ap', component: SurveyComponent },
+  { path: 'appointment-standard', component: ReserveAppointmentStandardComponent, canActivate: [AuthGuard]},
+  { path: 'survey/:id/:ap', component: SurveyComponent, canActivate: [AuthGuard]},
   { path: '', component: LandingComponent, pathMatch: 'full'},
   { path: 'comments', component: CommentsObserveComponent, pathMatch: 'full'},
   { path: 'login', component: LoginComponent},
   { path: 'activate', redirectTo: "/login" },
   { path: 'user' ,  children: [{ path:'activate', component: ActivationAccountComponent }]},
-  { path: 'medicalRecord', component: MedicalRecordComponent },
+  { path: 'medicalRecord', component: MedicalRecordComponent, canActivate: [AuthGuard]},
   { path: 'registrationSuccess', component: RegistrationSuccessComponent},
-  { path: 'recommendAppointment', component: RecommendAppointmentComponent},
+  { path: 'recommendAppointment', component: RecommendAppointmentComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: ''}
 ];
 
