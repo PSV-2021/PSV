@@ -1,0 +1,33 @@
+<div class="tender-holder">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-4">
+        <h2 style="font-size: 30px; margin-top: 2%;">Active Tenders:</h2>
+    </div>
+    <div *ngFor="let tender of tenders">
+        <div class="tender-holder">
+        <mat-card class="example-card">
+            <mat-card-subtitle >{{tender.id}}</mat-card-subtitle>
+            <br>
+            <mat-card-title>Tender</mat-card-title>
+            <mat-card-content>
+            <br>
+            <p><b>End Time: </b>{{ tender.tenderEnd }}</p>
+            </mat-card-content>
+            <div *ngFor="let i of tender.tenderInfo">
+                <mat-card-content>
+                    <br>
+                    <p> {{ i.drugName }}, kolicina: {{ i.amount }}</p>
+                </mat-card-content>
+            </div>
+            <mat-divider inset></mat-divider>
+            <mat-card-subtitle>Offer</mat-card-subtitle>
+            <br>
+            <p>Add Price: </p> 
+            <input type="text" matInput name="offer">
+            <button>Offer</button>
+        </mat-card>
+        </div>
+        <br>
+        <br>
+    </div>
+</div>
