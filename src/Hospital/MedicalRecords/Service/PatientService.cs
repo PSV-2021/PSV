@@ -55,6 +55,7 @@ namespace Hospital.MedicalRecords.Service
         {
             PatientSqlRepository = patientSqlRepository;
             AllergenRepository = new AllergenSqlRepository();
+            PatientRepository = patientSqlRepository;
         }
 
         public Patient GetPatientById(int id)
@@ -79,7 +80,7 @@ namespace Hospital.MedicalRecords.Service
 
         public Patient FindByUsernameAndPassword(String username, String password)
         {
-            return PatientSqlRepository.FindByUsernameAndPassword(username, password);
+            return PatientRepository.FindByUsernameAndPassword(username, password);
         }
 
         public String GenerateJwtToken(Patient patient)
