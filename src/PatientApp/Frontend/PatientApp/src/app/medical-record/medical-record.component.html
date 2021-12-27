@@ -2,10 +2,15 @@
 <div class="reviews-holder">
     <div>
         <mat-card class="example-card">
-            <mat-card-title class="medtitle">Medical record</mat-card-title>
+            <mat-card-title class="medtitle">Medical record</mat-card-title>    
             <mat-card-content class = "content"><br>
                 <mat-card-content class="label"> Name:</mat-card-content>
-                 <mat-card-content class="contentlabel"> {{medicalRecord.name}}</mat-card-content> <br>
+                 <mat-card-content class="contentlabel"> {{medicalRecord.name}}</mat-card-content> 
+                 <mat-card-content class="contentImg">  Profile image:
+                     <div>  
+                    <img [src]="imagePath" class = "imgShow" />
+                    </div>
+                 </mat-card-content><br>
                  <mat-card-content class="label">Surname:</mat-card-content>
                  <mat-card-content class="contentlabel"> {{medicalRecord.surname}} </mat-card-content><br>
               <mat-card-content class="label"> Jmbg:</mat-card-content>
@@ -26,9 +31,11 @@
                 <mat-card-content class="contentlabel"> {{medicalRecord.bType}} </mat-card-content><br>
                 <mat-card-content class="label"> Chosen Doctor:</mat-card-content>
                 <mat-card-content class="contentlabel" style="margin-bottom: 5%;"> {{medicalRecord.doctorName}} </mat-card-content><br>
+
             </mat-card-content>
             <app-appointments-observe class="content"></app-appointments-observe>
         </mat-card>
+        
     </div>
         <br>
         <br>
