@@ -3,6 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xunit;
 
 namespace SeleniumTests.Pages
 {
@@ -15,10 +16,10 @@ namespace SeleniumTests.Pages
         private IWebElement StayAnonymous => Driver.FindElement(By.Id("anonymous"));
         private IWebElement Publish => Driver.FindElement(By.Id("publishCom"));
         private IWebElement SendButton => Driver.FindElement(By.Id("send"));
-
+   
 
         public static readonly string ALERT_MESSAGE = "Comment sent!";
-
+          
         public CommentsPage(IWebDriver driver)
         {
             Driver = driver;
@@ -53,6 +54,18 @@ namespace SeleniumTests.Pages
         public bool SendButtonDisplayed()
         {
             return SendButton.Displayed;
+        }
+        public bool FeedbackInputDisplayed()
+        {
+            return FeedbackText.Displayed;
+        }
+        public bool AnonymusButtonDisplayed()
+        {
+            return StayAnonymous.Displayed;
+        }
+        public bool PublishableButtonDisplayed()
+        {
+            return Publish.Displayed;
         }
         public void Navigate()
           => Driver.Navigate().GoToUrl(URI);

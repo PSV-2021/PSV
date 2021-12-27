@@ -47,6 +47,7 @@ namespace SeleniumTests
             CommentPage.ClickSend();
             Assert.Equal(Driver.Url, CommentsPage.URI);
             Assert.True(CommentPage.SendButtonDisplayed());
+            Assert.True(CommentPage.FeedbackInputDisplayed());
             Dispose();
         }
 
@@ -60,6 +61,7 @@ namespace SeleniumTests
             CommentPage.ClickSend();
             Assert.Equal(Driver.Url, CommentsPage.URI);
             Assert.True(CommentPage.SendButtonDisplayed());
+            Assert.True(CommentPage.AnonymusButtonDisplayed());
             Dispose();
         }
         [Fact]
@@ -72,6 +74,20 @@ namespace SeleniumTests
             CommentPage.ClickSend();
             Assert.Equal(Driver.Url, CommentsPage.URI);
             Assert.True(CommentPage.SendButtonDisplayed());
+            Assert.True(CommentPage.PublishableButtonDisplayed());
+            Dispose();
+        }
+        [Fact]
+        public void Cancel_ExaminationNotPublishableAndAnonymus()
+        {
+            CommentPage.WaitToLoad();
+            CommentPage.InsertFeedback("Extra!");
+            CommentPage.InsertAnonymus(false);
+            CommentPage.InsertPublishable(false);
+            CommentPage.ClickSend();
+            Assert.Equal(Driver.Url, CommentsPage.URI);
+            Assert.True(CommentPage.SendButtonDisplayed());
+            Assert.True(CommentPage.PublishableButtonDisplayed());
             Dispose();
         }
     }
