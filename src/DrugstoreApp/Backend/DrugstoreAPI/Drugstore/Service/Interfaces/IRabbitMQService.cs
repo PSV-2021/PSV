@@ -1,5 +1,4 @@
-﻿using Integration.Model;
-using Integration.Tendering.Model;
+﻿using Drugstore.Models;
 using RabbitMQ.Client;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,8 +8,7 @@ namespace PrimerServis
     public interface IRabbitMQService
     {
         void CreateConnection();
-        DrugstoreOffer RecieveMessage();
-        TenderOffer RecieveTenderOffer();
+        DrugTender RecieveMessage();
         Task StartAsync(CancellationToken cancellationToken);
         Task StopAsync(CancellationToken cancellationToken);
     }
