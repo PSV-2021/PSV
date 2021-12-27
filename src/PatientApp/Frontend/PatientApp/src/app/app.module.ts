@@ -34,6 +34,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
 import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 @NgModule({
@@ -77,7 +78,9 @@ import { HomePageComponent } from './home-page/home-page.component';
     MatRadioModule,
     MatSnackBarModule,
     FormsModule,
-    MatStepperModule
+    MatStepperModule,
+    NgxDropzoneModule
+
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
