@@ -42,8 +42,6 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('id', tokenInfo.id);
       localStorage.setItem('role', tokenInfo.role);
       console.log(data);
-      console.log(tokenInfo.id);
-      console.log(tokenInfo.role);
       this.router.navigate(['medicalRecord']);
     });
   
