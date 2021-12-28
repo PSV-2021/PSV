@@ -29,8 +29,8 @@ namespace SeleniumTests
             Driver = new ChromeDriver(options);
             HomePage = new HomePage(Driver);
             HomePage.Navigate();
-            HomePage.InsertUsername("masa");
-            HomePage.InsertPassword("masa3009");
+            HomePage.InsertUsername("mici97");
+            HomePage.InsertPassword("mici789");
             HomePage.ClickLogin();
 
             CommentPage = new CommentsPage(Driver);
