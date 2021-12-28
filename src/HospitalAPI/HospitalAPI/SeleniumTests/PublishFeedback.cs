@@ -13,6 +13,7 @@ namespace SeleniumTests
     {
         private readonly IWebDriver Driver;
         private CommentsPage CommentPage;
+        private HomePage HomePage;
 
         public PublishFeedback()
         {
@@ -26,6 +27,12 @@ namespace SeleniumTests
             options.AddArguments("--disable-notifications");
 
             Driver = new ChromeDriver(options);
+            HomePage = new HomePage(Driver);
+            HomePage.Navigate();
+            HomePage.InsertUsername("masa");
+            HomePage.InsertPassword("masa3009");
+            HomePage.ClickLogin();
+
             CommentPage = new CommentsPage(Driver);
             CommentPage.Navigate();
         }
