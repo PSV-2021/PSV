@@ -16,9 +16,6 @@ namespace SeleniumTests.Pages
         private IWebElement StayAnonymous => Driver.FindElement(By.Id("anonymous"));
         private IWebElement Publish => Driver.FindElement(By.Id("publishCom"));
         private IWebElement SendButton => Driver.FindElement(By.Id("send"));
-   
-
-        public static readonly string ALERT_MESSAGE = "Comment sent!";
           
         public CommentsPage(IWebDriver driver)
         {
