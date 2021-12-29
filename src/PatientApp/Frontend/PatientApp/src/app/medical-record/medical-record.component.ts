@@ -15,7 +15,7 @@ export class MedicalRecordComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.medicalRecordService.GetMedicalRecord('3').subscribe((data: any)=>{
+    this.medicalRecordService.GetMedicalRecord('1').subscribe((data: any)=>{
         this.imagePath ="data:image/png;base64,"+ atob(data.image);
         this.medicalRecord = data;
     });
