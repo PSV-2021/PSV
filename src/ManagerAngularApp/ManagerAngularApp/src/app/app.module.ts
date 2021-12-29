@@ -25,6 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { timeout } from 'rxjs/operators';
 import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
 import { DrugstoreComponent } from './drugstore/drugstore.component';
+import { TenderComponent } from './tender/tender.component';
+import { TenderOffersComponent } from './tender-offers/tender-offers.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
@@ -41,6 +43,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     FilesComponent,
     AllDrugstoresComponent,
     DrugstoreComponent,
+    TenderComponent,
+    TenderOffersComponent,
     HomePageComponent,
   ],
   imports: [

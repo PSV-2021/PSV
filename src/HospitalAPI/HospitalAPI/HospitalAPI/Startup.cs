@@ -65,11 +65,11 @@ namespace HospitalAPI
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
-                    
+
             }));
         }
 
-        
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
@@ -99,7 +99,7 @@ namespace HospitalAPI
             server.Start();
             applicationLifetime.ApplicationStopping.Register(OnShutdown);
         }
-      
+
         private void OnShutdown()
         {
             if (server != null)
@@ -116,10 +116,10 @@ namespace HospitalAPI
             var password = Configuration["DBPassword"] ?? "natasa1234";
             var database = Configuration["DB"] ?? "hospitalNewN";
             Console.WriteLine(server + port + user + password + database);
+
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
 
-    }   
+    }
  }
-

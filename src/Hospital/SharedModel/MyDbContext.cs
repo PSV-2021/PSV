@@ -35,7 +35,7 @@ namespace Hospital.SharedModel
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+
 
             modelBuilder.Entity<UserFeedback>().HasData(
                 new UserFeedback( 1, DateTime.Now, "Good!", "Mika Mikic", false ),
@@ -66,7 +66,7 @@ namespace Hospital.SharedModel
                 );
             modelBuilder.Entity<Patient>(mb =>
             {
-               
+
                 mb.HasData(
                new Patient(1, "Marko", "Markovic", "3009998805138", new DateTime(1998, 06, 25), Sex.male, "0641664608",
                 "Bulevar Oslobodjenja 8", "marko@gmail.com", "miki98", "miki985", true, BloodType.B, "Petar", 1, new List<Allergen>()),
@@ -78,7 +78,7 @@ namespace Hospital.SharedModel
                   new { PatientId = 1, HealthInsuranceNumber = "1ab", CompanyName = "WellCare" },
                   new { PatientId = 2, HealthInsuranceNumber = "2ab", CompanyName = "WellCare" });
             });
-               
+
 
             modelBuilder.Entity<SurveyQuestion>().HasData(
                 new SurveyQuestion( 1, "How satisfied are you with the work of your doctor?", 0, 0),
@@ -97,7 +97,7 @@ namespace Hospital.SharedModel
                 new SurveyQuestion(14, "How likely are you to recommend our hospital to a friend or family member?", 0, 2)
             );
             modelBuilder.Entity<Medicine>().HasData(new Medicine(1, "Brufen", 200, 100, "Pfizer", "Umres", "Pa umres", "Kad god hoces", 100, "Mozes sve lagano", ""));
-            
+
             //modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
             modelBuilder.Entity<Appointment>().HasData(
              new Appointment(1, new DateTime(2021, 12, 07, 16, 30, 00), 30, "All good", false, 1, 1, false, true),
@@ -110,5 +110,5 @@ namespace Hospital.SharedModel
 
     }
 
-   
+
 }
