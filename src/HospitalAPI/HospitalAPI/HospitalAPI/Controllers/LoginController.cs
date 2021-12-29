@@ -36,8 +36,11 @@ namespace HospitalAPI.Controllers
             {
                 String jwtToken = patientService.GenerateJwtToken(patient);
                 return Ok(jwtToken);
-            }else
+            }
+            else
+            {
                 return Unauthorized();
+            }
         }
     }
 }

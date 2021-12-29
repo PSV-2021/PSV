@@ -87,10 +87,10 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
-    Interceptor,
     AuthGuard,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-        JwtHelperService
+    JwtHelperService,
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

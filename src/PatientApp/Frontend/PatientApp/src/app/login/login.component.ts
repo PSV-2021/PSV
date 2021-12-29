@@ -41,9 +41,11 @@ export class LoginComponent implements OnInit {
       let tokenInfo = this.getDecodedToken(data);
       localStorage.setItem('id', tokenInfo.id);
       localStorage.setItem('role', tokenInfo.role);
+      console.log(tokenInfo.role);
       console.log(data);
       this.router.navigate(['medicalRecord']);
     });
+
   
   }
 

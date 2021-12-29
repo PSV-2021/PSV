@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MedicalrecordController : ControllerBase
@@ -34,7 +35,8 @@ namespace HospitalAPI.Controllers
             patientService.AllergenRepository = new AllergenSqlRepository(context);
         }
 
-
+ 
+        //[Authorize(Roles = "patient")]
         [HttpGet]
         public IActionResult Get( string id)
         {
