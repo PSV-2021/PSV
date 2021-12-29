@@ -17,7 +17,7 @@ export class TenderService {
     
 
     GetAllActiveTenders(): Observable<any>{
-      return this.http.get<any>(this.url + '/drugTender/ongoing');
+      return this.http.get<any>(this.url + '/tenderOffer/ongoing');
     }   
     
 }

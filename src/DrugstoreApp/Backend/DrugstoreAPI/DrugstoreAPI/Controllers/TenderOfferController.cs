@@ -1,5 +1,6 @@
 ﻿using Drugstore.Models;
 using Drugstore.Service;
+using DrugstoreAPI.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using System;
@@ -43,6 +44,48 @@ namespace DrugstoreAPI.Controllers
 
 
             }
+        }
+
+        
+
+        [HttpGet("ongoing")] // Get /api/tenderOffer/ongoing
+        public IActionResult GetOnGoing()
+        {
+            drugTenderService = new DrugTenderService(dbContext);
+            List<TenderDto> retVal = new List<TenderDto>();
+            try
+            {
+                List<DrugTender> rawTenders = drugTenderService.GetOngoingTenders();
+                foreach (DrugTender rawTender in rawTenders)
+                {
+                    AddOneTender(rawTender, retVal);
+                }
+
+                return Ok(retVal);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return NotFound();
+            }
+        }
+
+        private static void AddOneTender(DrugTender rawTender, List<TenderDto> retVal)
+        {
+            TenderDto oneTender = new TenderDto(rawTender.Id, rawTender.TenderEnd);
+            foreach (string drugWithPrice in rawTender.TenderInfo.Split(","))
+            {
+                AddOneDrug(drugWithPrice, oneTender);
+            }
+
+            retVal.Add(oneTender);
+        }
+
+        private static void AddOneDrug(string drugWithPrice, TenderDto oneTender)
+        {
+            string[] info = drugWithPrice.Split(" - ");
+            oneTender.TenderInfo.Add(new DrugTenderDto(info[0], Int32.Parse(info[1])));
         }
 
     }

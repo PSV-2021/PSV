@@ -29,20 +29,20 @@ export class TendersComponent implements OnInit {
   }
   */
   ngOnInit(): void {
-    // this.tendersService.GetAllActiveTenders().subscribe((data: any) => {
-    //   for (const d of (data as any)) {
-    //     this.tenders.push({
-    //       "id": d.id,
-    //       "tenderEnd": d.tenderEnd,
-    //       "tenderInfo": d.tenderInfo
-    //     });
-    //   }
-    // });
-    this.tenders.push({
-      "id": 1111,
-      "tenderEnd": new Date(),
-      "tenderInfo": [{"drugName" : "Lek1", "amount" : 4 }, {"drugName" : "Lek2", "amount" : 5 } ]
+    this.tendersService.GetAllActiveTenders().subscribe((data: any) => {
+      for (const d of (data as any)) {
+        this.tenders.push({
+          "id": d.id,
+          "tenderEnd": d.tenderEnd,
+          "tenderInfo": d.tenderInfo
+        });
+      }
     });
+    // this.tenders.push({
+    //   "id": 1111,
+    //   "tenderEnd": new Date(),
+    //   "tenderInfo": [{"drugName" : "Lek1", "amount" : 4 }, {"drugName" : "Lek2", "amount" : 5 } ]
+    // });
   }
 
 }
