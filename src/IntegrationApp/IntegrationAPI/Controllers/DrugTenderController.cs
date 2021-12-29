@@ -7,6 +7,8 @@ using Integration_API.DTOs;
 using Model.DataBaseContext;
 using Integration.Service;
 using Integration.Tendering.Model;
+using RabbitMQ.Client;
+using System.Text;
 
 namespace Integration_API.Controllers
 {
@@ -17,6 +19,7 @@ namespace Integration_API.Controllers
         private readonly MyDbContext dbContext;
         public DrugTenderService DrugTenderService;
         public DrugstoreService DrugstoreService;
+        private string host = Environment.GetEnvironmentVariable("RABBIT_HOST") ?? "localhost";
 
 
         public DrugTenderController(MyDbContext db)
@@ -30,8 +33,23 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/drugTender
         public IActionResult Post(TenderDto tender)
         {
-            DrugTenderService.Save(new DrugTender(tender.TenderEnd.AddDays(1).AddMinutes(59).AddSeconds(59), FormatTenderInfo(tender.TenderInfo), false));
-            return Ok(true);
+            var factory = new ConnectionFactory() { HostName = host };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.ExchangeDeclare(exchange: "logs", type: ExchangeType.Fanout);
+
+                DrugTender drugstoreTender = new DrugTender(tender.TenderEnd.AddDays(1).AddMinutes(59).AddSeconds(59), FormatTenderInfo(tender.TenderInfo), false);
+                string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(drugstoreTender);
+                var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
+                channel.BasicPublish(exchange: "tender",
+                                     routingKey: "",
+                                     basicProperties: null,
+                                     body: bodyNew);
+                DrugTenderService.Save(drugstoreTender);
+
+                return Ok(true);
+                 }
         }
 
         [HttpGet("ongoing")] // Get /api/drugTender/ongoing
