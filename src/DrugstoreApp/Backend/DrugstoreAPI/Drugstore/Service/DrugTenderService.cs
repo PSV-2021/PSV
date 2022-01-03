@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Integration.Repository.Sql;
-using Integration.Tendering.Model;
-using Integration.Tendering.Repository.Sql;
-using Model.DataBaseContext;
+using Drugstore.Models;
+using Drugstore.Repository.Sql;
 using Syncfusion.XPS;
 
-namespace Integration.Service
+namespace Drugstore.Service
 {
     public class DrugTenderService
     {

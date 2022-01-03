@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Integration.Tendering.Model;
-using Integration.Tendering.Repository.Interfaces;
-using Model.DataBaseContext;
+using Drugstore.Models;
+using Drugstore.Repository.Interfaces;
 
-namespace Integration.Tendering.Repository.Sql
+namespace Drugstore.Repository.Sql
 {
     public class TenderOfferSqlRepository : ITenderOfferRepository
     {
@@ -19,10 +18,6 @@ namespace Integration.Tendering.Repository.Sql
 
         public TenderOfferSqlRepository() { }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<TenderOffer> GetAll()
         {
@@ -34,13 +29,28 @@ namespace Integration.Tendering.Repository.Sql
             throw new NotImplementedException();
         }
 
-        public void Save(TenderOffer newObject)
+        public void Add(TenderOffer drugTender)
         {
-            dbContext.TenderOffers.Add(newObject);
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TenderOffer GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Save(TenderOffer tenderOffer)
+        {
+            dbContext.TenderOffers.Add(tenderOffer);
             dbContext.SaveChanges();
         }
 
-            public void Update(TenderOffer editedObject)
+        public void Update(TenderOffer drugTender)
         {
             throw new NotImplementedException();
         }
