@@ -20,5 +20,6 @@ jobs:
             docker kill $(docker ps -q)
             cd PSV
             git checkout development
+            git pull origin development
             cd src/IntegrationApp
             docker-compose build
