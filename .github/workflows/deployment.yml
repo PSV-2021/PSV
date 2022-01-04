@@ -23,3 +23,11 @@ jobs:
             git pull origin development
             cd src/IntegrationApp
             docker-compose build
+            docker push aco99/gateway
+            docker push aco99/hospital_api
+            docker push aco99/integration_api
+            docker push aco99/drugstore_api
+            docker push aco99/patient_client
+            docker push aco99/drugstore_client
+            docker push aco99/manager_client
+            
