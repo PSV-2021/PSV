@@ -26,15 +26,15 @@ export class TenderService {
     }
 
     SaveTender(tenderEnd: Date, tenderInfo: TenderDto[]): Observable<any> {
-        const body = {
-            TenderEnd : tenderEnd,
-            TenderInfo: tenderInfo
-          };
-          console.log(body);
-          let headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'ApiKey': "abcde" });
-          let options = { headers: headers };
-          return this.http.post<any>(this.url + '/drugTender', body, options);
-        }
-}
+      const body = {
+        TenderEnd : tenderEnd,
+        TenderInfo: tenderInfo
+      };
+      console.log(body);
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'ApiKey': "abcde" });
+      let options = { headers: headers };
+      return this.http.post<any>(this.url + '/drugTender', body, options);
+    }
+  }

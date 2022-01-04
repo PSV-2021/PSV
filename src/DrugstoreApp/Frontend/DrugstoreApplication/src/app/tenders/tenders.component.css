@@ -1,0 +1,13 @@
+.example-card {
+    max-width: 90%;
+  }
+
+.tender-holder{
+  display: flex;
+  flex-direction: column;
+} 
+
+.tender-holder{
+  margin-left: 5%;
+  align-items: center;
+}

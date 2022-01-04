@@ -30,6 +30,7 @@ namespace Integration.Service
         }
         public void SaveTenderOffer(TenderOffer tenderOffer)
         {
+            tenderOffer.Id = GenId();
             TenderOfferSqlRepository.Save(tenderOffer);
         }
 
@@ -41,6 +42,20 @@ namespace Integration.Service
         public List<TenderOffer> GetOffersForTender(int tenderId)
         {
             return TenderOfferSqlRepository.GetAll().Where(offer => offer.TenderId == tenderId).ToList();
+        }
+
+        public int GenId()
+        {
+            List<TenderOffer> tenders = TenderOfferSqlRepository.GetAll();
+            int id = 1;
+            foreach (TenderOffer t in tenders)
+            {
+                if (t.Id == id)
+                {
+                    id++;
+                }
+            }
+            return id;
         }
 
     }
