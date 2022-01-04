@@ -19,6 +19,7 @@ jobs:
             echo "Connection successful!"
             docker kill $(docker ps -q)
             docker image prune -a
+            y
             cd PSV
             git checkout development
             cd src/IntegrationApp
