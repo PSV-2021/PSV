@@ -1,0 +1,24 @@
+name: CD
+on:
+  push:
+    branches: [ development, feat#20/setup_deployment ]
+    
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute SSH commmands on remote server
+        uses: ian-whitestone/action-ssh@master
+        with:
+          hosts: 'student@79.101.34.218'
+          port: 22212
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          debug: true
+          command: |
+            echo "Connection successful!"
+            docker kill $(docker ps -q)
+            cd PSV
+            git checkout development
+            cd src/IntegrationApp
+            docker-compose build
