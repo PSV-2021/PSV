@@ -33,6 +33,7 @@ export class RecommendAppointmentComponent implements OnInit {
   start: Date = new Date;
   doctorName: string = "";
   doctorId: number = 0;
+  id: any = "";
 
   appointment: RecommendedAppointment = {startDate: new Date(),endDate: new Date(), doctorId: 0, specializationId: 0, priority: 1};
   public returnAppointment: RecommendAppointmentDto;
@@ -110,6 +111,7 @@ export class RecommendAppointmentComponent implements OnInit {
   schedule(element: { start: Date; doctorFullName: string; }) {
     this.start = element.start;
     this.doctorName = element.doctorFullName;
+    this.id = localStorage.getItem('id');
 
     for(const d of this.doctors){
       if(d.nameAndSurname == this.doctorName){
@@ -117,7 +119,7 @@ export class RecommendAppointmentComponent implements OnInit {
       }
     }
    
-    this.recommendAppointmentService.Schedule(this.start, this.doctorId).subscribe(data => {
+    this.recommendAppointmentService.Schedule(this.start, this.doctorId, this.id).subscribe(data => {
      
     });
 

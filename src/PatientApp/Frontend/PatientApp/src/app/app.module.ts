@@ -34,6 +34,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
 import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from './interceptor';
+import { AuthGuard } from './auth-guard';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -82,7 +86,12 @@ import { HomePageComponent } from './home-page/home-page.component';
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -289,9 +289,9 @@ namespace Hospital.Schedule.Service
             AppointmentRepository.Create(appointment);
         }
 
-        public static Appointment ScheduleAppointmentDTOToAppointment(DateTime start, int doctorId)
+        public static Appointment ScheduleAppointmentDTOToAppointment(DateTime start, int doctorId, int patientId)
         {
-            return new Appointment(start, 30, "", false, doctorId, 2, false);
+            return new Appointment(start, 30, "", false, doctorId, patientId, false, true);
         }
 
         public List<Appointment> RecommendDatePriority(SearchAppointmentsDTO searchAppointments)

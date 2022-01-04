@@ -100,5 +100,15 @@ namespace Hospital.MedicalRecords.Repository
         {
             throw new NotImplementedException();
         }
+
+        public List<Patient> GetAllPatients()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Patient FindByUsernameAndPassword(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

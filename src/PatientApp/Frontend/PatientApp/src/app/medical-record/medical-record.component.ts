@@ -9,13 +9,13 @@ import { MedicalRecordService } from '../service/medical-record.service';
 export class MedicalRecordComponent implements OnInit {
 
   medicalRecord: any;
+  id: any = "";
 
   constructor(private medicalRecordService: MedicalRecordService) { }
 
   ngOnInit(): void {
-    
-    this.medicalRecordService.GetMedicalRecord('2').subscribe((data: any)=>{
-        console.log(data);
+    this.id = localStorage.getItem('id');
+    this.medicalRecordService.GetMedicalRecord(this.id).subscribe((data: any)=>{
         this.medicalRecord = data;
     });
   }
