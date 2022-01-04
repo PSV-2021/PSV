@@ -11,7 +11,7 @@ namespace IntegrationSeleniumTests.Pages
     public class DrugstorePage
     {
         private readonly IWebDriver _driver;
-        private const string Url = "http://localhost:3001/drugstore/1";
+        //private const string Url = "http://localhost:3001/drugstore/1";
 
         private IWebElement Title => _driver.FindElement(By.Id("title"));
         private IWebElement Address => _driver.FindElement(By.Id("address"));
@@ -58,11 +58,6 @@ namespace IntegrationSeleniumTests.Pages
             return Comment.Displayed;
         }
 
-        public string GetUrl()
-        {
-            return Url;
-        }
-
         public string GetTitle()
         {
             return Title.Text;
@@ -78,7 +73,7 @@ namespace IntegrationSeleniumTests.Pages
             return Comment.GetAttribute("value");
         }
 
-        public void Navigate()
-            => _driver.Navigate().GoToUrl(Url);
+        public void Navigate(string url)
+            => _driver.Navigate().GoToUrl(url);
     }
 }

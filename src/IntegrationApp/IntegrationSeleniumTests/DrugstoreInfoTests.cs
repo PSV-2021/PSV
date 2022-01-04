@@ -25,7 +25,7 @@ namespace IntegrationSeleniumTests
 
             Driver = new ChromeDriver(options);
             DrugstorePage = new DrugstorePage(Driver);
-            DrugstorePage.Navigate();
+            DrugstorePage.Navigate(Configuration.DrugstorePageUrl);
         }
 
         public void Dispose()
@@ -38,7 +38,7 @@ namespace IntegrationSeleniumTests
         public void IsDrugstoreLoadCorrect()
         {
             DrugstorePage.WaitToLoad();
-            Assert.Equal(Driver.Url, DrugstorePage.GetUrl());
+            Assert.Equal(Driver.Url, Configuration.DrugstorePageUrl);
             Assert.Equal("Apoteka prva", DrugstorePage.GetTitle());
             Assert.Equal("Tolstojeva 5, Novi Sad", DrugstorePage.GetAddress());
             Dispose();
@@ -55,7 +55,7 @@ namespace IntegrationSeleniumTests
             IAlert alert = Driver.SwitchTo().Alert();
             Assert.Equal("Drugstore info updated succesfully!", alert.Text);
             alert.Accept();
-            Assert.Equal(Driver.Url, DrugstorePage.GetUrl());
+            Assert.Equal(Driver.Url, Configuration.DrugstorePageUrl);
             Assert.Equal("Apoteka prva", DrugstorePage.GetTitle());
             Assert.Equal("Tolstojeva 5, Novi Sad", DrugstorePage.GetAddress());
             Assert.Equal("Ovo je test komentar", DrugstorePage.GetComment());
