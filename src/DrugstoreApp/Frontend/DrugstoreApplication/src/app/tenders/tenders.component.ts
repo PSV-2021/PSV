@@ -24,11 +24,20 @@ export class TendersComponent implements OnInit {
 
   
   addOffer(tender : WholeTenderDto, price : string): void {
+    
     this.tenderOffer = new TenderOfferDto;
     this.tenderOffer.price = parseFloat(price);
     this.tenderOffer.tender = tender;
     alert("tender to be offered: " + this.tenderOffer.tender.tenderInfo.map(a => (a.drugName + " " + a.amount)).toString());
-    this.tendersService.AddOffer(this.tenderOffer).subscribe((d: any) =>{alert("NAJJACI" + d.response)});
+    this.tendersService.GetAvailability(this.tenderOffer).subscribe((d:any) => {
+      if(d){
+        alert("Drugs available.");
+        this.tendersService.AddOffer(this.tenderOffer).subscribe();
+      }
+      else{
+        alert("Drugs not available.")
+      }
+    });
   }
 
   addCounterOffer(tender : WholeTenderDto, price : string): void {
@@ -36,9 +45,16 @@ export class TendersComponent implements OnInit {
     this.tenderOffer.price = parseFloat(price);
     this.tenderOffer.tender = tender;
     alert("tender to be offered: " + this.tenderOffer.tender.counterOfferInfo.map(a => (a.drugName + " " + a.amount)).toString());
-    this.tendersService.AddCounterOffer(this.tenderOffer).subscribe((d: any) =>{alert("NAJJACI" + d.response)});
+    this.tendersService.GetCounterAvailability(this.tenderOffer).subscribe((d:any) => {
+      if(d){
+        alert("Drugs available.");
+        this.tendersService.AddCounterOffer(this.tenderOffer).subscribe();
+      }
+      else{
+        alert("Drugs not available.")
+      }
+    });
   }
-  
   ngOnInit(): void {
     this.tendersService.GetAllActiveTenders().subscribe((data: any) => {
       for (const d of (data as any)) {
