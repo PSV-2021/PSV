@@ -1,0 +1,68 @@
+<!-- <div class="tender-holder">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-4">
+        <h2 style="font-size: 30px; margin-top: 2%;">Active Tenders:</h2>
+    </div>
+    <div *ngFor="let tender of tenders">
+        <div class="tender-holder">
+        <mat-card class="example-card">
+            <mat-card-subtitle >{{tender.id}}</mat-card-subtitle>
+            <br>
+            <mat-card-title>Tender</mat-card-title>
+            <mat-card-content>
+            <br>
+            <p><b>End Time: </b>{{ tender.tenderEnd }}</p>
+            </mat-card-content>
+            <div *ngFor="let i of tender.tenderInfo">
+                <mat-card-content>
+                    <br>
+                    <p> {{ i.drugName }}, kolicina: {{ i.amount }}</p>
+                </mat-card-content>
+            </div>
+            <mat-divider inset></mat-divider>
+            <mat-card-subtitle>Offer</mat-card-subtitle>
+            <br>
+            <p>Add Price: </p> 
+            <input type="text" matInput name="offer">
+            <button>Offer</button>
+        </mat-card>
+        </div>
+        <br>
+        <br>
+    </div>
+</div> -->
+<div class="container-fluid">
+    <mat-divider></mat-divider>
+    <br>
+    <h2 style="font-size: 50px; color: rgb(243, 26, 26);">Current active tenders:</h2>
+
+    <table *ngFor="let ot of tenders" class="table" style="margin-bottom: 2cm;">
+        <thead>
+            <tr>
+                <th scope="col" style="font-size: x-large;" >Tender ends: {{ot.tenderEnd}}</th>
+                <th>
+                    <input type="number" min = "0" placeholder="Add price" matInput name="offer" id = "price" name = "price" #price>
+                    <button *ngIf="!counter.checked" (click)="addOffer(ot, price.value)">Offer</button>
+                    <button *ngIf="counter.checked" (click)="addCounterOffer(ot, price.value)">Offer</button>
+                </th>
+            </tr>
+            <tr>
+                <th scope="col" style="font-size: large;" >Drug name</th>
+                <th scope="col" style="font-size: large;">Amount</th>
+                <th scope="col" style="font-size: large;">
+                    <input type="checkbox" (change)="counter" id="counter" name="counter" #counter>
+                    <label for="counter">Counter Offer</label>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tt of ot.tenderInfo; let idx = index">
+                <td scope="col" style="font-size: large;">{{ tt.drugName }}</td>
+                <td scope="col" style="font-size: large;">{{ tt.amount }}</td>
+                <td scope="col" style="font-size: large;">
+                    <input *ngIf="counter.checked" [(ngModel)]="ot.counterOfferInfo[idx].amount" type="text" placeholder="amount" matInput name="offer">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

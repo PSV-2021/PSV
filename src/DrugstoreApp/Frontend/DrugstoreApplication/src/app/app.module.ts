@@ -12,6 +12,7 @@ import { MaterialModule } from './material/material.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.component';
+import { TendersComponent } from './tenders/tenders.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.compo
     RegistrationComponent,
     ReviewsComponent,
     DrugstoreOfferComponent,
+    TendersComponent,
   ],
   imports: [
     BrowserModule,

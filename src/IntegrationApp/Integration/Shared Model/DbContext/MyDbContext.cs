@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Integration.Model;
+using Integration.Tendering.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Model.DataBaseContext
@@ -17,6 +18,8 @@ namespace Model.DataBaseContext
         public DbSet<DrugstoreFeedback> DrugstoreFeedbacks { get; set; }
         public DbSet<DrugstoreOffer> DrugstoreOffers { get; set; }
         public DbSet<DrugConsumed> DrugsConsumed { get; set; }
+        public DbSet<DrugTender> DrugTenders { get; set; }
+        public DbSet<TenderOffer> TenderOffers { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -115,6 +118,16 @@ namespace Model.DataBaseContext
                 new DrugConsumed(47, "Andol", 77, new DateTime(2021, 11, 20)),
                 new DrugConsumed(48, "Panadol", 60, new DateTime(2021, 11, 20)),
                 new DrugConsumed(49, "Panklav", 38, new DateTime(2021, 11, 20))
+            );
+
+            modelBuilder.Entity<DrugTender>().HasData(
+                new DrugTender(1, DateTime.Now.AddDays(-7), "Brufen - 150, Palitreks - 100, Andol - 40", true),
+                new DrugTender(2, DateTime.Now.AddDays(21), "Brufen - 120, Palitreks - 90, Andol - 50", false)
+            );
+
+            modelBuilder.Entity<TenderOffer>().HasData(
+                new TenderOffer(1, "Brufen - 100, Palitreks - 80, Andol - 40",5000, 2, false, 1, true),
+                new TenderOffer(2, "Brufen - 120, Palitreks - 50, Andol - 35", 5900,2, false, 2, true)
             );
         }
     }

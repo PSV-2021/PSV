@@ -12,6 +12,7 @@ using Hospital.Schedule.Repository;
 using System.Globalization;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -39,10 +40,11 @@ namespace HospitalAPI.Controllers
             return Ok(dto);
         }
 
+
         [HttpPost("schedule")]
         public IActionResult Schedule(ScheduleDTO scheduleDTO)
         {
-            Appointment appointment = AppointmentService.ScheduleAppointmentDTOToAppointment(scheduleDTO.Start, scheduleDTO.Id);
+            Appointment appointment = AppointmentService.ScheduleAppointmentDTOToAppointment(scheduleDTO.Start, scheduleDTO.Id, scheduleDTO.PatientId);
             appointmentService.Schedule(appointment);
 
             return Ok();

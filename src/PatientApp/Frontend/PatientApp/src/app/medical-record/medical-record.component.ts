@@ -11,11 +11,13 @@ export class MedicalRecordComponent implements OnInit {
 
   medicalRecord: any;
   imagePath: any;
+  id: any = "";
+
   constructor(private medicalRecordService: MedicalRecordService, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    
-    this.medicalRecordService.GetMedicalRecord('1').subscribe((data: any)=>{
+    this.id = localStorage.getItem('id');
+    this.medicalRecordService.GetMedicalRecord(this.id).subscribe((data: any)=>{
         this.imagePath ="data:image/png;base64,"+ atob(data.image);
         this.medicalRecord = data;
     });
