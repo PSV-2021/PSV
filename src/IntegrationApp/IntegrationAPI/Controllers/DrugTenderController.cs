@@ -29,7 +29,7 @@ namespace Integration_API.Controllers
             DrugstoreService = new DrugstoreService(new DrugstoreSqlRepository(dbContext));
 
         }
-        
+
         [HttpPost] // POST /api/drugTender
         public IActionResult Post(TenderDto tender)
         {

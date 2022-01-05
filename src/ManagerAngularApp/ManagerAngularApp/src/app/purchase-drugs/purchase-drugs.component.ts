@@ -47,10 +47,10 @@ export class PurchaseDrugsComponent implements OnInit {
     this.pharmacyService.SendDrugDemand(this.selectedPharmacy.Url, this.drugAmount, this.drugName).subscribe((d: any) =>{
       if (d){
         this.disableButton = false;
-        alert("You CAN order this drug from this drugstore ");
+        alert("You CAN order this drug from this drugstore.");
       }else if(!d){
         this.disableButton = true;
-        alert("You CAN'T order this drug from this drugstore ");
+        alert("You CAN'T order this drug from this drugstore.");
       }
 
     });

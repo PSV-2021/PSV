@@ -36,7 +36,6 @@ namespace Integration.Tendering.Repository.Sql
 
         public void Save(TenderOffer newObject)
         {
-
             dbContext.TenderOffers.Add(newObject);
             dbContext.SaveChanges();
         }
