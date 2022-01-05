@@ -9,6 +9,7 @@ using Hospital.MedicalRecords.Service;
 using Hospital.SharedModel;
 using HospitalAPI.DTO;
 using Hospital.MedicalRecords.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -28,6 +29,7 @@ namespace HospitalAPI.Controllers
             surveyService = new SurveyService(repoSurvey);
         }
 
+
         [HttpGet]   // GET 
         public IActionResult Get()
         {
@@ -35,6 +37,8 @@ namespace HospitalAPI.Controllers
             return Ok(repoSurveyQuestion.GetAll());
 
         }
+
+
         [HttpPost("{id}/{ap}")]
         public IActionResult Post(List<AnsweredQuestion> answeredQuestion, string id, string ap)
         {

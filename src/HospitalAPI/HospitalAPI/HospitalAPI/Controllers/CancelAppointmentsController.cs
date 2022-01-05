@@ -1,6 +1,7 @@
 ﻿using Hospital.Schedule.Repository;
 using Hospital.Schedule.Service;
 using Hospital.SharedModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,6 +23,7 @@ namespace HospitalAPI.Controllers
             this.context = context;
             observeAppointmentsService = new ObserveAppointmentsService(new ObserveAppointmentsSqlRepository(context));
         }
+
 
         [HttpPost]
         public IActionResult CancelAppointment([FromBody] int appointmentId)
