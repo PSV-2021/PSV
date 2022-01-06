@@ -15,6 +15,7 @@ export class PatientDto{
     DoctorId: number;
     Allergens: any[];
     Token: string;
+    Image: string;
 
     constructor(){
         this.Name = "",
@@ -33,5 +34,6 @@ export class PatientDto{
         this.DoctorId = 0,
         this.Allergens = [],
         this.Token = ""
+        this.Image = ""
     }
 }
