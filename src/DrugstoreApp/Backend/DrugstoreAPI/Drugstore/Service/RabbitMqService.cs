@@ -61,7 +61,7 @@ namespace PrimerServis
             channel.QueueBind(queue: queueName,
                               exchange: "tender",
                               routingKey: "");
-            
+
             var consumer = new EventingBasicConsumer(channel);
 
             consumer.Received += (model, ea) =>
@@ -77,7 +77,7 @@ namespace PrimerServis
                     {   // try deserialize with default datetime format
                         drugTender = JsonConvert.DeserializeObject<DrugTender>(jsonMessage);
                         Console.WriteLine(drugTender.Id);
-                        
+
                     }
                     catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
                     {
@@ -91,6 +91,7 @@ namespace PrimerServis
                                          autoAck: true,
                                          consumer: consumer);
             return drugTender;
+            /*            return null;*/
         }
 
         DrugTender IRabbitMQService.RecieveMessage()

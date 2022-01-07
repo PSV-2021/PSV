@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211227190648_NewMiigr")]
-    partial class NewMiigr
+    [Migration("20220107151713_eventAddedMigration")]
+    partial class eventAddedMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,14 +75,14 @@ namespace Drugstore.Migrations
                         new
                         {
                             Id = 1,
-                            TenderEnd = new DateTime(2021, 12, 20, 20, 6, 47, 970, DateTimeKind.Local).AddTicks(402),
+                            TenderEnd = new DateTime(2021, 12, 31, 16, 17, 11, 876, DateTimeKind.Local).AddTicks(471),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = 2,
-                            TenderEnd = new DateTime(2022, 1, 17, 20, 6, 47, 970, DateTimeKind.Local).AddTicks(1673),
+                            TenderEnd = new DateTime(2022, 1, 28, 16, 17, 11, 876, DateTimeKind.Local).AddTicks(3154),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         });
@@ -118,9 +118,35 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 27, 20, 6, 47, 969, DateTimeKind.Local).AddTicks(7135),
-                            StartDate = new DateTime(2021, 12, 27, 20, 6, 47, 967, DateTimeKind.Local).AddTicks(8935),
+                            EndDate = new DateTime(2022, 1, 7, 16, 17, 11, 875, DateTimeKind.Local).AddTicks(2775),
+                            StartDate = new DateTime(2022, 1, 7, 16, 17, 11, 870, DateTimeKind.Local).AddTicks(7171),
                             Title = "title"
+                        });
+                });
+
+            modelBuilder.Entity("Drugstore.Models.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("EventName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EventTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EventName = "Klik",
+                            EventTime = new DateTime(2022, 1, 7, 16, 17, 11, 877, DateTimeKind.Local).AddTicks(12)
                         });
                 });
 
@@ -290,34 +316,7 @@ namespace Drugstore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Drugstore.Models.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("Integration.Tendering.Model.TenderOffer", b =>
+            modelBuilder.Entity("Drugstore.Models.TenderOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -367,6 +366,33 @@ namespace Drugstore.Migrations
                             TenderId = 2,
                             TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
                         });
+                });
+
+            modelBuilder.Entity("Drugstore.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
                 });
 
             modelBuilder.Entity("Drugstore.Models.Customer", b =>

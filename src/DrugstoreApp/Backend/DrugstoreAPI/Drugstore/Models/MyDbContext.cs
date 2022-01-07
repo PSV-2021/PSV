@@ -17,7 +17,7 @@ namespace Drugstore.Models
         public DbSet<DrugSpecification> DrugSpecifications { get; set; }
         public DbSet<DrugTender> DrugTenders { get; set; }
         public DbSet<TenderOffer> TenderOffers { get; set; }
-
+        public DbSet<Event> Events { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
 
@@ -67,6 +67,10 @@ namespace Drugstore.Models
             modelBuilder.Entity<TenderOffer>().HasData(
                 new TenderOffer(1, "Brufen - 100, Palitreks - 80, Andol - 40", 5000, 2, false, 1, true),
                 new TenderOffer(2, "Brufen - 120, Palitreks - 50, Andol - 35", 5900, 2, false, 2, true)
+            );
+
+            modelBuilder.Entity<Event>().HasData(
+               new Event(1, "Klik", DateTime.Now)
             );
         }
     }
