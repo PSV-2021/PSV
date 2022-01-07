@@ -18,6 +18,7 @@ export class AppointmentsObserveComponent implements OnInit {
   dataSource = [];
   surveys: any[] = []
   appointmentId: any;
+  id: any = "";
 
 
   constructor(private observeAppointemntsService: AppointmentObserveService, private router: Router) { }
@@ -41,7 +42,8 @@ export class AppointmentsObserveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.observeAppointemntsService.GetAppointments('2').subscribe((data: any)=>{
+    this.id = localStorage.getItem('id');
+    this.observeAppointemntsService.GetAppointments(this.id).subscribe((data: any)=>{
       console.log(data);
     this.dataSource = data;
   });

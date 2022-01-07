@@ -1,8 +1,6 @@
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { environment } from 'src/environments/environment';
 import { TenderDto } from '../tender/tender.dto';
 
@@ -28,15 +26,15 @@ export class TenderService {
     }
 
     SaveTender(tenderEnd: Date, tenderInfo: TenderDto[]): Observable<any> {
-        const body = {
-            TenderEnd : tenderEnd,
-            TenderInfo: tenderInfo
-          };
-          console.log(body);
-          let headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'ApiKey': "abcde" });
-          let options = { headers: headers };
-          return this.http.post<any>(this.url + '/drugTender', body, options);
-        }
-}
+      const body = {
+        TenderEnd : tenderEnd,
+        TenderInfo: tenderInfo
+      };
+      console.log(body);
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'ApiKey': "abcde" });
+      let options = { headers: headers };
+      return this.http.post<any>(this.url + '/drugTender', body, options);
+    }
+  }

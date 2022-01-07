@@ -1,4 +1,5 @@
 ﻿using Integration.Model;
+using Integration.Tendering.Model;
 using RabbitMQ.Client;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace PrimerServis
     {
         void CreateConnection();
         DrugstoreOffer RecieveMessage();
+        TenderOffer RecieveTenderOffer();
         Task StartAsync(CancellationToken cancellationToken);
         Task StopAsync(CancellationToken cancellationToken);
     }

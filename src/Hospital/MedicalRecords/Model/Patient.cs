@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 using Hospital.Schedule.Model;
 using Hospital.SharedModel;
 
@@ -21,6 +22,7 @@ namespace Hospital.MedicalRecords.Model
         public int DoctorId { get; private set; }
         public virtual Doctor ChosenDoctor { get; }
         public MedicalRecord MedicalRecord { get; private set; }
+        public byte[] Image { get; private set; }
         
        public String Token { get; set; }
 
@@ -29,7 +31,7 @@ namespace Hospital.MedicalRecords.Model
         }
 
         public Patient(string name, string surname, string jmbg, BloodType bloodType, string fathersName, Sex sex, string address, string email,
-            string username, string phoneNumber, string password, int doctorId, string token, List<Allergen> allergens)
+            string username, string phoneNumber, string password, int doctorId, string token, List<Allergen> allergens, string image)
         {
             Name = name;
             Surname = surname;
@@ -47,11 +49,13 @@ namespace Hospital.MedicalRecords.Model
             Allergen = allergens;
             Type = UserType.patient;
             MedicalRecord = new MedicalRecord("PT" + jmbg, "WellCare");
+            Image = Encoding.ASCII.GetBytes(image);
+
             Validate();
         }
 
         public Patient(int id, string fathersName, string name, string surname, string jmbg, DateTime date, Sex sex, string phoneNumber, string address, string email,
-            string username, string password, BloodType bloodType, Boolean isActive, Doctor doc)
+            string username, string password, BloodType bloodType, Boolean isActive, Doctor doc, string image)
         {
             Id = id;
             FathersName = fathersName;
@@ -68,11 +72,12 @@ namespace Hospital.MedicalRecords.Model
             BloodType = bloodType;
             IsActive = isActive;
             ChosenDoctor = doc;
+            Image = new byte[0];
             Validate();
         }
 
         public Patient(int id, string name, string surname, string username, string password, string jmbg, DateTime date, BloodType btype, string father, 
-            Sex sex, string phone, string address, string email)
+            Sex sex, string phone, string address, string email, string image)
         {
             Id = id;
             Name = name;
@@ -87,11 +92,12 @@ namespace Hospital.MedicalRecords.Model
             PhoneNumber = phone;
             Adress = address;
             Email = email;
+            Image = new byte[0];
             Validate();
         }
 
         public Patient(int id, string name, string surname, string jmbg, DateTime date, Sex sex, string phone, string address, string email, string username,
-            string password, bool isActive, BloodType btype, string father, int doctorId, List<Allergen> allergens)
+            string password, bool isActive, BloodType btype, string father, int doctorId, List<Allergen> allergens, string image)
         {
             Id = id;
             Name = name;
@@ -109,6 +115,7 @@ namespace Hospital.MedicalRecords.Model
             IsActive = isActive;
             DoctorId = doctorId;
             Allergen = allergens;
+            Image = new byte[0];
             Validate();
 
         }

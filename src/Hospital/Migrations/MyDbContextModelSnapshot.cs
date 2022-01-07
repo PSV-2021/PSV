@@ -120,6 +120,9 @@ namespace Hospital.Migrations
                     b.Property<string>("FathersName")
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("bytea");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
@@ -164,6 +167,7 @@ namespace Hospital.Migrations
                             DoctorId = 1,
                             Email = "marko@gmail.com",
                             FathersName = "Petar",
+                            Image = new byte[0],
                             IsActive = true,
                             Jmbg = "3009998805138",
                             Name = "Marko",
@@ -183,6 +187,7 @@ namespace Hospital.Migrations
                             DoctorId = 1,
                             Email = "milica@gmail.com",
                             FathersName = "Nenad",
+                            Image = new byte[0],
                             IsActive = true,
                             Jmbg = "3009998805137",
                             Name = "Milica",
@@ -224,7 +229,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 23, 3, 45, 25, 68, DateTimeKind.Local).AddTicks(6075),
+                            IssuedTime = new DateTime(2021, 12, 27, 12, 8, 46, 742, DateTimeKind.Local).AddTicks(7829),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -400,7 +405,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 23, 3, 45, 25, 48, DateTimeKind.Local).AddTicks(7528),
+                            TimeWritten = new DateTime(2021, 12, 27, 12, 8, 46, 710, DateTimeKind.Local).AddTicks(9326),
                             canPublish = false
                         },
                         new
@@ -408,16 +413,16 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 23, 3, 45, 25, 51, DateTimeKind.Local).AddTicks(2949),
-                            canPublish = false
+                            TimeWritten = new DateTime(2021, 12, 27, 12, 8, 46, 718, DateTimeKind.Local).AddTicks(4164),
+                            canPublish = true
                         },
                         new
                         {
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 23, 3, 45, 25, 51, DateTimeKind.Local).AddTicks(3073),
-                            canPublish = false
+                            TimeWritten = new DateTime(2021, 12, 27, 12, 8, 46, 718, DateTimeKind.Local).AddTicks(4489),
+                            canPublish = true
                         });
                 });
 
@@ -539,7 +544,7 @@ namespace Hospital.Migrations
                             DurationInMunutes = 30,
                             IsDeleted = false,
                             PatientId = 2,
-                            StartTime = new DateTime(2022, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2021, 12, 31, 16, 30, 0, 0, DateTimeKind.Unspecified),
                             SurveyId = 0,
                             canCancel = true,
                             isCancelled = false

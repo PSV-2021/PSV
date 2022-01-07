@@ -36,10 +36,11 @@ namespace Integration.Tendering.Repository.Sql
 
         public void Save(TenderOffer newObject)
         {
-            throw new NotImplementedException();
+            dbContext.TenderOffers.Add(newObject);
+            dbContext.SaveChanges();
         }
 
-        public void Update(TenderOffer editedObject)
+            public void Update(TenderOffer editedObject)
         {
             throw new NotImplementedException();
         }

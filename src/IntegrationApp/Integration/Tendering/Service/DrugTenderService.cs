@@ -33,6 +33,11 @@ namespace Integration.Service
         {
             drugTenderRepository.Save(tender);
         }
+        public void SaveTenderOffer(TenderOffer tenderOffer)
+        {
+            tenderOffer.Id = GenId();
+            TenderOfferSqlRepository.Save(tenderOffer);
+        }
 
         public List<DrugTender> GetOngoingTenders()
         {
@@ -98,6 +103,20 @@ namespace Integration.Service
                     wins = te.DrugstoreId == drugstoreId ? wins += 1 : wins;
             }
             return wins;
+        }
+
+        public int GenId()
+        {
+            List<TenderOffer> tenders = TenderOfferSqlRepository.GetAll();
+            int id = 1;
+            foreach (TenderOffer t in tenders)
+            {
+                if (t.Id == id)
+                {
+                    id++;
+                }
+            }
+            return id;
         }
 
     }
