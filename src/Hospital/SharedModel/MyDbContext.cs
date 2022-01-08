@@ -69,9 +69,9 @@ namespace Hospital.SharedModel
 
                 mb.HasData(
                new Patient(1, "Marko", "Markovic", "3009998805138", new DateTime(1998, 06, 25), Sex.male, "0641664608",
-                "Bulevar Oslobodjenja 8", "marko@gmail.com", "miki98", "miki985", true, BloodType.B, "Petar", 1, new List<Allergen>()),
+                "Bulevar Oslobodjenja 8", "marko@gmail.com", "miki98", "miki985", true, BloodType.B, "Petar", 1, new List<Allergen>(),"0"),
                new Patient(2, "Milica", "Mikic", "3009998805137", new DateTime(1997, 10, 12), Sex.female, "065245987", "Kisacka 5", "milica@gmail.com",
-               "mici97", "mici789", true, BloodType.A, "Nenad", 1, new List<Allergen>())
+               "mici97", "mici789", true, BloodType.A, "Nenad", 1, new List<Allergen>(),"0")
                );
 
                 mb.OwnsOne(p => p.MedicalRecord).HasData(

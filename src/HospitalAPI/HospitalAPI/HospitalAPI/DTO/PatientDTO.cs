@@ -22,6 +22,7 @@ namespace HospitalAPI.DTO
         public int DoctorId { get; set; }
         public string Token { get; set; }
         public List<String> Allergens { get; set; }
+        public String Image { get; set; }
         public PatientDto() { }
     }
 }

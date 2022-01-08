@@ -32,7 +32,7 @@ namespace HospitalApiTests.Integration
             context.Add(new Doctor("Milan", "Popovic", "3009998805137", new DateTime(1998, 04, 20), "0641664608", "Bulevar Oslobodjenja 4", "milan@gmail.com",
                 "miki56", "02145", UserType.doctor, 200000, 1, 1, 0, Sex.male));
             Patient patient = new Patient(1, "Andjelka", "Andjic", "andji", "andji", "1821099320191", new DateTime(1980, 9, 17), BloodType.A,
-                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com");
+                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com","0");
             context.Add(patient);
 
             ObserveAppointmentsController observeAppointmentsController = new ObserveAppointmentsController(context);

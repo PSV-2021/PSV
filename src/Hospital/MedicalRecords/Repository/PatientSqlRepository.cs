@@ -97,5 +97,11 @@ namespace Hospital.MedicalRecords.Repository
 
             return false;
         }
+
+        public Patient FindByUsernameAndPassword(String username, String password)
+        {
+            Patient patient = (from n in dbContext.Patients where n.Username == username && n.Password == password select n).FirstOrDefault();
+            return patient;
+        }
     }
 }

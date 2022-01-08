@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Drugstore.Models;
 using Drugstore.Repository.Sql;
@@ -23,11 +24,12 @@ namespace Drugstore.Service
         }
 
         public void Save(DrugTender tender)
-        {
+        {          
             drugTenderRepository.Save(tender);
         }
         public void SaveTenderOffer(TenderOffer tenderOffer)
         {
+            tenderOffer.Id = GenId();
             TenderOfferSqlRepository.Save(tenderOffer);
         }
 
@@ -39,6 +41,20 @@ namespace Drugstore.Service
         public List<TenderOffer> GetOffersForTender(int tenderId)
         {
             return TenderOfferSqlRepository.GetAll().Where(offer => offer.TenderId == tenderId).ToList();
+        }
+
+        public int GenId()
+        {
+            List<TenderOffer> tenders = TenderOfferSqlRepository.GetAll();
+            int id = 1;
+            foreach(TenderOffer t in tenders)
+            {
+                if(t.Id == id)
+                {
+                    id++;
+                }
+            }
+            return id;
         }
 
     }

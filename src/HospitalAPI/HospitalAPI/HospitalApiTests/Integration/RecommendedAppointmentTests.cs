@@ -119,10 +119,10 @@ namespace HospitalApiTests.Integration
             var retVal = new List<object[]>();
 
             retVal.Add(new object[]
-            {   new Appointment(new DateTime(2021, 12, 12, 8, 30, 00), 30, "", false, 1, 1, false),
-                new Appointment(new DateTime(2021, 12, 12, 9, 00, 00), 30, "", false, 1, 1, false),
-                new Appointment(new DateTime(2021, 12, 12, 10, 00, 00), 30, "", false, 1, 1, false),
-                new Appointment(new DateTime(2021, 12, 12, 14, 30, 00), 30, "", false, 1, 1, false)
+            {   new Appointment(new DateTime(2021, 12, 12, 8, 30, 00), 30, "", false, 1, 1, false, true),
+                new Appointment(new DateTime(2021, 12, 12, 9, 00, 00), 30, "", false, 1, 1, false, true),
+                new Appointment(new DateTime(2021, 12, 12, 10, 00, 00), 30, "", false, 1, 1, false, true),
+                new Appointment(new DateTime(2021, 12, 12, 14, 30, 00), 30, "", false, 1, 1, false, true)
             });
 
             return retVal;
