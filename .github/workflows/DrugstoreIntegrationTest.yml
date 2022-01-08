@@ -2,7 +2,7 @@ name: HospitalIntegrationTests
 
 on:
   push: 
-    branches: [ development, feat ]
+    branches: [ development, fix#6run_integraton_tests ]
 jobs:
   build:
     runs-on: windows-latest
