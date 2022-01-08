@@ -3,7 +3,7 @@ WORKDIR /src
 COPY DrugstoreAPI.sln ./
 COPY Drugstore/*.csproj ./Drugstore/
 COPY DrugstoreAPI/*.csproj ./DrugstoreAPI/
-COPY DrugstoreApiTests/DrugstoreApiTests.csproj ./DrugstoreApiTests/
+COPY DrugstoreApiTests/*.csproj ./DrugstoreApiTests/
 RUN dotnet restore DrugstoreAPI.sln
 
 COPY . ./
