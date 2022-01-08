@@ -7,6 +7,7 @@ using Integration_API.DTOs;
 using Model.DataBaseContext;
 using Integration.Service;
 using Integration.Tendering.Model;
+using Integration.Model;
 using RabbitMQ.Client;
 using System.Text;
 
@@ -137,6 +138,14 @@ namespace Integration_API.Controllers
                 retString += dt.DrugName + " - " + dt.Amount + ", ";
             }
             return retString.Substring(0, retString.Length - 2);
+        }
+
+        [HttpPost("chartsInfo")] // POST /api/drugTender
+        public IActionResult GetCharts(DateRange range)
+        {
+            Console.WriteLine(range.From.AddHours(1));
+            Console.WriteLine(range.To.AddHours(1));
+            return Ok(DrugTenderService.GetDrugstoreTenderInfo(range.ConvertDateFromAngular()));
         }
     }
 }

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration.Migrations
 {
-    public partial class forFrontend : Migration
+    public partial class tenderMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -91,16 +91,39 @@ namespace Integration.Migrations
                     table.PrimaryKey("PK_DrugTenders", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TenderOffers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TenderOfferInfo = table.Column<string>(type: "text", nullable: true),
+                    Price = table.Column<int>(type: "integer", nullable: false),
+                    TenderId = table.Column<int>(type: "integer", nullable: false),
+                    IsAccepted = table.Column<bool>(type: "boolean", nullable: false),
+                    DrugstoreId = table.Column<int>(type: "integer", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TenderOffers", x => x.Id);
+                });
+
             migrationBuilder.InsertData(
                 table: "DrugTenders",
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
-                values: new object[] { 1, new DateTime(2021, 12, 16, 22, 43, 40, 780, DateTimeKind.Local).AddTicks(7406), "Brufen - 150, Palitreks - 100, Andol - 40", true });
+                values: new object[,]
+                {
+                    { 2, new DateTime(2022, 1, 17, 15, 33, 36, 538, DateTimeKind.Local).AddTicks(5467), "Brufen - 120, Palitreks - 90, Andol - 50", false },
+                    { 1, new DateTime(2021, 12, 20, 15, 33, 36, 534, DateTimeKind.Local).AddTicks(7949), "Brufen - 150, Palitreks - 100, Andol - 40", true }
+                });
 
             migrationBuilder.InsertData(
                 table: "DrugsConsumed",
                 columns: new[] { "Id", "Amount", "DateConsumed", "Name" },
                 values: new object[,]
                 {
+                    { 25, 54, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinacilin" },
                     { 26, 77, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
                     { 27, 64, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panadol" },
                     { 28, 38, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
@@ -111,8 +134,8 @@ namespace Integration.Migrations
                     { 33, 45, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
                     { 34, 56, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panadol" },
                     { 35, 76, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
-                    { 36, 93, new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brufen" },
                     { 37, 62, new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palitrex" },
+                    { 49, 38, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
                     { 38, 49, new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amoksicilin" },
                     { 39, 46, new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinacilin" },
                     { 40, 72, new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
@@ -122,12 +145,10 @@ namespace Integration.Migrations
                     { 44, 62, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palitrex" },
                     { 45, 39, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amoksicilin" },
                     { 46, 46, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinacilin" },
-                    { 47, 77, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
-                    { 48, 60, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panadol" },
-                    { 25, 54, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinacilin" },
+                    { 36, 93, new DateTime(2021, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brufen" },
                     { 24, 42, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amoksicilin" },
-                    { 23, 66, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palitrex" },
                     { 22, 105, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brufen" },
+                    { 47, 77, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
                     { 1, 98, new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brufen" },
                     { 2, 65, new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palitrex" },
                     { 3, 45, new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amoksicilin" },
@@ -136,9 +157,9 @@ namespace Integration.Migrations
                     { 6, 65, new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panadol" },
                     { 7, 36, new DateTime(2021, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
                     { 8, 76, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brufen" },
-                    { 49, 38, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
-                    { 10, 54, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amoksicilin" },
                     { 9, 56, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palitrex" },
+                    { 23, 66, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palitrex" },
+                    { 10, 54, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amoksicilin" },
                     { 12, 87, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
                     { 13, 67, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panadol" },
                     { 14, 33, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
@@ -149,7 +170,8 @@ namespace Integration.Migrations
                     { 19, 56, new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
                     { 20, 75, new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panadol" },
                     { 21, 39, new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
-                    { 11, 34, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinacilin" }
+                    { 11, 34, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinacilin" },
+                    { 48, 60, new DateTime(2021, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panadol" }
                 });
 
             migrationBuilder.InsertData(
@@ -162,9 +184,18 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "ApiKey", "Base64Image", "Comment", "Name", "Url", "gRPC", "Address_City", "Address_Country", "Address_Street", "Email_EmailValue" },
                 values: new object[,]
                 {
+                    { 1, "DrugStoreSecretKey", null, null, "Apoteka prva", "http://localhost:5001", true, "Novi Sad", "Srbija", "Tolstojeva 5", "apotekaprva@gmail.com" },
                     { 3, "gasic", null, null, "Apoteka treca", "http://localhost:7001", true, "Subotica", "Srbija", "Cara Dusana 56", "trecimejl@gmail.com" },
-                    { 2, "nestorandom", null, null, "Apoteka druga", "http://localhost:6001", true, "Beograd", "Srbija", "Balzakova 31", "drugimeil@gmail.com" },
-                    { 1, "DrugStoreSecretKey", null, null, "Apoteka prva", "http://localhost:5001", true, "Novi Sad", "Srbija", "Tolstojeva 5", "apotekaprva@gmail.com" }
+                    { 2, "nestorandom", null, null, "Apoteka druga", "http://localhost:6001", true, "Beograd", "Srbija", "Balzakova 31", "drugimeil@gmail.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TenderOffers",
+                columns: new[] { "Id", "DrugstoreId", "IsAccepted", "IsActive", "Price", "TenderId", "TenderOfferInfo" },
+                values: new object[,]
+                {
+                    { 1, 1, false, true, 5000, 2, "Brufen - 100, Palitreks - 80, Andol - 40" },
+                    { 2, 2, false, true, 5900, 2, "Brufen - 120, Palitreks - 50, Andol - 35" }
                 });
         }
 
@@ -184,6 +215,9 @@ namespace Integration.Migrations
 
             migrationBuilder.DropTable(
                 name: "DrugTenders");
+
+            migrationBuilder.DropTable(
+                name: "TenderOffers");
         }
     }
 }
