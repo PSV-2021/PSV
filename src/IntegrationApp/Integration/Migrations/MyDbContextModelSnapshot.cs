@@ -500,10 +500,8 @@ namespace Integration.Migrations
 
             modelBuilder.Entity("Integration.Tendering.Model.DrugTender", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("TenderEnd")
                         .HasColumnType("timestamp without time zone");
@@ -521,15 +519,15 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            TenderEnd = new DateTime(2021, 12, 18, 20, 41, 37, 543, DateTimeKind.Local).AddTicks(6606),
+                            Id = "as",
+                            TenderEnd = new DateTime(2021, 12, 31, 14, 8, 37, 747, DateTimeKind.Local).AddTicks(6975),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
-                            Id = 2,
-                            TenderEnd = new DateTime(2022, 1, 15, 20, 41, 37, 548, DateTimeKind.Local).AddTicks(1532),
+                            Id = "2",
+                            TenderEnd = new DateTime(2022, 1, 28, 14, 8, 37, 749, DateTimeKind.Local).AddTicks(6210),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         });
@@ -537,10 +535,8 @@ namespace Integration.Migrations
 
             modelBuilder.Entity("Integration.Tendering.Model.TenderOffer", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<int>("DrugstoreId")
                         .HasColumnType("integer");
@@ -554,8 +550,8 @@ namespace Integration.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TenderId")
-                        .HasColumnType("integer");
+                    b.Property<string>("TenderId")
+                        .HasColumnType("text");
 
                     b.Property<string>("TenderOfferInfo")
                         .HasColumnType("text");
@@ -567,22 +563,22 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = "1",
                             DrugstoreId = 1,
                             IsAccepted = false,
                             IsActive = true,
                             Price = 5000,
-                            TenderId = 2,
+                            TenderId = "as",
                             TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = "2",
                             DrugstoreId = 2,
                             IsAccepted = false,
                             IsActive = true,
                             Price = 5900,
-                            TenderId = 2,
+                            TenderId = "2",
                             TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
                         });
                 });

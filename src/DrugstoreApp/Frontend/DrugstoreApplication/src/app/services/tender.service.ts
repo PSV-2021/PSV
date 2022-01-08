@@ -97,7 +97,7 @@ export class TenderService {
     }
     
     TenderInfoToString(tenderInfo: TenderDto[]): string{
-      var array = tenderInfo.map(a => (a.drugName + " " + a.amount));
+      var array = tenderInfo.map(a => (a.drugName + " - " + a.amount));
       var result = array.toString();
       console.log(result);
       return result;

@@ -24,7 +24,7 @@ namespace DrugstoreAPI.Controllers
         {
             this.dbContext = db;
         }
-        [HttpPost]
+        [HttpPost("availability")]
         public IActionResult Post(TenderOffer offer)
         {
             drugTenderService = new DrugTenderService(dbContext);
@@ -33,7 +33,8 @@ namespace DrugstoreAPI.Controllers
             using (var channel = connection.CreateModel())
             {
                 channel.ExchangeDeclare(exchange: "tenderOffer", type: ExchangeType.Direct);
-                TenderOffer tenderOffer = new TenderOffer(offer.Id,offer.TenderOfferInfo,offer.Price,offer.TenderId,offer.IsAccepted,offer.DrugstoreId,offer.IsActive);
+                string tenderId = drugTenderService.GenId();
+                TenderOffer tenderOffer = new TenderOffer(tenderId, offer.TenderOfferInfo,offer.Price,offer.TenderId,offer.IsAccepted,offer.DrugstoreId,offer.IsActive);
                 string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderOffer);
                 var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
                 channel.BasicPublish(exchange: "tenderOffer",
@@ -73,14 +74,14 @@ namespace DrugstoreAPI.Controllers
             }
         }
 
-        [HttpPost("availability")]
-        public IActionResult CheckAvailability(TenderOffer tenderInfo)
-        {
-            List<TenderInfo> infoList= new List<TenderInfo>();
-            medicineService = new MedicineService(dbContext);
-            return Ok(medicineService.CheckForDrugsAvailability(TenderInfoToList(tenderInfo.TenderOfferInfo)));
+        //[HttpPost("availability")]
+        //public IActionResult CheckAvailability(TenderOffer tenderInfo)
+        //{
+        //    List<TenderInfo> infoList= new List<TenderInfo>();
+        //    medicineService = new MedicineService(dbContext);
+        //    return Ok(medicineService.CheckForDrugsAvailability(TenderInfoToList(tenderInfo.TenderOfferInfo)));
                     
-        }
+        //}
 
         private static void AddOneTender(DrugTender rawTender, List<TenderDto> retVal)
         {

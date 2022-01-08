@@ -6,12 +6,12 @@ namespace Drugstore.Models
     public class DrugTender
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
         public DateTime TenderEnd { get; set; }
         public String TenderInfo { get; set; }
         public bool isFinished { get; set; }
 
-        public DrugTender(int id, DateTime tenderEnd, string tenderInfo, bool isFinished)
+        public DrugTender(string id, DateTime tenderEnd, string tenderInfo, bool isFinished)
         {
             Id = id;
             TenderEnd = tenderEnd;

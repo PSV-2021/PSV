@@ -105,7 +105,8 @@ export class TenderComponent implements OnInit {
       this.toastr.error('Your tender ending date must be valid (after today) and your drug list must contain at least one drug !', 'Error');
   }
 
-  seeOffers(id: number){
+  seeOffers(id: string){
+    console.log(id);
     this.router.navigate(['offer/' + id]);
   }
 

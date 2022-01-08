@@ -29,7 +29,6 @@ namespace Drugstore.Service
         }
         public void SaveTenderOffer(TenderOffer tenderOffer)
         {
-            tenderOffer.Id = GenId();
             TenderOfferSqlRepository.Save(tenderOffer);
         }
 
@@ -38,23 +37,14 @@ namespace Drugstore.Service
             return drugTenderRepository.GetAll().Where(tender => !tender.isFinished).ToList();
         }
 
-        public List<TenderOffer> GetOffersForTender(int tenderId)
+        public List<TenderOffer> GetOffersForTender(string tenderId)
         {
             return TenderOfferSqlRepository.GetAll().Where(offer => offer.TenderId == tenderId).ToList();
         }
 
-        public int GenId()
+        public string GenId()
         {
-            List<TenderOffer> tenders = TenderOfferSqlRepository.GetAll();
-            int id = 1;
-            foreach(TenderOffer t in tenders)
-            {
-                if(t.Id == id)
-                {
-                    id++;
-                }
-            }
-            return id;
+            return Guid.NewGuid().ToString();
         }
 
     }

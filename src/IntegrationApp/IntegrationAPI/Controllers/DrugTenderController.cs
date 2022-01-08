@@ -9,6 +9,7 @@ using Integration.Service;
 using Integration.Tendering.Model;
 using RabbitMQ.Client;
 using System.Text;
+using Integration.Model;
 
 namespace Integration_API.Controllers
 {
@@ -38,8 +39,8 @@ namespace Integration_API.Controllers
             using (var channel = connection.CreateModel())
             {
                 channel.ExchangeDeclare(exchange: "logs", type: ExchangeType.Fanout);
-
-                DrugTender drugstoreTender = new DrugTender(tender.TenderEnd.AddDays(1).AddMinutes(59).AddSeconds(59), FormatTenderInfo(tender.TenderInfo), false);
+                string tenderId = DrugTenderService.GenId();
+                DrugTender drugstoreTender = new DrugTender(tenderId, tender.TenderEnd.AddDays(1).AddMinutes(59).AddSeconds(59), FormatTenderInfo(tender.TenderInfo), false);
                 string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(drugstoreTender);
                 var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
                 channel.BasicPublish(exchange: "tender",
@@ -49,6 +50,48 @@ namespace Integration_API.Controllers
                 DrugTenderService.Save(drugstoreTender);
 
                 return Ok(true);
+            }
+        }
+
+        [HttpPost("complete")] // POST /api/drugTender
+        public IActionResult PostGas(TenderFinisherDTO tender)
+        {
+            var factory = new ConnectionFactory() { HostName = host };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.ExchangeDeclare(exchange: "tenderFinish", type: ExchangeType.Fanout);
+                
+                foreach(Drugstore d in DrugstoreService.GetAll())
+                {
+                    if(tender.drugstoreName == d.Name)
+                    {
+                        string tenderWin = "Winner-" + tender.tenderId;
+                        string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderWin);
+                        var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
+                        channel.BasicPublish(exchange: "tenderFinish",
+                                             routingKey: "",
+                                             basicProperties: null,
+                                             body: bodyNew);
+
+                        return Ok(true);
+                    }
+                    else
+                    {
+                        string tenderLose = "Loser-" + tender.tenderId;
+
+                        string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderLose);
+                        var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
+                        channel.BasicPublish(exchange: "tenderFinish",
+                                             routingKey: "",
+                                             basicProperties: null,
+                                             body: bodyNew);
+
+                        return Ok(true);
+                    }
+                }
+                return Unauthorized();
+                
             }
         }
 
@@ -76,16 +119,16 @@ namespace Integration_API.Controllers
 
 
         [HttpGet] // Get /api/drugTender/offer/2
-        [Route("offer/{id?}")]
-        public IActionResult GetAllOffersForTender(int id)
+        [Route("offer/{Id?}")]
+        public IActionResult GetAllOffersForTender(string Id)
         {
             List<TenderOfferDto> retVal = new List<TenderOfferDto>();
             try
             {
-                List<TenderOffer> rawOffers = DrugTenderService.GetOffersForTender(id);
+                List<TenderOffer> rawOffers = DrugTenderService.GetOffersForTender(Id);
                 foreach (TenderOffer rawOffer in rawOffers)
                 {
-                    FillDrugList(id, rawOffer, retVal);
+                    FillDrugList(rawOffer.DrugstoreId, rawOffer, retVal);
                 }
                 return Ok(retVal);
             }
@@ -121,7 +164,7 @@ namespace Integration_API.Controllers
                 AddDrugToList(drugWithAmount, listOfDrugs);
             }
 
-            retVal.Add(new TenderOfferDto(DrugstoreService.GetDrugstoreById(id).Name, listOfDrugs, rawOffer.Price));
+            retVal.Add(new TenderOfferDto(DrugstoreService.GetDrugstoreById(id).Name, listOfDrugs, rawOffer.Price,rawOffer.TenderId));
         }
 
         private static void AddDrugToList(string drugWithAmount, List<DrugTenderDto> listOfDrugs)

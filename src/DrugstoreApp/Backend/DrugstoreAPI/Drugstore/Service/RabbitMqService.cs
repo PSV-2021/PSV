@@ -32,7 +32,9 @@ namespace PrimerServis
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             CreateConnection();
+            CreateCompletionConnection();
             RecieveMessage();
+            RecieveFinishingMessage();
             return base.StartAsync(cancellationToken);
         }
 
@@ -53,6 +55,13 @@ namespace PrimerServis
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
             channel.ExchangeDeclare(exchange: "tender", type: ExchangeType.Fanout);
+        }
+        public void CreateCompletionConnection()
+        {
+            var factory = new ConnectionFactory() { HostName = host };
+            connection = factory.CreateConnection();
+            channel = connection.CreateModel();
+            channel.ExchangeDeclare(exchange: "tenderFinish", type: ExchangeType.Fanout);
         }
         public DrugTender RecieveMessage()
         {
@@ -93,9 +102,41 @@ namespace PrimerServis
             return drugTender;
         }
 
-        DrugTender IRabbitMQService.RecieveMessage()
+        public void RecieveFinishingMessage()
         {
-            throw new NotImplementedException();
+            var queueName = channel.QueueDeclare().QueueName;
+            channel.QueueBind(queue: queueName,
+                              exchange: "tenderFinish",
+                              routingKey: "");
+
+            var consumer = new EventingBasicConsumer(channel);
+
+            consumer.Received += (model, ea) =>
+            {
+                using (var scope = scopeFactory.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
+                    drugTenderService = new DrugTenderService(dbContext);
+                    byte[] body = ea.Body.ToArray();
+                    var jsonMessage = Encoding.UTF8.GetString(body);
+
+                    try
+                    {   // try deserialize with default datetime format
+                        string message = JsonConvert.DeserializeObject<string>(jsonMessage);
+                        Console.WriteLine(message);
+
+                    }
+                    catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
+                    {
+                        Console.WriteLine("Ne moze");
+                    }
+                    Console.WriteLine(" [x] Received {0}", jsonMessage);
+                }
+            };
+            channel.BasicConsume(queue: queueName,
+                                         autoAck: true,
+                                         consumer: consumer);
         }
+
     }
 }
