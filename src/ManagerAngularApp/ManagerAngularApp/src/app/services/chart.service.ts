@@ -25,5 +25,19 @@ export class ChartService {
       const ret = this.http.post<any>(this.url + '/drugTender/chartsInfo', body, options);
       return ret;
     }
+    GetSingleChartInfo(start: Date, end: Date, id: number): Observable<any> {
+      const body = {
+        From : start,
+        To: end,
+        Id: id
+      };
+      console.log(body);
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'ApiKey': "abcde" });
+    let options = { headers: headers };
+    const ret = this.http.post<any>(this.url + '/drugTender/chartInfo', body, options);
+    return ret;
+  }
     
 }

@@ -1,8 +1,6 @@
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { environment } from 'src/environments/environment';
 import { TenderDto } from '../tenders/tender.dto';
 import { TenderOfferDto } from '../tenders/tender.offer.dto';
