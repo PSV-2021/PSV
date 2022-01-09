@@ -33,7 +33,7 @@ namespace HospitalAPI.Controllers
         {
             medicineService.AddDrugUrgent(demand.Name, demand.Amount);
             return Ok(true);                         
-        }       
+        }
         //COKA
     }
 }

@@ -16,7 +16,7 @@ export class MedicalRecordService {
 
 
   public GetMedicalRecord(id: string): Observable<any> {
-    console.log(id);
-    return this.http.get<any>(this.url + '/medicalrecord/' ,{params:{id: id}});
+    const headers = { 'Authorization': 'Bearer' + localStorage.getItem("jwtToken")}
+    return this.http.get<any>(this.url + '/medicalrecord/', {'headers':headers, params:{id: id}});
   }
 }

@@ -121,9 +121,28 @@ namespace HospitalApiTests.Unit
             patient.Email = "nesto";
             Assert.False(patientVerification.Verify(patient));
         }
+
+        [Fact]
+        public void Check_patient_image_true()
+        {
+            PatientDto patient = GeneratePatientWithImage();
+            Assert.True(patientVerification.VerifyImage(patient));
+        }
+
+        [Fact]
+        public void Check_patient_image_false()
+        {
+            PatientDto patient = GeneratePatientWithImage();
+            patient.Image = null;
+            Assert.False(patientVerification.VerifyImage(patient));
+        }
         private PatientDto GeneratePatient()
         {
             return new PatientDto { Name = "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType = BloodType.A, DoctorId = 1, Allergens = new List<String>() };
+        }
+        private PatientDto GeneratePatientWithImage()
+        {
+            return new PatientDto { Name = "Mirko", FathersName = "Srdjan", Surname = "Kitic", Jmbg = "3009998805057", Date = "20/01/2000 00:00:00", Sex = Sex.male, PhoneNumber = "0641664608", Address = "Resavska 5", Email = "mirko@gmail.com", Username = "uproba", Password = "pproba", BloodType = BloodType.A, DoctorId = 1, Allergens = new List<String>(), Image = "jdiejwimdn" };
         }
     }
 }

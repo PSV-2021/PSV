@@ -67,7 +67,22 @@ namespace DrugstoreAPI.Service
                 return false;
             return CheckIsTheDrugAmountSatisfied(amountOfDrug, med);
         }
-
+        public bool CheckForDrugsAvailability(List<TenderInfo> tender)
+        {
+            foreach(TenderInfo ti in tender)
+            {
+                Medicine med = MedicineRepository.GetByName(ti.DrugName);
+                if (med == null)
+                {
+                    return false;
+                }
+                if (!CheckIsTheDrugAmountSatisfied(ti.Amount, med))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public bool SellDrugUrgent(string nameOfDrug, int amountOfDrug)
         {

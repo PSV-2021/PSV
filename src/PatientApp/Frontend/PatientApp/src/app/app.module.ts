@@ -29,7 +29,16 @@ import { ActivationAccountComponent } from './activation-account/activation-acco
 import { LoginComponent } from './login/login.component';
 import { MedicalRecordComponent } from './medical-record/medical-record.component';
 import { RegistrationSuccessComponent } from './registration-success/registration-success.component';
+import { ReserveAppointmentStandardComponent } from './reserve-appointment-standard/reserve-appointment-standard.component';
+import { MatStepperModule } from '@angular/material/stepper';
 import { AppointmentsObserveComponent } from './appointments-observe/appointments-observe.component';
+import { RecommendAppointmentComponent } from './recommend-appointment/recommend-appointment.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from './interceptor';
+import { AuthGuard } from './auth-guard';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -44,7 +53,11 @@ import { AppointmentsObserveComponent } from './appointments-observe/appointment
     LoginComponent,
     MedicalRecordComponent,
     RegistrationSuccessComponent,
-    AppointmentsObserveComponent
+    ReserveAppointmentStandardComponent,
+    AppointmentsObserveComponent,
+    RecommendAppointmentComponent,
+    HomePageComponent
+
 
   ],
   imports: [
@@ -68,12 +81,20 @@ import { AppointmentsObserveComponent } from './appointments-observe/appointment
     MatNativeDateModule,
     MatRadioModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    MatStepperModule,
+    NgxDropzoneModule
+
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

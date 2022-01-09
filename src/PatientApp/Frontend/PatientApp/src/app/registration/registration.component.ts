@@ -48,6 +48,7 @@ export class RegistrationComponent implements OnInit {
     {value: 'AB'},
     {value: 'O'}
   ]
+  pageTitle="Patient App";
 
   doctors: any[]=[];
   selectedDoctor: SelectedDoctor = {name: ""};
@@ -58,7 +59,11 @@ export class RegistrationComponent implements OnInit {
   
   allergenList: any[]=[];
   public allergens: any[]=[];
-
+  title = 'dropzone';
+  
+  files: File[] = [];
+  base64textString: any;
+  blob: Blob = new Blob();
   patient: Patient = {name: "",surname: "", jmbg: "", date: new Date(), bloodType: 0, sex: 0, fathersName: "", phoneNumber: "", adress: "", email: "", username: "", password: "", repeatPassword: "", doctorId: 0, token:""};
   public returnPatient: PatientDto;
 
@@ -91,7 +96,8 @@ export class RegistrationComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       doctor: ['', Validators.required],
-      bloodType: ['', Validators.required]
+      bloodType: ['', Validators.required],
+      image: ['']
     }, {
       validator: MustMatch('password', 'confirmPassword')
     });
@@ -107,6 +113,9 @@ export class RegistrationComponent implements OnInit {
         this.allergenList.push(p);
       }
     })
+  }
+  login(){
+    this.router.navigate(['/login']);
   }
 
   onSubmit(){
@@ -141,11 +150,39 @@ export class RegistrationComponent implements OnInit {
     this.returnPatient.Sex = this.patient.sex;
     this.returnPatient.BloodType = this.patient.bloodType;
     this.returnPatient.Allergens = this.allergens;
+    this.returnPatient.Image = this.base64textString;
 
     const format = "dd/MM/yyyy HH:mm:ss"
-
     this.returnPatient.Date = formatDate(this.patient.date, format, "en-US")
     
   }
+
+  onSelect(event:any) {
+    this.files.push(...event.addedFiles);
+    var file = this.files[0];
+    if (this.files && file) 
+    {
+      var reader = new FileReader();
+      reader.onload =this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt:any) {
+    var binaryString = readerEvt.target.result;
+    this.base64textString= btoa(binaryString);
+   /* const byteCharacters = atob(this.base64textString);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) 
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    const byteArray = new Uint8Array(byteNumbers);
+    this.blob = new Blob([byteArray], {type: 'image/png'});
+    console.log(this.blob);*/
+   }
+
+  onRemove(event:any) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
 
 }

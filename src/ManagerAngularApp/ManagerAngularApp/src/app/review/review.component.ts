@@ -31,8 +31,9 @@ export class ReviewComponent implements OnInit {
           "Id": p.id,
           "Name": p.name,
           "Url": p.url,
-          "City": p.city,
-          "Address": p.address
+          "Country": p.address.country,
+          "City": p.address.city,
+          "Address": p.address.street
         });
       }
     });

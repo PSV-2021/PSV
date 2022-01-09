@@ -24,8 +24,9 @@ export class DrugstoreComponent implements OnInit {
       this.drugstore = {"Id": data.id,
                         "Name": data.name,
                         "Url": data.url,
-                        "City": data.city,
-                        "Address": data.address,
+                        "Country": data.address.country,
+                        "City": data.address.city,
+                        "Address": data.address.street,
                         "Comment": data.comment,
                         "ImageBase64": data.base64Image
                       }

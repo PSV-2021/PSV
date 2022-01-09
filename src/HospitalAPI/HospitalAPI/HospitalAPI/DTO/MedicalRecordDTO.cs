@@ -1,5 +1,6 @@
 ﻿using Hospital.MedicalRecords.Model;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace HospitalAPI.DTO
             PhoneNumber = resultPatient.PhoneNumber;
             Address = resultPatient.Adress;
             Email = resultPatient.Email;
+            Image = Convert.ToBase64String(resultPatient.Image); 
+        }
+
+        public MedicalRecordDTO()
+        {
         }
     }
 }

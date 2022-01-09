@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Grpc.Core;
 using Drugstore.Compression.Controller;
 using Drugstore.Service;
+using PrimerServis;
 
 namespace DrugstoreAPI
 {
@@ -28,7 +29,7 @@ namespace DrugstoreAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddHostedService<RabbitMQService>();
             services.AddDbContext<Drugstore.Models.MyDbContext>(options =>
             options.UseNpgsql(GetDBConnectionString()));
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -63,7 +64,7 @@ namespace DrugstoreAPI
                 endpoints.MapControllers();
             });
             PrepDB.PrepPopulation(app);
-
+            Console.WriteLine("SFTP_IP:" + Environment.GetEnvironmentVariable("SFTP_IP"));
             server = new Server
             {
                 Services = { Greeter.BindService(new GreeterService()), gRPCDrugPurchaseService.BindService(new DrugDemandServiceGrpc()) },

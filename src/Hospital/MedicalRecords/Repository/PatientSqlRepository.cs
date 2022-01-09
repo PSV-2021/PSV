@@ -28,10 +28,10 @@ namespace Hospital.MedicalRecords.Repository
         }
 
         public void SavePatient(Patient patient)
-        {
-            dbContext.MedicalRecords.Add(new MedicalRecord { Id = patient.MedicalRecordId });
+        { 
             Doctor d = (from n in dbContext.Doctors where n.Id == patient.DoctorId select n).FirstOrDefault();
-            d.NumberOfPatients++;
+            if(d != null)    
+                d.NumberOfPatients++;
             dbContext.Patients.Add(patient);
             dbContext.SaveChanges();
         }
@@ -40,11 +40,6 @@ namespace Hospital.MedicalRecords.Repository
         {
             Patient patientWithThatId = (from n in dbContext.Patients where n.Id == id select n).FirstOrDefault();
             return patientWithThatId;
-        }
-
-        internal int FindIdMedRecordByIdPatient(int idPatient)
-        {
-           return (from n in dbContext.Patients where n.Id == idPatient select n).FirstOrDefault().MedicalRecordId;
         }
 
         public bool Update(Patient editedObject)
@@ -101,6 +96,12 @@ namespace Hospital.MedicalRecords.Repository
             }
 
             return false;
+        }
+
+        public Patient FindByUsernameAndPassword(String username, String password)
+        {
+            Patient patient = (from n in dbContext.Patients where n.Username == username && n.Password == password select n).FirstOrDefault();
+            return patient;
         }
     }
 }

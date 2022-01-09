@@ -20,4 +20,8 @@ export class NavigationComponent implements OnInit {
   login() {
   this.router.navigate(['/login']);
   }
+
+  LogOut(){
+    this.router.navigate(['']);
+  }
 }

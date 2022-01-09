@@ -35,38 +35,11 @@ namespace Hospital.MedicalRecords.Repository
             foreach (Patient patient in storedPatients)
             {
                 //if (patient.Jmbg.Equals(newPatient.Jmbg) && patient.IsDeleted == false)
-                    return false;
+                return false;
             }
             storedPatients.Add(newPatient);
             WriteToFile(storedPatients);
             return true;
-        }
-
-        public Boolean Update(Patient editedPatient)
-        {
-            List<Patient> storedPatients = ReadFromFile();
-            foreach (Patient patient in storedPatients)
-            {
-                if (patient.Jmbg.Equals(editedPatient.Jmbg))
-                {
-                    patient.Name = editedPatient.Name;
-                    patient.Surname = editedPatient.Surname;
-                    patient.DateOfBirth = editedPatient.DateOfBirth;
-                    patient.Sex = editedPatient.Sex;
-                    patient.PhoneNumber = editedPatient.PhoneNumber;
-                    patient.Adress = editedPatient.Adress;
-                    patient.Email = editedPatient.Email;
-                    patient.EmergencyContact = editedPatient.EmergencyContact;
-                    patient.MedicalRecord = editedPatient.MedicalRecord;
-                    patient.Username = editedPatient.Username;
-                    patient.Password = editedPatient.Password;
-                    patient.IsBlocked = editedPatient.IsBlocked;
-
-                    WriteToFile(storedPatients);
-                    return true;
-                }
-            }
-            return false;
         }
 
         public Patient GetOne(String jmbg)
@@ -121,6 +94,21 @@ namespace Hospital.MedicalRecords.Repository
             catch
             {
             }
+        }
+
+        public bool Update(Patient editedObject)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Patient> GetAllPatients()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Patient FindByUsernameAndPassword(string username, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 }

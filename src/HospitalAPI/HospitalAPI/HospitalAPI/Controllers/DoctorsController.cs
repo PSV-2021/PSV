@@ -30,5 +30,22 @@ namespace HospitalAPI.Controllers
             result = doctorService.GetGeneralDoctors();
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetDoctorsBySpecialty(string id)
+        {
+            int idSpecialty = int.Parse(id);
+            Console.WriteLine(id);
+            List<Doctor> result = new List<Doctor>();
+            result = doctorService.GetDoctorsBySpeciality(idSpecialty);
+            return Ok(result);
+        }
+
+        [HttpGet("findDoctors")]
+        public IActionResult GetAllDoctors()
+        {
+            return Ok(doctorService.GetAllDoctors());
+
+        }
     }
 }
