@@ -8,11 +8,26 @@ namespace Hospital.MedicalRecords.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public String Name { get; set; }
+        public int Id { get; private set; }
+        public String Name { get; private set; }
         [ForeignKey("PatientId")]
-        public int PatientId {get; set;}
-        public virtual Patient Patient { get; set; }
+        public int PatientId {get; set; }
+        public virtual Patient Patient { get; }
         public Allergen() { }
+
+        public Allergen(int id, string s)
+        {
+            Id = id;
+            Name = s;
+            Validate();
+        }
+
+        private void Validate()
+        {
+            if (Id < 0)
+                throw new ArgumentException(String.Format("Id must be positive number"));
+            if (PatientId < 0)
+                throw new ArgumentException(String.Format("PatientId must be positive number"));
+        }
     }
 }

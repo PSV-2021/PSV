@@ -50,6 +50,41 @@ namespace Drugstore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Drugstore.Models.DrugTender", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TenderEnd")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("TenderInfo")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("isFinished")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugTenders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "as",
+                            TenderEnd = new DateTime(2021, 12, 31, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(1236),
+                            TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
+                            isFinished = true
+                        },
+                        new
+                        {
+                            Id = "2",
+                            TenderEnd = new DateTime(2022, 1, 28, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(2558),
+                            TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
+                            isFinished = false
+                        });
+                });
+
             modelBuilder.Entity("Drugstore.Models.DrugstoreOffer", b =>
                 {
                     b.Property<string>("Id")
@@ -80,8 +115,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 14, 3, 47, 56, 286, DateTimeKind.Local).AddTicks(4861),
-                            StartDate = new DateTime(2021, 12, 14, 3, 47, 56, 279, DateTimeKind.Local).AddTicks(7107),
+                            EndDate = new DateTime(2022, 1, 7, 14, 25, 12, 583, DateTimeKind.Local).AddTicks(7862),
+                            StartDate = new DateTime(2022, 1, 7, 14, 25, 12, 581, DateTimeKind.Local).AddTicks(9906),
                             Title = "title"
                         });
                 });
@@ -278,6 +313,7 @@ namespace Drugstore.Migrations
                     b.HasData(
                         new
                         {
+
                             Id = 1,
                             Content = "Aloaloalo",
                             Posted = new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -297,6 +333,30 @@ namespace Drugstore.Migrations
                             Posted = new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Vazno obavestenje"
                         });
+                });
+
+            modelBuilder.Entity("Drugstore.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<bool>("Delivered")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("PickedUp")
+                        .HasColumnType("boolean");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Drugstore.Models.User", b =>

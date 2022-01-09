@@ -21,14 +21,7 @@ namespace Hospital.MedicalRecords.Repository
 
         public List<MedicalRecord> GetAll()
         {
-            return dbContext.MedicalRecords.ToList();
-        }
-
-        internal List<MedicalRecord> GetMedicalRecordById(int id)
-        {
-            List<MedicalRecord> retVal = (List<MedicalRecord>)dbContext.MedicalRecords.ToList().Where(s => s.Id == id).ToList();
-
-            return retVal;
+            throw new NotImplementedException();
         }
 
         public MedicalRecord GetOne(int id)

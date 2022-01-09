@@ -1,3 +1,8 @@
+<mat-toolbar color="warn">
+  <div class="landing-header">{{pageTitle}}</div>
+  <span class="spacer"></span>
+  <button mat-raised-button (click)="login()">Login</button>
+</mat-toolbar>
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header>
@@ -100,8 +105,18 @@
                   <mat-option *ngFor="let allergen of allergenList" [value]="allergen.name" >
                     {{allergen.name}}
                   </mat-option>
-              </mat-select>
-          </mat-form-field>
+                </mat-select>
+              </mat-form-field>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Profile Image</mat-label>
+          <mat-select></mat-select>
+          <ngx-dropzone (change)="onSelect($event)">
+              <ngx-dropzone-label>Drop image</ngx-dropzone-label>
+              <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+              </ngx-dropzone-preview>
+            </ngx-dropzone>
+        </mat-form-field>
           </div>
 
       <button mat-stroked-button color="accent" class="btn-block" [disabled]="!f.valid" (click)="onSubmit()">Register</button>

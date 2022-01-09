@@ -115,3 +115,28 @@ body {
 .example-form{
     margin-top: 5%;
 }
+mat-toolbar span{
+  margin-left: 20px;
+  display: flex;
+}
+
+mat-toolbar{
+  max-width: 100%;
+}
+
+.example-spacer {
+  flex: 1 1 5;
+}
+
+.spacer{
+  flex: 1 1 auto
+}
+
+mat-toolbar a{
+  text-decoration-color: aliceblue;
+  color: aliceblue;
+}
+
+mat-toolbar div{
+ color: black;
+}

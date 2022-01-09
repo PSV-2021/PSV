@@ -1,3 +1,6 @@
+<mat-toolbar>
+    <app-navigation></app-navigation>
+</mat-toolbar>
 <div *ngFor="let drugstore of drugstores">
     <mat-card class="example-card">
         <mat-card-title-group>
@@ -9,6 +12,6 @@
             {{drugstore.Comment}}
         </mat-card-content>
         <br>
-        <a mat-raised-button href="/drugstore/{{drugstore.Id}}">Change</a>
+        <a mat-raised-button href="/drugstore/{{drugstore.Id}}">Details</a>
     </mat-card>
 </div>

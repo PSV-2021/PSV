@@ -67,6 +67,12 @@ namespace HospitalAPI.Verification
                 return false;
             return true;
         }
+        private bool VerifyImage()
+        {
+            if (patient.Image == null)
+                return false;
+            return true;
+        }
 
         public bool Verify(PatientDto patient)
         {
@@ -84,6 +90,13 @@ namespace HospitalAPI.Verification
             if (!VerifyAddress())
                 return false;
             if (!VerifyEmail())
+                return false;
+            return true;
+        }
+        public bool VerifyImage(PatientDto patient)
+        {
+            this.patient = patient;
+            if (!VerifyImage())
                 return false;
             return true;
         }

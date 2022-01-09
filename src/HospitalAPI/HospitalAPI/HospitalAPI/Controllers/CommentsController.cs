@@ -10,6 +10,7 @@ using Hospital.SharedModel;
 using HospitalAPI.DTO;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -28,6 +29,7 @@ namespace HospitalAPI.Controllers
 
         }
 
+
         [HttpPost]   // POST /api/comments
         public IActionResult Post([FromBody]CommentDTO comment)
         {
@@ -36,6 +38,7 @@ namespace HospitalAPI.Controllers
             userFeedbackService.SaveUserFeedback(feedback);
             return Ok();
         }
+
 
         [HttpGet]   // GET /api/comments
         public IActionResult Get()
@@ -50,13 +53,8 @@ namespace HospitalAPI.Controllers
 
         private UserFeedback GenerateUserFeedbackFromDTO(CommentDTO comDTO)
         {
-            UserFeedback comment = new UserFeedback
-            {
-                TimeWritten = DateTime.Now,
-                Content = comDTO.Content,
-                Name = comDTO.Name,
-                canPublish = false
-            };
+            UserFeedback comment = new UserFeedback(DateTime.Now, comDTO.Content, comDTO.Name, false);
+          
             return comment;
         }
     }

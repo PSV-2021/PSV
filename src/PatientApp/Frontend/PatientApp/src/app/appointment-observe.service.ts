@@ -14,4 +14,8 @@ export class AppointmentObserveService {
   GetAppointments(id: string): Observable<any> {
     return this.http.get<any>(this.url + '/observeAppointments/',{params:{id: id}});
   }
+
+  CancelAppointment(id: number): any {
+    return this.http.post<any>(this.url + '/cancelAppointments', id);
+  }
 }

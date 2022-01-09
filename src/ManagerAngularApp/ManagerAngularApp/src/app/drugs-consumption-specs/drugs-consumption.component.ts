@@ -36,8 +36,9 @@ export class DrugsConsumptionComponent implements OnInit {
           "Id": p.id,
           "Name": p.name,
           "Url": p.url,
-          "City": p.city,
-          "Address": p.address
+          "City": p.address.city,
+          "Country": p.address.country,
+          "Address": p.address.street
         });
       }
       this.range.value.start = null;
@@ -60,7 +61,6 @@ export class DrugsConsumptionComponent implements OnInit {
   public generateReport(): void{
     if (this.isDateRangeIncorrect() || this.checkNulls()){
       alert("Report can't be generated for this date range. Please, pick a valid date range.");
-      console.log(this.range);
     }
     else {
       this.drugConsumptionSpecsService.GenerateReport(this.range.value.start, this.range.value.end).subscribe((d: any) =>{

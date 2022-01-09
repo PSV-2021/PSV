@@ -25,6 +25,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { timeout } from 'rxjs/operators';
 import { AllDrugstoresComponent } from './all-drugstores/all-drugstores.component';
 import { DrugstoreComponent } from './drugstore/drugstore.component';
+import { TenderComponent } from './tender/tender.component';
+import { TenderOffersComponent } from './tender-offers/tender-offers.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { ChartsComponent } from './charts/charts.component';
+import { DrugstoreChartComponent } from './drugstore-chart/drugstore-chart.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,11 @@ import { DrugstoreComponent } from './drugstore/drugstore.component';
     FilesComponent,
     AllDrugstoresComponent,
     DrugstoreComponent,
+    TenderComponent,
+    TenderOffersComponent,
+    HomePageComponent,
+    ChartsComponent,
+    DrugstoreChartComponent,
   ],
   imports: [
     BrowserModule,
