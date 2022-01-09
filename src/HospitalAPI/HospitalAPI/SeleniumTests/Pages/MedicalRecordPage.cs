@@ -11,8 +11,8 @@ namespace SeleniumTests.Pages
         private readonly IWebDriver Driver;
         public const string URI = "http://localhost:4200/medicalRecord";
 
-        private IWebElement CancelButton => Driver.FindElement(By.XPath("//*[@id='cancelButton']"));
-        private IWebElement CancelText => Driver.FindElement(By.XPath("//div[contains(.,'CANCELLED')]"));
+        private IWebElement CancelButton => Driver.FindElement(By.XPath("/html/body/app-root/div/app-medical-record/div/div/mat-card/app-appointments-observe/table/tbody/tr[3]/td[7]/button"));
+        private IWebElement CancelText => Driver.FindElement(By.XPath("/html/body/app-root/div/app-medical-record/div/div/mat-card/app-appointments-observe/table/tbody/tr[3]/td[5]//div[contains(.,'CANCELLED')]"));
 
         public MedicalRecordPage(IWebDriver driver)
         {
@@ -51,6 +51,12 @@ namespace SeleniumTests.Pages
             {
                 return false;
             }
+        }
+
+        public void  WaitText()
+        {
+            var wait = new WebDriverWait(Driver, new TimeSpan(0, 0, 10));
+            wait.Until(condition => CancelText.Displayed);
         }
 
         public void Navigate()

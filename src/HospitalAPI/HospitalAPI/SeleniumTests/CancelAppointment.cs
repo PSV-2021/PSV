@@ -47,6 +47,7 @@ namespace SeleniumTests
             MedicalRecordPage.WaitToLoad();
             Assert.True(MedicalRecordPage.CancelButtonDisplayed());
             MedicalRecordPage.ClickCancel();
+            MedicalRecordPage.WaitText();
             Assert.True(MedicalRecordPage.CancelTextDisplayed());
             Assert.Equal(Driver.Url, MedicalRecordPage.URI);            
             Dispose();
