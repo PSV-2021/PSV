@@ -17,6 +17,12 @@ namespace DrugstoreAPI.Service
             MedicineRepository = medicineRepository;
         }
 
+        public MedicineService(IMedicineRepository medicineRepository, IOrderRepository orderRepository)
+        {
+            MedicineRepository = medicineRepository;
+            OrderService = new OrderService(orderRepository);
+        }
+
         public MedicineService(MyDbContext context)
         {
             this.dbContext = context;
@@ -43,13 +49,14 @@ namespace DrugstoreAPI.Service
             return MedicineRepository.Delete(id);
         }
 
-        public Medicine GetByName(string name)
+        public Medicine GetByName1(string name)
         {
-            return MedicineRepository.GetByName(name);
+            return MedicineRepository.GetByName1(name);
         }
 
         public void PurchaseDrugs(ShoppingCart shoppingCart)
         {
+            MedicineRepository.GetByName1("Paracetamol");
             shoppingCart.ShoppingCartItems.ForEach(item => DecreaseDrugAmount(item.Amount, MedicineRepository.GetByName1(item.MedicineName)));
         }
 

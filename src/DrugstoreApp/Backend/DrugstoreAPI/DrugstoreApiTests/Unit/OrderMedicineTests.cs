@@ -20,14 +20,14 @@ namespace DrugstoreApiTests.Unit
         public void Check_finnished_order(ShoppingCart order, List<int> expectedCount)
         {
             //arrange
-            var orderService = new MedicineService(GenerateStubData());
+            var medicineService = new MedicineService(GenerateStubDataMedicine(), GenerateStubDataOrder());
             //act
-            orderService.FinishOrder(order);
+            medicineService.FinishOrder(order);
             //assert
             List<int> retVal = new List<int>();
             foreach(ShoppingCartItem item in order.ShoppingCartItems)
             {
-                retVal.Add(orderService.GetByName(item.MedicineName).Supply);
+                retVal.Add(medicineService.GetByName1(item.MedicineName).Supply);
             }
             CollectionAssert.AreEqual(expectedCount, retVal);
         }
@@ -35,19 +35,23 @@ namespace DrugstoreApiTests.Unit
         public static IEnumerable<object[]> Orders()
         {
             List<ShoppingCartItem> items1 = new List<ShoppingCartItem>();
-            ShoppingCartItem item1 = new ShoppingCartItem("Paracetamol", 12);
-            ShoppingCartItem item2 = new ShoppingCartItem("Brufen", 10);
+            ShoppingCartItem item1 = new ShoppingCartItem("Brufen", 10);
+            ShoppingCartItem item2 = new ShoppingCartItem("Paracetamol", 8);         
             items1.Add(item1);
             items1.Add(item2);
-            List<ShoppingCartItem> items2 = new List<ShoppingCartItem>();
-            ShoppingCartItem item21 = new ShoppingCartItem("Brufen", 2);
-            items1.Add(item21);
 
             List<int> retvalValues1 = new List<int>();
-            retvalValues1.Add(1);
+            retvalValues1.Add(5);
             retvalValues1.Add(3);
+
+            //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+            List<ShoppingCartItem> items2 = new List<ShoppingCartItem>();
+            ShoppingCartItem item21 = new ShoppingCartItem("Brufen", 2);
+            items2.Add(item21);
+
             List<int> retvalValues2 = new List<int>();
-            retvalValues1.Add(13);
+            retvalValues2.Add(13);
 
             var retVal = new List<object[]>();
             retVal.Add(new object[] { new ShoppingCart(1, items1, 350.00, OrderType.Delivery, false, false), retvalValues1});
@@ -55,7 +59,7 @@ namespace DrugstoreApiTests.Unit
             return retVal;
         }
 
-        private static IMedicineRepository GenerateStubData()
+        private static IMedicineRepository GenerateStubDataMedicine()
         {
             var medicineStubRepository = new Mock<IMedicineRepository>();
             List<Medicine> orderedMedicines = new List<Medicine>();
@@ -67,8 +71,17 @@ namespace DrugstoreApiTests.Unit
             orderedMedicines.Add(m2);
 
             medicineStubRepository.Setup(m => m.GetAll()).Returns(orderedMedicines);
+            medicineStubRepository.Setup(m => m.GetByName1("Paracetamol")).Returns(m2);
+            medicineStubRepository.Setup(m => m.GetByName1("Brufen")).Returns(m1);
+
 
             return medicineStubRepository.Object;
+        }
+
+        private static IOrderRepository GenerateStubDataOrder()
+        {
+            var orderStubRepository = new Mock<IOrderRepository>();
+            return orderStubRepository.Object;
         }
     }
 }

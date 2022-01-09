@@ -61,6 +61,7 @@ namespace Drugstore.Repository.Sql
 
         public Medicine GetByName1(string name)
         {
+            List<Medicine> medicines = GetAll();
             Medicine medicine = DbContext.Medicines.FirstOrDefault(medicine => medicine.Name == name);
             return medicine;
         }
