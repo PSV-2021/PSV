@@ -37,7 +37,7 @@
 
     <ng-container matColumnDef="cancel">
       <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Cancel appointment </th>
-      <td mat-cell *matCellDef="let element"><button id="cancel" *ngIf="element.isCancelled==false && element.status==2 && element.canCancel==true" (click)="CancelAppointment(element)">Cancel appointment</button> </td>
+      <td mat-cell *matCellDef="let element"><button id="cancelButton" *ngIf="element.isCancelled==false && element.status==2 && element.canCancel==true" (click)="CancelAppointment(element)">Cancel appointment</button> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
