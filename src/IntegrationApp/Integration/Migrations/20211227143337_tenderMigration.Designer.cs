@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211227143337_tenderMigration")]
+    partial class tenderMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -500,8 +502,10 @@ namespace Integration.Migrations
 
             modelBuilder.Entity("Integration.Tendering.Model.DrugTender", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("TenderEnd")
                         .HasColumnType("timestamp without time zone");
@@ -519,16 +523,15 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-
-                            Id = "as",
-                            TenderEnd = new DateTime(2021, 12, 31, 14, 8, 37, 747, DateTimeKind.Local).AddTicks(6975),
+                            Id = 1,
+                            TenderEnd = new DateTime(2021, 12, 20, 15, 33, 36, 534, DateTimeKind.Local).AddTicks(7949),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
-                            Id = "2",
-                            TenderEnd = new DateTime(2022, 1, 28, 14, 8, 37, 749, DateTimeKind.Local).AddTicks(6210),
+                            Id = 2,
+                            TenderEnd = new DateTime(2022, 1, 17, 15, 33, 36, 538, DateTimeKind.Local).AddTicks(5467),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         });
@@ -536,8 +539,10 @@ namespace Integration.Migrations
 
             modelBuilder.Entity("Integration.Tendering.Model.TenderOffer", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("DrugstoreId")
                         .HasColumnType("integer");
@@ -551,8 +556,8 @@ namespace Integration.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("integer");
 
-                    b.Property<string>("TenderId")
-                        .HasColumnType("text");
+                    b.Property<int>("TenderId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("TenderOfferInfo")
                         .HasColumnType("text");
@@ -564,53 +569,23 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
+                            Id = 1,
                             DrugstoreId = 1,
                             IsAccepted = false,
                             IsActive = true,
                             Price = 5000,
-                            TenderId = "as",
-                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            DrugstoreId = 2,
-                            IsAccepted = true,
-                            IsActive = true,
-                            Price = 5900,
-                            TenderId = 1,
-                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DrugstoreId = 1,
-                            IsAccepted = true,
-                            IsActive = true,
-                            Price = 4000,
                             TenderId = 2,
                             TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 2,
                             DrugstoreId = 2,
                             IsAccepted = false,
                             IsActive = true,
                             Price = 5900,
-                            TenderId = "2",
-                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DrugstoreId = 3,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 6000,
                             TenderId = 2,
-                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
+                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
                         });
                 });
 

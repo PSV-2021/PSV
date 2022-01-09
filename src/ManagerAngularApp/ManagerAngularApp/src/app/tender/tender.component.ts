@@ -6,6 +6,8 @@ import { TenderService } from '../services/tender.service';
 import { ToastrService } from 'ngx-toastr';
 import { WholeTenderDto } from './whole.tender.dto';
 import { Router } from '@angular/router';
+//@ts-ignore
+import { Chart } from 'node_modules/chart.js';
 
 @Component({
   selector: 'app-tender',
@@ -38,8 +40,8 @@ export class TenderComponent implements OnInit {
         });
       }
       console.log(this.ongoingTenders);
+      
     });
-
   }
 
   valid(): boolean {
@@ -109,5 +111,4 @@ export class TenderComponent implements OnInit {
     console.log(id);
     this.router.navigate(['offer/' + id]);
   }
-
 }
