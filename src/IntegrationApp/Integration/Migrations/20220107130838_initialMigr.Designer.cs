@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220107130838_initialMigr")]
+    partial class initialMigr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -519,7 +521,6 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-
                             Id = "as",
                             TenderEnd = new DateTime(2021, 12, 31, 14, 8, 37, 747, DateTimeKind.Local).AddTicks(6975),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
@@ -576,41 +577,11 @@ namespace Integration.Migrations
                         {
                             Id = "2",
                             DrugstoreId = 2,
-                            IsAccepted = true,
-                            IsActive = true,
-                            Price = 5900,
-                            TenderId = 1,
-                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DrugstoreId = 1,
-                            IsAccepted = true,
-                            IsActive = true,
-                            Price = 4000,
-                            TenderId = 2,
-                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DrugstoreId = 2,
                             IsAccepted = false,
                             IsActive = true,
                             Price = 5900,
                             TenderId = "2",
                             TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DrugstoreId = 3,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 6000,
-                            TenderId = 2,
-                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
                         });
                 });
 

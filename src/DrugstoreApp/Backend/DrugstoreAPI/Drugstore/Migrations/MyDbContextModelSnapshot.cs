@@ -51,10 +51,8 @@ namespace Drugstore.Migrations
 
             modelBuilder.Entity("Drugstore.Models.DrugTender", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("TenderEnd")
                         .HasColumnType("timestamp without time zone");
@@ -72,15 +70,15 @@ namespace Drugstore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            TenderEnd = new DateTime(2021, 12, 20, 20, 6, 47, 970, DateTimeKind.Local).AddTicks(402),
+                            Id = "as",
+                            TenderEnd = new DateTime(2021, 12, 31, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(1236),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
-                            Id = 2,
-                            TenderEnd = new DateTime(2022, 1, 17, 20, 6, 47, 970, DateTimeKind.Local).AddTicks(1673),
+                            Id = "2",
+                            TenderEnd = new DateTime(2022, 1, 28, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(2558),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         });
@@ -116,8 +114,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2021, 12, 27, 20, 6, 47, 969, DateTimeKind.Local).AddTicks(7135),
-                            StartDate = new DateTime(2021, 12, 27, 20, 6, 47, 967, DateTimeKind.Local).AddTicks(8935),
+                            EndDate = new DateTime(2022, 1, 7, 14, 25, 12, 583, DateTimeKind.Local).AddTicks(7862),
+                            StartDate = new DateTime(2022, 1, 7, 14, 25, 12, 581, DateTimeKind.Local).AddTicks(9906),
                             Title = "title"
                         });
                 });
@@ -288,6 +286,56 @@ namespace Drugstore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Drugstore.Models.TenderOffer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("DrugstoreId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TenderId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TenderOfferInfo")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TenderOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            DrugstoreId = 1,
+                            IsAccepted = false,
+                            IsActive = true,
+                            Price = 5000,
+                            TenderId = "as",
+                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            DrugstoreId = 2,
+                            IsAccepted = false,
+                            IsActive = true,
+                            Price = 5900,
+                            TenderId = "2",
+                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
+                        });
+                });
+
             modelBuilder.Entity("Drugstore.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -313,58 +361,6 @@ namespace Drugstore.Migrations
                     b.ToTable("Users");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("Integration.Tendering.Model.TenderOffer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("DrugstoreId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TenderId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("TenderOfferInfo")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TenderOffers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DrugstoreId = 1,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 5000,
-                            TenderId = 2,
-                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DrugstoreId = 2,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 5900,
-                            TenderId = 2,
-                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
-                        });
                 });
 
             modelBuilder.Entity("Drugstore.Models.Customer", b =>

@@ -2,7 +2,7 @@
 
 namespace Integration_API.Repository.Interfaces
 {
-    public interface IDrugTenderRepository : IGenericRepository<DrugTender, int>
+    public interface IDrugTenderRepository : IGenericRepository<DrugTender, string>
     {
 
     }

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
-    public partial class newMigration : Migration
+    public partial class initiralMigt : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +34,20 @@ namespace Drugstore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DrugstoreOffers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DrugTenders",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    TenderEnd = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    TenderInfo = table.Column<string>(type: "text", nullable: true),
+                    isFinished = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DrugTenders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,6 +110,23 @@ namespace Drugstore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TenderOffers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    TenderOfferInfo = table.Column<string>(type: "text", nullable: true),
+                    Price = table.Column<int>(type: "integer", nullable: false),
+                    TenderId = table.Column<string>(type: "text", nullable: true),
+                    IsAccepted = table.Column<bool>(type: "boolean", nullable: false),
+                    DrugstoreId = table.Column<int>(type: "integer", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TenderOffers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -125,17 +156,26 @@ namespace Drugstore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "DrugTenders",
+                columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
+                values: new object[,]
+                {
+                    { "as", new DateTime(2021, 12, 31, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(1236), "Brufen - 150, Palitreks - 100, Andol - 40", true },
+                    { "2", new DateTime(2022, 1, 28, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(2558), "Brufen - 120, Palitreks - 90, Andol - 50", false }
+                });
+
+            migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2021, 12, 23, 3, 44, 0, 183, DateTimeKind.Local).AddTicks(9798), new DateTime(2021, 12, 23, 3, 44, 0, 174, DateTimeKind.Local).AddTicks(1759), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 7, 14, 25, 12, 583, DateTimeKind.Local).AddTicks(7862), new DateTime(2022, 1, 7, 14, 25, 12, 581, DateTimeKind.Local).AddTicks(9906), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
                 columns: new[] { "Id", "Content", "HospitalName", "Response" },
                 values: new object[,]
                 {
-                    { "aaa", "Lenka vrati zeton", "Health", "" },
                     { "bbb", "normalno", "Ime bolnice 223", "" },
+                    { "aaa", "Lenka vrati zeton", "Health", "" },
                     { "ccc", "bla bla", "Ime bolnice 224", "" }
                 });
 
@@ -149,20 +189,29 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "Manufacturer", "MedicineId", "MedicineImage", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Substances", "Supply", "Usage", "Weight" },
                 values: new object[,]
                 {
+                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 30, "bla", 100.0 },
                     { 1, "bla", null, null, "Brufen", "bla", 150.0, "bla", "bla", "bla", 150, "bla", 100.0 },
-                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 10, "bla", 100.0 },
-                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 30, "bla", 100.0 }
+                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 10, "bla", 100.0 }
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "UserId", "Adress", "Discriminator", "Customer_Name", "Password", "Role", "Username" },
-                values: new object[] { 5, "Adresa kupca 123", "Customer", "Kupac", "kupac", "Customer", "kupac" });
+                table: "TenderOffers",
+                columns: new[] { "Id", "DrugstoreId", "IsAccepted", "IsActive", "Price", "TenderId", "TenderOfferInfo" },
+                values: new object[,]
+                {
+                    { "2", 2, false, true, 5900, "2", "Brufen - 120, Palitreks - 50, Andol - 35" },
+                    { "1", 1, false, true, 5000, "as", "Brufen - 100, Palitreks - 80, Andol - 40" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Discriminator", "Name", "Password", "Role", "Username" },
                 values: new object[] { 1, "Pharmacist", "Farmaceut", "farmaceut", "Pharmacist", "farmaceut" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Adress", "Discriminator", "Customer_Name", "Password", "Role", "Username" },
+                values: new object[] { 5, "Adresa kupca 123", "Customer", "Kupac", "kupac", "Customer", "kupac" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Medicines_MedicineId",
@@ -179,6 +228,9 @@ namespace Drugstore.Migrations
                 name: "DrugstoreOffers");
 
             migrationBuilder.DropTable(
+                name: "DrugTenders");
+
+            migrationBuilder.DropTable(
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
@@ -186,6 +238,9 @@ namespace Drugstore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Medicines");
+
+            migrationBuilder.DropTable(
+                name: "TenderOffers");
 
             migrationBuilder.DropTable(
                 name: "Users");
