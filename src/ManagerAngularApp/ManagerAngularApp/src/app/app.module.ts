@@ -28,6 +28,7 @@ import { DrugstoreComponent } from './drugstore/drugstore.component';
 import { TenderComponent } from './tender/tender.component';
 import { TenderOffersComponent } from './tender-offers/tender-offers.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ChartsComponent } from './charts/charts.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HomePageComponent } from './home-page/home-page.component';
     TenderComponent,
     TenderOffersComponent,
     HomePageComponent,
+    ChartsComponent,
   ],
   imports: [
     BrowserModule,

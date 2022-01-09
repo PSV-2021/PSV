@@ -34,8 +34,7 @@ namespace HospitalAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] PatientDto p)
         {
-            if (!patientVerification.Verify(p))
-                return BadRequest();
+            if (!patientVerification.Verify(p))     return BadRequest();
             Patient patient = GeneratePatientFromDTO(p);
             patientService.SavePatientSql(patient, dbContext);
             string link = GetLink(patient);
@@ -44,18 +43,13 @@ namespace HospitalAPI.Controllers
         }
 
         private static Patient GeneratePatientFromDTO(PatientDto p)
-        {
-          TokenGenerator tokenGenerator = new TokenGenerator();
+        { 
+            TokenGenerator tokenGenerator = new TokenGenerator();
             Patient patient = new Patient(p.Name, p.Surname, p.Jmbg, p.BloodType, p.FathersName, p.Sex, p.Address, p.Email, p.Username, p.PhoneNumber, p.Password, p.DoctorId,
-                tokenGenerator.getNewToken(), new List<Allergen>());
-            foreach (String s in p.Allergens)
-            {
-                patient.Allergen.Add(new Allergen(patient.Id, s));
-            }
+                tokenGenerator.getNewToken(), new List<Allergen>(), p.Image);
+            foreach (String s in p.Allergens)   patient.Allergen.Add(new Allergen(patient.Id, s));
             patient.DateOfBirth = DateTime.ParseExact(p.Date, "dd/MM/yyyy hh:mm:ss", null);
-            //patient.DateOfBirth = DateTime.Parse(p.Date);
             patient.Type = UserType.patient;
-
             return patient;
         }
         private string GetLink(Patient patient)
@@ -72,10 +66,8 @@ namespace HospitalAPI.Controllers
             formMessage(message);
             message.Body = message.Body.Replace("[link]", link);
             message.Body = message.Body.Replace("[link2]", link);
-
             try
             {
-
                 await mailService.SendMailAsync(message);
             }
             catch (Exception e)

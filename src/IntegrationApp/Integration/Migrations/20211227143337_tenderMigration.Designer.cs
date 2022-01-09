@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20211224231132_tenderOfferTwo")]
-    partial class tenderOfferTwo
+    [Migration("20211227143337_tenderMigration")]
+    partial class tenderMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -524,9 +524,16 @@ namespace Integration.Migrations
                         new
                         {
                             Id = 1,
-                            TenderEnd = new DateTime(2021, 12, 18, 0, 11, 31, 414, DateTimeKind.Local).AddTicks(1358),
+                            TenderEnd = new DateTime(2021, 12, 20, 15, 33, 36, 534, DateTimeKind.Local).AddTicks(7949),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            TenderEnd = new DateTime(2022, 1, 17, 15, 33, 36, 538, DateTimeKind.Local).AddTicks(5467),
+                            TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
+                            isFinished = false
                         });
                 });
 

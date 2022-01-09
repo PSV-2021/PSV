@@ -11,9 +11,9 @@ namespace Integration.Model
     [Owned]
     public class DateRange: ValueObject
     { 
-        public DateTime From { get; }
+        public DateTime From { get; set; }
 
-        public DateTime To { get;  }
+        public DateTime To { get; set; }
 
         public DateRange(DateTime from, DateTime to)
         {
@@ -28,7 +28,7 @@ namespace Integration.Model
 
         public DateRange ConvertDateFromAngular()
         {
-            return new DateRange(To.AddHours(1), From.AddHours(1));
+            return new DateRange(From.AddHours(1), To.AddHours(1));
         }
 
         public DateRange()

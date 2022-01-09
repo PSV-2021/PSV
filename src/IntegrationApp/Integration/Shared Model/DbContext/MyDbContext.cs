@@ -126,8 +126,11 @@ namespace Model.DataBaseContext
             );
 
             modelBuilder.Entity<TenderOffer>().HasData(
-                new TenderOffer(1, "Brufen - 100, Palitreks - 80, Andol - 40",5000, 2, false, 1, true),
-                new TenderOffer(2, "Brufen - 120, Palitreks - 50, Andol - 35", 5900,2, false, 2, true)
+                new TenderOffer(1, "Brufen - 100, Palitreks - 80, Andol - 40",5000, 1, false, 1, true),
+                new TenderOffer(2, "Brufen - 120, Palitreks - 50, Andol - 35", 5900,1, true, 2, true),
+                new TenderOffer(3, "Brufen - 100, Palitreks - 80, Andol - 40", 4000, 2, true, 1, true),
+                new TenderOffer(4, "Brufen - 120, Palitreks - 50, Andol - 35", 5900, 2, false, 2, true),
+                new TenderOffer(5, "Brufen - 100, Palitreks - 80, Andol - 40", 6000, 2, false, 3, true)
             );
         }
     }
