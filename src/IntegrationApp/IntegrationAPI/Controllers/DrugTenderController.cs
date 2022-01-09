@@ -64,21 +64,29 @@ namespace Integration_API.Controllers
                 
                 foreach(Drugstore d in DrugstoreService.GetAll())
                 {
-                    if(tender.drugstoreName == d.Name)
+                    TenderOffer tenderOfferNew = DrugTenderService.getTenderOfferById(tender.tenderId);
+                    DrugTender drugTender = DrugTenderService.getDrugTenderById(tenderOfferNew.TenderId);
+                    if (tender.drugstoreName == d.Name)
                     {
-                        string tenderWin = "Winner-" + tender.tenderId;
+                        string tenderWin = "Winner:" + tender.tenderId;
                         string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderWin);
                         var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
                         channel.BasicPublish(exchange: "tenderFinish",
                                              routingKey: "",
                                              basicProperties: null,
                                              body: bodyNew);
-
+                     TenderOffer tenderOffer  =  DrugTenderService.getTenderOfferById(tender.tenderId);
+                        tenderOffer.IsAccepted = true;
+                        tenderOffer.IsActive = false;
+                        DrugTenderService.UpdateTenderOffer(tenderOffer);
+                        drugTender.isFinished = true;
+                        Console.WriteLine(drugTender.isFinished);
+                        DrugTenderService.UpdateDrugTender(drugTender);
                         return Ok(true);
                     }
                     else
                     {
-                        string tenderLose = "Loser-" + tender.tenderId;
+                        string tenderLose = "Loser:" + tender.tenderId;
 
                         string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderLose);
                         var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
@@ -86,9 +94,16 @@ namespace Integration_API.Controllers
                                              routingKey: "",
                                              basicProperties: null,
                                              body: bodyNew);
-
+                        TenderOffer tenderOffer = DrugTenderService.getTenderOfferById(tender.tenderId);
+                        tenderOffer.IsAccepted = false;
+                        tenderOffer.IsActive = false;
+                        DrugTenderService.UpdateTenderOffer(tenderOffer);
+                        drugTender.isFinished = true;
+                        Console.WriteLine(drugTender.isFinished);
+                        DrugTenderService.UpdateDrugTender(drugTender);
                         return Ok(true);
                     }
+                    
                 }
                 return Unauthorized();
                 
@@ -164,7 +179,7 @@ namespace Integration_API.Controllers
                 AddDrugToList(drugWithAmount, listOfDrugs);
             }
 
-            retVal.Add(new TenderOfferDto(DrugstoreService.GetDrugstoreById(id).Name, listOfDrugs, rawOffer.Price,rawOffer.TenderId));
+            retVal.Add(new TenderOfferDto(DrugstoreService.GetDrugstoreById(id).Name, listOfDrugs, rawOffer.Price,rawOffer.Id));
         }
 
         private static void AddDrugToList(string drugWithAmount, List<DrugTenderDto> listOfDrugs)

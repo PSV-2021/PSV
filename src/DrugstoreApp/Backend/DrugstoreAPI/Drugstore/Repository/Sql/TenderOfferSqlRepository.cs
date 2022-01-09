@@ -24,9 +24,9 @@ namespace Drugstore.Repository.Sql
             return dbContext.TenderOffers.ToList();
         }
 
-        public TenderOffer GetOne(int id)
+        public TenderOffer GetOne(string id)
         {
-            throw new NotImplementedException();
+            return dbContext.TenderOffers.Find(id);
         }
 
         public void Add(TenderOffer drugTender)
@@ -34,9 +34,17 @@ namespace Drugstore.Repository.Sql
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public bool Delete(string id)
         {
-            throw new NotImplementedException();
+            TenderOffer offer = dbContext.TenderOffers.ToList().Find(offer => offer.Id == id);
+            if (offer == null)
+                return false;
+            else
+            {
+                dbContext.TenderOffers.Remove(offer);
+                dbContext.SaveChanges();
+                return true;
+            }
         }
 
         public TenderOffer GetByName(string name)
@@ -52,7 +60,8 @@ namespace Drugstore.Repository.Sql
 
         public void Update(TenderOffer drugTender)
         {
-            throw new NotImplementedException();
+            dbContext.TenderOffers.Update(drugTender);
+            dbContext.SaveChanges();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Integration.Tendering.Repository.Sql
 
         public TenderOfferSqlRepository() { }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }
@@ -29,9 +29,9 @@ namespace Integration.Tendering.Repository.Sql
             return dbContext.TenderOffers.ToList();
         }
 
-        public TenderOffer GetOne(int id)
+        public TenderOffer GetOne(string id)
         {
-            throw new NotImplementedException();
+            return dbContext.TenderOffers.Find(id);
         }
 
         public void Save(TenderOffer newObject)
@@ -42,7 +42,8 @@ namespace Integration.Tendering.Repository.Sql
 
             public void Update(TenderOffer editedObject)
         {
-            throw new NotImplementedException();
+            dbContext.TenderOffers.Update(editedObject);
+            dbContext.SaveChanges();
         }
     }
 }

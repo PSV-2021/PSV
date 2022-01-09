@@ -49,6 +49,23 @@ namespace Integration.Service
             return Guid.NewGuid().ToString();
 
         }
+        public TenderOffer getTenderOfferById(string id)
+        {
+           return TenderOfferSqlRepository.GetOne(id);
+        }
+
+        public void UpdateTenderOffer(TenderOffer tenderOffer)
+        {
+            TenderOfferSqlRepository.Update(tenderOffer);
+        }
+        public void UpdateDrugTender(DrugTender tender)
+        {
+            drugTenderRepository.Update(tender);
+        }
+        public DrugTender getDrugTenderById(string id)
+        {
+            return drugTenderRepository.GetOne(id);
+        }
 
 
     }

@@ -31,10 +31,17 @@ namespace Drugstore.Service
         {
             TenderOfferSqlRepository.Save(tenderOffer);
         }
-
+        public void RemoveOffer(string id)
+        {
+            TenderOfferSqlRepository.Delete(id);
+        }
         public List<DrugTender> GetOngoingTenders()
         {
             return drugTenderRepository.GetAll().Where(tender => !tender.isFinished).ToList();
+        }
+        public List<TenderOffer> GetFinshedTenderOffers()
+        {
+            return TenderOfferSqlRepository.GetAll().Where(tender => !tender.IsActive).ToList();
         }
 
         public List<TenderOffer> GetOffersForTender(string tenderId)
@@ -45,6 +52,23 @@ namespace Drugstore.Service
         public string GenId()
         {
             return Guid.NewGuid().ToString();
+        }
+        public TenderOffer getTenderOfferById(string id)
+        {
+            TenderOffer td = TenderOfferSqlRepository.GetOne(id);
+            return td;
+        }
+        public void UpdateTenderOffer(TenderOffer tenderOffer)
+        {
+            TenderOfferSqlRepository.Update(tenderOffer);
+        }
+        public void UpdateDrugTender(DrugTender tender)
+        {
+            drugTenderRepository.Update(tender);
+        }
+        public DrugTender getDrugTenderById(string id)
+        {
+            return drugTenderRepository.GetOne(id);
         }
 
     }
