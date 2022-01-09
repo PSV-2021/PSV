@@ -97,6 +97,28 @@ namespace Integration_API.Controllers
             }
         }
 
+        [HttpGet] // Get /api/drugTender/offer/2
+        [Route("offers/{id?}")]
+        public IActionResult GetAllOffersForDrugstore(int id)
+        {
+            List<TenderOfferDto> retVal = new List<TenderOfferDto>();
+            try
+            {
+                List<TenderOffer> rawOffers = DrugTenderService.GetOffersForDrugstoreActive(id);
+                foreach (TenderOffer rawOffer in rawOffers)
+                {
+                    FillDrugList(id, rawOffer, retVal);
+                }
+                return Ok(retVal);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return NotFound();
+            }
+        }
+
+
         private static void AddOneTender(DrugTender rawTender, List<TenderDto> retVal)
         {
             TenderDto oneTender = new TenderDto(rawTender.Id, rawTender.TenderEnd);
@@ -146,6 +168,15 @@ namespace Integration_API.Controllers
             Console.WriteLine(range.From.AddHours(1));
             Console.WriteLine(range.To.AddHours(1));
             return Ok(DrugTenderService.GetDrugstoreTenderInfo(range.ConvertDateFromAngular()));
+        }
+
+        [HttpPost("chartInfo")] // POST /api/drugTender
+        public IActionResult GetSingleChart(DateRangeAndIdDTO rangeAndId)
+        {
+            Console.WriteLine(rangeAndId.From.AddHours(1));
+            Console.WriteLine(rangeAndId.To.AddHours(1));
+            DateRange range = new DateRange(rangeAndId.From, rangeAndId.To);
+            return Ok(DrugTenderService.GetSingleDrugstoreTenderInfo(range.ConvertDateFromAngular(), rangeAndId.Id));
         }
     }
 }

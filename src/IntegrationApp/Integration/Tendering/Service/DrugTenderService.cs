@@ -48,6 +48,16 @@ namespace Integration.Service
         {
             return TenderOfferSqlRepository.GetAll().Where(offer => offer.TenderId == tenderId).ToList();
         }
+        public List<TenderOffer> GetOffersForDrugstore(int drugstoreId)
+        {
+
+            return TenderOfferSqlRepository.GetAll().Where(offer => offer.DrugstoreId == drugstoreId).ToList();
+        }
+        public List<TenderOffer> GetOffersForDrugstoreActive(int drugstoreId)
+        {
+            
+            return TenderOfferSqlRepository.GetAll().Where(offer => offer.DrugstoreId == drugstoreId).ToList();
+        }
         public List <TenderChartInfoDTO> GetDrugstoreTenderInfo(DateRange range) {
             List<TenderChartInfoDTO> chartData = new List<TenderChartInfoDTO>();
             List<Drugstore> drugstores = drugstoreSqlRepository.GetAll();
@@ -55,6 +65,18 @@ namespace Integration.Service
                 chartData.Add(new TenderChartInfoDTO(d.Id, d.Name, GetDrugstoreWins(range, d.Id), GetDrugstoreProfit(range, d.Id), GetDrugstoreParticipations(range, d.Id)));
             }
             return chartData;
+        }
+        public TenderChartInfoDTO GetSingleDrugstoreTenderInfo(DateRange range, int id)
+        {
+            List<Drugstore> drugstores = drugstoreSqlRepository.GetAll();
+            foreach (Drugstore d in drugstores)
+            {
+                if(d.Id == id)
+                {
+                    return new TenderChartInfoDTO(d.Id, d.Name, GetDrugstoreWins(range, d.Id), GetDrugstoreProfit(range, d.Id), GetDrugstoreParticipations(range, d.Id));
+                }
+            }
+            return null;
         }
 
         private List<DrugTender> GetDateRangeTenders(DateRange range) {
