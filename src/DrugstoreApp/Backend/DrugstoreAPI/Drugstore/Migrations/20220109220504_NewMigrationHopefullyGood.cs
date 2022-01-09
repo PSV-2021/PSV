@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
-    public partial class initiralMigt : Migration
+    public partial class NewMigrationHopefullyGood : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -110,6 +111,39 @@ namespace Drugstore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Posted = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
+                    Recipients = table.Column<List<string>>(type: "text[]", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CustomerId = table.Column<int>(type: "integer", nullable: false),
+                    TotalPrice = table.Column<double>(type: "double precision", nullable: false),
+                    OrderType = table.Column<int>(type: "integer", nullable: false),
+                    Delivered = table.Column<bool>(type: "boolean", nullable: false),
+                    PickedUp = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TenderOffers",
                 columns: table => new
                 {
@@ -160,23 +194,23 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { "as", new DateTime(2021, 12, 31, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(1236), "Brufen - 150, Palitreks - 100, Andol - 40", true },
-                    { "2", new DateTime(2022, 1, 28, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(2558), "Brufen - 120, Palitreks - 90, Andol - 50", false }
+                    { "as", new DateTime(2022, 1, 2, 23, 5, 3, 594, DateTimeKind.Local).AddTicks(9420), "Brufen - 150, Palitreks - 100, Andol - 40", true },
+                    { "2", new DateTime(2022, 1, 30, 23, 5, 3, 595, DateTimeKind.Local).AddTicks(889), "Brufen - 120, Palitreks - 90, Andol - 50", false }
                 });
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 7, 14, 25, 12, 583, DateTimeKind.Local).AddTicks(7862), new DateTime(2022, 1, 7, 14, 25, 12, 581, DateTimeKind.Local).AddTicks(9906), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 9, 23, 5, 3, 594, DateTimeKind.Local).AddTicks(2981), new DateTime(2022, 1, 9, 23, 5, 3, 589, DateTimeKind.Local).AddTicks(4236), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
                 columns: new[] { "Id", "Content", "HospitalName", "Response" },
                 values: new object[,]
                 {
-                    { "bbb", "normalno", "Ime bolnice 223", "" },
+                    { "ccc", "bla bla", "Ime bolnice 224", "" },
                     { "aaa", "Lenka vrati zeton", "Health", "" },
-                    { "ccc", "bla bla", "Ime bolnice 224", "" }
+                    { "bbb", "normalno", "Ime bolnice 223", "" }
                 });
 
             migrationBuilder.InsertData(
@@ -189,9 +223,19 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "Manufacturer", "MedicineId", "MedicineImage", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Substances", "Supply", "Usage", "Weight" },
                 values: new object[,]
                 {
-                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 30, "bla", 100.0 },
                     { 1, "bla", null, null, "Brufen", "bla", 150.0, "bla", "bla", "bla", 150, "bla", 100.0 },
-                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 10, "bla", 100.0 }
+                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 10, "bla", 100.0 },
+                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 30, "bla", 100.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Notifications",
+                columns: new[] { "Id", "Content", "Posted", "Recipients", "Title" },
+                values: new object[,]
+                {
+                    { 3, "Obavestenje o promeni cena", new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Vazno obavestenje" },
+                    { 1, "Aloaloalo", new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Uzbuna" },
+                    { 2, "Stigli su novi lekovi", new DateTime(2021, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Novi lekovi" }
                 });
 
             migrationBuilder.InsertData(
@@ -238,6 +282,12 @@ namespace Drugstore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Medicines");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "TenderOffers");
