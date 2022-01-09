@@ -71,14 +71,14 @@ namespace Drugstore.Migrations
                         new
                         {
                             Id = "as",
-                            TenderEnd = new DateTime(2021, 12, 31, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(1236),
+                            TenderEnd = new DateTime(2022, 1, 2, 22, 49, 2, 132, DateTimeKind.Local).AddTicks(9185),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 1, 28, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(2558),
+                            TenderEnd = new DateTime(2022, 1, 30, 22, 49, 2, 133, DateTimeKind.Local).AddTicks(665),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         });
@@ -114,8 +114,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2022, 1, 7, 14, 25, 12, 583, DateTimeKind.Local).AddTicks(7862),
-                            StartDate = new DateTime(2022, 1, 7, 14, 25, 12, 581, DateTimeKind.Local).AddTicks(9906),
+                            EndDate = new DateTime(2022, 1, 9, 22, 49, 2, 132, DateTimeKind.Local).AddTicks(5900),
+                            StartDate = new DateTime(2022, 1, 9, 22, 49, 2, 130, DateTimeKind.Local).AddTicks(7846),
                             Title = "title"
                         });
                 });
@@ -286,6 +286,33 @@ namespace Drugstore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Drugstore.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Delivered")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("PickedUp")
+                        .HasColumnType("boolean");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("Drugstore.Models.TenderOffer", b =>
                 {
                     b.Property<string>("Id")
@@ -334,30 +361,6 @@ namespace Drugstore.Migrations
                             TenderId = "2",
                             TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
                         });
-                });
-
-            modelBuilder.Entity("Drugstore.Models.ShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<bool>("Delivered")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("OrderType")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("PickedUp")
-                        .HasColumnType("boolean");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Drugstore.Models.User", b =>

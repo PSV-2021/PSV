@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
-    public partial class initiralMigt : Migration
+    public partial class initialMigr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -110,6 +110,23 @@ namespace Drugstore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CustomerId = table.Column<int>(type: "integer", nullable: false),
+                    TotalPrice = table.Column<double>(type: "double precision", nullable: false),
+                    OrderType = table.Column<int>(type: "integer", nullable: false),
+                    Delivered = table.Column<bool>(type: "boolean", nullable: false),
+                    PickedUp = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TenderOffers",
                 columns: table => new
                 {
@@ -160,14 +177,14 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { "as", new DateTime(2021, 12, 31, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(1236), "Brufen - 150, Palitreks - 100, Andol - 40", true },
-                    { "2", new DateTime(2022, 1, 28, 14, 25, 12, 584, DateTimeKind.Local).AddTicks(2558), "Brufen - 120, Palitreks - 90, Andol - 50", false }
+                    { "as", new DateTime(2022, 1, 2, 22, 49, 2, 132, DateTimeKind.Local).AddTicks(9185), "Brufen - 150, Palitreks - 100, Andol - 40", true },
+                    { "2", new DateTime(2022, 1, 30, 22, 49, 2, 133, DateTimeKind.Local).AddTicks(665), "Brufen - 120, Palitreks - 90, Andol - 50", false }
                 });
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 7, 14, 25, 12, 583, DateTimeKind.Local).AddTicks(7862), new DateTime(2022, 1, 7, 14, 25, 12, 581, DateTimeKind.Local).AddTicks(9906), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 9, 22, 49, 2, 132, DateTimeKind.Local).AddTicks(5900), new DateTime(2022, 1, 9, 22, 49, 2, 130, DateTimeKind.Local).AddTicks(7846), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
@@ -238,6 +255,9 @@ namespace Drugstore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Medicines");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "TenderOffers");

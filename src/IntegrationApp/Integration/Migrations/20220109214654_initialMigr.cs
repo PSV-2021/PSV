@@ -46,6 +46,8 @@ namespace Integration.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: true),
                     Title = table.Column<string>(type: "text", nullable: true),
+                    TimeRange_From = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    TimeRange_To = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     DrugstoreName = table.Column<string>(type: "text", nullable: true),
                     IsPublished = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -112,8 +114,8 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { "2", new DateTime(2022, 1, 28, 14, 8, 37, 749, DateTimeKind.Local).AddTicks(6210), "Brufen - 120, Palitreks - 90, Andol - 50", false },
-                    { "as", new DateTime(2021, 12, 31, 14, 8, 37, 747, DateTimeKind.Local).AddTicks(6975), "Brufen - 150, Palitreks - 100, Andol - 40", true }
+                    { "2", new DateTime(2022, 1, 30, 22, 46, 54, 404, DateTimeKind.Local).AddTicks(4485), "Brufen - 120, Palitreks - 90, Andol - 50", false },
+                    { "as", new DateTime(2022, 1, 2, 22, 46, 54, 402, DateTimeKind.Local).AddTicks(5448), "Brufen - 150, Palitreks - 100, Andol - 40", true }
                 });
 
             migrationBuilder.InsertData(
@@ -174,8 +176,8 @@ namespace Integration.Migrations
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
-                columns: new[] { "Id", "Content", "DrugstoreName", "IsPublished", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", false, "title" });
+                columns: new[] { "Id", "Content", "DrugstoreName", "IsPublished", "Title", "TimeRange_From", "TimeRange_To" },
+                values: new object[] { "1", "Content", "Apotekica", false, "title", new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Drugstores",
