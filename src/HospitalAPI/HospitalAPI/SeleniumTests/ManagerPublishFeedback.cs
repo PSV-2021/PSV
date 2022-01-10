@@ -47,7 +47,7 @@ namespace SeleniumTests
             Assert.True(FeedbackPage.ApproveButtonDisplayed());
             FeedbackPage.ApproveFeedback();
             FeedbackPage.Navigate();
-            Assert.True(FeedbackPage.ReturnButtonDisplayed());
+            Assert.False(FeedbackPage.ReturnButtonDisplayed());
 
             Assert.Equal(Driver.Url, FeedbacksPage.URI);
             Dispose();

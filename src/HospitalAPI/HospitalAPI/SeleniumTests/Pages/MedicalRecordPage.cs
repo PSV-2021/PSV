@@ -25,7 +25,7 @@ namespace SeleniumTests.Pages
         }
         public void WaitToLoad()
         {
-            var wait = new WebDriverWait(Driver, new TimeSpan(0, 0, 10));
+            var wait = new WebDriverWait(Driver, new TimeSpan(0, 0, 20));
             wait.Until(condition => CancelButton.Displayed);
         }
 
