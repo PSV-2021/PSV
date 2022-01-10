@@ -3,17 +3,15 @@ using System;
 using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Drugstore.Migrations
+namespace Drugstore.Migrations.MyDb
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220107151713_eventAddedMigration")]
-    partial class eventAddedMigration
+    partial class MyDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,14 +73,14 @@ namespace Drugstore.Migrations
                         new
                         {
                             Id = 1,
-                            TenderEnd = new DateTime(2021, 12, 31, 16, 17, 11, 876, DateTimeKind.Local).AddTicks(471),
+                            TenderEnd = new DateTime(2022, 1, 3, 18, 44, 0, 624, DateTimeKind.Local).AddTicks(3875),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = 2,
-                            TenderEnd = new DateTime(2022, 1, 28, 16, 17, 11, 876, DateTimeKind.Local).AddTicks(3154),
+                            TenderEnd = new DateTime(2022, 1, 31, 18, 44, 0, 624, DateTimeKind.Local).AddTicks(6680),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         });
@@ -118,35 +116,9 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2022, 1, 7, 16, 17, 11, 875, DateTimeKind.Local).AddTicks(2775),
-                            StartDate = new DateTime(2022, 1, 7, 16, 17, 11, 870, DateTimeKind.Local).AddTicks(7171),
+                            EndDate = new DateTime(2022, 1, 10, 18, 44, 0, 623, DateTimeKind.Local).AddTicks(4570),
+                            StartDate = new DateTime(2022, 1, 10, 18, 44, 0, 619, DateTimeKind.Local).AddTicks(495),
                             Title = "title"
-                        });
-                });
-
-            modelBuilder.Entity("Drugstore.Models.Event", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("EventName")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("EventTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Events");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EventName = "Klik",
-                            EventTime = new DateTime(2022, 1, 7, 16, 17, 11, 877, DateTimeKind.Local).AddTicks(12)
                         });
                 });
 

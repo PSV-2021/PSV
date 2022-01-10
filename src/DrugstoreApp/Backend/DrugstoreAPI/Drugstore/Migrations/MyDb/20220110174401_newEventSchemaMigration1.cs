@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Drugstore.Migrations
+namespace Drugstore.Migrations.MyDb
 {
-    public partial class eventAddedMigration : Migration
+    public partial class newEventSchemaMigration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,20 +49,6 @@ namespace Drugstore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DrugTenders", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Events",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EventName = table.Column<string>(type: "text", nullable: true),
-                    EventTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Events", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,27 +162,22 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 12, 31, 16, 17, 11, 876, DateTimeKind.Local).AddTicks(471), "Brufen - 150, Palitreks - 100, Andol - 40", true },
-                    { 2, new DateTime(2022, 1, 28, 16, 17, 11, 876, DateTimeKind.Local).AddTicks(3154), "Brufen - 120, Palitreks - 90, Andol - 50", false }
+                    { 1, new DateTime(2022, 1, 3, 18, 44, 0, 624, DateTimeKind.Local).AddTicks(3875), "Brufen - 150, Palitreks - 100, Andol - 40", true },
+                    { 2, new DateTime(2022, 1, 31, 18, 44, 0, 624, DateTimeKind.Local).AddTicks(6680), "Brufen - 120, Palitreks - 90, Andol - 50", false }
                 });
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 7, 16, 17, 11, 875, DateTimeKind.Local).AddTicks(2775), new DateTime(2022, 1, 7, 16, 17, 11, 870, DateTimeKind.Local).AddTicks(7171), "title" });
-
-            migrationBuilder.InsertData(
-                table: "Events",
-                columns: new[] { "Id", "EventName", "EventTime" },
-                values: new object[] { 1, "Klik", new DateTime(2022, 1, 7, 16, 17, 11, 877, DateTimeKind.Local).AddTicks(12) });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 10, 18, 44, 0, 623, DateTimeKind.Local).AddTicks(4570), new DateTime(2022, 1, 10, 18, 44, 0, 619, DateTimeKind.Local).AddTicks(495), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
                 columns: new[] { "Id", "Content", "HospitalName", "Response" },
                 values: new object[,]
                 {
-                    { "aaa", "Lenka vrati zeton", "Health", "" },
                     { "bbb", "normalno", "Ime bolnice 223", "" },
+                    { "aaa", "Lenka vrati zeton", "Health", "" },
                     { "ccc", "bla bla", "Ime bolnice 224", "" }
                 });
 
@@ -250,9 +231,6 @@ namespace Drugstore.Migrations
 
             migrationBuilder.DropTable(
                 name: "DrugTenders");
-
-            migrationBuilder.DropTable(
-                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");

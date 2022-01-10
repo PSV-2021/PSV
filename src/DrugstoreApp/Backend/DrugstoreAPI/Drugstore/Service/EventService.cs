@@ -10,13 +10,13 @@ namespace Drugstore.Service
     public class EventService
     {
         public IEventRepository EventRepository { get; set; }
-        public readonly MyDbContext dbContext;
+        public readonly EventDbContext dbContext;
         public EventService(IEventRepository eventRepository)
         {
             EventRepository = eventRepository;
         }
 
-        public EventService(MyDbContext context)
+        public EventService(EventDbContext context)
         {
             this.dbContext = context;
             EventRepository = new EventSqlRepository(context);
