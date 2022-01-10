@@ -8,6 +8,7 @@ using Factory;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Repository;
 using Hospital.SharedModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Hospital.MedicalRecords.Service
@@ -97,13 +98,14 @@ namespace Hospital.MedicalRecords.Service
         }
 
         public String GenerateJwtTokenPatient(JwtSecurityTokenHandler tokenHandler, Patient patient)
-        {            
+        {
+            IdentityOptions options = new IdentityOptions();
             SecurityTokenDescriptor tokenDeskriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("id", patient.Id.ToString()),
-                    new Claim("role", "patient")
+                    new Claim("role", "patient"),
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes("QKcOa8xPopVOliV6tpvuWmoKn4MOydSeIzUt4W4r1UlU2De7dTUYMlrgv3rU")), SecurityAlgorithms.HmacSha256Signature)
@@ -115,12 +117,13 @@ namespace Hospital.MedicalRecords.Service
 
         public String GenerateJwtTokenManager(JwtSecurityTokenHandler tokenHandler, Patient patient)
         {
+            IdentityOptions options = new IdentityOptions();
             SecurityTokenDescriptor tokenDeskriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("id", patient.Id.ToString()),
-                    new Claim("role", "manager")
+                    new Claim("role", "manager"),
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes("QKcOa8xPopVOliV6tpvuWmoKn4MOydSeIzUt4W4r1UlU2De7dTUYMlrgv3rU")), SecurityAlgorithms.HmacSha256Signature)

@@ -10,11 +10,12 @@ export class AuthService {
   constructor(private jwtHelper: JwtHelperService) {}
 
   getAuthStatus() {
+    console.log(!!localStorage.getItem("jwtToken"));
     return !!localStorage.getItem("jwtToken");
   }
 
-  isPatient() {
-    if(localStorage.getItem("role") == "patient"){
+  isManager() {
+    if(localStorage.getItem("role") == "manager"){
       return true;
     }
     else{

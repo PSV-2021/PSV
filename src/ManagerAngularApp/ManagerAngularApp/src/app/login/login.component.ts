@@ -43,7 +43,12 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('role', tokenInfo.role);
       console.log(tokenInfo.role);
       console.log(data);
-      this.router.navigate(['medicalRecord']);
+      if(tokenInfo.role == "manager"){
+      this.router.navigate(['home']);
+      }
+      else{
+        alert("This is manager only application, please log in as a manager");
+      }
     });
 
   
