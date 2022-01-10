@@ -10,6 +10,7 @@ using Integration.Tendering.Model;
 using Integration.Model;
 using RabbitMQ.Client;
 using System.Text;
+using Integration.Model;
 
 namespace Integration_API.Controllers
 {
@@ -39,8 +40,8 @@ namespace Integration_API.Controllers
             using (var channel = connection.CreateModel())
             {
                 channel.ExchangeDeclare(exchange: "logs", type: ExchangeType.Fanout);
-
-                DrugTender drugstoreTender = new DrugTender(tender.TenderEnd.AddDays(1).AddMinutes(59).AddSeconds(59), FormatTenderInfo(tender.TenderInfo), false);
+                string tenderId = DrugTenderService.GenId();
+                DrugTender drugstoreTender = new DrugTender(tenderId, tender.TenderEnd.AddDays(1).AddMinutes(59).AddSeconds(59), FormatTenderInfo(tender.TenderInfo), false);
                 string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(drugstoreTender);
                 var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
                 channel.BasicPublish(exchange: "tender",
@@ -50,6 +51,63 @@ namespace Integration_API.Controllers
                 DrugTenderService.Save(drugstoreTender);
 
                 return Ok(true);
+            }
+        }
+
+        [HttpPost("complete")] // POST /api/drugTender
+        public IActionResult PostGas(TenderFinisherDTO tender)
+        {
+            var factory = new ConnectionFactory() { HostName = host };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.ExchangeDeclare(exchange: "tenderFinish", type: ExchangeType.Fanout);
+                
+                foreach(Drugstore d in DrugstoreService.GetAll())
+                {
+                    TenderOffer tenderOfferNew = DrugTenderService.getTenderOfferById(tender.tenderId);
+                    DrugTender drugTender = DrugTenderService.getDrugTenderById(tenderOfferNew.TenderId);
+                    if (tender.drugstoreName == d.Name)
+                    {
+                        string tenderWin = "Winner:" + tender.tenderId;
+                        string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderWin);
+                        var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
+                        channel.BasicPublish(exchange: "tenderFinish",
+                                             routingKey: "",
+                                             basicProperties: null,
+                                             body: bodyNew);
+                     TenderOffer tenderOffer  =  DrugTenderService.getTenderOfferById(tender.tenderId);
+                        tenderOffer.IsAccepted = true;
+                        tenderOffer.IsActive = false;
+                        DrugTenderService.UpdateTenderOffer(tenderOffer);
+                        drugTender.isFinished = true;
+                        Console.WriteLine(drugTender.isFinished);
+                        DrugTenderService.UpdateDrugTender(drugTender);
+                        return Ok(true);
+                    }
+                    else
+                    {
+                        string tenderLose = "Loser:" + tender.tenderId;
+
+                        string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderLose);
+                        var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
+                        channel.BasicPublish(exchange: "tenderFinish",
+                                             routingKey: "",
+                                             basicProperties: null,
+                                             body: bodyNew);
+                        TenderOffer tenderOffer = DrugTenderService.getTenderOfferById(tender.tenderId);
+                        tenderOffer.IsAccepted = false;
+                        tenderOffer.IsActive = false;
+                        DrugTenderService.UpdateTenderOffer(tenderOffer);
+                        drugTender.isFinished = true;
+                        Console.WriteLine(drugTender.isFinished);
+                        DrugTenderService.UpdateDrugTender(drugTender);
+                        return Ok(true);
+                    }
+                    
+                }
+                return Unauthorized();
+                
             }
         }
 
@@ -77,13 +135,34 @@ namespace Integration_API.Controllers
 
 
         [HttpGet] // Get /api/drugTender/offer/2
-        [Route("offer/{id?}")]
-        public IActionResult GetAllOffersForTender(int id)
+        [Route("offer/{Id?}")]
+        public IActionResult GetAllOffersForTender(string Id)
         {
             List<TenderOfferDto> retVal = new List<TenderOfferDto>();
             try
             {
-                List<TenderOffer> rawOffers = DrugTenderService.GetOffersForTender(id);
+                List<TenderOffer> rawOffers = DrugTenderService.GetOffersForTender(Id);
+                foreach (TenderOffer rawOffer in rawOffers)
+                {
+                    FillDrugList(rawOffer.DrugstoreId, rawOffer, retVal);
+                }
+                return Ok(retVal);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return NotFound();
+            }
+        }
+
+        [HttpGet] // Get /api/drugTender/offer/2
+        [Route("offers/{id?}")]
+        public IActionResult GetAllOffersForDrugstore(int id)
+        {
+            List<TenderOfferDto> retVal = new List<TenderOfferDto>();
+            try
+            {
+                List<TenderOffer> rawOffers = DrugTenderService.GetOffersForDrugstoreActive(id);
                 foreach (TenderOffer rawOffer in rawOffers)
                 {
                     FillDrugList(id, rawOffer, retVal);
@@ -96,6 +175,7 @@ namespace Integration_API.Controllers
                 return NotFound();
             }
         }
+
 
         private static void AddOneTender(DrugTender rawTender, List<TenderDto> retVal)
         {
@@ -122,7 +202,7 @@ namespace Integration_API.Controllers
                 AddDrugToList(drugWithAmount, listOfDrugs);
             }
 
-            retVal.Add(new TenderOfferDto(DrugstoreService.GetDrugstoreById(id).Name, listOfDrugs, rawOffer.Price));
+            retVal.Add(new TenderOfferDto(DrugstoreService.GetDrugstoreById(id).Name, listOfDrugs, rawOffer.Price,rawOffer.Id));
         }
 
         private static void AddDrugToList(string drugWithAmount, List<DrugTenderDto> listOfDrugs)
@@ -146,6 +226,15 @@ namespace Integration_API.Controllers
             Console.WriteLine(range.From.AddHours(1));
             Console.WriteLine(range.To.AddHours(1));
             return Ok(DrugTenderService.GetDrugstoreTenderInfo(range.ConvertDateFromAngular()));
+        }
+
+        [HttpPost("chartInfo")] // POST /api/drugTender
+        public IActionResult GetSingleChart(DateRangeAndIdDTO rangeAndId)
+        {
+            Console.WriteLine(rangeAndId.From.AddHours(1));
+            Console.WriteLine(rangeAndId.To.AddHours(1));
+            DateRange range = new DateRange(rangeAndId.From, rangeAndId.To);
+            return Ok(DrugTenderService.GetSingleDrugstoreTenderInfo(range.ConvertDateFromAngular(), rangeAndId.Id));
         }
     }
 }
