@@ -1,4 +1,5 @@
 using Grpc.Core;
+using Hospital.PatientEvent.Model;
 using Hospital.SharedModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -55,8 +56,10 @@ namespace HospitalAPI
 
 
             services.AddControllers();
-            services.AddDbContext<MyDbContext>(options =>
-            options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
+            services.AddDbContext<MyDbContext>();
+            services.AddDbContext<EventDbContext>();
+            /*services.AddDbContext<MyDbContext>(options =>
+            options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());*/
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
