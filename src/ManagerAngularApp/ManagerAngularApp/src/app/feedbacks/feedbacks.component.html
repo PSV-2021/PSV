@@ -11,8 +11,8 @@
               <p>{{ comment.timeWritten | date:'short' }}</p>
               <br>
               <mat-card-subtitle>Response</mat-card-subtitle>
-              <p><em>"{{ comment.content }}"</em></p><button mat-raised-button class="approveButton" *ngIf="!comment.canPublish" (click)="publishComment(comment.id)">&#10003; Odobri</button>
-              <button mat-raised-button class="returnButton" *ngIf="comment.canPublish" (click)="returnComment(comment.id)">	&#10007; Vrati na odobravanje</button>
+              <p><em>"{{ comment.content }}"</em></p><button id="approveButton" mat-raised-button class="approveButton" *ngIf="!comment.canPublish" (click)="publishComment(comment.id)">&#10003; Approve</button>
+              <button mat-raised-button id="returnButton" class="returnButton" *ngIf="comment.canPublish" (click)="returnComment(comment.id)">	&#10007; Return for approval</button>
             </mat-card-content>
         </mat-card>
         </div>
