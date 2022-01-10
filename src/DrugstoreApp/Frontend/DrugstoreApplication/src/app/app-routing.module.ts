@@ -4,12 +4,14 @@ import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.compo
 import { RegistrationComponent } from './registration/registration.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { TendersComponent } from './tenders/tenders.component';
+import { TenderFinishingComponent } from './tender-finishing/tender-finishing.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'reviews', component: ReviewsComponent},
   { path: 'drugstore-offer', component: DrugstoreOfferComponent},
-  { path: 'tenders', component: TendersComponent}
+  { path: 'tenders', component: TendersComponent},
+  { path: 'tender-finishing', component : TenderFinishingComponent}
 ];
 
 @NgModule({

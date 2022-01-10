@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <mat-divider></mat-divider>
+    <br>
+    <h2 style="font-size: 50px; color: rgb(243, 26, 26);">Current active tenders:</h2>
+
+    <table *ngFor="let ot of tenders" class="table" style="margin-bottom: 2cm;">
+        <thead>
+            <tr>
+                <th scope="col" style="font-size: x-large;" >Tender ends: {{ot.tenderEnd}}</th>
+            </tr>
+            <tr>
+                <th scope="col" style="font-size: large;" >Drug name</th>
+                <th scope="col" style="font-size: large;">Amount</th>
+                <th scope="col" style="font-size: large;">
+                    <input type="checkbox" (change)="counter" disabled="true" id="counter" name="counter" #counter>
+                    <button *ngIf=" !ot.isWinner;" mat-button style=
+                "background-color:red; color:white" >
+                Loser
+            </button>
+                <button *ngIf=" ot.isWinner;"  mat-button style=
+                "background-color:green; color:white" (click)="finishTender(ot)">
+                Winner
+            </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tt of ot.tenderInfo; let idx = index">
+                <td scope="col" style="font-size: large;">{{ tt.drugName }}</td>
+                <td scope="col" style="font-size: large;">{{ tt.amount }}</td>
+                <td scope="col" style="font-size: large;">
+                    <input *ngIf="counter.checked" [(ngModel)]="ot.counterOfferInfo[idx].amount" type="text" placeholder="amount" matInput name="offer">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

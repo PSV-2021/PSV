@@ -23,7 +23,7 @@ export class TendersComponent implements OnInit {
   }
 
   
-  addOffer(tender : WholeTenderDto, price : string): void {
+  sendOffer(tender : WholeTenderDto, price : string): void {
     
     this.tenderOffer = new TenderOfferDto;
     this.tenderOffer.price = parseFloat(price);
@@ -40,7 +40,7 @@ export class TendersComponent implements OnInit {
     });
   }
 
-  addCounterOffer(tender : WholeTenderDto, price : string): void {
+  sendCounterOffer(tender : WholeTenderDto, price : string): void {
     this.tenderOffer = new TenderOfferDto;
     this.tenderOffer.price = parseFloat(price);
     this.tenderOffer.tender = tender;

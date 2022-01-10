@@ -11,6 +11,7 @@ using DrugstoreAPI.Service;
 using Drugstore.Repository.Interfaces;
 using Service;
 using Drugstore.Service;
+using RestSharp;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -43,13 +44,13 @@ namespace DrugstoreAPI.Controllers
                 {
                     if (HospitalService.CheckApiKey(header))
                     {
-                       return Ok(medicineService.CheckForAmountOfDrug(demand.Name, demand.Amount));
+                        return Ok(medicineService.CheckForAmountOfDrug(demand.Name, demand.Amount));
                     }
                 }
             }
             return Unauthorized();
         }
-        [HttpPost ("urgent")]
+        [HttpPost("urgent")]
         public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
         {
             Microsoft.Extensions.Primitives.StringValues headerValues;
@@ -68,8 +69,12 @@ namespace DrugstoreAPI.Controllers
             return Unauthorized(false);
         }
 
-
-
+        
 
     }
 }
+
+
+
+
+ 

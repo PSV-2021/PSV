@@ -3,7 +3,7 @@
         <tr>
             <th scope="col" style="font-size: large;" >Drugstore: {{offer.drugstoreName}}, Price: {{offer.price}}</th>
             <th>
-                <button mat-mini-fab color="warn" aria-label="Accept offer">
+                <button mat-mini-fab color="warn" (click)="completeTransaction(offer)" aria-label="Accept offer">
                   <mat-icon>check_circle</mat-icon>
                 </button>
               </th>
