@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build-env
 WORKDIR /src
 COPY DrugstoreAPI.sln ./
 COPY Drugstore/*.csproj ./Drugstore/
-COPY DrugstoreAPI/*.csproj ./DrugstoreAPI/
+COPY DrugstoreAPI/*.csproj ./DrugstoreAP
 COPY DrugstoreApiTests/*.csproj ./DrugstoreApiTests/
 RUN dotnet restore DrugstoreAPI.sln
 
