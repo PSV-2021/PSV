@@ -9,6 +9,7 @@ using Model.DataBaseContext;
 using Grpc.Core;
 using System;
 using PrimerServis;
+using Integration.IntegrationEvents.Model;
 
 namespace Integration_API
 {
@@ -29,8 +30,11 @@ namespace Integration_API
         {           
             services.AddControllers();
             services.AddHostedService<RabbitMQService>();
-            services.AddDbContext<MyDbContext>(options =>
-                options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
+            services.AddDbContext<MyDbContext>();
+            services.AddDbContext<EventDbContext>();
+            /*            services.AddDbContext<MyDbContext>(options =>
+                            options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
+            */
             services.AddControllersWithViews().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
