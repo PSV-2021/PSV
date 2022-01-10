@@ -13,6 +13,7 @@ using System.Globalization;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Service;
 using Microsoft.AspNetCore.Authorization;
+using HospitalAPI.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -30,7 +31,7 @@ namespace HospitalAPI.Controllers
             appointmentService = new AppointmentService(new RecommendedAppointmentSqlRepository(context), new DoctorSqlRepository(context));
         }
 
-
+        [AuthAttribute("Post", "patient")]
         [HttpPost]
         public IActionResult Post(SearchAppointmentsDTO searchAppointments)
         {
@@ -40,7 +41,7 @@ namespace HospitalAPI.Controllers
             return Ok(dto);
         }
 
-
+        [AuthAttribute("Post", "patient")]
         [HttpPost("schedule")]
         public IActionResult Schedule(ScheduleDTO scheduleDTO)
         {
