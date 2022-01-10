@@ -19,5 +19,10 @@ namespace Integration_API.DTOs
             this.Name = drugName;
             this.Amount = drugAmount;
         }
+        public DrugAmountDemandDto( string drugName, int drugAmount)
+        {
+            this.Name = drugName;
+            this.Amount = drugAmount;
+        }
     }
 }

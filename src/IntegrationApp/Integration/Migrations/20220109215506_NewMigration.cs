@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration.Migrations
 {
-    public partial class tenderMigration : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,8 @@ namespace Integration.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: true),
                     Title = table.Column<string>(type: "text", nullable: true),
+                    TimeRange_From = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    TimeRange_To = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     DrugstoreName = table.Column<string>(type: "text", nullable: true),
                     IsPublished = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -80,8 +82,7 @@ namespace Integration.Migrations
                 name: "DrugTenders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     TenderEnd = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TenderInfo = table.Column<string>(type: "text", nullable: true),
                     isFinished = table.Column<bool>(type: "boolean", nullable: false)
@@ -95,11 +96,10 @@ namespace Integration.Migrations
                 name: "TenderOffers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     TenderOfferInfo = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<int>(type: "integer", nullable: false),
-                    TenderId = table.Column<int>(type: "integer", nullable: false),
+                    TenderId = table.Column<string>(type: "text", nullable: true),
                     IsAccepted = table.Column<bool>(type: "boolean", nullable: false),
                     DrugstoreId = table.Column<int>(type: "integer", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
@@ -114,8 +114,8 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { 2, new DateTime(2022, 1, 17, 15, 33, 36, 538, DateTimeKind.Local).AddTicks(5467), "Brufen - 120, Palitreks - 90, Andol - 50", false },
-                    { 1, new DateTime(2021, 12, 20, 15, 33, 36, 534, DateTimeKind.Local).AddTicks(7949), "Brufen - 150, Palitreks - 100, Andol - 40", true }
+                    { "2", new DateTime(2022, 1, 30, 22, 55, 5, 548, DateTimeKind.Local).AddTicks(2495), "Brufen - 120, Palitreks - 90, Andol - 50", false },
+                    { "as", new DateTime(2022, 1, 2, 22, 55, 5, 542, DateTimeKind.Local).AddTicks(8060), "Brufen - 150, Palitreks - 100, Andol - 40", true }
                 });
 
             migrationBuilder.InsertData(
@@ -176,8 +176,8 @@ namespace Integration.Migrations
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
-                columns: new[] { "Id", "Content", "DrugstoreName", "IsPublished", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", false, "title" });
+                columns: new[] { "Id", "Content", "DrugstoreName", "IsPublished", "Title", "TimeRange_From", "TimeRange_To" },
+                values: new object[] { "1", "Content", "Apotekica", false, "title", new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Drugstores",
@@ -194,8 +194,8 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "DrugstoreId", "IsAccepted", "IsActive", "Price", "TenderId", "TenderOfferInfo" },
                 values: new object[,]
                 {
-                    { 1, 1, false, true, 5000, 2, "Brufen - 100, Palitreks - 80, Andol - 40" },
-                    { 2, 2, false, true, 5900, 2, "Brufen - 120, Palitreks - 50, Andol - 35" }
+                    { "1", 1, false, true, 5000, "as", "Brufen - 100, Palitreks - 80, Andol - 40" },
+                    { "2", 2, false, true, 5900, "2", "Brufen - 120, Palitreks - 50, Andol - 35" }
                 });
         }
 

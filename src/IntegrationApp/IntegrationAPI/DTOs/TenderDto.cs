@@ -7,7 +7,7 @@ namespace Integration_API.DTOs
 {
     public class TenderDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public DateTime TenderEnd { get; set; }
         public List<DrugTenderDto> TenderInfo { get; set; }
 
@@ -16,7 +16,7 @@ namespace Integration_API.DTOs
             TenderInfo = new List<DrugTenderDto>();
         }
 
-        public TenderDto(int id, DateTime tenderEnd)
+        public TenderDto(string id, DateTime tenderEnd)
         {
             Id = id;
             TenderEnd = tenderEnd;
