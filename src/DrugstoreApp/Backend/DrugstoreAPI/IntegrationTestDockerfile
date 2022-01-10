@@ -9,4 +9,17 @@ RUN dotnet restore DrugstoreAPI.sln
 COPY . ./
 
 WORKDIR /src/DrugstoreApiTests
-RUN dotnet test --filter Type=IntegrationTest --no-restore
+ARG DBServer
+ENV DBServer=${DBServer}
+
+ARG DBUser
+ENV DBUser=${DBUser}
+
+ARG DBPassword
+ENV DBPassword=${DBPassword}
+
+ARG DBTest
+ENV DBTest=${DBTest}
+
+RUN echo ${DBServer}
+#RUN dotnet test --filter Type=IntegrationTest --no-restore
