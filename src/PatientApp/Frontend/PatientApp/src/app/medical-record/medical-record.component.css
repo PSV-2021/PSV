@@ -63,7 +63,7 @@ body {
       font-family: Roboto, "Helvetica Neue", sans-serif;
       }
 .contentlabel{
-    width:35%;
+    width:20%;
     float:left;
     text-align: left;
     font-size:20px;
@@ -74,4 +74,18 @@ body {
   
   .example-form{
       margin-top: 1%;
+  }
+  .imgShow{
+      margin:5%;
+      width:90%;
+      max-height:90%;
+  }
+  .contentImg{
+      font-size:20px;
+      margin-top:5%;
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      margin-right:3%;
+      float:right;
+      width:25%;
+      height:25%;
   }

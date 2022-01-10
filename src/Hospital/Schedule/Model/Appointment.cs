@@ -150,7 +150,7 @@ namespace Hospital.Schedule.Model
             Validate();
         }
 
-        public Appointment(DateTime start, int duration, string description, bool isDeleted, int doctorId, int patientId, bool isCancelled)
+        public Appointment(DateTime start, int duration, string description, bool isDeleted, int doctorId, int patientId, bool isCancelled, bool canCancel)
         {
             StartTime = start;
             DurationInMunutes = duration;
@@ -159,6 +159,7 @@ namespace Hospital.Schedule.Model
             DoctorId = doctorId;
             PatientId = patientId;
             this.isCancelled = isCancelled;
+            this.canCancel = canCancel;
             Validate();
         }
 

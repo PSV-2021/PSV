@@ -8,6 +8,7 @@ using Grpc.Core;
 using Microsoft.AspNetCore.Cors;
 using Integration.Service;
 using Integration.Repository.Sql;
+using System.Collections.Generic;
 
 namespace Integration_API.Controllers
 {
@@ -110,6 +111,63 @@ namespace Integration_API.Controllers
 
         }
 
+        [HttpPost("finish")]
+        public IActionResult FinishTender(TenderOfferCompletionDto demand)
+        {
+            int isOk = 0;
+            List<DrugTenderDto> retInfo = this.getDrugToSell(this.DemandToString(demand.TenderInfo));
+            int check = retInfo.Count();
+            
+
+            foreach (DrugTenderDto d in retInfo)
+            {
+                
+                DrugAmountDemandDto dto = new DrugAmountDemandDto(this.GetHospitalLink(),d.DrugName, d.Amount);
+                var client = new RestClient(this.GetHospitalLink());
+                var request = new RestRequest("/api/drugPurchase/urgent", Method.PUT);
+                SetApiKeyInHeaderForFinish(demand, request);
+
+                SetRequestBody(dto, request);
+
+                IRestResponse response = client.Execute(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    isOk++;
+                }
+                else
+                {
+                    return Ok(false);
+                }
+                
+            }
+
+            return Ok(true);        
+
+    }
+        private string DemandToString(List<DrugTenderDto> list)
+        {
+            string ret = "";
+            foreach (DrugTenderDto dto in list)
+            {
+                ret += dto.DrugName + " - " + dto.Amount + " , ";
+            }
+            string fin = ret.Remove(ret.Length - 2, 2);
+            return fin;
+        }
+
+        private List<DrugTenderDto> getDrugToSell(string info)
+        {
+            string[] infos = info.Split(",");
+            List<DrugTenderDto> retInfo = new List<DrugTenderDto>();
+            foreach (string s in infos)
+            {
+                string[] singleDrugInfo = s.Split("-");
+                DrugTenderDto drug = new DrugTenderDto(singleDrugInfo[0].Trim(), int.Parse(singleDrugInfo[1]));
+                retInfo.Add(drug);
+            }
+            return retInfo;
+        }
 
 
         private static void SetRequestBody(DrugAmountDemandDto demand, RestRequest request)
@@ -124,12 +182,41 @@ namespace Integration_API.Controllers
             request.AddJsonBody(jsonBody);
         }
 
+        private static void SetRequestBodyForFinish(TenderOfferCompletionDto demand, RestRequest request)
+        {
+            var body = new
+            {
+                Id = demand.Id,
+                TenderEnd = demand.TenderEnd,
+                TenderInfo = demand.TenderInfo,
+                IsWinner = demand.IsWinner
+            };
+            string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+
+            request.AddJsonBody(jsonBody);
+        }
+
         private void SetApiKeyInHeader(DrugAmountDemandDto demand, RestRequest request)
         {
             string ApiKey = "";
             foreach (var df in dbContext.Drugstores.ToList())
             {
                 if (df.Url.Equals(demand.PharmacyUrl))
+                {
+                    ApiKey = df.ApiKey;
+                    break;
+                }
+            }
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("ApiKey", ApiKey);
+        }
+        private void SetApiKeyInHeaderForFinish(TenderOfferCompletionDto demand, RestRequest request)
+        {
+            string ApiKey = "";
+            foreach (var df in dbContext.Drugstores.ToList())
+            {
+                if (df.Url.Equals(this.GetHospitalLink()))
                 {
                     ApiKey = df.ApiKey;
                     break;

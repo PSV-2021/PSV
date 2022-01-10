@@ -22,10 +22,11 @@ export class RecommendAppointmentService {
     return this.http.post<any>(this.url + "/recommendedAppointment", appointment);
   }
 
-  Schedule(start: Date, id: number): Observable<any>{
+  Schedule(start: Date, id: number, patientId: number): Observable<any>{
     const body = {
       Start : start,
-      Id : id
+      Id : id,
+      PatientId: patientId
     }
     return this.http.post<any>(this.url + "/recommendedAppointment/schedule", body);
   }

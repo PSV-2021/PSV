@@ -50,7 +50,7 @@ namespace DrugstoreAPI.Controllers
         [HttpPost("pls")]
         public IActionResult Post(PublishedOfferDto offer)
         {
-            
+
             IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(dbContext);
             
             DrugstoreOffer forEdit = repo.GetOne(offer.OfferId);

@@ -4,18 +4,25 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
+using Newtonsoft.Json;
 
 namespace Integration.Model
 {
     public class DrugstoreOffer
     {   [Key]
+        [JsonProperty]
         public string Id { get; private set; }
+        [JsonProperty]
         public string Content { get; private set; }
+        [JsonProperty]
         public string Title { get; private set; }
         //public DateTime StartDate { get; private set; }
         //public DateTime EndDate { get; private set; }
+        [JsonProperty]
         public DateRange TimeRange { get; private set; }
+        [JsonProperty]
         public string DrugstoreName { get; private set; }
+        [JsonProperty]
         public bool IsPublished { get; private set; }
 
         public DrugstoreOffer(string id, string content, string title, DateTime startDate, DateTime endDate, string drugstoreName, bool isPublished)

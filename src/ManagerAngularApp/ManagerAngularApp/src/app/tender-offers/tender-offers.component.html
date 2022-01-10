@@ -1,0 +1,23 @@
+<table *ngFor="let offer of offers" class="table" style="margin-bottom: 2cm;">
+    <thead>
+        <tr>
+            <th scope="col" style="font-size: large;" >Drugstore: {{offer.drugstoreName}}, Price: {{offer.price}}</th>
+            <th>
+                <button mat-mini-fab color="warn" (click)="completeTransaction(offer)" aria-label="Accept offer">
+                  <mat-icon>check_circle</mat-icon>
+                </button>
+              </th>
+          </tr>
+      <tr>
+        <th scope="col" style="font-size: large;" >Drug name</th>
+        <th scope="col" style="font-size: large;">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tt of offer.tenderInfo">
+          <td scope="col" style="font-size: large;">{{ tt.drugName }}</td>
+          <td scope="col" style="font-size: large;">{{ tt.amount }}</td>
+      </tr>
+  </tbody>
+  </table>
+  <br>

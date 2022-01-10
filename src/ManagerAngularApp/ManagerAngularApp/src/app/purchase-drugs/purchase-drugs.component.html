@@ -27,8 +27,8 @@
     <mat-card-content>
         <mat-form-field appearance="fill">
             <mat-label>Choose pharmacy:</mat-label>
-            <mat-select [(ngModel)]="selectedPharmacy" name="phar" (ngModelChange)="inputChanged($event)">
-              <mat-option *ngFor="let pharmacy of pharmacies" [value]="pharmacy">
+            <mat-select id="drugstores" [(ngModel)]="selectedPharmacy" name="phar" (ngModelChange)="inputChanged($event)">
+              <mat-option *ngFor="let pharmacy of pharmacies" [value]="pharmacy" id={{pharmacy.Name}}>
                 {{pharmacy.Name}}
               </mat-option>
             </mat-select>
@@ -36,17 +36,17 @@
           <br>
           <mat-form-field class="example-full-width" appearance="fill" >
             <mat-label>Drug name</mat-label>
-            <textarea matInput placeholder="Drug name" [(ngModel)]="drugName" name="drugName" (ngModelChange)="inputChanged($event)" matInput></textarea>
+            <textarea id="drugName" matInput placeholder="Drug name" [(ngModel)]="drugName" name="drugName" (ngModelChange)="inputChanged($event)" matInput></textarea>
           </mat-form-field>
           <br>
           <mat-form-field class="example-full-width" appearance="fill" >
             <mat-label>Amount of drug</mat-label>
-            <input matInput type="number" min="1" [(ngModel)]="drugAmount" name="drugAmount" (ngModelChange)="inputChanged($event)" matInput>
+            <input matInput id="drugAmount" type="number" min="1" [(ngModel)]="drugAmount" name="drugAmount" (ngModelChange)="inputChanged($event)" matInput>
           </mat-form-field>
           <br>
           <mat-card-actions>
-            <button mat-raised-button (click)="sendDemand()" color="primary">Send request</button>
-            <button mat-raised-button [disabled]="disableButton" (click)="sendUrgedPurchase()" color="primary">Urgend request</button>
+            <button id="requestButton" mat-raised-button (click)="sendDemand()" color="primary">Send request</button>
+            <button id="purchaseButton" mat-raised-button [disabled]="disableButton" (click)="sendUrgedPurchase()" color="primary">Urgend request</button>
           </mat-card-actions>
     </mat-card-content>
 </mat-card>

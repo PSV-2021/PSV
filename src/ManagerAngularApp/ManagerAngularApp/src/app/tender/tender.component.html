@@ -1,0 +1,80 @@
+<mat-toolbar>
+  <app-navigation></app-navigation>
+</mat-toolbar>
+<div class="container-fluid">
+    <div class="row" style="margin-top: 2%;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4">
+            <h2 style="font-size: 50px; color: rgb(243, 26, 26);">New tender</h2>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Choose tender end date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="tenderEnd">
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" (click)="saveTender()" class="btn btn-lg btn-secondary">Save tender</button>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" style="font-size: large;" >Drug name</th>
+            <th scope="col" style="font-size: large;">Amount</th>
+            <th scope="col" style="font-size: large;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ti of tenderItems">
+                <td scope="col" style="font-size: large;">{{ ti.drugName }}</td>
+                <td scope="col" style="font-size: large;">{{ ti.amount }}</td>
+                <td><button type="button" (click)="removeDrug(ti.drugName)" class="btn btn-danger">Remove drug</button></td>
+            </tr>
+            <tr>
+                <td><input type="text" style="font-size: large;" class="form-control" [(ngModel)]="newTender.drugName" placeholder="Drug name"></td>
+                <td><input type="number" style="font-size: large;" class="form-control" [(ngModel)]="newTender.amount" min ="1" placeholder="Amount"></td>
+                <td><button type="button" (click)="addDrug(newTender.drugName)" class="btn btn-primary">Add new drug</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <h2 style="font-size: 50px; color: rgb(243, 26, 26);">Current active tenders:</h2>
+
+      <table *ngFor="let ot of ongoingTenders" class="table" style="margin-bottom: 2cm;">
+        <thead>
+          <tr>
+            <th scope="col" style="font-size: x-large;" >Tender ends: {{ot.tenderEnd}}</th>
+            <th>
+              <button mat-mini-fab color="warn" aria-label="See offers" (click)="seeOffers(ot.id)">
+                <mat-icon>help</mat-icon>
+              </button>
+            </th>
+          </tr>
+          <tr>
+            <th scope="col" style="font-size: large;" >Drug name</th>
+            <th scope="col" style="font-size: large;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tt of ot.tenderInfo">
+              <td scope="col" style="font-size: large;">{{ tt.drugName }}</td>
+              <td scope="col" style="font-size: large;">{{ tt.amount }}</td>
+          </tr>
+      </tbody>
+      </table>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <h2 style="font-size: 50px; color: rgb(243, 26, 26);">Tender charts:</h2>
+
+    </div>
+    <div class="container-fluid">
+      <app-charts></app-charts>
+    </div>

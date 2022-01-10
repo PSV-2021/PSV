@@ -38,9 +38,9 @@ namespace HospitalApiTests.Integration
             SetUpDbContext();
 
             context.Add(new Patient(1, "Andjelka", "Andjic", "andji", "andji", "1821099320191", new DateTime(1980, 9, 17), BloodType.A,
-                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com"));
+                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com","0"));
             context.Add(new Patient(2, "Milica", "Andjic", "andji", "andji", "1821099320191", new DateTime(1980, 9, 17), BloodType.A,
-                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com"));
+                "Milan", Sex.female, "02102019", "Resavska 1", "andja12@gmail.com","0"));
 
             MedicalrecordController medicalrecordController = new MedicalrecordController(context);
             IActionResult retVal = medicalrecordController.Get("1");

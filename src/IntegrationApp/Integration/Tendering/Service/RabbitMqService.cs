@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Integration.Tendering.Model;
 
 namespace PrimerServis
 {
@@ -27,6 +28,7 @@ namespace PrimerServis
         private string host = Environment.GetEnvironmentVariable("RABBIT_HOST") ?? "localhost";
         private readonly IServiceScopeFactory scopeFactory;
         public DrugstoreOfferService drugstoreOfferService;
+        public DrugTenderService drugTenderService;
 
         public RabbitMQService(IServiceScopeFactory scopeFactory)
         {
@@ -36,7 +38,9 @@ namespace PrimerServis
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             CreateConnection();
+            CreateTenderOfferConnection();
             RecieveMessage();
+            RecieveTenderOffer();
             return base.StartAsync(cancellationToken);
         }
 
@@ -58,6 +62,13 @@ namespace PrimerServis
             channel = connection.CreateModel();
             channel.ExchangeDeclare(exchange: "logs", type: ExchangeType.Fanout);
         }
+        public void CreateTenderOfferConnection()
+        {
+            var factory = new ConnectionFactory() { HostName = host };
+            connection = factory.CreateConnection();
+            channel = connection.CreateModel();
+            channel.ExchangeDeclare(exchange: "tenderOffer", type: ExchangeType.Direct);
+        }
         public DrugstoreOffer RecieveMessage()
         {
             DrugstoreOffer drugstoreOffer = new DrugstoreOffer();
@@ -65,7 +76,7 @@ namespace PrimerServis
             channel.QueueBind(queue: queueName,
                               exchange: "logs",
                               routingKey: "");
-
+            
             var consumer = new EventingBasicConsumer(channel);
 
             consumer.Received += (model, ea) =>
@@ -80,7 +91,7 @@ namespace PrimerServis
                     try
                     {   // try deserialize with default datetime format
                         drugstoreOffer = JsonConvert.DeserializeObject<DrugstoreOffer>(jsonMessage);
-                        Console.WriteLine(drugstoreOffer.IsPublished);
+                        Console.WriteLine(drugstoreOffer.Id);
                         
                     }
                     catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
@@ -95,6 +106,45 @@ namespace PrimerServis
                                          autoAck: true,
                                          consumer: consumer);
             return drugstoreOffer;
+        }
+
+        public TenderOffer RecieveTenderOffer()
+        {
+            TenderOffer tenderOffer = new TenderOffer();
+            var queueName = channel.QueueDeclare().QueueName;
+            channel.QueueBind(queue: queueName,
+                              exchange: "tenderOffer",
+                              routingKey: "");
+
+            var consumer = new EventingBasicConsumer(channel);
+
+            consumer.Received += (model, ea) =>
+            {
+                using (var scope = scopeFactory.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
+                    drugTenderService = new DrugTenderService(dbContext);
+                    byte[] body = ea.Body.ToArray();
+                    var jsonMessage = Encoding.UTF8.GetString(body);
+
+                    try
+                    {   // try deserialize with default datetime format
+                        tenderOffer = JsonConvert.DeserializeObject<TenderOffer>(jsonMessage);
+                        Console.WriteLine(tenderOffer.Id);
+
+                    }
+                    catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
+                    {
+                        Console.WriteLine("Ne moze");
+                    }
+                    Console.WriteLine(" [x] Received {0}", tenderOffer);
+                    drugTenderService.SaveTenderOffer(tenderOffer);
+                }
+            };
+            channel.BasicConsume(queue: queueName,
+                                         autoAck: true,
+                                         consumer: consumer);
+            return tenderOffer;
         }
     }
 }

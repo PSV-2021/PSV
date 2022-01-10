@@ -498,6 +498,91 @@ namespace Integration.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Integration.Tendering.Model.DrugTender", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TenderEnd")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("TenderInfo")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("isFinished")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DrugTenders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "as",
+                            TenderEnd = new DateTime(2022, 1, 2, 22, 55, 5, 542, DateTimeKind.Local).AddTicks(8060),
+                            TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
+                            isFinished = true
+                        },
+                        new
+                        {
+                            Id = "2",
+                            TenderEnd = new DateTime(2022, 1, 30, 22, 55, 5, 548, DateTimeKind.Local).AddTicks(2495),
+                            TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
+                            isFinished = false
+                        });
+                });
+
+            modelBuilder.Entity("Integration.Tendering.Model.TenderOffer", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("DrugstoreId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TenderId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TenderOfferInfo")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TenderOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            DrugstoreId = 1,
+                            IsAccepted = false,
+                            IsActive = true,
+                            Price = 5000,
+                            TenderId = "as",
+                            TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            DrugstoreId = 2,
+                            IsAccepted = false,
+                            IsActive = true,
+                            Price = 5900,
+                            TenderId = "2",
+                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
+                        });
+                });
+
             modelBuilder.Entity("Integration.Model.Drugstore", b =>
                 {
                     b.OwnsOne("Integration.Drugstore_Interaction.Model.ValueObjects.Address", "Address", b1 =>
@@ -594,6 +679,12 @@ namespace Integration.Migrations
                             b1.Property<string>("DrugstoreOfferId")
                                 .HasColumnType("text");
 
+                            b1.Property<DateTime>("From")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<DateTime>("To")
+                                .HasColumnType("timestamp without time zone");
+
                             b1.HasKey("DrugstoreOfferId");
 
                             b1.ToTable("DrugstoreOffers");
@@ -604,7 +695,9 @@ namespace Integration.Migrations
                             b1.HasData(
                                 new
                                 {
-                                    DrugstoreOfferId = "1"
+                                    DrugstoreOfferId = "1",
+                                    From = new DateTime(2021, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    To = new DateTime(2021, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                                 });
                         });
 
