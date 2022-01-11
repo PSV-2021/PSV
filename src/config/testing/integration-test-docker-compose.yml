@@ -36,6 +36,7 @@ services:
   hospital_api:
      depends_on:
        - postgres-server-hospital
+     build: ../../
      image: aco99/hospital_api
      environment:
        DBServer: postgres-server-hospital
@@ -52,6 +53,7 @@ services:
       - sftp-server
       - message-broker   
       - hospital_api
+    build: ../../IntegrationApp/
     image: aco99/integration_api
     environment:
       DBServer: postgres-server-hospital
@@ -76,13 +78,14 @@ services:
       - postgres-server-drugstore
       - message-broker
       - sftp-server
-    #build: ../DrugstoreApp/Backend/DrugstoreAPI
+    build: ../../DrugstoreApp/Backend/DrugstoreAPI
     image: aco99/drugstore_api
     environment:
       SFTP_IP: sftp-server
       SFTP_USERNAME: user
       SFTP_PASSWORD: password
       DBServer: postgres-server-drugstore
+      RABBIT_HOST: message-broker
       DBUser: postgres
       DBPassword: 123
       DB: drugstore
@@ -94,6 +97,7 @@ services:
         context: ../../DrugstoreApp/Backend/DrugstoreAPI
         dockerfile: IntegrationTestDockerfile
         args:
+          DBUser: postgres
           DBServer: postgres-server-drugstore
           DBTest: drugstore
           DBPassword: 123
@@ -106,6 +110,7 @@ services:
       dockerfile: IntegrationTestHospital.Dockerfile
       args:
         DBServer: postgres-server-hospital
+        DBUser: postgres
         DBTest: hospital
         DBPassword: 123
     entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
@@ -117,6 +122,7 @@ services:
       dockerfile: IntegrationTest.Dockerfile
       args:
         DBServer: postgres-server-hospital
+        DBUser: postgres
         DBTest: hospital
         DBPassword: 123
     entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
