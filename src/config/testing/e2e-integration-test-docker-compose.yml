@@ -120,7 +120,8 @@ services:
       dockerfile: E2E.Dockerfile
       args: 
         MF_HOST: "http://manager_client"
-    entrypoint: dotnet test
+    entrypoint: dotnet 
+    restart: always
     depends_on:
       integration_api:
         condition: service_healthy

@@ -1,4 +1,4 @@
-name: Integration tests
+name: Integration tests drugstore
 on:
   pull_request: 
     branches: [ development ]
