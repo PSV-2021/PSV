@@ -37,6 +37,12 @@ services:
      depends_on:
        - postgres-server-hospital
      build: ../../
+     healthcheck:
+      test: ["CMD", "curl", "http://localhost/","||","exit","1"]
+      interval: 15s
+      timeout: 30s
+      retries: 25
+      start_period: 15s
      image: aco99/hospital_api
      environment:
        DBServer: postgres-server-hospital
@@ -55,6 +61,12 @@ services:
       - hospital_api
     build: ../../IntegrationApp/
     image: aco99/integration_api
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost/","||","exit","1"]
+      interval: 15s
+      timeout: 30s
+      retries: 25
+      start_period: 15s
     environment:
       DBServer: postgres-server-hospital
       DBPort: 5432
@@ -79,6 +91,12 @@ services:
       - message-broker
       - sftp-server
     build: ../../DrugstoreApp/Backend/DrugstoreAPI
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost/","||","exit","1"]
+      interval: 15s
+      timeout: 30s
+      retries: 25
+      start_period: 15s
     image: aco99/drugstore_api
     environment:
       SFTP_IP: sftp-server
@@ -103,7 +121,8 @@ services:
           DBPassword: 123
       entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
       depends_on:
-        - drugstore_api
+        drugstore_api:
+          condition: service_healthy
   hospital_test:
     build:
       context: ../..
@@ -115,7 +134,8 @@ services:
         DBPassword: 123
     entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
     depends_on:
-      - hospital_api
+      hospital_api:
+        condition: service_healthy
   integration_test:
     build:
       context: ../../IntegrationApp
@@ -127,6 +147,7 @@ services:
         DBPassword: 123
     entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
     depends_on:
-      - integration_api      
+      integration_api:
+        condition: service_healthy      
   
       
