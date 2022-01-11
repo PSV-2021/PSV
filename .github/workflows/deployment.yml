@@ -30,4 +30,7 @@ jobs:
             docker push aco99/patient_client
             docker push aco99/drugstore_client
             docker push aco99/manager_client
+            cd ..
+            cd config/integration_testing
+            docker-compose -f integration-test-docker-compose.yml build
             
