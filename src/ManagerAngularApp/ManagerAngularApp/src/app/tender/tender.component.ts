@@ -6,6 +6,8 @@ import { TenderService } from '../services/tender.service';
 import { ToastrService } from 'ngx-toastr';
 import { WholeTenderDto } from './whole.tender.dto';
 import { Router } from '@angular/router';
+//@ts-ignore
+import { Chart } from 'node_modules/chart.js';
 
 @Component({
   selector: 'app-tender',
@@ -38,8 +40,8 @@ export class TenderComponent implements OnInit {
         });
       }
       console.log(this.ongoingTenders);
+      
     });
-
   }
 
   valid(): boolean {
@@ -105,8 +107,8 @@ export class TenderComponent implements OnInit {
       this.toastr.error('Your tender ending date must be valid (after today) and your drug list must contain at least one drug !', 'Error');
   }
 
-  seeOffers(id: number){
+  seeOffers(id: string){
+    console.log(id);
     this.router.navigate(['offer/' + id]);
   }
-
 }

@@ -6,7 +6,7 @@ using Integration_API.Repository.Interfaces;
 
 namespace Integration.Tendering.Repository.Interfaces
 {
-    interface ITenderOfferRepository : IGenericRepository<TenderOffer, int>
+    interface ITenderOfferRepository : IGenericRepository<TenderOffer, string>
     {
     }
 }

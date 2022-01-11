@@ -42,8 +42,8 @@
                 <th scope="col" style="font-size: x-large;" >Tender ends: {{ot.tenderEnd}}</th>
                 <th>
                     <input type="number" min = "0" placeholder="Add price" matInput name="offer" id = "price" name = "price" #price>
-                    <button *ngIf="!counter.checked" (click)="addOffer(ot, price.value)">Offer</button>
-                    <button *ngIf="counter.checked" (click)="addCounterOffer(ot, price.value)">Offer</button>
+                    <button *ngIf="!counter.checked" (click)="sendOffer(ot, price.value)">Offer</button>
+                    <button *ngIf="counter.checked" (click)="sendCounterOffer(ot, price.value)">Offer</button>
                 </th>
             </tr>
             <tr>

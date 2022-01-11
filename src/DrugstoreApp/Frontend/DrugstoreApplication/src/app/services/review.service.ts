@@ -1,12 +1,9 @@
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { catchError } from 'rxjs/operators';
 import { ReviewDto } from '../reviews/review.dto';
 import { ResponseDto } from '../reviews/response.dto';
-
 import { map } from 'rxjs-compat/operator/map';
 import { environment } from 'src/environments/environment';
 

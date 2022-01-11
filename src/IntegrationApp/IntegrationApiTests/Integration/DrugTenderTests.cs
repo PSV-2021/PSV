@@ -34,7 +34,7 @@ namespace IntegrationApiTests.Integration
             SetUpDbContext();
             var tenderController = new DrugTenderController(context);
 
-            IActionResult result = tenderController.GetAllOffersForTender(2);
+            IActionResult result = tenderController.GetAllOffersForTender("2");
 
             Assert.IsType<OkObjectResult>(result);
         }

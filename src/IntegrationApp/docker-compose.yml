@@ -60,6 +60,7 @@ services:
        DBUser: postgres
        DBPassword: 123
        DB: hospital
+     restart: always
      ports:
        - "8081:80"
        
@@ -75,6 +76,10 @@ services:
         SFTP_USERNAME: user
         SFTP_PASSWORD: password
         RABBIT_HOST: message-broker
+        HOSPITAL_GRPC_DOMAIN: hospital_api
+        HOSPITAL_GRPC_PORT: 8081
+        DRUGSTORE_GRPC_DOMAIN: drugstore_api
+        DRUGSTORE_GRPC_PORT: 8082
     image: aco99/integration_api
     environment:
       DBServer: postgres-server-hospital
@@ -82,6 +87,8 @@ services:
       DBUser: postgres
       DBPassword: 123
       DB: hospital
+      RABBIT_HOST: message-broker
+    restart: always
     ports:
       - "8083:80"  
   
@@ -96,11 +103,13 @@ services:
       SFTP_IP: sftp-server
       SFTP_USERNAME: user
       SFTP_PASSWORD: password
+      RABBIT_HOST: message-broker
       DBServer: postgres-server-drugstore
       DBPerver: 5433
       DBUser: postgres
       DBPassword: 123
       DB: drugstore
+    restart: always
     ports:
       - "8082:80"    
   

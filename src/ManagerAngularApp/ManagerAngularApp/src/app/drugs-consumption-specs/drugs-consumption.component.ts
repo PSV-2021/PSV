@@ -61,7 +61,6 @@ export class DrugsConsumptionComponent implements OnInit {
   public generateReport(): void{
     if (this.isDateRangeIncorrect() || this.checkNulls()){
       alert("Report can't be generated for this date range. Please, pick a valid date range.");
-      console.log(this.range);
     }
     else {
       this.drugConsumptionSpecsService.GenerateReport(this.range.value.start, this.range.value.end).subscribe((d: any) =>{
