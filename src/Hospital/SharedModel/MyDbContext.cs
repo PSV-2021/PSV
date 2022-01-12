@@ -103,7 +103,7 @@ namespace Hospital.SharedModel
              new Appointment(1, new DateTime(2021, 12, 07, 16, 30, 00), 30, "All good", false, 1, 1, false, true),
              new Appointment(2, new DateTime(2021, 12, 31, 16, 30, 00), 30, "", false, 1, 2, false, true),
              new Appointment(3, new DateTime(2021, 12, 07, 14, 30, 00), 30, "All good", false, 1, 2, false, true),
-             new Appointment(4, new DateTime(2021, 11, 15, 14, 00, 00), 30, "All good", false, 1, 2, true, true)
+             new Appointment(4, new DateTime(2022, 01, 30, 14, 00, 00), 30, "All good", false, 1, 2, false, true)
             );
             modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
         }

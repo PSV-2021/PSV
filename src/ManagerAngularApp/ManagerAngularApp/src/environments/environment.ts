@@ -7,10 +7,10 @@ export const environment = {
   production: false,
   api : "http://localhost:5003/api",
   
-
   //ja dodala
   apiUrl:"localhost",
   port: "5003"
+
 };
 
 /*
