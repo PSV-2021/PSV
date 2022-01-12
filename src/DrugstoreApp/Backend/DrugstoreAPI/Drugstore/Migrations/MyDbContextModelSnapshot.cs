@@ -72,28 +72,28 @@ namespace Drugstore.Migrations
                         new
                         {
                             Id = "1",
-                            TenderEnd = new DateTime(2021, 12, 27, 15, 28, 32, 739, DateTimeKind.Local).AddTicks(6647),
+                            TenderEnd = new DateTime(2021, 12, 29, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(1941),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 1, 31, 15, 28, 32, 739, DateTimeKind.Local).AddTicks(8612),
+                            TenderEnd = new DateTime(2022, 2, 2, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3194),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         },
                         new
                         {
                             Id = "3",
-                            TenderEnd = new DateTime(2022, 1, 3, 15, 28, 32, 739, DateTimeKind.Local).AddTicks(8685),
+                            TenderEnd = new DateTime(2022, 1, 5, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3242),
                             TenderInfo = "Brufen - 2, Palitreks - 2, Andol - 2",
                             isFinished = true
                         },
                         new
                         {
                             Id = "4",
-                            TenderEnd = new DateTime(2021, 12, 13, 15, 28, 32, 739, DateTimeKind.Local).AddTicks(8691),
+                            TenderEnd = new DateTime(2021, 12, 15, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3245),
                             TenderInfo = "Brufen - 10, Palitreks - 50, Andol - 35",
                             isFinished = true
                         });
@@ -129,8 +129,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2022, 1, 10, 15, 28, 32, 739, DateTimeKind.Local).AddTicks(1399),
-                            StartDate = new DateTime(2022, 1, 10, 15, 28, 32, 735, DateTimeKind.Local).AddTicks(1970),
+                            EndDate = new DateTime(2022, 1, 12, 13, 47, 35, 274, DateTimeKind.Local).AddTicks(6870),
+                            StartDate = new DateTime(2022, 1, 12, 13, 47, 35, 272, DateTimeKind.Local).AddTicks(8945),
                             Title = "title"
                         });
                 });
@@ -315,7 +315,6 @@ namespace Drugstore.Migrations
                         });
                 });
 
-
             modelBuilder.Entity("Drugstore.Models.Notification", b =>
                 {
                     b.Property<int>("Id")
@@ -362,7 +361,6 @@ namespace Drugstore.Migrations
                             Title = "Vazno obavestenje"
                         });
                 });
-
 
             modelBuilder.Entity("Drugstore.Models.ShoppingCart", b =>
                 {

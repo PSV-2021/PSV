@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220110143140_sprint5")]
-    partial class sprint5
+    [Migration("20220112124823_initialMigr")]
+    partial class initialMigr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -522,28 +522,28 @@ namespace Integration.Migrations
                         new
                         {
                             Id = "1",
-                            TenderEnd = new DateTime(2021, 12, 27, 15, 31, 39, 677, DateTimeKind.Local).AddTicks(6141),
+                            TenderEnd = new DateTime(2021, 12, 29, 13, 48, 22, 725, DateTimeKind.Local).AddTicks(513),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 1, 31, 15, 31, 39, 687, DateTimeKind.Local).AddTicks(6903),
+                            TenderEnd = new DateTime(2022, 2, 2, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(843),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         },
                         new
                         {
                             Id = "3",
-                            TenderEnd = new DateTime(2022, 1, 3, 15, 31, 39, 687, DateTimeKind.Local).AddTicks(7120),
+                            TenderEnd = new DateTime(2022, 1, 5, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(916),
                             TenderInfo = "Brufen - 2, Palitreks - 2, Andol - 2",
                             isFinished = true
                         },
                         new
                         {
                             Id = "4",
-                            TenderEnd = new DateTime(2021, 12, 13, 15, 31, 39, 687, DateTimeKind.Local).AddTicks(7145),
+                            TenderEnd = new DateTime(2021, 12, 15, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(922),
                             TenderInfo = "Brufen - 10, Palitreks - 50, Andol - 35",
                             isFinished = true
                         });
