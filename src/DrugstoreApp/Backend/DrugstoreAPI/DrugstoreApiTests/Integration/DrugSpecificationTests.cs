@@ -17,6 +17,7 @@ namespace DrugstoreApiTests.Integration
     {
 
         private MyDbContext context;
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
         private void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
@@ -26,10 +27,11 @@ namespace DrugstoreApiTests.Integration
             context = new MyDbContext(builder.Options);
         }
 
-        [Theory]
+        [SkippableTheory]
         [MemberData(nameof(FileNames))]
         public void Upload_drugs_consumption_report(string fileName, bool expectedOutcome)
         {
+            Skip.If(skippable);
             DrugSpecificationService service = new DrugSpecificationService(context);
 
             bool isUploaded = service.UploadDrugSpecification(fileName);
@@ -37,9 +39,10 @@ namespace DrugstoreApiTests.Integration
             Assert.Equal(expectedOutcome, isUploaded);
         }
 
-        [Fact]
+        [SkippableFact]
         public void Exception_for_Rebex_off_Upload()
         {
+            Skip.If(skippable);
             DrugSpecificationService service = new DrugSpecificationService(context);
 
             bool result = service.UploadDrugSpecification("Brufen");

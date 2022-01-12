@@ -13,7 +13,8 @@ namespace DrugstoreApiTests.Integration
     public class FileCompressionTests
     {
         private FileCompressionService fileCompressionService = new FileCompressionService();
-        
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
+
         public string CreatePath()
         {
             string current = Directory.GetCurrentDirectory().ToString();
@@ -37,9 +38,10 @@ namespace DrugstoreApiTests.Integration
             using (FileStream fs = File.Create(path4)) ;
 
         }
-        [Fact]
+        [SkippableFact]
         public void ThereAreFilesToCompress()
         {
+            Skip.If(skippable);
             string path = this.CreatePath();
             CreateFilesInDirectory();
            var result = fileCompressionService.CheckIfThereAreFIlesToCompress(path);

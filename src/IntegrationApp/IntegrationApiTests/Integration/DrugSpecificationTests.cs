@@ -24,7 +24,9 @@ namespace IntegrationApiTests.Integration
     public class DrugSpecificationTests
     {
         private MyDbContext context;
-        
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
+
+
         public void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
@@ -34,9 +36,10 @@ namespace IntegrationApiTests.Integration
             context = new MyDbContext(builder.Options);
         }
 
-        [Fact]
+        [SkippableFact]
         public void Drug_spec_when_exists()
         {
+            Skip.If(skippable);
             SetUpDbContext();
             var dsController = new DrugSpecificationController(context);
 
@@ -44,9 +47,10 @@ namespace IntegrationApiTests.Integration
             Assert.IsType<OkObjectResult>(result);
         }
 
-        [Fact]
+        [SkippableFact]
         public void Drug_spec_when_doesnt_exist()
         {
+            Skip.If(skippable);
             SetUpDbContext();
             var dsController = new DrugSpecificationController(context);
 
@@ -54,9 +58,10 @@ namespace IntegrationApiTests.Integration
             Assert.IsType<NoContentResult>(result);
         }
 
-        [Fact]
+        [SkippableFact]
         public void Drug_spec_when_server_is_down()
         {
+            Skip.If(skippable);
             SetUpDbContext();
             var dsController = new DrugSpecificationController(context);
 
@@ -64,10 +69,11 @@ namespace IntegrationApiTests.Integration
             Assert.IsType<UnauthorizedObjectResult>(result);
         }
 
-        [Theory]
+        [SkippableTheory]
         [MemberData(nameof(FileNames))]
         public void Download_drug_specification_file(string fileName, bool expectedOutcome)
         {
+            Skip.If(skippable);
             DrugSpecificationService service = new DrugSpecificationService();
 
             bool isDownloaded = service.DownloadDrugSpecification(fileName);
