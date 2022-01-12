@@ -25,17 +25,17 @@ namespace Hospital.Schedule.Model
 
         [ForeignKey("DoctorId")]
         public int DoctorId { get; private set; }
-        public virtual Doctor Doctor { get; }
+        public virtual Doctor Doctor { get; private set; }
 
         [ForeignKey("SurveyId")]
         public int SurveyId { get; set; }
-        public virtual Survey Survey { get; }
+        public virtual Survey Survey { get; private set; }
         [NotMapped]
         public AppointmentStatus Status { get; private set; }
 
         [ForeignKey("PatientId")]
         public int PatientId { get; private set; }
-        public virtual Patient Patient { get; }
+        public virtual Patient Patient { get; private set; }
 
 
         public bool IsOccupied(DateTime start)
