@@ -1,7 +1,7 @@
-name: CD
+name: DrugstoreIntegrationTest
 on:
   push:
-    branches: [ development, feat#20/setup_deployment ]
+    branches: [ development ]
     
 jobs:
   build:
@@ -21,16 +21,6 @@ jobs:
             cd PSV
             git checkout development
             git pull origin development
-            cd src/IntegrationApp
-            docker-compose build
-            docker push aco99/gateway
-            docker push aco99/hospital_api
-            docker push aco99/integration_api
-            docker push aco99/drugstore_api
-            docker push aco99/patient_client
-            docker push aco99/drugstore_client
-            docker push aco99/manager_client
-            cd ..
-            cd config/integration_testing
+            cd src/config/integration_testing
             docker-compose -f integration-test-docker-compose.yml build
             

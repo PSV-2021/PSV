@@ -1,6 +1,7 @@
 using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 
 namespace Drugstore.Models
 {
@@ -12,6 +13,7 @@ namespace Drugstore.Models
         public DbSet<User> Users { get; set; }
         public DbSet<DrugstoreOffer> DrugstoreOffers { get; set; }
         public DbSet<DrugSpecification> DrugSpecifications { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<ShoppingCart> Orders { get; set; }
         public DbSet<DrugTender> DrugTenders { get; set; }
         public DbSet<TenderOffer> TenderOffers { get; set; }
@@ -21,6 +23,7 @@ namespace Drugstore.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Medicine>().HasData(
+
                 new Medicine(1, "Brufen", 150, 200, "bla", "bla", "bla", "bla", null, 100.00, "bla", "bla"),
                 new Medicine(2, "Paracetamol", 150, 200, "bla", "bla", "bla", "bla", null, 100.00, "bla", "bla"),
                 new Medicine(3, "Palitreks", 150, 200, "bla", "bla", "bla", "bla", null, 100.00, "bla", "bla"),
@@ -58,6 +61,13 @@ namespace Drugstore.Models
                new DrugSpecification("Paracetamol", "Ovde ide tekst specifikacije za Paracetamol"),
                new DrugSpecification("Palitreks", "Ovde ide tekst specifikacije za Palitreks")
            );
+            modelBuilder.Entity<Notification>().HasData(
+
+                 new Notification(1, new DateTime(2021, 6, 6), "Uzbuna", "Aloaloalo", null),
+                 new Notification(2, new DateTime(2021, 7, 7), "Novi lekovi", "Stigli su novi lekovi", null),
+                 new Notification(3, new DateTime(2021, 8, 8), "Vazno obavestenje", "Obavestenje o promeni cena", null)
+                ) ;
+                
             modelBuilder.Entity<DrugTender>().HasData(
                 new DrugTender("1", DateTime.Now.AddDays(-14), "Brufen - 150, Palitreks - 100, Andol - 40", true),
                 new DrugTender("2", DateTime.Now.AddDays(21), "Brufen - 120, Palitreks - 90, Andol - 50", false),
