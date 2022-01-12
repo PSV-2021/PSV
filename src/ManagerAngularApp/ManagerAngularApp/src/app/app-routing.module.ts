@@ -13,13 +13,16 @@ import { DrugstoreComponent } from './drugstore/drugstore.component';
 import { TenderComponent } from './tender/tender.component';
 import { TenderOffersComponent } from './tender-offers/tender-offers.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { AuthGuard } from './auth-guard';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
-  { path: 'home', component: HomePageComponent},
+  { path: 'home', component: HomePageComponent, canActivate: [AuthGuard]},
   { path: 'reviews', component: ReviewComponent},
-  { path: 'feedbacks', component: FeedbacksComponent},
+  { path: 'feedbacks', component: FeedbacksComponent, canActivate: [AuthGuard]},
   { path: 'landingPage', component: LandingPageComponent},
+  { path: 'login', component: LoginComponent},
   { path: 'purchase', component: PurchaseDrugsComponent},
   { path: 'files', component: FilesComponent},
   { path: 'drugstore-offer', component: DrugstoreOfferComponent},
