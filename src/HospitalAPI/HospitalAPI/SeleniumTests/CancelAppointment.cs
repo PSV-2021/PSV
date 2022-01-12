@@ -49,7 +49,7 @@ namespace SeleniumTests
             MedicalRecordPage.ClickCancel();
             MedicalRecordPage.WaitText();
             Assert.True(MedicalRecordPage.CancelTextDisplayed());
-            Assert.Equal(Driver.Url, MedicalRecordPage.URI);            
+            Assert.Equal(Driver.Url, Configurations.MedicalRecordUrl);            
             Dispose();
         }
     }

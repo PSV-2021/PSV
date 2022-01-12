@@ -10,7 +10,7 @@ namespace SeleniumTests.Pages
     {
         private readonly IWebDriver Driver;
         private IWebDriver driver;
-        public const string URI = "http://localhost:4200/login";
+        public string URI = Configurations.LoginUrl;
 
         private IWebElement UsernameElement => Driver.FindElement(By.Id("username"));
         private IWebElement PasswordElement => Driver.FindElement(By.Id("password"));

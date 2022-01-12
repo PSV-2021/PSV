@@ -9,7 +9,7 @@ namespace SeleniumTests.Pages
     public class MedicalRecordPage
     {
         private readonly IWebDriver Driver;
-        public const string URI = "http://localhost:4200/medicalRecord";
+        public string URI = Configurations.MedicalRecordUrl;
 
         private IWebElement CancelButton => Driver.FindElement(By.XPath("/html/body/app-root/div/app-medical-record/div/div/mat-card/app-appointments-observe/table/tbody/tr[3]/td[7]/button"));
         private IWebElement CancelText => Driver.FindElement(By.XPath("/html/body/app-root/div/app-medical-record/div/div/mat-card/app-appointments-observe/table/tbody/tr[3]/td[5]//div[contains(.,'CANCELLED')]"));

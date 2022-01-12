@@ -9,7 +9,7 @@ namespace SeleniumTests.Pages
     public class FeedbacksPage
     {
         private readonly IWebDriver Driver;
-        public const string URI = "http://localhost:3001/feedbacks";
+        public string URI = Configurations.FeedbacksUrl;
         private IWebElement ApproveButton => Driver.FindElement(By.XPath("/html/body/app-root/main/app-feedbacks/div/div[1]/div/mat-card/mat-card-content/button/span[1]"));
         private IWebElement FirstApproveButton => Driver.FindElement(By.XPath("/html/body/app-root/main/app-feedbacks/div/div[1]/div/mat-card/mat-card-content/button/span[1]"));
         private IWebElement SecondApproveButton => Driver.FindElement(By.XPath("/html/body/app-root/main/app-feedbacks/div/div[2]/div/mat-card/mat-card-content/button/span[1]"));

@@ -49,7 +49,7 @@ namespace SeleniumTests
             FeedbackPage.Navigate();
             Assert.False(FeedbackPage.ReturnButtonDisplayed());
 
-            Assert.Equal(Driver.Url, FeedbacksPage.URI);
+            Assert.Equal(Driver.Url, Configurations.FeedbacksUrl);
             Dispose();
         }
 
@@ -63,7 +63,7 @@ namespace SeleniumTests
                 FeedbackDeclinePage.Navigate();
                 Assert.True(FeedbackDeclinePage.ApproveButtonsDisplayed());
             }
-            Assert.Equal(Driver.Url, FeedbacksPage.URI);
+            Assert.Equal(Driver.Url, Configurations.FeedbacksUrl);
 
             Dispose();
         }

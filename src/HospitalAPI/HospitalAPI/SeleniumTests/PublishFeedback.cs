@@ -52,7 +52,7 @@ namespace SeleniumTests
             CommentPage.InsertAnonymus(true);
             CommentPage.InsertPublishable(true);
             CommentPage.ClickSend();
-            Assert.Equal(Driver.Url, CommentsPage.URI);
+            Assert.Equal(Driver.Url, Configurations.CommentsUrl);
             Assert.True(CommentPage.SendButtonDisplayed());
             Assert.True(CommentPage.FeedbackInputDisplayed());
             Dispose();
@@ -66,7 +66,7 @@ namespace SeleniumTests
             CommentPage.InsertAnonymus(false);
             CommentPage.InsertPublishable(true);
             CommentPage.ClickSend();
-            Assert.Equal(Driver.Url, CommentsPage.URI);
+            Assert.Equal(Driver.Url, Configurations.CommentsUrl);
             Assert.True(CommentPage.SendButtonDisplayed());
             Assert.True(CommentPage.AnonymusButtonDisplayed());
             Dispose();
@@ -79,7 +79,7 @@ namespace SeleniumTests
             CommentPage.InsertAnonymus(true);
             CommentPage.InsertPublishable(false);
             CommentPage.ClickSend();
-            Assert.Equal(Driver.Url, CommentsPage.URI);
+            Assert.Equal(Driver.Url, Configurations.CommentsUrl);
             Assert.True(CommentPage.SendButtonDisplayed());
             Assert.True(CommentPage.PublishableButtonDisplayed());
             Dispose();
@@ -92,7 +92,7 @@ namespace SeleniumTests
             CommentPage.InsertAnonymus(false);
             CommentPage.InsertPublishable(false);
             CommentPage.ClickSend();
-            Assert.Equal(Driver.Url, CommentsPage.URI);
+            Assert.Equal(Driver.Url, Configurations.CommentsUrl);
             Assert.True(CommentPage.SendButtonDisplayed());
             Assert.True(CommentPage.PublishableButtonDisplayed());
             Dispose();

@@ -10,7 +10,7 @@ namespace SeleniumTests.Pages
     public class CommentsPage
     {
         private readonly IWebDriver Driver;
-        public const string URI = "http://localhost:4200/comments";
+        public string URI = Configurations.CommentsUrl;
 
         private IWebElement FeedbackText => Driver.FindElement(By.Id("feedbackText"));
         private IWebElement StayAnonymous => Driver.FindElement(By.Id("anonymous"));
