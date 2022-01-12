@@ -69,6 +69,12 @@ namespace Hospital.Schedule.Service
             DoctorRepository = doctorRepository;
         }
 
+        public AppointmentService(DoctorFileRepository doctorRepository, IAppointmentRepository appointmentRepository)
+        {
+            AppointmentRepository = appointmentRepository;
+            DoctorRepository = doctorRepository;
+        }
+
         public List<Appointment> GetAppointmentsByDoctorAndDate(int idDoctor, DateTime chosenDate)
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -300,10 +306,13 @@ namespace Hospital.Schedule.Service
             DateTime start = DateTime.Parse(searchAppointments.StartInterval);
             DateTime end = DateTime.Parse(searchAppointments.EndInterval);
             List<Appointment> availableAppointments = new List<Appointment>();
-            foreach (Doctor d in doctors)
+            if (doctors != null)
             {
-                if (d.Id != searchAppointments.DoctorId)
-                    availableAppointments = AppointmentsForDoctorInDateRange(start, end, d.Id);
+                foreach (Doctor d in doctors)
+                {
+                    if (d.Id != searchAppointments.DoctorId)
+                        availableAppointments = AppointmentsForDoctorInDateRange(start, end, d.Id);
+                }
             }
             return availableAppointments;
         }
