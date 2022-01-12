@@ -8,6 +8,7 @@ using Factory;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Repository;
 using Hospital.SharedModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Hospital.MedicalRecords.Service
@@ -86,10 +87,10 @@ namespace Hospital.MedicalRecords.Service
         public String GenerateJwtToken(Patient patient)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            if (patient.Username.Equals("manager") && patient.Password.Equals("manager"))
+            if (patient.Type.Equals(UserType.menager))
             {
                 //logika za menadzera
-                return "";
+                return GenerateJwtTokenManager(tokenHandler, patient); ;
             }
             else
                 return GenerateJwtTokenPatient(tokenHandler, patient);
@@ -97,13 +98,32 @@ namespace Hospital.MedicalRecords.Service
         }
 
         public String GenerateJwtTokenPatient(JwtSecurityTokenHandler tokenHandler, Patient patient)
-        {            
+        {
+            IdentityOptions options = new IdentityOptions();
             SecurityTokenDescriptor tokenDeskriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("id", patient.Id.ToString()),
-                    new Claim("role", "patient")
+                    new Claim("role", "patient"),
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes("QKcOa8xPopVOliV6tpvuWmoKn4MOydSeIzUt4W4r1UlU2De7dTUYMlrgv3rU")), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDeskriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+        public String GenerateJwtTokenManager(JwtSecurityTokenHandler tokenHandler, Patient patient)
+        {
+            IdentityOptions options = new IdentityOptions();
+            SecurityTokenDescriptor tokenDeskriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim("id", patient.Id.ToString()),
+                    new Claim("role", "manager"),
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes("QKcOa8xPopVOliV6tpvuWmoKn4MOydSeIzUt4W4r1UlU2De7dTUYMlrgv3rU")), SecurityAlgorithms.HmacSha256Signature)

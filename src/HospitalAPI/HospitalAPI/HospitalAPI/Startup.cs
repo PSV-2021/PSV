@@ -8,8 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
+
 using System;
 using System.Text;
+using Hospital.MedicalRecords.Model;
+using AspNet.Security.OpenIdConnect.Primitives;
 
 namespace HospitalAPI
 {
@@ -52,14 +56,14 @@ namespace HospitalAPI
                 };
             });
 
-
-
             services.AddControllers();
+            
             services.AddDbContext<MyDbContext>(options =>
             options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
+
             services.AddControllers().AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -113,9 +117,9 @@ namespace HospitalAPI
             var server = Configuration["DBServer"] ?? "localhost";
             var port = Configuration["DBPort"] ?? "5432";
             var user = Configuration["DBUser"] ?? "postgres";
+            var password = Configuration["DBPassword"] ?? "masa3009";
+            var database = Configuration["DB"] ?? "hospital";
 
-            var password = Configuration["DBPassword"] ?? "firma4";
-            var database = Configuration["DB"] ?? "hospitalNew";
             Console.WriteLine(server + port + user + password + database);
 
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");

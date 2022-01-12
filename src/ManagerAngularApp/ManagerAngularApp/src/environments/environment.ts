@@ -3,8 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  //bilo ovako
   production: false,
-  api : "http://localhost:5000/api"
+  api : "http://localhost:5003/api",
+  
+  //ja dodala
+  apiUrl:"localhost",
+  port: "5003"
+
 };
 
 /*

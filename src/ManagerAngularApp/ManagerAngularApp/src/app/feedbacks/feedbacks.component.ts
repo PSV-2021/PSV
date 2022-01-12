@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { CommentService } from '../services/comment.service';
+
 
 @Component({
   selector: 'app-feedbacks',
@@ -14,7 +16,7 @@ export class FeedbacksComponent implements OnInit {
   public comments: any[];
   displayedColumns: string[] = ['comment', 'date', 'name'];
 
-  constructor(private commentService: CommentService, private _snackBar: MatSnackBar) {
+  constructor(private commentService: CommentService, private _snackBar: MatSnackBar, private router: Router) {
     this.comments = [];
   }
 
@@ -27,15 +29,21 @@ export class FeedbacksComponent implements OnInit {
   }
   public publishComment(id:number): void{
     this.commentService.publishComment(id).subscribe((d: any) =>{
-      this._snackBar.open('Komentar odobren!', '', {
+      this.router.navigate(['/feedbacks']);
+      this.ngOnInit();
+
+      this._snackBar.open('Feedback approved!', '', {
         duration: 2000
       });;
+
     });
 
   }
   public returnComment(id:number): void{
     this.commentService.returnComment(id).subscribe((d: any) =>{
-      this._snackBar.open('Komentar vraćen na odobravanje!', '', {
+      this.router.navigate(['/feedbacks']);
+      this.ngOnInit();
+      this._snackBar.open('Feedback returned for approval!', '', {
         duration: 2000
       });;
     });

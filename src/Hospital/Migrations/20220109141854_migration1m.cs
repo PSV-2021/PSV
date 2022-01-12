@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
-    public partial class MigrationT : Migration
+    public partial class migration1m : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -308,7 +308,7 @@ namespace Hospital.Migrations
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
-                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2021, 12, 27, 12, 8, 46, 742, DateTimeKind.Local).AddTicks(7829), "Zoran Zoranic" });
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2022, 1, 9, 15, 18, 53, 626, DateTimeKind.Local).AddTicks(4697), "Zoran Zoranic" });
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -345,9 +345,9 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
-                    { 2, "I didn't like it.", "Anonymus", new DateTime(2021, 12, 27, 12, 8, 46, 718, DateTimeKind.Local).AddTicks(4164), true },
-                    { 1, "Good!", "Mika Mikic", new DateTime(2021, 12, 27, 12, 8, 46, 710, DateTimeKind.Local).AddTicks(9326), false },
-                    { 3, "Super service!", "Sara Saric", new DateTime(2021, 12, 27, 12, 8, 46, 718, DateTimeKind.Local).AddTicks(4489), true }
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2022, 1, 9, 15, 18, 53, 610, DateTimeKind.Local).AddTicks(8675), true },
+                    { 1, "Good!", "Mika Mikic", new DateTime(2022, 1, 9, 15, 18, 53, 606, DateTimeKind.Local).AddTicks(3397), false },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2022, 1, 9, 15, 18, 53, 610, DateTimeKind.Local).AddTicks(8896), true }
                 });
 
             migrationBuilder.InsertData(
