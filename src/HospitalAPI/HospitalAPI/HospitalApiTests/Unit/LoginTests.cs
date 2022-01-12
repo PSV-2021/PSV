@@ -2,6 +2,9 @@
 using Hospital.MedicalRecords.Repository;
 using Hospital.MedicalRecords.Service;
 using Hospital.SharedModel;
+using HospitalAPI.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Moq;
 using Shouldly;
 using System;
@@ -59,6 +62,52 @@ namespace HospitalApiTests.Unit
 
 
             return patients;
+        }
+
+
+        private static List<Patient> GenerateStubDataManager()
+        {
+            List<Patient> patients = new List<Patient>();
+
+            Patient patient1 = new Patient(1, "Marko", "Markovic", "3009998805138", new DateTime(1998, 06, 25), Sex.male, "0641664608",
+                "Bulevar Oslobodjenja 8", "marko@gmail.com", "miki98", "miki985", true, BloodType.B, "Petar", 1, new List<Allergen>(), "");
+            patient1.Type = UserType.menager;
+            Patient patient2 = new Patient(2, "Milica", "Mikic", "3009998805137", new DateTime(1997, 10, 12), Sex.female, "065245987", "Kisacka 5", "milica@gmail.com",
+               "mici97", "mici789", true, BloodType.A, "Nenad", 1, new List<Allergen>(), "");
+
+            patients.Add(patient1);
+            patients.Add(patient2);
+
+
+            return patients;
+        }
+
+        [Fact]
+        public void Manager_username_and_password_exist()
+        {
+            var patientStubRepository = new Mock<IPatientRepository>();
+            var patientService = new PatientService(patientStubRepository.Object);
+            List<Patient> patients = GenerateStubDataManager();
+
+            patientStubRepository.Setup(s => s.GetAll()).Returns(patients);
+
+            PatientService service = new PatientService(patientStubRepository.Object);
+            Patient b = service.FindByUsernameAndPassword("miki98", "miki985");
+
+            b.ShouldBeNull();
+        }
+
+        [Fact]
+        public void Manager_authorized()
+        {
+           //// AuthAttribute authAttribute = new AuthAttribute("Get",  "manager");
+           // AuthorizationFilterContext context = new AuthorizationFilterContext(new ActionContext(),new List<IFilterMetadata>());
+           // context.HttpContext.Request?.Headers.Add("role", "patient");
+           // AuthorizeAction authorizeAction = new AuthorizeAction("Get", "manager");
+           // authorizeAction.OnAuthorization(context);
+
+
+           // context.Result.ShouldBe(new UnauthorizedResult());
         }
     }
 }

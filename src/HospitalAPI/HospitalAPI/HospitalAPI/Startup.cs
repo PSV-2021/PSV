@@ -8,8 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
+
 using System;
 using System.Text;
+using Hospital.MedicalRecords.Model;
+using AspNet.Security.OpenIdConnect.Primitives;
 
 namespace HospitalAPI
 {
@@ -52,14 +56,14 @@ namespace HospitalAPI
                 };
             });
 
-
-
             services.AddControllers();
+            
             services.AddDbContext<MyDbContext>(options =>
             options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
+
             services.AddControllers().AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
