@@ -1,12 +1,12 @@
 import { TenderDto } from "./tender.dto";
 
 export class WholeTenderDto{
-    id : number;
+    id : string;
     tenderEnd: Date;
     tenderInfo: TenderDto[];
 
     constructor(){
-        this.id = 0;
+        this.id = "";
         this.tenderEnd = Date.prototype;
         this.tenderInfo = [] as TenderDto[];
     }

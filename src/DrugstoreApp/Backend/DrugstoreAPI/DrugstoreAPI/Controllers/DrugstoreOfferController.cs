@@ -29,6 +29,7 @@ namespace DrugstoreAPI.Controllers
         public DrugstoreOfferController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
             this.dbContext = db;
+            Console.WriteLine("HOST:" + host);
         }
 
         [HttpPost]

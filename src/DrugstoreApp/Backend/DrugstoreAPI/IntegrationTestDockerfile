@@ -1,0 +1,25 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build-env
+WORKDIR /src
+COPY DrugstoreAPI.sln ./
+COPY Drugstore/*.csproj ./Drugstore/
+COPY DrugstoreAPI/*.csproj ./DrugstoreAPI/
+COPY DrugstoreApiTests/DrugstoreApiTests.csproj ./DrugstoreApiTests/
+RUN dotnet restore DrugstoreAPI.sln
+
+COPY . ./
+
+WORKDIR /src/DrugstoreApiTests
+ARG DBServer
+ENV DBServer=${DBServer}
+
+ARG DBUser
+ENV DBUser=${DBUser}
+
+ARG DBPassword
+ENV DBPassword=${DBPassword}
+
+ARG DBTest
+ENV DBTest=${DBTest}
+
+RUN echo ${DBServer}
+#RUN dotnet test --filter Type=IntegrationTest --no-restore

@@ -28,9 +28,9 @@ namespace Integration.Repository.Sql
             return result;
         }
 
-        public DrugTender GetOne(int id)
+        public DrugTender GetOne(string id)
         {
-            throw new NotImplementedException();
+            return dbContext.DrugTenders.Find(id);
         }
 
         public void Save(DrugTender newObject)
@@ -45,7 +45,7 @@ namespace Integration.Repository.Sql
             dbContext.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             throw new NotImplementedException();
         }

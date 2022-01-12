@@ -33,6 +33,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './interceptor';
 import { AuthGuard } from './auth-guard';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { ChartsComponent } from './charts/charts.component';
+import { DrugstoreChartComponent } from './drugstore-chart/drugstore-chart.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     TenderOffersComponent,
     HomePageComponent,
     LoginComponent,
+    ChartsComponent,
+    DrugstoreChartComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@ namespace DrugstoreApiTests
             var user = Environment.GetEnvironmentVariable("DBUser") ?? "postgres";
             var password = Environment.GetEnvironmentVariable("DBPassword") ?? "firma4";
             var database = Environment.GetEnvironmentVariable("DBTest") ?? "drugstoreTest";
-
+            Console.WriteLine(server);
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
 
