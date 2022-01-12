@@ -8,7 +8,7 @@ namespace SeleniumTests
     {
         public static string HostPatient
         {
-            get => Environment.GetEnvironmentVariable("MF_HOST") ?? "http://localhost:4200";
+            get => Environment.GetEnvironmentVariable("PF_HOST") ?? "http://localhost:4200";
         }
 
         public static string HostManager
