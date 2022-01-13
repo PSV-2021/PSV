@@ -36,7 +36,7 @@ namespace Drugstore.Models
             );
 
             modelBuilder.Entity<Hospital>().HasData(
-                new Hospital("Health", 1, "http://localhost:5000", "DrugStoreSecretKey")
+                new Hospital("Health", 1, "http://localhost:5000", "DrugStoreSecretKey", "crnimraz99@gmail.com")
 
             );
 

@@ -62,7 +62,12 @@ namespace DrugstoreAPI.Controllers
                 {
                     if (HospitalService.CheckApiKey(header))
                     {
-                        return Ok(medicineService.SellDrugUrgent(demand.Name, demand.Amount));
+                        if (medicineService.SellDrugUrgent(demand.Name, demand.Amount))
+                        {
+                            //TODO: Posalji mejl
+                            return Ok(true);
+                        }
+                        return Ok(false);
                     }
                 }
             }

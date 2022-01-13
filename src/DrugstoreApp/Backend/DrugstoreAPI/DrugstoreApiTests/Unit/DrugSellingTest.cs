@@ -42,7 +42,7 @@ namespace DrugstoreApiTests.Unit
             medicineRepository.Setup(d => d.GetByName(null)).Returns(drug);
             hospitalRepository.Setup(h => h.GetAll()).Returns(new List<Hospital>
             {
-                new Hospital("", 111, "", "DrugStoreSecretKey")
+                new Hospital("", 111, "", "DrugStoreSecretKey", "ovo je test")
             });
 
             //act
