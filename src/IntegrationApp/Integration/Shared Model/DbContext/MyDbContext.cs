@@ -41,7 +41,7 @@ namespace Model.DataBaseContext
                     new Drugstore(3, "Apoteka treca", "http://localhost:7001", "gasic", true));
 
                 mb.OwnsOne(e => e.Email).HasData(
-                    new { DrugstoreId = 1, EmailValue = "apotekaprva@gmail.com" },
+                    new { DrugstoreId = 1, EmailValue = "smrdic99@gmail.com" }, //ne osudjujte...
                     new { DrugstoreId = 2, EmailValue = "drugimeil@gmail.com" },
                     new { DrugstoreId = 3, EmailValue = "trecimejl@gmail.com" }
                     );

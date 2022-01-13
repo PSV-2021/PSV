@@ -16,6 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="itext7" Version="7.2.0" />
+    <PackageReference Include="MailKit" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.12" />

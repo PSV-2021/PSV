@@ -11,6 +11,7 @@ using Integration.Model;
 using RabbitMQ.Client;
 using System.Text;
 using Integration.Model;
+using Integration.Tendering.Service;
 
 namespace Integration_API.Controllers
 {
@@ -21,6 +22,7 @@ namespace Integration_API.Controllers
         private readonly MyDbContext dbContext;
         public DrugTenderService DrugTenderService;
         public DrugstoreService DrugstoreService;
+        public MailService MailService;
         private string host = Environment.GetEnvironmentVariable("RABBIT_HOST") ?? "localhost";
 
 
@@ -29,6 +31,7 @@ namespace Integration_API.Controllers
             this.dbContext = db;
             DrugTenderService = new DrugTenderService(db);
             DrugstoreService = new DrugstoreService(new DrugstoreSqlRepository(dbContext));
+            MailService = new MailService(db);
 
         }
 
@@ -44,7 +47,7 @@ namespace Integration_API.Controllers
                 DrugTender drugstoreTender = new DrugTender(tenderId, tender.TenderEnd.AddDays(1).AddMinutes(59).AddSeconds(59), FormatTenderInfo(tender.TenderInfo), false);
                 string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(drugstoreTender);
                 var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
-                channel.BasicPublish(exchange: "tender",
+                channel.BasicPublish(exchange: "tenderFinisherDto",
                                      routingKey: "",
                                      basicProperties: null,
                                      body: bodyNew);
@@ -55,7 +58,7 @@ namespace Integration_API.Controllers
         }
 
         [HttpPost("complete")] // POST /api/drugTender
-        public IActionResult PostGas(TenderFinisherDTO tender)
+        public IActionResult PostGas(TenderFinisherDTO tenderFinisherDto)
         {
             var factory = new ConnectionFactory() { HostName = host };
             using (var connection = factory.CreateConnection())
@@ -65,29 +68,39 @@ namespace Integration_API.Controllers
                 
                 foreach(Drugstore d in DrugstoreService.GetAll())
                 {
-                    TenderOffer tenderOfferNew = DrugTenderService.getTenderOfferById(tender.tenderId);
+                    TenderOffer tenderOfferNew = DrugTenderService.getTenderOfferById(tenderFinisherDto.tenderId);
                     DrugTender drugTender = DrugTenderService.getDrugTenderById(tenderOfferNew.TenderId);
-                    if (tender.drugstoreName == d.Name)
+                    List<TenderOffer> offers = DrugTenderService.GetOffersForTender(tenderOfferNew.TenderId);
+                    bool exist = false;
+                    foreach (TenderOffer offer in offers)
                     {
-                        string tenderWin = "Winner:" + tender.tenderId;
+                        if (offer.DrugstoreId == d.Id)
+                            exist = true;
+                    }
+                    if(!exist)
+                        continue;
+
+                    if (tenderFinisherDto.drugstoreName == d.Name)
+                    {
+                        string tenderWin = "Winner:" + tenderFinisherDto.tenderId;
                         string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderWin);
                         var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
                         channel.BasicPublish(exchange: "tenderFinish",
                                              routingKey: "",
                                              basicProperties: null,
                                              body: bodyNew);
-                     TenderOffer tenderOffer  =  DrugTenderService.getTenderOfferById(tender.tenderId);
+                     TenderOffer tenderOffer  =  DrugTenderService.getTenderOfferById(tenderFinisherDto.tenderId);
                         tenderOffer.IsAccepted = true;
                         tenderOffer.IsActive = false;
                         DrugTenderService.UpdateTenderOffer(tenderOffer);
                         drugTender.isFinished = true;
                         Console.WriteLine(drugTender.isFinished);
                         DrugTenderService.UpdateDrugTender(drugTender);
-                        return Ok(true);
+                        MailService.SendEmailForTenderWin(d, tenderOfferNew);
                     }
                     else
                     {
-                        string tenderLose = "Loser:" + tender.tenderId;
+                        string tenderLose = "Loser:" + tenderFinisherDto.tenderId;
 
                         string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderLose);
                         var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
@@ -95,19 +108,18 @@ namespace Integration_API.Controllers
                                              routingKey: "",
                                              basicProperties: null,
                                              body: bodyNew);
-                        TenderOffer tenderOffer = DrugTenderService.getTenderOfferById(tender.tenderId);
+                        TenderOffer tenderOffer = DrugTenderService.getTenderOfferById(tenderFinisherDto.tenderId);
                         tenderOffer.IsAccepted = false;
                         tenderOffer.IsActive = false;
                         DrugTenderService.UpdateTenderOffer(tenderOffer);
                         drugTender.isFinished = true;
                         Console.WriteLine(drugTender.isFinished);
                         DrugTenderService.UpdateDrugTender(drugTender);
-                        return Ok(true);
+                        MailService.SendEmailForTenderLoser(d, tenderOffer);
                     }
-                    
                 }
-                return Unauthorized();
-                
+                return Ok(true);
+
             }
         }
 

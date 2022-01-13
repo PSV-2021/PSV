@@ -653,7 +653,7 @@ namespace Integration.Migrations
                                 new
                                 {
                                     DrugstoreId = 1,
-                                    EmailValue = "apotekaprva@gmail.com"
+                                    EmailValue = "smrdic99@gmail.com"
                                 },
                                 new
                                 {
