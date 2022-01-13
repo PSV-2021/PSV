@@ -61,7 +61,6 @@ namespace DrugstoreAPI
                 {
                     if (medicineService.CheckForAmountOfDrug(request.Name, request.Amount))
                     {
-                        mailService.SendEmailAboutUrgentPurchase(request.Name, request.Amount, request.ApiKey);
                         return Task.FromResult(new DrugReply
                         {
                             Message = "you can have some " + request.Name,
@@ -92,7 +91,7 @@ namespace DrugstoreAPI
                     if (medicineService.CheckForAmountOfDrug(request.Name, request.Amount))
                     {
                         medicineService.SellDrugUrgent(request.Name, request.Amount);
-                        //TODO: Slanje mejla!
+                        mailService.SendEmailAboutUrgentPurchase(request.Name, request.Amount, request.ApiKey);
                         return Task.FromResult(new DrugReply
                         {
                             Message = "you sold some " + request.Name,

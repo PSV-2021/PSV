@@ -48,6 +48,7 @@ namespace Drugstore.Service
                 client.Connect("smtp.gmail.com", 465, true);
                 client.Authenticate("smrdic99@gmail.com", "cokolada");
                 client.Send(message);
+                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAA");
             }
             catch (Exception e)
             {
