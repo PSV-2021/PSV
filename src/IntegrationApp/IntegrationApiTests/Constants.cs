@@ -13,7 +13,6 @@ namespace IntegrationApiTests
             var user = Environment.GetEnvironmentVariable("DBUser") ?? "postgres";
             var password = Environment.GetEnvironmentVariable("DBPassword") ?? "firma4";
             var database = Environment.GetEnvironmentVariable("DBTest") ?? "hospital";
-
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
     }

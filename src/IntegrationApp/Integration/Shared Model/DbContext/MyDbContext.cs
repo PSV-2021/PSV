@@ -121,13 +121,22 @@ namespace Model.DataBaseContext
             );
 
             modelBuilder.Entity<DrugTender>().HasData(
-                new DrugTender("as", DateTime.Now.AddDays(-7), "Brufen - 150, Palitreks - 100, Andol - 40", true),
-                new DrugTender("2", DateTime.Now.AddDays(21), "Brufen - 120, Palitreks - 90, Andol - 50", false)
+                new DrugTender("1", DateTime.Now.AddDays(-14), "Brufen - 150, Palitreks - 100, Andol - 40", true),
+                new DrugTender("2", DateTime.Now.AddDays(21), "Brufen - 120, Palitreks - 90, Andol - 50", false),
+                new DrugTender("3", DateTime.Now.AddDays(-7), "Brufen - 2, Palitreks - 2, Andol - 2", true),
+                new DrugTender("4", DateTime.Now.AddDays(-28), "Brufen - 10, Palitreks - 50, Andol - 35", true)
+                
             );
 
             modelBuilder.Entity<TenderOffer>().HasData(
-                new TenderOffer("1", "Brufen - 100, Palitreks - 80, Andol - 40",5000, "as", false, 1, true),
-                new TenderOffer("2", "Brufen - 120, Palitreks - 50, Andol - 35", 5900, "2", false, 2, true)
+                new TenderOffer("1", "Brufen - 100, Palitreks - 80, Andol - 40",5000, "1", true, 1, false),
+                new TenderOffer("2", "Brufen - 120, Palitreks - 50, Andol - 35", 5900, "2", false, 2, true),
+                new TenderOffer("3", "Brufen - 2, Palitreks - 2, Andol - 2", 500, "3", true, 1, false),
+                new TenderOffer("4", "Brufen - 10, Palitreks - 50, Andol - 35", 2900, "4", false, 1, true),
+                new TenderOffer("5", "Brufen - 2, Palitreks - 2, Andol - 2", 500, "3", false, 3, false),
+                new TenderOffer("6", "Brufen - 10, Palitreks - 50, Andol - 35", 1900, "4", true, 3, false),
+                new TenderOffer("7", "Brufen - 10, Palitreks - 80, Andol - 40", 10000, "1", false, 1, false),
+                new TenderOffer("8", "Brufen - 120, Palitreks - 50, Andol - 20", 7900, "2", false, 2, true)
             );
         }
     }
