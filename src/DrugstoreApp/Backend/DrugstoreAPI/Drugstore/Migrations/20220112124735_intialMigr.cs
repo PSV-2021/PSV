@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
-    public partial class NewMigrationHopefullyGood : Migration
+    public partial class intialMigr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -194,23 +194,25 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { "as", new DateTime(2022, 1, 2, 23, 5, 3, 594, DateTimeKind.Local).AddTicks(9420), "Brufen - 150, Palitreks - 100, Andol - 40", true },
-                    { "2", new DateTime(2022, 1, 30, 23, 5, 3, 595, DateTimeKind.Local).AddTicks(889), "Brufen - 120, Palitreks - 90, Andol - 50", false }
+                    { "1", new DateTime(2021, 12, 29, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(1941), "Brufen - 150, Palitreks - 100, Andol - 40", true },
+                    { "2", new DateTime(2022, 2, 2, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3194), "Brufen - 120, Palitreks - 90, Andol - 50", false },
+                    { "3", new DateTime(2022, 1, 5, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3242), "Brufen - 2, Palitreks - 2, Andol - 2", true },
+                    { "4", new DateTime(2021, 12, 15, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3245), "Brufen - 10, Palitreks - 50, Andol - 35", true }
                 });
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 9, 23, 5, 3, 594, DateTimeKind.Local).AddTicks(2981), new DateTime(2022, 1, 9, 23, 5, 3, 589, DateTimeKind.Local).AddTicks(4236), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 12, 13, 47, 35, 274, DateTimeKind.Local).AddTicks(6870), new DateTime(2022, 1, 12, 13, 47, 35, 272, DateTimeKind.Local).AddTicks(8945), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
                 columns: new[] { "Id", "Content", "HospitalName", "Response" },
                 values: new object[,]
                 {
-                    { "ccc", "bla bla", "Ime bolnice 224", "" },
+                    { "bbb", "normalno", "Ime bolnice 223", "" },
                     { "aaa", "Lenka vrati zeton", "Health", "" },
-                    { "bbb", "normalno", "Ime bolnice 223", "" }
+                    { "ccc", "bla bla", "Ime bolnice 224", "" }
                 });
 
             migrationBuilder.InsertData(
@@ -223,9 +225,10 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "Manufacturer", "MedicineId", "MedicineImage", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Substances", "Supply", "Usage", "Weight" },
                 values: new object[,]
                 {
-                    { 1, "bla", null, null, "Brufen", "bla", 150.0, "bla", "bla", "bla", 150, "bla", 100.0 },
-                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 10, "bla", 100.0 },
-                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 30, "bla", 100.0 }
+                    { 1, "bla", null, null, "Brufen", "bla", 150.0, "bla", "bla", "bla", 200, "bla", 100.0 },
+                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 200, "bla", 100.0 },
+                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 200, "bla", 100.0 },
+                    { 4, "bla", null, null, "Andol", "bla", 150.0, "bla", "bla", "bla", 200, "bla", 100.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -233,9 +236,9 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "Content", "Posted", "Recipients", "Title" },
                 values: new object[,]
                 {
-                    { 3, "Obavestenje o promeni cena", new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Vazno obavestenje" },
                     { 1, "Aloaloalo", new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Uzbuna" },
-                    { 2, "Stigli su novi lekovi", new DateTime(2021, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Novi lekovi" }
+                    { 2, "Stigli su novi lekovi", new DateTime(2021, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Novi lekovi" },
+                    { 3, "Obavestenje o promeni cena", new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Vazno obavestenje" }
                 });
 
             migrationBuilder.InsertData(
@@ -243,8 +246,10 @@ namespace Drugstore.Migrations
                 columns: new[] { "Id", "DrugstoreId", "IsAccepted", "IsActive", "Price", "TenderId", "TenderOfferInfo" },
                 values: new object[,]
                 {
-                    { "2", 2, false, true, 5900, "2", "Brufen - 120, Palitreks - 50, Andol - 35" },
-                    { "1", 1, false, true, 5000, "as", "Brufen - 100, Palitreks - 80, Andol - 40" }
+                    { "3", 1, true, false, 500, "3", "Brufen - 2, Palitreks - 2, Andol - 2" },
+                    { "1", 1, true, false, 5000, "1", "Brufen - 100, Palitreks - 80, Andol - 40" },
+                    { "4", 1, false, true, 2900, "4", "Brufen - 10, Palitreks - 50, Andol - 35" },
+                    { "7", 1, false, false, 10000, "1", "Brufen - 10, Palitreks - 80, Andol - 40" }
                 });
 
             migrationBuilder.InsertData(

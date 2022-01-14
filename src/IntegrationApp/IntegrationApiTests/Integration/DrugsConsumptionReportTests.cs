@@ -18,6 +18,7 @@ namespace IntegrationApiTests.Integration
     public class DrugsConsumptionReportTests
     {
         private MyDbContext context;
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
         public void SetUpDbContext()
         {
             DbContextOptionsBuilder<MyDbContext> builder = new DbContextOptionsBuilder<MyDbContext>();
@@ -27,10 +28,11 @@ namespace IntegrationApiTests.Integration
             context = new MyDbContext(builder.Options);
         }
 
-        [Theory]
+        [SkippableTheory]
         [MemberData(nameof(DateRanges))]
         public void Save_drugs_consumption_report(DateTime from, DateTime to, int expectedAmount) 
         {
+            Skip.If(skippable);
             SetUpDbContext();
             DrugsConsumptionReportService service = new DrugsConsumptionReportService(context);
 
@@ -39,10 +41,11 @@ namespace IntegrationApiTests.Integration
             Assert.Equal(expectedAmount, amount);
         }
 
-        [Theory]
+        [SkippableTheory]
         [MemberData(nameof(FileNames))]
         public void Upload_drugs_consumption_report(string fileName, bool expectedOutcome)
         {
+            Skip.If(skippable);
             SetUpDbContext();
             DrugsConsumptionReportService service = new DrugsConsumptionReportService(context);
 
@@ -51,9 +54,10 @@ namespace IntegrationApiTests.Integration
             Assert.Equal(expectedOutcome, isUploaded);
         }
 
-        [Fact]
+        [SkippableFact]
         public void Exception_for_Rebex_off_Upload()
         {
+            Skip.If(skippable);
             SetUpDbContext();
             DrugsConsumptionReportService service = new DrugsConsumptionReportService(context);
 

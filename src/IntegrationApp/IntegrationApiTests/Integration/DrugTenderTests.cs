@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
+using Integration.Model;
 using Integration.Service;
 using Integration.Tendering.Repository.Sql;
 using Integration_API.Controllers;
@@ -50,7 +51,38 @@ namespace IntegrationApiTests.Integration
             Assert.IsType<OkObjectResult>(result);
         }
 
+        [Fact]
+        public void CheckDrugstoreProfit()
+        {
+            SetUpDbContext();
+            var tenderService = new DrugTenderService(context);
 
+            double result = tenderService.GetDrugstoreProfit(new DateRange(new DateTime(2021, 11, 30), new DateTime(2022,4,1)), 1);
+
+            Assert.Equal(result, 5500);
+        }
+
+        [Fact]
+        public void CheckDrugstoreParticipations()
+        {
+            SetUpDbContext();
+            var tenderService = new DrugTenderService(context);
+
+            double result = tenderService.GetDrugstoreParticipations(new DateRange(new DateTime(2021, 11, 30), new DateTime(2022, 4, 1)), 1);
+
+            Assert.Equal(result, 3);
+        }
+
+        [Fact]
+        public void CheckDrugstoreWins()
+        {
+            SetUpDbContext();
+            var tenderService = new DrugTenderService(context);
+
+            double result = tenderService.GetDrugstoreWins(new DateRange(new DateTime(2021, 11, 30), new DateTime(2022, 4, 1)), 1);
+
+            Assert.Equal(result, 2);
+        }
 
     }
 }

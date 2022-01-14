@@ -78,11 +78,11 @@ namespace Integration.Service
             return null;
         }
 
-        private List<DrugTender> GetDateRangeTenders(DateRange range) {
+        public List<DrugTender> GetDateRangeTenders(DateRange range) {
             return drugTenderRepository.GetAll().Where(tender => tender.TenderEnd >= range.From && tender.TenderEnd <= range.To).ToList();
         }
 
-        private double GetDrugstoreProfit(DateRange range, int drugstoreId) {
+        public double GetDrugstoreProfit(DateRange range, int drugstoreId) {
             List<DrugTender> tenders = GetDateRangeTenders(range);
             double profit = 0;
             foreach (DrugTender dt in tenders) {
@@ -93,7 +93,7 @@ namespace Integration.Service
             return profit;
         }
 
-        private int GetDrugstoreParticipations(DateRange range, int drugstoreId)
+        public int GetDrugstoreParticipations(DateRange range, int drugstoreId)
         {
             
             List<DrugTender> tenders = GetDateRangeTenders(range);
@@ -113,7 +113,7 @@ namespace Integration.Service
             return participations;
         }
 
-        private int GetDrugstoreWins(DateRange range, int drugstoreId)
+        public int GetDrugstoreWins(DateRange range, int drugstoreId)
         {
             List<DrugTender> tenders = GetDateRangeTenders(range);
             int wins = 0;

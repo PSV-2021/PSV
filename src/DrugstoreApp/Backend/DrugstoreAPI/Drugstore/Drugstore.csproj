@@ -21,8 +21,4 @@
     <PackageReference Include="Syncfusion.DocToPDFConverter.Wpf" Version="19.3.0.54" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

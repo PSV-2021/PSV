@@ -519,17 +519,31 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "as",
-                            TenderEnd = new DateTime(2022, 1, 2, 22, 55, 5, 542, DateTimeKind.Local).AddTicks(8060),
+                            Id = "1",
+                            TenderEnd = new DateTime(2021, 12, 29, 13, 48, 22, 725, DateTimeKind.Local).AddTicks(513),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 1, 30, 22, 55, 5, 548, DateTimeKind.Local).AddTicks(2495),
+                            TenderEnd = new DateTime(2022, 2, 2, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(843),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
+                        },
+                        new
+                        {
+                            Id = "3",
+                            TenderEnd = new DateTime(2022, 1, 5, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(916),
+                            TenderInfo = "Brufen - 2, Palitreks - 2, Andol - 2",
+                            isFinished = true
+                        },
+                        new
+                        {
+                            Id = "4",
+                            TenderEnd = new DateTime(2021, 12, 15, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(922),
+                            TenderInfo = "Brufen - 10, Palitreks - 50, Andol - 35",
+                            isFinished = true
                         });
                 });
 
@@ -565,10 +579,10 @@ namespace Integration.Migrations
                         {
                             Id = "1",
                             DrugstoreId = 1,
-                            IsAccepted = false,
-                            IsActive = true,
+                            IsAccepted = true,
+                            IsActive = false,
                             Price = 5000,
-                            TenderId = "as",
+                            TenderId = "1",
                             TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
                         },
                         new
@@ -580,6 +594,66 @@ namespace Integration.Migrations
                             Price = 5900,
                             TenderId = "2",
                             TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            DrugstoreId = 1,
+                            IsAccepted = true,
+                            IsActive = false,
+                            Price = 500,
+                            TenderId = "3",
+                            TenderOfferInfo = "Brufen - 2, Palitreks - 2, Andol - 2"
+                        },
+                        new
+                        {
+                            Id = "4",
+                            DrugstoreId = 1,
+                            IsAccepted = false,
+                            IsActive = true,
+                            Price = 2900,
+                            TenderId = "4",
+                            TenderOfferInfo = "Brufen - 10, Palitreks - 50, Andol - 35"
+                        },
+                        new
+                        {
+                            Id = "5",
+                            DrugstoreId = 3,
+                            IsAccepted = false,
+                            IsActive = false,
+                            Price = 500,
+                            TenderId = "3",
+                            TenderOfferInfo = "Brufen - 2, Palitreks - 2, Andol - 2"
+                        },
+                        new
+                        {
+                            Id = "6",
+                            DrugstoreId = 3,
+                            IsAccepted = true,
+                            IsActive = false,
+                            Price = 1900,
+                            TenderId = "4",
+                            TenderOfferInfo = "Brufen - 10, Palitreks - 50, Andol - 35"
+                        },
+                        new
+                        {
+                            Id = "7",
+                            DrugstoreId = 1,
+                            IsAccepted = false,
+                            IsActive = false,
+                            Price = 10000,
+                            TenderId = "1",
+                            TenderOfferInfo = "Brufen - 10, Palitreks - 80, Andol - 40"
+                        },
+                        new
+                        {
+                            Id = "8",
+                            DrugstoreId = 2,
+                            IsAccepted = false,
+                            IsActive = true,
+                            Price = 7900,
+                            TenderId = "2",
+                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 20"
                         });
                 });
 
