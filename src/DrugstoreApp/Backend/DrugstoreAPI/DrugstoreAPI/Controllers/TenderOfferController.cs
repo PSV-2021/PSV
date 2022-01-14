@@ -213,11 +213,17 @@ namespace DrugstoreAPI.Controllers
             List<TenderInfo> ret = new List<TenderInfo>();
             foreach (string drugWithPrice in tenderInfo.Split(","))
             {
+                if(!SkipDrug(drugWithPrice))
                 ret.Add(StringToTenderInfo(drugWithPrice));
             }
             return ret;
         }
-
+        private static bool SkipDrug(string info)
+        {
+            string[] split = info.Split("-");
+            return Int32.Parse(split[1]) <= 0;
+        }
+        
         private string GetIntegreationLink()
         {
             string domain = Environment.GetEnvironmentVariable("HOSPITAL_DOMAIN") ?? "localhost";

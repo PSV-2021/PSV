@@ -71,11 +71,13 @@ namespace DrugstoreAPI.Service
         {
             foreach(TenderInfo ti in tender)
             {
+                
                 Medicine med = MedicineRepository.GetByName(ti.DrugName);
                 if (med == null)
                 {
                     return false;
                 }
+                
                 if (!CheckIsTheDrugAmountSatisfied(ti.Amount, med))
                 {
                     return false;

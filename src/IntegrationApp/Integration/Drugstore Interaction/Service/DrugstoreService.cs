@@ -65,7 +65,7 @@ namespace Integration.Service
         {
             foreach (Drugstore dg in DrugstoreRepository.GetAll())
             {
-                if (dg.Name == name)
+                if (dg.Url == name)
                 {
                     return dg.gRPC;
                 }

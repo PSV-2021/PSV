@@ -186,7 +186,7 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "ApiKey", "Base64Image", "Comment", "Name", "Url", "gRPC", "Address_City", "Address_Country", "Address_Street", "Email_EmailValue" },
                 values: new object[,]
                 {
-                    { 1, "DrugStoreSecretKey", null, null, "Apoteka prva", "http://localhost:5001", true, "Novi Sad", "Srbija", "Tolstojeva 5", "apotekaprva@gmail.com" },
+                    { 1, "DrugStoreSecretKey", null, null, "Apoteka prva", "http://localhost:5001", true, "Novi Sad", "Srbija", "Tolstojeva 5", "smrdic99@gmail.com" },
                     { 3, "gasic", null, null, "Apoteka treca", "http://localhost:7001", true, "Subotica", "Srbija", "Cara Dusana 56", "trecimejl@gmail.com" },
                     { 2, "nestorandom", null, null, "Apoteka druga", "http://localhost:6001", true, "Beograd", "Srbija", "Balzakova 31", "drugimeil@gmail.com" }
                 });

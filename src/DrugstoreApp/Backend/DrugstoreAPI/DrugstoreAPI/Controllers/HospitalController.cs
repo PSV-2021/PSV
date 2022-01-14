@@ -34,7 +34,7 @@ namespace DrugstoreAPI.Controllers
         [HttpPost]
         public IActionResult Post(HospitalDto hospital)
         {
-            Hospital newHospital = new Hospital(hospital.HospitalName,hospital.URLAddress, hospital.ApiKey);
+            Hospital newHospital = new Hospital(hospital.HospitalName,hospital.URLAddress, hospital.ApiKey, "nabavite sta fronta!");
             hospitalService.SaveNewHospital(newHospital);
             return Ok();
         }
