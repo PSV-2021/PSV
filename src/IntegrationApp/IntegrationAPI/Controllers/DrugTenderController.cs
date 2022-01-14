@@ -47,7 +47,7 @@ namespace Integration_API.Controllers
                 DrugTender drugstoreTender = new DrugTender(tenderId, tender.TenderEnd.AddDays(1).AddMinutes(59).AddSeconds(59), FormatTenderInfo(tender.TenderInfo), false);
                 string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(drugstoreTender);
                 var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
-                channel.BasicPublish(exchange: "tenderFinisherDto",
+                channel.BasicPublish(exchange: "tender",
                                      routingKey: "",
                                      basicProperties: null,
                                      body: bodyNew);
@@ -64,7 +64,7 @@ namespace Integration_API.Controllers
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: "tenderFinish", type: ExchangeType.Fanout);
+                channel.ExchangeDeclare(exchange: "tenderFinish", type: ExchangeType.Direct);
                 
                 foreach(Drugstore d in DrugstoreService.GetAll())
                 {
@@ -86,7 +86,7 @@ namespace Integration_API.Controllers
                         string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderWin);
                         var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
                         channel.BasicPublish(exchange: "tenderFinish",
-                                             routingKey: "",
+                                             routingKey: tenderFinisherDto.drugstoreName,
                                              basicProperties: null,
                                              body: bodyNew);
                      TenderOffer tenderOffer  =  DrugTenderService.getTenderOfferById(tenderFinisherDto.tenderId);
@@ -105,7 +105,7 @@ namespace Integration_API.Controllers
                         string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderLose);
                         var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
                         channel.BasicPublish(exchange: "tenderFinish",
-                                             routingKey: "",
+                                             routingKey: "loser",
                                              basicProperties: null,
                                              body: bodyNew);
                         TenderOffer tenderOffer = DrugTenderService.getTenderOfferById(tenderFinisherDto.tenderId);
@@ -116,6 +116,7 @@ namespace Integration_API.Controllers
                         Console.WriteLine(drugTender.isFinished);
                         DrugTenderService.UpdateDrugTender(drugTender);
                         MailService.SendEmailForTenderLoser(d, tenderOffer);
+
                     }
                 }
                 return Ok(true);

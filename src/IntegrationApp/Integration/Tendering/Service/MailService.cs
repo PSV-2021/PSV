@@ -80,7 +80,7 @@ namespace Integration.Tendering.Service
 
             message.To.Add(MailboxAddress.Parse(drugstore.Email.EmailValue));
 
-            message.Subject = "You have just won on tender!";
+            message.Subject = "You lost on tender!";
 
             message.Body = new TextPart("plain")
             {

@@ -52,7 +52,6 @@ export class TenderFinishingComponent implements OnInit {
       }
     });
     
-    this.reloadPage();
      
 
   }
