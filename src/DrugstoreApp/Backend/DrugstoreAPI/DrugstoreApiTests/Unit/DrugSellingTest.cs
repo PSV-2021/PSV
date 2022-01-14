@@ -10,7 +10,9 @@ using Service;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Drugstore.Service;
 using Xunit;
 
 namespace DrugstoreApiTests.Unit
@@ -37,12 +39,13 @@ namespace DrugstoreApiTests.Unit
             };
             controler.HospitalService = new HospitalService(hospitalRepository.Object);
             controler.medicineService = new MedicineService(medicineRepository.Object);
+            controler.mailService = new MailService(hospitalRepository.Object);
 
             medicineRepository.Setup(d => d.GetByName("Brufen")).Returns(drug);
             medicineRepository.Setup(d => d.GetByName(null)).Returns(drug);
             hospitalRepository.Setup(h => h.GetAll()).Returns(new List<Hospital>
             {
-                new Hospital("", 111, "", "DrugStoreSecretKey", "ovo je test")
+                new Hospital("", 111, "", "DrugStoreSecretKey", "nesto@gmail.com")
             });
 
             //act
