@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220112124735_intialMigr")]
+    partial class intialMigr
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,9 +189,6 @@ namespace Drugstore.Migrations
                     b.Property<string>("ApiKey")
                         .HasColumnType("text");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -205,7 +204,6 @@ namespace Drugstore.Migrations
                         {
                             Id = 1,
                             ApiKey = "DrugStoreSecretKey",
-                            Email = "crnimraz99@gmail.com",
                             Name = "Health",
                             Url = "http://localhost:5000"
                         });

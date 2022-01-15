@@ -28,6 +28,8 @@ namespace IntegrationApiTests.Integration
         PublishedOfferDto exists = new PublishedOfferDto("1");
         PublishedOfferDto Nonexistent = new PublishedOfferDto("2");
         DrugstoreOffer offer1 = new DrugstoreOffer("7", "Content", "title", DateTime.Now, DateTime.Now, "Apotekica", false);
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
+
 
         public void SetUpDbContext()
         {
@@ -37,9 +39,10 @@ namespace IntegrationApiTests.Integration
 
             context = new MyDbContext(builder.Options);
         }
-        [Fact]
+        [SkippableFact]
         public void Get_Correct_Number_Of_Offers()
         {
+            Skip.If(skippable);
             SetUpDbContext();
             IDrugstoreOfferRepository repo = new DrugstoreOfferRepository(context);
             List<DrugstoreOffer> offers = repo.GetAll();

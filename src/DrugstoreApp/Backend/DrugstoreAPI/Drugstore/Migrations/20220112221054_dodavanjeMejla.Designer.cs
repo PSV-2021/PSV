@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220109220504_NewMigrationHopefullyGood")]
-    partial class NewMigrationHopefullyGood
+    [Migration("20220112221054_dodavanjeMejla")]
+    partial class dodavanjeMejla
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,14 +74,14 @@ namespace Drugstore.Migrations
                         new
                         {
                             Id = "as",
-                            TenderEnd = new DateTime(2022, 1, 2, 23, 5, 3, 594, DateTimeKind.Local).AddTicks(9420),
+                            TenderEnd = new DateTime(2022, 1, 5, 23, 10, 53, 747, DateTimeKind.Local).AddTicks(5145),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 1, 30, 23, 5, 3, 595, DateTimeKind.Local).AddTicks(889),
+                            TenderEnd = new DateTime(2022, 2, 2, 23, 10, 53, 747, DateTimeKind.Local).AddTicks(6798),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         });
@@ -117,8 +117,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2022, 1, 9, 23, 5, 3, 594, DateTimeKind.Local).AddTicks(2981),
-                            StartDate = new DateTime(2022, 1, 9, 23, 5, 3, 589, DateTimeKind.Local).AddTicks(4236),
+                            EndDate = new DateTime(2022, 1, 12, 23, 10, 53, 746, DateTimeKind.Local).AddTicks(6457),
+                            StartDate = new DateTime(2022, 1, 12, 23, 10, 53, 743, DateTimeKind.Local).AddTicks(4653),
                             Title = "title"
                         });
                 });
@@ -175,6 +175,9 @@ namespace Drugstore.Migrations
                     b.Property<string>("ApiKey")
                         .HasColumnType("text");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -190,6 +193,7 @@ namespace Drugstore.Migrations
                         {
                             Id = 1,
                             ApiKey = "DrugStoreSecretKey",
+                            Email = "crnimraz99@gmail.com",
                             Name = "Health",
                             Url = "http://localhost:5000"
                         });
