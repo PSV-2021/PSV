@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.DataBaseContext;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220115152839_novaSaEventovima")]
+    partial class novaSaEventovima
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -537,31 +539,17 @@ namespace Integration.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
-                            TenderEnd = new DateTime(2021, 12, 29, 13, 48, 22, 725, DateTimeKind.Local).AddTicks(513),
+                            Id = "as",
+                            TenderEnd = new DateTime(2022, 1, 8, 16, 28, 37, 975, DateTimeKind.Local).AddTicks(9121),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 2, 2, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(843),
+                            TenderEnd = new DateTime(2022, 2, 5, 16, 28, 37, 980, DateTimeKind.Local).AddTicks(6816),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
-                        },
-                        new
-                        {
-                            Id = "3",
-                            TenderEnd = new DateTime(2022, 1, 5, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(916),
-                            TenderInfo = "Brufen - 2, Palitreks - 2, Andol - 2",
-                            isFinished = true
-                        },
-                        new
-                        {
-                            Id = "4",
-                            TenderEnd = new DateTime(2021, 12, 15, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(922),
-                            TenderInfo = "Brufen - 10, Palitreks - 50, Andol - 35",
-                            isFinished = true
                         });
                 });
 
@@ -597,10 +585,10 @@ namespace Integration.Migrations
                         {
                             Id = "1",
                             DrugstoreId = 1,
-                            IsAccepted = true,
-                            IsActive = false,
+                            IsAccepted = false,
+                            IsActive = true,
                             Price = 5000,
-                            TenderId = "1",
+                            TenderId = "as",
                             TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
                         },
                         new
@@ -612,66 +600,6 @@ namespace Integration.Migrations
                             Price = 5900,
                             TenderId = "2",
                             TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
-                        },
-                        new
-                        {
-                            Id = "3",
-                            DrugstoreId = 1,
-                            IsAccepted = true,
-                            IsActive = false,
-                            Price = 500,
-                            TenderId = "3",
-                            TenderOfferInfo = "Brufen - 2, Palitreks - 2, Andol - 2"
-                        },
-                        new
-                        {
-                            Id = "4",
-                            DrugstoreId = 1,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 2900,
-                            TenderId = "4",
-                            TenderOfferInfo = "Brufen - 10, Palitreks - 50, Andol - 35"
-                        },
-                        new
-                        {
-                            Id = "5",
-                            DrugstoreId = 3,
-                            IsAccepted = false,
-                            IsActive = false,
-                            Price = 500,
-                            TenderId = "3",
-                            TenderOfferInfo = "Brufen - 2, Palitreks - 2, Andol - 2"
-                        },
-                        new
-                        {
-                            Id = "6",
-                            DrugstoreId = 3,
-                            IsAccepted = true,
-                            IsActive = false,
-                            Price = 1900,
-                            TenderId = "4",
-                            TenderOfferInfo = "Brufen - 10, Palitreks - 50, Andol - 35"
-                        },
-                        new
-                        {
-                            Id = "7",
-                            DrugstoreId = 1,
-                            IsAccepted = false,
-                            IsActive = false,
-                            Price = 10000,
-                            TenderId = "1",
-                            TenderOfferInfo = "Brufen - 10, Palitreks - 80, Andol - 40"
-                        },
-                        new
-                        {
-                            Id = "8",
-                            DrugstoreId = 2,
-                            IsAccepted = false,
-                            IsActive = true,
-                            Price = 7900,
-                            TenderId = "2",
-                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 20"
                         });
                 });
 
@@ -745,7 +673,7 @@ namespace Integration.Migrations
                                 new
                                 {
                                     DrugstoreId = 1,
-                                    EmailValue = "smrdic99@gmail.com"
+                                    EmailValue = "apotekaprva@gmail.com"
                                 },
                                 new
                                 {
