@@ -8,7 +8,7 @@ using Hospital.SharedModel;
 
 namespace Hospital.MedicalRecords.Model
 {
-    public class Patient : User
+    public class Patient : User, IAggregateRoot
     {
    
         [Key]
@@ -127,7 +127,8 @@ namespace Hospital.MedicalRecords.Model
                 return Name + " " + Surname;
             }
         }
- 
+
+        
         public override string ToString()
         {
             return this.Name + " " + this.Surname;
@@ -149,6 +150,28 @@ namespace Hospital.MedicalRecords.Model
                 throw new ArgumentException(String.Format("Id must be positive number"));
             if (DoctorId < 0)
                 throw new ArgumentException(String.Format("DoctorId must be positive number"));
+        }
+
+        public int ID { get => Id; set => Id = value; }
+
+        public void UpdateMedicalRecord(String healthInsuranceNumber, String companyName)
+        {
+            this.MedicalRecord = new MedicalRecord(healthInsuranceNumber, companyName);
+        }
+
+        public void AddAllergen(int id, String name)
+        {
+            this.Allergen.Add(new Allergen(id, name));
+        }
+
+        public void RemoveAllergen(int id, String name)
+        {
+            this.Allergen.Remove(new Allergen(id, name));
+        }
+
+        public void DoctorAddPatients()
+        {
+            this.ChosenDoctor.NumberOfPatients++;
         }
 
     }
