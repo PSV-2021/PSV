@@ -1,6 +1,6 @@
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { RegistrationDto } from '../registration/registration.dto';
 import { DrugstoreSearchDto } from '../purchase-drugs/drugstore.search.dto';
@@ -57,8 +57,7 @@ export class PharmacyService {
         'Content-Type': 'application/json',
         'ApiKey': "abcde" });
       let options = { headers: headers };
-      const ret = this.http.put<any>(this.url + '/drugpurchase', body, options);
-      return ret;
+      return this.http.put<any>(this.url + '/drugpurchase', body, options).pipe(catchError(this.errorHandler))
     }
 
     SendUrgentDrugPurchase(Url: string, DrugAmount: number, DrugName: string): Observable<any> {
@@ -88,4 +87,9 @@ export class PharmacyService {
 
       return ret;
     }
+
+    errorHandler(error: HttpErrorResponse) {
+      alert(error.error)
+      return Observable.throw(error.error)
+  }
 }

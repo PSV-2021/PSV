@@ -53,6 +53,9 @@ export class PurchaseDrugsComponent implements OnInit {
         alert("You CAN'T order this drug from this drugstore.");
       }
 
+    },
+    error => {
+      console.log(error)
     });
   }
 

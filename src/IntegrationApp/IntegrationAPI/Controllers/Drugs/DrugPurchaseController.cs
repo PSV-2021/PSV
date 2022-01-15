@@ -29,33 +29,37 @@ namespace Integration_API.Controllers
         [HttpPut]
         public IActionResult Put(DrugAmountDemandDto demand)
         {
-            if (GetDrugstoreProtocol(demand.PharmacyUrl))
+            try
             {
-                if (drugDemandGrpc(demand))
+                if (GetDrugstoreProtocol(demand.PharmacyUrl))
                 {
-                    return Ok(true);
-                }
-                else
-                {
+                    if (drugDemandGrpc(demand))
+                    {
+                        return Ok(true);
+                    }
+
                     return Ok(false);
                 }
             }
-            else
+            catch (Exception e)
             {
-                var client = new RestClient(demand.PharmacyUrl);
-                var request = new RestRequest("/api/drugDemand", Method.POST);
-
-                SetApiKeyInHeader(demand, request);
-
-                SetRequestBody(demand, request);
-
-                IRestResponse response = client.Execute(request);
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    return Ok(Boolean.Parse(response.Content));
-
-                return Unauthorized(false);
+                return NotFound("Drugstore server not available!");
             }
+
+            var client = new RestClient(demand.PharmacyUrl);
+            var request = new RestRequest("/api/drugDemand", Method.POST);
+
+            SetApiKeyInHeader(demand, request);
+
+            SetRequestBody(demand, request);
+
+            IRestResponse response = client.Execute(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                return Ok(Boolean.Parse(response.Content));
+
+            return Unauthorized(false);
+            
 
 
 
