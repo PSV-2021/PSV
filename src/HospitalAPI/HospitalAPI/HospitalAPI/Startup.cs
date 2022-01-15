@@ -56,10 +56,8 @@ namespace HospitalAPI
 
 
             services.AddControllers();
-            services.AddDbContext<MyDbContext>();
-            services.AddDbContext<EventDbContext>();
-            /*services.AddDbContext<MyDbContext>(options =>
-            options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());*/
+            services.AddDbContext<MyDbContext>(options =>
+            options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
             services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
@@ -117,7 +115,7 @@ namespace HospitalAPI
             var port = Configuration["DBPort"] ?? "5432";
             var user = Configuration["DBUser"] ?? "postgres";
 
-            var password = Configuration["DBPassword"] ?? "firma4";
+            var password = Configuration["DBPassword"] ?? "123";
             var database = Configuration["DB"] ?? "hospitalNew";
             Console.WriteLine(server + port + user + password + database);
 

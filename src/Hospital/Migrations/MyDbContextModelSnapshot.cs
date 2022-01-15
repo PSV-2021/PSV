@@ -229,7 +229,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2021, 12, 27, 12, 8, 46, 742, DateTimeKind.Local).AddTicks(7829),
+                            IssuedTime = new DateTime(2022, 1, 15, 16, 43, 17, 442, DateTimeKind.Local).AddTicks(9042),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -405,7 +405,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2021, 12, 27, 12, 8, 46, 710, DateTimeKind.Local).AddTicks(9326),
+                            TimeWritten = new DateTime(2022, 1, 15, 16, 43, 17, 418, DateTimeKind.Local).AddTicks(7186),
                             canPublish = false
                         },
                         new
@@ -413,7 +413,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2021, 12, 27, 12, 8, 46, 718, DateTimeKind.Local).AddTicks(4164),
+                            TimeWritten = new DateTime(2022, 1, 15, 16, 43, 17, 423, DateTimeKind.Local).AddTicks(8041),
                             canPublish = true
                         },
                         new
@@ -421,7 +421,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2021, 12, 27, 12, 8, 46, 718, DateTimeKind.Local).AddTicks(4489),
+                            TimeWritten = new DateTime(2022, 1, 15, 16, 43, 17, 423, DateTimeKind.Local).AddTicks(8252),
                             canPublish = true
                         });
                 });
@@ -482,6 +482,24 @@ namespace Hospital.Migrations
                             Usage = "Kad god hoces",
                             Weight = 100.0
                         });
+                });
+
+            modelBuilder.Entity("Hospital.PatientEvent.Model.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("EventName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EventTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PatientEvents", "PatientEvent");
                 });
 
             modelBuilder.Entity("Hospital.Schedule.Model.Appointment", b =>

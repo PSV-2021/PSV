@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220109215506_NewMigration")]
-    partial class NewMigration
+    [Migration("20220115152839_novaSaEventovima")]
+    partial class novaSaEventovima
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,24 @@ namespace Integration.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("Integration.IntegrationEvents.Model.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("EventName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EventTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IntegrationEvents", "IntegrationEvent");
+                });
 
             modelBuilder.Entity("Integration.Model.DrugConsumed", b =>
                 {
@@ -522,14 +540,14 @@ namespace Integration.Migrations
                         new
                         {
                             Id = "as",
-                            TenderEnd = new DateTime(2022, 1, 2, 22, 55, 5, 542, DateTimeKind.Local).AddTicks(8060),
+                            TenderEnd = new DateTime(2022, 1, 8, 16, 28, 37, 975, DateTimeKind.Local).AddTicks(9121),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 1, 30, 22, 55, 5, 548, DateTimeKind.Local).AddTicks(2495),
+                            TenderEnd = new DateTime(2022, 2, 5, 16, 28, 37, 980, DateTimeKind.Local).AddTicks(6816),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         });

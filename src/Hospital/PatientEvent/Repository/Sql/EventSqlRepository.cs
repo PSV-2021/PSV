@@ -1,5 +1,6 @@
 ﻿using Hospital.PatientEvent.Model;
 using Hospital.PatientEvent.Repository.Interface;
+using Hospital.SharedModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Hospital.PatientEvent.Repository.Sql
 {
     public class EventSqlRepository : IEventRepository
     {
-        public EventDbContext dbContext { get; set; }
+        public MyDbContext dbContext { get; set; }
 
-        public EventSqlRepository(EventDbContext dbContext)
+        public EventSqlRepository(MyDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

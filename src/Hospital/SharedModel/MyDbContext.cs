@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Hospital.MedicalRecords.Model;
 using Hospital.Medicines.Model;
+using Hospital.PatientEvent.Model;
 using Hospital.Schedule.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -24,12 +25,13 @@ namespace Hospital.SharedModel
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<Event> PatientEvents { get; set; }
+
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies();
             optionsBuilder.UseLazyLoadingProxies(true);
             optionsBuilder.EnableSensitiveDataLogging();
         }
@@ -109,16 +111,6 @@ namespace Hospital.SharedModel
             modelBuilder.Entity<Prescription>().HasData(new Prescription(1,"Zoran Zoranic", "Random opis nekog leka", "Palitrex", DateTime.Now));
         }
 
-        public string GetDBConnectionString()
-        {
-            var server = Environment.GetEnvironmentVariable("DBServer") ?? "localhost";
-            var port = Environment.GetEnvironmentVariable("DBPort") ?? "5432";
-            var user = Environment.GetEnvironmentVariable("DBUser") ?? "postgres";
-            var password = Environment.GetEnvironmentVariable("DBPassword") ?? "firma4";
-            var database = Environment.GetEnvironmentVariable("DB") ?? "hospitalNew";
-            //if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
-            return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
-        }
     }
 
 

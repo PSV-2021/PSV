@@ -9,9 +9,9 @@ namespace Drugstore.Repository.Sql
 {
     public class EventSqlRepository : IEventRepository
     {
-        public EventDbContext dbContext { get; set; }
+        public MyDbContext dbContext { get; set; }
 
-        public EventSqlRepository(EventDbContext dbContext)
+        public EventSqlRepository(MyDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

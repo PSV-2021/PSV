@@ -3,6 +3,7 @@ using Integration.IntegrationEvents.Model;
 using Integration.IntegrationEvents.Service;
 using Integration_API.Adapter;
 using Microsoft.AspNetCore.Mvc;
+using Model.DataBaseContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace Integration_API.Controllers
     {
         public EventService eventService;
 
-        public EventController(EventDbContext context)
+        public EventController(MyDbContext context)
         {
             this.eventService = new EventService(context);
         }

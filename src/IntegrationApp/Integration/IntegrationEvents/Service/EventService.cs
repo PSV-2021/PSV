@@ -1,6 +1,7 @@
 ﻿using Integration.IntegrationEvents.Model;
 using Integration.IntegrationEvents.Repository.Interface;
 using Integration.IntegrationEvents.Repository.Sql;
+using Model.DataBaseContext;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,13 +11,13 @@ namespace Integration.IntegrationEvents.Service
     public class EventService
     {
         public IEventRepository EventRepository { get; set; }
-        public readonly EventDbContext dbContext;
+        public readonly MyDbContext dbContext;
         public EventService(IEventRepository eventRepository)
         {
             EventRepository = eventRepository;
         }
 
-        public EventService(EventDbContext context)
+        public EventService(MyDbContext context)
         {
             this.dbContext = context;
             EventRepository = new EventSqlRepository(context);

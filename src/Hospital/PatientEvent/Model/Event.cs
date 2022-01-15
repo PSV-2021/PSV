@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Hospital.PatientEvent.Model
 {
+    [Table("PatientEvents", Schema = "PatientEvent")]
     public class Event
     {
         public int Id { get; set; }

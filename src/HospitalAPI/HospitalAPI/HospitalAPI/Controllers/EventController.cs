@@ -1,6 +1,7 @@
 ﻿using Hospital.PatientEvent.Dto;
 using Hospital.PatientEvent.Model;
 using Hospital.PatientEvent.Service;
+using Hospital.SharedModel;
 using HospitalAPI.Adapters;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,7 +17,7 @@ namespace HospitalAPI.Controllers
     {
         public EventService eventService;
 
-        public EventController(EventDbContext context)
+        public EventController(MyDbContext context)
         {
             this.eventService = new EventService(context);
         }

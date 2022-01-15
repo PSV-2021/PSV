@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Drugstore.Migrations.MyDb
+namespace Drugstore.Migrations
 {
-    public partial class newEventSchemaMigration1 : Migration
+    public partial class novaSaEventovima : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "DrugstoreEvents");
+
             migrationBuilder.CreateTable(
                 name: "DrugSpecifications",
                 columns: table => new
@@ -18,6 +22,21 @@ namespace Drugstore.Migrations.MyDb
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DrugSpecifications", x => x.Name);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DrugstoreEvents",
+                schema: "DrugstoreEvents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EventName = table.Column<string>(type: "text", nullable: true),
+                    EventTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DrugstoreEvents", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -40,8 +59,7 @@ namespace Drugstore.Migrations.MyDb
                 name: "DrugTenders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     TenderEnd = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TenderInfo = table.Column<string>(type: "text", nullable: true),
                     isFinished = table.Column<bool>(type: "boolean", nullable: false)
@@ -111,14 +129,46 @@ namespace Drugstore.Migrations.MyDb
                 });
 
             migrationBuilder.CreateTable(
-                name: "TenderOffers",
+                name: "Notifications",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Posted = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
+                    Recipients = table.Column<List<string>>(type: "text[]", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CustomerId = table.Column<int>(type: "integer", nullable: false),
+                    TotalPrice = table.Column<double>(type: "double precision", nullable: false),
+                    OrderType = table.Column<int>(type: "integer", nullable: false),
+                    Delivered = table.Column<bool>(type: "boolean", nullable: false),
+                    PickedUp = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TenderOffers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
                     TenderOfferInfo = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<int>(type: "integer", nullable: false),
-                    TenderId = table.Column<int>(type: "integer", nullable: false),
+                    TenderId = table.Column<string>(type: "text", nullable: true),
                     IsAccepted = table.Column<bool>(type: "boolean", nullable: false),
                     DrugstoreId = table.Column<int>(type: "integer", nullable: false),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
@@ -162,23 +212,23 @@ namespace Drugstore.Migrations.MyDb
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 1, 3, 18, 44, 0, 624, DateTimeKind.Local).AddTicks(3875), "Brufen - 150, Palitreks - 100, Andol - 40", true },
-                    { 2, new DateTime(2022, 1, 31, 18, 44, 0, 624, DateTimeKind.Local).AddTicks(6680), "Brufen - 120, Palitreks - 90, Andol - 50", false }
+                    { "as", new DateTime(2022, 1, 8, 16, 5, 53, 841, DateTimeKind.Local).AddTicks(3832), "Brufen - 150, Palitreks - 100, Andol - 40", true },
+                    { "2", new DateTime(2022, 2, 5, 16, 5, 53, 841, DateTimeKind.Local).AddTicks(6444), "Brufen - 120, Palitreks - 90, Andol - 50", false }
                 });
 
             migrationBuilder.InsertData(
                 table: "DrugstoreOffers",
                 columns: new[] { "Id", "Content", "DrugstoreName", "EndDate", "StartDate", "Title" },
-                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 10, 18, 44, 0, 623, DateTimeKind.Local).AddTicks(4570), new DateTime(2022, 1, 10, 18, 44, 0, 619, DateTimeKind.Local).AddTicks(495), "title" });
+                values: new object[] { "1", "Content", "Apotekica", new DateTime(2022, 1, 15, 16, 5, 53, 840, DateTimeKind.Local).AddTicks(2372), new DateTime(2022, 1, 15, 16, 5, 53, 834, DateTimeKind.Local).AddTicks(8073), "title" });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
                 columns: new[] { "Id", "Content", "HospitalName", "Response" },
                 values: new object[,]
                 {
-                    { "bbb", "normalno", "Ime bolnice 223", "" },
+                    { "ccc", "bla bla", "Ime bolnice 224", "" },
                     { "aaa", "Lenka vrati zeton", "Health", "" },
-                    { "ccc", "bla bla", "Ime bolnice 224", "" }
+                    { "bbb", "normalno", "Ime bolnice 223", "" }
                 });
 
             migrationBuilder.InsertData(
@@ -191,9 +241,19 @@ namespace Drugstore.Migrations.MyDb
                 columns: new[] { "Id", "Manufacturer", "MedicineId", "MedicineImage", "Name", "Precautions", "Price", "Reactions", "SideEffects", "Substances", "Supply", "Usage", "Weight" },
                 values: new object[,]
                 {
-                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 30, "bla", 100.0 },
                     { 1, "bla", null, null, "Brufen", "bla", 150.0, "bla", "bla", "bla", 150, "bla", 100.0 },
-                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 10, "bla", 100.0 }
+                    { 2, "bla", null, null, "Paracetamol", "bla", 150.0, "bla", "bla", "bla", 10, "bla", 100.0 },
+                    { 3, "bla", null, null, "Palitreks", "bla", 150.0, "bla", "bla", "bla", 30, "bla", 100.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Notifications",
+                columns: new[] { "Id", "Content", "Posted", "Recipients", "Title" },
+                values: new object[,]
+                {
+                    { 3, "Obavestenje o promeni cena", new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Vazno obavestenje" },
+                    { 1, "Aloaloalo", new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Uzbuna" },
+                    { 2, "Stigli su novi lekovi", new DateTime(2021, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Novi lekovi" }
                 });
 
             migrationBuilder.InsertData(
@@ -201,8 +261,8 @@ namespace Drugstore.Migrations.MyDb
                 columns: new[] { "Id", "DrugstoreId", "IsAccepted", "IsActive", "Price", "TenderId", "TenderOfferInfo" },
                 values: new object[,]
                 {
-                    { 2, 2, false, true, 5900, 2, "Brufen - 120, Palitreks - 50, Andol - 35" },
-                    { 1, 1, false, true, 5000, 2, "Brufen - 100, Palitreks - 80, Andol - 40" }
+                    { "2", 2, false, true, 5900, "2", "Brufen - 120, Palitreks - 50, Andol - 35" },
+                    { "1", 1, false, true, 5000, "as", "Brufen - 100, Palitreks - 80, Andol - 40" }
                 });
 
             migrationBuilder.InsertData(
@@ -227,6 +287,10 @@ namespace Drugstore.Migrations.MyDb
                 name: "DrugSpecifications");
 
             migrationBuilder.DropTable(
+                name: "DrugstoreEvents",
+                schema: "DrugstoreEvents");
+
+            migrationBuilder.DropTable(
                 name: "DrugstoreOffers");
 
             migrationBuilder.DropTable(
@@ -240,6 +304,12 @@ namespace Drugstore.Migrations.MyDb
 
             migrationBuilder.DropTable(
                 name: "Medicines");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "TenderOffers");

@@ -30,11 +30,8 @@ namespace Integration_API
         {           
             services.AddControllers();
             services.AddHostedService<RabbitMQService>();
-            services.AddDbContext<MyDbContext>();
-            services.AddDbContext<EventDbContext>();
-            /*            services.AddDbContext<MyDbContext>(options =>
-                            options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
-            */
+            services.AddDbContext<MyDbContext>(options =>
+                options.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies());
             services.AddControllersWithViews().AddNewtonsoftJson(options =>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -83,7 +80,7 @@ namespace Integration_API
             var server = Configuration["DBServer"] ?? "localhost";
             var port = Configuration["DBPort"] ?? "5432";
             var user = Configuration["DBUser"] ?? "postgres";
-            var password = Configuration["DBPassword"] ?? "firma4";
+            var password = Configuration["DBPassword"] ?? "123";
             var database = Configuration["DB"] ?? "hospital";
             Console.WriteLine($"server={server}; port={port}; database={database}; User Id={user}; password={password}");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";

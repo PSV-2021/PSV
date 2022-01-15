@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Integration.IntegrationEvents.Model;
 using Integration.Model;
 using Integration.Tendering.Model;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace Model.DataBaseContext
         public DbSet<DrugConsumed> DrugsConsumed { get; set; }
         public DbSet<DrugTender> DrugTenders { get; set; }
         public DbSet<TenderOffer> TenderOffers { get; set; }
+        public DbSet<Event> IntegrationEvents { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -129,22 +131,6 @@ namespace Model.DataBaseContext
                 new TenderOffer("1", "Brufen - 100, Palitreks - 80, Andol - 40",5000, "as", false, 1, true),
                 new TenderOffer("2", "Brufen - 120, Palitreks - 50, Andol - 35", 5900, "2", false, 2, true)
             );
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql(GetDBConnectionString()).UseLazyLoadingProxies();
-        }
-
-        public string GetDBConnectionString()
-        {
-            var server = Environment.GetEnvironmentVariable("DBServer") ?? "localhost";
-            var port = Environment.GetEnvironmentVariable("DBPort") ?? "5432";
-            var user = Environment.GetEnvironmentVariable("DBUser") ?? "postgres";
-            var password = Environment.GetEnvironmentVariable("DBPassword") ?? "firma4";
-            var database = Environment.GetEnvironmentVariable("DB") ?? "hospital";
-            //if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
-            return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";
         }
     }
 }

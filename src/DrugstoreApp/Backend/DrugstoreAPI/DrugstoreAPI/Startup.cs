@@ -30,13 +30,8 @@ namespace DrugstoreAPI
         {
             services.AddControllers();
             services.AddHostedService<RabbitMQService>();
-            services.AddDbContext<Drugstore.Models.MyDbContext>();
-            services.AddDbContext<Drugstore.Models.EventDbContext>();
-
-            /*services.AddDbContext<Drugstore.Models.MyDbContext>(options =>
-            options.UseNpgsql(GetDBConnectionString()));*/
-            /*services.AddDbContext<Drugstore.Models.EventDbContext>(options =>
-            options.UseNpgsql(GetDBConnectionString()));*/
+            services.AddDbContext<Drugstore.Models.MyDbContext>(options =>
+            options.UseNpgsql(GetDBConnectionString()));
             services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSingleton<IHostedService, BackgroundCompressionController>();
 

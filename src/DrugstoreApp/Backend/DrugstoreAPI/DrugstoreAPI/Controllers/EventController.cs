@@ -16,7 +16,7 @@ namespace DrugstoreAPI.Controllers
     {
         public EventService eventService;
 
-        public EventController(EventDbContext context)
+        public EventController(MyDbContext context)
         {
             this.eventService = new EventService(context);
         }
