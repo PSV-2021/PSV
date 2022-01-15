@@ -11,19 +11,22 @@ namespace Drugstore.Models
         public int Id { get; set; }
         public string Url { get; set; }
         public string ApiKey { get; set; }
+        public string Email { get; set; }
 
-        public Hospital(string name, int id, string url, string apiKey)
+        public Hospital(string name, int id, string url, string apiKey, string email)
         {
             this.Name = name;
             this.Id = id;
             this.Url = url;
             this.ApiKey = apiKey;
+            this.Email = email;
         }
-        public Hospital(string name, string url, string apiKey)
+        public Hospital(string name, string url, string apiKey, string email)
         {
             this.Name = name;
             this.Url = url;
             this.ApiKey = apiKey;
+            this.Email = email;
         }
 
         public Hospital() { }

@@ -23,6 +23,7 @@ namespace DrugstoreAPI.Controllers
         private readonly MyDbContext dbContext;
         public MedicineService medicineService;
         public HospitalService HospitalService;
+        public MailService mailService;
 
 
         public DrugDemandController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
@@ -30,6 +31,7 @@ namespace DrugstoreAPI.Controllers
             this.dbContext = db;
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.HospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
+            this.mailService = new MailService(new HospitalSqlRepository(dbContext));
         }
 
         [HttpPost]
@@ -62,7 +64,12 @@ namespace DrugstoreAPI.Controllers
                 {
                     if (HospitalService.CheckApiKey(header))
                     {
-                        return Ok(medicineService.SellDrugUrgent(demand.Name, demand.Amount));
+                        if (medicineService.SellDrugUrgent(demand.Name, demand.Amount))
+                        {
+                            mailService.SendEmailAboutUrgentPurchase(demand.Name, demand.Amount, header);
+                            return Ok(true);
+                        }
+                        return Ok(false);
                     }
                 }
             }

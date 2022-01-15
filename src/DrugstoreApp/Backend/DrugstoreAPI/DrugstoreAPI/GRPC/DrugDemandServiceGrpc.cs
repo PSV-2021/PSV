@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Service;
 using System;
 using System.Threading.Tasks;
+using Drugstore.Service;
 
 namespace DrugstoreAPI
 {
@@ -18,6 +19,7 @@ namespace DrugstoreAPI
               
         private MedicineService medicineService;
         public HospitalService hospitalService;
+        public MailService mailService;
         private readonly ILogger<GreeterService> _logger;
 
         private void SetupDbContext(string connectionString)
@@ -32,6 +34,7 @@ namespace DrugstoreAPI
             _logger = logger;
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.hospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
+            this.mailService = new MailService(new HospitalSqlRepository(dbContext));
 
         }
         public DrugDemandServiceGrpc(MyDbContext db) 
@@ -39,6 +42,7 @@ namespace DrugstoreAPI
             this.dbContext = db;
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.hospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
+            this.mailService = new MailService(new HospitalSqlRepository(dbContext));
 
         }
         public DrugDemandServiceGrpc() 
@@ -46,6 +50,7 @@ namespace DrugstoreAPI
             SetupDbContext(GetDBConnectionString());
             this.medicineService = new MedicineService(new MedicineSqlRepository(dbContext));
             this.hospitalService = new HospitalService(new HospitalSqlRepository(dbContext));
+            this.mailService = new MailService(new HospitalSqlRepository(dbContext));
         }
 
         public override Task<DrugReply> DrugDemand(DrugRequest request, ServerCallContext context)
@@ -86,6 +91,7 @@ namespace DrugstoreAPI
                     if (medicineService.CheckForAmountOfDrug(request.Name, request.Amount))
                     {
                         medicineService.SellDrugUrgent(request.Name, request.Amount);
+                        mailService.SendEmailAboutUrgentPurchase(request.Name, request.Amount, request.ApiKey);
                         return Task.FromResult(new DrugReply
                         {
                             Message = "you sold some " + request.Name,

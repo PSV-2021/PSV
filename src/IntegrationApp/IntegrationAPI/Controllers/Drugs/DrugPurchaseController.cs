@@ -29,7 +29,7 @@ namespace Integration_API.Controllers
         [HttpPut]
         public IActionResult Put(DrugAmountDemandDto demand)
         {
-            if (GetDrugstoreProtocol(demand.Name))
+            if (GetDrugstoreProtocol(demand.PharmacyUrl))
             {
                 if (drugDemandGrpc(demand))
                 {
@@ -66,7 +66,7 @@ namespace Integration_API.Controllers
         public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
         {
 
-            if (GetDrugstoreProtocol(demand.Name))
+            if (GetDrugstoreProtocol(demand.PharmacyUrl))
             {
                 if (drugPurchaseGrpc(demand))
                 {

@@ -111,7 +111,14 @@ namespace Hospital.Schedule.Repository
 
         public List<Doctor> GetDoctorsBySpeciality(int specialityId)
         {
-            throw new NotImplementedException();
+            List<Doctor> doctors = GetAll();
+            List<Doctor> doctorsWithSpeciality = new List<Doctor>();
+            foreach (Doctor d in doctors)
+            {
+                if (d.SpecialityId.Equals(specialityId))
+                    doctorsWithSpeciality.Add(d);
+            }
+            return doctorsWithSpeciality;
         }
 
         public Doctor GetDoctorBy(int id)
