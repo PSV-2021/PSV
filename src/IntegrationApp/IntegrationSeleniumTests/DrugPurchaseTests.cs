@@ -61,5 +61,66 @@ namespace IntegrationSeleniumTests
             Dispose();
         }
 
+        [Fact]
+        public void SendRequestForUnexistingDrug()
+        {
+            DrugPurchasePage.WaitToLoad();
+            DrugPurchasePage.SelectOneDrugstore();
+            DrugPurchasePage.InsertDrugAmount("10");
+            DrugPurchasePage.InsertDrugName("Unexisting drug123");
+            DrugPurchasePage.ClickRequestButton();
+            DrugPurchasePage.WaitToExecute();
+
+            IAlert alert = Driver.SwitchTo().Alert();
+            Assert.Equal("You CAN'T order this drug from this drugstore.", alert.Text);
+            alert.Accept();
+
+            Assert.Equal(Driver.Url, Configuration.DrugPurchasePageUrl);
+            Dispose();
+        }
+
+        [Fact]
+        public void BadDrugAmountInput()
+        {
+            DrugPurchasePage.WaitToLoad();
+            DrugPurchasePage.SelectOneDrugstore();
+            DrugPurchasePage.InsertDrugAmount("10e");
+            DrugPurchasePage.InsertDrugName("Some drug");
+            DrugPurchasePage.ClickRequestButton();
+            DrugPurchasePage.WaitToExecute();
+
+            IAlert alert = Driver.SwitchTo().Alert();
+            Assert.Equal("Drug amount must be whole number!", alert.Text);
+            alert.Accept();
+
+            Assert.Equal(Driver.Url, Configuration.DrugPurchasePageUrl);
+            Dispose();
+        }
+
+        [Fact]
+        public void SuccesfullUrgentDrugPurchase()
+        {
+            DrugPurchasePage.WaitToLoad();
+            DrugPurchasePage.SelectOneDrugstore();
+            DrugPurchasePage.InsertDrugAmount("2");
+            DrugPurchasePage.InsertDrugName("Brufen");
+            DrugPurchasePage.ClickRequestButton();
+            DrugPurchasePage.WaitToExecute();
+
+            IAlert alert = Driver.SwitchTo().Alert();
+            Assert.Equal("You CAN order this drug from this drugstore.", alert.Text);
+            alert.Accept();
+
+            DrugPurchasePage.ClickPurchaseButton();
+            DrugPurchasePage.WaitToExecute();
+
+            IAlert alertForPurchase = Driver.SwitchTo().Alert();
+            Assert.Equal("You have successfully purchased drugs!", alertForPurchase.Text);
+            alertForPurchase.Accept();
+
+            Assert.Equal(Driver.Url, Configuration.DrugPurchasePageUrl);
+            Dispose();
+        }
+
     }
 }

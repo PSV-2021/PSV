@@ -44,6 +44,11 @@ export class PurchaseDrugsComponent implements OnInit {
   }
 
   public sendDemand(): void{
+    if(!Number.isInteger(this.drugAmount)){
+      alert("Drug amount must be whole number!");
+      return;
+    }
+      
     this.pharmacyService.SendDrugDemand(this.selectedPharmacy.Url, this.drugAmount, this.drugName).subscribe((d: any) =>{
       if (d){
         this.disableButton = false;
