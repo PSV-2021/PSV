@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DrugstoreWithImageDto } from '../all-drugstores/drugstore.with.image';
 import { PharmacyService } from '../services/pharmacy.service';
 
@@ -12,7 +13,7 @@ import { PharmacyService } from '../services/pharmacy.service';
 export class DrugstoreComponent implements OnInit {
   public id;
   public drugstore : DrugstoreWithImageDto;
-  constructor(private route:ActivatedRoute, private pharmacyService: PharmacyService) {
+  constructor(private route:ActivatedRoute, private pharmacyService: PharmacyService, private toastr: ToastrService) {
     this.id = 0;
     this.drugstore = new DrugstoreWithImageDto();
    }
@@ -30,6 +31,12 @@ export class DrugstoreComponent implements OnInit {
                         "Comment": data.comment,
                         "ImageBase64": data.base64Image
                       }
+    },
+    error => {
+      if(error.error)
+        this.toastr.error(error.error, 'Sorry');
+      else
+        this.toastr.error(error, 'Sorry');
     });
   }
 
@@ -40,6 +47,12 @@ export class DrugstoreComponent implements OnInit {
           alert("Drugstore info updated succesfully!");
         else
           alert("Something went wrong!");
+      },
+      error => {
+        if(error.error)
+          this.toastr.error(error.error, 'Sorry');
+        else
+          this.toastr.error(error, 'Sorry');
       });
   }
 

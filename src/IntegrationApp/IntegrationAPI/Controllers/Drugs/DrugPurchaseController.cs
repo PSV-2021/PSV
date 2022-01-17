@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Cors;
 using Integration.Service;
 using Integration.Repository.Sql;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace Integration_API.Controllers
 {
@@ -37,7 +38,41 @@ namespace Integration_API.Controllers
                     {
                         return Ok(true);
                     }
+                    return Ok(false);
+                }
+                
+                
+                var client = new RestClient(demand.PharmacyUrl);
+                var request = new RestRequest("/api/drugDemand", Method.POST);
 
+                SetApiKeyInHeader(demand, request);
+
+                SetRequestBody(demand, request);
+
+                IRestResponse response = client.Execute(request);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    return Ok(Boolean.Parse(response.Content));
+                return NotFound("Drugstore not available at the moment!");
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
+        }
+
+        [HttpPut("urgent")]
+        public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
+        {
+            try
+            {
+                if (GetDrugstoreProtocol(demand.PharmacyUrl))
+                {
+                    if (drugPurchaseGrpc(demand))
+                    {
+                        return Ok(true);
+                    }
                     return Ok(false);
                 }
             }
@@ -46,43 +81,6 @@ namespace Integration_API.Controllers
                 return NotFound("Drugstore server not available!");
             }
 
-            var client = new RestClient(demand.PharmacyUrl);
-            var request = new RestRequest("/api/drugDemand", Method.POST);
-
-            SetApiKeyInHeader(demand, request);
-
-            SetRequestBody(demand, request);
-
-            IRestResponse response = client.Execute(request);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return Ok(Boolean.Parse(response.Content));
-
-            return Unauthorized(false);
-            
-
-
-
-
-        }
-
-        [HttpPut("urgent")]
-        public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
-        {
-
-            if (GetDrugstoreProtocol(demand.PharmacyUrl))
-            {
-                if (drugPurchaseGrpc(demand))
-                {
-                    return Ok(true);
-                }
-                else
-                {
-                    return Ok(false);
-                }
-            }
-            else
-            {
                 var client = new RestClient(demand.PharmacyUrl);
                 var request = new RestRequest("/api/drugDemand/urgent", Method.POST);
 
@@ -108,10 +106,8 @@ namespace Integration_API.Controllers
 
                         return Ok(responseH.Content);
                     }
-
                 }
-                return Unauthorized(false);
-            }
+            return Unauthorized("You are not authorized for this action.");
 
         }
 
@@ -259,11 +255,11 @@ namespace Integration_API.Controllers
             {
                 return true;
             }
-            else
+            if (response.Message.Contains("unaut"))
             {
-                return false;
+                throw new UnauthorizedAccessException();
             }
-            //return true;
+            return false;
         }
 
         public bool drugPurchaseGrpc(DrugAmountDemandDto demand)
