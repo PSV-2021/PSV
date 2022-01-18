@@ -1,5 +1,6 @@
 using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
@@ -17,8 +18,12 @@ namespace Drugstore.Models
         public DbSet<ShoppingCart> Orders { get; set; }
         public DbSet<DrugTender> DrugTenders { get; set; }
         public DbSet<TenderOffer> TenderOffers { get; set; }
-
+        public DbSet<Event> DrugstoreEvents { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+
+        public MyDbContext()
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -82,6 +87,10 @@ namespace Drugstore.Models
                 new TenderOffer("7", "Brufen - 10, Palitreks - 80, Andol - 40", 10000, "1", false, 1, false),
                 new TenderOffer("4", "Brufen - 10, Palitreks - 50, Andol - 35", 2900, "4", false, 1, true)
 
+            );
+
+            modelBuilder.Entity<Event>().HasData(
+                new Event(1, "Klik", DateTime.Now)
             );
         }
     }
