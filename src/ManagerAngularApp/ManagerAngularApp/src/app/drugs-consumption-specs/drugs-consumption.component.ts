@@ -63,9 +63,8 @@ export class DrugsConsumptionComponent implements OnInit {
       alert("Report can't be generated for this date range. Please, pick a valid date range.");
     }
     else {
-      this.drugConsumptionSpecsService.GenerateReport(this.range.value.start, this.range.value.end).subscribe((d: any) =>{
-          alert("Your drug consumption report has been generated successfully !");
-    });
+      alert("Your drug consumption report has been generated successfully !");
+      this.drugConsumptionSpecsService.GenerateReport(this.range.value.start, this.range.value.end);
   }
   }
 
@@ -77,7 +76,7 @@ export class DrugsConsumptionComponent implements OnInit {
       }
       else
         return false;
-  }
+}
 
   public isDateRangeIncorrect(): boolean
   {
