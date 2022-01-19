@@ -39,6 +39,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './interceptor';
 import { AuthGuard } from './auth-guard';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { DialogComponent } from './dialog/dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     ReserveAppointmentStandardComponent,
     AppointmentsObserveComponent,
     RecommendAppointmentComponent,
-    HomePageComponent
+    HomePageComponent,
+    DialogComponent
 
 
   ],
@@ -83,7 +86,8 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     MatSnackBarModule,
     FormsModule,
     MatStepperModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatDialogModule
 
   ],
   schemas: [
@@ -96,5 +100,6 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
   ],
   bootstrap: [AppComponent],
+  entryComponents: [DialogComponent]
 })
 export class AppModule { }

@@ -1,7 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AppointmentObserveService } from '../appointment-observe.service';
+import { ReportService } from '../service/report.service';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { DialogComponent } from '../dialog/dialog.component';
 
 
 export interface Appointment {
@@ -15,14 +18,15 @@ export interface Appointment {
   
 })
 export class AppointmentsObserveComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'start time', 'description', 'doctor', 'status','survey','cancel'];
+  displayedColumns: string[] = ['id', 'start time', 'description', 'doctor', 'status','survey','cancel','report'];
   dataSource = [];
   surveys: any[] = []
   appointmentId: any;
   id: any = "";
+  report: any;
 
 
-  constructor(private observeAppointemntsService: AppointmentObserveService, private router: Router, private _snackBar: MatSnackBar) { }
+  constructor(private observeAppointemntsService: AppointmentObserveService, private observeReportService: ReportService, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   TakeSurvey($myParam: number = 0, $myParam1: number = 0): void {
     const navigationDetails: string[] = ['/survey'];
@@ -52,6 +56,32 @@ export class AppointmentsObserveComponent implements OnInit {
     this.dataSource = data;
   });
   }
- 
 
+  Report(element: { id: number }){
+    this.appointmentId = element.id;
+    
+    this.observeReportService.GetReport(this.appointmentId).subscribe((data: any)=>{
+      this.report = data;
+      console.log(this.report);
+    });
+
+
+    let dialogRef = this.dialog.open(DialogComponent, {
+      width: '350px',
+      data: {
+        id: this.report.id,
+        apointmentDescription: this.report.apointmentDescription,
+        patientId: this.report.patientId,
+        startTime: this.report.startTime
+      }
+    })
+  
+    dialogRef.afterClosed().subscribe(res => {
+      // received data from dialog-component
+      console.log(res.data)
+    })
+    
+  }
+ 
 }
+

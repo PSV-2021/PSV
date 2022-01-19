@@ -28,9 +28,9 @@ namespace HospitalAPI.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] string id)
         {
-            int idPatient = Int32.Parse(id);
-            List<Appointment> appointments = observeAppointmentsService.GetById(idPatient);
-            List<ReportDTO> report = ObserveAppointmentsService.ReportDTO(appointments);
+            int idAppointment = Int32.Parse(id);
+            Appointment appointments = observeAppointmentsService.GetById(idAppointment);
+            ReportDTO report = ObserveAppointmentsService.ReportDTO(appointments);
             return Ok(report);
         }
     }

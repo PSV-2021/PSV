@@ -40,29 +40,24 @@ namespace Hospital.Schedule.Service
         }
 
         //ObserveReport
-        public List<Appointment> GetById(int id)
+        public Appointment GetById(int id)
         {
-            List<Appointment> appointments = ObserveAppointmentsSqlRepository.GetById(id);
-            return appointments;
+            Appointment appointment = ObserveAppointmentsSqlRepository.GetByAppointmentId(id);
+            return appointment;
         }
 
-        public static List<ReportDTO> ReportDTO(List<Appointment> appointments)
+        public static ReportDTO ReportDTO(Appointment appointment)
         {
-            List<ReportDTO> reportDTO = new List<ReportDTO>();
-
-            foreach (Appointment appointment in appointments)
+            ReportDTO dto = new ReportDTO
             {
-                ReportDTO dto = new ReportDTO
-                {
-                    Id = appointment.Id,
-                    StartTime = appointment.StartTime,
-                    ApointmentDescription = appointment.ApointmentDescription,
-                    DoctorId = appointment.DoctorId,
-                    PatientId = appointment.PatientId
-                };
-                reportDTO.Add(dto);
-            }
-            return reportDTO;
+                 Id = appointment.Id,
+                 StartTime = appointment.StartTime,
+                 ApointmentDescription = appointment.ApointmentDescription,
+                 DoctorId = appointment.DoctorId,
+                 PatientId = appointment.PatientId
+            };
+
+            return dto;
         }
     }
 }
