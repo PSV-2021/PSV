@@ -229,7 +229,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2022, 1, 9, 15, 20, 2, 685, DateTimeKind.Local).AddTicks(6881),
+                            IssuedTime = new DateTime(2022, 1, 19, 12, 3, 51, 169, DateTimeKind.Local).AddTicks(3272),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -405,7 +405,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2022, 1, 9, 15, 20, 2, 640, DateTimeKind.Local).AddTicks(8199),
+                            TimeWritten = new DateTime(2022, 1, 19, 12, 3, 51, 135, DateTimeKind.Local).AddTicks(5919),
                             canPublish = false
                         },
                         new
@@ -413,7 +413,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2022, 1, 9, 15, 20, 2, 659, DateTimeKind.Local).AddTicks(2349),
+                            TimeWritten = new DateTime(2022, 1, 19, 12, 3, 51, 148, DateTimeKind.Local).AddTicks(7618),
                             canPublish = true
                         },
                         new
@@ -421,7 +421,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2022, 1, 9, 15, 20, 2, 659, DateTimeKind.Local).AddTicks(2576),
+                            TimeWritten = new DateTime(2022, 1, 19, 12, 3, 51, 148, DateTimeKind.Local).AddTicks(7851),
                             canPublish = true
                         });
                 });
@@ -530,6 +530,9 @@ namespace Hospital.Migrations
                     b.Property<int>("SurveyId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("SurveyId1")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("canCancel")
                         .HasColumnType("boolean");
 
@@ -537,6 +540,12 @@ namespace Hospital.Migrations
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("SurveyId1");
 
                     b.ToTable("Appointments");
 
@@ -588,10 +597,10 @@ namespace Hospital.Migrations
                             DurationInMunutes = 30,
                             IsDeleted = false,
                             PatientId = 2,
-                            StartTime = new DateTime(2021, 11, 15, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartTime = new DateTime(2022, 1, 30, 14, 0, 0, 0, DateTimeKind.Unspecified),
                             SurveyId = 0,
                             canCancel = true,
-                            isCancelled = true
+                            isCancelled = false
                         });
                 });
 
@@ -720,7 +729,7 @@ namespace Hospital.Migrations
                             Sex = 0,
                             SpecialityId = 1,
                             Surname = "Popovic",
-                            Type = 2,
+                            Type = 3,
                             Username = "miki56"
                         },
                         new
@@ -738,7 +747,7 @@ namespace Hospital.Migrations
                             Sex = 1,
                             SpecialityId = 2,
                             Surname = "Milic",
-                            Type = 2,
+                            Type = 3,
                             Username = "mica56"
                         });
                 });
@@ -817,6 +826,31 @@ namespace Hospital.Migrations
                         });
 
                     b.Navigation("MedicalRecord");
+                });
+
+            modelBuilder.Entity("Hospital.Schedule.Model.Appointment", b =>
+                {
+                    b.HasOne("Hospital.SharedModel.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Hospital.MedicalRecords.Model.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Hospital.MedicalRecords.Model.Survey", "Survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyId1");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Survey");
                 });
 
             modelBuilder.Entity("Hospital.MedicalRecords.Model.Patient", b =>
