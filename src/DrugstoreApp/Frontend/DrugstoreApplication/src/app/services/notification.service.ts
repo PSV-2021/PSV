@@ -1,4 +1,4 @@
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,21 @@ export class NotificationService {
     }
 
     GetNotifications(): Observable<NotificationDto> {
-        return this.http.get<any>(this.url + '/notifications/');
+        return this.http.get<any>(this.url + '/notification');
     }
+    RemoveNotification(notification: NotificationDto): any{
+        const body = {
+          id : notification.id,
+          posted : notification.date,
+          title: notification.title,
+          content: notification.content,
+          recipients: notification.recipients
+        };
+        let headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'ApiKey': "DrugStoreSecretKey" });
+        let options = { headers: headers };
+        const ret = this.http.post<any>(this.url + "/notification/remove", body, options);
+        return ret;
+      }
 }

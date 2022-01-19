@@ -16,20 +16,28 @@ export class NotificationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.notificationService.GetNotifications().subscribe((data: any) => {
-    //   for (const d of (data as any)) {
-    //     this.notifications.push({
-    //       "title": d.title,
-    //       "content": d.content,
-    //       "date": d.date
-          
-    //     });
-    //   }
-    // });
-    this.notifications.push(new NotificationDto("notification1", "content 1", new Date(2022, 1, 18)));
-    this.notifications.push(new NotificationDto("notification2", "content 2", new Date(2022, 1, 18)));
-    this.notifications.push(new NotificationDto("notification3", "content 3", new Date(2022, 1, 18)));
-
+    this.notificationService.GetNotifications().subscribe((data: any) => {
+      for (const d of (data as any)) {
+        this.notifications.push({
+          "id": d.id,
+          "title": d.title,
+          "content": d.content,
+          "date": d.posted,
+          "recipients": d.recipients
+        });
+      }
+    });
+    
+  }
+  removeNotification(notification: NotificationDto){
+    alert("You are about to delete notification. Proceed?");
+    for (var i = 0; i < this.notifications.length; i++) {
+      if (this.notifications[i].id === notification.id) {
+        this.notifications.splice(i,1)
+        i--;
+      }
+    }
+    this.notificationService.RemoveNotification(notification).subscribe((d: any) =>{});
   }
 
 }
