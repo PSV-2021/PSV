@@ -63,5 +63,11 @@ namespace Integration.Repository.Sql
             dbContext.DrugstoreFeedbacks.Update(editedObject);
             dbContext.SaveChanges();
         }
+
+        public void SaveNewFeedback(DrugstoreFeedback feedback)
+        {
+            dbContext.DrugstoreFeedbacks.Add(feedback);
+            dbContext.SaveChanges();
+        }
     }
 }

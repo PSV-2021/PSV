@@ -30,6 +30,11 @@ namespace Integration.Service
            return Guid.NewGuid().ToString();
         }
 
+        public void SaveNewFeedback(DrugstoreFeedback newFeedback)
+        {
+            DrugstoreFeedbackRepository.SaveNewFeedback(newFeedback);
+        }
+
         public bool CheckApiKey(string apiKey)
         {
             Drugstore drugstore = DrugstoreRepository.GetAll().Where(drugstore => drugstore.IsApiKeyEqual(apiKey)).FirstOrDefault();
@@ -38,5 +43,9 @@ namespace Integration.Service
             return true;
         }
 
+        public List<DrugstoreFeedback> GetAll()
+        {
+            return DrugstoreFeedbackRepository.GetAll();
+        }
     }
 }

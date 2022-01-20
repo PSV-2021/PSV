@@ -54,6 +54,12 @@ export class ReviewComponent implements OnInit {
           "ReviewResponse": d.response,
         });
       }
+    },
+    error => {
+      if(error.error)
+      this.toastr.error(error.error, 'Sorry');
+      else
+      this.toastr.error(error, 'Sorry');
     });
   }
 
@@ -64,6 +70,11 @@ export class ReviewComponent implements OnInit {
         "ReviewContent": d.content,
         "ReviewResponse": d.response,
       });
+    }, error => {
+      if(error.error)
+      this.toastr.error(error.error, 'Sorry');
+      else
+      this.toastr.error(error, 'Sorry');
     });
   }
 
