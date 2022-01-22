@@ -42,7 +42,7 @@ namespace Hospital.Schedule.Service
         //ObserveReport
         public Appointment GetById(int id)
         {
-            Appointment appointment = ObserveAppointmentsSqlRepository.GetByAppointmentId(id);
+            Appointment appointment = AppointmentRepository.GetByAppointmentId(id);
             return appointment;
         }
 
