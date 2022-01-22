@@ -24,6 +24,8 @@ export class AppointmentsObserveComponent implements OnInit {
   appointmentId: any;
   id: any = "";
   report: any;
+  reportPatient: any;
+  patientName: any = "";
 
 
   constructor(private observeAppointemntsService: AppointmentObserveService, private observeReportService: ReportService, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
@@ -54,32 +56,37 @@ export class AppointmentsObserveComponent implements OnInit {
     this.observeAppointemntsService.GetAppointments(this.id).subscribe((data: any)=>{
       console.log(data);
     this.dataSource = data;
+    this.reportPatient = data;
+
+    for (var value of this.reportPatient) {
+      if(value.patientId == this.id){
+        this.patientName = value.patientName;
+      }
+    }
+
   });
   }
 
-  Report(element: { id: number }){
+  Report(element: { id: number, doctorName: string }){
     this.appointmentId = element.id;
     
     this.observeReportService.GetReport(this.appointmentId).subscribe((data: any)=>{
       this.report = data;
-      console.log(this.report);
-    });
 
-
-    let dialogRef = this.dialog.open(DialogComponent, {
-      width: '350px',
-      data: {
-        id: this.report.id,
-        apointmentDescription: this.report.apointmentDescription,
-        patientId: this.report.patientId,
-        startTime: this.report.startTime
+      if(this.report.id == this.appointmentId){
+        let dialogRef = this.dialog.open(DialogComponent, {
+          width: '550px',
+          data: {
+            doctorName: element.doctorName,
+            apointmentDescription: this.report.apointmentDescription,
+            patientId: this.report.patientId,
+            startTime: this.report.startTime,
+            patientName: this.patientName
+          }
+        })
       }
-    })
-  
-    dialogRef.afterClosed().subscribe(res => {
-      // received data from dialog-component
-      console.log(res.data)
-    })
+
+    });
     
   }
  

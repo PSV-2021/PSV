@@ -1,12 +1,14 @@
 <h2 mat-dialog-title>Izvestaj</h2>
 
-<mat-dialog-content>Doktor: Milan Popovic</mat-dialog-content>
+<mat-dialog-content><b>Doktor:</b> {{data.doctorName }}</mat-dialog-content>
 <br>
-<mat-dialog-content>Pacijent: Milica Mikic</mat-dialog-content>
+<mat-dialog-content><b>Pacijent:</b> {{data.patientName }}</mat-dialog-content>
 <br>
-<mat-dialog-content>Vreme pregleda: 12/31/21, 4:30</mat-dialog-content>
+<mat-dialog-content><b>Pacijentov id:</b> {{data.patientId }}</mat-dialog-content>
 <br>
-<mat-dialog-content>Opis: All good!</mat-dialog-content>
+<mat-dialog-content><b>Vreme pregleda:</b> {{data.startTime | date: 'short'}}</mat-dialog-content>
+<br>
+<mat-dialog-content><b>Opis:</b> {{data.apointmentDescription }}</mat-dialog-content>
 
 <mat-dialog-actions>
     <button class="mat-raised-button"(click)="close()">Zatvori</button>

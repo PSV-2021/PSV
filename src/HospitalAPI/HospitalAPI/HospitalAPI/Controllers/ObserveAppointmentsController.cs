@@ -2,6 +2,7 @@
 using Hospital.Schedule.Repository;
 using Hospital.Schedule.Service;
 using Hospital.SharedModel;
+using HospitalAPI.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace HospitalAPI.Controllers
             observeAppointmentsService = new ObserveAppointmentsService(new ObserveAppointmentsSqlRepository(context));
         }
 
-
+        [AuthAttributePatient("Get", "patient")]
         [HttpGet]
         public IActionResult Get([FromQuery]string id)
         {
