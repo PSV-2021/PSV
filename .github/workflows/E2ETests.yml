@@ -16,7 +16,7 @@ jobs:
           debug: true
           command: |
             echo "Connection successful!"
-            docker kill $(docker ps -q)
+            
             git pull origin fix-integration-testing
             cd PSV/src
             cd config/testing
