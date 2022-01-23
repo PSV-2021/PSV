@@ -17,7 +17,8 @@ jobs:
           command: |
             echo "Connection successful!"
             docker kill $(docker ps -q)
-            cd PSV
+            git pull origin fix-integration-testing
+            cd PSV/src
             cd config/testing
             docker-compose -f e2e-hospital-docker-compose.yml up --exit-code-from integration-e2e-test
             
