@@ -1,7 +1,7 @@
 name: Integration tests drugstore
 on:
   pull_request: 
-    branches: [ development ]
+    branches: [ development, fix-integration-e2e-test ]
 jobs:
   build:
     runs-on: ubuntu-latest
