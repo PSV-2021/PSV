@@ -121,8 +121,7 @@ services:
           DBPassword: 123
       entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
       depends_on:
-        drugstore_api:
-          condition: service_healthy
+        - drugstore_api
   hospital_test:
     build:
       context: ../..
@@ -134,8 +133,7 @@ services:
         DBPassword: 123
     entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
     depends_on:
-      hospital_api:
-        condition: service_healthy
+      - hospital_api
   integration_test:
     build:
       context: ../../IntegrationApp
@@ -147,7 +145,6 @@ services:
         DBPassword: 123
     entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
     depends_on:
-      integration_api:
-        condition: service_healthy      
+      - integration_api     
   
       
