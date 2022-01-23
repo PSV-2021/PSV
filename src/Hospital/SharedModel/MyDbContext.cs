@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Hospital.MedicalRecords.Model;
 using Hospital.Medicines.Model;
+using Hospital.PatientEvent.Model;
 using Hospital.Schedule.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -24,6 +25,8 @@ namespace Hospital.SharedModel
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<Event> PatientEvents { get; set; }
+
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 

@@ -1,4 +1,5 @@
 using Grpc.Core;
+using Hospital.PatientEvent.Model;
 using Hospital.SharedModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;

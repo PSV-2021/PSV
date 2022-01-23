@@ -14,7 +14,7 @@ namespace Drugstore.Models
         public String SideEffects { get; set; }
         public String Reactions { get; set; }
         public String Usage { get; set; }
-        public List<Medicine> CompatibleMedicines { get; set; }
+        public virtual List<Medicine> CompatibleMedicines { get; set; }
         public Double Weight { get; set; }
         public String Precautions { get; set; }
         public String MedicineImage { get; set; }
