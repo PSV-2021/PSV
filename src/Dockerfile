@@ -1,7 +1,10 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build-env
 WORKDIR /src
 COPY Hospital/*.csproj ./Hospital/
-COPY HospitalAPI/ ./HospitalAPI/
+COPY HospitalAPI/HospitalAPI/HospitalAPI.sln ./HospitalAPI/HospitalAPI/
+COPY HospitalAPI/HospitalAPI/HospitalAPI/*.csproj ./HospitalAPI/HospitalAPI/HospitalAPI/
+COPY HospitalAPI/HospitalAPI/HospitalApiTests/*.csproj ./HospitalAPI/HospitalAPI/HospitalApiTests/
+COPY HospitalAPI/HospitalAPI/SeleniumTests/*.csproj ./HospitalAPI/HospitalAPI/SeleniumTests/
 
 RUN dotnet restore HospitalAPI/HospitalAPI
 COPY . ./
