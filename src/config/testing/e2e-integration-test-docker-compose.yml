@@ -33,26 +33,18 @@ services:
       - /upload/HospitalFiles:/home/user/upload/HospitalFiles
     command: user:password:1001
 
-  hospital_api:
-     depends_on:
-       - postgres-server-hospital
-     image: aco99/hospital_api
-     environment:
-       DBServer: postgres-server-hospital
-       DBPort: 5432
-       DBUser: postgres
-       DBPassword: 123
-       DB: hospital
-     restart: always
-     ports:
-       - "8081:80"
-
   integration_api:
     depends_on:
       - sftp-server
       - message-broker   
-      - hospital_api
+    #build: ../../IntegrationApp/
     image: aco99/integration_api
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost/","||","exit","1"]
+      interval: 15s
+      timeout: 30s
+      retries: 5
+      start_period: 15s
     environment:
       DBServer: postgres-server-hospital
       DBPort: 5432
@@ -70,57 +62,75 @@ services:
     restart: always
     ports:
       - "8083:80"  
-  
+
   drugstore_api:
     depends_on:  
       - postgres-server-drugstore
       - message-broker
       - sftp-server
-    #build: ../DrugstoreApp/Backend/DrugstoreAPI
+    #build: ../../DrugstoreApp/Backend/DrugstoreAPI
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost/","||","exit","1"]
+      interval: 15s
+      timeout: 30s
+      retries: 15
+      start_period: 15s
     image: aco99/drugstore_api
     environment:
       SFTP_IP: sftp-server
       SFTP_USERNAME: user
       SFTP_PASSWORD: password
       DBServer: postgres-server-drugstore
+      RABBIT_HOST: message-broker
       DBUser: postgres
       DBPassword: 123
       DB: drugstore
     restart: always
     ports:
       - "8082:80" 
-  drugstore_test:
-      build:
-        context: ../../DrugstoreApp/Backend/DrugstoreAPI
-        dockerfile: IntegrationTestDockerfile
-        args:
-          DBServer: postgres-server-drugstore
-          DBTest: drugstore
-          DBPassword: 123
-      entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
-      depends_on:
-        - drugstore_api
-  hospital_test:
-    build:
-      context: ../..
-      dockerfile: IntegrationTestHospital.Dockerfile
-      args:
-        DBServer: postgres-server-hospital
-        DBTest: hospital
-        DBPassword: 123
-    entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
+
+  manager_client:
+   build: ../../ManagerAngularApp/ManagerAngularApp
+   image: aco99/manager_client
+   ports:
+    - "4203:80"
+  
+  selenium-hub:
+    image: selenium/hub:4.1.1-20211217
+    container_name: selenium-hub
+    ports: 
+      - "4444:4444"
+      - "4443:4443"
+      - "4442:4442"
+ 
+  chrome:
     depends_on:
-      - hospital_api
-  integration_test:
+      - selenium-hub
+    image: selenium/node-chrome:4.1.1-20211217
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      
+  integration-e2e-test:
+    environment:
+      MF_HOST: "http://manager_client"
     build:
       context: ../../IntegrationApp
-      dockerfile: IntegrationTest.Dockerfile
-      args:
-        DBServer: postgres-server-hospital
-        DBTest: hospital
-        DBPassword: 123
-    entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
+      dockerfile: E2E.Dockerfile
+      args: 
+        MF_HOST: "http://manager_client"
+    entrypoint: dotnet 
+    restart: always
     depends_on:
-      - integration_api      
+      integration_api:
+        condition: service_healthy
+      manager_client:
+        condition: service_started
+      chrome:
+        condition: service_started
+    links:
+      - chrome
+
   
       

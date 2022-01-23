@@ -5,7 +5,6 @@ on:
     
 jobs:
   build:
-  
     runs-on: ubuntu-latest
     steps:
       - name: Execute SSH commmands on remote server
@@ -21,6 +20,6 @@ jobs:
             cd PSV
             git checkout development
             git pull origin development
-            cd src/config/integration_testing
-            docker-compose -f integration-test-docker-compose.yml build
+            cd config/testing
+            docker-compose -f e2e-integration-test-docker-compose.yml up --exit-code-from integration-e2e-test
             
