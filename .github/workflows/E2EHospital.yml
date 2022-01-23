@@ -1,7 +1,7 @@
 name: Hospital E2E Testing
 on:
   push:
-    branches: [ development, fix-integration-e2e-test ]
+    branches: [ development, fix-integration-testing ]
     
 jobs:
   build:
