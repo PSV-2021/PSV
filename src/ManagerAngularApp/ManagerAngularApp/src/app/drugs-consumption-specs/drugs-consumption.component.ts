@@ -3,8 +3,6 @@ import { PharmacyDto } from '../review/pharmacy.dto';
 import { DrugConsumptionSpecsService } from '../services/drug consumption specs.service';
 import { FormControl, FormGroup} from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs/operators';
-import { FilesComponent } from '../files/files.component';
 
 
 @Component({
@@ -43,6 +41,12 @@ export class DrugsConsumptionComponent implements OnInit {
       }
       this.range.value.start = null;
       this.range.value.end = null;
+    },
+    error => {
+      if(error.error)
+        this.toastr.error(error.error, 'Sorry');
+      else
+        this.toastr.error(error, 'Sorry');
     });
   }
 
@@ -63,9 +67,16 @@ export class DrugsConsumptionComponent implements OnInit {
       alert("Report can't be generated for this date range. Please, pick a valid date range.");
     }
     else {
-      alert("Your drug consumption report has been generated successfully !");
-      this.drugConsumptionSpecsService.GenerateReport(this.range.value.start, this.range.value.end);
-  }
+      this.drugConsumptionSpecsService.GenerateReport(this.range.value.start, this.range.value.end).subscribe((d: any) => {
+        alert("Your drug consumption report has been generated successfully !");
+      },
+      error => {
+        if(error.error)
+          this.toastr.error(error.error, 'Sorry');
+        else
+          this.toastr.error(error, 'Sorry');
+      });
+    }
   }
 
   public checkNulls(): boolean

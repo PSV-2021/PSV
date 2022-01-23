@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DrugstoreOfferDto } from './drugstore-offer.dto';
 import { DrugStoreOffersService } from '../services/drugstore-offer.service';
 import { PublishedDrugstoreOfferDto } from './published-drugstore-offer.dto';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-drugstore-offers',
   templateUrl: './drugstore-offer.component.html',
@@ -11,7 +12,7 @@ export class DrugstoreOfferComponent implements OnInit {
  public drugstoreOffers : DrugstoreOfferDto[];
  public publishedDrugstoreOffer: PublishedDrugstoreOfferDto;
 
-  constructor(private drugStoreOffersService : DrugStoreOffersService) { 
+  constructor(private drugStoreOffersService : DrugStoreOffersService, private toastr: ToastrService) { 
   this.drugstoreOffers = [] as DrugstoreOfferDto[];
   this.publishedDrugstoreOffer = new PublishedDrugstoreOfferDto;
   }
@@ -29,6 +30,12 @@ export class DrugstoreOfferComponent implements OnInit {
           "IsPublished" : ds.isPublished,
         });
       }
+    },
+    error => {
+      if(error.error)
+        this.toastr.error(error.error, 'Sorry');
+      else
+        this.toastr.error(error, 'Sorry');
     });
   }
   reloadPage() {

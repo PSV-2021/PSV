@@ -76,7 +76,7 @@ namespace Integration_API.Controllers
                     return Ok(false);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NotFound("Drugstore server not available!");
             }
@@ -116,9 +116,6 @@ namespace Integration_API.Controllers
         {
             int isOk = 0;
             List<DrugTenderDto> retInfo = this.getDrugToSell(this.DemandToString(demand.TenderInfo));
-            int check = retInfo.Count();
-            
-
             foreach (DrugTenderDto d in retInfo)
             {
                 

@@ -1,6 +1,6 @@
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { PublishedDrugstoreOfferDto } from '../drugstore-offer/published-drugstore-offer.dto';
 import { environment } from 'src/environments/environment';
 
@@ -16,8 +16,8 @@ export class DrugStoreOffersService {
     GetAllOffers(): Observable<any> {
         return this.http.get<any>(this.url + '/drugstoreoffer');
       }
+
     publishOffer(offer : PublishedDrugstoreOfferDto): any{
-      
       const body = {
         OfferId : offer.Id,
       };
@@ -26,9 +26,10 @@ export class DrugStoreOffersService {
         'ApiKey': "abcde" });
       let options = { headers: headers };
       
-      const ret = this.http.post<any>(this.url + '/drugstoreoffer/pls', body, options);
-      console.log(ret);
-      return ret;
-      
+      return this.http.post<any>(this.url + '/drugstoreoffer/pls', body, options);
     }
+
+    errorHandler(error: HttpErrorResponse) {
+      return throwError(error.error);
     }
+  }

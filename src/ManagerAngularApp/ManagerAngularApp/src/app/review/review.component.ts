@@ -47,7 +47,6 @@ export class ReviewComponent implements OnInit {
 
     this.reviewService.GetAllReviews().subscribe((data: any) => {
       for (const d of (data as any)) {
-        console.log(d);
         this.reviews.push({
           "DrugstoreName": d.drugstoreName,
           "ReviewContent": d.content,

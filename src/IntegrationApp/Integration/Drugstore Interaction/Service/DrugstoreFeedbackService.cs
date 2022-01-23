@@ -16,8 +16,8 @@ namespace Integration.Service
 
         public DrugstoreFeedbackService(MyDbContext dbContext)
         {
-            DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository(dbContext);
             DrugstoreRepository = new DrugstoreSqlRepository(dbContext);
+            DrugstoreFeedbackRepository = new DrugstoreFeedbackSqlRepository(dbContext);
         }
 
         public DrugstoreFeedbackService()

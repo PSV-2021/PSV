@@ -22,9 +22,8 @@ namespace Integration_API.Controllers
     {
         private readonly MyDbContext dbContext;
         public DrugsConsumptionReportService drugsConsumptionService;
-        //public DrugsConsumedRepositoryDummy repoDrugsConsumed = new DrugsConsumedRepositoryDummy();
 
-        public DrugsConsumptionReportController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
+        public DrugsConsumptionReportController(MyDbContext db)
         {
             this.dbContext = db;
             drugsConsumptionService = new DrugsConsumptionReportService(db);
@@ -33,19 +32,15 @@ namespace Integration_API.Controllers
         [HttpPost] // POST /api/DrugsConsumptionReportController
         public IActionResult Post(DateRange range)
         {
-            Console.WriteLine(range.ConvertDateFromAngular().From);
-            Console.WriteLine(range.ConvertDateFromAngular().To);
-            drugsConsumptionService.SaveDrugsConsumptionReport(range.ConvertDateFromAngular());
-            return Ok(true);
+            try
+            {
+                drugsConsumptionService.SaveDrugsConsumptionReport(range.ConvertDateFromAngular());
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
-        
-        /*
-        private DateRange ConvertDateFromAngular(DateRange range)
-        {
-            range.From = range.From.AddHours(1);
-            range.To = range.To.AddHours(1);
-            return range;
-        }
-        */
     }
 }
