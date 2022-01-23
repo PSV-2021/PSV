@@ -19,8 +19,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(): void{
-    if (this.validate() == true){
-      console.log(this.newDrugstore);
+    if (this.validate()){
       this.sendRegistration();
       alert("Uspesno ste registrovali novu apoteku !");
     }
@@ -31,7 +30,7 @@ export class RegistrationComponent implements OnInit {
 validate() : boolean{
   if (
     this.newDrugstore.Address == "" || this.newDrugstore.DrugstoreName == "" ||
-    this.newDrugstore.Email == "" || this.newDrugstore.URLAddress == "" || this.newDrugstore.Address == ""
+    this.newDrugstore.Email == "" || this.newDrugstore.URLAddress == "" || this.newDrugstore.City == ""
   )
     return false;
   else 
