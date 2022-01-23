@@ -31,9 +31,7 @@ namespace Integration.Repository.Sql
 
         public List<DrugstoreFeedback> GetAll()
         {
-            List<DrugstoreFeedback> result = new List<DrugstoreFeedback>();
-            result = dbContext.DrugstoreFeedbacks.ToList();
-            return result;
+            return dbContext.DrugstoreFeedbacks.ToList();
         }
 
         public DrugstoreFeedback GetOne(string id)

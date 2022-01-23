@@ -24,7 +24,6 @@ namespace Integration_API.Controllers
         public DrugstoreService drugstoreService = new DrugstoreService();
         public DrugstoreFeedbackService drugstoreFeedbackService = new DrugstoreFeedbackService();
         public DrugstoreFeedbackSqlRepository repoFeedback = new DrugstoreFeedbackSqlRepository();
-        public DrugstoreSqlRepository repoDrugstores = new DrugstoreSqlRepository();
 
         public DrugstoreFeedbackController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
         {
@@ -38,7 +37,7 @@ namespace Integration_API.Controllers
         {
             try
             {
-                var result = drugstoreFeedbackService.GetAll().Join(repoDrugstores.GetAll(), f => f.DrugstoreId,
+                var result = drugstoreFeedbackService.GetAll().Join(drugstoreService.GetAll(), f => f.DrugstoreId,
                     d => d.Id,
                     (df, d) =>
                         new

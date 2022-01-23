@@ -36,13 +36,20 @@ namespace Integration_API.Controllers
         [Route("pdf/{fileName?}")]
         public IActionResult GetSpec(string fileName)
         {
-            if (fileName == null)
-                return BadRequest();
-            var localFile = FormatDrugsSpecificationsPath() + fileName;
-            Stream stream = System.IO.File.OpenRead(localFile);
+            try
+            {
+                if (fileName == null)
+                    return BadRequest();
+                var localFile = FormatDrugsSpecificationsPath() + fileName;
+                Stream stream = System.IO.File.OpenRead(localFile);
 
-            var binaryFile = ReadFile(stream);
-            return File(binaryFile, "application/pdf");
+                var binaryFile = ReadFile(stream);
+                return File(binaryFile, "application/pdf");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
         private static byte[] ReadFile(Stream input)
@@ -62,15 +69,29 @@ namespace Integration_API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(drugSpecificationService.GetFiles());
+            try
+            {
+                return Ok(drugSpecificationService.GetFiles());
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
         [HttpGet("files")]
         public IActionResult GetRefreshedFiles([FromQuery] string filename)
         {
-            if (drugSpecificationService.DownloadDrugSpecification(filename))
-                return Ok(true);
-            return Ok(false);
+            try
+            {
+                if (drugSpecificationService.DownloadDrugSpecification(filename))
+                    return Ok(true);
+                return Ok(false);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
         [HttpPut]

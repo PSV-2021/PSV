@@ -7,6 +7,7 @@ import { ChartService } from '../services/chart.service';
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
 import jsPDF from 'jspdf';
 import { debounceTime } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-charts',
@@ -27,7 +28,7 @@ export class ChartsComponent implements OnInit {
         end: new FormControl(),
       });
     
-  constructor(private chartService: ChartService) {
+  constructor(private chartService: ChartService, private toastr: ToastrService) {
       this.chartInfo = [];
       this.chartNames = [];
       this.chartWins = [];
@@ -282,6 +283,12 @@ export class ChartsComponent implements OnInit {
           });
         }
         console.log(this.chartInfo);
+      },
+      error => {
+        if(error.error)
+          this.toastr.error(error.error, 'Sorry');
+        else
+          this.toastr.error(error, 'Sorry');
       });
   }
 }

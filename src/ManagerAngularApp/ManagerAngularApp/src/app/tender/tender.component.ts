@@ -38,9 +38,13 @@ export class TenderComponent implements OnInit {
           "tenderEnd": p.tenderEnd,
           "tenderInfo": p.tenderInfo
         });
-      }
-      console.log(this.ongoingTenders);
-      
+      }  
+    },
+    error => {
+      if(error.error)
+        this.toastr.error(error.error, 'Sorry');
+      else
+        this.toastr.error(error, 'Sorry');
     });
   }
 
@@ -101,6 +105,12 @@ export class TenderComponent implements OnInit {
     if (this.isTenderValid()) {
       this.tenderService.SaveTender(this.tenderEnd, this.tenderItems).subscribe((d: any) =>{
       this.toastr.success('Tender has been added successfully !', 'Tender');
+      },
+      error => {
+        if(error.error)
+          this.toastr.error(error.error, 'Sorry');
+        else
+          this.toastr.error(error, 'Sorry');
       })
     }
     else 
