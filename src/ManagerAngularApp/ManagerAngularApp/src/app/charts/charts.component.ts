@@ -63,6 +63,7 @@ export class ChartsComponent implements OnInit {
       this.makeParticipationsChart();
   }, 500);
     }
+    alert("Your drugstore tender chart has been updated successfully !");
   }
 
   public generateReport(): void{
