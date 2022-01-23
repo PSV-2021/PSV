@@ -19,5 +19,5 @@ jobs:
             cd PSV
             git pull origin fix-integration-testing
             cd src/config/testing
-            docker-compose -f e2e-hospital-docker-compose.yml up --exit-code-from integration-e2e-test
+            docker-compose -f e2e-hospital-docker-compose.yml up --exit-code-from e2e-test
             
