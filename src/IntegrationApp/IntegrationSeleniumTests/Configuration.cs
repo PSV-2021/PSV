@@ -26,6 +26,11 @@ namespace IntegrationSeleniumTests
             get => Host + "/drugs-consumption";
         }
 
+        public static string TendersPageUrl
+        {
+            get => Host + "/tender";
+        }
+
 
     }
 }

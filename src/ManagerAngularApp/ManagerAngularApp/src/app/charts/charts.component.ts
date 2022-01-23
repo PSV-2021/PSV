@@ -56,15 +56,16 @@ export class ChartsComponent implements OnInit {
       this.getChartInfo();
       setTimeout(() => {
         this.formatChartInfo();
-    }, 50);
-    setTimeout(() => {
-      this.formatChartInfo();
-      this.makeWinsChart();
-      this.makeProfitChart();
-      this.makeParticipationsChart();
-  }, 500);
+      }, 50);
+      setTimeout(() => {
+        this.formatChartInfo();
+        this.makeWinsChart();
+        this.makeProfitChart();
+        this.makeParticipationsChart();
+      }, 500);
+      alert("Your drugstore tender chart has been updated successfully !");
     }
-    alert("Your drugstore tender chart has been updated successfully !");
+    
   }
 
   public generateReport(): void{
