@@ -41,4 +41,10 @@ export class NotificationsComponent implements OnInit {
     this.notificationService.RemoveNotification(notification).subscribe((d: any) =>{});
   }
 
+  RefreshNotifications() {
+    this.notificationService.RefreshNotifications().subscribe((data: any) => {
+      window.location.reload();
+    });    
+  }
+  
 }

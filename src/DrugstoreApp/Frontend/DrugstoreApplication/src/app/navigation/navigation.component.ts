@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationDto } from '../notifications/notification.dto';
 import { NotificationService } from '../services/notification.service';
-import { RegistrationService } from '../services/registration.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -30,13 +29,10 @@ export class NavigationComponent implements OnInit {
         });
       }
       this.getUnreadAmount()
-      setTimeout(() => {
-        this.RefreshNotifications();
-      }, 500);
     });    
   }
 
-  getUnreadAmount() {
+  getUnreadAmount(){
     for (var i = 0; i < this.notifications.length; i++) {
       if (this.notifications[i].isRead === false)
         this.numberIndicator++;
@@ -44,8 +40,10 @@ export class NavigationComponent implements OnInit {
   }
 
   RefreshNotifications() {
-    this.notificationService.RefreshNotifications().subscribe((data: any) => {
+    this.getUnreadAmount();
+    if (this.numberIndicator == 0)
+      this.notificationService.RefreshNotifications().subscribe((data: any) => {
     });    
   }
-  
+
 }

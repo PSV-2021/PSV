@@ -59,6 +59,12 @@ export class DrugsConsumptionComponent implements OnInit {
       }else if(!d){
         alert("Drugstore doesn't have requested drug specification for that drug.");
       }
+    },
+    error => {
+      if(error.error)
+        this.toastr.error(error.error, 'Sorry');
+      else
+        this.toastr.error(error, 'Sorry');
     });
   }
 

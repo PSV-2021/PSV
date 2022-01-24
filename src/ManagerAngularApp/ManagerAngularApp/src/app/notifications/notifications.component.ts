@@ -42,6 +42,7 @@ export class NotificationsComponent implements OnInit {
 
   RefreshNotifications() {
     this.notificationService.RefreshNotifications().subscribe((data: any) => {
+      window.location.reload();
     });    
   }
 }

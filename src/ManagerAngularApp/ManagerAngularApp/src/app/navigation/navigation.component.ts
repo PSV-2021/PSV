@@ -39,7 +39,7 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(['/landingPage']);
   }
 
-  getUnreadAmount() {
+  getUnreadAmount(){
     for (var i = 0; i < this.notifications.length; i++) {
       if (this.notifications[i].isRead === false)
         this.numberIndicator++;
@@ -47,7 +47,9 @@ export class NavigationComponent implements OnInit {
   }
 
   RefreshNotifications() {
-    this.notificationService.RefreshNotifications().subscribe((data: any) => {
+    this.getUnreadAmount();
+    if (this.numberIndicator == 0)
+      this.notificationService.RefreshNotifications().subscribe((data: any) => {
     });    
   }
 
