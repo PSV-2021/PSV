@@ -20,14 +20,14 @@ export class NotificationsComponent implements OnInit {
       for (const d of (data as any)) {
         this.notifications.push({
           "id": d.id,
+          "drugstoreName": d.drugstoreName,
           "title": d.title,
           "content": d.content,
           "date": d.posted,
-          "recipients": d.recipients
+          "isRead":d.isRead
         });
       }
-    });
-    
+    });    
   }
   removeNotification(notification: NotificationDto){
     alert("You are about to delete notification. Proceed?");
@@ -40,4 +40,8 @@ export class NotificationsComponent implements OnInit {
     this.notificationService.RemoveNotification(notification).subscribe((d: any) =>{});
   }
 
+  RefreshNotifications() {
+    this.notificationService.RefreshNotifications().subscribe((data: any) => {
+    });    
+  }
 }

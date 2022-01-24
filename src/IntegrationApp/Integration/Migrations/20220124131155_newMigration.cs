@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration.Migrations
 {
-    public partial class initialMigr : Migration
+    public partial class newMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -93,6 +93,23 @@ namespace Integration.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DrugstoreName = table.Column<string>(type: "text", nullable: true),
+                    Posted = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Content = table.Column<string>(type: "text", nullable: true),
+                    IsRead = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TenderOffers",
                 columns: table => new
                 {
@@ -114,10 +131,10 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { "1", new DateTime(2021, 12, 29, 13, 48, 22, 725, DateTimeKind.Local).AddTicks(513), "Brufen - 150, Palitreks - 100, Andol - 40", true },
-                    { "4", new DateTime(2021, 12, 15, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(922), "Brufen - 10, Palitreks - 50, Andol - 35", true },
-                    { "3", new DateTime(2022, 1, 5, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(916), "Brufen - 2, Palitreks - 2, Andol - 2", true },
-                    { "2", new DateTime(2022, 2, 2, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(843), "Brufen - 120, Palitreks - 90, Andol - 50", false }
+                    { "1", new DateTime(2022, 1, 10, 14, 11, 54, 489, DateTimeKind.Local).AddTicks(6892), "Brufen - 150, Palitreks - 100, Andol - 40", true },
+                    { "4", new DateTime(2021, 12, 27, 14, 11, 54, 497, DateTimeKind.Local).AddTicks(580), "Brufen - 10, Palitreks - 50, Andol - 35", true },
+                    { "3", new DateTime(2022, 1, 17, 14, 11, 54, 497, DateTimeKind.Local).AddTicks(343), "Brufen - 2, Palitreks - 2, Andol - 2", true },
+                    { "2", new DateTime(2022, 2, 3, 14, 11, 54, 496, DateTimeKind.Local).AddTicks(9764), "Brufen - 120, Palitreks - 90, Andol - 50", false }
                 });
 
             migrationBuilder.InsertData(
@@ -127,7 +144,7 @@ namespace Integration.Migrations
                 {
                     { 27, 64, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panadol" },
                     { 28, 38, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
-                    { 30, 66, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palitrex" },
+                    { 29, 78, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brufen" },
                     { 31, 87, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amoksicilin" },
                     { 32, 56, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sinacilin" },
                     { 33, 45, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
@@ -173,7 +190,7 @@ namespace Integration.Migrations
                     { 21, 39, new DateTime(2021, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Panklav" },
                     { 22, 105, new DateTime(2021, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brufen" },
                     { 12, 87, new DateTime(2021, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Andol" },
-                    { 29, 78, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brufen" }
+                    { 30, 66, new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Palitrex" }
                 });
 
             migrationBuilder.InsertData(
@@ -192,17 +209,27 @@ namespace Integration.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Notifications",
+                columns: new[] { "Id", "Content", "DrugstoreName", "IsRead", "Posted", "Title" },
+                values: new object[,]
+                {
+                    { 3, "Obavestenje o promeni cena", null, true, new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Vazno obavestenje" },
+                    { 1, "Aloaloalo", null, true, new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Prva notifikacija" },
+                    { 2, "Stigli su novi lekovi", null, false, new DateTime(2021, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Novi lekovi" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "TenderOffers",
                 columns: new[] { "Id", "DrugstoreId", "IsAccepted", "IsActive", "Price", "TenderId", "TenderOfferInfo" },
                 values: new object[,]
                 {
+                    { "7", 1, false, false, 10000, "1", "Brufen - 10, Palitreks - 80, Andol - 40" },
                     { "1", 1, true, false, 5000, "1", "Brufen - 100, Palitreks - 80, Andol - 40" },
                     { "2", 2, false, true, 5900, "2", "Brufen - 120, Palitreks - 50, Andol - 35" },
                     { "3", 1, true, false, 500, "3", "Brufen - 2, Palitreks - 2, Andol - 2" },
                     { "4", 1, false, true, 2900, "4", "Brufen - 10, Palitreks - 50, Andol - 35" },
                     { "5", 3, false, false, 500, "3", "Brufen - 2, Palitreks - 2, Andol - 2" },
                     { "6", 3, true, false, 1900, "4", "Brufen - 10, Palitreks - 50, Andol - 35" },
-                    { "7", 1, false, false, 10000, "1", "Brufen - 10, Palitreks - 80, Andol - 40" },
                     { "8", 2, false, true, 7900, "2", "Brufen - 120, Palitreks - 50, Andol - 20" }
                 });
         }
@@ -223,6 +250,9 @@ namespace Integration.Migrations
 
             migrationBuilder.DropTable(
                 name: "DrugTenders");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "TenderOffers");

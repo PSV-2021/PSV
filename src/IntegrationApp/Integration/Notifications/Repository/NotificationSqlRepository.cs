@@ -1,4 +1,5 @@
 ﻿using Integration.Models;
+using Integration.Notifications.Model;
 using Integration.Repository.Interfaces;
 using Model.DataBaseContext;
 using System;
@@ -21,7 +22,7 @@ namespace Integration.Repository.Sql
         {
         }
 
-        public void Add(Notification notification)
+        public void Add(FileNotification notification)
         {
             int id = DbContext.Notifications.ToList().Count > 0 ? DbContext.Notifications.ToList().Max(notification => notification.Id) + 1 : 1;
             notification.Id = id;
@@ -31,7 +32,7 @@ namespace Integration.Repository.Sql
 
         public bool Delete(int id)
         {
-            Notification notification = DbContext.Notifications.ToList().Find(notification => notification.Id == id);
+            FileNotification notification = DbContext.Notifications.ToList().Find(notification => notification.Id == id);
             if (notification == null)
                 return false;
             else
@@ -42,22 +43,27 @@ namespace Integration.Repository.Sql
             }
         }
 
-        public List<Notification> GetAll()
+        public List<FileNotification> GetAll()
         {
-            List<Notification> result = new List<Notification>();
-            DbContext.Notifications.ToList().ForEach(notification => result.Add(new Notification(notification.Id, notification.Posted, notification.Title, notification.Content, notification.Recipients)));
+            List<FileNotification> result = new List<FileNotification>();
+            DbContext.Notifications.ToList().ForEach(notification => result.Add(new FileNotification(notification.Id, notification.DrugstoreName, notification.Posted, notification.Title, notification.Content, notification.IsRead)));
 
             return result;
         }
 
-        public Notification GetById(int id)
+        public FileNotification GetById(int id)
         {
             return DbContext.Notifications.FirstOrDefault(n => n.Id == id);
         }
 
-        public void Update(Notification notification)
+        public void Update(FileNotification notification)
         {
             DbContext.Notifications.Update(notification);
+            DbContext.SaveChanges();
+        }
+
+        public void SaveChanges()
+        {
             DbContext.SaveChanges();
         }
     }

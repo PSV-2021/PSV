@@ -1,27 +1,25 @@
-﻿using Integration.Models;
-using Integration.Notifications.Model;
-using Integration.Repository.Interfaces;
-using Integration.Repository.Sql;
-using Model.DataBaseContext;
+﻿using Drugstore.Models;
+using Drugstore.Repository.Interfaces;
+using Drugstore.Repository.Sql;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Integration.Service
+namespace Drugstore.Service
 {
-    public class NotificationService
+    public class FileNotificationService
     {
-        public INotificationRepository NotificationRepository { get; set; }
+        public IFileNotificationRepository NotificationRepository { get; set; }
         public readonly MyDbContext dbContext;
-        public NotificationService(INotificationRepository notificationRepository)
+        public FileNotificationService(IFileNotificationRepository notificationRepository)
         {
             NotificationRepository = notificationRepository;
         }
 
-        public NotificationService(MyDbContext context)
+        public FileNotificationService(MyDbContext context)
         {
             this.dbContext = context;
-            NotificationRepository = new NotificationSqlRepository(context);
+            NotificationRepository = new FileNotificationSqlRepository(context);
         }
 
         public List<FileNotification> GetAll()
@@ -49,17 +47,11 @@ namespace Integration.Service
             return NotificationRepository.Delete(id);
         }
 
-        public void Save(FileNotification notification)
-        {
-            dbContext.Notifications.Add(notification);
-            dbContext.SaveChanges();
-        }
-
         public void RefreshNotifications()
         {
-            var notifications = dbContext.Notifications;
+            var notifications = dbContext.FileNotifications;
             foreach (FileNotification fn in notifications)
-            if (!fn.IsRead)
+                if (!fn.IsRead)
                     fn.IsRead = true;
             dbContext.SaveChanges();
         }

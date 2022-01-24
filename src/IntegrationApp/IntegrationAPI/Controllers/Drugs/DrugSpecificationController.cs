@@ -11,6 +11,8 @@ using Model.DataBaseContext;
 using Integration.Drugs.DTOs;
 using Integration.Drugs.Service;
 using System.IO;
+using Integration.Service;
+using Integration.Notifications.Model;
 
 namespace Integration_API.Controllers
 {
@@ -20,11 +22,13 @@ namespace Integration_API.Controllers
     {
         private readonly MyDbContext dbContext;
         private DrugSpecificationService drugSpecificationService;
+        private NotificationService notificationService;
 
         public DrugSpecificationController(MyDbContext db)
         {
             this.dbContext = db;
             this.drugSpecificationService = new DrugSpecificationService();
+            notificationService = new NotificationService(db);
         }
 
         private string FormatDrugsSpecificationsPath()
@@ -105,7 +109,10 @@ namespace Integration_API.Controllers
             IRestResponse response = client.Execute(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                notificationService.Save(new FileNotification("Apoteka prva", DateTime.Now, "Obavestenje", "Dobili ste nov fajl od apoteke - " + specRequest.Name + " - Specifikacija leka.pdf", false));
                 return Ok(true);
+            }
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 return NoContent();
             return Unauthorized(false);

@@ -1,4 +1,5 @@
 using Integration.Models;
+using Integration.Notifications.Model;
 using Integration.Service;
 using Microsoft.AspNetCore.Mvc;
 using Model.DataBaseContext;
@@ -27,23 +28,31 @@ namespace Integration_API.Controllers
             return Ok(NotificationService.GetAll());
         }
         [HttpPost]
-        public IActionResult AddNotification(Notification notification)
+        public IActionResult AddNotification(FileNotification notification)
         {
-            if (notification.Title == null || notification.Content == null || notification.Title == string.Empty || notification.Content == string.Empty)
+            if (notification.Title == null || notification.Content == null || notification.Title == string.Empty || notification.Content == string.Empty || notification.DrugstoreName == null)
             {
                 return NotFound("Notification is empty.");
             }
             NotificationService.Add(notification);
             return Ok();
         }
+
         [HttpPost("remove")]
-        public IActionResult RemoveNotification(Notification notification)
+        public IActionResult RemoveNotification(FileNotification notification)
         {
             if (notification.Id == null)
             {
                 return NotFound("Could not find notification specified.");
             }
             NotificationService.Delete(notification.Id);
+            return Ok();
+        }
+
+        [HttpGet("refresh")]
+        public IActionResult RefreshNotifications()
+        {
+            NotificationService.RefreshNotifications();
             return Ok();
         }
     }

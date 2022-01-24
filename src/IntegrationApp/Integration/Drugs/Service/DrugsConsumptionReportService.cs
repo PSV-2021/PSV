@@ -77,9 +77,8 @@ namespace Integration.Service
         //    return Path.Combine(absolute[0], "src\\Integration\\Reports\\" + fileName);
         //}
 
-        public int SaveDrugsConsumptionReport(DateRange range)
+        public bool SaveDrugsConsumptionReport(DateRange range)
         {
-            int counter = 0;
             using (PdfDocument Document = new PdfDocument())
             {
                 PdfPage Page = Document.Pages.Add();
@@ -94,7 +93,6 @@ namespace Integration.Service
                 foreach (DrugConsumed drug in FormatDrugConsumptionList(range))
                 {
                     Table.Rows.Add(new string[] { drug.Name, drug.Amount.ToString() });
-                    counter++;
                 }
                 PdfLightTable.DataSource = Table;
                 PdfLightTable.Draw(Page, new PointF(0, 70));
@@ -104,7 +102,7 @@ namespace Integration.Service
                 Document.Close(true);
                 this.UploadDrugConsumptionReport(FileName);
             }
-            return counter;
+            return true;
         }
 
         private string FormatReportsPath()

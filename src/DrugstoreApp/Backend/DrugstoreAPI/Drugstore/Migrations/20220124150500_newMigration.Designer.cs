@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Drugstore.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220112221054_dodavanjeMejla")]
-    partial class dodavanjeMejla
+    [Migration("20220124150500_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,17 +73,31 @@ namespace Drugstore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "as",
-                            TenderEnd = new DateTime(2022, 1, 5, 23, 10, 53, 747, DateTimeKind.Local).AddTicks(5145),
+                            Id = "1",
+                            TenderEnd = new DateTime(2022, 1, 10, 16, 4, 59, 622, DateTimeKind.Local).AddTicks(9323),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 2, 2, 23, 10, 53, 747, DateTimeKind.Local).AddTicks(6798),
+                            TenderEnd = new DateTime(2022, 2, 14, 16, 4, 59, 623, DateTimeKind.Local).AddTicks(1237),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
+                        },
+                        new
+                        {
+                            Id = "3",
+                            TenderEnd = new DateTime(2022, 1, 17, 16, 4, 59, 623, DateTimeKind.Local).AddTicks(1303),
+                            TenderInfo = "Brufen - 2, Palitreks - 2, Andol - 2",
+                            isFinished = true
+                        },
+                        new
+                        {
+                            Id = "4",
+                            TenderEnd = new DateTime(2021, 12, 27, 16, 4, 59, 623, DateTimeKind.Local).AddTicks(1308),
+                            TenderInfo = "Brufen - 10, Palitreks - 50, Andol - 35",
+                            isFinished = true
                         });
                 });
 
@@ -117,8 +131,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2022, 1, 12, 23, 10, 53, 746, DateTimeKind.Local).AddTicks(6457),
-                            StartDate = new DateTime(2022, 1, 12, 23, 10, 53, 743, DateTimeKind.Local).AddTicks(4653),
+                            EndDate = new DateTime(2022, 1, 24, 16, 4, 59, 622, DateTimeKind.Local).AddTicks(1560),
+                            StartDate = new DateTime(2022, 1, 24, 16, 4, 59, 619, DateTimeKind.Local).AddTicks(2835),
                             Title = "title"
                         });
                 });
@@ -162,6 +176,62 @@ namespace Drugstore.Migrations
                             Content = "bla bla",
                             HospitalName = "Ime bolnice 224",
                             Response = ""
+                        });
+                });
+
+            modelBuilder.Entity("Drugstore.Models.FileNotification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HospitalName")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("Posted")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FileNotifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Aloaloalo",
+                            HospitalName = "Health",
+                            IsRead = true,
+                            Posted = new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Prva notifikacija"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Content = "Stigli su novi lekovi",
+                            HospitalName = "Health",
+                            IsRead = false,
+                            Posted = new DateTime(2021, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Novi lekovi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Content = "Obavestenje o promeni cena",
+                            HospitalName = "Health",
+                            IsRead = true,
+                            Posted = new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Vazno obavestenje"
                         });
                 });
 
@@ -259,7 +329,7 @@ namespace Drugstore.Migrations
                             Reactions = "bla",
                             SideEffects = "bla",
                             Substances = "bla",
-                            Supply = 150,
+                            Supply = 200,
                             Usage = "bla",
                             Weight = 100.0
                         },
@@ -273,7 +343,7 @@ namespace Drugstore.Migrations
                             Reactions = "bla",
                             SideEffects = "bla",
                             Substances = "bla",
-                            Supply = 10,
+                            Supply = 200,
                             Usage = "bla",
                             Weight = 100.0
                         },
@@ -287,7 +357,21 @@ namespace Drugstore.Migrations
                             Reactions = "bla",
                             SideEffects = "bla",
                             Substances = "bla",
-                            Supply = 30,
+                            Supply = 200,
+                            Usage = "bla",
+                            Weight = 100.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Manufacturer = "bla",
+                            Name = "Andol",
+                            Precautions = "bla",
+                            Price = 150.0,
+                            Reactions = "bla",
+                            SideEffects = "bla",
+                            Substances = "bla",
+                            Supply = 200,
                             Usage = "bla",
                             Weight = 100.0
                         });
@@ -399,21 +483,41 @@ namespace Drugstore.Migrations
                         {
                             Id = "1",
                             DrugstoreId = 1,
-                            IsAccepted = false,
-                            IsActive = true,
+                            IsAccepted = true,
+                            IsActive = false,
                             Price = 5000,
-                            TenderId = "as",
+                            TenderId = "1",
                             TenderOfferInfo = "Brufen - 100, Palitreks - 80, Andol - 40"
                         },
                         new
                         {
-                            Id = "2",
-                            DrugstoreId = 2,
+                            Id = "3",
+                            DrugstoreId = 1,
+                            IsAccepted = true,
+                            IsActive = false,
+                            Price = 500,
+                            TenderId = "3",
+                            TenderOfferInfo = "Brufen - 2, Palitreks - 2, Andol - 2"
+                        },
+                        new
+                        {
+                            Id = "7",
+                            DrugstoreId = 1,
+                            IsAccepted = false,
+                            IsActive = false,
+                            Price = 10000,
+                            TenderId = "1",
+                            TenderOfferInfo = "Brufen - 10, Palitreks - 80, Andol - 40"
+                        },
+                        new
+                        {
+                            Id = "4",
+                            DrugstoreId = 1,
                             IsAccepted = false,
                             IsActive = true,
-                            Price = 5900,
-                            TenderId = "2",
-                            TenderOfferInfo = "Brufen - 120, Palitreks - 50, Andol - 35"
+                            Price = 2900,
+                            TenderId = "4",
+                            TenderOfferInfo = "Brufen - 10, Palitreks - 50, Andol - 35"
                         });
                 });
 

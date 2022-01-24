@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Integration.Model;
 using Integration.Models;
+using Integration.Notifications.Model;
 using Integration.Tendering.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ namespace Model.DataBaseContext
         public DbSet<DrugConsumed> DrugsConsumed { get; set; }
         public DbSet<DrugTender> DrugTenders { get; set; }
         public DbSet<TenderOffer> TenderOffers { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<FileNotification> Notifications { get; set; }
 
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
@@ -141,11 +142,11 @@ namespace Model.DataBaseContext
                 new TenderOffer("7", "Brufen - 10, Palitreks - 80, Andol - 40", 10000, "1", false, 1, false),
                 new TenderOffer("8", "Brufen - 120, Palitreks - 50, Andol - 20", 7900, "2", false, 2, true)
             );
-            modelBuilder.Entity<Notification>().HasData(
+            modelBuilder.Entity<FileNotification>().HasData(
 
-                 new Notification(1, new DateTime(2021, 6, 6), "Uzbuna", "Aloaloalo", null),
-                 new Notification(2, new DateTime(2021, 7, 7), "Novi lekovi", "Stigli su novi lekovi", null),
-                 new Notification(3, new DateTime(2021, 8, 8), "Vazno obavestenje", "Obavestenje o promeni cena", null)
+                 new FileNotification(1, "Apoteka prva", new DateTime(2021, 6, 6), "Prva notifikacija", "Aloaloalo", true),
+                 new FileNotification(2, "Apoteka prva", new DateTime(2021, 7, 7), "Novi lekovi", "Stigli su novi lekovi", false),
+                 new FileNotification(3, "Apoteka druga", new DateTime(2021, 8, 8), "Vazno obavestenje", "Obavestenje o promeni cena", true)
                 );
 
         }

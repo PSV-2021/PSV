@@ -20,10 +20,11 @@ export class NotificationsComponent implements OnInit {
       for (const d of (data as any)) {
         this.notifications.push({
           "id": d.id,
+          "hospitalName": d.hospitalName,
           "title": d.title,
           "content": d.content,
           "date": d.posted,
-          "recipients": d.recipients
+          "isRead": d.isRead
         });
       }
     });

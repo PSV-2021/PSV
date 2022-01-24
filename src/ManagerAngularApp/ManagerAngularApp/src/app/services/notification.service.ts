@@ -19,10 +19,11 @@ export class NotificationService {
     RemoveNotification(notification: NotificationDto): any{
         const body = {
           id : notification.id,
+          drugstoreName : notification.drugstoreName,
           posted : notification.date,
           title: notification.title,
           content: notification.content,
-          recipients: notification.recipients
+          isRead: notification.isRead
         };
         let headers = new HttpHeaders({
           'Content-Type': 'application/json',
@@ -31,4 +32,8 @@ export class NotificationService {
         const ret = this.http.post<any>(this.url + "/notification/remove", body, options);
         return ret;
       }
+
+      RefreshNotifications(): Observable<NotificationDto> {
+        return this.http.get<any>(this.url + '/notification/refresh');
+    }
 }

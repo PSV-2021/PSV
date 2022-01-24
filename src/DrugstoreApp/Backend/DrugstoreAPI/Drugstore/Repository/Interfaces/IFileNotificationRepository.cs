@@ -1,12 +1,11 @@
-﻿using Integration.Models;
-using Integration.Notifications.Model;
+﻿using Drugstore.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Integration.Repository.Interfaces
+namespace Drugstore.Repository.Interfaces
 {
-    public interface INotificationRepository
+    public interface IFileNotificationRepository
     {
         public List<FileNotification> GetAll();
         public FileNotification GetById(int id);

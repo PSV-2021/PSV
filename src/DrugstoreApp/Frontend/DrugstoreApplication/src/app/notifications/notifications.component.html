@@ -1,17 +1,20 @@
-<div class="notification-ui_dd-header">
-    <h3 class="text-center">Notifications</h3>
-</div>
 <div *ngFor="let n of notifications" class="notification-ui_dd-content">
-    <div class="notification-list notification-list--unread">
-        <div class="notification-list_img">
-            <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+    <div style="display: flex;" class="notification-list notification-list--unread">
+        <div style="width: 8rem;" class="notification-list_img">
+            <img src="https://img.favpng.com/19/2/0/public-services-icon-pharmacy-icon-dispensary-icon-izYPGk2b.jpg" alt="user">
         </div>
-        <div class="notification-list_detail">
-            <p><b>{{n.title}}</b>  {{n.content}}</p>
-            <p><small>{{n.date}}</small></p>
+        <div style="width: 10rem;" class="notification-list_detail">
+            <p>{{n.date|date:'medium'}}</p>
         </div>
-        <div class="notification-list_feature-img">
-            <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
+        <div style="width: 8rem;" class="notification-list_detail">
+            <p><b>{{n.hospitalName}}</b></p>
+        </div>
+        <div style="width: 30rem;" class="notification-list_detail">
+            <p><b>{{n.title}}</b></p>
+            <p>{{n.content}}</p>
+        </div>
+        <div style="width: 16rem;" class="notification-list_detail">
+            <button *ngIf="!n.isRead" type="button" disabled class="btn btn-secondary">NEW</button>
         </div>
         <button type="button" class="btn btn-danger" (click) = "removeNotification(n)">Delete</button>
     </div>   

@@ -39,7 +39,7 @@ export class DrugConsumptionSpecsService {
         'Content-Type': 'application/json',
         'ApiKey': "abcde" });
       let options = { headers: headers };
-      return this.http.post<any>(this.url + '/drugsConsumptionReport', body, options).pipe(map(res => res), catchError(this.errorHandler));
+      return this.http.post<any>(this.url + '/DrugsConsumptionReport', body, options).pipe(map(res => res), catchError(this.errorHandler));
     }
 
     errorHandler(error: HttpErrorResponse) {
