@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Integration.IntegrationEvents.Model;
 using Integration.Model;
 using Integration.Models;
 using Integration.Notifications.Model;
@@ -23,7 +24,7 @@ namespace Model.DataBaseContext
         public DbSet<DrugTender> DrugTenders { get; set; }
         public DbSet<TenderOffer> TenderOffers { get; set; }
         public DbSet<FileNotification> Notifications { get; set; }
-
+        public DbSet<Event> IntegrationEvents { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
