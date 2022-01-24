@@ -79,7 +79,7 @@ namespace IntegrationApiTests.Unit
 
             var result = controler.Filter("", "");
 
-            Assert.IsType<UnauthorizedResult>(result);
+            Assert.IsType<UnauthorizedObjectResult>(result);
         }
 
         private static List<Drugstore> GenerateStubData()
