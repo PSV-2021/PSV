@@ -111,7 +111,7 @@ services:
     ports:
       - "8082:80" 
   drugstore_test:
-      container_name: drugstore-test
+      container_name: drugstore_test
       build:
         context: ../../DrugstoreApp/Backend/DrugstoreAPI
         dockerfile: IntegrationTestDockerfile

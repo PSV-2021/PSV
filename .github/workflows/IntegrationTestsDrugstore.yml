@@ -10,5 +10,5 @@ jobs:
       - name: RunTests
         run: |
           docker-compose -f src/config/testing/integration-test-docker-compose.yml build 
-          docker-compose -f src/config/testing/integration-test-docker-compose.yml up --exit-code-from drugstore_test drugstore-test
+          docker-compose -f src/config/testing/integration-test-docker-compose.yml up --exit-code-from drugstore_test drugstore_test
       

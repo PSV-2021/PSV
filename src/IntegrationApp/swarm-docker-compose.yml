@@ -1,0 +1,137 @@
+version: '3'
+services:
+  gateway:
+    depends_on:
+      - drugstore_client
+      - drugstore_api
+      - integration_api
+      - patient_client
+      - manager_client
+    build: ../config/gateway
+    image: aco99/gateway
+    extra_hosts:
+      - "patient.localhost:127.0.0.1"
+      - "drugstore.localhost:127.0.0.1"
+      - "manager.localhost:127.0.0.1"
+    ports:
+      - "80:80"
+
+  postgres-server-drugstore:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: drugstore
+      POSTGRES_USER: postgres
+    ports:
+      - "5433:5432"
+
+  postgres-server-hospital:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: hospital
+      POSTGRES_USER: POSTGRES_USERNAME
+    secrets:
+      - POSTGRES_USERNAME
+    ports:
+      - "5434:5432"
+
+  message-broker:
+    image: rabbitmq:management-alpine
+    container_name: rabbitmq-broker
+    ports:
+      - 15672:15672
+
+  sftp-server:
+    image: atmoz/sftp
+    ports:
+      - "22:22"
+    volumes:
+      - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
+      - /upload/HospitalFiles:/home/user/upload/HospitalFiles
+    command: user:password:1001
+
+  hospital_api:
+     depends_on:
+       - postgres-server-hospital
+     #build: ../
+     image: aco99/hospital_api
+     environment:
+       DBServer: postgres-server-hospital
+       DBPort: 5432
+       DBUser: postgres
+       DBPassword: 123
+       DB: hospital
+     restart: always
+     ports:
+       - "8081:80"
+
+  integration_api:
+    depends_on:
+      - sftp-server
+      - message-broker
+      - hospital_api
+    #build:
+      #context: .
+      #args:
+        #SFTP_IP: sftp-server
+        #SFTP_USERNAME: user
+        #SFTP_PASSWORD: password
+        #RABBIT_HOST: message-broker
+        #HOSPITAL_GRPC_DOMAIN: hospital_api
+        #HOSPITAL_GRPC_PORT: 8081
+        #DRUGSTORE_GRPC_DOMAIN: drugstore_api
+        #DRUGSTORE_GRPC_PORT: 8082
+    image: aco99/integration_api
+    environment:
+      DBServer: postgres-server-hospital
+      DBPort: 5432
+      DBUser: postgres
+      DBPassword: 123
+      DB: hospital
+      RABBIT_HOST: message-broker
+    restart: always
+    ports:
+      - "8083:80"
+
+  drugstore_api:
+    depends_on:
+      - postgres-server-drugstore
+      - message-broker
+      - sftp-server
+    #build: ../DrugstoreApp/Backend/DrugstoreAPI
+    image: aco99/drugstore_api
+    environment:
+      SFTP_IP: sftp-server
+      SFTP_USERNAME: user
+      SFTP_PASSWORD: password
+      RABBIT_HOST: message-broker
+      DBServer: postgres-server-drugstore
+      DBPerver: 5433
+      DBUser: postgres
+      DBPassword: 123
+      DB: drugstore
+    restart: always
+    ports:
+      - "8082:80"
+
+  patient_client:
+    #build: ../PatientApp/Frontend/PatientApp
+    image: aco99/patient_client
+    ports:
+      - "4201:80"
+  drugstore_client:
+    #build: ../DrugstoreApp/Frontend/DrugstoreApplication
+    image: aco99/drugstore_client
+    ports:
+      - "4202:80"
+
+  manager_client:
+   #build: ../ManagerAngularApp/ManagerAngularApp
+   image: aco99/manager_client
+   ports:
+    - "4203:80"
+
+secrets:
+ POSTGRES_USERNAME:
+  external: true

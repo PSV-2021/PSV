@@ -39,11 +39,7 @@ services:
       - message-broker   
     #build: ../../IntegrationApp/
     image: aco99/integration_api
-    healthcheck:
-      test: ["CMD", "curl", "http://localhost/","||","exit","1"]
-      interval: 15s
-      timeout: 30s
-      retries: 5
+    
     environment:
       DBServer: postgres-server-hospital
       DBPort: 5432
@@ -68,11 +64,6 @@ services:
       - message-broker
       - sftp-server
     #build: ../../DrugstoreApp/Backend/DrugstoreAPI
-    healthcheck:
-      test: ["CMD", "curl", "http://localhost/","||","exit","1"]
-      interval: 15s
-      timeout: 30s
-      retries: 15
     image: aco99/drugstore_api
     environment:
       SFTP_IP: sftp-server
