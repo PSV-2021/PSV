@@ -38,5 +38,28 @@ namespace Hospital.PatientEvent.Service
             EventRepository.Save(e);
         }
 
+        public List<double> GetPercentSuccessfullAndQuit()
+        {
+            List<double> result = new List<double>();
+
+            List<Event> allSuccessfull = EventRepository.GetAllSuccessful();
+            List<Event> allFirstStep = EventRepository.GetAllFirstStep();
+            List<Event> allThirdStep = EventRepository.GetAllThirdStep();
+            List<Event> allQuit = EventRepository.GetAllQuit();
+
+            int allAppointments = allSuccessfull.Count + allQuit.Count;
+
+            double successfullPercent = (double)allSuccessfull.Count / (double)allAppointments * 100;
+            double successfullFirstStep = (double)allFirstStep.Count / (double)allAppointments * 100;
+            double successfullThirdStep = (double)allThirdStep.Count / (double)allAppointments * 100;
+            double quitPercent = (double)allQuit.Count / (double)allAppointments * 100;
+
+            result.Add(successfullPercent);
+            result.Add(successfullFirstStep);
+            result.Add(successfullThirdStep);
+            result.Add(quitPercent);
+
+            return result;
+        }
     }
 }

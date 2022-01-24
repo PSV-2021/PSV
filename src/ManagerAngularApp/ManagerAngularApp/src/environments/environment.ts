@@ -5,7 +5,7 @@
 export const environment = {
   //bilo ovako
   production: false,
-  api : "http://localhost:5000/api",
+  api : "http://localhost:5003/api",
   
   //ja dodala
   apiUrl:"localhost",

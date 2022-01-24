@@ -56,7 +56,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     ReserveAppointmentStandardComponent,
     AppointmentsObserveComponent,
     RecommendAppointmentComponent,
-    HomePageComponent
+    HomePageComponent,
 
 
   ],
@@ -93,7 +93,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     AuthGuard,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

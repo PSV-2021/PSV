@@ -36,12 +36,39 @@ namespace Hospital.PatientEvent.Repository.Sql
             dbContext.PatientEvents.ToList().ForEach(e => result.Add(new Event(e.Id, e.EventName, e.EventTime)));
             return result;
         }
-
+        
         public Event GetById(int id)
         {
             Event e = dbContext.PatientEvents.FirstOrDefault(ev => ev.Id == id);
             return e;
         }
 
+        public List<Event> GetAllSuccessful()
+        {
+            List<Event> result = new List<Event>();
+            result = (from n in dbContext.PatientEvents where n.EventName.Equals("1") select n).ToList();
+            return result;
+        }
+
+        public List<Event> GetAllFirstStep()
+        {
+            List<Event> result = new List<Event>();
+            result = (from n in dbContext.PatientEvents where n.EventName.Equals("3") select n).ToList();
+            return result;
+        }
+
+        public List<Event> GetAllThirdStep()
+        {
+            List<Event> result = new List<Event>();
+            result = (from n in dbContext.PatientEvents where n.EventName.Equals("5") select n).ToList();
+            return result;
+        }
+
+        public List<Event> GetAllQuit()
+        {
+            List<Event> result = new List<Event>();
+            result = (from n in dbContext.PatientEvents where n.EventName.Equals("7") select n).ToList();
+            return result;
+        }
     }
 }

@@ -1,10 +1,13 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReserveAppointmentStandardService } from '../reserve-appointment-standard.service';
 import { StandardAppointmentDto } from './standard-appointment.dto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AppointmentScheduleProperties } from '../event/appointmentScheduleProperties';
+import { AppointmentEvent } from '../event/appointmentEvent';
+import { EventService } from '../service/event.service';
 
 
 export interface Specialty{
@@ -43,19 +46,26 @@ export class ReserveAppointmentStandardComponent implements OnInit {
   specialties: any[] = []
   doctors: any[] = [];
   appointments : any[]= [] 
+  eventId: number = 0;
 
   appointment: AppointmentDate = {date: new Date()}
+  appointmentProperties: AppointmentScheduleProperties = 0;
   returnAppointment: StandardAppointmentDto = new StandardAppointmentDto;
+  appointmentEvent : AppointmentEvent = new AppointmentEvent(this.appointmentProperties,this.eventId);
   returnDate: string = '';
   selectedDate: string = '';
   selectedSpecialty: SelectedSpecialty = {Name: "", Id: 0};
   selectedDoctor: SelectedDoctor = {Name: "", Id: 0};
   returnSpecialty: number = 0 ;
-
   displayedColumns : string[] = [ 'Time', '#'];
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
 
   constructor(private reserveAppointmentStandardService: ReserveAppointmentStandardService, 
-    private _snackBar: MatSnackBar, private router: Router,private formBuilder: FormBuilder) { 
+    private _snackBar: MatSnackBar, private router: Router,private formBuilder: FormBuilder,
+    private eventService: EventService) { 
     this.firstFormGroup = formBuilder.group({
         title: formBuilder.control('initial value', Validators.required)
     });
@@ -103,8 +113,27 @@ export class ReserveAppointmentStandardComponent implements OnInit {
         this.specialties.push(p);
       }
     });
+    
+    this.eventId = this.makeid();
+    this.startEvent();  
+  }
+  ngOnDestroy(): void {
+    
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.Quit, this.eventId);
+    this.sendEvent();
+  }
+  makeid() : number {
+    var number = 0;
+    var possible = "0123456789";
+  
+    number = Math.floor( Math.random() * 1000 ) 
+    return number;
   }
 
+  startEvent(){
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.Started, this.eventId);
+    this.sendEvent();
+  }
   onSubmit(): void{
     
     const format = "dd/MM/yyyy HH:mm:ss"
@@ -121,6 +150,7 @@ export class ReserveAppointmentStandardComponent implements OnInit {
   chosedSpecialty(): void{
 
     var specialtyId = this.selectedSpecialty.Id+"";
+    this.createFromSelectSpecializationToSelectDoctor()
     this.reserveAppointmentStandardService.GetThatSpecialtyDoctors(specialtyId).subscribe((data: any)=>{
       for(const p of (data as any)){
         this.doctors.push(p);
@@ -131,12 +161,15 @@ export class ReserveAppointmentStandardComponent implements OnInit {
   chosedDoctor(): void{
 
     var doctorId = this.selectedDoctor.Id+"";
+    this.createFromSelectDoctorToSelectAppointment();
     this.reserveAppointmentStandardService.GetAppointmentsForDoctorAndDate(doctorId, this.appointment.date).subscribe((data: any)=>{
         this.appointments=data;
       
     })
   }
   schedule(element: any): void{
+    this.createCreatedEvent();
+    
     this.returnAppointment = new StandardAppointmentDto;
     this.prepareDTO(element);
     this.reserveAppointmentStandardService.scheduleAppointment(this.returnAppointment)
@@ -153,6 +186,38 @@ export class ReserveAppointmentStandardComponent implements OnInit {
     const format = "dd/MM/yyyy HH:mm:ss"
     this.returnAppointment.StartTime = formatDate(element.startTime, format, "en-US")
     
+  }
+  sendEvent() {
+    this.eventService.postEvent(this.appointmentEvent).subscribe();
+  }
+  
+  createFromStartedToSelectSpecializationEvent() {
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.FromStartedToSelectSpecialization, this.eventId);
+    this.sendEvent()
+  }
+  createFromSelectSpecializationToStarted() {
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.FromSelectSpecializationToStarted, this.eventId);
+    this.sendEvent();
+  }
+  createFromSelectSpecializationToSelectDoctor() {
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.FromSelectSpecializationToSelectDoctor, this.eventId);
+    this.sendEvent();
+  }
+  createFromSelectDoctorToSelectSpecialization() {
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.FromSelectDoctorToSelectSpecialization, this.eventId);
+    this.sendEvent();
+  }
+  createFromSelectDoctorToSelectAppointment() {
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.FromSelectDoctorToSelectAppointment, this.eventId);
+    this.sendEvent();
+  }
+  createFromSelectAppointmentToSelectDoctor() {
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.FromSelectAppointmentToSelectDoctor, this.eventId);
+    this.sendEvent();
+  }
+  createCreatedEvent() {
+    this.appointmentEvent = new AppointmentEvent(AppointmentScheduleProperties.Created, this.eventId);
+    this.sendEvent();
   }
 
 }

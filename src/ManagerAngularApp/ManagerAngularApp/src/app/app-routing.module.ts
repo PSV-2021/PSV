@@ -15,6 +15,7 @@ import { TenderOffersComponent } from './tender-offers/tender-offers.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AuthGuard } from './auth-guard';
 import { LoginComponent } from './login/login.component';
+import { HospitalChartsComponent } from './hospitalCharts/hospital-charts/hospital-charts.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'reviews', component: ReviewComponent},
   { path: 'feedbacks', component: FeedbacksComponent, canActivate: [AuthGuard]},
   { path: 'landingPage', component: LandingPageComponent},
+  { path: 'hospitalCharts', component: HospitalChartsComponent,canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent},
   { path: 'purchase', component: PurchaseDrugsComponent},
   { path: 'files', component: FilesComponent},
