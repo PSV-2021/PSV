@@ -44,7 +44,6 @@ services:
       interval: 15s
       timeout: 30s
       retries: 5
-      start_period: 15s
     environment:
       DBServer: postgres-server-hospital
       DBPort: 5432
@@ -74,7 +73,6 @@ services:
       interval: 15s
       timeout: 30s
       retries: 15
-      start_period: 15s
     image: aco99/drugstore_api
     environment:
       SFTP_IP: sftp-server
@@ -95,24 +93,11 @@ services:
    ports:
     - "4203:80"
   
-  selenium-hub:
-    image: selenium/hub:4.1.1-20211217
-    container_name: selenium-hub
-    ports: 
-      - "4444:4444"
-      - "4443:4443"
-      - "4442:4442"
- 
-  chrome:
-    depends_on:
-      - selenium-hub
-    image: selenium/node-chrome:4.1.1-20211217
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-    
-      
+  selenium:
+      image: selenium/standalone-chrome:96.0.4664.45
+      ports:
+        - "4444:4444"
+
   integration-e2e-test:
     environment:
       MF_HOST: "http://manager_client"
@@ -124,12 +109,9 @@ services:
     entrypoint: dotnet 
     restart: always
     depends_on:
-      integration_api:
-        condition: service_healthy
-      manager_client:
-        condition: service_started
-      chrome:
-        condition: service_started
+      - integration_api
+      - manager_client
+      - chrome
     links:
       - chrome
 
