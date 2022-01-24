@@ -56,7 +56,21 @@ services:
     restart: always
     ports:
       - "8083:80"
-
+  hospital_api:
+     depends_on:
+       - postgres-server-hospital
+     build: ../
+     image: aco99/hospital_api
+     environment:
+       DBServer: postgres-server-hospital
+       DBPort: 5432
+       DBUser: postgres
+       DBPassword: 123
+       DB: hospital
+     restart: always
+     ports:
+       - "8081:80"
+  
   drugstore_api:
     depends_on:
       - postgres-server-drugstore
