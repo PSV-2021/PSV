@@ -17,6 +17,7 @@ jobs:
           command: |
             echo "Connection successful!"
             cd PSV
+            git checkout fix-integration-testing
             git pull origin fix-integration-testing
             cd src/IntegrationApp
             docker-compose build
