@@ -11,7 +11,6 @@ namespace Hospital.PatientEvent.Model
         public int Id { get; set; }
         public string EventName { get; set; }
         public DateTime EventTime { get; set; }
-
         public Event()
         {
         }

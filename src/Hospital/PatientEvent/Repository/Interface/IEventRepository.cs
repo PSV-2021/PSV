@@ -14,5 +14,8 @@ namespace Hospital.PatientEvent.Repository.Interface
         List<Event> GetAllFirstStep();
         List<Event> GetAllThirdStep();
         List<Event> GetAllQuit();
+        List<Event> GetTodaySuccessSchedule();
+        List<Event> GetYesterdaySuccessSchedule();
+        List<Event> GetTwoDaysAgoSuccessSchedule();
     }
 }

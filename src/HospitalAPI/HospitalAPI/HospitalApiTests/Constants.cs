@@ -6,7 +6,7 @@ namespace HospitalApiTests
     public class Constants
     {
 
-        public static string ConnectionString => "server=localhost; port=5432; database=hospitalN; User Id = postgres; password=natasa1234";
+        public static string ConnectionString => "server=localhost; port=5432; database=hospitalNew; User Id = postgres; password=firma4";
 
     }
 }

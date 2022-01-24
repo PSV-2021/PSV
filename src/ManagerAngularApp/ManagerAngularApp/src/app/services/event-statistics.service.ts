@@ -11,11 +11,11 @@ export class EventStatisticsService {
   constructor (private http: HttpClient) {
     this.url = environment.api;
   }
-/*
-  getCreatedCount() : Observable<number> {
-    return this.http.get<number>(`${environment.baseUrl}/${environment.createdCount}`);
-  }
 
+  getCreatedCount() : Observable<number> {
+    return this.http.get<any>(this.url +'/event/getDailyNumberOfScheduling');
+  }
+/*
   getBackStepCount() : Observable<number> {
     return this.http.get<number>(`${environment.baseUrl}/${environment.backStepCount}`);
   }

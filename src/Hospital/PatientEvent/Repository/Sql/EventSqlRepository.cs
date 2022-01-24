@@ -70,5 +70,29 @@ namespace Hospital.PatientEvent.Repository.Sql
             result = (from n in dbContext.PatientEvents where n.EventName.Equals("7") select n).ToList();
             return result;
         }
+
+        public List<Event> GetTodaySuccessSchedule()
+        {
+            List<Event> result = new List<Event>();
+            result = (from n in dbContext.PatientEvents where n.EventTime.Date.Equals(DateTime.Today.Date)
+                      && n.EventName.Equals("1") select n).ToList();
+            return result;
+        }
+
+        public List<Event> GetYesterdaySuccessSchedule()
+        {
+            List<Event> result = new List<Event>();
+            result = (from n in dbContext.PatientEvents where n.EventTime.Date.Equals(DateTime.Today.AddDays(-1).Date)
+                && n.EventName.Equals("1") select n).ToList();
+            return result;
+        }
+
+        public List<Event> GetTwoDaysAgoSuccessSchedule()
+        {
+            List<Event> result = new List<Event>();
+            result = (from n in dbContext.PatientEvents where n.EventTime.Date.Equals(DateTime.Today.AddDays(-2).Date)
+                      && n.EventName.Equals("1") select n).ToList();
+            return result;
+        }
     }
 }

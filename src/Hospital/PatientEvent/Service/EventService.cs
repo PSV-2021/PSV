@@ -41,14 +41,11 @@ namespace Hospital.PatientEvent.Service
         public List<double> GetPercentSuccessfullAndQuit()
         {
             List<double> result = new List<double>();
-
             List<Event> allSuccessfull = EventRepository.GetAllSuccessful();
             List<Event> allFirstStep = EventRepository.GetAllFirstStep();
             List<Event> allThirdStep = EventRepository.GetAllThirdStep();
             List<Event> allQuit = EventRepository.GetAllQuit();
-
             int allAppointments = allSuccessfull.Count + allQuit.Count;
-
             double successfullPercent = (double)allSuccessfull.Count / (double)allAppointments * 100;
             double successfullFirstStep = (double)allFirstStep.Count / (double)allAppointments * 100;
             double successfullThirdStep = (double)allThirdStep.Count / (double)allAppointments * 100;
@@ -59,6 +56,19 @@ namespace Hospital.PatientEvent.Service
             result.Add(successfullThirdStep);
             result.Add(quitPercent);
 
+            return result;
+        }
+
+        public List<int> GetDailyNumberOfScheduling()
+        {
+            List<int> result = new List<int>();
+            List<Event> todayScheduling = EventRepository.GetTodaySuccessSchedule();
+            List<Event> yesterdayScheduling = EventRepository.GetYesterdaySuccessSchedule();
+            List<Event> twoDaysAgoScheduling = EventRepository.GetTwoDaysAgoSuccessSchedule();
+
+            result.Add(twoDaysAgoScheduling.Count);
+            result.Add(yesterdayScheduling.Count);
+            result.Add(todayScheduling.Count);
             return result;
         }
     }
