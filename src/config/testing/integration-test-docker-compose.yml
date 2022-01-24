@@ -124,7 +124,7 @@ services:
       depends_on:
         - drugstore_api
   hospital_test:
-    container_name: hospital-test
+    container_name: hospital_test
     build:
       context: ../..
       dockerfile: IntegrationTestHospital.Dockerfile
@@ -137,7 +137,7 @@ services:
     depends_on:
       - hospital_api
   integration_test:
-    container_name: integration-test
+    container_name: integration_test
     build:
       context: ../../IntegrationApp
       dockerfile: IntegrationTest.Dockerfile

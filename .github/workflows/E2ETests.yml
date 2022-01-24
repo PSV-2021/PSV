@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Execute SSH commmands on remote server
+      - name: Run E2E Tests for Integration Project
         uses: ian-whitestone/action-ssh@master
         with:
           hosts: 'student@79.101.34.218'
@@ -18,6 +18,38 @@ jobs:
             echo "Connection successful!"
             cd PSV
             git pull origin fix-integration-testing
-            cd src/config/testing
-            docker-compose -f e2e-integration-test-docker-compose.yml up --exit-code-from integration-e2e-test
-            
+            cd src/IntegrationApp
+            docker-compose build
+  
+  test-e2e-integration:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run E2E Tests for Integration Project
+        uses: ian-whitestone/action-ssh@master
+        with:
+          hosts: 'student@79.101.34.218'
+          port: 22212
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          debug: true
+          command: |
+            echo "Connection successful!"
+            cd PSV/src/config/testing
+            docker-compose -f e2e-integration-test-docker-compose.yml up --exit-code-from integration-e2e-test integration-e2e-test
+  
+  test-e2e-hospital:
+    needs: [build, test-e2e-integration]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run E2E Tests for Hospital Project
+        uses: ian-whitestone/action-ssh@master
+        with:
+          hosts: 'student@79.101.34.218'
+          port: 22212
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          debug: true
+          command: |
+            echo "Connection successful!"
+            cd PSV/src/config/testing
+            docker-compose -f e2e-integration-test-docker-compose.yml up --exit-code-from hospital-e2e-test hospital-e2e-test
+        
