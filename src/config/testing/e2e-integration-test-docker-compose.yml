@@ -76,7 +76,10 @@ services:
     restart: always
     ports:
       - "8082:80"
-
+  patient_client:
+    image: aco99/patient_client
+    ports:
+      - "4201:80"
   manager_client:
    build: ../../ManagerAngularApp/ManagerAngularApp
    image: aco99/manager_client
