@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Run E2E Tests for Integration Project
+      - name: Build docker images
         uses: ian-whitestone/action-ssh@master
         with:
           hosts: 'student@79.101.34.218'
@@ -40,6 +40,7 @@ jobs:
   
   test-e2e-hospital:
     needs: [build, test-e2e-integration]
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
       - name: Run E2E Tests for Hospital Project
