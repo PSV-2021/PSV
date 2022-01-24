@@ -76,10 +76,10 @@ export class TenderComponent implements OnInit {
         this.newTender.amount = 1;
       }
       else
-      this.toastr.error('You have already added that drug to tender !', 'Error');
+      alert('You have already added that drug to tender !');
     }
     else
-      this.toastr.error('Please, fill drug name and amount with valid data !', 'Error');
+    alert('Please, fill drug name and amount with valid data !');
   }
 
   removeDrug(drugname: string): void {
@@ -104,7 +104,7 @@ export class TenderComponent implements OnInit {
   saveTender(): void {
     if (this.isTenderValid()) {
       this.tenderService.SaveTender(this.tenderEnd, this.tenderItems).subscribe((d: any) =>{
-      this.toastr.success('Tender has been added successfully !', 'Tender');
+        alert('Tender has been added successfully !');
       },
       error => {
         if(error.error)
@@ -114,7 +114,7 @@ export class TenderComponent implements OnInit {
       })
     }
     else 
-      this.toastr.error('Your tender ending date must be valid (after today) and your drug list must contain at least one drug !', 'Error');
+    alert('Your tender ending date must be valid (after today) and your drug list must contain at least one drug !');
   }
 
   seeOffers(id: string){
