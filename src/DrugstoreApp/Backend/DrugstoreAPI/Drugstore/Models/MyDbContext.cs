@@ -1,5 +1,6 @@
 using Drugstore.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
@@ -18,8 +19,12 @@ namespace Drugstore.Models
         public DbSet<DrugTender> DrugTenders { get; set; }
         public DbSet<TenderOffer> TenderOffers { get; set; }
         public DbSet<FileNotification> FileNotifications { get; set; }
-
+        public DbSet<Event> DrugstoreEvents { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+
+        public MyDbContext()
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -90,7 +95,9 @@ namespace Drugstore.Models
                  new FileNotification(2, "Health", new DateTime(2021, 7, 7), "Novi lekovi", "Stigli su novi lekovi", false),
                  new FileNotification(3, "Health", new DateTime(2021, 8, 8), "Vazno obavestenje", "Obavestenje o promeni cena", true)
                 );
-
+            modelBuilder.Entity<Event>().HasData(
+                new Event(1, "Klik", DateTime.Now)
+            );
         }
     }
 }
