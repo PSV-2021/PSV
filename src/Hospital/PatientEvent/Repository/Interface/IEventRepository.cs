@@ -17,5 +17,6 @@ namespace Hospital.PatientEvent.Repository.Interface
         List<Event> GetTodaySuccessSchedule();
         List<Event> GetYesterdaySuccessSchedule();
         List<Event> GetTwoDaysAgoSuccessSchedule();
+        int GetNumberOfDistinctEvents();
     }
 }

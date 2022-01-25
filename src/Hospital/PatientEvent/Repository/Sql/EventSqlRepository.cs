@@ -33,7 +33,7 @@ namespace Hospital.PatientEvent.Repository.Sql
         public List<Event> GetAll()
         {
             List<Event> result = new List<Event>();
-            dbContext.PatientEvents.ToList().ForEach(e => result.Add(new Event(e.Id, e.EventName, e.EventTime)));
+            dbContext.PatientEvents.ToList().ForEach(e => result.Add(new Event(e.Id, e.EventName, e.EventTime, e.EventId)));
             return result;
         }
         
@@ -93,6 +93,11 @@ namespace Hospital.PatientEvent.Repository.Sql
             result = (from n in dbContext.PatientEvents where n.EventTime.Date.Equals(DateTime.Today.AddDays(-2).Date)
                       && n.EventName.Equals("1") select n).ToList();
             return result;
+        }
+
+        public int GetNumberOfDistinctEvents()
+        {
+            return dbContext.PatientEvents.Select(s => s.EventId).Distinct().Count();
         }
     }
 }

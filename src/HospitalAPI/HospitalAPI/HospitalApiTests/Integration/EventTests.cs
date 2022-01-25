@@ -26,30 +26,30 @@ namespace HospitalApiTests.Integration
         public void GetSucceedQuitRatio()
         {
             SetUpDbContext();
-            context.Add(new Event(1, "1", new DateTime(2022, 01, 22)));
-            context.Add(new Event(2, "3", new DateTime(2022, 01, 23)));
-            context.Add(new Event(3, "4", new DateTime(2022, 01, 22)));
-            context.Add(new Event(4, "7", new DateTime(2022, 01, 22)));
-            context.Add(new Event(5, "7", new DateTime(2022, 01, 23)));
-            context.Add(new Event(6, "2", new DateTime(2022, 01, 23)));
+            context.Add(new Event(1, "1", new DateTime(2022, 01, 22),385));
+            context.Add(new Event(2, "3", new DateTime(2022, 01, 23),34));
+            context.Add(new Event(3, "4", new DateTime(2022, 01, 22),82));
+            context.Add(new Event(4, "7", new DateTime(2022, 01, 22),385));
+            context.Add(new Event(5, "7", new DateTime(2022, 01, 23),34));
+            context.Add(new Event(6, "2", new DateTime(2022, 01, 23),34));
 
             EventController eventController = new EventController(context);
             IActionResult retVal = eventController.GetSucceedQuitRatio();
 
             retVal.Equals(HttpStatusCode.OK);
-            retVal.Equals(new List<double> {(double)1/(double)6, (double)1/(double)6, (double)1/(double)3, (double)5/(double)6 });
+            retVal.Equals(new List<double> {(double)1/(double)3, (double)1/(double)3, (double)0/(double)3, (double)2/(double)3 });
 
         }
         [Fact]
         public void GetDailyNumberOfScheduling()
         {
             SetUpDbContext();
-            context.Add(new Event(1, "1", new DateTime(2022, 01, 22)));
-            context.Add(new Event(2, "3", new DateTime(2022, 01, 23)));
-            context.Add(new Event(3, "4", new DateTime(2022, 01, 22)));
-            context.Add(new Event(4, "7", new DateTime(2022, 01, 22)));
-            context.Add(new Event(5, "7", new DateTime(2022, 01, 23)));
-            context.Add(new Event(6, "2", new DateTime(2022, 01, 23)));
+            context.Add(new Event(1, "1", new DateTime(2022, 01, 22), 385));
+            context.Add(new Event(2, "3", new DateTime(2022, 01, 23), 34));
+            context.Add(new Event(3, "4", new DateTime(2022, 01, 22), 82));
+            context.Add(new Event(4, "7", new DateTime(2022, 01, 22), 385));
+            context.Add(new Event(5, "7", new DateTime(2022, 01, 23), 34));
+            context.Add(new Event(6, "2", new DateTime(2022, 01, 23), 34));
 
             EventController eventController = new EventController(context);
             IActionResult retVal = eventController.GetDailyNumberOfScheduling();

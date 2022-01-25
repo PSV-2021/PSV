@@ -18,7 +18,7 @@ export class EventService {
 
   public postEvent(data : AppointmentEvent) {
     console.log(data);
-    this.EventDto.Id = data.eventIdentificator;
+    this.EventDto.EventId = data.eventIdentificator;
     this.EventDto.EventName = data.appointmentProperties.toString();
 
     const ret = this.http.post<any>(this.url +"/event" , this.EventDto);

@@ -13,7 +13,7 @@ export class HospitalChartsComponent implements OnInit {
   public chartNames: string[]
   public chartDays: string[]
   constructor(private eventStatisticsService: EventStatisticsService) {
-    this.chartNames = ["Successful","First Step","Second Step","Not successful"]
+    this.chartNames = ["Successful","First Step","Second Step","Third Step"]
     this.chartDays = ["Two days ago","Yesterday","Today"]
    }
 

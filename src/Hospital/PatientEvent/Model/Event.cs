@@ -11,15 +11,17 @@ namespace Hospital.PatientEvent.Model
         public int Id { get; set; }
         public string EventName { get; set; }
         public DateTime EventTime { get; set; }
+        public int EventId { get; set; }
         public Event()
         {
         }
 
-        public Event(int id, string eventName, DateTime eventTime)
+        public Event(int id, string eventName, DateTime eventTime,int eventId)
         {
             Id = id;
             EventName = eventName;
             EventTime = eventTime;
+            EventId = eventId;
         }
 
     }

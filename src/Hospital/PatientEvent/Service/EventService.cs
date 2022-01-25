@@ -45,7 +45,7 @@ namespace Hospital.PatientEvent.Service
             List<Event> allFirstStep = EventRepository.GetAllFirstStep();
             List<Event> allThirdStep = EventRepository.GetAllThirdStep();
             List<Event> allQuit = EventRepository.GetAllQuit();
-            int allAppointments = allSuccessfull.Count + allQuit.Count;
+            int allAppointments = EventRepository.GetNumberOfDistinctEvents();
             double successfullPercent = (double)allSuccessfull.Count / (double)allAppointments * 100;
             double successfullFirstStep = (double)allFirstStep.Count / (double)allAppointments * 100;
             double successfullThirdStep = (double)allThirdStep.Count / (double)allAppointments * 100;

@@ -15,35 +15,9 @@ export class EventStatisticsService {
   getCreatedCount() : Observable<number> {
     return this.http.get<any>(this.url +'/event/getDailyNumberOfScheduling');
   }
-/*
-  getBackStepCount() : Observable<number> {
-    return this.http.get<number>(`${environment.baseUrl}/${environment.backStepCount}`);
-  }
 
-  getQuitCount() : Observable<number> {
-    return this.http.get<number>(`${environment.baseUrl}/${environment.quitCount}`);
-  }
-*/
   getSucceedQuitRatio() : Observable<number[]> {
   return this.http.get<any>(this.url +'/event/getSucceedQuitRatio' );
   }
-/*
-  getAverageNumberOfStepsForSuccessful() : Observable<number> {
-    return this.http.get<number>(`${environment.baseUrl}/${environment.averageNumberOfStepsForSuccessful}`);
-  }
-  getAverageSchedulingTime() : Observable<number> {
-    return this.http.get<number>(`${environment.baseUrl}/${environment.averageSchedulingTime}`);
-  }
 
-  getAverageTimeFromStartedToSpecialization() : Observable<number> {
-    return this.http.get<number>(`${environment.baseUrl}/${environment.getAverageTimeFromStartedToSpecialization}`);
-  }
-
-  getAverageTimeFromSpecializationToDoctor() : Observable<number> {
-    return this.http.get<number>(`${environment.baseUrl}/${environment.getAverageTimeFromSpecializationToDoctor}`);
-  }
-
-  getAverageTimeFromDoctorToAppointment() : Observable<number> {
-    return this.http.get<number>(`${environment.baseUrl}/${environment.getAverageTimeFromDoctorToSelectAppointment}`);
-  }*/
 }

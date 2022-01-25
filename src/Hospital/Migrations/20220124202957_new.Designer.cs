@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220123143351_newMigration")]
-    partial class newMigration
+    [Migration("20220124202957_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,7 +231,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2022, 1, 23, 15, 33, 50, 484, DateTimeKind.Local).AddTicks(9215),
+                            IssuedTime = new DateTime(2022, 1, 24, 21, 29, 56, 409, DateTimeKind.Local).AddTicks(4216),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -407,7 +407,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2022, 1, 23, 15, 33, 50, 469, DateTimeKind.Local).AddTicks(1224),
+                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 382, DateTimeKind.Local).AddTicks(5398),
                             canPublish = false
                         },
                         new
@@ -415,7 +415,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2022, 1, 23, 15, 33, 50, 472, DateTimeKind.Local).AddTicks(7331),
+                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9733),
                             canPublish = true
                         },
                         new
@@ -423,7 +423,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2022, 1, 23, 15, 33, 50, 472, DateTimeKind.Local).AddTicks(7498),
+                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9937),
                             canPublish = true
                         });
                 });
@@ -492,6 +492,9 @@ namespace Hospital.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("EventName")
                         .HasColumnType("text");

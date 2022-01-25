@@ -15,6 +15,7 @@ namespace HospitalAPI.Adapters
             e.Id = dto.Id;
             e.EventName = dto.EventName;
             e.EventTime = DateTime.Now;
+            e.EventId = dto.EventId;
             return e;
         }
 

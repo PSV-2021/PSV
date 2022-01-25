@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
-    public partial class newMigration : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -96,7 +96,8 @@ namespace Hospital.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EventName = table.Column<string>(type: "text", nullable: true),
-                    EventTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    EventTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EventId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -334,7 +335,7 @@ namespace Hospital.Migrations
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
-                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2022, 1, 23, 15, 33, 50, 484, DateTimeKind.Local).AddTicks(9215), "Zoran Zoranic" });
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2022, 1, 24, 21, 29, 56, 409, DateTimeKind.Local).AddTicks(4216), "Zoran Zoranic" });
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -371,9 +372,9 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
-                    { 2, "I didn't like it.", "Anonymus", new DateTime(2022, 1, 23, 15, 33, 50, 472, DateTimeKind.Local).AddTicks(7331), true },
-                    { 3, "Super service!", "Sara Saric", new DateTime(2022, 1, 23, 15, 33, 50, 472, DateTimeKind.Local).AddTicks(7498), true },
-                    { 1, "Good!", "Mika Mikic", new DateTime(2022, 1, 23, 15, 33, 50, 469, DateTimeKind.Local).AddTicks(1224), false }
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9733), true },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9937), true },
+                    { 1, "Good!", "Mika Mikic", new DateTime(2022, 1, 24, 21, 29, 56, 382, DateTimeKind.Local).AddTicks(5398), false }
                 });
 
             migrationBuilder.InsertData(
