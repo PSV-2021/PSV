@@ -1,6 +1,7 @@
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { TenderDto } from '../tender/tender.dto';
 
@@ -14,19 +15,19 @@ export class TenderService {
     }
     
     GetAllFiles(): Observable<any> {
-        return this.http.get<any>(this.url + '/drugTender');
+        return this.http.get<any>(this.url + '/drugTender').pipe(map(res => res), catchError(this.errorHandler));
     }
 
     GetAllActiveTenders(): Observable<any>{
-      return this.http.get<any>(this.url + '/drugTender/ongoing');
+      return this.http.get<any>(this.url + '/drugTender/ongoing').pipe(map(res => res), catchError(this.errorHandler));
     }
 
     GetAllOffersForTender(id: string): Observable<any>{
-      return this.http.get<any>(this.url + '/drugTender/offer/' + id);
+      return this.http.get<any>(this.url + '/drugTender/offer/' + id).pipe(map(res => res), catchError(this.errorHandler));
     }
 
     GetAllOffersForDrugstore(id: number): Observable<any>{
-      return this.http.get<any>(this.url + '/drugTender/offers/' + id);
+      return this.http.get<any>(this.url + '/drugTender/offers/' + id).pipe(map(res => res), catchError(this.errorHandler));
     }
 
     SaveTender(tenderEnd: Date, tenderInfo: TenderDto[]): Observable<any> {
@@ -39,6 +40,10 @@ export class TenderService {
         'Content-Type': 'application/json',
         'ApiKey': "abcde" });
       let options = { headers: headers };
-      return this.http.post<any>(this.url + '/drugTender', body, options);
+      return this.http.post<any>(this.url + '/drugTender', body, options).pipe(map(res => res), catchError(this.errorHandler));
+    }
+
+    errorHandler(error: HttpErrorResponse) {
+      return throwError(error.error);
     }
   }

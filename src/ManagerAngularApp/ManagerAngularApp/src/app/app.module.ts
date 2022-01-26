@@ -35,6 +35,7 @@ import { AuthGuard } from './auth-guard';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import { ChartsComponent } from './charts/charts.component';
 import { DrugstoreChartComponent } from './drugstore-chart/drugstore-chart.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { DrugstoreChartComponent } from './drugstore-chart/drugstore-chart.compo
     LoginComponent,
     ChartsComponent,
     DrugstoreChartComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

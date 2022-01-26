@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TenderService } from '../services/tender.service';
 import { TenderOfferDto } from './tender-offer.dto';
 import { TenderDto } from '../tender/tender.dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-drugstore-chart',
@@ -37,7 +38,7 @@ export class DrugstoreChartComponent implements OnInit {
       end: new FormControl(),
     });
     
-  constructor(private chartService: ChartService, private route: ActivatedRoute, private tenderService: TenderService) {
+  constructor(private chartService: ChartService, private route: ActivatedRoute, private tenderService: TenderService, private toastr: ToastrService) {
       this.chartInfo = new ChartsInfoDto();
       this.chartNames = [];
       this.winAndP = [];
@@ -55,9 +56,15 @@ export class DrugstoreChartComponent implements OnInit {
     
     this.id = this.route.snapshot.params['id'];
     this.tenderService.GetAllOffersForDrugstore(this.id).subscribe((data: any) => {
-      this.offers = data;
-      
-    });
+      this.offers = data;  
+    },
+    error => {
+      if(error.error)
+        this.toastr.error(error.error, 'Sorry');
+      else
+        this.toastr.error(error, 'Sorry');
+    }
+    );
     
     this.range.value.start = new Date(2020,1,1);
     this.range.value.end = new Date(2025,1,1);
@@ -234,12 +241,6 @@ export class DrugstoreChartComponent implements OnInit {
   
 
   formatChartInfo(): void {
-    // this.chartNames = [];
-    // this.chartWins = 0;
-    // this.chartParticipations = 0;
-    // this.chartProfit = 0;
-    
-    
     this.chartParticipations = this.chartInfo.participations;
     this.chartWins = this.chartInfo.wins;
     this.chartProfit = this.chartInfo.Profit;
@@ -259,7 +260,6 @@ export class DrugstoreChartComponent implements OnInit {
   }
 
   getChartInfo(): void {
-    
     this.chartInfo = new ChartsInfoDto();
     this.chartService.GetSingleChartInfo(this.range.value.start, this.range.value.end, this.id).subscribe((data: any) =>{
       console.log(this.range.value)
@@ -272,9 +272,12 @@ export class DrugstoreChartComponent implements OnInit {
           "Profit" : data.profit,
           "participations": data.participations
         });
-        
-        console.log(this.chartInfo);
-
+      },
+      error => {
+        if(error.error)
+          this.toastr.error(error.error, 'Sorry');
+        else
+          this.toastr.error(error, 'Sorry');
       });
   }
 }

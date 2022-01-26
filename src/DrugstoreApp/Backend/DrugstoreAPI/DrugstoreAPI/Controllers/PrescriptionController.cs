@@ -23,24 +23,31 @@ namespace DrugstoreAPI.Controllers
         [HttpPost("qr")]
         public IActionResult QrPerscription([FromBody] string file)
         {
-            var key = Request.Headers["ApiKey"].FirstOrDefault();
-            if (key == null || !key.Equals("DrugStoreSecretKey"))
-                return Unauthorized();
-
-            var name = Request.Headers["Patient"].FirstOrDefault();
-            if (name == null)
-                return BadRequest();
-
             try
             {
-                SavePdf(file, name);
-            }
-            catch
-            {
-                return BadRequest();
-            }
+                var key = Request.Headers["ApiKey"].FirstOrDefault();
+                if (key == null || !key.Equals("DrugStoreSecretKey"))
+                    return Unauthorized();
 
-            return Ok("Perscription created!");
+                var name = Request.Headers["Patient"].FirstOrDefault();
+                if (name == null)
+                    return BadRequest();
+
+                try
+                {
+                    SavePdf(file, name);
+                }
+                catch
+                {
+                    return BadRequest();
+                }
+
+                return Ok("Perscription created!");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
         private static void SavePdf(string file, string name)

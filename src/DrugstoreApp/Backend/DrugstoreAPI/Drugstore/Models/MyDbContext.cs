@@ -18,6 +18,7 @@ namespace Drugstore.Models
         public DbSet<ShoppingCart> Orders { get; set; }
         public DbSet<DrugTender> DrugTenders { get; set; }
         public DbSet<TenderOffer> TenderOffers { get; set; }
+        public DbSet<FileNotification> FileNotifications { get; set; }
         public DbSet<Event> DrugstoreEvents { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -88,7 +89,12 @@ namespace Drugstore.Models
                 new TenderOffer("4", "Brufen - 10, Palitreks - 50, Andol - 35", 2900, "4", false, 1, true)
 
             );
+            modelBuilder.Entity<FileNotification>().HasData(
 
+                 new FileNotification(1, "Health", new DateTime(2021, 6, 6), "Prva notifikacija", "Aloaloalo", true),
+                 new FileNotification(2, "Health", new DateTime(2021, 7, 7), "Novi lekovi", "Stigli su novi lekovi", false),
+                 new FileNotification(3, "Health", new DateTime(2021, 8, 8), "Vazno obavestenje", "Obavestenje o promeni cena", true)
+                );
             modelBuilder.Entity<Event>().HasData(
                 new Event(1, "Klik", DateTime.Now)
             );

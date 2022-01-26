@@ -31,9 +31,7 @@ namespace Integration.Repository.Sql
 
         public List<DrugstoreFeedback> GetAll()
         {
-            List<DrugstoreFeedback> result = new List<DrugstoreFeedback>();
-            result = dbContext.DrugstoreFeedbacks.ToList();
-            return result;
+            return dbContext.DrugstoreFeedbacks.ToList();
         }
 
         public DrugstoreFeedback GetOne(string id)
@@ -61,6 +59,12 @@ namespace Integration.Repository.Sql
         public void Update(DrugstoreFeedback editedObject)
         {
             dbContext.DrugstoreFeedbacks.Update(editedObject);
+            dbContext.SaveChanges();
+        }
+
+        public void SaveNewFeedback(DrugstoreFeedback feedback)
+        {
+            dbContext.DrugstoreFeedbacks.Add(feedback);
             dbContext.SaveChanges();
         }
     }

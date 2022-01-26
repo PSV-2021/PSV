@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220112124823_initialMigr")]
-    partial class initialMigr
+    [Migration("20220124131155_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -500,6 +500,59 @@ namespace Integration.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Integration.Notifications.Model.FileNotification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DrugstoreName")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("Posted")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Aloaloalo",
+                            IsRead = true,
+                            Posted = new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Prva notifikacija"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Content = "Stigli su novi lekovi",
+                            IsRead = false,
+                            Posted = new DateTime(2021, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Novi lekovi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Content = "Obavestenje o promeni cena",
+                            IsRead = true,
+                            Posted = new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Vazno obavestenje"
+                        });
+                });
+
             modelBuilder.Entity("Integration.Tendering.Model.DrugTender", b =>
                 {
                     b.Property<string>("Id")
@@ -522,28 +575,28 @@ namespace Integration.Migrations
                         new
                         {
                             Id = "1",
-                            TenderEnd = new DateTime(2021, 12, 29, 13, 48, 22, 725, DateTimeKind.Local).AddTicks(513),
+                            TenderEnd = new DateTime(2022, 1, 10, 14, 11, 54, 489, DateTimeKind.Local).AddTicks(6892),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 2, 2, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(843),
+                            TenderEnd = new DateTime(2022, 2, 3, 14, 11, 54, 496, DateTimeKind.Local).AddTicks(9764),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         },
                         new
                         {
                             Id = "3",
-                            TenderEnd = new DateTime(2022, 1, 5, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(916),
+                            TenderEnd = new DateTime(2022, 1, 17, 14, 11, 54, 497, DateTimeKind.Local).AddTicks(343),
                             TenderInfo = "Brufen - 2, Palitreks - 2, Andol - 2",
                             isFinished = true
                         },
                         new
                         {
                             Id = "4",
-                            TenderEnd = new DateTime(2021, 12, 15, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(922),
+                            TenderEnd = new DateTime(2021, 12, 27, 14, 11, 54, 497, DateTimeKind.Local).AddTicks(580),
                             TenderInfo = "Brufen - 10, Palitreks - 50, Andol - 35",
                             isFinished = true
                         });
@@ -729,7 +782,7 @@ namespace Integration.Migrations
                                 new
                                 {
                                     DrugstoreId = 1,
-                                    EmailValue = "apotekaprva@gmail.com"
+                                    EmailValue = "smrdic99@gmail.com"
                                 },
                                 new
                                 {

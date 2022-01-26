@@ -39,6 +39,12 @@ export class FilesComponent implements OnInit {
           "isNew": false
         });
       }
+    },
+    error => {
+      if(error.error)
+        this.toastr.error(error.error, 'Sorry');
+      else
+        this.toastr.error(error, 'Sorry');
     });
     this.newFilesNum = this.files.length;
     if (this.newFilesNum > this.oldFilesNum){
@@ -59,7 +65,6 @@ export class FilesComponent implements OnInit {
 
   public downloadFile(filename: string): void{
     this.fileService.DownloadFile(filename).subscribe((data: any) =>{
-      console.log(data);
       if (data){
         this.initFiles();
         //this.toastr.info('File has been downloaded successfully ! Now you can open it.', 'New file alert');
@@ -69,6 +74,12 @@ export class FilesComponent implements OnInit {
         this.initFiles();
         this.toastr.error('Rebex server is down. Please, try again later.', 'Sorry');
       }
+  },
+  error => {
+    if(error.error)
+      this.toastr.error(error.error, 'Sorry');
+    else
+      this.toastr.error(error, 'Sorry');
   });
 
 }

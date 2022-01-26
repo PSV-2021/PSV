@@ -1,6 +1,6 @@
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ReviewDto } from '../review/review.dto';
 import { map } from 'rxjs-compat/operator/map';
@@ -17,19 +17,22 @@ export class ReviewService {
     }
 
     GetAllReviews(): Observable<any> {
-        return this.http.get<any>(this.url + '/drugstorefeedback');
+        return this.http.get<any>(this.url + '/drugstorefeedback').pipe(res=> res, catchError(this.errorHandler));
     }
 
-    GetDrugStoreName(id: string): Observable<string>{
-      return this.http.get<any>(this.url + '/drugstore/name/', {params:{id: id}});
+    GetDrugStoreName(id: string): Observable<any>{
+      return this.http.get<any>(this.url + '/drugstore/name/', {params:{id: id}}).pipe(res => res, catchError(this.errorHandler));
     }
 
-    SendNewReview(pharmacyId: number, review: string): any{
+    SendNewReview(pharmacyId: number, review: string): Observable<any>{
       const body = {
         pharmacyId : pharmacyId,
         review : review
       };
-      const ret = this.http.post<any>(this.url + "/drugstorefeedback", body);
-      return ret;
+      return this.http.post<any>(this.url + "/drugstorefeedback", body).pipe(res => res ,catchError(this.errorHandler))
+    }
+
+    errorHandler(error: HttpErrorResponse) {
+      return throwError(error.error);
     }
 }
