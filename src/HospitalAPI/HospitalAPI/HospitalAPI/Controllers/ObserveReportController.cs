@@ -1,9 +1,9 @@
-﻿using Hospital.Schedule.Model;
+﻿using Hospital.DTO;
+using Hospital.Schedule.Model;
 using Hospital.Schedule.Repository;
 using Hospital.Schedule.Service;
 using Hospital.SharedModel;
 using HospitalAPI.Authorization;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,12 +15,12 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ObserveAppointmentsController : ControllerBase
+    public class ObserveReportController : ControllerBase
     {
         private MyDbContext context;
         public ObserveAppointmentsService observeAppointmentsService;
 
-        public ObserveAppointmentsController(MyDbContext context)
+        public ObserveReportController(MyDbContext context)
         {
             this.context = context;
             observeAppointmentsService = new ObserveAppointmentsService(new ObserveAppointmentsSqlRepository(context));
@@ -28,11 +28,12 @@ namespace HospitalAPI.Controllers
 
         [AuthAttributePatient("Get", "patient")]
         [HttpGet]
-        public IActionResult Get([FromQuery]string id)
+        public IActionResult Get([FromQuery] string id)
         {
-            int idPatient = Int32.Parse(id);
-            List<Appointment> appointments = observeAppointmentsService.GetAppointmentsById(idPatient);
-            return Ok(appointments);
+            int idAppointment = Int32.Parse(id);
+            Appointment appointments = observeAppointmentsService.GetById(idAppointment);
+            ReportDTO report = ObserveAppointmentsService.ReportDTO(appointments);
+            return Ok(report);
         }
     }
 }

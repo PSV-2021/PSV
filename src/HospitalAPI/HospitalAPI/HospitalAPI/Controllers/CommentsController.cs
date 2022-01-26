@@ -11,6 +11,7 @@ using HospitalAPI.DTO;
 using Hospital.MedicalRecords.Model;
 using Hospital.MedicalRecords.Service;
 using Microsoft.AspNetCore.Authorization;
+using HospitalAPI.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -29,7 +30,7 @@ namespace HospitalAPI.Controllers
 
         }
 
-
+        [AuthAttributePatient("Post", "patient")]
         [HttpPost]   // POST /api/comments
         public IActionResult Post([FromBody]CommentDTO comment)
         {
@@ -39,7 +40,7 @@ namespace HospitalAPI.Controllers
             return Ok();
         }
 
-
+        [AuthAttributePatient("Get", "patient")]
         [HttpGet]   // GET /api/comments
         public IActionResult Get()
         {

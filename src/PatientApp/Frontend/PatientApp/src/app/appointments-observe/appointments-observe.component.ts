@@ -1,7 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AppointmentObserveService } from '../appointment-observe.service';
+import { ReportService } from '../service/report.service';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { DialogComponent } from '../dialog/dialog.component';
 
 
 export interface Appointment {
@@ -15,14 +18,17 @@ export interface Appointment {
   
 })
 export class AppointmentsObserveComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'start time', 'description', 'doctor', 'status','survey','cancel'];
+  displayedColumns: string[] = ['id', 'start time', 'description', 'doctor', 'status','survey','cancel','report'];
   dataSource = [];
   surveys: any[] = []
   appointmentId: any;
   id: any = "";
+  report: any;
+  reportPatient: any;
+  patientName: any = "";
 
 
-  constructor(private observeAppointemntsService: AppointmentObserveService, private router: Router, private _snackBar: MatSnackBar) { }
+  constructor(private observeAppointemntsService: AppointmentObserveService, private observeReportService: ReportService, private router: Router, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   TakeSurvey($myParam: number = 0, $myParam1: number = 0): void {
     const navigationDetails: string[] = ['/survey'];
@@ -50,8 +56,39 @@ export class AppointmentsObserveComponent implements OnInit {
     this.observeAppointemntsService.GetAppointments(this.id).subscribe((data: any)=>{
       console.log(data);
     this.dataSource = data;
+    this.reportPatient = data;
+
+    for (var value of this.reportPatient) {
+      if(value.patientId == this.id){
+        this.patientName = value.patientName;
+      }
+    }
+
   });
   }
- 
 
+  Report(element: { id: number, doctorName: string }){
+    this.appointmentId = element.id;
+    
+    this.observeReportService.GetReport(this.appointmentId).subscribe((data: any)=>{
+      this.report = data;
+
+      if(this.report.id == this.appointmentId){
+        let dialogRef = this.dialog.open(DialogComponent, {
+          width: '550px',
+          data: {
+            doctorName: element.doctorName,
+            apointmentDescription: this.report.apointmentDescription,
+            patientId: this.report.patientId,
+            startTime: this.report.startTime,
+            patientName: this.patientName
+          }
+        })
+      }
+
+    });
+    
+  }
+ 
 }
+

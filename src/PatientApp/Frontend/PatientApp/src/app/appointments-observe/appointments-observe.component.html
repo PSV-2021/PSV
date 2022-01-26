@@ -40,6 +40,11 @@
       <td mat-cell *matCellDef="let element"><button id="cancelButton" *ngIf="element.isCancelled==false && element.status==2 && element.canCancel==true" (click)="CancelAppointment(element)">Cancel appointment</button> </td>
     </ng-container>
 
+    <ng-container matColumnDef="report">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Report </th>
+      <td mat-cell *matCellDef="let element"><button id="reportButton" *ngIf="element.status==0" (click)="Report(element)">Report</button> </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

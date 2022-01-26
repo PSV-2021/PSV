@@ -2,6 +2,7 @@
 using Hospital.Schedule.Repository;
 using Hospital.Schedule.Service;
 using Hospital.SharedModel;
+using HospitalAPI.Authorization;
 using HospitalAPI.DTO;
 using HospitalAPI.Verification;
 using Microsoft.AspNetCore.Authorization;
@@ -29,14 +30,14 @@ namespace HospitalAPI.Controllers
             appointmentService = new AppointmentService(new AppointmentSqlRepository(context));
         }
 
-
+        [AuthAttributePatient("Post", "patient")]
         [HttpPost]
         public IActionResult Post(Appointment appointment)
         {
             return Ok(appointmentService.SaveAppointment(appointment));
         }
 
-
+        [AuthAttributePatient("Get", "patient")]
         [HttpGet("{idDoctor}/{chosenDate}")]
         public IActionResult GetFreeAppointments(string idDoctor, string chosenDate)
         {
@@ -51,7 +52,7 @@ namespace HospitalAPI.Controllers
             return Ok(result);
         }
 
-
+        [AuthAttributePatient("Post", "patient")]
         [HttpPost("schedule")]
         public IActionResult Schedule([FromBody] AppointmentDTO appointment)
         {
