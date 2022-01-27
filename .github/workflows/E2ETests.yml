@@ -1,6 +1,6 @@
 name: Run E2E Test on server
 on:
-  push:
+  pull_request:
     branches: [ development ]
     
 jobs:
