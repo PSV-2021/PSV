@@ -34,9 +34,17 @@ services:
     ports:
       - "5434:5432"
 
+  postgres-server-integration:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: integration
+      POSTGRES_USER: postgres
+    ports:
+      - "5435:5432"
+
   message-broker:
     image: rabbitmq:management-alpine
-    container_name: rabbitmq-broker
     ports:
       - 15672:15672
 
@@ -55,11 +63,14 @@ services:
      build: ../
      image: aco99/hospital_api
      environment:
-       DBServer: postgres-server-hospital
-       DBPort: 5432
-       DBUser: postgres
-       DBPassword: 123
-       DB: hospital
+      HOSPITAL_GRPC_DOMAIN: hospital_api
+      HOSPITAL_GRPC_PORT: 4111
+
+      DBServer: postgres-server-hospital
+      DBPort: 5432
+      DBUser: postgres
+      DBPassword: 123
+      DB: hospital
      restart: always
      ports:
        - "8081:80"
@@ -71,23 +82,24 @@ services:
       - hospital_api
     build:
       context: .
-      args:
-        SFTP_IP: sftp-server
-        SFTP_USERNAME: user
-        SFTP_PASSWORD: password
-        RABBIT_HOST: message-broker
-        HOSPITAL_GRPC_DOMAIN: hospital_api
-        HOSPITAL_GRPC_PORT: 8081
-        DRUGSTORE_GRPC_DOMAIN: drugstore_api
-        DRUGSTORE_GRPC_PORT: 8082
     image: aco99/integration_api
     environment:
-      DBServer: postgres-server-hospital
+      SFTP_IP: sftp-server
+      SFTP_USERNAME: user
+      SFTP_PASSWORD: password
+      
+      RABBIT_HOST: message-broker
+      
+      HOSPITAL_GRPC_DOMAIN: hospital_api
+      HOSPITAL_GRPC_PORT: 4111
+      DRUGSTORE_GRPC_DOMAIN: drugstore_api
+      DRUGSTORE_GRPC_PORT: 4111
+      
+      DBServer: postgres-server-integration
       DBPort: 5432
       DBUser: postgres
       DBPassword: 123
-      DB: hospital
-      RABBIT_HOST: message-broker
+      DB: integration
     restart: always
     ports:
       - "8083:80"  
@@ -103,6 +115,8 @@ services:
       SFTP_IP: sftp-server
       SFTP_USERNAME: user
       SFTP_PASSWORD: password
+      DRUGSTORE_GRPC_DOMAIN: drugstore_api
+      DRUGSTORE_GRPC_PORT: 4111
       RABBIT_HOST: message-broker
       DBServer: postgres-server-drugstore
       DBPerver: 5433

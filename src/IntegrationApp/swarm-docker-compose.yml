@@ -41,10 +41,23 @@ services:
       - POSTGRES_HOSPITAL_DB
     ports:
       - "5434:5432"
+  
+  postgres-server-integration:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: /run/secrets/POSTGRES_PASSWORD
+      POSTGRES_DB: /run/secrets/POSTGRES_INTEGRATION_DB
+      POSTGRES_USER: /run/secrets/POSTGRES_USERNAME
+    secrets:
+      - POSTGRES_USERNAME
+      - POSTGRES_PASSWORD
+      - POSTGRES_INTEGRATION_DB
+    ports:
+      - "5433:5432"
+
 
   message-broker:
     image: rabbitmq:management-alpine
-    container_name: rabbitmq-broker
     ports:
       - 15672:15672
 
@@ -55,16 +68,16 @@ services:
     volumes:
       - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
       - /upload/HospitalFiles:/home/user/upload/HospitalFiles
-    command: /run/secrets/SFTP_USERNAME:/run/secrets/SFTP_PASSWORD:1001
-    secrets:
-      - SFTP_PASSWORD
-      - SFTP_USERNAME
+    command: user:password:1001
 
   hospital_api:
      depends_on:
        - postgres-server-hospital
      image: aco99/hospital_api
      environment:
+       HOSPITAL_GRPC_DOMAIN: hospital_api
+       HOSPITAL_GRPC_PORT: 4111
+       
        DBServer: postgres-server-hospital
        DBUser: /run/secrets/POSTGRES_USERNAME
        DBPassword: /run/secrets/POSTGRES_PASSWORD
@@ -84,17 +97,21 @@ services:
       - hospital_api
     image: aco99/integration_api
     environment:
+      HOSPITAL_GRPC_DOMAIN: hospital_api
+      HOSPITAL_GRPC_PORT: 4111
+      DRUGSTORE_GRPC_DOMAIN: drugstore_api
+      DRUGSTORE_GRPC_PORT: 4111
       SFTP_IP: sftp-server
       SFTP_USERNAME: /run/secrets/SFTP_USERNAME
       SFTP_PASSWORD: /run/secrets/SFTP_PASSWORD
       DBServer: postgres-server-hospital
       DBUser: /run/secrets/POSTGRES_USERNAME
       DBPassword: /run/secrets/POSTGRES_PASSWORD
-      DB: /run/secrets/POSTGRES_HOSPITAL_DB
+      DB: /run/secrets/POSTGRES_INTEGRATION_DB
       RABBIT_HOST: message-broker
     restart: always
     secrets:
-      - POSTGRES_HOSPITAL_DB
+      - POSTGRES_INTEGRATION_DB
       - POSTGRES_PASSWORD
       - POSTGRES_USERNAME
       - SFTP_USERNAME
@@ -150,6 +167,8 @@ secrets:
    external: true
   POSTGRES_DRUGSTORE_DB:
    external: true
+  POSTGRES_INTEGRATION_DB:
+   external: true 
   SFTP_USERNAME:
    external: true
   SFTP_PASSWORD:
