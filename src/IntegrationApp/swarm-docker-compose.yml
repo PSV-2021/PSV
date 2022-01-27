@@ -1,0 +1,157 @@
+version: '3.3'
+services:
+  gateway:
+    depends_on:
+      - drugstore_client
+      - drugstore_api
+      - integration_api
+      - patient_client
+      - manager_client
+    build: ../config/gateway
+    image: aco99/gateway
+    extra_hosts:
+      - "patient.localhost:127.0.0.1"
+      - "drugstore.localhost:127.0.0.1"
+      - "manager.localhost:127.0.0.1"
+    ports:
+      - "80:80"
+
+  postgres-server-drugstore:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: /run/secrets/POSTGRES_PASSWORD
+      POSTGRES_DB: /run/secrets/POSTGRES_DRUGSTORE_DB
+      POSTGRES_USER: /run/secrets/POSTGRES_USERNAME
+    secrets:
+      - POSTGRES_USERNAME
+      - POSTGRES_PASSWORD
+      - POSTGRES_DRUGSTORE_DB
+    ports:
+      - "5433:5432"
+
+  postgres-server-hospital:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: /run/secrets/POSTGRES_PASSWORD
+      POSTGRES_DB: /run/secrets/POSTGRES_HOSPITAL_DB
+      POSTGRES_USER: /run/secrets/POSTGRES_USERNAME
+    secrets:
+      - POSTGRES_USERNAME
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOSPITAL_DB
+    ports:
+      - "5434:5432"
+
+  message-broker:
+    image: rabbitmq:management-alpine
+    container_name: rabbitmq-broker
+    ports:
+      - 15672:15672
+
+  sftp-server:
+    image: atmoz/sftp
+    ports:
+      - "23:22"
+    volumes:
+      - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
+      - /upload/HospitalFiles:/home/user/upload/HospitalFiles
+    command: /run/secrets/SFTP_USERNAME:/run/secrets/SFTP_PASSWORD:1001
+    secrets:
+      - SFTP_PASSWORD
+      - SFTP_USERNAME
+
+  hospital_api:
+     depends_on:
+       - postgres-server-hospital
+     image: aco99/hospital_api
+     environment:
+       DBServer: postgres-server-hospital
+       DBUser: /run/secrets/POSTGRES_USERNAME
+       DBPassword: /run/secrets/POSTGRES_PASSWORD
+       DB: /run/secrets/POSTGRES_HOSPITAL_DB
+     restart: always
+     secrets:
+       - POSTGRES_USER
+       - POSTGRES_PASSWORD
+       - POSTGRES_HOSPITAL_DB
+     ports:
+       - "8081:80"
+
+  integration_api:
+    depends_on:
+      - sftp-server
+      - message-broker
+      - hospital_api
+    image: aco99/integration_api
+    environment:
+      SFTP_IP: sftp-server
+      SFTP_USERNAME: /run/secrets/SFTP_USERNAME
+      SFTP_PASSWORD: /run/secrets/SFTP_PASSWORD
+      DBServer: postgres-server-hospital
+      DBUser: /run/secrets/POSTGRES_USERNAME
+      DBPassword: /run/secrets/POSTGRES_PASSWORD
+      DB: /run/secrets/POSTGRES_HOSPITAL_DB
+      RABBIT_HOST: message-broker
+    restart: always
+    secrets:
+      - POSTGRES_HOSPITAL_DB
+      - POSTGRES_PASSWORD
+      - POSTGRES_USERNAME
+      - SFTP_USERNAME
+      - SFTP_PASSWORD
+    ports:
+      - "8083:80"
+
+  drugstore_api:
+    depends_on:
+      - postgres-server-drugstore
+      - message-broker
+      - sftp-server
+    image: aco99/drugstore_api
+    environment:
+      SFTP_IP: sftp-server
+      SFTP_USERNAME: /run/secrets/SFTP_USERNAME
+      SFTP_PASSWORD: /run/secrets/SFTP_PASSWORD
+      RABBIT_HOST: message-broker
+      DBServer: postgres-server-drugstore
+      DBUser: /run/secrets/POSTGRES_USERNAME
+      DBPassword: /run/secrets/POSTGRES_PASSWORD
+      DB: /run/secrets/POSTGRES_DRUGSTORE_DB
+    restart: always
+    secrets:
+      - POSTGRES_USERNAME
+      - POSTGRES_PASSWORD
+      - POSTGRES_DRUGSTORE_DB
+      - SFTP_USERNAME
+      - SFTP_PASSWORD
+    ports:
+      - "8082:80"
+
+  patient_client:
+    image: aco99/patient_client
+    ports:
+      - "4201:80"
+  drugstore_client:
+    image: aco99/drugstore_client
+    ports:
+      - "4202:80"
+
+  manager_client:
+   image: aco99/manager_client
+   ports:
+    - "4203:80"
+
+secrets:
+  POSTGRES_USERNAME:
+   external: true
+  POSTGRES_PASSWORD:
+   external: true
+  POSTGRES_HOSPITAL_DB:
+   external: true
+  POSTGRES_DRUGSTORE_DB:
+   external: true
+  SFTP_USERNAME:
+   external: true
+  SFTP_PASSWORD:
+   external: true
+   

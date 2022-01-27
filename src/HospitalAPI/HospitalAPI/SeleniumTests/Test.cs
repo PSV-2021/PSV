@@ -20,7 +20,7 @@ namespace SeleniumTests
             options.AddArguments("--disable-dev-shm-usage");
             options.AddArguments("--no-sandbox");
             options.AddArguments("--disable-notifications");
-            Uri grid = new Uri("http://localhost:4444/wd/hub");
+            Uri grid = new Uri("http://selenium:4444/wd/hub");
             driver = new RemoteWebDriver(grid, options);
             
         }

@@ -1,0 +1,14 @@
+name: Integration tests hospital
+on:
+  pull_request: 
+    branches: [ development ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: RunTests
+        run: |
+          docker-compose -f src/config/testing/integration-test-docker-compose.yml build 
+          docker-compose -f src/config/testing/integration-test-docker-compose.yml up --exit-code-from hospital_test hospital_test
+      

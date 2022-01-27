@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using SeleniumTests.Pages;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,9 @@ namespace SeleniumTests
             options.AddArguments("--disable-dev-shm-usage");
             options.AddArguments("--no-sandbox");
             options.AddArguments("--disable-notifications");
-
-            Driver = new ChromeDriver(options);
+            Uri grid = new Uri("http://localhost:4444/wd/hub");
+            Driver = new RemoteWebDriver(grid, options);
+            //Driver = new ChromeDriver(options);
             LoginPage = new LoginPage(Driver);
             LoginPage.Navigate();
             LoginPage.InsertUsername("mici97");

@@ -10,5 +10,13 @@ namespace Hospital.PatientEvent.Repository.Interface
         public List<Event> GetAll();
         public void Save(Event newEvent);
         public Event GetById(int eventId);
+        List<Event> GetAllSuccessful();
+        List<Event> GetAllFirstStep();
+        List<Event> GetAllThirdStep();
+        List<Event> GetAllQuit();
+        List<Event> GetTodaySuccessSchedule();
+        List<Event> GetYesterdaySuccessSchedule();
+        List<Event> GetTwoDaysAgoSuccessSchedule();
+        int GetNumberOfDistinctEvents();
     }
 }

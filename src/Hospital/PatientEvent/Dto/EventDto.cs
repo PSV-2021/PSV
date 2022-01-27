@@ -8,17 +8,19 @@ namespace Hospital.PatientEvent.Dto
     {
         public int Id { get; set; }
         public string EventName { get; set; }
-        public DateTime EventTime { get; set; }
+        public string EventTime { get; set; }
+        public int EventId { get; set; }
 
         public EventDto()
         {
         }
 
-        public EventDto(int id, string eventName, DateTime eventTime)
+        public EventDto(int id, string eventName, string eventTime,int eventId)
         {
             Id = id;
             EventName = eventName;
             EventTime = eventTime;
+            EventId = eventId;
         }
     }
 }

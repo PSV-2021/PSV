@@ -4,10 +4,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
-    public partial class migration1m : Migration
+    public partial class @new : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "PatientEvent");
+
             migrationBuilder.CreateTable(
                 name: "AnsweredQuestion",
                 columns: table => new
@@ -22,27 +25,6 @@ namespace Hospital.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AnsweredQuestion", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Appointments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StartTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DurationInMunutes = table.Column<int>(type: "integer", nullable: false),
-                    ApointmentDescription = table.Column<string>(type: "text", nullable: true),
-                    isCancelled = table.Column<bool>(type: "boolean", nullable: false),
-                    canCancel = table.Column<bool>(type: "boolean", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
-                    DoctorId = table.Column<int>(type: "integer", nullable: false),
-                    SurveyId = table.Column<int>(type: "integer", nullable: false),
-                    PatientId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Appointments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,6 +86,22 @@ namespace Hospital.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Medicines", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PatientEvents",
+                schema: "PatientEvent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EventName = table.Column<string>(type: "text", nullable: true),
+                    EventTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EventId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PatientEvents", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -261,15 +259,44 @@ namespace Hospital.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Appointments",
-                columns: new[] { "Id", "ApointmentDescription", "DoctorId", "DurationInMunutes", "IsDeleted", "PatientId", "StartTime", "SurveyId", "canCancel", "isCancelled" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "Appointments",
+                columns: table => new
                 {
-                    { 4, "All good", 1, 30, false, 2, new DateTime(2021, 11, 15, 14, 0, 0, 0, DateTimeKind.Unspecified), 0, true, true },
-                    { 3, "All good", 1, 30, false, 2, new DateTime(2021, 12, 7, 14, 30, 0, 0, DateTimeKind.Unspecified), 0, true, false },
-                    { 2, "", 1, 30, false, 2, new DateTime(2021, 12, 31, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, true, false },
-                    { 1, "All good", 1, 30, false, 1, new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, true, false }
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    StartTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DurationInMunutes = table.Column<int>(type: "integer", nullable: false),
+                    ApointmentDescription = table.Column<string>(type: "text", nullable: true),
+                    isCancelled = table.Column<bool>(type: "boolean", nullable: false),
+                    canCancel = table.Column<bool>(type: "boolean", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
+                    DoctorId = table.Column<int>(type: "integer", nullable: false),
+                    SurveyId = table.Column<int>(type: "integer", nullable: false),
+                    SurveyId1 = table.Column<int>(type: "integer", nullable: true),
+                    PatientId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Survey_SurveyId1",
+                        column: x => x.SurveyId1,
+                        principalTable: "Survey",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -277,8 +304,8 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Adress", "DateOfBirth", "Email", "Jmbg", "Name", "NumberOfPatients", "Password", "PhoneNumber", "SalaryInRsd", "Sex", "SpecialityId", "Surname", "Type", "Username" },
                 values: new object[,]
                 {
-                    { 2, "Ravanicka 8", new DateTime(1987, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "milica@gmail.com", "3052123545852", "Milica", 0, "mica1234", "0691457608", 250000, 1, 2, "Milic", 2, "mica56" },
-                    { 1, "Bulevar Oslobodjenja 4", new DateTime(1998, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "milan@gmail.com", "3009998805137", "Milan", 0, "02145", "0641664608", 200000, 0, 1, "Popovic", 2, "miki56" }
+                    { 2, "Ravanicka 8", new DateTime(1987, 4, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "milica@gmail.com", "3052123545852", "Milica", 0, "mica1234", "0691457608", 250000, 1, 2, "Milic", 3, "mica56" },
+                    { 1, "Bulevar Oslobodjenja 4", new DateTime(1998, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "milan@gmail.com", "3009998805137", "Milan", 0, "02145", "0641664608", 200000, 0, 1, "Popovic", 3, "miki56" }
                 });
 
             migrationBuilder.InsertData(
@@ -308,7 +335,7 @@ namespace Hospital.Migrations
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
-                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2022, 1, 9, 15, 18, 53, 626, DateTimeKind.Local).AddTicks(4697), "Zoran Zoranic" });
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2022, 1, 24, 21, 29, 56, 409, DateTimeKind.Local).AddTicks(4216), "Zoran Zoranic" });
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -324,20 +351,20 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "QuestionType", "Rating", "Text" },
                 values: new object[,]
                 {
-                    { 10, 2, 0, "How satisfied are you with the cleanliness and appearance of our hospital?" },
+                    { 6, 1, 0, "During this hospital stay, did nurses treat you with courtesy and respect?" },
                     { 1, 0, 0, "How satisfied are you with the work of your doctor?" },
                     { 2, 0, 0, "How satisfied were you with the time that your doctor spent with you?" },
                     { 3, 0, 0, "During this hospital stay, did doctor treat you with courtesy and respect?" },
-                    { 4, 0, 0, "During this hospital stay, did doctor listen carefully to you?" },
                     { 5, 0, 0, "During this hospital stay, did doctor explain things in a way you could understand?" },
-                    { 9, 2, 0, "How easy was it to schedule an appointment with our hospital?" },
-                    { 7, 1, 0, "During this hospital stay, did nurses listen carefully to you?" },
-                    { 6, 1, 0, "During this hospital stay, did nurses treat you with courtesy and respect?" },
                     { 14, 2, 0, "How likely are you to recommend our hospital to a friend or family member?" },
                     { 13, 2, 0, "Do you feel that our work hours are well suited to treat you?" },
-                    { 12, 2, 0, "How satisfied were you with the co-ordination between different departments?" },
+                    { 9, 2, 0, "How easy was it to schedule an appointment with our hospital?" },
+                    { 11, 2, 0, "How would you rate the professionalism of our staff?" },
+                    { 10, 2, 0, "How satisfied are you with the cleanliness and appearance of our hospital?" },
+                    { 4, 0, 0, "During this hospital stay, did doctor listen carefully to you?" },
                     { 8, 1, 0, "During this hospital stay, did nurses explain things in a way you could understand?" },
-                    { 11, 2, 0, "How would you rate the professionalism of our staff?" }
+                    { 7, 1, 0, "During this hospital stay, did nurses listen carefully to you?" },
+                    { 12, 2, 0, "How satisfied were you with the co-ordination between different departments?" }
                 });
 
             migrationBuilder.InsertData(
@@ -345,9 +372,9 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
-                    { 2, "I didn't like it.", "Anonymus", new DateTime(2022, 1, 9, 15, 18, 53, 610, DateTimeKind.Local).AddTicks(8675), true },
-                    { 1, "Good!", "Mika Mikic", new DateTime(2022, 1, 9, 15, 18, 53, 606, DateTimeKind.Local).AddTicks(3397), false },
-                    { 3, "Super service!", "Sara Saric", new DateTime(2022, 1, 9, 15, 18, 53, 610, DateTimeKind.Local).AddTicks(8896), true }
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9733), true },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9937), true },
+                    { 1, "Good!", "Mika Mikic", new DateTime(2022, 1, 24, 21, 29, 56, 382, DateTimeKind.Local).AddTicks(5398), false }
                 });
 
             migrationBuilder.InsertData(
@@ -360,10 +387,36 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "BeginningDate", "EndDate", "Shift" },
                 values: new object[] { 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), 0 });
 
+            migrationBuilder.InsertData(
+                table: "Appointments",
+                columns: new[] { "Id", "ApointmentDescription", "DoctorId", "DurationInMunutes", "IsDeleted", "PatientId", "StartTime", "SurveyId", "SurveyId1", "canCancel", "isCancelled" },
+                values: new object[,]
+                {
+                    { 1, "All good", 1, 30, false, 1, new DateTime(2021, 12, 7, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, null, true, false },
+                    { 2, "", 1, 30, false, 2, new DateTime(2021, 12, 31, 16, 30, 0, 0, DateTimeKind.Unspecified), 0, null, true, false },
+                    { 3, "All good", 1, 30, false, 2, new DateTime(2021, 12, 7, 14, 30, 0, 0, DateTimeKind.Unspecified), 0, null, true, false },
+                    { 4, "All good", 1, 30, false, 2, new DateTime(2022, 1, 30, 14, 0, 0, 0, DateTimeKind.Unspecified), 0, null, true, false }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Allergens_PatientId",
                 table: "Allergens",
                 column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_DoctorId",
+                table: "Appointments",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_PatientId",
+                table: "Appointments",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_SurveyId1",
+                table: "Appointments",
+                column: "SurveyId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -378,22 +431,20 @@ namespace Hospital.Migrations
                 name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
-
-            migrationBuilder.DropTable(
                 name: "Ingridients");
 
             migrationBuilder.DropTable(
                 name: "Medicines");
 
             migrationBuilder.DropTable(
+                name: "PatientEvents",
+                schema: "PatientEvent");
+
+            migrationBuilder.DropTable(
                 name: "Prescriptions");
 
             migrationBuilder.DropTable(
                 name: "Speciality");
-
-            migrationBuilder.DropTable(
-                name: "Survey");
 
             migrationBuilder.DropTable(
                 name: "SurveyQuestion");
@@ -408,7 +459,13 @@ namespace Hospital.Migrations
                 name: "WorkingHours");
 
             migrationBuilder.DropTable(
+                name: "Doctors");
+
+            migrationBuilder.DropTable(
                 name: "Patients");
+
+            migrationBuilder.DropTable(
+                name: "Survey");
         }
     }
 }
