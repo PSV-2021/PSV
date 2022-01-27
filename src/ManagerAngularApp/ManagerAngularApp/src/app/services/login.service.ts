@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class LoginService {
   url: string;
   constructor(private http: HttpClient) {   
-    this.url = "http://" + environment.apiUrl + ":" + environment.port +"/api";
+    this.url = environment.hospitalAPI;
   }
 
   Login(userDTO: UserDto): Observable<any>{
