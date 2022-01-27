@@ -18,8 +18,8 @@ jobs:
             echo "Connected"
             docker kill $(docker ps -q)
             cd PSV
-            git checkout master
-            git pull origin master
+            git checkout development
+            git pull origin development
             cd src/IntegrationApp
             docker-compose build
             docker-compose up -d
