@@ -31,7 +31,7 @@ namespace HospitalAPI.Controllers
         public IActionResult Authentication(UserDTO userDTO)
         {
             Patient patient = patientService.FindByUsernameAndPassword(userDTO.Username, userDTO.Password);
-
+            Console.Out.WriteLine(patient.Name);
             if(patient != null)
             {
                 String jwtToken = patientService.GenerateJwtToken(patient);

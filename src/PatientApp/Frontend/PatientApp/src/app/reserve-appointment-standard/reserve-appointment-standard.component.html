@@ -11,7 +11,7 @@
             <mat-error *ngIf="hasErrorFirst('date', 'required')">Date is required</mat-error>
         </mat-form-field>
         <div>
-          <button mat-button matStepperNext [disabled]="!f1.valid">Next</button>
+          <button mat-button matStepperNext [disabled]="!f1.valid" (click)="createFromStartedToSelectSpecializationEvent()">Next</button>
         </div>
       </form>
     </mat-step>
@@ -19,7 +19,8 @@
       <form #f2="ngForm" [formGroup]="secondFormGroup">
         <mat-form-field appearance="fill">
             <mat-label>Specialty</mat-label>
-            <mat-select formControlName="specialty" [(ngModel)]="selectedSpecialty.Id" required>
+            <mat-select formControlName="specialty" [(ngModel)]="selectedSpecialty.Id"
+              required>
                 <mat-option *ngFor="let specialty of specialties" [value]="specialty.id"  >
                   {{specialty.name}}
                 </mat-option>
@@ -27,8 +28,8 @@
             <mat-error *ngIf="hasErrorSecond('specialty', 'required')">Specialty is required</mat-error>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext [disabled]="!f2.valid" (click)="chosedSpecialty()">Next</button>
+          <button mat-button matStepperPrevious (click)="createFromSelectSpecializationToStarted()">Back</button>
+          <button mat-button matStepperNext [disabled]="!f2.valid" (click)="chosedSpecialty()" >Next</button>
         </div>
       </form>
     </mat-step>
@@ -44,8 +45,8 @@
              <mat-error *ngIf="hasErrorThird('doctor', 'required')">Doctor is required</mat-error>
             </mat-form-field>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext [disabled]="!f3.valid" (click)="chosedDoctor()">Next</button>
+            <button mat-button matStepperPrevious (click)="createFromSelectDoctorToSelectSpecialization()">Back</button>
+            <button mat-button matStepperNext [disabled]="!f3.valid" (click)="chosedDoctor()" >Next</button>
           </div>
         </form>
     </mat-step>

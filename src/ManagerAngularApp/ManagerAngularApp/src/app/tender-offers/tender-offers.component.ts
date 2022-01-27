@@ -26,12 +26,6 @@ export class TenderOffersComponent implements OnInit {
     this.tenderService.GetAllOffersForTender(this.id).subscribe((data: any) => {
       console.log(data)
       this.offers = data;
-    },
-    error => {
-      if(error.error)
-        this.toastr.error(error.error, 'Sorry');
-      else
-        this.toastr.error(error, 'Sorry');
     });
   }
   completeTransaction(offer: TenderOfferDto):void{

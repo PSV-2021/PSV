@@ -1,7 +1,6 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,12 +13,14 @@ export class FileService {
     }
     
     GetAllFiles(): Observable<any> {
-        return this.http.get<any>(this.url + '/drugSpecification').pipe(map(res => res), catchError(this.errorHandler));
+        return this.http.get<any>(this.url + '/drugSpecification');
     }
 
     DownloadFile(filename: string): Observable<any> {
         console.log(filename);
-        return this.http.get<any>(this.url + '/drugSpecification/files', {params:{filename: filename}}).pipe(map(res => res), catchError(this.errorHandler));
+        let responseData = this.http.get<any>(this.url + '/drugSpecification/files', {params:{filename: filename}});
+        console.log(responseData);
+        return responseData;
     }
 
     OpenFile(reportName: string): any {
@@ -31,9 +32,5 @@ export class FileService {
                 window.open(url);
             }
         );
-    }
-
-    errorHandler(error: HttpErrorResponse) {
-        return throwError(error.error);
-    }
+      }
 }

@@ -28,7 +28,11 @@ namespace Integration.Repository.Sql
 
         public List<Drugstore> GetAll()
         {
-            return dbContext.Drugstores.ToList();
+            List<Drugstore> result = new List<Drugstore>();
+
+            dbContext.Drugstores.ToList().ForEach(drugstore => result.Add(drugstore));
+
+            return result;
         }
 
         public string GetDrugstoreName(int id)

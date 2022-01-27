@@ -39,8 +39,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './interceptor';
 import { AuthGuard } from './auth-guard';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
-import { DialogComponent } from './dialog/dialog.component';
-import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -59,7 +57,6 @@ import { MatDialogModule } from "@angular/material/dialog";
     AppointmentsObserveComponent,
     RecommendAppointmentComponent,
     HomePageComponent,
-    DialogComponent
 
 
   ],
@@ -86,8 +83,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatSnackBarModule,
     FormsModule,
     MatStepperModule,
-    NgxDropzoneModule,
-    MatDialogModule
+    NgxDropzoneModule
 
   ],
   schemas: [
@@ -97,9 +93,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     AuthGuard,
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent]
 })
 export class AppModule { }

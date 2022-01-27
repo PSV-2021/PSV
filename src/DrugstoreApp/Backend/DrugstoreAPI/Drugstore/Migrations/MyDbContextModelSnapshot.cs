@@ -72,28 +72,28 @@ namespace Drugstore.Migrations
                         new
                         {
                             Id = "1",
-                            TenderEnd = new DateTime(2022, 1, 10, 16, 4, 59, 622, DateTimeKind.Local).AddTicks(9323),
+                            TenderEnd = new DateTime(2021, 12, 29, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(1941),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 2, 14, 16, 4, 59, 623, DateTimeKind.Local).AddTicks(1237),
+                            TenderEnd = new DateTime(2022, 2, 2, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3194),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         },
                         new
                         {
                             Id = "3",
-                            TenderEnd = new DateTime(2022, 1, 17, 16, 4, 59, 623, DateTimeKind.Local).AddTicks(1303),
+                            TenderEnd = new DateTime(2022, 1, 5, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3242),
                             TenderInfo = "Brufen - 2, Palitreks - 2, Andol - 2",
                             isFinished = true
                         },
                         new
                         {
                             Id = "4",
-                            TenderEnd = new DateTime(2021, 12, 27, 16, 4, 59, 623, DateTimeKind.Local).AddTicks(1308),
+                            TenderEnd = new DateTime(2021, 12, 15, 13, 47, 35, 275, DateTimeKind.Local).AddTicks(3245),
                             TenderInfo = "Brufen - 10, Palitreks - 50, Andol - 35",
                             isFinished = true
                         });
@@ -129,8 +129,8 @@ namespace Drugstore.Migrations
                             Id = "1",
                             Content = "Content",
                             DrugstoreName = "Apotekica",
-                            EndDate = new DateTime(2022, 1, 24, 16, 4, 59, 622, DateTimeKind.Local).AddTicks(1560),
-                            StartDate = new DateTime(2022, 1, 24, 16, 4, 59, 619, DateTimeKind.Local).AddTicks(2835),
+                            EndDate = new DateTime(2022, 1, 12, 13, 47, 35, 274, DateTimeKind.Local).AddTicks(6870),
+                            StartDate = new DateTime(2022, 1, 12, 13, 47, 35, 272, DateTimeKind.Local).AddTicks(8945),
                             Title = "title"
                         });
                 });
@@ -200,62 +200,6 @@ namespace Drugstore.Migrations
                             Content = "bla bla",
                             HospitalName = "Ime bolnice 224",
                             Response = ""
-                        });
-                });
-
-            modelBuilder.Entity("Drugstore.Models.FileNotification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<string>("HospitalName")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("Posted")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FileNotifications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "Aloaloalo",
-                            HospitalName = "Health",
-                            IsRead = true,
-                            Posted = new DateTime(2021, 6, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Prva notifikacija"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Content = "Stigli su novi lekovi",
-                            HospitalName = "Health",
-                            IsRead = false,
-                            Posted = new DateTime(2021, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Novi lekovi"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Content = "Obavestenje o promeni cena",
-                            HospitalName = "Health",
-                            IsRead = true,
-                            Posted = new DateTime(2021, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Vazno obavestenje"
                         });
                 });
 

@@ -14,7 +14,6 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { DrugstoreOfferComponent } from './drugstore-offer/drugstore-offer.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { TenderFinishingComponent } from './tender-finishing/tender-finishing.component';
-import { NotificationsComponent } from './notifications/notifications.component';
 
 
 @NgModule({
@@ -26,7 +25,6 @@ import { NotificationsComponent } from './notifications/notifications.component'
     DrugstoreOfferComponent,
     TendersComponent,
     TenderFinishingComponent,
-    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +34,6 @@ import { NotificationsComponent } from './notifications/notifications.component'
     FormsModule,
     HttpClientModule,
     MatDatepickerModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

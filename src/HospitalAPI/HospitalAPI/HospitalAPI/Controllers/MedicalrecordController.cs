@@ -12,7 +12,6 @@ using Hospital.MedicalRecords.Model;
 using HospitalAPI.DTO;
 using Hospital.Schedule.Repository;
 using Microsoft.AspNetCore.Authorization;
-using HospitalAPI.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -36,8 +35,8 @@ namespace HospitalAPI.Controllers
             patientService.AllergenRepository = new AllergenSqlRepository(context);
         }
 
-
-        [AuthAttributePatient("Get", "patient")]
+ 
+        //[Authorize(Roles = "patient")]
         [HttpGet]
         public IActionResult Get( string id)
         {

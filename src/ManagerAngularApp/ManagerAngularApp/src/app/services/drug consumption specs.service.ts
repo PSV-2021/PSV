@@ -1,7 +1,6 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class DrugConsumptionSpecsService {
     }
 
     GetAllDrugstores(): Observable<any> {
-      return this.http.get<any>(this.url + '/drugstore').pipe(map(res => res), catchError(this.errorHandler));
+      return this.http.get<any>(this.url + '/drugstore');
     }
     
     RequestDrugSpecification(Url: string, DrugName: string): Observable<any> {
@@ -26,7 +25,8 @@ export class DrugConsumptionSpecsService {
         'Content-Type': 'application/json',
         'ApiKey': "abcde" });
       let options = { headers: headers };
-      return this.http.put<any>(this.url + '/drugSpecification', body, options).pipe(map(res => res), catchError(this.errorHandler));
+      const ret = this.http.put<any>(this.url + '/drugSpecification', body, options);
+      return ret;
     }
 
     GenerateReport(start: Date, end: Date): Observable<any> {
@@ -39,11 +39,8 @@ export class DrugConsumptionSpecsService {
         'Content-Type': 'application/json',
         'ApiKey': "abcde" });
       let options = { headers: headers };
-      return this.http.post<any>(this.url + '/DrugsConsumptionReport', body, options).pipe(map(res => res), catchError(this.errorHandler));
-    }
-
-    errorHandler(error: HttpErrorResponse) {
-      return throwError(error.error);
+      const ret = this.http.post<any>(this.url + '/drugsConsumptionReport', body, options);
+      return ret;
     }
     
 }

@@ -4,7 +4,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReviewService } from '../services/review.service';
 import { PharmacyDto } from './pharmacy.dto';
 import { PharmacyService } from '../services/pharmacy.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-review',
@@ -16,7 +15,7 @@ export class ReviewComponent implements OnInit {
   public selectedPharmacy: PharmacyDto;
   public pharmacies: PharmacyDto[];
   public review: string;
-  constructor(private reviewService: ReviewService, private pharmacyService: PharmacyService, private toastr: ToastrService) {
+  constructor(private reviewService: ReviewService, private pharmacyService: PharmacyService) {
     this.reviews = [
     ];
     this.selectedPharmacy = new PharmacyDto();
@@ -37,28 +36,17 @@ export class ReviewComponent implements OnInit {
           "Address": p.address.street
         });
       }
-    },
-    error => {
-      if(error.error)
-        this.toastr.error(error.error, 'Sorry');
-      else
-        this.toastr.error(error, 'Sorry');
     });
 
     this.reviewService.GetAllReviews().subscribe((data: any) => {
       for (const d of (data as any)) {
+        console.log(d);
         this.reviews.push({
           "DrugstoreName": d.drugstoreName,
           "ReviewContent": d.content,
           "ReviewResponse": d.response,
         });
       }
-    },
-    error => {
-      if(error.error)
-      this.toastr.error(error.error, 'Sorry');
-      else
-      this.toastr.error(error, 'Sorry');
     });
   }
 
@@ -69,11 +57,6 @@ export class ReviewComponent implements OnInit {
         "ReviewContent": d.content,
         "ReviewResponse": d.response,
       });
-    }, error => {
-      if(error.error)
-      this.toastr.error(error.error, 'Sorry');
-      else
-      this.toastr.error(error, 'Sorry');
     });
   }
 

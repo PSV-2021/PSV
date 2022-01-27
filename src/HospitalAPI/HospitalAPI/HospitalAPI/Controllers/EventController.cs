@@ -35,6 +35,18 @@ namespace HospitalAPI.Controllers
             if (e == null) return NotFound();
             else return Ok(EventAdapter.EventToEventDto(e));
         }
+        [HttpGet("getSucceedQuitRatio")]
+        public IActionResult GetSucceedQuitRatio()
+        {
+            List<double> succesfulAndQuitScheduling = eventService.GetPercentSuccessfullAndQuit();
+             return Ok(succesfulAndQuitScheduling);
+        }
+        [HttpGet("getDailyNumberOfScheduling")]
+        public IActionResult GetDailyNumberOfScheduling()
+        {
+            List<int> dailyNumber = eventService.GetDailyNumberOfScheduling();
+            return Ok(dailyNumber);
+        }
 
         [HttpPost]
         public IActionResult Save(EventDto dto)

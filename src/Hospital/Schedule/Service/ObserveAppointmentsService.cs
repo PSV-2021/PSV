@@ -1,5 +1,4 @@
-﻿using Hospital.DTO;
-using Hospital.Schedule.Model;
+﻿using Hospital.Schedule.Model;
 using Hospital.Schedule.Repository;
 using System;
 using System.Collections.Generic;
@@ -37,27 +36,6 @@ namespace Hospital.Schedule.Service
             appointment.SetCancel(appointment);
             bool retVal = AppointmentRepository.Update(appointment);
             return retVal;
-        }
-
-        //ObserveReport
-        public Appointment GetById(int id)
-        {
-            Appointment appointment = AppointmentRepository.GetByAppointmentId(id);
-            return appointment;
-        }
-
-        public static ReportDTO ReportDTO(Appointment appointment)
-        {
-            ReportDTO dto = new ReportDTO
-            {
-                 Id = appointment.Id,
-                 StartTime = appointment.StartTime,
-                 ApointmentDescription = appointment.ApointmentDescription,
-                 DoctorId = appointment.DoctorId,
-                 PatientId = appointment.PatientId
-            };
-
-            return dto;
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Drugstore.Models;
 using Drugstore.Repository.Sql;
 using DrugstoreAPI.Dtos;
 using DrugstoreAPI.Service;
 using Drugstore.Service;
-using Microsoft.AspNetCore.Http;
 using Service;
 
 namespace DrugstoreAPI.Controllers
@@ -29,38 +27,31 @@ namespace DrugstoreAPI.Controllers
         [HttpPost]
         public IActionResult Post(DrugSpecificationDto drugSpec)
         {
-            try
-            {
-                Microsoft.Extensions.Primitives.StringValues headerValues;
+            Microsoft.Extensions.Primitives.StringValues headerValues;
 
-                if (Request.Headers.TryGetValue("ApiKey", out headerValues))
+            if (Request.Headers.TryGetValue("ApiKey", out headerValues))
+            {
+                drugSpec.Name = FormatString(drugSpec.Name);
+                var headers = Request.Headers["ApiKey"];
+                foreach (string header in headers)
                 {
-                    drugSpec.Name = FormatString(drugSpec.Name);
-                    var headers = Request.Headers["ApiKey"];
-                    foreach (string header in headers)
+                    if (HospitalService.CheckApiKey(header))
                     {
-                        if (HospitalService.CheckApiKey(header))
+                        string specificationContent = drugSpecificationService.ReadDrugSpecification(drugSpec.Name);
+                        if (!specificationContent.Equals(""))
                         {
-                            string specificationContent = drugSpecificationService.ReadDrugSpecification(drugSpec.Name);
-                            if (!specificationContent.Equals(""))
-                            {
-                                drugSpecificationService.SaveDrugSpecification(drugSpec.Name, specificationContent);
-                                if (drugSpecificationService.UploadDrugSpecification(drugSpec.Name))
-                                    return Ok(true);
-                                else
-                                    return NoContent();
-                            }
-                            return NoContent();
+                            drugSpecificationService.SaveDrugSpecification(drugSpec.Name, specificationContent);
+                            if (drugSpecificationService.UploadDrugSpecification(drugSpec.Name))
+                                return Ok(true);
+                            else
+                                return NoContent();
                         }
+                        else
+                            return NoContent();
                     }
                 }
-
-                return Unauthorized();
             }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
-            }
+            return Unauthorized();
         }
 
         private string FormatString(string drugName)

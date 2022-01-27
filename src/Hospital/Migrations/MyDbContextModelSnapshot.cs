@@ -229,7 +229,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2022, 1, 19, 12, 3, 51, 169, DateTimeKind.Local).AddTicks(3272),
+                            IssuedTime = new DateTime(2022, 1, 24, 21, 29, 56, 409, DateTimeKind.Local).AddTicks(4216),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -405,7 +405,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2022, 1, 19, 12, 3, 51, 135, DateTimeKind.Local).AddTicks(5919),
+                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 382, DateTimeKind.Local).AddTicks(5398),
                             canPublish = false
                         },
                         new
@@ -413,7 +413,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2022, 1, 19, 12, 3, 51, 148, DateTimeKind.Local).AddTicks(7618),
+                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9733),
                             canPublish = true
                         },
                         new
@@ -421,7 +421,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2022, 1, 19, 12, 3, 51, 148, DateTimeKind.Local).AddTicks(7851),
+                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9937),
                             canPublish = true
                         });
                 });
@@ -490,6 +490,9 @@ namespace Hospital.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("EventName")
                         .HasColumnType("text");

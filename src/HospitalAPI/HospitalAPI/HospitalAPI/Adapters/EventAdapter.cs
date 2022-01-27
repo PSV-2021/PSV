@@ -14,7 +14,8 @@ namespace HospitalAPI.Adapters
             Event e = new Event();
             e.Id = dto.Id;
             e.EventName = dto.EventName;
-            e.EventTime = dto.EventTime;
+            e.EventTime = DateTime.Now;
+            e.EventId = dto.EventId;
             return e;
         }
 
@@ -22,7 +23,7 @@ namespace HospitalAPI.Adapters
         {
             EventDto dto = new EventDto();
             dto.Id = e.Id;
-            dto.EventTime = e.EventTime;
+            dto.EventTime = e.EventTime.ToString();
             dto.EventName = e.EventName;
             return dto;
         }

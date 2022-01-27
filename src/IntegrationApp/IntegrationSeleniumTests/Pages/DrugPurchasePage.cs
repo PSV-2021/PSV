@@ -32,9 +32,9 @@ namespace IntegrationSeleniumTests.Pages
 
         public void InsertDrugAmount(string text)
         {
-            DrugAmount.SendKeys(Keys.Tab);
-            DrugAmount.Clear();
-            DrugAmount.SendKeys(text);
+            DrugName.SendKeys(Keys.Tab);
+            DrugName.Clear();
+            DrugName.SendKeys(text);
         }
         public void ClickRequestButton()
         {

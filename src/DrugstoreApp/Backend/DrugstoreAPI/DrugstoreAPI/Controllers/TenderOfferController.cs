@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace DrugstoreAPI.Controllers
 {
@@ -30,33 +29,25 @@ namespace DrugstoreAPI.Controllers
         [HttpPost]
         public IActionResult Post(TenderOffer offer)
         {
-            try
+            drugTenderService = new DrugTenderService(dbContext);
+            var factory = new ConnectionFactory() { HostName = host };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
             {
-                drugTenderService = new DrugTenderService(dbContext);
-                var factory = new ConnectionFactory() { HostName = host };
-                using (var connection = factory.CreateConnection())
-                using (var channel = connection.CreateModel())
-                {
-                    channel.ExchangeDeclare(exchange: "tenderOffer", type: ExchangeType.Direct);
-                    string tenderId = drugTenderService.GenId();
-                    TenderOffer tenderOffer = new TenderOffer(tenderId, offer.TenderOfferInfo, offer.Price,
-                        offer.TenderId, offer.IsAccepted, offer.DrugstoreId, offer.IsActive);
-                    string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderOffer);
-                    var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
-                    channel.BasicPublish(exchange: "tenderOffer",
-                        routingKey: "",
-                        basicProperties: null,
-                        body: bodyNew);
-                    drugTenderService.SaveTenderOffer(tenderOffer);
+                channel.ExchangeDeclare(exchange: "tenderOffer", type: ExchangeType.Direct);
+                string tenderId = drugTenderService.GenId();
+                TenderOffer tenderOffer = new TenderOffer(tenderId, offer.TenderOfferInfo, offer.Price, offer.TenderId, offer.IsAccepted, offer.DrugstoreId, offer.IsActive);
+                string jsonBody = Newtonsoft.Json.JsonConvert.SerializeObject(tenderOffer);
+                var bodyNew = Encoding.UTF8.GetBytes(jsonBody);
+                channel.BasicPublish(exchange: "tenderOffer",
+                                     routingKey: "",
+                                     basicProperties: null,
+                                     body: bodyNew);
+                drugTenderService.SaveTenderOffer(tenderOffer);
 
-                    return Ok(true);
+                return Ok(true);
 
 
-                }
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = "This service is not available at the moment" });
             }
         }
 
@@ -87,15 +78,9 @@ namespace DrugstoreAPI.Controllers
         [HttpPost("availability")]
         public IActionResult CheckAvailability(TenderOffer tenderInfo)
         {
-            try
-            {
-                medicineService = new MedicineService(dbContext);
-                return Ok(medicineService.CheckForDrugsAvailability(TenderInfoToList(tenderInfo.TenderOfferInfo)));
-            }
-            catch (Exception)
-            {
-                return Ok(false);
-            }
+            List<TenderInfo> infoList = new List<TenderInfo>();
+            medicineService = new MedicineService(dbContext);
+            return Ok(medicineService.CheckForDrugsAvailability(TenderInfoToList(tenderInfo.TenderOfferInfo)));
         }
 
             [HttpGet("finished")] // Get /api/tenderOffer/ongoing
@@ -120,7 +105,6 @@ namespace DrugstoreAPI.Controllers
                 return NotFound();
             }
         }
-
         [HttpPost("finish")]
         public IActionResult FinishTender(TenderOfferDto demand)
         {
@@ -128,12 +112,15 @@ namespace DrugstoreAPI.Controllers
             drugTenderService = new DrugTenderService(dbContext);
             var client = new RestClient(this.GetIntegreationLink());
             var request = new RestRequest("/api/drugPurchase/finish", Method.POST);
+            Console.WriteLine(demand.Id);
+
 
             SetApiKeyInHeader(demand, request);
 
             SetRequestBody(demand, request);
 
             IRestResponse response = client.Execute(request);
+
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
@@ -143,8 +130,9 @@ namespace DrugstoreAPI.Controllers
                     medicineService.SellDrugUrgent(d.DrugName, d.Amount);   
                 }
 
-                TenderOffer tenderOffer = drugTenderService.getTenderOfferById(demand.Id);
-                List<TenderOffer> offers = drugTenderService.GetOffersForTender(tenderOffer.TenderId);
+                TenderOffer offerk = drugTenderService.getTenderOfferById(demand.Id);
+                List<TenderOffer> offers = drugTenderService.GetOffersForTender(offerk.TenderId);
+
 
                 foreach (TenderOffer offer in offers)
                 {
@@ -153,6 +141,7 @@ namespace DrugstoreAPI.Controllers
                 return Ok();
                 
             }
+            else
             return Unauthorized(false);
         }
         private string DemandToString(List<DrugTenderDto> list)

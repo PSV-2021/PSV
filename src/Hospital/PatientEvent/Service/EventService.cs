@@ -38,5 +38,38 @@ namespace Hospital.PatientEvent.Service
             EventRepository.Save(e);
         }
 
+        public List<double> GetPercentSuccessfullAndQuit()
+        {
+            List<double> result = new List<double>();
+            List<Event> allSuccessfull = EventRepository.GetAllSuccessful();
+            List<Event> allFirstStep = EventRepository.GetAllFirstStep();
+            List<Event> allThirdStep = EventRepository.GetAllThirdStep();
+            List<Event> allQuit = EventRepository.GetAllQuit();
+            int allAppointments = EventRepository.GetNumberOfDistinctEvents();
+            double successfullPercent = (double)allSuccessfull.Count / (double)allAppointments * 100;
+            double successfullFirstStep = (double)allFirstStep.Count / (double)allAppointments * 100;
+            double successfullThirdStep = (double)allThirdStep.Count / (double)allAppointments * 100;
+            double quitPercent = (double)allQuit.Count / (double)allAppointments * 100;
+
+            result.Add(successfullPercent);
+            result.Add(successfullFirstStep);
+            result.Add(successfullThirdStep);
+            result.Add(quitPercent);
+
+            return result;
+        }
+
+        public List<int> GetDailyNumberOfScheduling()
+        {
+            List<int> result = new List<int>();
+            List<Event> todayScheduling = EventRepository.GetTodaySuccessSchedule();
+            List<Event> yesterdayScheduling = EventRepository.GetYesterdaySuccessSchedule();
+            List<Event> twoDaysAgoScheduling = EventRepository.GetTwoDaysAgoSuccessSchedule();
+
+            result.Add(twoDaysAgoScheduling.Count);
+            result.Add(yesterdayScheduling.Count);
+            result.Add(todayScheduling.Count);
+            return result;
+        }
     }
 }

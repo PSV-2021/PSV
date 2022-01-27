@@ -37,61 +37,46 @@ namespace DrugstoreAPI.Controllers
         [HttpPost]
         public IActionResult Post(DrugAmountDemandDto demand)
         {
-            try
-            {
-                Microsoft.Extensions.Primitives.StringValues headerValues;
+            Microsoft.Extensions.Primitives.StringValues headerValues;
 
-                if (Request.Headers.TryGetValue("ApiKey", out headerValues))
+            if (Request.Headers.TryGetValue("ApiKey", out headerValues))
+            {
+                var headers = Request.Headers["ApiKey"];
+                foreach (string header in headers)
                 {
-                    var headers = Request.Headers["ApiKey"];
-                    foreach (string header in headers)
+                    if (HospitalService.CheckApiKey(header))
                     {
-                        if (HospitalService.CheckApiKey(header))
-                        {
-                            return Ok(medicineService.CheckForAmountOfDrug(demand.Name, demand.Amount));
-                        }
+                        return Ok(medicineService.CheckForAmountOfDrug(demand.Name, demand.Amount));
                     }
                 }
-
-                return Unauthorized();
             }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
-            }
+            return Unauthorized();
         }
         [HttpPost("urgent")]
         public IActionResult UrgentPurchase(DrugAmountDemandDto demand)
         {
-            try
+            Microsoft.Extensions.Primitives.StringValues headerValues;
+
+            if (Request.Headers.TryGetValue("ApiKey", out headerValues))
             {
-                Microsoft.Extensions.Primitives.StringValues headerValues;
-
-                if (Request.Headers.TryGetValue("ApiKey", out headerValues))
+                var headers = Request.Headers["ApiKey"];
+                foreach (string header in headers)
                 {
-                    var headers = Request.Headers["ApiKey"];
-                    foreach (string header in headers)
+                    if (HospitalService.CheckApiKey(header))
                     {
-                        if (HospitalService.CheckApiKey(header))
+                        if (medicineService.SellDrugUrgent(demand.Name, demand.Amount))
                         {
-                            if (medicineService.SellDrugUrgent(demand.Name, demand.Amount))
-                            {
-                                mailService.SendEmailAboutUrgentPurchase(demand.Name, demand.Amount, header);
-                                return Ok(true);
-                            }
-
-                            return Ok(false);
+                            mailService.SendEmailAboutUrgentPurchase(demand.Name, demand.Amount, header);
+                            return Ok(true);
                         }
+                        return Ok(false);
                     }
                 }
-
-                return Unauthorized(false);
             }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
-            }
+            return Unauthorized(false);
         }
+
+        
 
     }
 }
