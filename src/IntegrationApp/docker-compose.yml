@@ -43,7 +43,7 @@ services:
   sftp-server:
     image: atmoz/sftp
     ports:
-      - "22:22"
+      - "23:22"
     volumes:
       - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
       - /upload/HospitalFiles:/home/user/upload/HospitalFiles
