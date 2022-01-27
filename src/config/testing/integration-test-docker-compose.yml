@@ -121,7 +121,7 @@ services:
           DBTest: drugstore
           DBPassword: 123
       entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
-      depends_on:
+    depends_on:
         - drugstore_api
   hospital_test:
     container_name: hospital_test
