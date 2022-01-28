@@ -538,28 +538,28 @@ namespace Integration.Migrations
                         new
                         {
                             Id = "1",
-                            TenderEnd = new DateTime(2021, 12, 29, 13, 48, 22, 725, DateTimeKind.Local).AddTicks(513),
+                            TenderEnd = new DateTime(2022, 1, 14, 19, 7, 15, 543, DateTimeKind.Local).AddTicks(5546),
                             TenderInfo = "Brufen - 150, Palitreks - 100, Andol - 40",
                             isFinished = true
                         },
                         new
                         {
                             Id = "2",
-                            TenderEnd = new DateTime(2022, 2, 2, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(843),
+                            TenderEnd = new DateTime(2022, 2, 18, 19, 7, 15, 546, DateTimeKind.Local).AddTicks(5630),
                             TenderInfo = "Brufen - 120, Palitreks - 90, Andol - 50",
                             isFinished = false
                         },
                         new
                         {
                             Id = "3",
-                            TenderEnd = new DateTime(2022, 1, 5, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(916),
+                            TenderEnd = new DateTime(2022, 1, 21, 19, 7, 15, 546, DateTimeKind.Local).AddTicks(5741),
                             TenderInfo = "Brufen - 2, Palitreks - 2, Andol - 2",
                             isFinished = true
                         },
                         new
                         {
                             Id = "4",
-                            TenderEnd = new DateTime(2021, 12, 15, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(922),
+                            TenderEnd = new DateTime(2021, 12, 31, 19, 7, 15, 546, DateTimeKind.Local).AddTicks(5747),
                             TenderInfo = "Brufen - 10, Palitreks - 50, Andol - 35",
                             isFinished = true
                         });

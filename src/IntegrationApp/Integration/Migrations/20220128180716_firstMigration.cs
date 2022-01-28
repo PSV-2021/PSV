@@ -4,10 +4,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration.Migrations
 {
-    public partial class initialMigr : Migration
+    public partial class firstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "IntegrationEvent");
+
             migrationBuilder.CreateTable(
                 name: "DrugsConsumed",
                 columns: table => new
@@ -93,6 +96,21 @@ namespace Integration.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "IntegrationEvents",
+                schema: "IntegrationEvent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EventName = table.Column<string>(type: "text", nullable: true),
+                    EventTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IntegrationEvents", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TenderOffers",
                 columns: table => new
                 {
@@ -114,10 +132,10 @@ namespace Integration.Migrations
                 columns: new[] { "Id", "TenderEnd", "TenderInfo", "isFinished" },
                 values: new object[,]
                 {
-                    { "1", new DateTime(2021, 12, 29, 13, 48, 22, 725, DateTimeKind.Local).AddTicks(513), "Brufen - 150, Palitreks - 100, Andol - 40", true },
-                    { "4", new DateTime(2021, 12, 15, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(922), "Brufen - 10, Palitreks - 50, Andol - 35", true },
-                    { "3", new DateTime(2022, 1, 5, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(916), "Brufen - 2, Palitreks - 2, Andol - 2", true },
-                    { "2", new DateTime(2022, 2, 2, 13, 48, 22, 727, DateTimeKind.Local).AddTicks(843), "Brufen - 120, Palitreks - 90, Andol - 50", false }
+                    { "1", new DateTime(2022, 1, 14, 19, 7, 15, 543, DateTimeKind.Local).AddTicks(5546), "Brufen - 150, Palitreks - 100, Andol - 40", true },
+                    { "4", new DateTime(2021, 12, 31, 19, 7, 15, 546, DateTimeKind.Local).AddTicks(5747), "Brufen - 10, Palitreks - 50, Andol - 35", true },
+                    { "3", new DateTime(2022, 1, 21, 19, 7, 15, 546, DateTimeKind.Local).AddTicks(5741), "Brufen - 2, Palitreks - 2, Andol - 2", true },
+                    { "2", new DateTime(2022, 2, 18, 19, 7, 15, 546, DateTimeKind.Local).AddTicks(5630), "Brufen - 120, Palitreks - 90, Andol - 50", false }
                 });
 
             migrationBuilder.InsertData(
@@ -223,6 +241,10 @@ namespace Integration.Migrations
 
             migrationBuilder.DropTable(
                 name: "DrugTenders");
+
+            migrationBuilder.DropTable(
+                name: "IntegrationEvents",
+                schema: "IntegrationEvent");
 
             migrationBuilder.DropTable(
                 name: "TenderOffers");

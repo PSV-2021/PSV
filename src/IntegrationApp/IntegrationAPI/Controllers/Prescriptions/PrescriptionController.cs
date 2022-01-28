@@ -11,11 +11,10 @@ using Integration_API.DTOs;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using MessagingToolkit.QRCode.Codec;
-using Integration.Service;
 using Renci.SshNet;
 using System.Net.Sockets;
-using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
+using Font = iTextSharp.text.Font;
 
 namespace Integration_API.Controllers
 {
@@ -86,17 +85,48 @@ namespace Integration_API.Controllers
             Document doc = new iTextSharp.text.Document(PageSize.A4.Rotate().Rotate());
             PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream("sample" + ".pdf", FileMode.Create));
             doc.Open();
+
             ColumnText.ShowTextAligned(writer.DirectContent,
-                Element.ALIGN_LEFT, new Phrase("Prescription:"), 30, 800, 0);
+                Element.ALIGN_LEFT, new Phrase("Prescription", new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.BOLD, new BaseColor(Color.DarkGreen))),
+                218, 800, 0);
             ColumnText.ShowTextAligned(writer.DirectContent,
-                Element.ALIGN_LEFT, new Phrase("Issued for: " + prescription.PatientName), 30, 760, 0);
+                Element.ALIGN_LEFT, new Phrase("Issued for: " + prescription.PatientName), 30, 720, 0);
             ColumnText.ShowTextAligned(writer.DirectContent,
-                Element.ALIGN_LEFT, new Phrase("Prescription issued: " + DateTime.Now.ToString("dd.MM.yyyy")), 30, 720, 0);
+                Element.ALIGN_LEFT, new Phrase("Prescription issued: " + DateTime.Now.ToString("dd.MM.yyyy")), 30, 690, 0);
+            ColumnText.ShowTextAligned(writer.DirectContent,
+                Element.ALIGN_LEFT, new Phrase("Prescription valid to: " + DateTime.Now.AddDays(15).ToString("dd.MM.yyyy")), 30, 660, 0);
 
             iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance("code.jpg");
-            image.SetAbsolutePosition(30, 600);
+            image.SetAbsolutePosition(30, 540);
             image.ScaleToFit(100f, 100f);
             doc.Add(image);
+
+            iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("logo.jpg");
+            logo.SetAbsolutePosition(420, 650);
+            logo.ScaleToFit(200f, 200f);
+            doc.Add(logo);
+
+            iTextSharp.text.Image decor = iTextSharp.text.Image.GetInstance("dekoracija.jpg");
+            decor.SetAbsolutePosition(0, 0);
+            decor.ScaleAbsolute(1000f, 200f);
+            doc.Add(decor);
+
+
+            ColumnText.ShowTextAligned(writer.DirectContent,
+                Element.ALIGN_LEFT, new Phrase("_______________________________________________________________________________"),
+                30, 270, 0);
+
+            ColumnText.ShowTextAligned(writer.DirectContent,
+                Element.ALIGN_LEFT, new Phrase("Hospital Srbija "), 30, 250, 0);
+            ColumnText.ShowTextAligned(writer.DirectContent,
+                Element.ALIGN_LEFT, new Phrase("Gogoljeva 23, Novi Sad, Srbija "), 30, 230, 0);
+            ColumnText.ShowTextAligned(writer.DirectContent,
+                Element.ALIGN_LEFT, new Phrase("Tel: 021-5600-222 "), 30, 210, 0);
+            ColumnText.ShowTextAligned(writer.DirectContent,
+                Element.ALIGN_LEFT, new Phrase("Email: bolnicasrbija@gmail.com"), 30, 190, 0);
+            ColumnText.ShowTextAligned(writer.DirectContent,
+                Element.ALIGN_LEFT, new Phrase("Tel: 021-5600-222 "), 30, 170, 0);
+
             doc.Close();
         }
 
@@ -190,7 +220,7 @@ namespace Integration_API.Controllers
                 Graphics.DrawString(" Recept za " + prescriptionDto.PatientName , HeaderFont, PdfBrushes.Blue, new PointF(120, 20));
                 Graphics.DrawString("Detalji: " + prescriptionDto.Description, BodyFont, PdfBrushes.Black, new PointF(90, 60));
                 Graphics.DrawString("Lekovi: " + prescriptionDto.Name, BodyFont, PdfBrushes.Black, new PointF(90, 50));
-                Graphics.DrawString("Datum izdavanja " + DateTime.Now.ToShortDateString(), BodyFont, PdfBrushes.Black, new PointF(90, 40));
+                Graphics.DrawString("Datum izdavanja: " + DateTime.Now.ToShortDateString(), BodyFont, PdfBrushes.Black, new PointF(90, 40));
                
                 string FileName = "Recept " + prescriptionDto.PatientName + " " + DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year + " " + DateTime.Now.Hour + "." + DateTime.Now.Minute + ".pdf";
                 string localFile = FormatReportsPath() + FileName;
