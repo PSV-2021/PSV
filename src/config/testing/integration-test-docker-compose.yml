@@ -18,9 +18,17 @@ services:
     ports:
       - "5434:5432"
 
+  postgres-server-integration:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: integration
+      POSTGRES_USER: postgres
+    ports:
+      - "5435:5432"
+
   message-broker:
     image: rabbitmq:management-alpine
-    container_name: rabbitmq-broker
     ports:
       - 15672:15672
 
@@ -37,50 +45,45 @@ services:
      depends_on:
        - postgres-server-hospital
      build: ../../
-     healthcheck:
-      test: ["CMD", "curl","-f","http://localhost/","||","exit","1"]
-      interval: 15s
-      timeout: 30s
-      retries: 25
-      start_period: 15s
      image: aco99/hospital_api
      environment:
-       DBServer: postgres-server-hospital
-       DBPort: 5432
-       DBUser: postgres
-       DBPassword: 123
-       DB: hospital
-     restart: always
-     ports:
-       - "8081:80"
+      HOSPITAL_GRPC_DOMAIN: hospital_api
+      HOSPITAL_GRPC_PORT: 4111
 
-  integration_api:
-    depends_on:
-      - sftp-server
-      - message-broker   
-      - hospital_api
-    build: ../../IntegrationApp/
-    image: aco99/integration_api
-    healthcheck:
-      test: ["CMD", "curl","-f", "http://localhost/","||","exit","1"]
-      interval: 15s
-      timeout: 30s
-      retries: 25
-      start_period: 15s
-    environment:
       DBServer: postgres-server-hospital
       DBPort: 5432
       DBUser: postgres
       DBPassword: 123
       DB: hospital
+     restart: always
+     ports:
+       - "8081:80"
+       
+  integration_api:
+    depends_on:
+      - sftp-server
+      - message-broker   
+      - hospital_api
+    build:
+      context: ../../IntegrationApp
+    image: aco99/integration_api
+    environment:
       SFTP_IP: sftp-server
       SFTP_USERNAME: user
       SFTP_PASSWORD: password
+      
       RABBIT_HOST: message-broker
+      
       HOSPITAL_GRPC_DOMAIN: hospital_api
-      HOSPITAL_GRPC_PORT: 8081
+      HOSPITAL_GRPC_PORT: 4111
       DRUGSTORE_GRPC_DOMAIN: drugstore_api
-      DRUGSTORE_GRPC_PORT: 8082
+      DRUGSTORE_GRPC_PORT: 4111
+      
+      DBServer: postgres-server-integration
+      DBPort: 5432
+      DBUser: postgres
+      DBPassword: 123
+      DB: integration
     restart: always
     ports:
       - "8083:80"  
@@ -91,37 +94,34 @@ services:
       - message-broker
       - sftp-server
     build: ../../DrugstoreApp/Backend/DrugstoreAPI
-    healthcheck:
-      test: ["CMD", "curl","-f", "http://localhost/","||","exit","1"]
-      interval: 15s
-      timeout: 30s
-      retries: 25
-      start_period: 15s
     image: aco99/drugstore_api
     environment:
       SFTP_IP: sftp-server
       SFTP_USERNAME: user
       SFTP_PASSWORD: password
-      DBServer: postgres-server-drugstore
+      DRUGSTORE_GRPC_DOMAIN: drugstore_api
+      DRUGSTORE_GRPC_PORT: 4111
       RABBIT_HOST: message-broker
+      DBServer: postgres-server-drugstore
+      DBPerver: 5433
       DBUser: postgres
       DBPassword: 123
       DB: drugstore
     restart: always
     ports:
-      - "8082:80" 
+      - "8082:80"   
   drugstore_test:
-      container_name: drugstore_test
-      build:
-        context: ../../DrugstoreApp/Backend/DrugstoreAPI
-        dockerfile: IntegrationTestDockerfile
-        args:
+    container_name: drugstore_test
+    build:
+      context: ../../DrugstoreApp/Backend/DrugstoreAPI
+      dockerfile: IntegrationTestDockerfile
+      args:
           DBUser: postgres
           DBServer: postgres-server-drugstore
           DBTest: drugstore
           DBPassword: 123
       entrypoint: dotnet test --filter Type=IntegrationTest --no-restore
-      depends_on:
+    depends_on:
         - drugstore_api
   hospital_test:
     container_name: hospital_test
@@ -151,3 +151,6 @@ services:
       - integration_api     
   
       
+
+  
+  
