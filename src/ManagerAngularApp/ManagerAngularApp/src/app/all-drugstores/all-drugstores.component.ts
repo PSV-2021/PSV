@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { PharmacyService } from '../services/pharmacy.service';
 import { DrugstoreWithImageDto } from './drugstore.with.image';
 
@@ -10,7 +11,7 @@ import { DrugstoreWithImageDto } from './drugstore.with.image';
 export class AllDrugstoresComponent implements OnInit {
   public drugstores: DrugstoreWithImageDto[];
 
-  constructor(private pharmacyService: PharmacyService) {
+  constructor(private pharmacyService: PharmacyService, private toastr: ToastrService) {
     this.drugstores = [];
    }
 
@@ -29,6 +30,12 @@ export class AllDrugstoresComponent implements OnInit {
           "ImageBase64": p.base64Image
         });
       }
+    },
+    error => {
+      if(error.error)
+        this.toastr.error(error.error, 'Sorry');
+      else
+        this.toastr.error(error, 'Sorry');
     });
   }
 

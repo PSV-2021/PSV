@@ -1,10 +1,11 @@
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { RegistrationDto } from '../registration/registration.dto';
 import { DrugstoreSearchDto } from '../purchase-drugs/drugstore.search.dto';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -16,11 +17,11 @@ export class PharmacyService {
     }
 
     GetAllDrugstoresWithImage(): Observable<any> {
-      return this.http.get<any>(this.url + '/drugstore/withimage');
+      return this.http.get<any>(this.url + '/drugstore/withimage').pipe(map(res => res), catchError(this.errorHandler));
     }
 
     GetAllDrugstores(): Observable<any> {
-      return this.http.get<any>(this.url + '/drugstore');
+      return this.http.get<any>(this.url + '/drugstore').pipe(map(res => res), catchError(this.errorHandler));
     }
 
     GetOneDrugstore(id: number): Observable<any> {
@@ -30,7 +31,7 @@ export class PharmacyService {
 
       const params = new HttpParams()
       .set('id', id)
-      return this.http.get<any>(this.url + '/drugstore/one', {params, headers});
+      return this.http.get<any>(this.url + '/drugstore/one', {params, headers}).pipe(map(res => res), catchError(this.errorHandler));
     }
 
     EditPharmacy(Id: number, ImageBase64: string, Comment: string) {
@@ -43,8 +44,7 @@ export class PharmacyService {
         'Content-Type': 'application/json',
         'ApiKey': "abcde" });
       let options = { headers: headers };
-      const ret = this.http.put<any>(this.url + '/drugstore/edit', body, options);
-      return ret;
+      return this.http.put<any>(this.url + '/drugstore/edit', body, options).pipe(map(res => res), catchError(this.errorHandler));
     }
 
     SendDrugDemand(Url: string, DrugAmount: number, DrugName: string): Observable<any> {
@@ -57,8 +57,7 @@ export class PharmacyService {
         'Content-Type': 'application/json',
         'ApiKey': "abcde" });
       let options = { headers: headers };
-      const ret = this.http.put<any>(this.url + '/drugpurchase', body, options);
-      return ret;
+      return this.http.put<any>(this.url + '/drugpurchase', body, options).pipe(map(res => res), catchError(this.errorHandler))
     }
 
     SendUrgentDrugPurchase(Url: string, DrugAmount: number, DrugName: string): Observable<any> {
@@ -71,8 +70,7 @@ export class PharmacyService {
         'Content-Type': 'application/json',
         'ApiKey': "abcde" });
       let options = { headers: headers };
-      const ret = this.http.put<any>(this.url + '/drugpurchase/urgent', body, options);
-      return ret;
+      return this.http.put<any>(this.url + '/drugpurchase/urgent', body, options).pipe(map(res => res), catchError(this.errorHandler));
     }
 
     SendFilter(searchDto: DrugstoreSearchDto): Observable<any>{
@@ -84,8 +82,10 @@ export class PharmacyService {
       .set('city', searchDto.City)
       .set('address', searchDto.Address);
 
-      const ret = this.http.get<any>(this.url + '/drugstore/filter', {params, headers});
-
-      return ret;
+      return this.http.get<any>(this.url + '/drugstore/filter', {params, headers}).pipe(map(res => res), catchError(this.errorHandler))
     }
+
+    errorHandler(error: HttpErrorResponse) {
+      return throwError(error.error);
+  }
 }

@@ -5,18 +5,18 @@
     <div class="row" style="margin-top: 2%;">
         <div class="col-sm-1"></div>
         <div class="col-sm-4">
-            <h2 style="font-size: 50px; color: rgb(243, 26, 26);">New tender</h2>
+            <h2 id = "title" style="font-size: 50px; color: rgb(243, 26, 26);">New tender</h2>
         </div>
         <div class="col-sm-4">
-            <mat-form-field appearance="fill">
+            <mat-form-field  appearance="fill">
                 <mat-label>Choose tender end date</mat-label>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="tenderEnd">
-                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <input name="tenderEndDate" matInput [matDatepicker]="picker" [(ngModel)]="tenderEnd">
+                <mat-datepicker-toggle  matSuffix [for]="picker" ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
         </div>
         <div class="col-sm-2">
-            <button type="button" (click)="saveTender()" class="btn btn-lg btn-secondary">Save tender</button>
+            <button id="saveTenderButton" type="button" (click)="saveTender()" class="btn btn-lg btn-secondary">Save tender</button>
         </div>
         <div class="col-sm-1"></div>
     </div>
@@ -36,9 +36,9 @@
                 <td><button type="button" (click)="removeDrug(ti.drugName)" class="btn btn-danger">Remove drug</button></td>
             </tr>
             <tr>
-                <td><input type="text" style="font-size: large;" class="form-control" [(ngModel)]="newTender.drugName" placeholder="Drug name"></td>
-                <td><input type="number" style="font-size: large;" class="form-control" [(ngModel)]="newTender.amount" min ="1" placeholder="Amount"></td>
-                <td><button type="button" (click)="addDrug(newTender.drugName)" class="btn btn-primary">Add new drug</button></td>
+                <td><input name= "drugName" type="text" style="font-size: large;" class="form-control" [(ngModel)]="newTender.drugName" placeholder="Drug name"></td>
+                <td><input name= "drugAmount" type="text" style="font-size: large;" class="form-control" [(ngModel)]="newTender.amount" min ="1" placeholder="Amount"></td>
+                <td><button id = "addDrugButton" type="button" (click)="addDrug(newTender.drugName)" class="btn btn-primary">Add new drug</button></td>
           </tr>
         </tbody>
       </table>

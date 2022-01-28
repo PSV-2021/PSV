@@ -3,16 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Integration.Repository.Sql;
 using Integration.Service;
 using Integration.Model;
 using Model.DataBaseContext;
 using Integration_API.DTOs;
-using Integration.Service;
-using Integration_API.Filters;
-using Integration_API.Repository.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Integration_API.Repository.Interfaces;
 using RestSharp;
 using System.Configuration;
@@ -38,30 +33,52 @@ namespace Integration_API.Controllers
         [HttpGet]       // GET /api/drugstore
         public IActionResult Get()
         {
-            List<Drugstore> result = new List<Drugstore>();
-            drugstoreService.GetAll().ForEach(drugstore => result.Add(drugstore));
-            return Ok(result);
+            try
+            {
+                List<Drugstore> result = new List<Drugstore>();
+                drugstoreService.GetAll().ForEach(drugstore => result.Add(drugstore));
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
         [HttpGet("withimage")]       // GET /api/drugstore
         public IActionResult GetWithImageAndComment()
         {
-            List<Drugstore> result = new List<Drugstore>();
-            drugstoreService.GetAll().ForEach(drugstore => result.Add(drugstore));
-            return Ok(result);
+            try
+            {
+                List<Drugstore> result = new List<Drugstore>();
+                drugstoreService.GetAll().ForEach(drugstore => result.Add(drugstore));
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
+            
         }
 
         [HttpGet ("filter")] // GET /api/drugstore/filter
 
         public IActionResult Filter([FromQuery] string city, [FromQuery] string address)
         {
-            IEnumerable<string> headerValues = Request.Headers["ApiKey"];
-            var key = headerValues.FirstOrDefault();
-            if (key == null || !key.Equals("abcde"))
-                return Unauthorized();
-            CheckFilterParameters(ref city, ref address);
-            List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
-            return Ok(result);
+            try
+            {
+                IEnumerable<string> headerValues = Request.Headers["ApiKey"];
+                var key = headerValues.FirstOrDefault();
+                if (key == null || !key.Equals("abcde"))
+                    return Unauthorized("You are not authorized for this action.");
+                CheckFilterParameters(ref city, ref address);
+                List<Drugstore> result = drugstoreService.SearchDrugstoresByCityAndAddress(city, address);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
 
@@ -76,18 +93,32 @@ namespace Integration_API.Controllers
         [HttpGet("/name/{id}")] // GET /api/test2/int/3
         public IActionResult GetDrugstoreName(int id)
         {
-            string result = drugstoreService.GetDrugstoreName(id);
-            return Ok(result);
+            try
+            {
+                string result = drugstoreService.GetDrugstoreName(id);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
         [HttpGet("one")] // GET /api/test2/int/3
         public IActionResult GetDrugstoreById([FromQuery] int id)
         {
-            Drugstore result = drugstoreService.GetDrugstoreById(id);
-            if (result != null)
-                return Ok(result);
-            
-            return BadRequest(false);
+            try
+            {
+                Drugstore result = drugstoreService.GetDrugstoreById(id);
+                if (result != null)
+                    return Ok(result);
+
+                return BadRequest("This drugstore doesn't exit!");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
         [HttpPost] // POST /api/drugstore/newdrugstore
@@ -119,24 +150,31 @@ namespace Integration_API.Controllers
                 drugstoreService.AddNewDrugstore(ds);
                 return Ok(ds);
             }
-            return Unauthorized();
+            return Unauthorized("You are not authorized for this action.");
         }
 
         [HttpPut("edit")]
         public IActionResult EditDrugstore(DrugstoreEditDto editDto)
         {
-            IEnumerable<string> headerValues = Request.Headers["ApiKey"];
-            var key = headerValues.FirstOrDefault();
-            if (key == null || !key.Equals("abcde"))
-                return Unauthorized(false);
+            try
+            {
+                IEnumerable<string> headerValues = Request.Headers["ApiKey"];
+                var key = headerValues.FirstOrDefault();
+                if (key == null || !key.Equals("abcde"))
+                    return Unauthorized("You are not authorized for this action.");
 
-            Drugstore edit = drugstoreService.GetDrugstoreById(editDto.Id);
-            if (edit == null)
-                return BadRequest(false);
+                Drugstore edit = drugstoreService.GetDrugstoreById(editDto.Id);
+                if (edit == null)
+                    return BadRequest("This drugstore doesn't exist!");
 
-            UpdateDrugstoreInfo(editDto, edit);
+                UpdateDrugstoreInfo(editDto, edit);
 
-            return Ok(true);
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = "This service is not available at the moment" });
+            }
         }
 
         private void UpdateDrugstoreInfo(DrugstoreEditDto editDto, Drugstore edit)

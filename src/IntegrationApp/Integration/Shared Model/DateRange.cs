@@ -34,6 +34,10 @@ namespace Integration.Model
         public DateRange()
         { }
 
+        public string FormatDate() {
+            return From.ToString().Substring(0,8) + " - " + To.ToString().Substring(0,9);
+        }
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return From;

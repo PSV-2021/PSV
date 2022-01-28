@@ -37,6 +37,7 @@ import { ChartsComponent } from './charts/charts.component';
 import { DrugstoreChartComponent } from './drugstore-chart/drugstore-chart.component';
 import { HospitalChartsComponent } from './hospitalCharts/hospital-charts/hospital-charts.component';
 import { Chart } from 'chart.js';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { Chart } from 'chart.js';
     ChartsComponent,
     DrugstoreChartComponent,
     HospitalChartsComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
