@@ -27,7 +27,7 @@ services:
       - POSTGRES_PASSWORD
       - POSTGRES_DRUGSTORE_DB
     ports:
-      - "5433:5432"
+      - "5431:5432"
 
   postgres-server-hospital:
     image: postgres
