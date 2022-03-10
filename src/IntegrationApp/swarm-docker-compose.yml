@@ -81,7 +81,7 @@ services:
        DBUser: /run/secrets/POSTGRES_USERNAME
        DBPassword: /run/secrets/POSTGRES_PASSWORD
        DB: /run/secrets/POSTGRES_HOSPITAL_DB
-     restart: always
+     restart: on-failure
      secrets:
        - POSTGRES_USERNAME
        - POSTGRES_PASSWORD
@@ -97,9 +97,7 @@ services:
     image: aco99/integration_api
     environment:
       HOSPITAL_GRPC_DOMAIN: hospital_api
-      HOSPITAL_GRPC_PORT: 4111
       DRUGSTORE_GRPC_DOMAIN: drugstore_api
-      DRUGSTORE_GRPC_PORT: 4111
       SFTP_IP: sftp-server
       SFTP_USERNAME: /run/secrets/SFTP_USERNAME
       SFTP_PASSWORD: /run/secrets/SFTP_PASSWORD
@@ -108,7 +106,7 @@ services:
       DBPassword: /run/secrets/POSTGRES_PASSWORD
       DB: /run/secrets/POSTGRES_INTEGRATION_DB
       RABBIT_HOST: message-broker
-    restart: always
+    restart: on-failure
     secrets:
       - POSTGRES_INTEGRATION_DB
       - POSTGRES_PASSWORD
