@@ -84,7 +84,7 @@ services:
        DB: /run/secrets/POSTGRES_HOSPITAL_DB
      restart: always
      secrets:
-       - POSTGRES_USER
+       - POSTGRES_USERNAME
        - POSTGRES_PASSWORD
        - POSTGRES_HOSPITAL_DB
      ports:
