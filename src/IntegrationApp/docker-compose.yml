@@ -79,7 +79,6 @@ services:
     depends_on:
       - sftp-server
       - message-broker   
-      - hospital_api
     build:
       context: .
     image: aco99/integration_api
@@ -87,14 +86,9 @@ services:
       SFTP_IP: sftp-server
       SFTP_USERNAME: user
       SFTP_PASSWORD: password
-      
       RABBIT_HOST: message-broker
-      
       HOSPITAL_GRPC_DOMAIN: hospital_api
-      HOSPITAL_GRPC_PORT: 4111
       DRUGSTORE_GRPC_DOMAIN: drugstore_api
-      DRUGSTORE_GRPC_PORT: 4111
-      
       DBServer: postgres-server-integration
       DBPort: 5432
       DBUser: postgres

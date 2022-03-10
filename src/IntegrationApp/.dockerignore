@@ -1,4 +1,16 @@
 .vs/
 bin/
 obj/
-node_moduls/
+
+Integration/obj/
+Integration/bin/
+IntegrationAPI/obj/
+IntegrationAPI/bin/
+IntegrationAPI/.vs/
+
+IntegrationApiTests/obj/
+IntegrationApiTests/bin/
+
+IntegrationSeleniumTests/obj/
+IntegrationSeleniumTests/bin/
+IntegrationSeleniumTests/.vs/

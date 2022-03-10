@@ -121,7 +121,7 @@ namespace HospitalAPI
             var password = Configuration["DBPassword"] ?? "firma4";
             var database = Configuration["DB"] ?? "hospitalNew";
 
-            Console.WriteLine(server + port + user + password + database);
+            Console.WriteLine($"server={server}; port={port}; database={database}; User Id={user}; password={password}");
 
             if (server == null) return ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString");
             return $"server={server}; port={port}; database={database}; User Id={user}; password={password}";

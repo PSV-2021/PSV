@@ -77,7 +77,6 @@ services:
      environment:
        HOSPITAL_GRPC_DOMAIN: hospital_api
        HOSPITAL_GRPC_PORT: 4111
-       
        DBServer: postgres-server-hospital
        DBUser: /run/secrets/POSTGRES_USERNAME
        DBPassword: /run/secrets/POSTGRES_PASSWORD

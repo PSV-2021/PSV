@@ -22,7 +22,7 @@ namespace DrugstoreAPI.Controllers
         private readonly MyDbContext dbContext;
         public DrugTenderService drugTenderService;
         public MedicineService medicineService;
-        public TenderOfferController(MyDbContext db) //Ovo mora da stoji, ne znam zasto!!!
+        public TenderOfferController(MyDbContext db) 
         {
             this.dbContext = db;
         }

@@ -7,23 +7,42 @@ services:
       POSTGRES_DB: drugstore
     ports:
       - "5433:5432"
+  
+  sftp-server:
+    image: atmoz/sftp
+    ports:
+      - "23:22"
+    volumes:
+      - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
+      - /upload/HospitalFiles:/home/user/upload/HospitalFiles
+    command: user:password:1001
+  
+  message-broker:
+    image: rabbitmq:management-alpine
+    ports:
+      - 15672:15672
+
   drugstore_api:
+    restart: on-failure
     depends_on:
       - postgres-server
-    build: ./Backend/DrugstoreAPI
+    #build: ./Backend/DrugstoreAPI
     image: aco99/drugstore_api
     environment:
+      RABBIT_HOST: message-broker
+      SFTP_IP: sftp-server
       DBServer: postgres-server
-      DBPerver: 5433
       DBUser: postgres
       DBPassword: 123
       DB: drugstore
     ports:
-      - "8081:80"  
+      - "8081:80" 
+      - "4111:4111"  
+
   drugstore_client:
     depends_on:
       - drugstore_api
-    build: ./Frontend/DrugstoreApplication
+    #build: ./Frontend/DrugstoreApplication
     image: aco99/drugstore_client
     ports:
       - "4201:80"
