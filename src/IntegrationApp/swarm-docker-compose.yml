@@ -3,6 +3,7 @@ services:
   gateway:
     build: ../config/gateway
     image: aco99/gateway
+    restart: on-failure
     extra_hosts:
       - "patient.localhost:127.0.0.1"
       - "drugstore.localhost:127.0.0.1"
@@ -123,7 +124,7 @@ services:
       DBUser: /run/secrets/POSTGRES_USERNAME
       DBPassword: /run/secrets/POSTGRES_PASSWORD
       DB: /run/secrets/POSTGRES_DRUGSTORE_DB
-    restart: always
+    restart: on-failure
     secrets:
       - POSTGRES_USERNAME
       - POSTGRES_PASSWORD

@@ -1,0 +1,23 @@
+version: '3'
+services:
+  integration_api:  
+    build:
+      context: .
+    image: aco99/integration_api
+    environment:
+      SFTP_IP: sftp-server
+      SFTP_USERNAME: user
+      SFTP_PASSWORD: password
+      RABBIT_HOST: message-broker
+      HOSPITAL_GRPC_DOMAIN: hospital_api
+      DRUGSTORE_GRPC_DOMAIN: drugstore_api
+      DBServer: postgres-server-integration
+      DBPort: 5432
+      DBUser: postgres
+      DBPassword: 123
+      DB: integration
+    restart: on-failure
+    ports:
+      - "8083:80"  
+  
+  

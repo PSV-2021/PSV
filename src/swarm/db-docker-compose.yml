@@ -1,0 +1,69 @@
+version: '3'
+services:
+  #gateway:
+  #  build: ../config/gateway
+  #  image: aco99/gateway
+   # restart: on-failure
+  #  extra_hosts:
+   #   - "patient.localhost:127.0.0.1"
+   ##   - "drugstore.localhost:127.0.0.1"
+    #  - "manager.localhost:127.0.0.1"
+    #ports:
+    #  - "80:80"
+
+  postgres-server-drugstore:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: drugstore
+      POSTGRES_USER: postgres
+  
+  #postgres-server-hospital:
+    #image: postgres
+    #environment:
+     # POSTGRES_PASSWORD: 123
+     # POSTGRES_DB: hospital
+     # POSTGRES_USER: postgres
+    #ports:
+   #   - "5434:5432"
+
+  postgres-server-integration:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: integration
+      POSTGRES_USER: postgres
+    ports:
+      - "5435:5432"
+  
+  message-broker:
+    image: rabbitmq:management-alpine
+    ports:
+      - 15672:15672
+
+  sftp-server:
+    image: atmoz/sftp
+    ports:
+      - "23:22"
+    volumes:
+      - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
+      - /upload/HospitalFiles:/home/user/upload/HospitalFiles
+    command: user:password:1001
+
+  #patient_client:
+  #  build: ../PatientApp/Frontend/PatientApp
+   # image: aco99/patient_client
+   # ports:
+   #   - "4201:80"
+  drugstore_client:
+    build: ../DrugstoreApp/Frontend/DrugstoreApplication
+    image: aco99/drugstore_client
+    ports:
+      - "4202:80"
+
+  manager_client:
+   build: ../ManagerAngularApp/ManagerAngularApp
+   image: aco99/manager_client
+   ports:
+    - "4203:80"  
+  
