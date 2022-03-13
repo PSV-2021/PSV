@@ -45,6 +45,7 @@ services:
     image: atmoz/sftp
     ports:
       - "23:22"
+    restart: on-failure
     volumes:
       - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
       - /upload/HospitalFiles:/home/user/upload/HospitalFiles
