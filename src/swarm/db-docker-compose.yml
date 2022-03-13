@@ -13,6 +13,8 @@ services:
 
   postgres-server-drugstore:
     image: postgres
+    deploy:
+      replicas: 2
     environment:
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: drugstore
@@ -29,6 +31,8 @@ services:
 
   postgres-server-integration:
     image: postgres
+    deploy:
+      replicas: 2
     environment:
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: integration
