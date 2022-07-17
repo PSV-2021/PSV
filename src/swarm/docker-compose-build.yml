@@ -1,0 +1,124 @@
+version: '3'
+services:
+  gateway:
+    image: aco99/gateway
+    build: ../config/gateway
+    extra_hosts:
+      - "patient.localhost:127.0.0.1"
+      - "drugstore.localhost:127.0.0.1"
+      - "manager.localhost:127.0.0.1"
+    ports:
+      - "80:80"
+
+  message-broker:
+    image: rabbitmq:management-alpine
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 15672:15672
+
+  sftp-server:
+    image: aco99/sftp
+    build: ../config/sftp
+    ports:
+      - "23:22"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - /upload/DrugstoreFiles:/home/user/upload/DrugstoreFiles
+      - /upload/HospitalFiles:/home/user/upload/HospitalFiles
+
+  postgres-server-hospital:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: hospital
+      POSTGRES_USER: postgres
+    ports:
+      - "5433:5432"
+  
+  hospital_api:
+    depends_on:
+      - postgres-server-hospital
+    image: aco99/hospital_api
+    build: ../HospitalProject/
+    environment:
+      DBServer: postgres-server-hospital
+      DBPort: 5432
+      DBUser: postgres
+      DBPassword: 123
+      DB: hospital
+    ports:
+      - "8081:80"
+      - "4112:4111"
+  patient_client:
+    links:
+      - hospital_api
+    image: aco99/patient_client
+    ports:
+      - "4201:80"
+
+  postgres-server-drugstore:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: drugstore
+      POSTGRES_USER: postgres
+    ports:
+      - "5434:5432"
+  drugstore_api:
+    build: ../DrugstoreApp/Backend/DrugstoreApi/
+    image: aco99/drugstore_api
+    environment:
+      SFTP_IP: sftp-server
+      SFTP_USERNAME: user
+      SFTP_PASSWORD: password
+      DRUGSTORE_GRPC_DOMAIN: drugstore_api
+      RABBIT_HOST: message-broker
+      DBServer: postgres-server-drugstore
+      DBUser: postgres
+      DBPassword: 123
+      DB: drugstore
+    ports:
+      - "8082:80"
+  drugstore_client:
+    image: aco99/drugstore_client
+    ports:
+      - "4202:80"
+
+  postgres-server-integration:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: integration
+      POSTGRES_USER: postgres
+    ports:
+      - "5431:5432"
+    volumes: 
+      - db:/var/lib/postgresql/data
+  integration_api:
+    build: ../IntegrationApp/
+    image: aco99/integration_api
+    environment:
+      SFTP_IP: sftp-server
+      SFTP_USERNAME: user
+      SFTP_PASSWORD: password
+      RABBIT_HOST: message-broker
+      HOSPITAL_GRPC_DOMAIN: hospital_api
+      DRUGSTORE_GRPC_DOMAIN: drugstore_api
+      DBServer: postgres-server-integration
+      DBPort: 5432
+      DBUser: postgres
+      DBPassword: 123
+      DB: integration
+    ports:
+      - "8083:80"
+  manager_client:
+    image: aco99/manager_client
+    ports:
+      - "4203:80"
+volumes:
+  db:
+    driver: local

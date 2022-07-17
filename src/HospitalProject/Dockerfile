@@ -1,17 +1,15 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build-env
-ENV REFRESHED_AT 03-10-2022 19:25
+ENV REFRESHED_AT 03-10-2022 18:55
 COPY . ./
-RUN dotnet restore ./IntegrationAPI
 
-WORKDIR /IntegrationAPI
-RUN dotnet build -c Release -o /app
+WORKDIR /HospitalAPI/HospitalAPI
 
-FROM build-env as Publish
 RUN dotnet publish -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 EXPOSE 80
 COPY --from=build-env /app .
-ENTRYPOINT [ "dotnet","IntegrationAPI.dll" ]
+ENTRYPOINT [ "dotnet","HospitalAPI.dll" ]
+
 

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
-    public partial class @new : Migration
+    public partial class migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -335,7 +335,7 @@ namespace Hospital.Migrations
             migrationBuilder.InsertData(
                 table: "Prescriptions",
                 columns: new[] { "Id", "Description", "DrugName", "IssuedTime", "PatientName" },
-                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2022, 1, 24, 21, 29, 56, 409, DateTimeKind.Local).AddTicks(4216), "Zoran Zoranic" });
+                values: new object[] { 1, "Random opis nekog leka", "Palitrex", new DateTime(2022, 3, 10, 18, 37, 32, 974, DateTimeKind.Local).AddTicks(4827), "Zoran Zoranic" });
 
             migrationBuilder.InsertData(
                 table: "Speciality",
@@ -372,9 +372,9 @@ namespace Hospital.Migrations
                 columns: new[] { "Id", "Content", "Name", "TimeWritten", "canPublish" },
                 values: new object[,]
                 {
-                    { 2, "I didn't like it.", "Anonymus", new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9733), true },
-                    { 3, "Super service!", "Sara Saric", new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9937), true },
-                    { 1, "Good!", "Mika Mikic", new DateTime(2022, 1, 24, 21, 29, 56, 382, DateTimeKind.Local).AddTicks(5398), false }
+                    { 2, "I didn't like it.", "Anonymus", new DateTime(2022, 3, 10, 18, 37, 32, 953, DateTimeKind.Local).AddTicks(1742), true },
+                    { 3, "Super service!", "Sara Saric", new DateTime(2022, 3, 10, 18, 37, 32, 953, DateTimeKind.Local).AddTicks(2066), true },
+                    { 1, "Good!", "Mika Mikic", new DateTime(2022, 3, 10, 18, 37, 32, 945, DateTimeKind.Local).AddTicks(6421), false }
                 });
 
             migrationBuilder.InsertData(

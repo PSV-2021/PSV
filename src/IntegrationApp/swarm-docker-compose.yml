@@ -1,14 +1,9 @@
 version: '3.3'
 services:
   gateway:
-    depends_on:
-      - drugstore_client
-      - drugstore_api
-      - integration_api
-      - patient_client
-      - manager_client
     build: ../config/gateway
     image: aco99/gateway
+    restart: on-failure
     extra_hosts:
       - "patient.localhost:127.0.0.1"
       - "drugstore.localhost:127.0.0.1"
@@ -27,7 +22,7 @@ services:
       - POSTGRES_PASSWORD
       - POSTGRES_DRUGSTORE_DB
     ports:
-      - "5433:5432"
+      - "5431:5432"
 
   postgres-server-hospital:
     image: postgres
@@ -41,7 +36,7 @@ services:
       - POSTGRES_HOSPITAL_DB
     ports:
       - "5434:5432"
-  
+
   postgres-server-integration:
     image: postgres
     environment:
@@ -54,7 +49,6 @@ services:
       - POSTGRES_INTEGRATION_DB
     ports:
       - "5433:5432"
-
 
   message-broker:
     image: rabbitmq:management-alpine
@@ -71,36 +65,32 @@ services:
     command: user:password:1001
 
   hospital_api:
-     depends_on:
-       - postgres-server-hospital
-     image: aco99/hospital_api
-     environment:
-       HOSPITAL_GRPC_DOMAIN: hospital_api
-       HOSPITAL_GRPC_PORT: 4111
-       
-       DBServer: postgres-server-hospital
-       DBUser: /run/secrets/POSTGRES_USERNAME
-       DBPassword: /run/secrets/POSTGRES_PASSWORD
-       DB: /run/secrets/POSTGRES_HOSPITAL_DB
-     restart: always
-     secrets:
-       - POSTGRES_USERNAME
-       - POSTGRES_PASSWORD
-       - POSTGRES_HOSPITAL_DB
-     ports:
-       - "8081:80"
+    depends_on:
+      - postgres-server-hospital
+    image: aco99/hospital_api
+    environment:
+      HOSPITAL_GRPC_DOMAIN: hospital_api
+      HOSPITAL_GRPC_PORT: 4111
+      DBServer: postgres-server-hospital
+      DBUser: /run/secrets/POSTGRES_USERNAME
+      DBPassword: /run/secrets/POSTGRES_PASSWORD
+      DB: /run/secrets/POSTGRES_HOSPITAL_DB
+    restart: on-failure
+    secrets:
+      - POSTGRES_USERNAME
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOSPITAL_DB
+    ports:
+      - "8081:80"
 
   integration_api:
     depends_on:
-      - sftp-server
       - message-broker
       - hospital_api
     image: aco99/integration_api
     environment:
       HOSPITAL_GRPC_DOMAIN: hospital_api
-      HOSPITAL_GRPC_PORT: 4111
       DRUGSTORE_GRPC_DOMAIN: drugstore_api
-      DRUGSTORE_GRPC_PORT: 4111
       SFTP_IP: sftp-server
       SFTP_USERNAME: /run/secrets/SFTP_USERNAME
       SFTP_PASSWORD: /run/secrets/SFTP_PASSWORD
@@ -109,7 +99,7 @@ services:
       DBPassword: /run/secrets/POSTGRES_PASSWORD
       DB: /run/secrets/POSTGRES_INTEGRATION_DB
       RABBIT_HOST: message-broker
-    restart: always
+    restart: on-failure
     secrets:
       - POSTGRES_INTEGRATION_DB
       - POSTGRES_PASSWORD
@@ -123,7 +113,6 @@ services:
     depends_on:
       - postgres-server-drugstore
       - message-broker
-      - sftp-server
     image: aco99/drugstore_api
     environment:
       SFTP_IP: sftp-server
@@ -134,7 +123,7 @@ services:
       DBUser: /run/secrets/POSTGRES_USERNAME
       DBPassword: /run/secrets/POSTGRES_PASSWORD
       DB: /run/secrets/POSTGRES_DRUGSTORE_DB
-    restart: always
+    restart: on-failure
     secrets:
       - POSTGRES_USERNAME
       - POSTGRES_PASSWORD
@@ -154,23 +143,22 @@ services:
       - "4202:80"
 
   manager_client:
-   image: aco99/manager_client
-   ports:
-    - "4203:80"
+    image: aco99/manager_client
+    ports:
+      - "4203:80"
 
 secrets:
   POSTGRES_USERNAME:
-   external: true
+    external: true
   POSTGRES_PASSWORD:
-   external: true
+    external: true
   POSTGRES_HOSPITAL_DB:
-   external: true
+    external: true
   POSTGRES_DRUGSTORE_DB:
-   external: true
+    external: true
   POSTGRES_INTEGRATION_DB:
-   external: true 
+    external: true
   SFTP_USERNAME:
-   external: true
+    external: true
   SFTP_PASSWORD:
-   external: true
-   
+    external: true

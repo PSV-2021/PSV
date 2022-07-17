@@ -3,15 +3,17 @@ using System;
 using Hospital.SharedModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Hospital.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220310173735_migration")]
+    partial class migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,7 +231,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Description = "Random opis nekog leka",
                             DrugName = "Palitrex",
-                            IssuedTime = new DateTime(2022, 1, 24, 21, 29, 56, 409, DateTimeKind.Local).AddTicks(4216),
+                            IssuedTime = new DateTime(2022, 3, 10, 18, 37, 32, 974, DateTimeKind.Local).AddTicks(4827),
                             PatientName = "Zoran Zoranic"
                         });
                 });
@@ -405,7 +407,7 @@ namespace Hospital.Migrations
                             Id = 1,
                             Content = "Good!",
                             Name = "Mika Mikic",
-                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 382, DateTimeKind.Local).AddTicks(5398),
+                            TimeWritten = new DateTime(2022, 3, 10, 18, 37, 32, 945, DateTimeKind.Local).AddTicks(6421),
                             canPublish = false
                         },
                         new
@@ -413,7 +415,7 @@ namespace Hospital.Migrations
                             Id = 2,
                             Content = "I didn't like it.",
                             Name = "Anonymus",
-                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9733),
+                            TimeWritten = new DateTime(2022, 3, 10, 18, 37, 32, 953, DateTimeKind.Local).AddTicks(1742),
                             canPublish = true
                         },
                         new
@@ -421,7 +423,7 @@ namespace Hospital.Migrations
                             Id = 3,
                             Content = "Super service!",
                             Name = "Sara Saric",
-                            TimeWritten = new DateTime(2022, 1, 24, 21, 29, 56, 389, DateTimeKind.Local).AddTicks(9937),
+                            TimeWritten = new DateTime(2022, 3, 10, 18, 37, 32, 953, DateTimeKind.Local).AddTicks(2066),
                             canPublish = true
                         });
                 });

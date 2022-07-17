@@ -1,14 +1,9 @@
 version: '3'
 services:
   gateway:
-    depends_on:
-      - drugstore_client
-      - drugstore_api
-      - integration_api
-      - patient_client
-      - manager_client
     build: ../config/gateway
     image: aco99/gateway
+    restart: on-failure
     extra_hosts:
       - "patient.localhost:127.0.0.1"
       - "drugstore.localhost:127.0.0.1"
@@ -64,22 +59,18 @@ services:
      image: aco99/hospital_api
      environment:
       HOSPITAL_GRPC_DOMAIN: hospital_api
-      HOSPITAL_GRPC_PORT: 4111
-
       DBServer: postgres-server-hospital
       DBPort: 5432
       DBUser: postgres
       DBPassword: 123
       DB: hospital
-     restart: always
+     restart: on-failure
      ports:
        - "8081:80"
        
   integration_api:
     depends_on:
-      - sftp-server
       - message-broker   
-      - hospital_api
     build:
       context: .
     image: aco99/integration_api
@@ -87,20 +78,15 @@ services:
       SFTP_IP: sftp-server
       SFTP_USERNAME: user
       SFTP_PASSWORD: password
-      
       RABBIT_HOST: message-broker
-      
       HOSPITAL_GRPC_DOMAIN: hospital_api
-      HOSPITAL_GRPC_PORT: 4111
       DRUGSTORE_GRPC_DOMAIN: drugstore_api
-      DRUGSTORE_GRPC_PORT: 4111
-      
       DBServer: postgres-server-integration
       DBPort: 5432
       DBUser: postgres
       DBPassword: 123
       DB: integration
-    restart: always
+    restart: on-failure
     ports:
       - "8083:80"  
   
@@ -108,7 +94,6 @@ services:
     depends_on:  
       - postgres-server-drugstore
       - message-broker
-      - sftp-server
     build: ../DrugstoreApp/Backend/DrugstoreAPI
     image: aco99/drugstore_api
     environment:
@@ -123,7 +108,7 @@ services:
       DBUser: postgres
       DBPassword: 123
       DB: drugstore
-    restart: always
+    restart: on-failure
     ports:
       - "8082:80"    
   

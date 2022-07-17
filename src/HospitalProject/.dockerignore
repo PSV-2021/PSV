@@ -1,0 +1,12 @@
+Hospital/bin/
+Hospital/obj/
+HospitalAPI/HospitalAPI/.vs/
+HospitalAPI/HospitalAPI/HospitalAPI/obj/
+HospitalAPI/HospitalAPI/HospitalAPI/bin/
+HospitalAPI/HospitalAPI/HospitalApiTests/obj/
+HospitalAPI/HospitalAPI/HospitalApiTests/bin/
+HospitalAPI/HospitalAPI/SeleniumTests/obj/
+HospitalAPI/HospitalAPI/SeleniumTests/bin/
+bin/
+obj/
+.vs/
