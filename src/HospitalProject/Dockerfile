@@ -1,12 +1,9 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build-env
-ENV REFRESHED_AT 03-10-2022 18:57
+ENV REFRESHED_AT 03-10-2022 18:55
 COPY . ./
-RUN dotnet restore HospitalAPI/HospitalAPI
 
 WORKDIR /HospitalAPI/HospitalAPI
-RUN dotnet build -c Release -o /app
 
-FROM build-env as Publish
 RUN dotnet publish -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
